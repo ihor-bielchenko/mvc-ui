@@ -20,7 +20,7 @@ export const COLUMN_ID = {
 export const COLUMN_TEXT = {
 	id: process.env.COLUMN_TEXT,
 	icon: TextFieldsIcon,
-	text: () => 'Текст',
+	text: () => 'Строка',
 };
 export const COLUMN_RICHTEXT = {
 	id: process.env.COLUMN_RICHTEXT,

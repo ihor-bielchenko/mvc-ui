@@ -16,8 +16,11 @@ const onSubmit = (e, name) => {
 
 	if (typeof prop.body[name] !== 'undefined') {
 		prop.body[name] = { 
-			source_id: SOURCE_COOKIE.id,
-			value,
+			key: Object.keys(prop.body).length,
+			value: {
+				source_id: SOURCE_COOKIE.id,
+				value,
+			},
 		};
 		onClose();
 	}

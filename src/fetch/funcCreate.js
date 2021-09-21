@@ -5,7 +5,7 @@ import { URL_API_CORE_FUNC } from 'consts/url.js';
 
 const funcCreate = async (data) => {
 	try {
-		const r = await axios(process.env.CORE_PATH + URL_API_CORE_FUNC, {
+		const r = await axios(process.env.LOGIC_PATH + URL_API_CORE_FUNC, {
 			method: 'post',
 			params: {
 				access_token: localStorage.getItem('access_token'),

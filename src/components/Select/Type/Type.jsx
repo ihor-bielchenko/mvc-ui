@@ -2,6 +2,7 @@ import React from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
 import columnTypes, {
 	COLUMN_RICHTEXT,
+	COLUMN_ID,
 } from 'structures/columnTypes.js';
 import Select from '../Select.jsx';
 
@@ -12,6 +13,7 @@ let Type = ({
 	defaultValue,
 	onSelect,
 	required,
+	offId,
 	children, 
 }) => {
 	return <Select
@@ -23,7 +25,8 @@ let Type = ({
 		onSelect={onSelect}>
 		{Object
 			.keys(columnTypes)
-			.filter((key, i) => columnTypes[key].id !== COLUMN_RICHTEXT.id)
+			.filter((key, i) => columnTypes[key].id !== COLUMN_RICHTEXT.id
+				&& !(offId && columnTypes[key].id === COLUMN_ID.id))
 			.map((key, i) => (
 				<MenuItem 
 					key={columnTypes[key].id.toString()}
@@ -41,6 +44,7 @@ Type.defaultProps = {
 	name: 'type_id',
 	label: 'Тип данных',
 	required: false,
+	offId: false,
 };
 
 export default Type;

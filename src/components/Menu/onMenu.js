@@ -8,27 +8,27 @@ const _onMenu = (e, aria, options = '', name) => {
 	if (aria) {
 		_timeout = setTimeout(() => {
 			const menu = Store().getState().menu;
-			let label = '',
-				scriptId;
-
+			
 			if (typeof options === 'string') {
-				label = options;
+				menu[aria] = {
+					...menu[aria],
+					anchorEl: currentTarget,
+					label: options,
+					name,
+				};
 			}
 			else if (typeof options === 'object') {
-				label = options.label || '';
-				scriptId = options.scriptId;
+				menu[aria] = {
+					...options,
+					...menu[aria],
+					anchorEl: currentTarget,
+					name,
+				};
 			}
 
-			menu[aria] = {
-				...menu[aria],
-				anchorEl: currentTarget,
-				label,
-				name,
-				scriptId,
-			};
 			Store().dispatch({
 				type: 'menu',
-				payload: () => menu,
+				payload: () => ({ ...menu }),
 			});
 		}, 0);
 	}

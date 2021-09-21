@@ -5,7 +5,7 @@ import { URL_API_CORE_PROP } from 'consts/url.js';
 
 const propCreate = async (data) => {
 	try {
-		const r = await axios(process.env.CORE_PATH + URL_API_CORE_PROP, {
+		const r = await axios(process.env.LOGIC_PATH + URL_API_CORE_PROP, {
 			method: 'post',
 			params: {
 				access_token: localStorage.getItem('access_token'),

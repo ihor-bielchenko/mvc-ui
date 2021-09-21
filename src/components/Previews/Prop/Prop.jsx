@@ -19,7 +19,7 @@ let Prop = ({
 		.entities
 		.data[id]
 		.name
-		.substr(0, 45));
+		.substr(0, 65));
 	const formatId = useSelector((state) => state
 		.entities
 		.data[id]

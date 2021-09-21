@@ -7,7 +7,7 @@ const onChangeName = (e) => {
 	prop.name = value;
 	Store().dispatch({
 		type: 'prop',
-		payload: () => prop,
+		payload: () => ({ ...prop }),
 	});
 };
 

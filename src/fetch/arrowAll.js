@@ -5,7 +5,7 @@ import { URL_API_CORE_ARROW } from 'consts/url.js';
 
 const arrowAll = async (scriptId) => {
 	try {
-		const r = await axios(process.env.CORE_PATH + URL_API_CORE_ARROW, {
+		const r = await axios(process.env.LOGIC_PATH + URL_API_CORE_ARROW, {
 			method: 'get',
 			params: {
 				access_token: localStorage.getItem('access_token'),

@@ -5,82 +5,29 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import InputText from 'components/Input/Text';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
 import DeleteIcon from '@material-ui/icons/Delete';
-import Store from 'components/Store';
 import Header from 'components/Header';
-import MenuSource from 'components/Menu/Source';
+import InputText from 'components/Input/Text';
+import SelectFormat from 'components/Select/Format';
 import Transition from 'components/Dialog/Transition.jsx';
-import onMenu from 'components/Menu/onMenu.js';
 import onDialog from 'components/Dialog/onDialog.js';
 import { 
 	DIALOG_PROP,
 	DIALOG_DELETE_CONFIRM, 
 } from 'consts/dialog.js';
+import Body from './Body.jsx';
 import onMount from './onMount.js';
 import onClose from './onClose.js';
 import onAddValue from './onAddValue.js';
-import onDeleteValue from './onDeleteValue.js';
-import onComplexValue from './onComplexValue.js';
-import onComplexDelete from './onComplexDelete.js';
 import onChangeName from './onChangeName.js';
-import onChangeValue from './onChangeValue.js';
 import onSave from './onSave.js';
 import onDelete from './onDelete.js';
-
-let Body = () => {
-	const bodyKeys = useSelector((state) => Object.keys(state.prop.body));
-	const bodyData = Store().getState().prop.body;
-
-	return bodyKeys.map((id) => {
-		const _id = id.toString();
-
-		return <Box 
-			key={id}
-			py={2}>
-			<Grid 
-				container
-				spacing={2}>
-				<Grid
-					item
-					xs={true}>
-					<InputText
-						menu
-						onMenu={onMenu(_id)}
-						onValue={onComplexValue}
-						onDelete={onComplexDelete}
-						name={_id}
-						id={_id}
-						defaultValue={bodyData[id]}
-						onChange={onChangeValue(id)} />
-					<MenuSource aria={_id} />
-				</Grid>
-				{bodyKeys.length > 1
-					? <Grid
-						item
-						xs="auto">
-						<IconButton 
-							color="secondary"
-							onClick={onDeleteValue(id)}>
-							<DeleteIcon />
-						</IconButton>
-					</Grid>
-					: <React.Fragment />}
-			</Grid>
-		</Box>;
-	});
-};
-Body = React.memo(Body);
-Body.defaultProps = {
-};
 
 let Prop = () => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_PROP]);
@@ -115,8 +62,8 @@ let Prop = () => {
 			<DialogTitle>
 				<Header onClose={onClose}>
 					{id >= 1
-						? 'Значение: '+ name
-						: 'Добавить значение'}
+						? 'Параметр: '+ name
+						: 'Добавить параметр'}
 				</Header>
 			</DialogTitle>
 			{_dialogOpenFlag
@@ -127,14 +74,19 @@ let Prop = () => {
 								required
 								name="name"
 								label="Название"
-								helperText="Для быстрого поиска значения придумайте название или краткое описание"
+								helperText="Для быстрого поиска параметра придумайте название или краткое описание"
 								value={name}
 								onChange={onChangeName} />
 						</Box>
-						<Box py={2}>
+						<Box 
+							display="flex"
+							alignItems="center"
+							pt={8}
+							pb={1}>
 							<Typography variant="h6">
-								Данные:
+								Содержимое:
 							</Typography>
+							<SelectFormat />
 						</Box>
 						<Body />
 						<Box py={1}>
@@ -143,7 +95,7 @@ let Prop = () => {
 								color="primary"
 								startIcon={<AddIcon />}
 								onClick={onAddValue}>
-								Добавить поле
+								Добавить элемент
 							</Button>
 						</Box>
 					</DialogContent>

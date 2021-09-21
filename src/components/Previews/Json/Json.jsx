@@ -17,7 +17,7 @@ let Json = ({
 		.entities
 		.data[id]
 		.name
-		.substr(0, 45));
+		.substr(0, 65));
 	const statusId = useSelector((state) => state
 		.entities
 		.data[id]
@@ -45,7 +45,7 @@ let Json = ({
 		</Typography>
 		<Box py="4px">
 			<Typography>
-				<b>{statusId}</b> - {(nameSubstr.length >= 44 && nameSubstr[44] !== ' ')
+				<b>{statusId}</b> - {(nameSubstr.length >= 64 && nameSubstr[64] !== ' ')
 					? <React.Fragment>
 						{nameSubstr} <b>...</b>
 					</React.Fragment>

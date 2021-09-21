@@ -5,7 +5,7 @@ import { URL_API_CORE_ENTITY } from 'consts/url.js';
 
 const entityDelete = async (ids) => {
 	try {
-		const r = await axios(process.env.CORE_PATH + URL_API_CORE_ENTITY, {
+		const r = await axios(process.env.LOGIC_PATH + URL_API_CORE_ENTITY, {
 			method: 'delete',
 			params: {
 				access_token: localStorage.getItem('access_token'),

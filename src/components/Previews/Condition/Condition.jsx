@@ -24,7 +24,7 @@ let Condition = ({
 		.entities
 		.data[id]
 		.name
-		.substr(0, 45));
+		.substr(0, 65));
 	const funcTemplateId = useSelector((state) => state
 		.entities
 		.data[id]

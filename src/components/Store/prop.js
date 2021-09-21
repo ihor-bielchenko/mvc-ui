@@ -2,7 +2,10 @@
 export const initialState = () => ({
 	name: '',
 	body: {
-		[Date.now()]: '',
+		[Date.now()]: {
+			key: '0',
+			value: '',
+		},
 	},
 	tempValue: {
 	},

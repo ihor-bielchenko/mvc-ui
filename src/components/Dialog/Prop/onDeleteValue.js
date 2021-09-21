@@ -5,10 +5,9 @@ const onDeleteValue = (id) => (e) => {
 
 	if (typeof prop.body[id] !== 'undefined') {
 		delete prop.body[id];
-		prop.body = { ...prop.body };
 		Store().dispatch({
 			type: 'prop',
-			payload: () => prop,
+			payload: () => ({ ...prop }),
 		});
 	}
 };

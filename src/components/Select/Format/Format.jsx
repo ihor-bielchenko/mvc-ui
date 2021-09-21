@@ -1,5 +1,6 @@
 import React from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
+import format from 'structures/format.js';
 import Select from '../Select.jsx';
 
 let Format = ({ 
@@ -9,6 +10,7 @@ let Format = ({
 	defaultValue,
 	onSelect,
 	required,
+	offId,
 	children, 
 }) => {
 	return <Select
@@ -20,14 +22,14 @@ let Format = ({
 		onSelect={onSelect}>
 		{Object
 			.keys(format)
-			.map((key, i) => (
-				<MenuItem 
+			.map((key, i) => {
+				return <MenuItem 
 					key={format[key].id.toString()}
 					value={format[key].id.toString()}
 					disabled={!!format[key].disabled}>
 					{format[key].text()}
-				</MenuItem>
-		))}
+				</MenuItem>;
+		})}
 		{children}
 	</Select>;
 };
@@ -37,6 +39,7 @@ Format.defaultProps = {
 	name: 'format_id',
 	label: 'Формат',
 	required: false,
+	offId: false,
 };
 
 export default Format;

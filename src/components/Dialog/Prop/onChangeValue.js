@@ -4,11 +4,11 @@ const onSubmit = (id) => (e) => {
 	const prop = Store().getState().prop;
 
 	if (typeof prop.body[id] !== undefined) {
-		prop.body[id] = e.target.value;
+		prop.body[id].value = e.target.value;
 
 		Store().dispatch({
 			type: 'prop',
-			payload: () => prop,
+			payload: () => ({ ...prop }),
 		});
 	}
 };
