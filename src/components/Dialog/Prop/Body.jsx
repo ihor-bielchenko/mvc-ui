@@ -35,7 +35,7 @@ let Item = ({
 	const _id = id.toString();
 	const _idKey = 'key-'+ _id;
 	const _idValue = 'value-'+ _id;
-	const key = useSelector((state) => (state.prop.body[id] || {}).key || '0');
+	const key = useSelector((state) => (state.prop.body[id] || {}).key || '');
 	const value = useSelector((state) => (state.prop.body[id] || {}).value ?? '');
 	const typeId = useSelector((state) => (state.prop.body[id] || {}).type_id ?? '');
 	const _onSelectTypeId = React.useCallback((e) => onSelectTypeId(e, id), [
@@ -44,6 +44,8 @@ let Item = ({
 	const Component = React.useMemo(() => React.lazy(loadColumnInputs(typeId)), [
 		typeId,
 	]);
+
+	console.log('key', key);
 
 	return <TableRow>
 		{(formatId === FORMAT_OBJ.id || formatId === FORMAT_ARR.id)

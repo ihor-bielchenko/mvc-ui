@@ -1,4 +1,8 @@
 import Store from 'components/Store';
+import { 
+	FORMAT_ATOMIC,
+	FORMAT_OBJ, 
+} from 'structures/format.js';
 
 const getNewKey = (body, key) => {
 	const bodyIds = Object.keys(body);
@@ -12,9 +16,15 @@ const getNewKey = (body, key) => {
 	}
 	return newKeyString;
 };
-const onAddValue = (e) => {
+const onAddItem = (e) => {
 	const prop = Store().getState().prop;
 	const key = getNewKey(prop.body);
+
+	if (prop.format_id === FORMAT_ATOMIC.id || !prop.format_id) {
+		prop.format_id = FORMAT_OBJ.id;
+	}
+
+	console.log('prop', prop);
 
 	prop.body[Date.now()] = {
 		type_id: '',
@@ -27,4 +37,4 @@ const onAddValue = (e) => {
 	});
 };
 
-export default onAddValue;
+export default onAddItem;

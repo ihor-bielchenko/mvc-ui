@@ -8,21 +8,19 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Button from '@material-ui/core/Button';
-import MenuItem from '@material-ui/core/MenuItem';
 import AddIcon from '@material-ui/icons/Add';
 import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Header from 'components/Header';
 import InputText from 'components/Input/Text';
-import SelectType from 'components/Select/Type';
+import SelectFormat from 'components/Select/Format';
 import Transition from 'components/Dialog/Transition.jsx';
 import onDialog from 'components/Dialog/onDialog.js';
-import columnTypes, { 
-	COLUMN_OBJ,
-	COLUMN_ARR, 
-} from 'structures/columnTypes.js';
-import { FORMAT_ATOMIC } from 'structures/format.js';
+import format, { 
+	FORMAT_ATOMIC,
+	FORMAT_OBJ,
+	FORMAT_ARR, } from 'structures/format.js';
 import { 
 	DIALOG_PROP,
 	DIALOG_DELETE_CONFIRM, 
@@ -30,7 +28,7 @@ import {
 import Body from './Body.jsx';
 import onMount from './onMount.js';
 import onClose from './onClose.js';
-import onAddValue from './onAddValue.js';
+import onAddItem from './onAddItem.js';
 import onChangeName from './onChangeName.js';
 import onSave from './onSave.js';
 import onDelete from './onDelete.js';
@@ -99,27 +97,24 @@ let Prop = () => {
 							<Box
 								position="relative"
 								width="300px">
-								<SelectType
+								<SelectFormat
 									label="Многомерный формат"
 									name="format_id"
 									value={formatId}
 									onSelect={onSelectFormatId}
-									onFilter={(key) => columnTypes[key].id === COLUMN_OBJ.id
-										|| columnTypes[key].id === COLUMN_ARR.id}>
-									<MenuItem value={FORMAT_ATOMIC.id}>
-										{FORMAT_ATOMIC.text()}
-									</MenuItem>
-								</SelectType>
+									onFilter={(key) => format[key].id === FORMAT_ATOMIC.id
+										|| format[key].id === FORMAT_OBJ.id
+										|| format[key].id === FORMAT_ARR.id} />
 							</Box>
 						</Box>
-						{formatId === COLUMN_OBJ.id
+						{formatId === FORMAT_OBJ.id
 							? <Typography 
 								variant="h4"
 								color="textSecondary"
 								style={{ lineHeight: '0px' }}>
 								<b>{'{'}</b>
 							</Typography>
-							: formatId === COLUMN_ARR.id
+							: formatId === FORMAT_ARR.id
 								? <Typography
 									variant="h4"
 									color="textSecondary"
@@ -128,13 +123,13 @@ let Prop = () => {
 								</Typography>
 								: <React.Fragment />}
 						<Body formatId={formatId} />
-						{formatId === COLUMN_OBJ.id
+						{formatId === FORMAT_OBJ.id
 							? <Typography 
 								variant="h4"
 								color="textSecondary">
 								<b>{'}'}</b>
 							</Typography>
-							: formatId === COLUMN_ARR.id
+							: formatId === FORMAT_ARR.id
 								? <Typography 
 									variant="h4"
 									color="textSecondary">
@@ -146,7 +141,7 @@ let Prop = () => {
 								variant="outlined"
 								color="primary"
 								startIcon={<AddIcon />}
-								onClick={onAddValue}>
+								onClick={onAddItem}>
 								Добавить элемент
 							</Button>
 						</Box>

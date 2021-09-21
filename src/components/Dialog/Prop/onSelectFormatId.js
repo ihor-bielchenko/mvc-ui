@@ -15,10 +15,11 @@ const onSelectFormatId = (e) => {
 		};
 	}
 	else if (newValue === FORMAT_ARR.id) {
-		bodyIds.forEach((id, i) => (prop.body[id].key = i));
+		bodyIds.forEach((id, index) => (prop.body[id].key = index.toString()));
 	}
 
 	prop.format_id = newValue;
+	console.log('prop', prop);
 	Store().dispatch({
 		type: 'prop',
 		payload: () => ({ ...prop }),

@@ -22,7 +22,6 @@ let Type = ({
 		required={required}
 		label={label}
 		onSelect={onSelect}>
-		{children}
 		{Object
 			.keys(columnTypes)
 			.filter(onFilter)
@@ -34,6 +33,7 @@ let Type = ({
 					{columnTypes[key].text()}
 				</MenuItem>
 		))}
+		{children}
 	</Select>;
 };
 
