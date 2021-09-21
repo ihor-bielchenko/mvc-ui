@@ -9,13 +9,13 @@ import Store from 'components/Store';
 import SelectColumn from 'components/Select/Column';
 import SelectOperatorIf from 'components/Select/OperatorIf';
 import typeFormatValidating from 'utils/typeFormatValidating.js';
+import loadColumnInputs from 'utils/loadColumnInputs.js';
 import { SOURCE_SCRIPT } from 'structures/source.js';
 import { 
 	COLUMN_ID,
 	COLUMN_NUMBER, 
 	COLUMN_TIME,
 } from 'structures/columnTypes.js';
-import * as columnTypes from 'structures/columnTypes.js';
 import onDialog from '../../onDialog.js';
 import onColumn from './onColumn.js';
 import onSubmit from './onSubmit.js';
@@ -23,16 +23,6 @@ import onCancel from './onCancel.js';
 import onChangeByLogic from './onChangeByLogic.js';
 import onClear from './onClear.js';
 
-const _load = (typeId) => () => {
-	switch (typeId) {
-		case columnTypes.COLUMN_TEXT.id:
-		default:
-			return import('components/Input/Text');
-		case columnTypes.COLUMN_NUMBER.id:
-		case columnTypes.COLUMN_ID.id:
-			return import('components/Input/Numeric');
-	}
-};
 let Form = ({ 
 	name,
 	setId, 
@@ -82,7 +72,7 @@ let Form = ({
 				const isNumeric = _column.type_id === COLUMN_ID.id ||
 					_column.type_id === COLUMN_NUMBER.id ||
 					_column.type_id === COLUMN_TIME.id;
-				const Component = React.lazy(_load(_column.type_id));
+				const Component = React.lazy(loadColumnInputs(_column.type_id));
 
 				return <React.Fragment>
 					<Box py={2}>

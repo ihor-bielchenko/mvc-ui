@@ -103,6 +103,8 @@ const columnTypes = {
 	[process.env.COLUMN_URL]: COLUMN_URL,
 	[process.env.COLUMN_PASSWORD]: COLUMN_PASSWORD,
 	[process.env.COLUMN_FILE]: COLUMN_FILE,
+	[process.env.COLUMN_OBJ]: COLUMN_OBJ,
+	[process.env.COLUMN_ARR]: COLUMN_ARR,
 };
 
 export default columnTypes;

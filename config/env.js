@@ -109,6 +109,7 @@ function getClientEnvironment(publicUrl) {
 				FORMAT_BOOL: Number(process.env.FORMAT_BOOL),
 				FORMAT_NULL: Number(process.env.FORMAT_NULL),
 				FORMAT_OBJ: Number(process.env.FORMAT_OBJ),
+				FORMAT_ATOMIC: Number(process.env.FORMAT_ATOMIC),
 				ARROW_BASE: Number(process.env.ARROW_BASE),
 				ARROW_TRUE: Number(process.env.ARROW_TRUE),
 				ARROW_FALSE: Number(process.env.ARROW_FALSE),

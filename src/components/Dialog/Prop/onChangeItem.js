@@ -1,10 +1,10 @@
 import Store from 'components/Store';
 
-const onChangeValue = (id) => (e) => {
+const onChangeItem = (id, key = 'key') => (e) => {
 	const prop = Store().getState().prop;
 
 	if (typeof prop.body[id] !== undefined) {
-		prop.body[id].value = e.target.value;
+		prop.body[id][key] = e.target.value;
 
 		Store().dispatch({
 			type: 'prop',
@@ -13,4 +13,4 @@ const onChangeValue = (id) => (e) => {
 	}
 };
 
-export default onChangeValue;
+export default onChangeItem;

@@ -1,11 +1,15 @@
 
+export const FORMAT_ATOMIC = {
+	id: process.env.FORMAT_ATOMIC,
+	text: () => 'Атомарное значение',
+};
 export const FORMAT_STR = {
 	id: process.env.FORMAT_STR,
 	text: () => 'строка',
 };
 export const FORMAT_ARR = {
 	id: process.env.FORMAT_ARR,
-	text: () => 'массив',
+	text: () => 'Массив',
 };
 export const FORMAT_NUM = {
 	id: process.env.FORMAT_NUM,
@@ -17,11 +21,11 @@ export const FORMAT_BOOL = {
 };
 export const FORMAT_NULL = {
 	id: process.env.FORMAT_NULL,
-	text: () => 'пустота',
+	text: () => 'Пустота',
 };
 export const FORMAT_OBJ = {
 	id: process.env.FORMAT_OBJ,
-	text: () => 'объект',
+	text: () => 'Объект',
 };
 
 const format = {
@@ -31,6 +35,7 @@ const format = {
 	[process.env.FORMAT_OBJ]: FORMAT_OBJ,
 	[process.env.FORMAT_ARR]: FORMAT_ARR,
 	[process.env.FORMAT_NULL]: FORMAT_NULL,
+	[process.env.FORMAT_ATOMIC]: FORMAT_ATOMIC,
 };
 
 export default format;

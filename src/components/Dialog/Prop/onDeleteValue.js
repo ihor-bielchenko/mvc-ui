@@ -1,4 +1,5 @@
 import Store from 'components/Store';
+import { FORMAT_ARR } from 'structures/format.js';
 
 const onDeleteValue = (id) => (e) => {
 	const prop = Store().getState().prop;
@@ -6,12 +7,13 @@ const onDeleteValue = (id) => (e) => {
 	if (typeof prop.body[id] !== 'undefined') {
 		delete prop.body[id];
 
-		const bodyKeys = Object.keys(prop.body);
+		const bodyIds = Object.keys(prop.body);
 
-		console.log('bodyKeys', bodyKeys);
-
-		if (bodyKeys.length === 1) {
-			prop.body[bodyKeys[0]].key = '0';
+		if (bodyIds.length === 1) {
+			prop.body[bodyIds[0]].key = '0';
+		}
+		else if (prop.format_id === FORMAT_ARR.id) {
+			bodyIds.forEach((id, index) => prop.body[id].key = index.toString());
 		}
 
 		Store().dispatch({

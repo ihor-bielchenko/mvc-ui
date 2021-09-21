@@ -12,6 +12,7 @@ import onClose from '../onClose.js';
 let Source = ({
 	aria,  
 	children, 
+	typeId,
 }) => {
 	const anchorEl = useSelector((state) => state.menu[aria]
 		? state.menu[aria].anchorEl
@@ -33,7 +34,8 @@ let Source = ({
 			{children}
 			{Object
 				.keys(source)
-				.filter((key) => source[key].id !== 0)
+				.filter((key) => source[key].id !== 0 
+					&& source[key].formatValidating().includes(typeId))
 				.map((key, i) => {
 					const item = source[key];
 
@@ -61,6 +63,7 @@ let Source = ({
 Source = React.memo(Source);
 Source.defaultProps = {
 	aria: 'aria-source',
+	typeId: 0,
 };
 
 export default Source;
