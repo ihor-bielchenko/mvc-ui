@@ -1,0 +1,13 @@
+import Store from 'components/Store';
+
+const onChangeName = (e) => {
+	const func = Store().getState().func;
+
+	func.name = e.target.value;
+	Store().dispatch({
+		type: 'func',
+		payload: () => func,
+	});
+};
+
+export default onChangeName;
