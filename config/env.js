@@ -91,6 +91,7 @@ function getClientEnvironment(publicUrl) {
 				// It is defined here so it is available in the webpackHotDevClient.
 				FAST_REFRESH: process.env.FAST_REFRESH !== 'false',
 
+				LOGIC_PATH: process.env.LOGIC_PATH,
 				CORE_PATH: process.env.CORE_PATH,
 				SSO_PATH: process.env.SSO_PATH,
 				DB_PATH: process.env.DB_PATH,
