@@ -17,6 +17,10 @@ import InputText from 'components/Input/Text';
 import SelectFormat from 'components/Select/Format';
 import Transition from 'components/Dialog/Transition.jsx';
 import onDialog from 'components/Dialog/onDialog.js';
+import format, {
+	FORMAT_OBJ,
+	FORMAT_ARR,
+} from 'structures/format.js';
 import { 
 	DIALOG_PROP,
 	DIALOG_DELETE_CONFIRM, 
@@ -34,6 +38,7 @@ let Prop = () => {
 	const existId = (dialog || {}).id || 0;
 	const id = useSelector((state) => state.prop.id);
 	const name = useSelector((state) => state.prop.name || '');
+	const bodyLength = useSelector((state) => Object.keys(state.prop.body).length);
 	const _onDelete = React.useCallback((e) => onDelete(e, id), [
 		id,
 	]);
@@ -78,16 +83,23 @@ let Prop = () => {
 								value={name}
 								onChange={onChangeName} />
 						</Box>
-						<Box 
-							display="flex"
-							alignItems="center"
+						<Box
 							pt={8}
-							pb={1}>
+							pb={4}>
 							<Typography variant="h6">
 								Содержимое:
 							</Typography>
-							<SelectFormat />
 						</Box>
+						{bodyLength > 1
+							? <Box
+								position="relative"
+								width="180px"
+								pb={2}>
+								<SelectFormat
+									onFilter={(key) => format[key].id === FORMAT_OBJ.id
+										|| format[key].id === FORMAT_ARR.id} />
+							</Box>
+							: <React.Fragment />}
 						<Body />
 						<Box py={1}>
 							<Button 

@@ -28,14 +28,18 @@ let Body = () => {
 			<Table>
 				<TableHead>
 					<TableRow>
-						<TableCell>
-							<Typography 
-								variant="caption"
-								color="textSecondary">
-								Ключ
-							</Typography>
-						</TableCell>
-						<TableCell />
+						{bodyKeys.length > 1
+							? <React.Fragment>
+								<TableCell>
+									<Typography 
+										variant="caption"
+										color="textSecondary">
+										Ключ
+									</Typography>
+								</TableCell>
+								<TableCell />
+							</React.Fragment>
+							: <React.Fragment />}
 						<TableCell>
 							<Typography 
 								variant="caption"
@@ -59,36 +63,40 @@ let Body = () => {
 						const _idValue = 'value-'+ _id;
 						
 						return <TableRow key={id}>
-							<TableCell 
-								width="20%"
-								style={{
-									border: 'none',
-									paddingLeft: 0,
-									paddingRight: 0,
-								}}>
-								<InputText
-									menu
-									onMenu={onMenu(_idKey)}
-									onValue={onComplexValue}
-									onDelete={onComplexDelete}
-									name={_idKey}
-									id={_idKey}
-									defaultValue={bodyData[id].key}
-									onChange={onChangeValue(id)}
-									label="" />
-							</TableCell>
-							<TableCell 
-								align="center"
-								width="1%"
-								style={{
-									border: 'none',
-									paddingLeft: 0,
-									paddingRight: 0,
-								}}>
-								<Typography variant="h5">
-									<b>:</b>
-								</Typography>
-							</TableCell>
+							{bodyKeys.length > 1
+								? <React.Fragment>
+									<TableCell 
+										width="20%"
+										style={{
+											border: 'none',
+											paddingLeft: 0,
+											paddingRight: 0,
+										}}>
+										<InputText
+											menu
+											onMenu={onMenu(_idKey)}
+											onValue={onComplexValue}
+											onDelete={onComplexDelete}
+											name={_idKey}
+											id={_idKey}
+											defaultValue={bodyData[id].key}
+											onChange={onChangeValue(id)}
+											label="" />
+									</TableCell>
+									<TableCell 
+										align="center"
+										width="1%"
+										style={{
+											border: 'none',
+											paddingLeft: 0,
+											paddingRight: 0,
+										}}>
+										<Typography variant="h5">
+											<b>:</b>
+										</Typography>
+									</TableCell>
+								</React.Fragment>
+								: <React.Fragment />}
 							<TableCell 
 								style={{
 									border: 'none',

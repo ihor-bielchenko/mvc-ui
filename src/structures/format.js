@@ -17,7 +17,7 @@ export const FORMAT_BOOL = {
 };
 export const FORMAT_NULL = {
 	id: process.env.FORMAT_NULL,
-	text: () => 'пустое',
+	text: () => 'пустота',
 };
 export const FORMAT_OBJ = {
 	id: process.env.FORMAT_OBJ,
