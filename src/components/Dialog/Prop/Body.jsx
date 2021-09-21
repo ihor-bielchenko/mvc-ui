@@ -8,12 +8,17 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
+import MenuItem from '@material-ui/core/MenuItem';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Store from 'components/Store';
 import InputText from 'components/Input/Text';
 import SelectType from 'components/Select/Type';
 import MenuSource from 'components/Menu/Source';
 import onMenu from 'components/Menu/onMenu.js';
+import {
+	COLUMN_OBJ,
+	COLUMN_ARR,
+} from 'structures/columnTypes.js';
 import onDeleteValue from './onDeleteValue.js';
 import onComplexValue from './onComplexValue.js';
 import onComplexDelete from './onComplexDelete.js';
@@ -104,7 +109,18 @@ let Body = () => {
 									paddingRight: 14,
 								}}>
 								<SelectType 
-									offId />
+									offId>
+									<MenuItem 
+										value={COLUMN_OBJ.id.toString()}
+										disabled={!!COLUMN_OBJ.disabled}>
+										{COLUMN_OBJ.text()}
+									</MenuItem>
+									<MenuItem 
+										value={COLUMN_ARR.id.toString()}
+										disabled={!!COLUMN_ARR.disabled}>
+										{COLUMN_ARR.text()}
+									</MenuItem>
+								</SelectType>
 							</TableCell>
 							<TableCell 
 								style={{

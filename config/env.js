@@ -124,6 +124,8 @@ function getClientEnvironment(publicUrl) {
 				COLUMN_URL: Number(process.env.COLUMN_URL),
 				COLUMN_PASSWORD: Number(process.env.COLUMN_PASSWORD),
 				COLUMN_FILE: Number(process.env.COLUMN_FILE),
+				COLUMN_OBJ: Number(process.env.COLUMN_OBJ),
+				COLUMN_ARR: Number(process.env.COLUMN_ARR),
 				SOURCE_MANUALLY: Number(process.env.SOURCE_MANUALLY),
 				SOURCE_DB: Number(process.env.SOURCE_DB),
 				SOURCE_PROXY_PASS: Number(process.env.SOURCE_PROXY_PASS),

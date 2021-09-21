@@ -79,6 +79,16 @@ export const COLUMN_FILE = {
 	disabled: true,
 	text: () => 'Файл',
 };
+export const COLUMN_OBJ = {
+	id: process.env.COLUMN_OBJ,
+	icon: InsertDriveFileIcon,
+	text: () => 'Объект',
+};
+export const COLUMN_ARR = {
+	id: process.env.COLUMN_ARR,
+	icon: InsertDriveFileIcon,
+	text: () => 'Массив',
+};
 
 const columnTypes = {
 	[process.env.COLUMN_ID]: COLUMN_ID,
