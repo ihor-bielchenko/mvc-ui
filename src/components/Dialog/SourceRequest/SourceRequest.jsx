@@ -29,13 +29,13 @@ const _onMenu = onDialog(SOURCE_SCRIPT.id, {
 });
 let SourceRequest = () => {
 	const dialog = useSelector((state) => state.dialogs[SOURCE_REQUEST.id]);
-	const name = (dialog || {}).name;
+	const bodyId = (dialog || {}).name;
 	const value = useSelector((state) => state.prop.tempValue.value || '');
-	const _onSubmit = React.useCallback((e) => onSubmit(e, name), [
-		name,
+	const _onSubmit = React.useCallback((e) => onSubmit(e, bodyId), [
+		bodyId,
 	]);
-	const _onClear = React.useCallback((e) => onClear(e, name), [
-		name,
+	const _onClear = React.useCallback((e) => onClear(e, bodyId), [
+		bodyId,
 	]);
 
 	return <React.Fragment>
@@ -58,7 +58,7 @@ let SourceRequest = () => {
 						onMenu={_onMenu}
 						onValue={_onMenu}
 						onDelete={_onClear}
-						name="name"
+						name="value"
 						type="text"
 						label="Название"
 						placeholder="Например, user_id"

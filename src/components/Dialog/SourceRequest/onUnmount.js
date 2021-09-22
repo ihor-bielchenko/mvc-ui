@@ -6,7 +6,7 @@ const onUnmount = () => {
 	prop.tempValue = {};
 	Store().dispatch({
 		type: 'prop',
-		payload: () => prop,
+		payload: () => ({ ...prop }),
 	});
 };
 

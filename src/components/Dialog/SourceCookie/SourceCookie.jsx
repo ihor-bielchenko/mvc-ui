@@ -29,13 +29,13 @@ const _onMenu = onDialog(SOURCE_SCRIPT.id, {
 });
 let SourceCookie = () => {
 	const dialog = useSelector((state) => state.dialogs[SOURCE_COOKIE.id]);
-	const id = (dialog || {}).name;
+	const bodyId = (dialog || {}).name;
 	const value = useSelector((state) => state.prop.tempValue.value || '');
-	const _onSubmit = React.useCallback((e) => onSubmit(e, id), [
-		id,
+	const _onSubmit = React.useCallback((e) => onSubmit(e, bodyId), [
+		bodyId,
 	]);
-	const _onClear = React.useCallback((e) => onClear(e, id), [
-		id,
+	const _onClear = React.useCallback((e) => onClear(e, bodyId), [
+		bodyId,
 	]);
 
 	return !!dialog
