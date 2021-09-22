@@ -24,8 +24,8 @@ import {
 } from 'structures/format.js';
 import onChangeItem from './onChangeItem.js';
 import onDeleteItem from './onDeleteItem.js';
-import onComplexValue from './onComplexValue.js';
-import onComplexDelete from './onComplexDelete.js';
+import onChangeLogic from './onChangeLogic.js';
+import onDeleteLogic from './onDeleteLogic.js';
 import onSelectTypeId from './onSelectTypeId.js';
 
 let Item = ({ 
@@ -43,10 +43,10 @@ let Item = ({
 	const Component = React.useMemo(() => React.lazy(loadColumnInputs(typeId)), [
 		typeId,
 	]);
-	const _onComplexValue = React.useCallback((e) => onComplexValue(e, _id), [
+	const _onChangeLogic = React.useCallback((e) => onChangeLogic(e, _id), [
 		_id,
 	]);
-	const _onComplexDelete = React.useCallback((e) => onComplexDelete(e, _id), [
+	const _onDeleteLogic = React.useCallback((e) => onDeleteLogic(e, _id), [
 		_id,
 	]);
 	const _onChangeItemKey = React.useCallback((e) => onChangeItem(e, _id, 'key'), [
@@ -122,8 +122,8 @@ let Item = ({
 				<Component
 					menu
 					onMenu={onMenu(_id)}
-					onValue={_onComplexValue}
-					onDelete={_onComplexDelete}
+					onValue={_onChangeLogic}
+					onDelete={_onDeleteLogic}
 					name={_id}
 					id={_id}
 					defaultValue={value}

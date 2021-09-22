@@ -1,7 +1,7 @@
 import Store from 'components/Store';
 import onDialog from 'components/Dialog/onDialog.js';
 
-const onComplexValue = (e, id) => {
+const onChangeLogic = (e, id) => {
 	const prop = Store().getState().prop;
 
 	if (prop.body[id]
@@ -17,4 +17,4 @@ const onComplexValue = (e, id) => {
 	}
 };
 
-export default onComplexValue;
+export default onChangeLogic;

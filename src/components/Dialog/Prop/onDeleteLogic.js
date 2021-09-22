@@ -1,6 +1,6 @@
 import Store from 'components/Store';
 
-const onComplexDelete = (e, name) => {
+const onDeleteLogic = (e, name) => {
 	const prop = Store().getState().prop;
 
 	if (prop.body[name]) {
@@ -12,4 +12,4 @@ const onComplexDelete = (e, name) => {
 	}
 };
 
-export default onComplexDelete;
+export default onDeleteLogic;
