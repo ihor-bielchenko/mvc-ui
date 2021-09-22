@@ -41,12 +41,14 @@ const TableCellValue = styled(TableCell)`
 	& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
 		border-color: rgba(0, 0, 0, 0.23);
 		border-width: 1px;
-		${(props) => props['data-is_type_id']
-			? `
-				border-right: none;
-				border-top-right-radius: 0px;
-				border-bottom-right-radius: 0px;
-			`
+		${(props) => typeof props['data-is_type_id'] !== 'undefined'
+			? props['data-is_type_id']
+				? `
+					border-right: none;
+					border-top-right-radius: 0px;
+					border-bottom-right-radius: 0px;
+				`
+				: ''
 			: `
 				border-top-left-radius: 0px;
 				border-bottom-left-radius: 0px;
@@ -135,7 +137,9 @@ let Item = ({
 			</React.Fragment>
 			: <React.Fragment />}
 		<TableCellValue 
-			data-is_type_id={1}
+			data-is_type_id={(typeId === FORMAT_OBJ.id || typeId === FORMAT_ARR.id)
+				? false
+				: true}
 			data-index={index}>
 			<SelectType 
 				name={'type_id-'+ id}
