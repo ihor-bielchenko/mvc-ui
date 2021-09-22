@@ -30,6 +30,7 @@ import onSelectTypeId from './onSelectTypeId.js';
 
 let Item = ({ 
 	id,
+	index,
 	formatId, 
 }) => {
 	const _id = id.toString();
@@ -68,6 +69,10 @@ let Item = ({
 						paddingLeft: 0,
 						paddingRight: 0,
 						textAlign: 'right',
+						paddingBottom: 4,
+						paddingTop: index === 0
+							? 28
+							: 12,
 					}}>
 					{formatId === FORMAT_ARR.id
 						? <Typography 
@@ -89,10 +94,16 @@ let Item = ({
 					width="1%"
 					style={{
 						border: 'none',
-						paddingLeft: 0,
-						paddingRight: 0,
+						paddingRight: 4,
+						paddingLeft: 4,
+						paddingBottom: 4,
+						paddingTop: index === 0
+							? 28
+							: 12,
 					}}>
-					<Typography variant="h6">
+					<Typography 
+						variant="h4"
+						color="textSecondary">
 						<b>:</b>
 					</Typography>
 				</TableCell>
@@ -101,8 +112,10 @@ let Item = ({
 		<TableCell 
 			style={{
 				border: 'none',
-				paddingLeft: 0,
-				paddingRight: 14,
+				paddingBottom: 4,
+				paddingTop: index === 0
+					? 28
+					: 12,
 			}}>
 			<SelectType 
 				name={'type_id-'+ id}
@@ -110,13 +123,16 @@ let Item = ({
 				onSelect={_onSelectTypeId}
 				onFilter={(key) => columnTypes[key].id !== COLUMN_ID.id
 					&& columnTypes[key].id !== FORMAT_ARR.id}
-				label="Выбрать тип" />
+				label="" />
 		</TableCell>
 		<TableCell 
 			style={{
 				border: 'none',
-				paddingLeft: 0,
-				paddingRight: 0,
+				paddingLeft: 4,
+				paddingBottom: 4,
+				paddingTop: index === 0
+					? 28
+					: 12,
 			}}>
 			<React.Suspense fallback={<Typography>Подождите...</Typography>}>
 				<Component
@@ -139,8 +155,11 @@ let Item = ({
 				width="1%"
 				style={{
 					border: 'none',
-					paddingLeft: 0,
-					paddingRight: 0,
+					paddingLeft: 4,
+					paddingBottom: 4,
+					paddingTop: index === 0
+						? 28
+						: 12,
 				}}>
 				<IconButton 
 					color="secondary"
@@ -155,6 +174,7 @@ let Item = ({
 Item = React.memo(Item);
 Item.defaultProps = {
 	id: 0,
+	index: 0,
 	formatId: 0,
 };
 
@@ -163,9 +183,9 @@ let Body = ({ formatId }) => {
 	
 	return <React.Fragment>
 		<TableContainer>
-			<Table>
+			<Table padding="none">
 				<TableHead>
-					<TableRow>
+					<TableRow style={{ marginBottom: 32 }}>
 						{(formatId === FORMAT_OBJ.id || formatId === FORMAT_ARR.id)
 							? <React.Fragment>
 								<TableCell 
@@ -175,7 +195,7 @@ let Body = ({ formatId }) => {
 									padding="none"
 									width={formatId === FORMAT_ARR.id
 										? '4%'
-										: '20%'}
+										: '16%'}
 									style={{
 										position: 'relative',
 									}}>
@@ -201,7 +221,9 @@ let Body = ({ formatId }) => {
 								<TableCell />
 							</React.Fragment>
 							: <React.Fragment />}
-						<TableCell align="center">
+						<TableCell 
+							align="center"
+							width="16%">
 							<Typography 
 								variant="caption"
 								color="textSecondary">
@@ -218,9 +240,10 @@ let Body = ({ formatId }) => {
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{bodyKeys.map((id) => <Item 
+					{bodyKeys.map((id, index) => <Item 
 						key={id}
 						id={id}
+						index={index}
 						formatId={formatId} />
 					)}
 				</TableBody>
