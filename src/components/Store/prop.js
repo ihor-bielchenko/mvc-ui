@@ -1,8 +1,9 @@
+import { FORMAT_ATOMIC } from 'structures/format.js';
 import { COLUMN_TEXT } from 'structures/columnTypes.js';
 
 export const initialState = () => ({
 	name: '',
-	format_id: '',
+	format_id: FORMAT_ATOMIC.id,
 	body: {
 		[Date.now()]: {
 			type_id: COLUMN_TEXT.id,

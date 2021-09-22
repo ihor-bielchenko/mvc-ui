@@ -29,6 +29,7 @@ import onChangeLogic from './onChangeLogic.js';
 import onDeleteLogic from './onDeleteLogic.js';
 import onSelectTypeId from './onSelectTypeId.js';
 
+const _onFilterTypes = () => (key) => columnTypes[key].id !== COLUMN_ID.id;
 const TableCellValue = styled(TableCell)`
 	border: none !important;
 	padding-bottom: 4px !important;
@@ -137,16 +138,13 @@ let Item = ({
 			</React.Fragment>
 			: <React.Fragment />}
 		<TableCellValue 
-			data-is_type_id={(typeId === FORMAT_OBJ.id || typeId === FORMAT_ARR.id)
-				? false
-				: true}
+			data-is_type_id={true}
 			data-index={index}>
 			<SelectType 
 				name={'type_id-'+ id}
 				value={typeId}
 				onSelect={_onSelectTypeId}
-				onFilter={(key) => columnTypes[key].id !== COLUMN_ID.id
-					&& columnTypes[key].id !== FORMAT_ARR.id}
+				onFilter={_onFilterTypes}
 				label="" />
 		</TableCellValue>
 		<TableCellValue data-index={index}>

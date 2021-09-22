@@ -22,12 +22,18 @@ import onChangeByLogicLimit from './onChangeByLogicLimit.js';
 import onClearOffset from './onClearOffset.js';
 import onClearLimit from './onClearLimit.js';
 
-let Select = () => {
+let Select = ({ id }) => {
 	const dbColumnsKeys = useSelector((state) => Object.keys(state.dbColumns.data));
 	const isCollection = useSelector((state) => state.prop.tempValue.is_collection);
 	const offset = useSelector((state) => state.prop.tempValue.offset);
 	const limit = useSelector((state) => state.prop.tempValue.limit);
 	const selectData = useSelector((state) => state.prop.tempValue.select || []);
+	const _onCollection = React.useCallback((e) => onCollection(e, id), [
+		id,
+	]);
+	const _onColumn = React.useCallback((e) => onColumn(e, id), [
+		id,
+	]);
 
 	return <React.Fragment>
 		<Box py={3}>
@@ -43,7 +49,7 @@ let Select = () => {
 							name="is_collection"
 							control={<Switch 
 								checked={!!isCollection}
-								onChange={onCollection} />} />
+								onChange={_onCollection} />} />
 					</Box>
 				</Grid>
 				{isCollection
@@ -123,7 +129,7 @@ let Select = () => {
 					control={<Checkbox 
 						value={key}
 						checked={selectData.indexOf(Number(key)) > -1}
-						onChange={onColumn} />}
+						onChange={_onColumn} />}
 					label={<Typography 
 						variant="h6"
 						color={dbColumnsData[key].type_id === COLUMN_ID.id
@@ -138,6 +144,7 @@ let Select = () => {
 
 Select = React.memo(Select);
 Select.defaultProps = {
+	id: 0,
 };
 
 export default Select;

@@ -75,7 +75,7 @@ let SourceDb = () => {
 							</Typography>
 						</StepLabel>
 						<StepContent>
-							<Select />
+							<Select id={bodyId} />
 						</StepContent>
 					</Step>
 					<Step>
