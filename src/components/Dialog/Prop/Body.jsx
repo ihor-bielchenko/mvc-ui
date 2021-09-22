@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import TableContainer from '@material-ui/core/TableContainer';
 import Table from '@material-ui/core/Table';
@@ -28,6 +29,30 @@ import onChangeLogic from './onChangeLogic.js';
 import onDeleteLogic from './onDeleteLogic.js';
 import onSelectTypeId from './onSelectTypeId.js';
 
+const TableCellValue = styled(TableCell)`
+	border: none !important;
+	padding-bottom: 4px !important;
+	padding-top: ${(props) => props['data-index'] === 0
+		? 28
+		: 12}px !important;
+
+	& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline,
+	& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline,
+	& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+		border-color: rgba(0, 0, 0, 0.23);
+		border-width: 1px;
+		${(props) => props['data-is_type_id']
+			? `
+				border-right: none;
+				border-top-right-radius: 0px;
+				border-bottom-right-radius: 0px;
+			`
+			: `
+				border-top-left-radius: 0px;
+				border-bottom-left-radius: 0px;
+			`}
+	}
+`;
 let Item = ({ 
 	id,
 	index,
@@ -76,7 +101,7 @@ let Item = ({
 					}}>
 					{formatId === FORMAT_ARR.id
 						? <Typography 
-							variant="h6"
+							variant="h5"
 							color="primary">
 							<b>{key.toString()}</b>
 						</Typography>
@@ -102,21 +127,16 @@ let Item = ({
 							: 12,
 					}}>
 					<Typography 
-						variant="h4"
+						variant="h5"
 						color="textSecondary">
 						<b>:</b>
 					</Typography>
 				</TableCell>
 			</React.Fragment>
 			: <React.Fragment />}
-		<TableCell 
-			style={{
-				border: 'none',
-				paddingBottom: 4,
-				paddingTop: index === 0
-					? 28
-					: 12,
-			}}>
+		<TableCellValue 
+			data-is_type_id={1}
+			data-index={index}>
 			<SelectType 
 				name={'type_id-'+ id}
 				value={typeId}
@@ -124,16 +144,8 @@ let Item = ({
 				onFilter={(key) => columnTypes[key].id !== COLUMN_ID.id
 					&& columnTypes[key].id !== FORMAT_ARR.id}
 				label="" />
-		</TableCell>
-		<TableCell 
-			style={{
-				border: 'none',
-				paddingLeft: 4,
-				paddingBottom: 4,
-				paddingTop: index === 0
-					? 28
-					: 12,
-			}}>
+		</TableCellValue>
+		<TableCellValue data-index={index}>
 			<React.Suspense fallback={<Typography>Подождите...</Typography>}>
 				<Component
 					menu
@@ -149,7 +161,7 @@ let Item = ({
 			<MenuSource 
 				aria={_id}
 				typeId={typeId} />
-		</TableCell>
+		</TableCellValue>
 		{(formatId === FORMAT_OBJ.id || formatId === FORMAT_ARR.id)
 			? <TableCell 
 				width="1%"
@@ -210,7 +222,6 @@ let Body = ({ formatId }) => {
 													position: 'absolute',
 													left: 22,
 													top: 0,
-													paddingTop: 16,
 													lineHeight: '1.6rem',
 												},
 											}
@@ -223,7 +234,7 @@ let Body = ({ formatId }) => {
 							: <React.Fragment />}
 						<TableCell 
 							align="center"
-							width="16%">
+							width="14%">
 							<Typography 
 								variant="caption"
 								color="textSecondary">
