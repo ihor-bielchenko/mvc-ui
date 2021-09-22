@@ -84,6 +84,18 @@ const initialState = {
 			id: 8,
 			type_id: 1,
 			value: 'path2',
+		}, {
+			id: 9,
+			type_id: 2,
+			value: 'placeholder4',
+		}, {
+			id: 10,
+			type_id: 2,
+			value: 'placeholder5',
+		}, {
+			id: 11,
+			type_id: 2,
+			value: 'placeholder6',
 		}],
 	},
 };

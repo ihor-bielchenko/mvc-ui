@@ -22,23 +22,23 @@ import onChangeByLogic from './onChangeByLogic.js';
 
 let SourcePlaceholder = () => {
 	const dialog = useSelector((state) => state.dialogs[SOURCE_PLACEHOLDER.id]);
-	const name = (dialog || {}).name;
+	const bodyId = (dialog || {}).name;
 	const path = useSelector((state) => state.routes.form.path || []);
 	const value = useSelector((state) => state.prop.tempValue.value);
-	const _onSave = React.useCallback((id) => (e) => onSave(e, name, id), [
-		name,
+	const _onSave = React.useCallback((placeholderId) => (e) => onSave(e, bodyId, placeholderId), [
+		bodyId,
 	]);
-	const _onClear = React.useCallback((e) => onClear(e, name), [
-		name,
+	const _onClear = React.useCallback((e) => onClear(e, bodyId), [
+		bodyId,
 	]);
 	const _onMenu = React.useCallback((e) => onDialog(SOURCE_SCRIPT.id, {
-		onClickEntity: (e, typeId, id) => onChangeByLogic(e, typeId, id, name),
+		onClickEntity: (e, typeId, id) => onChangeByLogic(e, typeId, id, bodyId),
 		formatValidating: () => ([
 			process.env.FORMAT_STR,
 			process.env.FORMAT_NUM,
 		]),
 	})(e), [
-		name,
+		bodyId,
 	]);
 
 	return <React.Fragment>
@@ -58,6 +58,8 @@ let SourcePlaceholder = () => {
 				style={{
 					display: 'flex',
 					alignItems: 'center',
+					paddingTop: 48,
+					paddingBottom: 48,
 				}}>
 				{typeof value === 'object'
 					? <Box 
@@ -84,7 +86,10 @@ let SourcePlaceholder = () => {
 							color="primary"
 							variant="outlined"
 							startIcon={<AddIcon fontSize="small" />}
-							onClick={_onMenu}>
+							onClick={_onMenu}
+							style={{
+								minWidth: 130,
+							}}>
 							Из логики
 						</Button>
 						<Typography 
@@ -96,13 +101,19 @@ let SourcePlaceholder = () => {
 							}}>
 							или
 						</Typography>
-						<Box>
+						<Box
+							style={{
+								whiteSpace: 'nowrap',
+							}}>
 							{path.map((pathItem, i) => (
 								<React.Fragment key={pathItem.id}>
 									/{pathItem.type_id === 2
 										? <Chip 
 											label={pathItem.value}
-											onClick={_onSave(pathItem.id)} />
+											onClick={_onSave(pathItem.id)}
+											color={pathItem.id === value
+												? 'primary'
+												: 'default'} />
 										: <Typography 
 											component="span"
 											variant="body2">
