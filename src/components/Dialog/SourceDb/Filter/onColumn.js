@@ -11,7 +11,7 @@ const onColumn = (e, name, setColumnId = () => {}, setLogicValue = () => {}) => 
 
 			Store().dispatch({
 				type: 'prop',
-				payload: () => prop,
+				payload: () => ({ ...prop }),
 			});
 		}
 		setColumnId(value);

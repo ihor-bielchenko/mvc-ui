@@ -6,7 +6,7 @@ let onAdd = (e) => {
 	prop.filterFormId = 0;
 	Store().dispatch({
 		type: 'prop',
-		payload: () => prop,
+		payload: () => ({ ...prop }),
 	});
 };
 

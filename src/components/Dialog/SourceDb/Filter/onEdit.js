@@ -7,7 +7,7 @@ let onEdit = (id) => (e) => {
 	prop.filterFormId = id;
 	Store().dispatch({
 		type: 'prop',
-		payload: () => prop,
+		payload: () => ({ ...prop }),
 	});
 	onClose(e, 'filter-'+ id);
 };

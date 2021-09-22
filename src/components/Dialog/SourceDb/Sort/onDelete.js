@@ -10,7 +10,7 @@ const onDelete = (id) => () => {
 		delete prop.sortFormId;
 		Store().dispatch({
 			type: 'prop',
-			payload: () => prop,
+			payload: () => ({ ...prop }),
 		});
 		onClose(DIALOG_DELETE_CONFIRM)();
 	}

@@ -8,7 +8,7 @@ let onRoute = (e) => {
 		prop.tempValue['route_id'] = value;
 		Store().dispatch({
 			type: 'prop',
-			payload: () => prop,
+			payload: () => ({ ...prop }),
 		});
 	}
 };

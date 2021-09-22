@@ -14,7 +14,7 @@ const onAdd = () => {
 	};
 	Store().dispatch({
 		type: 'prop',
-		payload: () => prop,
+		payload: () => ({ ...prop }),
 	});
 };
 

@@ -7,7 +7,7 @@ const onClear = (e, name, key) => {
 		prop.tempValue.request[name][key] = '';
 		Store().dispatch({
 			type: 'prop',
-			payload: () => prop,
+			payload: () => ({ ...prop }),
 		});
 	}
 };

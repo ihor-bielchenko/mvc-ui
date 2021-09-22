@@ -8,7 +8,7 @@ const onClear = (e, name, setLogicValue) => {
 		prop.tempValue.filter[name].value = '';
 		Store().dispatch({
 			type: 'prop',
-			payload: () => prop,
+			payload: () => ({ ...prop }),
 		});
 	}
 	setLogicValue(undefined);

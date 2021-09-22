@@ -7,7 +7,7 @@ const onDelete = (e, name) => {
 		delete prop.tempValue.request[name];
 		Store().dispatch({
 			type: 'prop',
-			payload: () => prop,
+			payload: () => ({ ...prop }),
 		});
 	}
 };

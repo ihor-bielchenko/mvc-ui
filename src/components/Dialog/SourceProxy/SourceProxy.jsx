@@ -25,7 +25,7 @@ import onSave from './onSave';
 
 let SourceProxy = () => {
 	const dialog = useSelector((state) => state.dialogs[SOURCE_PROXY_PASS.id]);
-	const name = (dialog || {}).name;
+	const bodyId = (dialog || {}).name;
 	const serviceId = useSelector((state) => state.prop.tempValue.service_id || '');
 	const routeId = useSelector((state) => state.prop.tempValue.route_id || '');
 	const [ tab, setTab ] = React.useState((state) => 0);
@@ -39,8 +39,8 @@ let SourceProxy = () => {
 	}, [
 		setTab,
 	]);
-	const _onSave = React.useCallback((e) => onSave(e, name, _onClose), [
-		name,
+	const _onSave = React.useCallback((e) => onSave(e, bodyId, _onClose), [
+		bodyId,
 		_onClose,
 	]);
 

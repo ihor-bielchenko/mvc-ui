@@ -19,7 +19,7 @@ const onSubmit = (e, logicValue) => {
 		delete prop.filterFormId;
 		Store().dispatch({
 			type: 'prop',
-			payload: () => prop,
+			payload: () => ({ ...prop }),
 		});
 	}
 	else if (id === 0) {
@@ -34,7 +34,7 @@ const onSubmit = (e, logicValue) => {
 		delete prop.filterFormId;
 		Store().dispatch({
 			type: 'prop',
-			payload: () => prop,
+			payload: () => ({ ...prop }),
 		});
 	}
 };

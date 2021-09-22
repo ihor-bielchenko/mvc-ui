@@ -7,7 +7,7 @@ let onEdit = (id) => (e) => {
 	prop.sortFormId = id;
 	Store().dispatch({
 		type: 'prop',
-		payload: () => prop,
+		payload: () => ({ ...prop }),
 	});
 	onClose();
 };

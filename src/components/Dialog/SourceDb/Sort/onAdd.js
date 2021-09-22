@@ -6,7 +6,7 @@ let onAdd = (e) => {
 	prop.sortFormId = 0;
 	Store().dispatch({
 		type: 'prop',
-		payload: () => prop,
+		payload: () => ({ ...prop }),
 	});
 };
 

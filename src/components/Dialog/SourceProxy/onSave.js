@@ -7,7 +7,7 @@ const onSave = (e, name, onClose) => {
 	const prop = Store().getState().prop;
 
 	if (typeof prop.body[name] !== 'undefined') {
-		prop.body[name] = { 
+		prop.body[name].value = { 
 			source_id: SOURCE_PROXY_PASS.id,
 			...prop.tempValue, 
 		};

@@ -33,20 +33,22 @@ import onEdit from './onEdit.js';
 import onDelete from './onDelete.js';
 
 let Table = () => {
-	const filterOperatorId = useSelector((state) => state.prop.tempValue.filter_operator_id || '');
+	const filterOperatorId = useSelector((state) => state.prop.tempValue.filter_operator_id ?? process.env.UNION_AND);
 	const filterKeys = useSelector((state) => Object.keys(state.prop.tempValue.filter || {}));
 
 	return <React.Fragment>
 		{filterKeys.length > 0
 			? <React.Fragment>
-				<Box 
-					maxWidth="210px"
-					py={2}>
-					<SelectOperatorUnion 
-						name="filter_operator_id"
-						value={filterOperatorId}
-						onSelect={onOperatorUnion} />
-				</Box>
+				{filterKeys.length > 1
+					? <Box 
+						maxWidth="210px"
+						py={2}>
+						<SelectOperatorUnion 
+							name="filter_operator_id"
+							value={filterOperatorId}
+							onSelect={onOperatorUnion} />
+					</Box>
+					: <React.Fragment />}
 				<TableContainer>
 					<TableMaterial>
 						<TableHead>

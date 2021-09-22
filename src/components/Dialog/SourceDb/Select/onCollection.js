@@ -6,7 +6,7 @@ const onCollection = () => {
 	prop.tempValue['is_collection'] = !prop.tempValue['is_collection'];
 	Store().dispatch({
 		type: 'prop',
-		payload: () => prop,
+		payload: () => ({ ...prop }),
 	});
 };
 

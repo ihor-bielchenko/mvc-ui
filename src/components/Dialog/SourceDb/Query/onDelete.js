@@ -9,7 +9,7 @@ const onDelete = (id) => () => {
 		delete prop.tempValue.query[id];
 		Store().dispatch({
 			type: 'prop',
-			payload: () => prop,
+			payload: () => ({ ...prop }),
 		});
 		onClose(DIALOG_DELETE_CONFIRM)();
 	}

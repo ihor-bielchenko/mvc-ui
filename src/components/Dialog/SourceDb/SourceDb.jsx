@@ -24,7 +24,7 @@ import onUnmount from './onUnmount.js';
 
 let SourceDb = () => {
 	const dialog = useSelector((state) => state.dialogs[SOURCE_DB.id]);
-	const name = (dialog || {}).name;
+	const bodyId = (dialog || {}).name;
 	const issetSelectData = useSelector((state) => (state.prop.tempValue.select || []).length > 0);
 	const filterFormId = useSelector((state) => state.prop.filterFormId);
 	const sortFormId = useSelector((state) => state.prop.sortFormId);
@@ -46,8 +46,8 @@ let SourceDb = () => {
 	}, [
 		setStep,
 	]);
-	const _onSave = React.useCallback((e) => onSave(e, name, _onClose), [
-		name,
+	const _onSave = React.useCallback((e) => onSave(e, bodyId, _onClose), [
+		bodyId,
 		_onClose,
 	]);
 

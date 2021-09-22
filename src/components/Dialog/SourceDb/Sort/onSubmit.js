@@ -17,7 +17,7 @@ const onSubmit = (e) => {
 		delete prop.sortFormId;
 		Store().dispatch({
 			type: 'prop',
-			payload: () => prop,
+			payload: () => ({ ...prop }),
 		});
 	}
 	else if (id === 0) {
@@ -31,7 +31,7 @@ const onSubmit = (e) => {
 		delete prop.sortFormId;
 		Store().dispatch({
 			type: 'prop',
-			payload: () => prop,
+			payload: () => ({ ...prop }),
 		});
 	}
 };

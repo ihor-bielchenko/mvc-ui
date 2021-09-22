@@ -6,7 +6,7 @@ let onCancel = () => {
 	delete prop.sortFormId;
 	Store().dispatch({
 		type: 'prop',
-		payload: () => prop,
+		payload: () => ({ ...prop }),
 	});
 };
 

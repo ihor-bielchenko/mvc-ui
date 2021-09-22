@@ -14,7 +14,7 @@ const onSave = (e, name, onClose) => {
 			}
 		}
 
-		prop.body[name] = { 
+		prop.body[name].value = { 
 			source_id: SOURCE_DB.id,
 			...prop.tempValue, 
 		};

@@ -7,7 +7,7 @@ let onOperatorUnion = (e) => {
 	prop.tempValue['filter_operator_id'] = value;
 	Store().dispatch({
 		type: 'prop',
-		payload: () => prop,
+		payload: () => ({ ...prop }),
 	});
 };
 

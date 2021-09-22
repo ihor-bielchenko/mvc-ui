@@ -19,7 +19,7 @@ const onColumn = (e) => {
 		prop.tempValue.select = select;
 		Store().dispatch({
 			type: 'prop',
-			payload: () => prop,
+			payload: () => ({ ...prop }),
 		});
 	}
 };
