@@ -29,66 +29,68 @@ const _onMenu = onDialog(SOURCE_SCRIPT.id, {
 });
 let SourceCookie = () => {
 	const dialog = useSelector((state) => state.dialogs[SOURCE_COOKIE.id]);
-	const name = (dialog || {}).name;
+	const id = (dialog || {}).name;
 	const value = useSelector((state) => state.prop.tempValue.value || '');
-	const _onSubmit = React.useCallback((e) => onSubmit(e, name), [
-		name,
+	const _onSubmit = React.useCallback((e) => onSubmit(e, id), [
+		id,
 	]);
-	const _onClear = React.useCallback((e) => onClear(e, name), [
-		name,
+	const _onClear = React.useCallback((e) => onClear(e, id), [
+		id,
 	]);
 
-	return <React.Fragment>
-		<Dialog
-			aria-labelledby="dialog-title"
-			aria-describedby="dialog-description"
-			fullWidth
-			open={!!dialog}
-			onClose={onClose}>
-			<DialogTitle>
-				<Header onClose={onClose}>
-					Куки входящего запроса
-				</Header>
-			</DialogTitle>
-			<form onSubmit={_onSubmit}>
-				<DialogContent dividers>
-					<InputText 
-						required
-						menu
-						onMenu={_onMenu}
-						onValue={_onMenu}
-						onDelete={_onClear}
-						name="name"
-						type="text"
-						label="Название"
-						placeholder="Например, access_token"
-						defaultValue={value} />
-				</DialogContent>
-				<DialogActions>
-					<Box 
-						p={2}
-						width="100%"
-						display="flex"
-						justifyContent="space-between">
-						<Button 
-							variant="outlined"
-							color="secondary"
-							startIcon={<CloseIcon />}
-							onClick={onClose}>
-							Отмена
-						</Button>
-						<Button 
-							variant="outlined"
-							color="primary"
-							type="submit"
-							startIcon={<CheckIcon />}>
-							Добавить
-						</Button>
-					</Box>
-				</DialogActions>
-			</form>
-		</Dialog>
-	</React.Fragment>;
+	return !!dialog
+		? <React.Fragment>
+			<Dialog
+				aria-labelledby="dialog-title"
+				aria-describedby="dialog-description"
+				fullWidth
+				open={!!dialog}
+				onClose={onClose}>
+				<DialogTitle>
+					<Header onClose={onClose}>
+						Куки входящего запроса
+					</Header>
+				</DialogTitle>
+				<form onSubmit={_onSubmit}>
+					<DialogContent dividers>
+						<InputText 
+							required
+							menu
+							onMenu={_onMenu}
+							onValue={_onMenu}
+							onDelete={_onClear}
+							name="value"
+							type="text"
+							label="Название"
+							placeholder="Например, access_token"
+							defaultValue={value} />
+					</DialogContent>
+					<DialogActions>
+						<Box 
+							p={2}
+							width="100%"
+							display="flex"
+							justifyContent="space-between">
+							<Button 
+								variant="outlined"
+								color="secondary"
+								startIcon={<CloseIcon />}
+								onClick={onClose}>
+								Отмена
+							</Button>
+							<Button 
+								variant="outlined"
+								color="primary"
+								type="submit"
+								startIcon={<CheckIcon />}>
+								Добавить
+							</Button>
+						</Box>
+					</DialogActions>
+				</form>
+			</Dialog>
+		</React.Fragment>
+		: <React.Fragment />;
 };
 
 SourceCookie = React.memo(SourceCookie);

@@ -1,10 +1,11 @@
+import { COLUMN_TEXT } from 'structures/columnTypes.js';
 
 export const initialState = () => ({
 	name: '',
 	format_id: '',
 	body: {
 		[Date.now()]: {
-			type_id: '',
+			type_id: COLUMN_TEXT.id,
 			key: '0',
 			value: '',
 		},

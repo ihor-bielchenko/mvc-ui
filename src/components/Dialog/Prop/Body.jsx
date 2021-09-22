@@ -16,16 +16,16 @@ import onMenu from 'components/Menu/onMenu.js';
 import loadColumnInputs from 'utils/loadColumnInputs.js';
 import columnTypes, { 
 	COLUMN_ID,
-	COLUMN_ARR, 
+	COLUMN_TEXT,
 } from 'structures/columnTypes.js';
 import {
 	FORMAT_OBJ,
 	FORMAT_ARR,
 } from 'structures/format.js';
-import onDeleteValue from './onDeleteValue.js';
+import onChangeItem from './onChangeItem.js';
+import onDeleteItem from './onDeleteItem.js';
 import onComplexValue from './onComplexValue.js';
 import onComplexDelete from './onComplexDelete.js';
-import onChangeItem from './onChangeItem.js';
 import onSelectTypeId from './onSelectTypeId.js';
 
 let Item = ({ 
@@ -34,18 +34,30 @@ let Item = ({
 }) => {
 	const _id = id.toString();
 	const _idKey = 'key-'+ _id;
-	const _idValue = 'value-'+ _id;
 	const key = useSelector((state) => (state.prop.body[id] || {}).key || '');
 	const value = useSelector((state) => (state.prop.body[id] || {}).value ?? '');
-	const typeId = useSelector((state) => (state.prop.body[id] || {}).type_id ?? '');
+	const typeId = useSelector((state) => (state.prop.body[id] || {}).type_id ?? COLUMN_TEXT.id);
 	const _onSelectTypeId = React.useCallback((e) => onSelectTypeId(e, id), [
 		id,
 	]);
 	const Component = React.useMemo(() => React.lazy(loadColumnInputs(typeId)), [
 		typeId,
 	]);
-
-	console.log('key', key);
+	const _onComplexValue = React.useCallback((e) => onComplexValue(e, _id), [
+		_id,
+	]);
+	const _onComplexDelete = React.useCallback((e) => onComplexDelete(e, _id), [
+		_id,
+	]);
+	const _onChangeItemKey = React.useCallback((e) => onChangeItem(e, _id, 'key'), [
+		_id,
+	]);
+	const _onChangeItemValue = React.useCallback((e) => onChangeItem(e, _id, 'value'), [
+		_id,
+	]);
+	const _onDeleteItem = React.useCallback((e) => onDeleteItem(e, _id), [
+		_id,
+	]);
 
 	return <TableRow>
 		{(formatId === FORMAT_OBJ.id || formatId === FORMAT_ARR.id)
@@ -65,13 +77,11 @@ let Item = ({
 						</Typography>
 						: <InputText
 							menu
-							onMenu={onMenu(_idKey)}
-							onValue={onComplexValue}
-							onDelete={onComplexDelete}
+							onMenu={() => {}}
 							name={_idKey}
 							id={_idKey}
 							value={key.toString()}
-							onChange={onChangeItem(id, 'key')}
+							onChange={_onChangeItemKey}
 							label="" />}
 				</TableCell>
 				<TableCell 
@@ -99,7 +109,7 @@ let Item = ({
 				value={typeId}
 				onSelect={_onSelectTypeId}
 				onFilter={(key) => columnTypes[key].id !== COLUMN_ID.id
-					&& columnTypes[key].id !== COLUMN_ARR.id}
+					&& columnTypes[key].id !== FORMAT_ARR.id}
 				label="Выбрать тип" />
 		</TableCell>
 		<TableCell 
@@ -111,17 +121,17 @@ let Item = ({
 			<React.Suspense fallback={<Typography>Подождите...</Typography>}>
 				<Component
 					menu
-					onMenu={onMenu(_idValue)}
-					onValue={onComplexValue}
-					onDelete={onComplexDelete}
-					name={_idValue}
-					id={_idValue}
-					value={value}
-					onChange={onChangeItem(id, 'value')}
+					onMenu={onMenu(_id)}
+					onValue={_onComplexValue}
+					onDelete={_onComplexDelete}
+					name={_id}
+					id={_id}
+					defaultValue={value}
+					onChange={_onChangeItemValue}
 					label="" />
 			</React.Suspense>
 			<MenuSource 
-				aria={_idValue}
+				aria={_id}
 				typeId={typeId} />
 		</TableCell>
 		{(formatId === FORMAT_OBJ.id || formatId === FORMAT_ARR.id)
@@ -135,7 +145,7 @@ let Item = ({
 				<IconButton 
 					color="secondary"
 					size="small"
-					onClick={onDeleteValue(id)}>
+					onClick={_onDeleteItem}>
 					<CloseIcon fontSize="small" />
 				</IconButton>
 			</TableCell>

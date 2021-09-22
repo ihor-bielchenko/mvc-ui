@@ -1,6 +1,6 @@
 import Store from 'components/Store';
 
-const onChangeItem = (id, key = 'key') => (e) => {
+const onChangeItem = (e, id, key = 'key') => {
 	const prop = Store().getState().prop;
 
 	if (typeof prop.body[id] !== undefined) {

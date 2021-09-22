@@ -1,17 +1,18 @@
 import Store from 'components/Store';
 import onDialog from 'components/Dialog/onDialog.js';
 
-const onComplexValue = (e, name) => {
+const onComplexValue = (e, id) => {
 	const prop = Store().getState().prop;
 
-	if (prop.body[name]) {
-		prop.tempValue = { ...prop.body[name] };
+	if (prop.body[id]
+		&& prop.body[id].value.source_id >= 0) {
+		prop.tempValue = { ...prop.body[id].value };
 		Store().dispatch({
 			type: 'prop',
-			payload: () => prop,
+			payload: () => ({ ...prop }),
 		});
-		onDialog(prop.body[name].source_id, { 
-			name, 
+		onDialog(prop.body[id].value.source_id, { 
+			name: id, 
 		})();
 	}
 };

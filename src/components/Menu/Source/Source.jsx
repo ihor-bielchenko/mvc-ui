@@ -20,9 +20,6 @@ let Source = ({
 	const name = useSelector((state) => state.menu[aria]
 		? state.menu[aria].name
 		: null);
-	const scriptId = useSelector((state) => state.menu[aria]
-		? state.menu[aria].scriptId
-		: undefined);
 
 	return <React.Fragment>
 		<Menu
@@ -44,7 +41,6 @@ let Source = ({
 						disabled={!!item.disabled}
 						onClick={onDialog(item.id, { 
 							name, 
-							scriptId, 
 						})}>
 						<ListItemAvatar>
 							<item.icon />

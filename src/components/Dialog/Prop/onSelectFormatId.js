@@ -19,7 +19,6 @@ const onSelectFormatId = (e) => {
 	}
 
 	prop.format_id = newValue;
-	console.log('prop', prop);
 	Store().dispatch({
 		type: 'prop',
 		payload: () => ({ ...prop }),

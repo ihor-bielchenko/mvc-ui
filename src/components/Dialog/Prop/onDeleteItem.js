@@ -1,7 +1,7 @@
 import Store from 'components/Store';
 import { FORMAT_ARR } from 'structures/format.js';
 
-const onDeleteValue = (id) => (e) => {
+const onDeleteItem = (e, id) => {
 	const prop = Store().getState().prop;
 
 	if (typeof prop.body[id] !== 'undefined') {
@@ -23,4 +23,4 @@ const onDeleteValue = (id) => (e) => {
 	}
 };
 
-export default onDeleteValue;
+export default onDeleteItem;
