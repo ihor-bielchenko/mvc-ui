@@ -14,6 +14,10 @@ import {
 	SOURCE_HEADER,
 	SOURCE_SCRIPT, 
 } from 'structures/source.js';
+import {
+	COLUMN_NUMBER,
+	COLUMN_TEXT,
+} from 'structures/columnTypes.js';
 import onDialog from '../onDialog.js';
 import onChangeByLogic from '../onChangeByLogic.js';
 import onClear from '../onClear.js';
@@ -23,8 +27,8 @@ import onSubmit from './onSubmit.js';
 const _onMenu = onDialog(SOURCE_SCRIPT.id, {
 	onClickEntity: onChangeByLogic,
 	formatValidating: () => ([
-		process.env.FORMAT_STR,
-		process.env.FORMAT_NUM,
+		COLUMN_NUMBER.id,
+		COLUMN_TEXT.id,
 	]),
 });
 let SourceHeader = () => {

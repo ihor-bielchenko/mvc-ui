@@ -5,6 +5,10 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import InputText from 'components/Input/Text';
 import { SOURCE_SCRIPT } from 'structures/source.js';
+import {
+	COLUMN_NUMBER,
+	COLUMN_TEXT,
+} from 'structures/columnTypes.js';
 import onDialog from '../../onDialog.js';
 import onValidate from '../onValidate.js';
 import onPlaceholder from './onPlaceholder.js';
@@ -26,8 +30,8 @@ let Placeholder = ({
 	const _onMenu = React.useCallback((e) => onDialog(SOURCE_SCRIPT.id, {
 		onClickEntity: (e, typeId, id) => onChangeByLogic(e, typeId, id, routeId, name),
 		formatValidating: () => ([
-			process.env.FORMAT_STR,
-			process.env.FORMAT_NUM,
+			COLUMN_NUMBER.id,
+			COLUMN_TEXT.id,
 		]),
 	})(e), [
 		routeId,

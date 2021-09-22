@@ -1,13 +1,12 @@
-import * as format from 'structures/format.js';
 import * as columnTypes from 'structures/columnTypes.js';
 
 const typeFormatValidating = (value, useOnlyFormatFlag = false) => () => {
 	if (useOnlyFormatFlag) {
 		switch (value) {
-			case format.FORMAT_STR.id:
+			case columnTypes.COLUMN_TEXT.id:
 				return [ 
-					process.env.FORMAT_NUM,
-					process.env.FORMAT_STR, 
+					columnTypes.COLUMN_NUMBER.id,
+					columnTypes.COLUMN_TEXT.id,
 				]; 
 			default:
 				return [ value ];
@@ -17,7 +16,7 @@ const typeFormatValidating = (value, useOnlyFormatFlag = false) => () => {
 	switch (value) {
 		case columnTypes.COLUMN_ID.id:
 		case columnTypes.COLUMN_NUMBER.id:
-			return [ process.env.FORMAT_NUM ];
+			return [ columnTypes.COLUMN_NUMBER.id ];
 		case columnTypes.COLUMN_TEXT.id:
 		case columnTypes.COLUMN_RICHTEXT.id:
 		case columnTypes.COLUMN_TIME.id:
@@ -27,18 +26,19 @@ const typeFormatValidating = (value, useOnlyFormatFlag = false) => () => {
 		case columnTypes.COLUMN_URL.id:
 		case columnTypes.COLUMN_PASSWORD.id:
 			return [ 
-				process.env.FORMAT_NUM,
-				process.env.FORMAT_STR, 
+				columnTypes.COLUMN_NUMBER.id,
+				columnTypes.COLUMN_TEXT.id, 
 			];
 		case columnTypes.COLUMN_BOOLEAN.id:
-			return [ process.env.FORMAT_BOOL ];
+			return [ columnTypes.COLUMN_BOOLEAN.id ];
 		default:
 			return [
-				process.env.FORMAT_STR,
-				process.env.FORMAT_NUM,
-				process.env.FORMAT_ARR,
-				process.env.FORMAT_BOOL,
-				process.env.FORMAT_EMPTY,
+				columnTypes.COLUMN_TEXT.id,
+				columnTypes.COLUMN_NUMBER.id,
+				columnTypes.COLUMN_BOOLEAN.id,
+				columnTypes.COLUMN_ARR.id,
+				columnTypes.COLUMN_OBJ.id,
+				columnTypes.COLUMN_NULL.id,
 			];
 	}
 };

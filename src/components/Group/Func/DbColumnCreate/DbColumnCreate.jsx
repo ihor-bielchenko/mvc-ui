@@ -7,6 +7,11 @@ import SelectType from 'components/Select/Type';
 import InputText from 'components/Input/Text';
 import onDialog from 'components/Dialog/onDialog.js';
 import { SOURCE_SCRIPT } from 'structures/source.js';
+import {
+	COLUMN_NUMBER,
+	COLUMN_TEXT,
+	COLUMN_NULL,
+} from 'structures/columnTypes.js';
 import onSelect from '../onSelect.js';
 import onClear from '../onClear.js';
 import onChangeByLogic from '../onChangeByLogic.js';
@@ -29,8 +34,8 @@ let DbColumnCreate = ({ scriptId }) => {
 		scriptId,
 		onClickEntity: _onChangeByLogic2,
 			formatValidating: () => ([
-				process.env.FORMAT_STR,
-				process.env.FORMAT_NUM,
+				COLUMN_NUMBER.id,
+				COLUMN_TEXT.id,
 			]),
 	})(e), [
 		scriptId,
@@ -45,9 +50,9 @@ let DbColumnCreate = ({ scriptId }) => {
 		scriptId,
 		onClickEntity: _onChangeByLogic3,
 			formatValidating: () => ([
-				process.env.FORMAT_STR,
-				process.env.FORMAT_NUM,
-				process.env.FORMAT_EMPTY,
+				COLUMN_NUMBER.id,
+				COLUMN_TEXT.id,
+				COLUMN_NULL.id,
 			]),
 	})(e), [
 		scriptId,

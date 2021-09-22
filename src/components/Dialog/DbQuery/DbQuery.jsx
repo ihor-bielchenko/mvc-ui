@@ -14,6 +14,10 @@ import Header from 'components/Header';
 import InputText from 'components/Input/Text';
 import { DIALOG_DB_QUERY } from 'consts/dialog.js';
 import { SOURCE_SCRIPT } from 'structures/source.js';
+import {
+	COLUMN_NUMBER,
+	COLUMN_TEXT,
+} from 'structures/columnTypes.js';
 import onDialog from '../onDialog.js';
 import onClose from './onClose.js';
 import onSubmit from './onSubmit.js';
@@ -33,8 +37,8 @@ let DbQuery = () => {
 	const _onMenu = React.useCallback((e) => onDialog(SOURCE_SCRIPT.id, {
 		onClickEntity: (e, entityId, id) => onChangeByLogic(e, entityId, id, setLogicValue),
 		formatValidating: () => ([
-			process.env.FORMAT_NUM,
-			process.env.FORMAT_STR,
+			COLUMN_NUMBER.id,
+			COLUMN_TEXT.id,
 		]),
 	})(e), [
 		setLogicValue,

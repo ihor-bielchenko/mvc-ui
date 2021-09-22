@@ -89,6 +89,11 @@ export const COLUMN_ARR = {
 	icon: InsertDriveFileIcon,
 	text: () => 'Массив',
 };
+export const COLUMN_NULL = {
+	id: process.env.COLUMN_NULL,
+	icon: InsertDriveFileIcon,
+	text: () => 'Пустота',
+};
 
 const columnTypes = {
 	[process.env.COLUMN_ID]: COLUMN_ID,
@@ -105,6 +110,7 @@ const columnTypes = {
 	[process.env.COLUMN_FILE]: COLUMN_FILE,
 	[process.env.COLUMN_OBJ]: COLUMN_OBJ,
 	[process.env.COLUMN_ARR]: COLUMN_ARR,
+	[process.env.COLUMN_NULL]: COLUMN_NULL,
 };
 
 export default columnTypes;

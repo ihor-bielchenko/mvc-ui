@@ -5,6 +5,11 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import InputText from 'components/Input/Text';
 import { SOURCE_SCRIPT } from 'structures/source.js';
+import {
+	COLUMN_NUMBER,
+	COLUMN_TEXT,
+	COLUMN_BOOLEAN,
+} from 'structures/columnTypes.js';
 import onDialog from '../../onDialog.js';
 import onValidate from '../onValidate.js';
 import onDelete from './onDelete.js';
@@ -34,9 +39,9 @@ let KeyValue = ({ name }) => {
 	const _onMenuKey = React.useCallback((e) => onDialog(SOURCE_SCRIPT.id, {
 		onClickEntity: (e, typeId, id) => onChangeByLogic(e, typeId, id, name, 'key'),
 		formatValidating: () => ([
-			process.env.FORMAT_STR,
-			process.env.FORMAT_NUM,
-			process.env.FORMAT_BOOL,
+			COLUMN_NUMBER.id,
+			COLUMN_TEXT.id,
+			COLUMN_BOOLEAN.id,
 		]),
 	})(e), [
 		name,
@@ -44,9 +49,9 @@ let KeyValue = ({ name }) => {
 	const _onMenuValue = React.useCallback((e) => onDialog(SOURCE_SCRIPT.id, {
 		onClickEntity: (e, typeId, id) => onChangeByLogic(e, typeId, id, name, 'value'),
 		formatValidating: () => ([
-			process.env.FORMAT_STR,
-			process.env.FORMAT_NUM,
-			process.env.FORMAT_BOOL,
+			COLUMN_NUMBER.id,
+			COLUMN_TEXT.id,
+			COLUMN_BOOLEAN.id,
 		]),
 	})(e), [
 		name,

@@ -14,6 +14,10 @@ import {
 	SOURCE_PLACEHOLDER,
 	SOURCE_SCRIPT, 
 } from 'structures/source.js';
+import {
+	COLUMN_NUMBER,
+	COLUMN_TEXT,
+} from 'structures/columnTypes.js';
 import onDialog from '../onDialog.js';
 import onClear from '../onClear.js';
 import onClose from './onClose.js';
@@ -34,8 +38,8 @@ let SourcePlaceholder = () => {
 	const _onMenu = React.useCallback((e) => onDialog(SOURCE_SCRIPT.id, {
 		onClickEntity: (e, typeId, id) => onChangeByLogic(e, typeId, id, bodyId),
 		formatValidating: () => ([
-			process.env.FORMAT_STR,
-			process.env.FORMAT_NUM,
+			COLUMN_NUMBER.id,
+			COLUMN_TEXT.id,
 		]),
 	})(e), [
 		bodyId,
