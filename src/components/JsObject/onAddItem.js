@@ -30,8 +30,19 @@ const recursion = (data, temp, id) => {
 			|| (data[dataKeys[i]] || {}).type_id === COLUMN_OBJ.id
 			|| (data[dataKeys[i]] || {}).type_id === COLUMN_ARR.id) {
 			if (id === dataKeys[i]) {
-				if (temp[id]) {
-					data[id] = { ...temp[id] };
+				if (typeof temp[id].type_id !== 'undefined') {
+					data[id].type_id = temp[id].type_id;
+				}
+				if (typeof temp[id].key !== 'undefined') {
+					data[id].key = temp[id].key;
+				}
+				if (typeof temp[id].key !== 'undefined') {
+					data[id].key = temp[id].key;
+				}
+				if (typeof temp[id].value !== 'undefined') {
+					data[id].value = typeof temp[id].value === 'object'
+						? {}
+						: temp[id].value;
 				}
 				const newKey = getNewItemKey(data[id].value);
 				const newId = Date.now();

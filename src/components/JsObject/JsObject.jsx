@@ -4,10 +4,15 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+import onMenu from 'components/Menu/onMenu.js';
 import Header from './Header';
 import Item from './Item';
 import onAddItem from './onAddItem.js';
 import { FORMAT_ATOMIC } from 'structures/format.js';
+import source, {
+	SOURCE_DB,
+	SOURCE_PROXY_PASS,
+} from 'structures/source.js';
 import {
 	COLUMN_OBJ,
  	COLUMN_ARR,
@@ -17,6 +22,12 @@ const closures = {
 	[COLUMN_OBJ.id]: [ '{', '}' ],
 	[COLUMN_ARR.id]: [ '[', ']' ],
 };
+const _onFilterSource = (typeId) => (key) => (
+	typeId === COLUMN_ARR.id
+		? source[key].id === SOURCE_DB.id
+		: (source[key].id === SOURCE_DB.id
+			|| source[key].id === SOURCE_PROXY_PASS.id)
+);
 let JsObject = ({ 
 	parentId,
 	typeId,
@@ -90,6 +101,29 @@ let JsObject = ({
 						Добавить элемент
 					</Button>
 				</Box>
+				{typeof data !== 'undefined'
+					? <Box 
+						pt={1}
+						pl={2}>
+						<Button 
+							variant="outlined"
+							color="primary"
+							startIcon={<AddIcon />}
+							onClick={onMenu(parentId)}>
+							{typeId === COLUMN_OBJ.id
+								? 'Вставить объект'
+								: typeId === COLUMN_ARR.id
+									? 'Вставить массив'
+									: ''}
+						</Button>
+						{typeof MenuValueComponent === 'object'
+							? <MenuValueComponent
+								aria={parentId}
+								typeId={typeId}
+								onFilter={_onFilterSource(typeId)} />
+							: <React.Fragment />}
+					</Box>
+					: <React.Fragment />}
 				{closures[typeId]
 					? <Box display="flex">
 						<Typography

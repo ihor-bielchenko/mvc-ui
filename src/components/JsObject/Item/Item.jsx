@@ -233,6 +233,9 @@ let Item = ({
 			position="relative"
 			width="100%"
 			minWidth="280px"
+			maxWidth={typeof parentTypeId === 'undefined'
+				? 'inherit'
+				: '280px'}
 			data-border_left_radius_0={typeof parentTypeId === 'undefined'}
 			data-border_left_hide={typeof parentTypeId === 'undefined'}>
 			{(() => {
