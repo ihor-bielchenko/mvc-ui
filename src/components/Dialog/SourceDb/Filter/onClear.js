@@ -1,14 +1,14 @@
 import Store from 'components/Store';
 
 const onClear = (e, name, setLogicValue) => {
-	const prop = Store().getState().prop;
+	const jsObject = Store().getState().jsObject;
 
-	if (prop.tempValue.filter &&
-		prop.tempValue.filter[name]) {
-		prop.tempValue.filter[name].value = '';
+	if (jsObject.tempValue.filter &&
+		jsObject.tempValue.filter[name]) {
+		jsObject.tempValue.filter[name].value = '';
 		Store().dispatch({
-			type: 'prop',
-			payload: () => ({ ...prop }),
+			type: 'jsObject',
+			payload: () => ({ ...jsObject }),
 		});
 	}
 	setLogicValue(undefined);

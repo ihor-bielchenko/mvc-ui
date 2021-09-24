@@ -5,7 +5,7 @@ import Table from './Table.jsx';
 import onCancel from './onCancel.js';
 
 let Filter = () => {
-	const id = useSelector((state) => state.prop.filterFormId);
+	const id = useSelector((state) => state.jsObject.filterFormId);
 
 	// onUnmount
 	React.useEffect(() => () => onCancel(), []);

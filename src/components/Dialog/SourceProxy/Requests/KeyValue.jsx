@@ -19,8 +19,8 @@ import onChangeByLogic from './onChangeByLogic.js';
 import onClear from './onClear.js';
 
 let KeyValue = ({ name }) => {
-	const key = useSelector((state) => (state.prop.tempValue.request[name] || {}).key || '');
-	const value = useSelector((state) => (state.prop.tempValue.request[name] || {}).value || '');
+	const key = useSelector((state) => (state.jsObject.tempValue.request[name] || {}).key || '');
+	const value = useSelector((state) => (state.jsObject.tempValue.request[name] || {}).value || '');
 	const _onClearKey = React.useCallback((e) => onClear(e, name, 'key'), [
 		name,
 	]);

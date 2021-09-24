@@ -3,10 +3,10 @@ import onClose from 'components/Dialog/onClose.js';
 import { SOURCE_SCRIPT } from 'structures/source.js';
 
 const onChangeByLogic = (e, typeId, id, routeId, key) => {
-	const prop = Store().getState().prop;
+	const jsObject = Store().getState().prop;
 
-	if (!prop.tempValue.placeholder) {
-		prop.tempValue.placeholder = {
+	if (!jsObject.tempValue.placeholder) {
+		jsObject.tempValue.placeholder = {
 			[key]: {
 				route_url_id: routeId,
 				route_placeholder_id: key,
@@ -14,14 +14,14 @@ const onChangeByLogic = (e, typeId, id, routeId, key) => {
 			},
 		};
 	}
-	prop.tempValue.placeholder[key]['value'] = {
+	jsObject.tempValue.placeholder[key]['value'] = {
 		source_id: SOURCE_SCRIPT.id,
 		type_id: typeId,
 		id,
 	};
 	Store().dispatch({
-		type: 'prop',
-		payload: () => prop,
+		type: 'jsObject',
+		payload: () => ({ ...jsObject }),
 	});
 	onClose(SOURCE_SCRIPT.id)(e);
 };

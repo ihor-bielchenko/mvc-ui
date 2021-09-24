@@ -92,7 +92,7 @@ export const COLUMN_ARR = {
 export const COLUMN_NULL = {
 	id: process.env.COLUMN_NULL,
 	icon: InsertDriveFileIcon,
-	text: () => 'Пустота',
+	text: () => 'Пустота (NULL)',
 };
 
 const columnTypes = {

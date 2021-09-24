@@ -1,14 +1,14 @@
 import Store from 'components/Store';
 
 let onService = (e) => {
-	const prop = Store().getState().prop;
+	const jsObject = Store().getState().jsObject;
 	const value = Number(e.target.value);
 
 	if (value > 0) {
-		prop.tempValue['service_id'] = value;
+		jsObject.tempValue['service_id'] = value;
 		Store().dispatch({
-			type: 'prop',
-			payload: () => prop,
+			type: 'jsObject',
+			payload: () => ({ ...jsObject }),
 		});
 	}
 };

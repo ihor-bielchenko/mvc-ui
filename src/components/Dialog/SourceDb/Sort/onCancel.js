@@ -1,12 +1,12 @@
 import Store from 'components/Store';
 
 let onCancel = () => {
-	const prop = Store().getState().prop;
+	const jsObject = Store().getState().jsObject;
 
-	delete prop.sortFormId;
+	delete jsObject.sortFormId;
 	Store().dispatch({
-		type: 'prop',
-		payload: () => ({ ...prop }),
+		type: 'jsObject',
+		payload: () => ({ ...jsObject }),
 	});
 };
 

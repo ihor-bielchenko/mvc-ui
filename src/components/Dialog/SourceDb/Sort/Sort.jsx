@@ -5,7 +5,7 @@ import Table from './Table.jsx';
 import onCancel from './onCancel.js';
 
 let Sort = () => {
-	const id = useSelector((state) => state.prop.sortFormId);
+	const id = useSelector((state) => state.jsObject.sortFormId);
 
 	// onUnmount
 	React.useEffect(() => () => onCancel(), []);

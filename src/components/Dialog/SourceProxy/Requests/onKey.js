@@ -1,13 +1,13 @@
 import Store from 'components/Store';
 
 const onKey = (e, name) => {
-	const prop = Store().getState().prop;
+	const jsObject = Store().getState().jsObject;
 
-	if (prop.tempValue.request[name]) {
-		prop.tempValue.request[name]['key'] = e.target.value;
+	if (jsObject.tempValue.request[name]) {
+		jsObject.tempValue.request[name]['key'] = e.target.value;
 		Store().dispatch({
-			type: 'prop',
-			payload: () => prop,
+			type: 'jsObject',
+			payload: () => ({ ...jsObject }),
 		});
 	}
 };

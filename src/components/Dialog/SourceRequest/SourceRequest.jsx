@@ -10,6 +10,8 @@ import CloseIcon from '@material-ui/icons/Close';
 import CheckIcon from '@material-ui/icons/Check';
 import Header from 'components/Header';
 import InputText from 'components/Input/Text';
+import onSubmit from 'components/Dialog/SourceCookie/onSubmit.js';
+import onClose from 'components/Dialog/SourceCookie/onClose.js';
 import { 
 	SOURCE_REQUEST,
 	SOURCE_SCRIPT, 
@@ -21,8 +23,6 @@ import {
 import onDialog from '../onDialog.js';
 import onChangeByLogic from '../onChangeByLogic.js';
 import onClear from '../onClear.js';
-import onClose from './onClose.js';
-import onSubmit from './onSubmit.js';
 
 const _onMenu = onDialog(SOURCE_SCRIPT.id, {
 	onClickEntity: onChangeByLogic,
@@ -34,8 +34,8 @@ const _onMenu = onDialog(SOURCE_SCRIPT.id, {
 let SourceRequest = () => {
 	const dialog = useSelector((state) => state.dialogs[SOURCE_REQUEST.id]);
 	const bodyId = (dialog || {}).name;
-	const value = useSelector((state) => state.prop.tempValue.value || '');
-	const _onSubmit = React.useCallback((e) => onSubmit(e, bodyId), [
+	const value = useSelector((state) => state.jsObject.tempValue.value || '');
+	const _onSubmit = React.useCallback((e) => onSubmit(e, bodyId, SOURCE_REQUEST.id), [
 		bodyId,
 	]);
 	const _onClear = React.useCallback((e) => onClear(e, bodyId), [
@@ -48,9 +48,9 @@ let SourceRequest = () => {
 			aria-describedby="dialog-description"
 			fullWidth
 			open={!!dialog}
-			onClose={onClose}>
+			onClose={onClose(SOURCE_REQUEST.id)}>
 			<DialogTitle>
-				<Header onClose={onClose}>
+				<Header onClose={onClose(SOURCE_REQUEST.id)}>
 					Параметр входящего запроса
 				</Header>
 			</DialogTitle>
@@ -78,7 +78,7 @@ let SourceRequest = () => {
 							variant="outlined"
 							color="secondary"
 							startIcon={<CloseIcon />}
-							onClick={onClose}>
+							onClick={onClose(SOURCE_REQUEST.id)}>
 							Отмена
 						</Button>
 						<Button 

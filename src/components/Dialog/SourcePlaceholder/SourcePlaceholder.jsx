@@ -28,7 +28,7 @@ let SourcePlaceholder = () => {
 	const dialog = useSelector((state) => state.dialogs[SOURCE_PLACEHOLDER.id]);
 	const bodyId = (dialog || {}).name;
 	const path = useSelector((state) => state.routes.form.path || []);
-	const value = useSelector((state) => state.prop.tempValue.value);
+	const value = useSelector((state) => state.jsObject.tempValue.value);
 	const _onSave = React.useCallback((placeholderId) => (e) => onSave(e, bodyId, placeholderId), [
 		bodyId,
 	]);

@@ -7,12 +7,14 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Typography from '@material-ui/core/Typography';
 import onDialog from 'components/Dialog/onDialog.js';
 import source from 'structures/source.js';
+import { SOURCE_MANUALLY } from 'structures/source.js';
 import onClose from '../onClose.js';
 
 let Source = ({
 	aria,  
 	children, 
 	typeId,
+	onFilter,
 }) => {
 	const anchorEl = useSelector((state) => state.menu[aria]
 		? state.menu[aria].anchorEl
@@ -31,8 +33,7 @@ let Source = ({
 			{children}
 			{Object
 				.keys(source)
-				.filter((key) => source[key].id !== 0 
-					&& source[key].formatValidating().includes(typeId))
+				.filter(onFilter)
 				.map((key, i) => {
 					const item = source[key];
 
@@ -60,6 +61,7 @@ Source = React.memo(Source);
 Source.defaultProps = {
 	aria: 'aria-source',
 	typeId: 0,
+	onFilter: (key) => source[key].id !== SOURCE_MANUALLY.id,
 };
 
 export default Source;

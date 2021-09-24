@@ -13,6 +13,7 @@ import Button from '@material-ui/core/Button';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import Header from 'components/Header';
+import onUnmount from 'components/Dialog/SourceCookie/onUnmount.js';
 import { SOURCE_DB } from 'structures/source.js';
 import onClose from '../onClose.js';
 import Select from './Select';
@@ -20,14 +21,13 @@ import Filter from './Filter';
 import Sort from './Sort';
 import Query from './Query';
 import onSave from './onSave.js';
-import onUnmount from './onUnmount.js';
 
 let SourceDb = () => {
 	const dialog = useSelector((state) => state.dialogs[SOURCE_DB.id]);
 	const bodyId = (dialog || {}).name;
-	const issetSelectData = useSelector((state) => (state.prop.tempValue.select || []).length > 0);
-	const filterFormId = useSelector((state) => state.prop.filterFormId);
-	const sortFormId = useSelector((state) => state.prop.sortFormId);
+	const issetSelectData = useSelector((state) => (state.jsObject.tempValue.select || []).length > 0);
+	const filterFormId = useSelector((state) => state.jsObject.filterFormId);
+	const sortFormId = useSelector((state) => state.jsObject.sortFormId);
 	const [ step, setStep ] = React.useState(() => 0);
 	const _onNext = React.useCallback(() => setStep((value) => value < 3
 		? (value + 1)

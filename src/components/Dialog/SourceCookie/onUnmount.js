@@ -1,12 +1,12 @@
 import Store from 'components/Store';
 
 const onUnmount = () => {
-	const prop = Store().getState().prop;
+	const jsObject = Store().getState().jsObject;
 
-	prop.tempValue = {};
+	jsObject.tempValue = {};
 	Store().dispatch({
-		type: 'prop',
-		payload: () => ({ ...prop }),
+		type: 'jsObject',
+		payload: () => ({ ...jsObject }),
 	});
 };
 

@@ -1,14 +1,14 @@
 import Store from 'components/Store';
 
 const onOffset = (e) => {
-	const prop = Store().getState().prop;
+	const jsObject = Store().getState().jsObject;
 
-	prop.tempValue['offset'] = e.target.value
+	jsObject.tempValue['offset'] = e.target.value
 		? Number(e.target.value)
 		: undefined;
 	Store().dispatch({
-		type: 'prop',
-		payload: () => prop,
+		type: 'jsObject',
+		payload: () => jsObject,
 	});
 };
 

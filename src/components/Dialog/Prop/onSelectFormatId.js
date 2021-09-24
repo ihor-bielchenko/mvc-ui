@@ -1,24 +1,29 @@
 import Store from 'components/Store';
-import { 
-	FORMAT_ATOMIC,
-	FORMAT_ARR, 
-} from 'structures/format.js';
+import { FORMAT_ATOMIC } from 'structures/format.js';
+import { COLUMN_ARR } from 'structures/columnTypes.js';
 
 const onSelectFormatId = (e) => {
 	const newValue = Number(e.target.value);
-	const prop = Store().getState().prop;
-	const bodyIds = Object.keys(prop.body);
+	const {
+		prop,
+		jsObject,
+	} = Store().getState();
+	const dataIds = Object.keys(jsObject.data);
 
 	if (newValue === FORMAT_ATOMIC.id) {
-		prop.body = {
-			[bodyIds[0]]: prop.body[bodyIds[0]],
+		jsObject.data = {
+			[dataIds[0]]: jsObject.data[dataIds[0]],
 		};
 	}
-	else if (newValue === FORMAT_ARR.id) {
-		bodyIds.forEach((id, index) => (prop.body[id].key = index.toString()));
+	else if (newValue === COLUMN_ARR.id) {
+		dataIds.forEach((id, index) => (jsObject.data[id].key = index.toString()));
 	}
 
 	prop.format_id = newValue;
+	Store().dispatch({
+		type: 'jsObject',
+		payload: () => ({ ...jsObject }),
+	});
 	Store().dispatch({
 		type: 'prop',
 		payload: () => ({ ...prop }),

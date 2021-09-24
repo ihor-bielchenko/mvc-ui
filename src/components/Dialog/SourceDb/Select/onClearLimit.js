@@ -1,12 +1,12 @@
 import Store from 'components/Store';
 
 const onClearLimit = (e) => {
-	const prop = Store().getState().prop;
+	const jsObject = Store().getState().jsObject;
 
-	prop.tempValue['limit'] = '';
+	jsObject.tempValue['limit'] = '';
 	Store().dispatch({
-		type: 'prop',
-		payload: () => prop,
+		type: 'jsObject',
+		payload: () => ({ ...jsObject }),
 	});
 };
 

@@ -14,9 +14,7 @@ let Email = ({
 	}, [
 		onInput,
 	]);
-
-	console.log('placeholder', props.placeholder);
-
+	
 	return <Input 
 		{ ...props } 
 		type="text"

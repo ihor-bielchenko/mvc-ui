@@ -8,13 +8,15 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
+// import AddIcon from '@material-ui/icons/Add';
 import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Header from 'components/Header';
+import JsObject from 'components/JsObject';
 import InputText from 'components/Input/Text';
 import SelectFormat from 'components/Select/Format';
+import MenuSource from 'components/Menu/Source';
 import Transition from 'components/Dialog/Transition.jsx';
 import onDialog from 'components/Dialog/onDialog.js';
 import format, { 
@@ -25,10 +27,8 @@ import {
 	DIALOG_PROP,
 	DIALOG_DELETE_CONFIRM, 
 } from 'consts/dialog.js';
-import Body from './Body.jsx';
 import onMount from './onMount.js';
 import onClose from './onClose.js';
-import onAddItem from './onAddItem.js';
 import onChangeName from './onChangeName.js';
 import onSave from './onSave.js';
 import onDelete from './onDelete.js';
@@ -107,44 +107,10 @@ let Prop = () => {
 										|| format[key].id === FORMAT_ARR.id} />
 							</Box>
 						</Box>
-						{formatId === FORMAT_OBJ.id
-							? <Typography 
-								variant="h4"
-								color="textSecondary"
-								style={{ lineHeight: '0px' }}>
-								<b>{'{'}</b>
-							</Typography>
-							: formatId === FORMAT_ARR.id
-								? <Typography
-									variant="h4"
-									color="textSecondary"
-									style={{ lineHeight: '0px' }}>
-									<b>{'['}</b>
-								</Typography>
-								: <React.Fragment />}
-						<Body formatId={formatId} />
-						{formatId === FORMAT_OBJ.id
-							? <Typography 
-								variant="h4"
-								color="textSecondary">
-								<b>{'}'}</b>
-							</Typography>
-							: formatId === FORMAT_ARR.id
-								? <Typography 
-									variant="h4"
-									color="textSecondary">
-									<b>{']'}</b>
-								</Typography>
-								: <React.Fragment />}
-						<Box py={1}>
-							<Button 
-								variant="outlined"
-								color="primary"
-								startIcon={<AddIcon />}
-								onClick={onAddItem}>
-								Добавить элемент
-							</Button>
-						</Box>
+						<JsObject 
+							editType
+							typeId={formatId}
+							MenuValueComponent={MenuSource} />
 					</DialogContent>
 					<DialogActions>
 					<Box 

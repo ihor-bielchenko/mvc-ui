@@ -23,7 +23,7 @@ let Placeholder = ({
 	name,
 	label,
 }) => {
-	const value = useSelector((state) => ((state.prop.tempValue.placeholder || {})[name] || {}).value || '');
+	const value = useSelector((state) => ((state.jsObject.tempValue.placeholder || {})[name] || {}).value || '');
 	const _onClear = React.useCallback((e) => onClear(e, name), [
 		name,
 	]);

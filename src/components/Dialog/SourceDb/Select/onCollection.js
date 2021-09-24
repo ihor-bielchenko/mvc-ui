@@ -1,36 +1,15 @@
 import Store from 'components/Store';
-import {
-	FORMAT_ATOMIC,
-	FORMAT_OBJ,
-	FORMAT_ARR,
-} from 'structures/format.js';
+// import switchFormatId from './switchFormatId.js';
 
 const onCollection = (e, id) => {
-	const prop = Store().getState().prop;
+	let jsObject = Store().getState().jsObject;
 
-	prop.tempValue['is_collection'] = !prop.tempValue['is_collection'];
+	jsObject.tempValue['is_collection'] = !jsObject.tempValue['is_collection'];
+	// jsObject = switchFormatId(id, jsObject);
 
-	if (typeof prop.body[id] === 'object') {
-		if ((prop.tempValue['select'] || []).length > 0) {
-			if (prop.format_id === FORMAT_ATOMIC.id) {
-				prop.format_id = FORMAT_OBJ.id;
-			}
-			else {
-				prop.body[id].type_id = FORMAT_OBJ.id;
-			}
-		}
-		if (prop.tempValue['is_collection']) {
-			if (prop.format_id === FORMAT_ATOMIC.id) {
-				prop.format_id = FORMAT_ARR.id;
-			}
-			else {
-				prop.body[id].type_id = FORMAT_ARR.id;
-			}
-		}
-	}
 	Store().dispatch({
-		type: 'prop',
-		payload: () => ({ ...prop }),
+		type: 'jsObject',
+		payload: () => ({ ...jsObject }),
 	});
 };
 

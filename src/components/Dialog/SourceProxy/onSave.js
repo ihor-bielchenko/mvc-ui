@@ -1,17 +1,17 @@
 import Store from 'components/Store';
 import { SOURCE_PROXY_PASS } from 'structures/source.js';
 
-const onSave = (e, name, onClose) => {
+const onSave = (e, itemId, onClose) => {
 	e.preventDefault();
 
-	const prop = Store().getState().prop;
+	const jsObject = Store().getState().jsObject;
 
-	if (typeof prop.body[name] !== 'undefined') {
-		prop.body[name].value = { 
+	if (typeof jsObject.temp[itemId] !== 'undefined') {
+		jsObject.temp[itemId].value = { 
 			source_id: SOURCE_PROXY_PASS.id,
-			...prop.tempValue, 
+			...jsObject.tempValue, 
 		};
-		prop.tempValue = {};
+		jsObject.tempValue = {};
 		onClose();
 	}
 };

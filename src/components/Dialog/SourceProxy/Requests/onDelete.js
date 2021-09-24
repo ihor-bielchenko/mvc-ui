@@ -1,13 +1,13 @@
 import Store from 'components/Store';
 
 const onDelete = (e, name) => {
-	const prop = Store().getState().prop;
+	const jsObject = Store().getState().jsObject;
 
-	if (prop.tempValue.request[name]) {
-		delete prop.tempValue.request[name];
+	if (jsObject.tempValue.request[name]) {
+		delete jsObject.tempValue.request[name];
 		Store().dispatch({
-			type: 'prop',
-			payload: () => ({ ...prop }),
+			type: 'jsObject',
+			payload: () => ({ ...jsObject }),
 		});
 	}
 };

@@ -7,7 +7,7 @@ import KeyValue from './KeyValue.jsx';
 import onAdd from './onAdd.js';
 
 let Headers = () => {
-	const headerKeys = useSelector((state) => Object.keys(state.prop.tempValue.header || {}));
+	const headerKeys = useSelector((state) => Object.keys(state.jsObject.tempValue.header || {}));
 
 	return <React.Fragment>
 		<Box py={4}>

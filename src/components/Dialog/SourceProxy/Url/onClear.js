@@ -1,13 +1,13 @@
 import Store from 'components/Store';
 
 const onChangeByLogic = (e, key) => {
-	const prop = Store().getState().prop;
+	const jsObject = Store().getState().jsObject;
 
-	if (prop.tempValue.placeholder[key]) {
-		prop.tempValue.placeholder[key].value = '';
+	if (jsObject.tempValue.placeholder[key]) {
+		jsObject.tempValue.placeholder[key].value = '';
 		Store().dispatch({
-			type: 'prop',
-			payload: () => prop,
+			type: 'jsObject',
+			payload: () => ({ ...jsObject }),
 		});
 	}
 };

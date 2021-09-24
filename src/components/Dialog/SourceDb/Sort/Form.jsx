@@ -13,7 +13,7 @@ let Form = ({
 	id,
 	setId, 
 }) => {
-	const sortItem = (Store().getState().prop.tempValue.sort || {})[id];
+	const sortItem = (Store().getState().jsObject.tempValue.sort || {})[id];
 
 	return <form onSubmit={onSubmit}>
 		<input 

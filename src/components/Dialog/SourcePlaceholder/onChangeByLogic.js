@@ -6,21 +6,24 @@ import {
 import onCloseDialog from '../onClose.js';
 import onClose from './onClose.js';
 
-const onChangeByLogic = (e, typeId, id, name) => {
-	const prop = Store().getState().prop;
+const onChangeByLogic = (e, typeId, valueId, itemId) => {
+	const jsObject = Store().getState().jsObject;
 
-	if (typeof prop.body[name] !== 'undefined') {
-		prop.body[name] = { 
-			source_id: SOURCE_PLACEHOLDER.id,
-			value: {
-				source_id: SOURCE_SCRIPT.id,
-				type_id: typeId,
-				id,
-			},
+	if (typeof jsObject.temp[itemId] === 'undefined') {
+		jsObject.data[itemId] = {
+			id: itemId,
 		};
-		onClose(e);
-		onCloseDialog(SOURCE_SCRIPT.id)(e);
 	}
+	jsObject.data[itemId] = { 
+		source_id: SOURCE_PLACEHOLDER.id,
+		value: {
+			source_id: SOURCE_SCRIPT.id,
+			type_id: typeId,
+			id: valueId,
+		},
+	};
+	onClose(e);
+	onCloseDialog(SOURCE_SCRIPT.id)(e);
 };
 
 export default onChangeByLogic;

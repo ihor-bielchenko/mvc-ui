@@ -13,6 +13,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import Header from 'components/Header';
 import SelectService from 'components/Select/Service';
 import SelectRoute from 'components/Select/Route';
+import onUnmount from 'components/Dialog/SourceCookie/onUnmount.js';
 import { SOURCE_PROXY_PASS } from 'structures/source.js';
 import onClose from '../onClose.js';
 import Url from './Url';
@@ -20,14 +21,13 @@ import Headers from './Headers';
 import Requests from './Requests';
 import onService from './onService.js';
 import onRoute from './onRoute.js';
-import onUnmount from './onUnmount.js';
 import onSave from './onSave';
 
 let SourceProxy = () => {
 	const dialog = useSelector((state) => state.dialogs[SOURCE_PROXY_PASS.id]);
 	const bodyId = (dialog || {}).name;
-	const serviceId = useSelector((state) => state.prop.tempValue.service_id || '');
-	const routeId = useSelector((state) => state.prop.tempValue.route_id || '');
+	const serviceId = useSelector((state) => state.jsObject.tempValue.service_id || '');
+	const routeId = useSelector((state) => state.jsObject.tempValue.route_id || '');
 	const [ tab, setTab ] = React.useState((state) => 0);
 	const _onTab = React.useCallback((e, newValue) => setTab(newValue), [
 		setTab,

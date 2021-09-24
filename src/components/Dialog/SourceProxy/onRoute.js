@@ -1,14 +1,14 @@
 import Store from 'components/Store';
 
 let onRoute = (e) => {
-	const prop = Store().getState().prop;
+	const jsObject = Store().getState().jsObject;
 	const value = Number(e.target.value);
 
 	if (value > 0) {
-		prop.tempValue['route_id'] = value;
+		jsObject.tempValue['route_id'] = value;
 		Store().dispatch({
-			type: 'prop',
-			payload: () => ({ ...prop }),
+			type: 'jsObject',
+			payload: () => ({ ...jsObject }),
 		});
 	}
 };

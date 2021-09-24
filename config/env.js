@@ -123,6 +123,7 @@ function getClientEnvironment(publicUrl) {
 				COLUMN_FILE: Number(process.env.COLUMN_FILE),
 				COLUMN_OBJ: Number(process.env.COLUMN_OBJ),
 				COLUMN_ARR: Number(process.env.COLUMN_ARR),
+				COLUMN_NULL: Number(process.env.COLUMN_NULL),
 				SOURCE_MANUALLY: Number(process.env.SOURCE_MANUALLY),
 				SOURCE_DB: Number(process.env.SOURCE_DB),
 				SOURCE_PROXY_PASS: Number(process.env.SOURCE_PROXY_PASS),

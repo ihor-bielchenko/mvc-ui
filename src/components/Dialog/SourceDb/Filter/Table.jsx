@@ -33,8 +33,8 @@ import onEdit from './onEdit.js';
 import onDelete from './onDelete.js';
 
 let Table = () => {
-	const filterOperatorId = useSelector((state) => state.prop.tempValue.filter_operator_id ?? process.env.UNION_AND);
-	const filterKeys = useSelector((state) => Object.keys(state.prop.tempValue.filter || {}));
+	const filterOperatorId = useSelector((state) => state.jsObject.tempValue.filter_operator_id ?? process.env.UNION_AND);
+	const filterKeys = useSelector((state) => Object.keys(state.jsObject.tempValue.filter || {}));
 
 	return <React.Fragment>
 		{filterKeys.length > 0
@@ -66,7 +66,7 @@ let Table = () => {
 						</TableHead>
 						<TableBody>
 							{filterKeys.map((id) => {
-								const filterItem = Store().getState().prop.tempValue.filter[id];
+								const filterItem = Store().getState().jsObject.tempValue.filter[id];
 								const column = Store().getState().dbColumns.data[filterItem.column_id];
 
 								return <TableRow key={id}>

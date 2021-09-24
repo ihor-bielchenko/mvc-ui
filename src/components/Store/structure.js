@@ -3,6 +3,7 @@ import alert from './alert.js';
 import dialogs from './dialogs.js';
 import menu from './menu.js';
 import account from './account.js';
+import jsObject from './jsObject.js';
 import entities from './entities.js';
 import arrows from './arrows.js';
 import func from './func.js';
@@ -19,6 +20,7 @@ const structure = {
 	dialogs,
 	menu,
 	account,
+	jsObject,
 	entities,
 	arrows,
 	func,

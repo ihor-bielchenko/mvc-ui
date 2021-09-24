@@ -2,12 +2,12 @@ import Store from 'components/Store';
 import onClose from 'components/Menu/onClose.js';
 
 let onEdit = (id) => (e) => {
-	const prop = Store().getState().prop;
+	const jsObject = Store().getState().jsObject;
 
-	prop.sortFormId = id;
+	jsObject.sortFormId = id;
 	Store().dispatch({
-		type: 'prop',
-		payload: () => ({ ...prop }),
+		type: 'jsObject',
+		payload: () => ({ ...jsObject }),
 	});
 	onClose();
 };

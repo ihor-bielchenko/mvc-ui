@@ -1,7 +1,7 @@
 import React from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
 import columnTypes, {
-	COLUMN_RICHTEXT,
+	// COLUMN_RICHTEXT,
 } from 'structures/columnTypes.js';
 import Select from '../Select.jsx';
 
@@ -25,14 +25,14 @@ let Type = ({
 		{Object
 			.keys(columnTypes)
 			.filter(onFilter)
-			.map((key, i) => (
-				<MenuItem 
+			.map((key, i) => {
+				return <MenuItem 
 					key={columnTypes[key].id.toString()}
 					value={columnTypes[key].id.toString()}
 					disabled={!!columnTypes[key].disabled}>
 					{columnTypes[key].text()}
 				</MenuItem>
-		))}
+		})}
 		{children}
 	</Select>;
 };
@@ -42,7 +42,7 @@ Type.defaultProps = {
 	name: 'type_id',
 	label: 'Тип данных',
 	required: false,
-	onFilter: () => (key, i) => columnTypes[key].id !== COLUMN_RICHTEXT.id,
+	// onFilter: () => (key, i) => columnTypes[key].id !== COLUMN_RICHTEXT.id,
 };
 
 export default Type;

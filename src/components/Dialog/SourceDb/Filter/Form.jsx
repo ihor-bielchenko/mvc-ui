@@ -27,9 +27,9 @@ let Form = ({
 	name,
 	setId, 
 }) => {
-	const value = useSelector((state) => ((state.prop.tempValue.filter || {})[name] || {}).value || '');
-	const operatorId = useSelector((state) => ((state.prop.tempValue.filter || {})[name] || {}).operator_id || '');
-	const columnId = useSelector((state) => ((state.prop.tempValue.filter || {})[name] || {}).column_id || '');
+	const value = useSelector((state) => ((state.jsObject.tempValue.filter || {})[name] || {}).value || '');
+	const operatorId = useSelector((state) => ((state.jsObject.tempValue.filter || {})[name] || {}).operator_id || '');
+	const columnId = useSelector((state) => ((state.jsObject.tempValue.filter || {})[name] || {}).column_id || '');
 	const [ tempColumnId, setTempColumnId ] = React.useState(() => columnId || '');
 	const [ logicValue, setLogicValue ] = React.useState(() => (typeof value === 'object' && 
 		value.source_id === SOURCE_SCRIPT.id)

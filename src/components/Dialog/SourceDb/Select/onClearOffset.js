@@ -1,12 +1,12 @@
 import Store from 'components/Store';
 
 const onClearOffset = (e) => {
-	const prop = Store().getState().prop;
+	const jsObject = Store().getState().jsObject;
 
-	prop.tempValue['offset'] = '';
+	jsObject.tempValue['offset'] = '';
 	Store().dispatch({
-		type: 'prop',
-		payload: () => prop,
+		type: 'jsObject',
+		payload: () => ({ ...jsObject }),
 	});
 };
 

@@ -3,17 +3,17 @@ import onClose from 'components/Dialog/onClose.js';
 import { SOURCE_SCRIPT } from 'structures/source.js';
 
 const onChangeByLogic = (e, typeId, id, name, key) => {
-	const prop = Store().getState().prop;
+	const jsObject = Store().getState().jsObject;
 
-	if (prop.tempValue.request[name]) {
-		prop.tempValue.request[name][key] = {
+	if (jsObject.tempValue.request[name]) {
+		jsObject.tempValue.request[name][key] = {
 			source_id: SOURCE_SCRIPT.id,
 			type_id: typeId,
 			id,
 		};
 		Store().dispatch({
-			type: 'prop',
-			payload: () => prop,
+			type: 'jsObject',
+			payload: () => ({ ...jsObject }),
 		});
 		onClose(SOURCE_SCRIPT.id)(e);
 	}

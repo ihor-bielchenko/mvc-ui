@@ -1,20 +1,20 @@
 import Store from 'components/Store';
 
 const onAdd = () => {
-	const prop = Store().getState().prop;
+	const jsObject = Store().getState().jsObject;
 	const _id = Date.now();
 
-	if (!prop.tempValue.request) {
-		prop.tempValue.request = {};
+	if (!jsObject.tempValue.request) {
+		jsObject.tempValue.request = {};
 	}
-	prop.tempValue.request[_id] = {
+	jsObject.tempValue.request[_id] = {
 		id: _id,
 		key: '',
 		value: '',
 	};
 	Store().dispatch({
-		type: 'prop',
-		payload: () => ({ ...prop }),
+		type: 'jsObject',
+		payload: () => ({ ...jsObject }),
 	});
 };
 

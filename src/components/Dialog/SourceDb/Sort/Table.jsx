@@ -23,7 +23,7 @@ import onEdit from './onEdit.js';
 import onDelete from './onDelete.js';
 
 let Table = () => {
-	const sortKeys = useSelector((state) => Object.keys(state.prop.tempValue.sort || {}));
+	const sortKeys = useSelector((state) => Object.keys(state.jsObject.tempValue.sort || {}));
 
 	return <React.Fragment>
 		{sortKeys.length > 0
@@ -41,7 +41,7 @@ let Table = () => {
 					</TableHead>
 					<TableBody>
 						{sortKeys.map((id) => {
-							const sortItem = Store().getState().prop.tempValue.sort[id];
+							const sortItem = Store().getState().jsObject.tempValue.sort[id];
 							const column = Store().getState().dbColumns.data[sortItem.column_id];
 
 							return <TableRow key={id}>

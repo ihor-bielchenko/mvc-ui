@@ -14,11 +14,11 @@ import { SOURCE_SCRIPT } from 'structures/source.js';
 import onDelete from './onDelete.js';
 
 let Query = () => {
-	const queryKeys = useSelector((state) => Object.keys(state.prop.tempValue.query || {}));
+	const queryKeys = useSelector((state) => Object.keys(state.jsObject.tempValue.query || {}));
 
 	return <React.Fragment>
 		{queryKeys.map((id) => {
-			const queryItem = Store().getState().prop.tempValue.query[id];
+			const queryItem = Store().getState().jsObject.tempValue.query[id];
 
 			return <Box 
 				key={id}

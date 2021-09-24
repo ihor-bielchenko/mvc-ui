@@ -3,16 +3,16 @@ import onClose from 'components/Dialog/onClose.js';
 import { SOURCE_SCRIPT } from 'structures/source.js';
 
 const onChangeByLogicLimit = (e, typeId, id) => {
-	const prop = Store().getState().prop;
+	const jsObject = Store().getState().jsObject;
 
-	prop.tempValue['limit'] = {
+	jsObject.tempValue['limit'] = {
 		source_id: SOURCE_SCRIPT.id,
 		type_id: typeId,
 		id,
 	};
 	Store().dispatch({
-		type: 'prop',
-		payload: () => prop,
+		type: 'jsObject',
+		payload: () => ({ ...jsObject }),
 	});
 	onClose(SOURCE_SCRIPT.id)(e);
 };

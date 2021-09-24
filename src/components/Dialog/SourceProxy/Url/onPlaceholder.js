@@ -1,19 +1,19 @@
 import Store from 'components/Store';
 
 const onPlaceholder = (e, routeId, id) => {
-	const prop = Store().getState().prop;
+	const jsObject = Store().getState().jsObject;
 
-	if (!prop.tempValue.placeholder) {
-		prop.tempValue.placeholder = {};
+	if (!jsObject.tempValue.placeholder) {
+		jsObject.tempValue.placeholder = {};
 	}
-	prop.tempValue.placeholder[id] = {
+	jsObject.tempValue.placeholder[id] = {
 		route_url_id: routeId,
 		route_placeholder_id: id,
 		value: e.target.value,
 	};
 	Store().dispatch({
-		type: 'prop',
-		payload: () => prop,
+		type: 'jsObject',
+		payload: () => ({ ...jsObject }),
 	});
 };
 

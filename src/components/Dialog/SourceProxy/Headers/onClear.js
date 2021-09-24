@@ -1,13 +1,13 @@
 import Store from 'components/Store';
 
 const onClear = (e, name, key) => {
-	const prop = Store().getState().prop;
+	const jsObject = Store().getState().jsObject;
 
-	if (prop.tempValue.header[name]) {
-		prop.tempValue.header[name][key] = '';
+	if (jsObject.tempValue.header[name]) {
+		jsObject.tempValue.header[name][key] = '';
 		Store().dispatch({
-			type: 'prop',
-			payload: () => prop,
+			type: 'jsObject',
+			payload: () => ({ ...jsObject }),
 		});
 	}
 };

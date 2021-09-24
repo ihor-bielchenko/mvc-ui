@@ -34,7 +34,7 @@ const _onMenu = onDialog(SOURCE_SCRIPT.id, {
 let SourceCookie = () => {
 	const dialog = useSelector((state) => state.dialogs[SOURCE_COOKIE.id]);
 	const bodyId = (dialog || {}).name;
-	const value = useSelector((state) => state.prop.tempValue.value || '');
+	const value = useSelector((state) => state.jsObject.tempValue.value || '');
 	const _onSubmit = React.useCallback((e) => onSubmit(e, bodyId), [
 		bodyId,
 	]);
@@ -49,9 +49,9 @@ let SourceCookie = () => {
 				aria-describedby="dialog-description"
 				fullWidth
 				open={!!dialog}
-				onClose={onClose}>
+				onClose={onClose(SOURCE_COOKIE.id)}>
 				<DialogTitle>
-					<Header onClose={onClose}>
+					<Header onClose={onClose(SOURCE_COOKIE.id)}>
 						Куки входящего запроса
 					</Header>
 				</DialogTitle>
@@ -79,7 +79,7 @@ let SourceCookie = () => {
 								variant="outlined"
 								color="secondary"
 								startIcon={<CloseIcon />}
-								onClick={onClose}>
+								onClick={onClose(SOURCE_COOKIE.id)}>
 								Отмена
 							</Button>
 							<Button 

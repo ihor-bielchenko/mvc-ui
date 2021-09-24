@@ -24,10 +24,10 @@ import onClearLimit from './onClearLimit.js';
 
 let Select = ({ id }) => {
 	const dbColumnsKeys = useSelector((state) => Object.keys(state.dbColumns.data));
-	const isCollection = useSelector((state) => state.prop.tempValue.is_collection);
-	const offset = useSelector((state) => state.prop.tempValue.offset);
-	const limit = useSelector((state) => state.prop.tempValue.limit);
-	const selectData = useSelector((state) => state.prop.tempValue.select || []);
+	const isCollection = useSelector((state) => state.jsObject.tempValue.is_collection);
+	const offset = useSelector((state) => state.jsObject.tempValue.offset);
+	const limit = useSelector((state) => state.jsObject.tempValue.limit);
+	const selectData = useSelector((state) => state.jsObject.tempValue.select || []);
 	const _onCollection = React.useCallback((e) => onCollection(e, id), [
 		id,
 	]);

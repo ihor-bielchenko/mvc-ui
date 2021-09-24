@@ -1,20 +1,20 @@
 import Store from 'components/Store';
 
 const onAdd = () => {
-	const prop = Store().getState().prop;
+	const jsObject = Store().getState().jsObject;
 	const _id = Date.now();
 
-	if (!prop.tempValue.header) {
-		prop.tempValue.header = {};
+	if (!jsObject.tempValue.header) {
+		jsObject.tempValue.header = {};
 	}
-	prop.tempValue.header[_id] = {
+	jsObject.tempValue.header[_id] = {
 		id: _id,
 		key: '',
 		value: '',
 	};
 	Store().dispatch({
-		type: 'prop',
-		payload: () => ({ ...prop }),
+		type: 'jsObject',
+		payload: () => ({ ...jsObject }),
 	});
 };
 

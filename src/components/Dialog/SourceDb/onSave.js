@@ -1,24 +1,29 @@
 import Store from 'components/Store';
 import { SOURCE_DB } from 'structures/source.js';
 
-const onSave = (e, name, onClose) => {
-	const prop = Store().getState().prop;
+const onSave = (e, itemId, onClose) => {
+	const jsObject = Store().getState().jsObject;
 
-	if (typeof prop.body[name] !== 'undefined') {
-		if (prop.tempValue.is_collection) {
-			if (typeof prop.tempValue.offset === 'undefined') {
-				prop.tempValue['offset'] = 0;
+	if (!jsObject.temp[itemId]) {
+		jsObject.temp[itemId] = {
+			id: itemId,
+		};
+	}
+	if (typeof jsObject.temp[itemId] !== 'undefined') {
+		if (jsObject.tempValue.is_collection) {
+			if (typeof jsObject.tempValue.offset === 'undefined') {
+				jsObject.tempValue['offset'] = 0;
 			}
-			if (typeof prop.tempValue.limit === 'undefined') {
-				prop.tempValue['limit'] = 10;
+			if (typeof jsObject.tempValue.limit === 'undefined') {
+				jsObject.tempValue['limit'] = 10;
 			}
 		}
 
-		prop.body[name].value = { 
+		jsObject.temp[itemId].value = { 
 			source_id: SOURCE_DB.id,
-			...prop.tempValue, 
+			...jsObject.tempValue, 
 		};
-		prop.tempValue = {};
+		jsObject.tempValue = {};
 		onClose();
 	}
 };

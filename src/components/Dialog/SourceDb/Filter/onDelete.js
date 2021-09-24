@@ -3,14 +3,14 @@ import onClose from 'components/Dialog/onClose.js';
 import { DIALOG_DELETE_CONFIRM } from 'consts/dialog.js';
 
 const onDelete = (id) => () => {
-	const prop = Store().getState().prop;
+	const jsObject = Store().getState().jsObject;
 
-	if ((prop.tempValue.filter || {})[id]) {
-		delete prop.tempValue.filter[id];
-		delete prop.filterFormId;
+	if ((jsObject.tempValue.filter || {})[id]) {
+		delete jsObject.tempValue.filter[id];
+		delete jsObject.filterFormId;
 		Store().dispatch({
-			type: 'prop',
-			payload: () => ({ ...prop }),
+			type: 'jsObject',
+			payload: () => ({ ...jsObject }),
 		});
 		onClose(DIALOG_DELETE_CONFIRM)();
 	}

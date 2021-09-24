@@ -2,12 +2,12 @@ import Store from 'components/Store';
 
 let onOperatorUnion = (e) => {
 	const value = Number(e.target.value);
-	const prop = Store().getState().prop;
+	const jsObject = Store().getState().jsObject;
 
-	prop.tempValue['filter_operator_id'] = value;
+	jsObject.tempValue['filter_operator_id'] = value;
 	Store().dispatch({
-		type: 'prop',
-		payload: () => ({ ...prop }),
+		type: 'jsObject',
+		payload: () => ({ ...jsObject }),
 	});
 };
 

@@ -1,12 +1,12 @@
 import Store from 'components/Store';
 
 let onAdd = (e) => {
-	const prop = Store().getState().prop;
+	const jsObject = Store().getState().jsObject;
 
-	prop.filterFormId = 0;
+	jsObject.filterFormId = 0;
 	Store().dispatch({
-		type: 'prop',
-		payload: () => ({ ...prop }),
+		type: 'jsObject',
+		payload: () => ({ ...jsObject }),
 	});
 };
 
