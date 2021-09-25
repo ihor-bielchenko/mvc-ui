@@ -60,9 +60,7 @@ let Item = ({
 			|| parentTypeId === COLUMN_OBJ.id
 			|| parentTypeId === COLUMN_ARR.id
 			? <React.Fragment>
-				{typeof disabled === 'boolean'
-					? !disabled
-					: !disabledWrapper
+				{(!disabled || !disabledWrapper)
 						? <Box
 							position="relative"
 							width="100%"

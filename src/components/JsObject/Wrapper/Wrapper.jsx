@@ -121,7 +121,7 @@ let Wrapper = ({
 								Добавить элемент
 							</Button>
 						</Box>
-						{typeId !== FORMAT_ATOMIC.id
+						{blocksLength === 0
 							? <Box 
 								pt={1}
 								pl={2}>
