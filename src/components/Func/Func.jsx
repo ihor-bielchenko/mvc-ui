@@ -3,14 +3,14 @@ import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import SelectFuncType from 'components/Select/FuncType';
 import SelectFuncTemplate from 'components/Select/FuncTemplate';
-import GroupFunc from 'components/Group/Func';
+// import GroupFunc from 'components/Group/Func';
 import InputText from 'components/Input/Text';
 import onSelectFuncType from './onSelectFuncType.js';
 import onSelectFuncTemplate from './onSelectFuncTemplate.js';
 import onChangeName from './onChangeName.js';
 
 let Func = () => {
-	const id = useSelector((state) => (state.func || {}).id);
+	// const id = useSelector((state) => (state.func || {}).id);
 	const name = useSelector((state) => (state.func || {}).name || '');
 	const typeId = useSelector((state) => (state.func || {}).type_id || '');
 	const funcTemplateId = useSelector((state) => (state.func || {}).func_template_id || '');
@@ -41,9 +41,9 @@ let Func = () => {
 			: <React.Fragment />}
 		{funcTemplateId > 0
 			? <Box py={2}>
-				<GroupFunc 
+				{/*<GroupFunc 
 					funcTemplateId={funcTemplateId}
-					id={id} />
+					id={id} />*/}
 			</Box>
 			: <React.Fragment />}
 	</React.Fragment>;

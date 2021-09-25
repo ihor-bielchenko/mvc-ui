@@ -15,15 +15,12 @@ const onSubmit = (e, id, sourceId = SOURCE_COOKIE.id) => {
 		? jsObject.tempValue.value
 		: e.target.value.value;
 
-	if (typeof jsObject.temp[id] === 'undefined') {
-		jsObject.temp[id] = {
-			id,
+	if (typeof jsObject.data[id] === 'object') {
+		jsObject.data[id].value = {
+			source_id: sourceId,
+			value,
 		};
 	}
-	jsObject.temp[id]['value'] = {
-		source_id: sourceId,
-		value,
-	};
 	onClose(sourceId)(e);
 	onUnmount();
 };

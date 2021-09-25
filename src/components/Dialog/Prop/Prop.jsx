@@ -16,17 +16,20 @@ import Header from 'components/Header';
 import JsObject from 'components/JsObject';
 import InputText from 'components/Input/Text';
 import SelectFormat from 'components/Select/Format';
-import MenuSource from 'components/Menu/Source';
 import Transition from 'components/Dialog/Transition.jsx';
 import onDialog from 'components/Dialog/onDialog.js';
 import format, { 
 	FORMAT_ATOMIC,
 	FORMAT_OBJ,
-	FORMAT_ARR, } from 'structures/format.js';
+	FORMAT_ARR, 
+} from 'structures/format.js';
 import { 
 	DIALOG_PROP,
 	DIALOG_DELETE_CONFIRM, 
 } from 'consts/dialog.js';
+import KeyComponent from './KeyComponent.jsx';
+import ValueComponent from './ValueComponent.jsx';
+import TypeComponent from './TypeComponent.jsx';
 import onMount from './onMount.js';
 import onClose from './onClose.js';
 import onChangeName from './onChangeName.js';
@@ -39,7 +42,7 @@ let Prop = () => {
 	const existId = (dialog || {}).id || 0;
 	const id = useSelector((state) => state.prop.id);
 	const name = useSelector((state) => state.prop.name || '');
-	const formatId = useSelector((state) => state.prop.format_id || FORMAT_ATOMIC.id);
+	const formatId = useSelector((state) => (state.jsObject.data[0] || {}).type_id ?? FORMAT_ATOMIC.id);
 	const _onDelete = React.useCallback((e) => onDelete(e, id), [
 		id,
 	]);
@@ -108,9 +111,10 @@ let Prop = () => {
 							</Box>
 						</Box>
 						<JsObject 
-							editType
 							typeId={formatId}
-							MenuValueComponent={MenuSource} />
+							KeyComponent={KeyComponent}
+							ValueComponent={ValueComponent}
+							TypeComponent={TypeComponent} />
 					</DialogContent>
 					<DialogActions>
 					<Box 

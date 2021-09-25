@@ -5,15 +5,12 @@ import onClose from './onClose.js';
 const onSave = (e, itemId, valueId) => {
 	const jsObject = Store().getState().jsObject;
 
-	if (!jsObject.temp[itemId]) {
-		jsObject.temp[itemId] = {
-			id: itemId,
+	if (typeof jsObject.data[itemId] === 'object') {
+		jsObject.data[itemId].value = { 
+			source_id: SOURCE_PLACEHOLDER.id,
+			value: valueId,
 		};
 	}
-	jsObject.temp[itemId].value = { 
-		source_id: SOURCE_PLACEHOLDER.id,
-		value: valueId,
-	};
 	onClose();
 };
 

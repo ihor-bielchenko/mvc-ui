@@ -5,31 +5,31 @@ import { DIALOG_DB_QUERY } from 'consts/dialog.js';
 const onSubmit = (e, logicValue, setLogicValue = () => {}) => {
 	e.preventDefault();
 
-	const prop = Store().getState().prop;
+	const jsObject = Store().getState().jsObject;
 	const target = e.currentTarget;
 	const id = Number(target.elements['id'].value);
 	const value = logicValue || target.elements['value'].value;
 	const left = target.elements['left'].checked;
 	const right = target.elements['right'].checked;
 
-	if (!prop.tempValue['query']) {
-		prop.tempValue['query'] = {};
+	if (!jsObject.tempValue['query']) {
+		jsObject.tempValue['query'] = {};
 	}
-	if (id > 0 && prop.tempValue.query[id]) {
-		prop.tempValue.query[id]['value'] = value;
-		prop.tempValue.query[id]['left'] = left;
-		prop.tempValue.query[id]['right'] = right;
+	if (id > 0 && jsObject.tempValue.query[id]) {
+		jsObject.tempValue.query[id]['value'] = value;
+		jsObject.tempValue.query[id]['left'] = left;
+		jsObject.tempValue.query[id]['right'] = right;
 		setLogicValue(undefined);
 		Store().dispatch({
-			type: 'prop',
-			payload: () => prop,
+			type: 'jsObject',
+			payload: () => ({ ...jsObject }),
 		});
 		onClose(DIALOG_DB_QUERY)();
 	}
 	else if (id === 0) {
 		const _id = Date.now();
 
-		prop.tempValue.query[_id] = {
+		jsObject.tempValue.query[_id] = {
 			id: _id,
 			value,
 			left,
@@ -37,8 +37,8 @@ const onSubmit = (e, logicValue, setLogicValue = () => {}) => {
 		};
 		setLogicValue(undefined);
 		Store().dispatch({
-			type: 'prop',
-			payload: () => prop,
+			type: 'jsObject',
+			payload: () => ({ ...jsObject }),
 		});
 		onClose(DIALOG_DB_QUERY)();
 	}

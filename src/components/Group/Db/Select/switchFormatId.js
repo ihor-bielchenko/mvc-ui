@@ -8,8 +8,8 @@ import {
 	COLUMN_ARR,
 } from 'structures/columnTypes.js';
 
-const switchFormatId = (id, jsObject) => {
-	if (typeof jsObject.temp[id] === 'object') {
+const switchFormatId = (id) => {
+	if (typeof jsObject.data[id] === 'object') {
 		if ((jsObject.tempValue['select'] || []).length > 0) {
 			if (prop.format_id === FORMAT_ATOMIC.id) {
 				prop.format_id = FORMAT_OBJ.id;

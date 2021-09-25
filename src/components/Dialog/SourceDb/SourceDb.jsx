@@ -13,13 +13,13 @@ import Button from '@material-ui/core/Button';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import Header from 'components/Header';
+import Select from 'components/Group/Db/Select';
+import Filter from 'components/Group/Db/Filter';
+import Sort from 'components/Group/Db/Sort';
+import Query from 'components/Group/Db/Query';
 import onUnmount from 'components/Dialog/SourceCookie/onUnmount.js';
 import { SOURCE_DB } from 'structures/source.js';
 import onClose from '../onClose.js';
-import Select from './Select';
-import Filter from './Filter';
-import Sort from './Sort';
-import Query from './Query';
 import onSave from './onSave.js';
 
 let SourceDb = () => {

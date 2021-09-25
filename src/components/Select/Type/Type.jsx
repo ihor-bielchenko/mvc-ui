@@ -5,7 +5,8 @@ import columnTypes, {
 } from 'structures/columnTypes.js';
 import Select from '../Select.jsx';
 
-let Type = ({ 
+let Type = ({
+	disabled, 
 	name,
 	value,
 	label,
@@ -16,6 +17,7 @@ let Type = ({
 	children, 
 }) => {
 	return <Select
+		disabled={disabled}
 		name={name}
 		value={value}
 		defaultValue={defaultValue}
@@ -42,6 +44,7 @@ Type.defaultProps = {
 	name: 'type_id',
 	label: 'Тип данных',
 	required: false,
+	disabled: false,
 	// onFilter: () => (key, i) => columnTypes[key].id !== COLUMN_RICHTEXT.id,
 };
 

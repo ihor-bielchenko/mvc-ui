@@ -10,8 +10,8 @@ import {
 	COLUMN_TEXT,
 	COLUMN_BOOLEAN,
 } from 'structures/columnTypes.js';
-import onDialog from '../../onDialog.js';
-import onValidate from '../onValidate.js';
+import onDialog from 'components/Dialog/onDialog.js';
+import onValidate from 'components/Dialog/SourceProxy/onValidate.js';
 import onDelete from './onDelete.js';
 import onKey from './onKey.js';
 import onValue from './onValue.js';

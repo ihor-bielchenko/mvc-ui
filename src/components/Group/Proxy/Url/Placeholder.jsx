@@ -9,8 +9,8 @@ import {
 	COLUMN_NUMBER,
 	COLUMN_TEXT,
 } from 'structures/columnTypes.js';
-import onDialog from '../../onDialog.js';
-import onValidate from '../onValidate.js';
+import onDialog from 'components/Dialog/onDialog.js';
+import onValidate from 'components/Dialog/SourceProxy/onValidate.js';
 import onPlaceholder from './onPlaceholder.js';
 import onChangeByLogic from './onChangeByLogic.js';
 import onClear from './onClear.js';

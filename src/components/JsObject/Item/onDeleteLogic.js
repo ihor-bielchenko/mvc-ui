@@ -4,8 +4,8 @@ import getDefaultValueByTypeId from '../getDefaultValueByTypeId.js';
 const onDeleteLogic = (e, id) => {
 	const jsObject = Store().getState().jsObject;
 
-	if (jsObject.temp[id]) {
-		jsObject.temp[id].value = getDefaultValueByTypeId(jsObject.temp[id].type_id);
+	if (typeof jsObject.data[id] === 'object') {
+		jsObject.data[id].value = getDefaultValueByTypeId(jsObject.data[id].type_id);
 		Store().dispatch({
 			type: 'jsObject',
 			payload: () => ({ ...jsObject }),

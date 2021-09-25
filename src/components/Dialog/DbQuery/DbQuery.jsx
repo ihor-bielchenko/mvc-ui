@@ -27,9 +27,9 @@ import onClear from './onClear.js';
 let DbQuery = () => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_DB_QUERY]);
 	const name = (dialog || {}).name || 0;
-	const value = useSelector((state) => ((state.prop.tempValue.query || {})[name] || {}).value || '');
-	const left = useSelector((state) => ((state.prop.tempValue.query || {})[name] || {}).left || '');
-	const right = useSelector((state) => ((state.prop.tempValue.query || {})[name] || {}).right || '');
+	const value = useSelector((state) => ((state.jsObject.tempValue.query || {})[name] || {}).value || '');
+	const left = useSelector((state) => ((state.jsObject.tempValue.query || {})[name] || {}).left || '');
+	const right = useSelector((state) => ((state.jsObject.tempValue.query || {})[name] || {}).right || '');
 	const [ logicValue, setLogicValue ] = React.useState(() => (typeof value === 'object' && 
 		value.source_id === SOURCE_SCRIPT.id)
 		? value

@@ -1,32 +1,43 @@
 import Store from 'components/Store';
 import { FORMAT_ATOMIC } from 'structures/format.js';
-import { COLUMN_ARR } from 'structures/columnTypes.js';
+import { 
+	COLUMN_ARR,
+	COLUMN_TEXT, 
+} from 'structures/columnTypes.js';
 
 const onSelectFormatId = (e) => {
 	const newValue = Number(e.target.value);
-	const {
-		prop,
-		jsObject,
-	} = Store().getState();
-	const dataIds = Object.keys(jsObject.data);
+	const jsObject = Store().getState().jsObject;
+	const newId = Date.now();
 
 	if (newValue === FORMAT_ATOMIC.id) {
 		jsObject.data = {
-			[dataIds[0]]: jsObject.data[dataIds[0]],
+			0: jsObject.data[0],
+			[newId]: {
+				parent_id: 0,
+				id: newId,
+				type_id: COLUMN_TEXT.id,
+				key: '0',
+				value: '',
+			},
+		};
+		jsObject.blocks = {
+			0: [ jsObject.data[newId] ],
 		};
 	}
-	else if (newValue === COLUMN_ARR.id) {
-		dataIds.forEach((id, index) => (jsObject.data[id].key = index.toString()));
+	else if (newValue === COLUMN_ARR.id 
+		&& jsObject.blocks[0]) {
+		jsObject
+			.blocks[0]
+			.forEach((item, index) => {
+				return (jsObject.blocks[0][index].key = index.toString());
+			});
 	}
 
-	prop.format_id = newValue;
+	jsObject.data[0].type_id = newValue;
 	Store().dispatch({
 		type: 'jsObject',
 		payload: () => ({ ...jsObject }),
-	});
-	Store().dispatch({
-		type: 'prop',
-		payload: () => ({ ...prop }),
 	});
 };
 
