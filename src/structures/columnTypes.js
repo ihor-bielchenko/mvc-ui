@@ -94,6 +94,11 @@ export const COLUMN_NULL = {
 	icon: InsertDriveFileIcon,
 	text: () => 'Пустота (NULL)',
 };
+export const COLUMN_VAR = {
+	id: process.env.COLUMN_VAR,
+	icon: InsertDriveFileIcon,
+	text: () => 'Переменная',
+};
 
 const columnTypes = {
 	[process.env.COLUMN_ID]: COLUMN_ID,

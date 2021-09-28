@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import JsBoxControlWrapper from 'components/JsObject/BoxControlWrapper';
 import SelectType from 'components/Select/Type';
@@ -21,11 +22,11 @@ let TypeComponent = ({
 	parentTypeId,
 	id,
 	typeId,
-	disabledWrapper,
-	disabled,
 	onSelect,
 }) => {
-	return (disabled || disabledWrapper)
+	const disabledType = useSelector((state) => state.jsObject.data[id].disabledType);
+
+	return disabledType
 		? <Typography 
 			variant="subtitle1"
 			color="textSecondary"
@@ -46,7 +47,7 @@ let TypeComponent = ({
 				&& parentTypeId !== COLUMN_ARR.id}
 			mt="0px">
 				<SelectType 
-					disabled={disabledWrapper}
+					disabled={disabledType}
 					name={'type_id-'+ id}
 					value={typeId}
 					onSelect={onSelect}
@@ -59,7 +60,6 @@ TypeComponent.defaultProps = {
 	parentTypeId: 0,
 	id: 0,
 	typeId: 0,
-	disabledWrapper: false,
 	onSelect: () => {},
 };
 

@@ -21,15 +21,9 @@ let Header = ({ typeId }) => {
 				variant="caption"
 				color="textSecondary"
 				style={{
-					minWidth: typeId === COLUMN_ARR.id
-						? '46px'
-						: '138px',
-					maxWidth: typeId === COLUMN_ARR.id
-						? '46px'
-						: '138px',
-					textAlign: typeId === COLUMN_ARR.id
-						? 'right'
-						: 'center',
+					minWidth: 138,
+					maxWidth: 138,
+					textAlign: 'center',
 				}}>
 				Ключ
 			</Typography>
