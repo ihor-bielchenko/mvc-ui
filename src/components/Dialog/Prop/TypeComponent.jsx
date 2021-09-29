@@ -8,6 +8,7 @@ import columnTypes, {
 	COLUMN_ID,
 	COLUMN_OBJ,
 	COLUMN_ARR,
+	COLUMN_NUMBER,
 } from 'structures/columnTypes.js';
 
 const _onFilterTypes = (parentTypeId) => (key) => (
@@ -35,7 +36,9 @@ let TypeComponent = ({
 				lineHeight: '56px',
 				textAlign: 'center',
 			}}>
-			{columnTypes[typeId].text()}
+			{columnTypes[typeId === COLUMN_ID.id
+				? COLUMN_NUMBER.id
+				: typeId].text()}
 		</Typography>
 		: <JsBoxControlWrapper
 			data-border_left_radius_0={(parentTypeId !== FORMAT_ATOMIC.id
@@ -49,7 +52,9 @@ let TypeComponent = ({
 				<SelectType 
 					disabled={disabledType}
 					name={'type_id-'+ id}
-					value={typeId}
+					value={typeId === COLUMN_ID.id
+						? COLUMN_NUMBER.id
+						: typeId}
 					onSelect={onSelect}
 					onFilter={_onFilterTypes(parentTypeId)}
 					label="" />

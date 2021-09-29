@@ -28,15 +28,15 @@ const onSave = (e, id, onClose) => {
 			...tempValue, 
 		},
 	};
-	const currentItem = data[id];
-	const parentId = currentItem.parent_id;
-	const parentItem = data[parentId];
-	const parentTypeId = parentItem.type_id;
 	const {
 		is_collection: isCollection,
 		select,
 	} = (tempValue || {});
 	let newId = Date.now();
+	const currentItem = data[id];
+	const parentId = currentItem.parent_id;
+	const parentItem = data[parentId];
+	const parentTypeId = (parentItem || {}).type_id || currentItem.type_id;
 
 	if (isCollection) {
 		tempValue.offset = tempValue.offset ?? 0;
@@ -109,8 +109,15 @@ const onSave = (e, id, onClose) => {
 		}
 	}
 	else if (select.length === 1) {
+		if ((parentItem || {}).type_id !== COLUMN_ARR.id) {
+			currentItem.key = dbColumnsData[select[0]].name;
+		}
 		currentItem.type_id = dbColumnsData[select[0]].type_id;
 		currentItem.value = getDefaultValueByTypeId(currentItem.type_id);
+		currentItem.disabledType = true;
+		currentItem.disabledValue = true;
+		currentItem.disabledControl = true;
+		currentItem.source = sourceValue;
 	}
 	else if (select.length > 1) {
 		if (parentTypeId === FORMAT_ATOMIC.id) {

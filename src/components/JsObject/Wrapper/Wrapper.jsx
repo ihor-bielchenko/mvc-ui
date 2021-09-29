@@ -29,6 +29,8 @@ let Wrapper = ({
 	ValueComponent,
 	TypeComponent,
 }) => {
+	useSelector((state) => (state.jsObject.data[id] || {}).update);
+
 	const blocksLength = useSelector((state) => (state.jsObject.blocks[id] || []).length);
 	const isCollection = useSelector((state) => ((state.jsObject.data[id].source || {}).value || {}).is_collection);
 	const _onAddItem = React.useCallback((e) => onAddItem(e, id), [

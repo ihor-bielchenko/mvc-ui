@@ -12,6 +12,7 @@ import loadColumnInputs from 'utils/loadColumnInputs.js';
 // import { SOURCE_DB } from 'structures/source.js';
 import { FORMAT_ATOMIC } from 'structures/format.js';
 import { 
+	COLUMN_ID,
 	COLUMN_OBJ,
 	COLUMN_ARR,
 	COLUMN_NULL,
@@ -36,6 +37,9 @@ let ValueComponent = ({
 		typeId,
 	]);
 	const disabledValue = useSelector((state) => state.jsObject.data[id].disabledValue);
+	const _typeId = typeId === COLUMN_ID.id
+		? COLUMN_NUMBER.id
+		: typeId;
 
 	return disabledValue
 		? <Box
@@ -48,9 +52,9 @@ let ValueComponent = ({
 				? 'inherit'
 				: 'max-content'}>
 			{sourceId > 0
-				&& typeId !== COLUMN_OBJ.id
-				&& typeId !== COLUMN_ARR.id
-				&& typeId !== COLUMN_NULL.id
+				&& _typeId !== COLUMN_OBJ.id
+				&& _typeId !== COLUMN_ARR.id
+				&& _typeId !== COLUMN_NULL.id
 				? <React.Fragment>
 					<Chip label="Переменная" />
 					<Typography
@@ -65,7 +69,7 @@ let ValueComponent = ({
 				</React.Fragment>
 				: <React.Fragment />}
 			{(() => {
-				switch (typeId) {
+				switch (_typeId) {
 					case COLUMN_OBJ.id:
 					case COLUMN_ARR.id:
 						return value;
@@ -137,7 +141,7 @@ let ValueComponent = ({
 				|| parentTypeId === COLUMN_OBJ.id
 				|| parentTypeId === COLUMN_ARR.id)}>
 				{(() => {
-					switch (typeId) {
+					switch (_typeId) {
 						case COLUMN_OBJ.id:
 						case COLUMN_ARR.id:
 							return value;
@@ -170,7 +174,7 @@ let ValueComponent = ({
 								</Box>
 								<MenuSource
 									aria={id.toString()}
-									typeId={typeId} />
+									typeId={_typeId} />
 							</React.Fragment>;
 					}
 				})()}
