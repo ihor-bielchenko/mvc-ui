@@ -38,6 +38,8 @@ const onSave = (e, id, onClose) => {
 	const parentItem = data[parentId];
 	const parentTypeId = (parentItem || {}).type_id || currentItem.type_id;
 
+	console.log('currentItem', currentItem);
+
 	if (isCollection) {
 		tempValue.offset = tempValue.offset ?? 0;
 		tempValue.limit = tempValue.limit ?? 0;

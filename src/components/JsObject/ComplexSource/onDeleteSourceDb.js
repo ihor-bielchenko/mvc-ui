@@ -3,7 +3,7 @@ import {
 	COLUMN_OBJ,
 	COLUMN_ARR,
 } from 'structures/columnTypes.js';
-import getDefaultValueByTypeId from '../getDefaultValueByTypeId.js';
+import onDeleteLogic from '../Item/onDeleteLogic.js';
 
 const onDeleteSourceDb = (e, id) => {
 	id = Number(id);
@@ -13,48 +13,40 @@ const onDeleteSourceDb = (e, id) => {
 	const blocks = jsObject.blocks;
 	const parentId = data[id].parent_id;
 
-	if (typeof data[id] === 'object') {
-		console.log('data[id].type_id', data[id].type_id);
+	if ((data[id] || {}).type_id === COLUMN_OBJ.id
+		|| (data[id] || {}).type_id === COLUMN_ARR.id) {
+		(blocks[id] || []).forEach((item) => {
+			delete data[item.id];
+			delete blocks[item.id];
+		});
+		if (((data[id].source || {}).value || {}).is_collection) {
+			const findIndex = (blocks[parentId] || []).findIndex((item) => (
+				item.id === id
+			));
 
-		if (data[id].type_id === COLUMN_OBJ.id
-			|| data[id].type_id === COLUMN_ARR.id) {
-			(blocks[id] || []).forEach((item) => {
-				delete data[item.id];
-				delete blocks[item.id];
-			});
-			if (((data[id].source || {}).value || {}).is_collection) {
-				const findIndex = (blocks[parentId] || []).findIndex((item) => (
-					item.id === id
-				));
-
-				if (findIndex > -1) {
-					blocks[parentId].splice(findIndex, 1);
-				}
-				delete data[id];
+			if (findIndex > -1) {
+				blocks[parentId].splice(findIndex, 1);
 			}
-			else {
-				data[id].source = undefined;
-				data[id].disabledKey = false;
-				data[id].disabledType = false;
-				data[id].disabledValue = false;
-				data[id].disabledControl = false;
-			}
-			blocks[id] = [];
-			jsObject.data = { ...data };
-			jsObject.blocks = { ...blocks };
+			delete data[id];
 		}
 		else {
-			data[id].value = getDefaultValueByTypeId(data[id].type_id);
 			data[id].source = undefined;
+			data[id].disabledKey = false;
 			data[id].disabledType = false;
 			data[id].disabledValue = false;
 			data[id].disabledControl = false;
 		}
+		blocks[id] = [];
+		jsObject.data = { ...data };
+		jsObject.blocks = { ...blocks };
 
 		Store().dispatch({
 			type: 'jsObject',
 			payload: () => ({ ...jsObject }),
 		});
+	}
+	else {
+		onDeleteLogic(e, id);
 	}
 };
 
