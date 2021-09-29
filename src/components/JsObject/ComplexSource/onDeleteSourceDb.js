@@ -28,6 +28,7 @@ const onDeleteSourceDb = (e, id) => {
 				blocks[parentId].splice(findIndex, 1);
 			}
 			delete data[id];
+			delete blocks[id];
 		}
 		else {
 			data[id].source = undefined;
@@ -35,8 +36,8 @@ const onDeleteSourceDb = (e, id) => {
 			data[id].disabledType = false;
 			data[id].disabledValue = false;
 			data[id].disabledControl = false;
+			blocks[id] = [];
 		}
-		blocks[id] = [];
 		jsObject.data = { ...data };
 		jsObject.blocks = { ...blocks };
 

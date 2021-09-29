@@ -7,8 +7,9 @@ const onChangeLogic = (e, id) => {
 	if (typeof jsObject.data[id] === 'object'
 		&& typeof jsObject.data[id].value === 'object') {
 		jsObject.tempValue = { ...jsObject.data[id].value };
-		onDialog(jsObject.data[id].source_id, { 
+		onDialog(jsObject.data[id].value.source_id, { 
 			name: id, 
+			isEditFlag: true,
 		})();
 	}
 };

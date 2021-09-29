@@ -38,8 +38,6 @@ const onSave = (e, id, onClose) => {
 	const parentItem = data[parentId];
 	const parentTypeId = (parentItem || {}).type_id || currentItem.type_id;
 
-	console.log('currentItem', currentItem);
-
 	if (isCollection) {
 		tempValue.offset = tempValue.offset ?? 0;
 		tempValue.limit = tempValue.limit ?? 0;
@@ -49,6 +47,7 @@ const onSave = (e, id, onClose) => {
 		if (parentTypeId === FORMAT_ATOMIC.id) {
 			parentItem.type_id = COLUMN_ARR.id;
 			parentItem.lengthIsUndefined = true;
+			currentItem.bind_id = parentId;
 			currentItem.key = 'n';
 			currentItem.disabledKey = true;
 			currentItem.disabledType = true;
@@ -59,6 +58,7 @@ const onSave = (e, id, onClose) => {
 			select.forEach((columnId, index) => {
 				newId = newId + 1;
 				data[newId] = getTemplate({
+					bind_id: id,
 					parent_id: id,
 					id: newId,
 					type_id: dbColumnsData[columnId].type_id === COLUMN_ID.id
@@ -78,6 +78,7 @@ const onSave = (e, id, onClose) => {
 		else {
 			currentItem.type_id = COLUMN_ARR.id;
 			data[newId] = getTemplate({
+				bind_id: id,
 				parent_id: id,
 				id: newId,
 				type_id: COLUMN_OBJ.id,
@@ -93,6 +94,7 @@ const onSave = (e, id, onClose) => {
 			select.forEach((columnId, index) => {
 				newId = newId + 1;
 				data[newId] = getTemplate({
+					bind_id: blocks[id][0].id,
 					parent_id: blocks[id][0].id,
 					id: newId,
 					type_id: dbColumnsData[columnId].type_id === COLUMN_ID.id
@@ -129,6 +131,7 @@ const onSave = (e, id, onClose) => {
 			parentItem.source = sourceValue;
 			data[id] = getTemplate({
 				...(data[id] || {}),
+				bind_id: parentId,
 				type_id: dbColumnsData[select[0]].type_id === COLUMN_ID.id
 					? COLUMN_NUMBER.id
 					: dbColumnsData[select[0]].type_id,
@@ -144,6 +147,7 @@ const onSave = (e, id, onClose) => {
 				if (index > 0) {
 					newId = newId + 1;
 					jsObject.data[newId] = getTemplate({
+						bind_id: parentId,
 						id: newId,
 						type_id: dbColumnsData[columnId].type_id === COLUMN_ID.id
 							? COLUMN_NUMBER.id
@@ -168,6 +172,7 @@ const onSave = (e, id, onClose) => {
 			select.forEach((columnId, index) => {
 				newId = newId + 1;
 				data[newId] = getTemplate({
+					bind_id: id,
 					parent_id: id,
 					id: newId,
 					type_id: dbColumnsData[columnId].type_id === COLUMN_ID.id

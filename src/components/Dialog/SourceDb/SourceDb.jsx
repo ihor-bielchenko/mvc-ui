@@ -21,10 +21,12 @@ import onUnmount from 'components/Dialog/SourceCookie/onUnmount.js';
 import { SOURCE_DB } from 'structures/source.js';
 import onClose from '../onClose.js';
 import onSave from './onSave.js';
+import onEdit from './onEdit.js';
 
 let SourceDb = () => {
 	const dialog = useSelector((state) => state.dialogs[SOURCE_DB.id]);
 	const bodyId = (dialog || {}).name;
+	const isEditFlag = (dialog || {}).isEditFlag || false;
 	const issetSelectData = useSelector((state) => (state.jsObject.tempValue.select || []).length > 0);
 	const filterFormId = useSelector((state) => state.jsObject.filterFormId);
 	const sortFormId = useSelector((state) => state.jsObject.sortFormId);
@@ -46,7 +48,10 @@ let SourceDb = () => {
 	}, [
 		setStep,
 	]);
-	const _onSave = React.useCallback((e) => onSave(e, bodyId, _onClose), [
+	const _onSave = React.useCallback((e) => isEditFlag
+		? onEdit(e, bodyId, _onClose)
+		: onSave(e, bodyId, _onClose), [
+		isEditFlag,
 		bodyId,
 		_onClose,
 	]);
