@@ -23,17 +23,19 @@ const complexSources = {
 
 const BoxComplexSource = styled(Box)`
 	& > .MuiChip-root {
+		overflow: hidden;
 		position: static !important;
 		top: initial !important;
 		left: initial !important;
 	}
 `;
 
-let ComplexSource = ({ id }) => {
+let ComplexSource = ({ id, className }) => {
 	const sourceId = useSelector((state) => (state.jsObject.data[id].source || {}).source_id);
 
 	return sourceId > 0
 		? <BoxComplexSource 
+			className={className}
 			position="relative"
 			display="inline-block">
 			<StyledChip 

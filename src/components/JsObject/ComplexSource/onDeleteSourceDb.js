@@ -3,6 +3,7 @@ import {
 	COLUMN_OBJ,
 	COLUMN_ARR,
 } from 'structures/columnTypes.js';
+import getDefaultValueByTypeId from '../getDefaultValueByTypeId.js';
 
 const onDeleteSourceDb = (e, id) => {
 	id = Number(id);
@@ -13,6 +14,8 @@ const onDeleteSourceDb = (e, id) => {
 	const parentId = data[id].parent_id;
 
 	if (typeof data[id] === 'object') {
+		console.log('data[id].type_id', data[id].type_id);
+
 		if (data[id].type_id === COLUMN_OBJ.id
 			|| data[id].type_id === COLUMN_ARR.id) {
 			(blocks[id] || []).forEach((item) => {
@@ -39,6 +42,13 @@ const onDeleteSourceDb = (e, id) => {
 			blocks[id] = [];
 			jsObject.data = { ...data };
 			jsObject.blocks = { ...blocks };
+		}
+		else {
+			data[id].value = getDefaultValueByTypeId(data[id].type_id);
+			data[id].source = undefined;
+			data[id].disabledType = false;
+			data[id].disabledValue = false;
+			data[id].disabledControl = false;
 		}
 
 		Store().dispatch({
