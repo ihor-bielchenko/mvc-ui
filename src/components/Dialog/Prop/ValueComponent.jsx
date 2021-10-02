@@ -4,7 +4,6 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import JsBoxControlWrapper from 'components/JsObject/BoxControlWrapper';
 import MenuSource from 'components/Menu/Source';
-// import ComplexSource from 'components/JsObject/ComplexSource';
 import onChangeLogic from 'components/JsObject/Value/onChangeLogic.js';
 import onDeleteLogic from 'components/JsObject/Value/onDeleteLogic.js';
 import onMenu from 'components/Menu/onMenu.js';

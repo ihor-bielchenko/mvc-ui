@@ -1,7 +1,7 @@
 import Store from 'components/Store';
 import getDefaultValueByTypeId from 'components/JsObject/getDefaultValueByTypeId.js';
 import getTemplate from 'components/JsObject/getTemplate.js';
-import getNewItemKey from 'components/JsObject/Wrapper/getNewItemKey.js';
+import getNewItemKey from 'components/JsObject/Parent/getNewItemKey.js';
 import { SOURCE_DB } from 'structures/source.js';
 import { FORMAT_ATOMIC } from 'structures/format.js';
 import {

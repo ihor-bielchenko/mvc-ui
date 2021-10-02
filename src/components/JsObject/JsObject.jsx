@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import Wrapper from './Wrapper';
+import Parent from './Parent';
 import onMount from './onMount.js';
 
 let JsObject = ({ 
@@ -20,7 +20,7 @@ let JsObject = ({
 	]);
 
 	return wrapperIsset
-		? <Wrapper
+		? <Parent
 			id={0}
 			typeId={_typeId}
 			KeyComponent={KeyComponent}

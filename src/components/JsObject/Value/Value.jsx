@@ -11,7 +11,7 @@ import {
 } from 'structures/columnTypes.js';
 import { FORMAT_ATOMIC } from 'structures/format.js';
 import BoxControlWrapper from '../BoxControlWrapper.jsx';
-import Wrapper from '../Wrapper';
+import Parent from '../Parent';
 import onChangeLocal from './onChange.js';
 
 let Value = ({
@@ -48,7 +48,7 @@ let Value = ({
 					switch (_typeId) {
 						case COLUMN_OBJ.id:
 						case COLUMN_ARR.id:
-							return <Wrapper
+							return <Parent
 								id={id}
 								typeId={_typeId}
 								last={last}
@@ -77,7 +77,7 @@ let Value = ({
 					switch (_typeId) {
 						case COLUMN_OBJ.id:
 						case COLUMN_ARR.id:
-							return <Wrapper
+							return <Parent
 								id={id}
 								typeId={_typeId}
 								last={last}

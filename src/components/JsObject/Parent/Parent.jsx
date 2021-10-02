@@ -20,7 +20,7 @@ const closures = {
 	[COLUMN_ARR.id]: [ '[', ']' ],
 };
 
-let Wrapper = ({ 
+let Parent = ({ 
 	id,
 	typeId,
 	last,
@@ -134,10 +134,10 @@ let Wrapper = ({
 	</React.Fragment>;
 };
 
-Wrapper = React.memo(Wrapper);
-Wrapper.defaultProps = {
+Parent = React.memo(Parent);
+Parent.defaultProps = {
 	id: 0,
 	typeId: 0,
 };
 
-export default Wrapper;
+export default Parent;
