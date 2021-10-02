@@ -7,9 +7,6 @@ const getTemplate = (obj = {}) => {
 		type_id: COLUMN_TEXT.id,
 		key: 0,
 		value: '',
-		lengthIsUndefined: false,
-		disabled: false,
-		source: undefined,
 		...obj,
 	};
 };

@@ -63,8 +63,6 @@ const onEdit = (e, id, onClose) => {
 
 	jsObject.tempValue = {};
 	onClose();
-
-	console.log('jsObject', jsObject);
 };
 
 export default onEdit;
