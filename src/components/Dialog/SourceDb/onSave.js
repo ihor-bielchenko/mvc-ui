@@ -1,13 +1,15 @@
 import Store from 'components/Store';
 import getDefaultValueByTypeId from 'components/JsObject/getDefaultValueByTypeId.js';
 import getTemplate from 'components/JsObject/getTemplate.js';
+import getNewItemKey from 'components/JsObject/Wrapper/getNewItemKey.js';
 import { SOURCE_DB } from 'structures/source.js';
 import { FORMAT_ATOMIC } from 'structures/format.js';
 import {
-	COLUMN_ID,
+	// COLUMN_ID,
 	COLUMN_OBJ,
 	COLUMN_ARR,
-	COLUMN_NUMBER,
+	// COLUMN_NUMBER,
+	// COLUMN_DB,
 } from 'structures/columnTypes.js';
 
 const onSave = (e, id, onClose) => {
@@ -23,10 +25,9 @@ const onSave = (e, id, onClose) => {
 	const blocks = jsObject.blocks;
 	const tempValue = jsObject.tempValue;
 	const sourceValue = {
+		...tempValue,
 		source_id: SOURCE_DB.id,
-		value: { 
-			...tempValue, 
-		},
+		columns: {},
 	};
 	const {
 		is_collection: isCollection,
@@ -38,78 +39,19 @@ const onSave = (e, id, onClose) => {
 	const parentItem = data[parentId];
 	const parentTypeId = (parentItem || {}).type_id || currentItem.type_id;
 
+	select.forEach((columnId) => (
+		sourceValue.columns[columnId] = dbColumnsData[columnId].name
+	));
+
 	if (isCollection) {
 		tempValue.offset = tempValue.offset ?? 0;
 		tempValue.limit = tempValue.limit ?? 0;
-		currentItem.type_id = COLUMN_OBJ.id;
-		currentItem.value = undefined;
-
+		
 		if (parentTypeId === FORMAT_ATOMIC.id) {
-			parentItem.type_id = COLUMN_ARR.id;
-			parentItem.lengthIsUndefined = true;
-			currentItem.bind_id = parentId;
-			currentItem.key = 'n';
-			currentItem.disabledKey = true;
-			currentItem.disabledType = true;
-			currentItem.lengthIsUndefined = true;
-			currentItem.source = sourceValue;
-			blocks[id] = [];
-			blocks[parentId] = [ currentItem ];
-			select.forEach((columnId, index) => {
-				newId = newId + 1;
-				data[newId] = getTemplate({
-					bind_id: id,
-					parent_id: id,
-					id: newId,
-					type_id: dbColumnsData[columnId].type_id === COLUMN_ID.id
-						? COLUMN_NUMBER.id
-						: dbColumnsData[columnId].type_id,
-					key: dbColumnsData[columnId].name,
-					column_id: columnId,
-					disabledType: true,
-					disabledValue: true,
-					disabledControl: true,
-				});
-				data[newId].value = dbColumnsData[columnId].default_value 
-					?? getDefaultValueByTypeId(data[newId].type_id);
-				blocks[id].push(data[newId]);
-			});
+			
 		}
 		else {
-			currentItem.type_id = COLUMN_ARR.id;
-			data[newId] = getTemplate({
-				bind_id: id,
-				parent_id: id,
-				id: newId,
-				type_id: COLUMN_OBJ.id,
-				key: 'n',
-				value: undefined,
-				disabledKey: true,
-				disabledType: true,
-				lengthIsUndefined: true,
-				source: sourceValue,
-			});
-			blocks[newId] = [];
-			blocks[id] = [ data[newId] ];
-			select.forEach((columnId, index) => {
-				newId = newId + 1;
-				data[newId] = getTemplate({
-					bind_id: blocks[id][0].id,
-					parent_id: blocks[id][0].id,
-					id: newId,
-					type_id: dbColumnsData[columnId].type_id === COLUMN_ID.id
-						? COLUMN_NUMBER.id
-						: dbColumnsData[columnId].type_id,
-					key: dbColumnsData[columnId].name,
-					column_id: columnId,
-					disabledType: true,
-					disabledValue: true,
-					disabledControl: true,
-				});
-				data[newId].value = data[id].default_value 
-					?? getDefaultValueByTypeId(data[newId].type_id);
-				blocks[blocks[id][0].id].push(data[newId]);
-			});
+		
 		}
 	}
 	else if (select.length === 1) {
@@ -119,74 +61,29 @@ const onSave = (e, id, onClose) => {
 		currentItem.type_id = dbColumnsData[select[0]].type_id;
 		currentItem.value = getDefaultValueByTypeId(currentItem.type_id);
 		currentItem.disabledType = true;
-		currentItem.disabledValue = true;
-		currentItem.disabledControl = true;
-		currentItem.source = sourceValue;
+		currentItem.value = sourceValue;
+
+		select.forEach((columnId) => dbColumnsData[columnId].name);
 	}
 	else if (select.length > 1) {
 		if (parentTypeId === FORMAT_ATOMIC.id) {
-			parentItem.type_id = COLUMN_OBJ.id;
-			parentItem.disabledKey = true;
-			parentItem.disabledType = true;
-			parentItem.source = sourceValue;
-			data[id] = getTemplate({
-				...(data[id] || {}),
-				bind_id: parentId,
-				type_id: dbColumnsData[select[0]].type_id === COLUMN_ID.id
-					? COLUMN_NUMBER.id
-					: dbColumnsData[select[0]].type_id,
-				key: dbColumnsData[select[0]].name,
-				column_id: select[0],
+			
+		}
+		else {
+			currentItem.type_id = COLUMN_OBJ.id;
+			currentItem.disabledType = true;
+			blocks[id] = (blocks[id] ?? []);
+			data[newId] = getTemplate({
+				parent_id: id,
+				id: newId,
+				type_id: COLUMN_OBJ.id,
+				key: getNewItemKey(blocks[id]),
+				value: sourceValue,
 				disabledType: true,
 				disabledValue: true,
 				disabledControl: true,
 			});
-			data[id].value = getDefaultValueByTypeId(data[id].type_id);
-			blocks[parentId] = [ data[id] ];
-			select.forEach((columnId, index) => {
-				if (index > 0) {
-					newId = newId + 1;
-					jsObject.data[newId] = getTemplate({
-						bind_id: parentId,
-						id: newId,
-						type_id: dbColumnsData[columnId].type_id === COLUMN_ID.id
-							? COLUMN_NUMBER.id
-							: dbColumnsData[columnId].type_id,
-						key: dbColumnsData[columnId].name,
-						column_id: columnId,
-						disabledType: true,
-						disabledValue: true,
-						disabledControl: true,
-					});
-					data[newId].value = getDefaultValueByTypeId(data[newId].type_id);
-					blocks[parentId].push(data[newId]);
-				}
-			});
-		}
-		else {
-			currentItem.type_id = COLUMN_OBJ.id;
-			currentItem.disabledKey = true;
-			currentItem.disabledType = true;
-			currentItem.source = sourceValue;
-			blocks[id] = [];
-			select.forEach((columnId, index) => {
-				newId = newId + 1;
-				data[newId] = getTemplate({
-					bind_id: id,
-					parent_id: id,
-					id: newId,
-					type_id: dbColumnsData[columnId].type_id === COLUMN_ID.id
-						? COLUMN_NUMBER.id
-						: dbColumnsData[columnId].type_id,
-					key: dbColumnsData[columnId].name,
-					column_id: columnId,
-					disabledType: true,
-					disabledValue: true,
-					disabledControl: true,
-				});
-				data[newId].value = getDefaultValueByTypeId(data[newId].type_id);
-				blocks[id].push(data[newId]);
-			});
+			blocks[id].push(data[newId]);
 		}
 	}
 	jsObject.tempValue = {};

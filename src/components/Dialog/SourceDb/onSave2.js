@@ -10,178 +10,185 @@ import {
 	COLUMN_NUMBER,
 } from 'structures/columnTypes.js';
 
-const onSave = (e, itemId, onClose) => {
-	itemId = Number(itemId);
+const onSave = (e, id, onClose) => {
+	id = Number(id);
 
 	const {
 		jsObject,
-		dbColumns,
+		dbColumns: {
+			data: dbColumnsData,
+		},
 	} = Store().getState();
-	const currentItem = jsObject.data[itemId];
-	const parentItem = jsObject.data[currentItem.parent_id];
-	const parentTypeId = parentItem.type_id;
+	const data = jsObject.data;
+	const blocks = jsObject.blocks;
+	const tempValue = jsObject.tempValue;
+	const sourceValue = {
+		source_id: SOURCE_DB.id,
+		value: { 
+			...tempValue, 
+		},
+	};
+	const {
+		is_collection: isCollection,
+		select,
+	} = (tempValue || {});
+	let newId = Date.now();
+	const currentItem = data[id];
+	const parentId = currentItem.parent_id;
+	const parentItem = data[parentId];
+	const parentTypeId = (parentItem || {}).type_id || currentItem.type_id;
 
-	if (typeof currentItem === 'object') {
-		let newId = Date.now();
+	if (isCollection) {
+		tempValue.offset = tempValue.offset ?? 0;
+		tempValue.limit = tempValue.limit ?? 0;
+		currentItem.type_id = COLUMN_OBJ.id;
+		currentItem.value = undefined;
 
-		if (jsObject.tempValue.select.length === 1
-			&& !jsObject.tempValue.is_collection) {
-			currentItem.type_id = dbColumns[jsObject.tempValue.select[0]].type_id;
-			currentItem.value = getDefaultValueByTypeId(currentItem.type_id);
+		if (parentTypeId === FORMAT_ATOMIC.id) {
+			parentItem.type_id = COLUMN_ARR.id;
+			parentItem.lengthIsUndefined = true;
+			currentItem.bind_id = parentId;
+			currentItem.key = 'n';
+			currentItem.disabledKey = true;
+			currentItem.disabledType = true;
+			currentItem.lengthIsUndefined = true;
+			currentItem.source = sourceValue;
+			blocks[id] = [];
+			blocks[parentId] = [ currentItem ];
+			select.forEach((columnId, index) => {
+				newId = newId + 1;
+				data[newId] = getTemplate({
+					bind_id: id,
+					parent_id: id,
+					id: newId,
+					type_id: dbColumnsData[columnId].type_id === COLUMN_ID.id
+						? COLUMN_NUMBER.id
+						: dbColumnsData[columnId].type_id,
+					key: dbColumnsData[columnId].name,
+					column_id: columnId,
+					disabledType: true,
+					disabledValue: true,
+					disabledControl: true,
+				});
+				data[newId].value = dbColumnsData[columnId].default_value 
+					?? getDefaultValueByTypeId(data[newId].type_id);
+				blocks[id].push(data[newId]);
+			});
 		}
-		else if (jsObject.tempValue.select.length > 1
-			&& !jsObject.tempValue.is_collection) {
-			if (parentTypeId === FORMAT_ATOMIC.id) {
-				parentItem.type_id = COLUMN_OBJ.id;
-				parentItem.disabled = true;
-
-				if (parentItem.id === 0) {
-					jsObject.data[itemId] = getTemplate({
-						...jsObject.data[itemId],
-						type_id: dbColumns.data[jsObject.tempValue.select[0]].type_id === COLUMN_ID.id
-							? COLUMN_NUMBER.id
-							: dbColumns.data[jsObject.tempValue.select[0]].type_id,
-						key: dbColumns.data[jsObject.tempValue.select[0]].name,
-						column_id: jsObject.tempValue.select[0],
-					});
-					jsObject.data[itemId].value = getDefaultValueByTypeId(jsObject.data[itemId].type_id);
-					jsObject.blocks[0] = [
-						jsObject.data[itemId],
-					];
-					jsObject
-						.tempValue
-						.select
-						.forEach((id, index) => {
-							if (index > 0) {
-								newId = newId + 1;
-								jsObject.data[newId] = getTemplate({
-									id: newId,
-									type_id: dbColumns.data[id].type_id === COLUMN_ID.id
-										? COLUMN_NUMBER.id
-										: dbColumns.data[id].type_id,
-									key: dbColumns.data[id].name,
-									column_id: id,
-								});
-								jsObject.data[newId].value = getDefaultValueByTypeId(jsObject.data[newId].type_id);
-								jsObject.blocks[0].push(jsObject.data[newId]);
-							}
-						});
-				}
-			}
-			else {
-				currentItem.type_id = COLUMN_OBJ.id;
-				currentItem.disabled = true;
-				jsObject.blocks[itemId] = [];
-				jsObject
-					.tempValue
-					.select
-					.forEach((id, index) => {
-						newId = newId + 1;
-
-						jsObject.data[newId] = getTemplate({
-							parent_id: itemId,
-							id: newId,
-							type_id: dbColumns.data[id].type_id === COLUMN_ID.id
-								? COLUMN_NUMBER.id
-								: dbColumns.data[id].type_id,
-							key: dbColumns.data[id].name,
-							column_id: id,
-						});
-						jsObject.data[newId].value = getDefaultValueByTypeId(jsObject.data[newId].type_id);
-						jsObject.blocks[itemId].push(jsObject.data[newId]);
-					});
-			}
+		else {
+			currentItem.type_id = COLUMN_ARR.id;
+			data[newId] = getTemplate({
+				bind_id: id,
+				parent_id: id,
+				id: newId,
+				type_id: COLUMN_OBJ.id,
+				key: 'n',
+				value: undefined,
+				disabledKey: true,
+				disabledType: true,
+				lengthIsUndefined: true,
+				source: sourceValue,
+			});
+			blocks[newId] = [];
+			blocks[id] = [ data[newId] ];
+			select.forEach((columnId, index) => {
+				newId = newId + 1;
+				data[newId] = getTemplate({
+					bind_id: blocks[id][0].id,
+					parent_id: blocks[id][0].id,
+					id: newId,
+					type_id: dbColumnsData[columnId].type_id === COLUMN_ID.id
+						? COLUMN_NUMBER.id
+						: dbColumnsData[columnId].type_id,
+					key: dbColumnsData[columnId].name,
+					column_id: columnId,
+					disabledType: true,
+					disabledValue: true,
+					disabledControl: true,
+				});
+				data[newId].value = data[id].default_value 
+					?? getDefaultValueByTypeId(data[newId].type_id);
+				blocks[blocks[id][0].id].push(data[newId]);
+			});
 		}
-		if (jsObject.tempValue.is_collection) {
-			if (typeof jsObject.tempValue.offset === 'undefined') {
-				jsObject.tempValue['offset'] = 0;
-			}
-			if (typeof jsObject.tempValue.limit === 'undefined') {
-				jsObject.tempValue['limit'] = 10;
-			}
-			if (parentTypeId === FORMAT_ATOMIC.id) {
-				parentItem.type_id = COLUMN_ARR.id;
-				parentItem.lengthIsUndefined = true;
-				parentItem.disabled = true;
-				parentItem.source.value = {
-					source_id: SOURCE_DB.id,
-					value: {
-						...jsObject.tempValue,
-					},
-				};
-
-				if (parentItem.id === 0) {
-					jsObject.blocks[itemId] = [];
-					jsObject.blocks[0][0].type_id = COLUMN_OBJ.id;
-					jsObject.blocks[0][0].key = 'n';
-					jsObject.blocks[0][0].value = undefined;
-					jsObject.data[jsObject.blocks[0][0].id] = jsObject.blocks[0][0];
-					jsObject
-						.tempValue
-						.select
-						.forEach((id, index) => {
-							newId = newId + 1;
-
-							jsObject.data[newId] = getTemplate({
-								parent_id: itemId,
-								id: newId,
-								type_id: dbColumns.data[id].type_id === COLUMN_ID.id
-									? COLUMN_NUMBER.id
-									: dbColumns.data[id].type_id,
-								key: dbColumns.data[id].name,
-								column_id: id,
-							});
-							jsObject.data[newId].value = dbColumns.data[id].default_value ?? getDefaultValueByTypeId(jsObject.data[newId].type_id);
-							jsObject.blocks[itemId].push(jsObject.data[newId]);
-						});
-				}
-			}
-			else {
-				currentItem.type_id = COLUMN_ARR.id;
-				currentItem.lengthIsUndefined = true;
-				currentItem.disabled = true;
-				currentItem.source.value = {
-					source_id: SOURCE_DB.id,
-					value: {
-						...jsObject.tempValue,
-					},
-				};
-				jsObject.blocks[itemId] = [
-					getTemplate({
-						parent_id: itemId,
-						id: newId,
-						type_id: COLUMN_OBJ.id,
-						key: 'n',
-						value: {},
-					}),
-				];
-				jsObject.data[jsObject.blocks[itemId][0].id] = jsObject.blocks[itemId][0];
-				jsObject.blocks[jsObject.blocks[itemId][0].id] = [];
-				jsObject
-					.tempValue
-					.select
-					.forEach((id, index) => {
-						newId = newId + 1;
-
-						jsObject.data[newId] = getTemplate({
-							parent_id: jsObject.blocks[itemId][0].id,
-							id: newId,
-							type_id: dbColumns.data[id].type_id === COLUMN_ID.id
-								? COLUMN_NUMBER.id
-								: dbColumns.data[id].type_id,
-							key: dbColumns.data[id].name,
-							column_id: id,
-						});
-						jsObject.data[newId].value = dbColumns.data[id].default_value ?? getDefaultValueByTypeId(jsObject.data[newId].type_id);
-						jsObject.blocks[jsObject.blocks[itemId][0].id].push(jsObject.data[newId]);
-					});
-			}
-		}
-
-		// console.log('jsObject', { ...jsObject.tempValue });
-		jsObject.tempValue = {};
-		onClose();
 	}
+	else if (select.length === 1) {
+		if ((parentItem || {}).type_id !== COLUMN_ARR.id) {
+			currentItem.key = dbColumnsData[select[0]].name;
+		}
+		currentItem.type_id = dbColumnsData[select[0]].type_id;
+		currentItem.value = getDefaultValueByTypeId(currentItem.type_id);
+		currentItem.disabledType = true;
+		currentItem.disabledValue = true;
+		currentItem.disabledControl = true;
+		currentItem.source = sourceValue;
+	}
+	else if (select.length > 1) {
+		if (parentTypeId === FORMAT_ATOMIC.id) {
+			parentItem.type_id = COLUMN_OBJ.id;
+			parentItem.disabledKey = true;
+			parentItem.disabledType = true;
+			parentItem.source = sourceValue;
+			data[id] = getTemplate({
+				...(data[id] || {}),
+				bind_id: parentId,
+				type_id: dbColumnsData[select[0]].type_id === COLUMN_ID.id
+					? COLUMN_NUMBER.id
+					: dbColumnsData[select[0]].type_id,
+				key: dbColumnsData[select[0]].name,
+				column_id: select[0],
+				disabledType: true,
+				disabledValue: true,
+				disabledControl: true,
+			});
+			data[id].value = getDefaultValueByTypeId(data[id].type_id);
+			blocks[parentId] = [ data[id] ];
+			select.forEach((columnId, index) => {
+				if (index > 0) {
+					newId = newId + 1;
+					jsObject.data[newId] = getTemplate({
+						bind_id: parentId,
+						id: newId,
+						type_id: dbColumnsData[columnId].type_id === COLUMN_ID.id
+							? COLUMN_NUMBER.id
+							: dbColumnsData[columnId].type_id,
+						key: dbColumnsData[columnId].name,
+						column_id: columnId,
+						disabledType: true,
+						disabledValue: true,
+						disabledControl: true,
+					});
+					data[newId].value = getDefaultValueByTypeId(data[newId].type_id);
+					blocks[parentId].push(data[newId]);
+				}
+			});
+		}
+		else {
+			currentItem.type_id = COLUMN_OBJ.id;
+			currentItem.source = sourceValue;
+			blocks[id] = [];
+			select.forEach((columnId, index) => {
+				newId = newId + 1;
+				data[newId] = getTemplate({
+					bind_id: id,
+					parent_id: id,
+					id: newId,
+					type_id: dbColumnsData[columnId].type_id === COLUMN_ID.id
+						? COLUMN_NUMBER.id
+						: dbColumnsData[columnId].type_id,
+					key: dbColumnsData[columnId].name,
+					column_id: columnId,
+					disabledType: true,
+					disabledValue: true,
+					disabledControl: true,
+				});
+				data[newId].value = getDefaultValueByTypeId(data[newId].type_id);
+				blocks[id].push(data[newId]);
+			});
+		}
+	}
+	jsObject.tempValue = {};
+	onClose();
 };
 
 export default onSave;

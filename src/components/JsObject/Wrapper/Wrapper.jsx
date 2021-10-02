@@ -12,7 +12,6 @@ import {
  	COLUMN_ARR,
 } from 'structures/columnTypes.js';
 import Header from '../Header';
-import ComplexSource from '../ComplexSource';
 import Item from '../Item';
 import onAddItem from './onAddItem.js';
 
@@ -29,10 +28,7 @@ let Wrapper = ({
 	ValueComponent,
 	TypeComponent,
 }) => {
-	useSelector((state) => (state.jsObject.data[id] || {}).update);
-
 	const blocksLength = useSelector((state) => (state.jsObject.blocks[id] || []).length);
-	const isCollection = useSelector((state) => ((state.jsObject.data[id].source || {}).value || {}).is_collection);
 	const _onAddItem = React.useCallback((e) => onAddItem(e, id), [
 		id,
 	]);
@@ -79,9 +75,6 @@ let Wrapper = ({
 							</Typography>
 						</React.Fragment>
 						: <React.Fragment />}
-						{!isCollection
-							? <ComplexSource id={id} />
-							: <React.Fragment />}
 						{(() => {
 							let i = 0,
 								collector = [];

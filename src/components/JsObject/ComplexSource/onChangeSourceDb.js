@@ -8,6 +8,7 @@ const onChangeSourceDb = (e, id) => {
 	jsObject.tempValue = { ...jsObject.data[id].source.value };
 	onDialog(SOURCE_DB.id, { 
 		name: id, 
+		isEditFlag: true,
 	})();
 };
 
