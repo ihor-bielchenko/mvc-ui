@@ -1,10 +1,9 @@
 import Store from 'components/Store';
 import getDefaultValueByTypeId from 'components/JsObject/getDefaultValueByTypeId.js';
 import { SOURCE_DB } from 'structures/source.js';
-import { FORMAT_ATOMIC } from 'structures/format.js';
 import {
 	// COLUMN_ID,
-	// COLUMN_OBJ,
+	COLUMN_OBJ,
 	COLUMN_ARR,
 	// COLUMN_NUMBER,
 } from 'structures/columnTypes.js';
@@ -19,6 +18,7 @@ const onEdit = (e, id, onClose) => {
 		},
 	} = Store().getState();
 	const data = jsObject.data;
+	const blocks = jsObject.blocks;
 	const tempValue = jsObject.tempValue;
 	const sourceValue = {
 		...tempValue,
@@ -32,19 +32,21 @@ const onEdit = (e, id, onClose) => {
 	const currentItem = data[id];
 	const parentId = currentItem.parent_id;
 	const parentItem = data[parentId];
-	const parentTypeId = (parentItem || {}).type_id || currentItem.type_id;
 
 	select.forEach((columnId) => (
 		sourceValue.columns[columnId] = dbColumnsData[columnId].name
 	));
 
 	if (isCollection) {
-		if (parentTypeId === FORMAT_ATOMIC.id) {
+		currentItem.collection = sourceValue;
 
-		}
-		else {
-
-		}
+		blocks[id].forEach((item, index) => {
+			if (item.type_id === COLUMN_OBJ.id
+				&& typeof item.value === 'object'
+				&& item.value.is_collection) {
+				data[item.id].value = sourceValue;
+			}
+		});
 	}
 	else if (select.length > 1) {
 		currentItem.value = sourceValue;

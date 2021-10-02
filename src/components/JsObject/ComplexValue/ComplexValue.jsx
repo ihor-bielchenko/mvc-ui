@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
 import Store from 'components/Store';
 import Remove from '../Remove';
 import Key from '../Key';
@@ -54,6 +55,18 @@ let ComplexItem = ({
 		<Values
 			typeId={dbColumnsData[columnId].type_id}
 			value={dbColumnsData[columnId].default_value} />
+		{last
+			? <React.Fragment />
+			: <Box 
+				position="relative"
+				textAlign="center"
+				minWidth="8px"
+				maxWidth="8px"
+				pt="12px">
+				<Typography variant="h5">
+					,
+				</Typography>
+			</Box>}
 	</Box>;
 };
 ComplexItem = React.memo(ComplexItem);
@@ -93,7 +106,7 @@ let ComplexValue = ({
 						id={id}
 						parentId={parentId}
 						columnId={_columnId}
-						last={last}
+						last={i === columnsLength - 1 && last}
 						KeyComponent={KeyComponent}
 						ValueComponent={ValueComponent}
 						TypeComponent={TypeComponent} />);

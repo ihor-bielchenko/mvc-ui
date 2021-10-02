@@ -40,8 +40,6 @@ let Item = ({
 		&& value.source_id > 0
 		&& (typeId === COLUMN_OBJ.id || typeId === COLUMN_ARR.id);
 
-	console.log('id', id, key);
-
 	return <React.Fragment>
 		{arrayLengthIsUndefined
 			? <React.Fragment>
@@ -49,9 +47,8 @@ let Item = ({
 					component="span"
 					variant="h3"
 					style={{
-						lineHeight: '18px',
-						paddingLeft: 8,
-						paddingRight: 8,
+						lineHeight: '0px',
+						padding: 8,
 					}}>
 					...
 				</Typography>
@@ -127,14 +124,14 @@ let Item = ({
 		</Box>
 		{arrayLengthIsUndefined
 			? <Typography 
-				component="span"
 				variant="h3"
 				style={{
-					lineHeight: '18px',
+					lineHeight: '0px',
 					paddingLeft: 8,
 					paddingRight: 8,
+					paddingBottom: 8,
 				}}>
-				...
+				···
 			</Typography>
 			: <React.Fragment />}
 	</React.Fragment>;
