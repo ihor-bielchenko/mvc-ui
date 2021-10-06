@@ -41,6 +41,14 @@ const onSelect = (e, id) => {
 		}
 		else if (currentItem.type_id === COLUMN_OBJ.id) {
 			blocks[id] = (blocks[id] ?? []);
+			blocks[id].forEach((item, i) => {
+				if (blocks[id][i].key.includes('n+')) {
+					blocks[id][i].key = i.toString();
+				}
+				else if (blocks[id][i].key.includes('n')) {
+					blocks[id][i].disabledKey = true;
+				}
+			});
 		}
 		else if (blocks[id]) {
 			delete blocks[id];
