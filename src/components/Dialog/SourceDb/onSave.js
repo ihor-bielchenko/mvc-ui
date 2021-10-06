@@ -1,7 +1,7 @@
 import Store from 'components/Store';
 import getDefaultValueByTypeId from 'components/JsObject/getDefaultValueByTypeId.js';
 import getTemplate from 'components/JsObject/getTemplate.js';
-import getNewItemKey from 'components/JsObject/Parent/getNewItemKey.js';
+import generateKey from 'components/JsObject/generateKey.js';
 import { SOURCE_DB } from 'structures/source.js';
 import { FORMAT_ATOMIC } from 'structures/format.js';
 import {
@@ -33,7 +33,7 @@ const onSave = (e, id, onClose) => {
 		select,
 	} = (tempValue || {});
 	let newId = Date.now();
-	const currentItem = data[id];
+	const currentItem = data[id] || {};
 	const parentId = currentItem.parent_id;
 	const parentItem = data[parentId];
 	const parentTypeId = (parentItem || {}).type_id || currentItem.type_id;
@@ -47,7 +47,7 @@ const onSave = (e, id, onClose) => {
 
 		if (parentTypeId === FORMAT_ATOMIC.id) {
 			parentItem.type_id = COLUMN_ARR.id;
-			currentItem.key = 'n';
+			currentItem.key = generateKey(blocks[parentId], 'n');
 			currentItem.disabledKey = true;
 			currentItem.disabledType = true;
 			currentItem.value = undefined;
@@ -57,7 +57,7 @@ const onSave = (e, id, onClose) => {
 				parent_id: id,
 				id: newId,
 				type_id: COLUMN_OBJ.id,
-				key: getNewItemKey(blocks[id] ?? []),
+				key: generateKey(blocks[id] ?? []),
 				value: sourceValue,
 				disabledType: true,
 				disabledValue: true,
@@ -74,7 +74,7 @@ const onSave = (e, id, onClose) => {
 				parent_id: id,
 				id: nId,
 				type_id: COLUMN_OBJ.id,
-				key: 'n',
+				key: generateKey(blocks[id], 'n'),
 				value: undefined,
 				disabledKey: true,
 				disabledType: true,
@@ -87,7 +87,7 @@ const onSave = (e, id, onClose) => {
 				parent_id: nId,
 				id: oId,
 				type_id: COLUMN_OBJ.id,
-				key: getNewItemKey(blocks[nId] ?? []),
+				key: generateKey(blocks[nId] ?? []),
 				value: sourceValue,
 				disabledType: true,
 				disabledValue: true,
@@ -99,12 +99,11 @@ const onSave = (e, id, onClose) => {
 	else if (select.length > 1) {
 		if (parentTypeId === FORMAT_ATOMIC.id) {
 			parentItem.type_id = COLUMN_OBJ.id;
-			parentItem.disabledType = true;
 			data[id] = getTemplate({
 				parent_id: parentId,
 				id: id,
 				type_id: COLUMN_OBJ.id,
-				key: getNewItemKey(blocks[parentId] ?? []),
+				key: generateKey(blocks[parentId] ?? []),
 				value: sourceValue,
 				disabledType: true,
 				disabledValue: true,
@@ -114,13 +113,12 @@ const onSave = (e, id, onClose) => {
 		}
 		else {
 			currentItem.type_id = COLUMN_OBJ.id;
-			currentItem.disabledType = true;
 			blocks[id] = (blocks[id] ?? []);
 			data[newId] = getTemplate({
 				parent_id: id,
 				id: newId,
 				type_id: COLUMN_OBJ.id,
-				key: getNewItemKey(blocks[id]),
+				key: generateKey(blocks[id]),
 				value: sourceValue,
 				disabledType: true,
 				disabledValue: true,
@@ -140,6 +138,7 @@ const onSave = (e, id, onClose) => {
 
 		select.forEach((columnId) => dbColumnsData[columnId].name);
 	}
+	console.log('jsObject', jsObject);
 	jsObject.tempValue = {};
 	onClose();
 };

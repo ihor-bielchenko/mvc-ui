@@ -5,11 +5,15 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import Store from 'components/Store';
+import MenuSource from 'components/Menu/Source';
+import onMenu from 'components/Menu/onMenu.js';
 // import onDialog from 'components/Dialog/onDialog.js';
 import { FORMAT_ATOMIC } from 'structures/format.js';
-import {
+import columnTypes, {
 	COLUMN_OBJ,
  	COLUMN_ARR,
+ 	COLUMN_NUMBER,
+ 	COLUMN_ID,
 } from 'structures/columnTypes.js';
 import Header from '../Header';
 import Item from '../Item';
@@ -30,6 +34,9 @@ let Parent = ({
 }) => {
 	const blocksLength = useSelector((state) => (state.jsObject.blocks[id] || []).length);
 	const _onAddItem = React.useCallback((e) => onAddItem(e, id), [
+		id,
+	]);
+	const _onMenu = React.useCallback((e) => onMenu(id.toString())(e, id), [
 		id,
 	]);
 	const {
@@ -103,6 +110,22 @@ let Parent = ({
 						</Box>
 						{closures[typeId]
 							? <React.Fragment>
+								<Box 
+									pt={1}
+									pl={2}>
+									<Button 
+										variant="outlined"
+										color="primary"
+										startIcon={<AddIcon />}
+										onClick={_onMenu}>
+										Вставить {columnTypes[typeId].text()}
+									</Button>
+									<MenuSource
+										aria={id.toString()}
+										typeId={typeId === COLUMN_ID.id
+											? COLUMN_NUMBER.id
+											: typeId} />
+								</Box>
 								<Box display="flex">
 									<Typography
 										variant="h4"

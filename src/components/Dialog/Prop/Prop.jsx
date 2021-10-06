@@ -36,6 +36,7 @@ import onChangeName from './onChangeName.js';
 import onSave from './onSave.js';
 import onDelete from './onDelete.js';
 import onSelectFormatId from './onSelectFormatId.js';
+// import onMergeJsObject from './onMergeJsObject.js';
 
 let Prop = () => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_PROP]);

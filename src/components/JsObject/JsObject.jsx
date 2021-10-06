@@ -8,6 +8,7 @@ let JsObject = ({
 	KeyComponent,
 	ValueComponent,
 	TypeComponent,
+	onMerge,
 }) => {
 	const wrapperIsset = useSelector((state) => !!state.jsObject.data[0]);
 	const _typeId = useSelector((state) => (state.jsObject.data[0] || {}).type_id ?? typeId);
@@ -25,13 +26,15 @@ let JsObject = ({
 			typeId={_typeId}
 			KeyComponent={KeyComponent}
 			ValueComponent={ValueComponent}
-			TypeComponent={TypeComponent} />
+			TypeComponent={TypeComponent}
+			onMerge={onMerge} />
 		: <React.Fragment />;
 };
 
 JsObject = React.memo(JsObject);
 JsObject.defaultProps = {
 	typeId: 0,
+	onMerge: () => {},
 };
 
 export default JsObject;

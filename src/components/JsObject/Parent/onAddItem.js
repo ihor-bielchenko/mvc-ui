@@ -1,6 +1,6 @@
 import Store from 'components/Store';
 import getTemplate from '../getTemplate.js';
-import getNewItemKey from './getNewItemKey.js';
+import generateKey from '../generateKey.js';
 
 const onAddItem = (e, id) => {
 	const jsObject = Store().getState().jsObject;
@@ -8,7 +8,7 @@ const onAddItem = (e, id) => {
 	const newItem = getTemplate({
 		parent_id: id,
 		id: newId,
-		key: getNewItemKey(jsObject.blocks[id]),
+		key: generateKey(jsObject.blocks[id]),
 	});
 
 	jsObject.data[newId] = newItem;

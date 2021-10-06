@@ -25,6 +25,7 @@ let Value = ({
 	ValueComponent,
 	last,
 	onChange,
+	onMerge,
 }) => {
 	const _parentTypeId = useSelector((state) => parentTypeId ?? (state.jsObject.data[parentId] || {}).type_id);
 	const _typeId = useSelector((state) => typeId ?? (state.jsObject.data[id] || {}).type_id);
@@ -54,7 +55,8 @@ let Value = ({
 								last={last}
 								KeyComponent={KeyComponent}
 								ValueComponent={ValueComponent}
-								TypeComponent={TypeComponent} />;
+								TypeComponent={TypeComponent}
+								onMerge={onMerge} />;
 						default:
 							return _value;
 					}
@@ -83,7 +85,8 @@ let Value = ({
 								last={last}
 								KeyComponent={KeyComponent}
 								ValueComponent={ValueComponent}
-								TypeComponent={TypeComponent} />;
+								TypeComponent={TypeComponent}
+								onMerge={onMerge} />;
 						case COLUMN_NULL.id:
 							return <Typography color="textSecondary">
 								<i><b>NULL</b></i>
@@ -126,6 +129,7 @@ Value = React.memo(Value);
 Value.defaultProps = {
 	parentId: 0,
 	id: 0,
+	onMerge: () => {},
 };
 
 export default Value;

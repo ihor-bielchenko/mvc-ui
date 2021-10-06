@@ -24,6 +24,7 @@ let Item = ({
 	ValueComponent,
 	TypeComponent,
 	className,
+	onMerge,
 }) => {
 	const parentTypeId = useSelector((state) => (state.jsObject.data[parentId] || {}).type_id);
 	const typeId = useSelector((state) => (state.jsObject.data[id] || {}).type_id);
@@ -32,13 +33,14 @@ let Item = ({
 	const collection = useSelector((state) => (state.jsObject.data[id] || {}).collection);
 	const isCollection = useSelector((state) => ((state.jsObject.data[id] || {}).value || {}).is_collection);
 	const arrayLengthIsUndefined = (parentTypeId === COLUMN_ARR.id
-		&& !key.includes('n+') && key.includes('n')
+		&& !key.includes('n+') 
+		&& key.includes('n')
 		&& typeof collection === 'object'
 		&& collection.source_id === SOURCE_DB.id
 		&& collection.is_collection);
-	const isCompexValue = typeof value === 'object' 
-		&& value.source_id > 0
-		&& (typeId === COLUMN_OBJ.id || typeId === COLUMN_ARR.id);
+	const isCompexValue = (typeId === COLUMN_OBJ.id || typeId === COLUMN_ARR.id)
+		&& typeof value === 'object' 
+		&& value.source_id > 0;
 
 	return <React.Fragment>
 		{arrayLengthIsUndefined
@@ -52,14 +54,16 @@ let Item = ({
 					}}>
 					...
 				</Typography>
-				<Typography
-					component="span"
-					variant="caption"
-					color="secondary">
-					Длина массива неизвестна {collection.limit > 0
-						? `(макс. ${collection.limit} элементов)`
-						: ''}
-				</Typography>
+				{key[0] === 'n'
+					? <Typography
+						component="span"
+						variant="caption"
+						color="secondary">
+						Длина массива неизвестна {collection.limit > 0
+							? `(макс. ${collection.limit} элементов)`
+							: ''}
+					</Typography>
+					: <React.Fragment />}
 			</React.Fragment>
 			: <React.Fragment />}
 		<Box 
@@ -118,7 +122,8 @@ let Item = ({
 							last={last}
 							KeyComponent={KeyComponent}
 							ValueComponent={ValueComponent}
-							TypeComponent={TypeComponent} />
+							TypeComponent={TypeComponent}
+							onMerge={onMerge} />
 					</Box>
 				</React.Fragment>}
 		</Box>
@@ -127,9 +132,7 @@ let Item = ({
 				variant="h3"
 				style={{
 					lineHeight: '0px',
-					paddingLeft: 8,
-					paddingRight: 8,
-					paddingBottom: 8,
+					padding: 8,
 				}}>
 				···
 			</Typography>
@@ -142,6 +145,7 @@ Item.defaultProps = {
 	id: 0,
 	parentId: 0,
 	last: false,
+	onMerge: () => {},
 };
 
 export default Item;
