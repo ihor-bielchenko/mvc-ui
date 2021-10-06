@@ -10,7 +10,7 @@ const onSelectFormatId = (e) => {
 	const jsObject = Store().getState().jsObject;
 	const newId = Date.now();
 
-	if (newValue === FORMAT_ATOMIC.id) {
+	if (newValue === FORMAT_ATOMIC.id && jsObject.blocks[0][0].type_id !== COLUMN_TEXT.id) {
 		jsObject.data = {
 			0: jsObject.data[0],
 			[newId]: {

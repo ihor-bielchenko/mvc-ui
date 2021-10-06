@@ -1,5 +1,4 @@
 import Store from 'components/Store';
-import getDefaultValueByTypeId from 'components/JsObject/getDefaultValueByTypeId.js';
 import getTemplate from 'components/JsObject/getTemplate.js';
 import generateKey from 'components/JsObject/generateKey.js';
 import { SOURCE_DB } from 'structures/source.js';
@@ -128,17 +127,29 @@ const onSave = (e, id, onClose) => {
 		}
 	}
 	else if (select.length === 1) {
-		if ((parentItem || {}).type_id !== COLUMN_ARR.id) {
-			currentItem.key = dbColumnsData[select[0]].name;
+		if (currentItem.type_id === COLUMN_OBJ.id) {
+			blocks[id] = (blocks[id] ?? []);
+			data[newId] = getTemplate({
+				parent_id: id,
+				id: newId,
+				type_id: dbColumnsData[select[0]].type_id,
+				key: dbColumnsData[select[0]].name,
+				value: sourceValue,
+				disabledType: true,
+			});
+			blocks[id].push(data[newId]);
 		}
-		currentItem.type_id = dbColumnsData[select[0]].type_id;
-		currentItem.value = getDefaultValueByTypeId(currentItem.type_id);
-		currentItem.disabledType = true;
-		currentItem.value = sourceValue;
+		else {
+			if ((parentItem || {}).type_id !== COLUMN_ARR.id) {
+				currentItem.key = dbColumnsData[select[0]].name;
+			}
+			currentItem.type_id = dbColumnsData[select[0]].type_id;
+			currentItem.disabledType = true;
+			currentItem.value = sourceValue;
 
-		select.forEach((columnId) => dbColumnsData[columnId].name);
+			select.forEach((columnId) => dbColumnsData[columnId].name);
+		}
 	}
-	console.log('jsObject', jsObject);
 	jsObject.tempValue = {};
 	onClose();
 };

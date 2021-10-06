@@ -15,6 +15,10 @@ import columnTypes, {
  	COLUMN_NUMBER,
  	COLUMN_ID,
 } from 'structures/columnTypes.js';
+import source, {
+	SOURCE_DB,
+	SOURCE_PROXY_PASS,
+} from 'structures/source.js';
 import Header from '../Header';
 import Item from '../Item';
 import onAddItem from './onAddItem.js';
@@ -22,6 +26,14 @@ import onAddItem from './onAddItem.js';
 const closures = {
 	[COLUMN_OBJ.id]: [ '{', '}' ],
 	[COLUMN_ARR.id]: [ '[', ']' ],
+};
+const _onFilterMenuSource = (typeId) => (key, i) => {
+	return typeId === COLUMN_OBJ.id
+		? (source[key].id === SOURCE_DB.id
+			|| source[key].id === SOURCE_PROXY_PASS.id)
+		: (typeId === COLUMN_ARR.id)
+			? (source[key].id === SOURCE_DB.id)
+			: false;
 };
 
 let Parent = ({ 
@@ -36,8 +48,11 @@ let Parent = ({
 	const _onAddItem = React.useCallback((e) => onAddItem(e, id), [
 		id,
 	]);
-	const _onMenu = React.useCallback((e) => onMenu(id.toString())(e, id), [
+	const _onMenu = React.useCallback((e) => onMenu(id.toString(), typeId === COLUMN_ARR.id
+		? ({ isCollection: true })
+		: ({ isCollection: false }))(e, id), [
 		id,
+		typeId,
 	]);
 	const {
 		// dbColumns,
@@ -124,7 +139,8 @@ let Parent = ({
 										aria={id.toString()}
 										typeId={typeId === COLUMN_ID.id
 											? COLUMN_NUMBER.id
-											: typeId} />
+											: typeId}
+										onFilter={_onFilterMenuSource(typeId)} />
 								</Box>
 								<Box display="flex">
 									<Typography

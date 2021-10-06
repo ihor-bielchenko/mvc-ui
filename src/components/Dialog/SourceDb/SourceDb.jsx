@@ -27,6 +27,7 @@ let SourceDb = () => {
 	const dialog = useSelector((state) => state.dialogs[SOURCE_DB.id]);
 	const bodyId = (dialog || {}).name;
 	const isEditFlag = (dialog || {}).isEditFlag || false;
+	const isCollection = (dialog || {}).isCollection;
 	const issetSelectData = useSelector((state) => (state.jsObject.tempValue.select || []).length > 0);
 	const filterFormId = useSelector((state) => state.jsObject.filterFormId);
 	const sortFormId = useSelector((state) => state.jsObject.sortFormId);
@@ -80,7 +81,9 @@ let SourceDb = () => {
 							</Typography>
 						</StepLabel>
 						<StepContent>
-							<Select id={bodyId} />
+							<Select 
+								id={bodyId}
+								isCollection={isCollection} />
 						</StepContent>
 					</Step>
 					<Step>

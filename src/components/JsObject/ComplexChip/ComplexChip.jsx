@@ -7,17 +7,17 @@ import source, {
 	SOURCE_DB,
 	SOURCE_PROXY_PASS,
 } from 'structures/source.js';
+import onRemove from '../Remove/onRemove.js';
 import onChangeSourceDb from './onChangeSourceDb.js';
-import onDeleteSourceDb from './onDeleteSourceDb.js';
 
 const complexSources = {
 	[SOURCE_DB.id]: {
 		onChange: onChangeSourceDb,
-		onDelete: onDeleteSourceDb,
+		onDelete: onRemove,
 	},
 	[SOURCE_PROXY_PASS.id]: {
 		onChange: () => {},
-		onDelete: () => {},
+		onDelete: onRemove,
 	},
 };
 
