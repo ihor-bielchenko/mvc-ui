@@ -1,4 +1,6 @@
 import Store from 'components/Store';
+import getTemplate from './getTemplate.js';
+import getDefaultValueByTypeId from './getDefaultValueByTypeId.js';
 
 const onMount = (typeId) => {
 	const jsObject = Store().getState().jsObject;
@@ -8,17 +10,11 @@ const onMount = (typeId) => {
 		tmp = {},
 		blocks = {};
 
-	jsObject.data[0] = jsObject.data[0] ?? ({
-		id: 0,
+	jsObject.data[0] = jsObject.data[0] ?? getTemplate({
+		parent_id: undefined,
 		key: 0,
 		value: undefined,
 		type_id: typeId,
-		lengthIsUndefined: false,
-		disabled: false,
-		source: {
-			key: undefined,
-			value: undefined,
-		},
 		...typeof jsObject.data[0] === 'object'
 			? jsObject.data[0]
 			: {},
@@ -26,15 +22,11 @@ const onMount = (typeId) => {
 	while (i < dataKeys.length) {
 		const _id = dataKeys[i];
 
-		data[_id] = {
-			lengthIsUndefined: false,
-			disabled: false,
-			source: {
-				key: undefined,
-				value: undefined,
-			},
+		data[_id] = getTemplate({
+			parent_id: data[_id].parent_id,
+			value: getDefaultValueByTypeId(data[_id].type_id),
 			...data[_id],
-		};
+		});
 
 		if (!tmp[_id]) {
 			tmp[_id] = { ...data[_id] };

@@ -2,244 +2,142 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import onDialog from 'components/Dialog/onDialog.js';
-import columnTypes, {
-	COLUMN_NUMBER,
-	COLUMN_BOOLEAN,
+import {
 	COLUMN_OBJ,
 	COLUMN_ARR,
-	COLUMN_NULL,
 } from 'structures/columnTypes.js';
 import { FORMAT_ATOMIC } from 'structures/format.js';
-import { DIALOG_DELETE_CONFIRM } from 'consts/dialog.js'; 
-import Wrapper from '../Wrapper';
-import BoxControlWrapper from '../BoxControlWrapper';
-import onSelectTypeId from './onSelectTypeId.js';
-import onChangeItem from './onChangeItem.js';
-import onDeleteItem from './onDeleteItem.js';
+import { SOURCE_DB } from 'structures/source.js';
+import ComplexValue from '../ComplexValue';
+import ComplexChip from '../ComplexChip';
+import Remove from '../Remove';
+import Key from '../Key';
+import Type from '../Type';
+import Divider from '../Divider';
+import Value from '../Value';
 
 let Item = ({
 	id,
 	parentId,
 	last,
-	disabledWrapper,
 	KeyComponent,
 	ValueComponent,
 	TypeComponent,
+	className,
+	onMerge,
 }) => {
 	const parentTypeId = useSelector((state) => (state.jsObject.data[parentId] || {}).type_id);
 	const typeId = useSelector((state) => (state.jsObject.data[id] || {}).type_id);
 	const key = useSelector((state) => (state.jsObject.data[id] || {}).key);
 	const value = useSelector((state) => (state.jsObject.data[id] || {}).value);
-	const disabled = useSelector((state) => (state.jsObject.data[id] || {}).disabled);
-	const _onChangeItemKey = React.useCallback((e) => onChangeItem(e, id, 'key'), [
-		id,
-	]);
-	const _onChangeItemValue = React.useCallback((e) => onChangeItem(e, id, 'value'), [
-		id,
-	]);
-	const _onDeleteItem = React.useCallback((e) => onDeleteItem(e, id), [
-		id,
-	]);
-	const _onSelectTypeId = React.useCallback((e) => onSelectTypeId(e, id), [
-		id,
-	]);
+	const collection = useSelector((state) => (state.jsObject.data[id] || {}).collection);
+	const isCollection = useSelector((state) => ((state.jsObject.data[id] || {}).value || {}).is_collection);
+	const arrayLengthIsUndefined = (parentTypeId === COLUMN_ARR.id
+		&& !key.includes('n+') 
+		&& key.includes('n')
+		&& typeof collection === 'object'
+		&& collection.source_id === SOURCE_DB.id
+		&& collection.is_collection);
+	const isCompexValue = (typeId === COLUMN_OBJ.id || typeId === COLUMN_ARR.id)
+		&& typeof value === 'object' 
+		&& value.source_id > 0;
 
-	// console.log('id, key', id, key);
-
-	return <Box
-		position="relative"
-		display="flex"
-		alignItems="flex-start"
-		width="100%"
-		py={2}
-		pl={2}>
-		{parentTypeId !== FORMAT_ATOMIC.id 
-			|| parentTypeId === COLUMN_OBJ.id
-			|| parentTypeId === COLUMN_ARR.id
+	return <React.Fragment>
+		{arrayLengthIsUndefined
 			? <React.Fragment>
-				{(!disabled || !disabledWrapper)
-						? <Box
-							position="relative"
-							width="100%"
-							minWidth="30px"
-							maxWidth="30px"
-							height="56px"
-							lineHeight="56px"
-							textAlign="left">
-							<IconButton 
-								color="secondary"
-								size="small"
-								onClick={onDialog(DIALOG_DELETE_CONFIRM, {
-									onDelete: _onDeleteItem,
-								})}>
-								<CloseIcon fontSize="small" />
-							</IconButton>
-						</Box>
-						: <React.Fragment />}
-				<Box
-					position="relative"
-					textAlign="right"
-					pr={parentTypeId === COLUMN_ARR.id
-						? '6px'
-						: '0px'}
-					minWidth={parentTypeId === COLUMN_ARR.id
-						? 46
-						: 138}
-					maxWidth={parentTypeId === COLUMN_ARR.id
-						? 46
-						: 138}
+				<Typography 
+					component="span"
+					variant="h3"
 					style={{
-						whiteSpace: 'nowrap',
+						lineHeight: '0px',
+						padding: 8,
 					}}>
-					{typeof KeyComponent === 'object'
-						&& typeof KeyComponent['$$typeof'] === 'symbol'
-						? <React.Fragment>
-							<KeyComponent
-								parentId={parentId}
-								parentTypeId={parentTypeId}
-								id={id}
-								typeId={typeId}
-								value={key}
-								onChange={_onChangeItemKey}
-								disabledWrapper={disabledWrapper} 
-								disabled={disabled} />
-						</React.Fragment>
-						: <Typography color="primary">
-							{(key || '').toString()}
-						</Typography>}
-				</Box>
+					...
+				</Typography>
+				{key[0] === 'n'
+					? <Typography
+						component="span"
+						variant="caption"
+						color="secondary">
+						Длина массива неизвестна {collection.limit > 0
+							? `(макс. ${collection.limit} элементов)`
+							: ''}
+					</Typography>
+					: <React.Fragment />}
 			</React.Fragment>
 			: <React.Fragment />}
-		<Box
-			position="relative"
-			width="14%"
-			minWidth="108px">
-			{typeof TypeComponent === 'object'
-				&& typeof TypeComponent['$$typeof'] === 'symbol'
-				? <TypeComponent
+		<Box 
+			maxWidth={parentTypeId === FORMAT_ATOMIC.id
+				? 'inherit'
+				: 'max-content'}
+			mb="8px"
+			style={(isCompexValue && !isCollection) || arrayLengthIsUndefined
+				? {
+					borderRadius: '16px',
+					border: '1px solid #ff9800',
+					borderStyle: 'dashed',
+				}
+				: {}}>
+			{isCompexValue
+				? <ComplexValue 
 					parentId={parentId}
-					parentTypeId={parentTypeId}
 					id={id}
-					typeId={typeId}
-					onSelect={_onSelectTypeId}
-					disabledWrapper={disabledWrapper}
-					disabled={disabled} />
-				: <Typography>
-					{columnTypes[typeId].text()}
-				</Typography>}
+					last={last}
+					KeyComponent={KeyComponent}
+					ValueComponent={ValueComponent}
+					TypeComponent={TypeComponent} />
+				: <React.Fragment>
+					{arrayLengthIsUndefined
+						? <ComplexChip id={id} />
+						: <React.Fragment />}
+					<Box
+						position="relative"
+						display="flex"
+						alignItems="flex-start"
+						width="100%"
+						pb={1}>
+						{parentTypeId !== FORMAT_ATOMIC.id 
+							|| parentTypeId === COLUMN_OBJ.id
+							|| parentTypeId === COLUMN_ARR.id
+							? <React.Fragment>
+								<Remove
+									parentId={parentId}
+									id={id} />
+								<Key
+									parentId={parentId}
+									id={id}
+									KeyComponent={KeyComponent} />
+							</React.Fragment>
+							: <React.Fragment />}
+						<Type
+							parentId={parentId}
+							id={id}
+							TypeComponent={TypeComponent} />
+						<Divider
+							parentId={parentId}
+							id={id} />
+						<Value
+							parentId={parentId}
+							id={id}
+							last={last}
+							KeyComponent={KeyComponent}
+							ValueComponent={ValueComponent}
+							TypeComponent={TypeComponent}
+							onMerge={onMerge} />
+					</Box>
+				</React.Fragment>}
 		</Box>
-		{parentTypeId !== FORMAT_ATOMIC.id 
-			|| parentTypeId === COLUMN_OBJ.id
-			|| parentTypeId === COLUMN_ARR.id
-			? <Typography	
-				variant="h4"
+		{arrayLengthIsUndefined
+			? <Typography 
+				variant="h3"
 				style={{
-					position: 'relative',
-					overflow: 'hidden',
-					minWidth: 8,
-					height: 56,
-					paddingLeft: 3,
-					paddingRight: 9,
-					lineHeight: '56px',
-					textAlign: 'center'
+					lineHeight: '0px',
+					padding: 8,
 				}}>
-				:
+				···
 			</Typography>
 			: <React.Fragment />}
-		{typeof ValueComponent === 'object'
-			&& typeof ValueComponent['$$typeof'] === 'symbol'
-			? <ValueComponent
-				parentId={parentId}
-				parentTypeId={parentTypeId}
-				id={id}
-				typeId={typeId}
-				disabledWrapper={disabledWrapper}
-				disabled={disabled}
-				value={(() => {
-					switch (typeId) {
-						case COLUMN_OBJ.id:
-						case COLUMN_ARR.id:
-							return <Wrapper
-								id={id}
-								typeId={typeId}
-								last={last}
-								disabledWrapper={disabledWrapper}
-								KeyComponent={KeyComponent}
-								ValueComponent={ValueComponent}
-								TypeComponent={TypeComponent} />;
-						case COLUMN_NULL.id:
-							return <Typography color="textSecondary">
-								<i><b>NULL</b></i>
-							</Typography>;
-						default:
-							return value;
-					}
-				})()}
-				onChange={_onChangeItemValue} />
-			: <BoxControlWrapper 
-				position="relative"
-				width="100%"
-				minWidth="280px"
-				maxWidth={(parentId === 0 && parentTypeId === FORMAT_ATOMIC.id)
-					? 'inherit'
-					: '280px'}
-				data-border_left_radius_0={!(parentTypeId !== FORMAT_ATOMIC.id 
-					|| parentTypeId === COLUMN_OBJ.id
-					|| parentTypeId === COLUMN_ARR.id)}
-				data-border_left_hide={!(parentTypeId !== FORMAT_ATOMIC.id 
-					|| parentTypeId === COLUMN_OBJ.id
-					|| parentTypeId === COLUMN_ARR.id)}>
-				{(() => {
-					switch (typeId) {
-						case COLUMN_OBJ.id:
-						case COLUMN_ARR.id:
-							return <Wrapper
-								id={id}
-								typeId={typeId}
-								last={last}
-								disabledWrapper={disabledWrapper}
-								KeyComponent={KeyComponent}
-								ValueComponent={ValueComponent}
-								TypeComponent={TypeComponent} />;
-						case COLUMN_NULL.id:
-							return <Typography color="textSecondary">
-								<i><b>NULL</b></i>
-							</Typography>;
-						case COLUMN_NUMBER.id:
-							return <Typography color="primary">
-								{value.toString()}
-							</Typography>;
-						case COLUMN_BOOLEAN.id:
-							return <Typography 
-								color={value
-									? 'primary'
-									: 'secondary'}>
-								{value.toString().toUpperCase()}
-							</Typography>;
-						default:
-							return <Typography>
-								{value.toString()}
-							</Typography>;
-					}
-				})()}
-			</BoxControlWrapper>}
-		{last || (typeId === COLUMN_OBJ.id
-			|| typeId === COLUMN_ARR.id)
-			? <React.Fragment />
-			: <Box 
-				position="relative"
-				textAlign="center"
-				minWidth="8px"
-				maxWidth="8px"
-				pt="12px">
-				<Typography variant="h5">
-					,
-				</Typography>
-			</Box>}
-	</Box>;
+	</React.Fragment>;
 };
 
 Item = React.memo(Item);
@@ -247,7 +145,7 @@ Item.defaultProps = {
 	id: 0,
 	parentId: 0,
 	last: false,
-	disabledWrapper: false,
+	onMerge: () => {},
 };
 
 export default Item;

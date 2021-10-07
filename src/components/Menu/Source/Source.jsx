@@ -22,6 +22,9 @@ let Source = ({
 	const name = useSelector((state) => state.menu[aria]
 		? state.menu[aria].name
 		: null);
+	const isCollection = useSelector((state) => state.menu[aria]
+		? state.menu[aria].isCollection
+		: undefined);
 
 	return <React.Fragment>
 		<Menu
@@ -42,6 +45,7 @@ let Source = ({
 						disabled={!!item.disabled}
 						onClick={onDialog(item.id, { 
 							name, 
+							isCollection,
 						})}>
 						<ListItemAvatar>
 							<item.icon />

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import JsBoxControlWrapper from 'components/JsObject/BoxControlWrapper';
 import SelectType from 'components/Select/Type';
@@ -7,6 +8,7 @@ import columnTypes, {
 	COLUMN_ID,
 	COLUMN_OBJ,
 	COLUMN_ARR,
+	COLUMN_NUMBER,
 } from 'structures/columnTypes.js';
 
 const _onFilterTypes = (parentTypeId) => (key) => (
@@ -21,11 +23,11 @@ let TypeComponent = ({
 	parentTypeId,
 	id,
 	typeId,
-	disabledWrapper,
-	disabled,
 	onSelect,
 }) => {
-	return (disabled || disabledWrapper)
+	const disabledType = useSelector((state) => state.jsObject.data[id].disabledType);
+
+	return disabledType
 		? <Typography 
 			variant="subtitle1"
 			color="textSecondary"
@@ -34,7 +36,9 @@ let TypeComponent = ({
 				lineHeight: '56px',
 				textAlign: 'center',
 			}}>
-			{columnTypes[typeId].text()}
+			{columnTypes[typeId === COLUMN_ID.id
+				? COLUMN_NUMBER.id
+				: typeId].text()}
 		</Typography>
 		: <JsBoxControlWrapper
 			data-border_left_radius_0={(parentTypeId !== FORMAT_ATOMIC.id
@@ -46,9 +50,11 @@ let TypeComponent = ({
 				&& parentTypeId !== COLUMN_ARR.id}
 			mt="0px">
 				<SelectType 
-					disabled={disabledWrapper}
+					disabled={disabledType}
 					name={'type_id-'+ id}
-					value={typeId}
+					value={typeId === COLUMN_ID.id
+						? COLUMN_NUMBER.id
+						: typeId}
 					onSelect={onSelect}
 					onFilter={_onFilterTypes(parentTypeId)}
 					label="" />
@@ -59,7 +65,6 @@ TypeComponent.defaultProps = {
 	parentTypeId: 0,
 	id: 0,
 	typeId: 0,
-	disabledWrapper: false,
 	onSelect: () => {},
 };
 

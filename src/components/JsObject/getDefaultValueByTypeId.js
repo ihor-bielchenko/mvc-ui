@@ -1,4 +1,5 @@
 import {
+	COLUMN_ID,
 	COLUMN_TEXT,
 	COLUMN_NUMBER,
 	COLUMN_BOOLEAN,
@@ -10,9 +11,10 @@ import {
 const templates = {
 	[COLUMN_TEXT.id]: '',
 	[COLUMN_NUMBER.id]: 0,
+	[COLUMN_ID.id]: 0,
 	[COLUMN_BOOLEAN.id]: true,
-	[COLUMN_OBJ.id]: {},
-	[COLUMN_ARR.id]: {},
+	[COLUMN_OBJ.id]: undefined,
+	[COLUMN_ARR.id]: undefined,
 	[COLUMN_NULL.id]: null,
 };
 const getDefaultValueByTypeId = (typeId) => templates[typeId] ?? '';
