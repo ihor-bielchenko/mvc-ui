@@ -2,6 +2,7 @@ import Store from 'components/Store';
 import getTemplate from '../getTemplate.js';
 import generateKey from '../generateKey.js';
 
+// TODO: одинаковые ключи
 const onAddItem = (e, id) => {
 	const jsObject = Store().getState().jsObject;
 	const newId = Date.now();
