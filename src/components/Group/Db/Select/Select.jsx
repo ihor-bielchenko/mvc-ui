@@ -22,9 +22,12 @@ import onChangeByLogicLimit from './onChangeByLogicLimit.js';
 import onClearOffset from './onClearOffset.js';
 import onClearLimit from './onClearLimit.js';
 
-let Select = ({ id }) => {
+let Select = ({ 
+	id,
+	isCollection, 
+}) => {
 	const dbColumnsKeys = useSelector((state) => Object.keys(state.dbColumns.data));
-	const isCollection = useSelector((state) => state.jsObject.tempValue.is_collection);
+	const _isCollection = useSelector((state) => isCollection || state.jsObject.tempValue.is_collection);
 	const offset = useSelector((state) => state.jsObject.tempValue.offset);
 	const limit = useSelector((state) => state.jsObject.tempValue.limit);
 	const selectData = useSelector((state) => state.jsObject.tempValue.select || []);
@@ -33,6 +36,13 @@ let Select = ({ id }) => {
 	]);
 	const _onColumn = React.useCallback((e) => onColumn(e, id), [
 		id,
+	]);
+
+	// onMount
+	React.useEffect(() => {
+		typeof isCollection === 'boolean' && onCollection(isCollection);
+	}, [
+		isCollection,
 	]);
 
 	return <React.Fragment>
@@ -48,11 +58,15 @@ let Select = ({ id }) => {
 							label="Получать из базы коллекцию элементов"
 							name="is_collection"
 							control={<Switch 
-								checked={!!isCollection}
-								onChange={_onCollection} />} />
+								{ ...typeof isCollection === 'boolean'
+									? { checked: !!_isCollection }
+									: {
+										checked: !!_isCollection,
+										onChange: _onCollection,
+									} } />} />
 					</Box>
 				</Grid>
-				{isCollection
+				{_isCollection
 					? <Grid
 						item
 						container
