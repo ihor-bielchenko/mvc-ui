@@ -3,23 +3,9 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Box from '@material-ui/core/Box';
 import { StyledChip } from 'components/Input/LogicValue.jsx';
-import source, {
-	SOURCE_DB,
-	SOURCE_PROXY_PASS,
-} from 'structures/source.js';
-import onRemove from '../Remove/onRemove.js';
-import onChangeSourceDb from './onChangeSourceDb.js';
-
-const complexSources = {
-	[SOURCE_DB.id]: {
-		onChange: onChangeSourceDb,
-		onDelete: onRemove,
-	},
-	[SOURCE_PROXY_PASS.id]: {
-		onChange: () => {},
-		onDelete: onRemove,
-	},
-};
+import source from 'structures/source.js';
+import onDelete from '../Remove/onRemove.js';
+import onChange from './onChange.js';
 
 const BoxComplexSource = styled(Box)`
 	& > .MuiChip-root {
@@ -40,13 +26,12 @@ let ComplexChip = ({
 	const sourceText = React.useMemo(() => source[sourceId].text(), [
 		sourceId,
 	]);
-	const _onChange = React.useCallback((e) => complexSources[sourceId].onChange(e, id), [
+	const _onChange = React.useCallback((e) => onChange(e, id, sourceId), [
 		id,
 		sourceId,
 	]);
-	const _onDelete = React.useCallback((e) => complexSources[sourceId].onDelete(e, id), [
+	const _onDelete = React.useCallback((e) => onDelete(e, id), [
 		id,
-		sourceId,
 	]);
 
 	return <BoxComplexSource 

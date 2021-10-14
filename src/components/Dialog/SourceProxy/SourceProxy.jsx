@@ -22,10 +22,12 @@ import onClose from '../onClose.js';
 import onService from './onService.js';
 import onRoute from './onRoute.js';
 import onSave from './onSave';
+import onEdit from './onEdit.js';
 
 let SourceProxy = () => {
 	const dialog = useSelector((state) => state.dialogs[SOURCE_PROXY_PASS.id]);
 	const bodyId = (dialog || {}).name;
+	const isEditFlag = (dialog || {}).isEditFlag || false;
 	const serviceId = useSelector((state) => state.jsObject.tempValue.service_id || '');
 	const routeId = useSelector((state) => state.jsObject.tempValue.route_id || '');
 	const [ tab, setTab ] = React.useState((state) => 0);
@@ -39,7 +41,10 @@ let SourceProxy = () => {
 	}, [
 		setTab,
 	]);
-	const _onSave = React.useCallback((e) => onSave(e, bodyId, _onClose), [
+	const _onSave = React.useCallback((e) => isEditFlag
+		? onEdit(e, bodyId, _onClose)
+		: onSave(e, bodyId, _onClose), [
+		isEditFlag,
 		bodyId,
 		_onClose,
 	]);
