@@ -8,6 +8,9 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Button from '@material-ui/core/Button';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Divider from '@material-ui/core/Divider';
 // import AddIcon from '@material-ui/icons/Add';
 import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
@@ -36,13 +39,14 @@ import onChangeName from './onChangeName.js';
 import onSave from './onSave.js';
 import onDelete from './onDelete.js';
 import onSelectFormatId from './onSelectFormatId.js';
-// import onMergeJsObject from './onMergeJsObject.js';
+import onCheckVariable from './onCheckVariable.js';
 
 let Prop = () => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_PROP]);
 	const existId = (dialog || {}).id || 0;
 	const id = useSelector((state) => state.prop.id);
 	const name = useSelector((state) => state.prop.name || '');
+	const asVariable = useSelector((state) => !!state.prop.as_variable);
 	const formatId = useSelector((state) => (state.jsObject.data[0] || {}).type_id ?? FORMAT_ATOMIC.id);
 	const _onDelete = React.useCallback((e) => onDelete(e, id), [
 		id,
@@ -79,7 +83,9 @@ let Prop = () => {
 			{_dialogOpenFlag
 				? <React.Fragment>
 					<DialogContent dividers>
-						<Box py={2}>
+						<Box 
+							pt={2}
+							pb={6}>
 							<InputText 
 								required
 								name="name"
@@ -88,15 +94,32 @@ let Prop = () => {
 								value={name}
 								onChange={onChangeName} />
 						</Box>
+						<Divider />
+						<Box py={2}>
+							<FormControlLabel
+								onChange={onCheckVariable}
+								label={<React.Fragment>
+									<Typography>
+										Переменная
+									</Typography>
+									<Typography variant="caption">
+										Возможность перезаписывать контент пераметра во время выполнения программы
+									</Typography>
+								</React.Fragment>}
+								control={<Checkbox 
+									name="as_variable"
+									checked={asVariable} />} />
+						</Box>
+						<Divider />
 						<Box
 							display="flex"
 							alignItems="center"
 							justifyContent="space-between"
 							height="80px"
-							pt={8}
+							pt={5}
 							pb={4}>
 							<Typography variant="h6">
-								Содержимое параметра:
+								Контент:
 							</Typography>
 							<Box
 								position="relative"
