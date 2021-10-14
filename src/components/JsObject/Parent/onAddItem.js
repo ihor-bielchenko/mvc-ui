@@ -9,7 +9,7 @@ const onAddItem = (e, id) => {
 	const newItem = getTemplate({
 		parent_id: id,
 		id: newId,
-		key: generateKey(jsObject.blocks[id]),
+		key: generateKey((jsObject.blocks[id] = (jsObject.blocks[id] ?? []))),
 	});
 
 	jsObject.data[newId] = newItem;

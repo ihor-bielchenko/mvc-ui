@@ -13,8 +13,8 @@ export const setJsObject = () => ({
 			id: 1,
 			parent_id: 0,
 			type_id: COLUMN_TEXT.id,
-			key: 'key1',
-			value: 'value1',
+			key: '0',
+			value: '',
 		},
 		// 2: {
 		// 	id: 2,
@@ -67,7 +67,7 @@ export const setJsObject = () => ({
 		// },
 	},
 	json: {},
-	blocks: [],
+	blocks: {},
 
 
 	temp: {},

@@ -65,8 +65,6 @@ let Parent = ({
 		? Number((Object.keys(data))[1])
 		: 0;
 
-	// console.log('sourceId', id, blocksLength);
-
 	return <React.Fragment>
 		{id === 0
 			? <Header typeId={typeId} />

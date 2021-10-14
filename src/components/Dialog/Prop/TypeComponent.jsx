@@ -29,7 +29,7 @@ let TypeComponent = ({
 
 	return disabledType
 		? <Typography 
-			variant="subtitle1"
+			variant="body1"
 			color="textSecondary"
 			style={{
 				height: 56,

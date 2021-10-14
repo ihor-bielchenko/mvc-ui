@@ -84,7 +84,9 @@ let Input = ({
 							aria-controls={name}
 							onClick={_onMenu}
 							position="start">
-							<IconButton size="small">
+							<IconButton 
+								disabled={disabled}
+								size="small">
 								<AddIcon fontSize="small" />
 							</IconButton>
 						</InputAdornment>,
