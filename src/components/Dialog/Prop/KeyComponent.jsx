@@ -18,7 +18,7 @@ let KeyComponent = ({
 
 	return (parentTypeId === COLUMN_ARR.id || disabledKey)
 		? <Typography 
-			variant="h5"
+			variant="body1"
 			color="primary"
 			style={{
 				height: 56,
