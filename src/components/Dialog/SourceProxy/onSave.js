@@ -64,7 +64,7 @@ const onSave = (e, id, onClose) => {
 		currentItem.key = generateKey(blocks[parentId]);
 		currentItem.value = sourceValue;
 		currentItem.disabledType = true;
-		currentItem.disabledControl = true;
+		currentItem.disabledRemove = true;
 
 		data[newId] = getTemplate({
 			parent_id: currentItem.id,
@@ -74,7 +74,7 @@ const onSave = (e, id, onClose) => {
 			value: undefined,
 			disabledType: true,
 			disabledValue: true,
-			disabledControl: true,
+			disabledRemove: true,
 		});
 
 		data[newId] = getTemplate({
@@ -85,7 +85,7 @@ const onSave = (e, id, onClose) => {
 			value: undefined,
 			disabledType: true,
 			disabledValue: true,
-			disabledControl: true,
+			disabledRemove: true,
 		});
 		dataItem = data[newId];
 		blocks[newId] = [];
@@ -97,7 +97,7 @@ const onSave = (e, id, onClose) => {
 			data[responseParsed[key].id].disabledKey = true;
 			data[responseParsed[key].id].disabledType = true;
 			data[responseParsed[key].id].disabledValue = true;
-			data[responseParsed[key].id].disabledControl = true;
+			data[responseParsed[key].id].disabledRemove = true;
 			blocks[data[responseParsed[key].id].parent_id] = (blocks[data[responseParsed[key].id].parent_id] ?? []);
 			blocks[data[responseParsed[key].id].parent_id].push(data[responseParsed[key].id]);
 		});
@@ -116,7 +116,7 @@ const onSave = (e, id, onClose) => {
 			value: sourceValue,
 			disabledType: true,
 			disabledValue: true,
-			disabledControl: true,
+			disabledRemove: true,
 		});
 		sectionItem = data[newId];
 		blocks[sectionItem.id] = [];
@@ -132,7 +132,7 @@ const onSave = (e, id, onClose) => {
 			value: undefined,
 			disabledType: true,
 			disabledValue: true,
-			disabledControl: true,
+			disabledRemove: true,
 		});
 		dataItem = data[newId];
 		blocks[dataItem.id] = [];
@@ -146,7 +146,7 @@ const onSave = (e, id, onClose) => {
 			data[responseParsed[key].id].disabledKey = true;
 			data[responseParsed[key].id].disabledType = true;
 			data[responseParsed[key].id].disabledValue = true;
-			data[responseParsed[key].id].disabledControl = true;
+			data[responseParsed[key].id].disabledRemove = true;
 			blocks[data[responseParsed[key].id].parent_id] = (blocks[data[responseParsed[key].id].parent_id] ?? []);
 			blocks[data[responseParsed[key].id].parent_id].push(data[responseParsed[key].id]);
 		});

@@ -9,7 +9,7 @@ const onDeleteLogic = (e, id) => {
 		jsObject.data[id].source = undefined;
 		jsObject.data[id].disabledType = false;
 		jsObject.data[id].disabledValue = false;
-		jsObject.data[id].disabledControl = false;
+		jsObject.data[id].disabledRemove = false;
 		Store().dispatch({
 			type: 'jsObject',
 			payload: () => ({ ...jsObject }),

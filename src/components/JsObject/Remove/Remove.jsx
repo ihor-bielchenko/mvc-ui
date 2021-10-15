@@ -16,13 +16,13 @@ let Remove = ({
 	id,
 	parentId,
 	parentTypeId,
-	disabledControl,
+	disabledRemove,
 	ValueComponent,
 	TypeComponent,
 	onRemove,
 }) => {
 	const _parentTypeId = useSelector((state) => parentTypeId ?? (state.jsObject.data[parentId] || {}).type_id);
-	const _disabledControl = useSelector((state) => disabledControl ?? (state.jsObject.data[id] || {}).disabledControl);
+	const _disabledRemove = useSelector((state) => disabledRemove ?? (state.jsObject.data[id] || {}).disabledRemove);
 	const _onRemove = React.useCallback((e) => typeof onRemove === 'function'
 		? onRemove(e, id)
 		: onRemoveLocal(e, id), [
@@ -34,7 +34,7 @@ let Remove = ({
 		|| _parentTypeId === COLUMN_OBJ.id
 		|| _parentTypeId === COLUMN_ARR.id
 		? <React.Fragment>
-			{_disabledControl
+			{_disabledRemove
 				? <React.Fragment />
 				: <Box
 					position="relative"

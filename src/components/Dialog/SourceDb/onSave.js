@@ -60,7 +60,7 @@ const onSave = (e, id, onClose) => {
 				value: sourceValue,
 				disabledType: true,
 				disabledValue: true,
-				disabledControl: true,
+				disabledRemove: true,
 			});
 			blocks[id] = [ data[newId] ];
 		}
@@ -90,7 +90,7 @@ const onSave = (e, id, onClose) => {
 				value: sourceValue,
 				disabledType: true,
 				disabledValue: true,
-				disabledControl: true,
+				disabledRemove: true,
 			});
 			blocks[nId].push(data[oId]);
 		}
@@ -106,7 +106,7 @@ const onSave = (e, id, onClose) => {
 				value: sourceValue,
 				disabledType: true,
 				disabledValue: true,
-				disabledControl: true,
+				disabledRemove: true,
 			});
 			blocks[parentId] = [ data[id] ];
 		}
@@ -121,7 +121,7 @@ const onSave = (e, id, onClose) => {
 				value: sourceValue,
 				disabledType: true,
 				disabledValue: true,
-				disabledControl: true,
+				disabledRemove: true,
 			});
 			blocks[id].push(data[newId]);
 		}
