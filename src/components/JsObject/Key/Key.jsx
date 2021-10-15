@@ -12,13 +12,13 @@ let Key = ({
 	parentTypeId,
 	KeyComponent,
 	value,
-	disabledControl,
+	disabledRemove,
 	onChange,
 }) => {
 	const _parentTypeId = useSelector((state) => parentTypeId ?? (state.jsObject.data[parentId] || {}).type_id);
 	const _typeId = useSelector((state) => typeId ?? (state.jsObject.data[id] || {}).type_id);
 	const _key = useSelector((state) => value ?? (state.jsObject.data[id] || {}).key);
-	const _disabledControl = useSelector((state) => disabledControl ?? (state.jsObject.data[id] || {}).disabledControl);
+	const _disabledRemove = useSelector((state) => disabledRemove ?? (state.jsObject.data[id] || {}).disabledRemove);
 	const _onChange = React.useCallback((e) => typeof onChange === 'function'
 		? onChange(e, id)
 		: onChangeLocal(e, id), [
@@ -32,7 +32,7 @@ let Key = ({
 		pr={_parentTypeId === COLUMN_ARR.id
 			? '6px'
 			: '0px'}
-		pl={_disabledControl
+		pl={_disabledRemove
 			? '30px'
 			: '0px'}
 		minWidth={102}
