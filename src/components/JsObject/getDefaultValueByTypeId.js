@@ -1,22 +1,22 @@
 import {
-	COLUMN_ID,
-	COLUMN_TEXT,
-	COLUMN_NUMBER,
-	COLUMN_BOOLEAN,
-	COLUMN_OBJ,
- 	COLUMN_ARR,
- 	COLUMN_NULL,
-} from 'structures/columnTypes.js';
+	DATA_TYPE_ID,
+	DATA_TYPE_TEXT,
+	DATA_TYPE_NUMBER,
+	DATA_TYPE_BOOLEAN,
+	DATA_TYPE_OBJECT,
+ 	DATA_TYPE_ARRAY,
+ 	DATA_TYPE_NULL,
+} from 'structures/dataTypes.js';
 
 const templates = {
-	[COLUMN_TEXT.id]: '',
-	[COLUMN_NUMBER.id]: 0,
-	[COLUMN_ID.id]: 0,
-	[COLUMN_BOOLEAN.id]: true,
-	[COLUMN_OBJ.id]: undefined,
-	[COLUMN_ARR.id]: undefined,
-	[COLUMN_NULL.id]: null,
+	[DATA_TYPE_TEXT.id]: '',
+	[DATA_TYPE_NUMBER.id]: 0,
+	[DATA_TYPE_ID.id]: 0,
+	[DATA_TYPE_BOOLEAN.id]: true,
+	[DATA_TYPE_OBJECT.id]: undefined,
+	[DATA_TYPE_ARRAY.id]: undefined,
+	[DATA_TYPE_NULL.id]: null,
 };
-const getDefaultValueByTypeId = (typeId) => templates[typeId] ?? '';
+const getDefaultValueByTypeId = (dataTypeId) => templates[dataTypeId] ?? '';
 
 export default getDefaultValueByTypeId;

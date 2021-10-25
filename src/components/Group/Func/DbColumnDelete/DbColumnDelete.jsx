@@ -36,7 +36,7 @@ let DbColumnDelete = ({ scriptId }) => {
 							value={dbColumns[key].name} 
 							control={<Radio />} 
 							label={<React.Fragment>
-								{dbColumns[key].name} <b>({columnTypes[dbColumns[key].type_id].text()})</b>
+								{dbColumns[key].name} <b>({columnTypes[dbColumns[key].data_type_id].text()})</b>
 							</React.Fragment>} />
 					})}
 					</RadioGroup>

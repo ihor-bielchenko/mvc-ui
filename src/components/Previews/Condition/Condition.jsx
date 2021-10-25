@@ -8,7 +8,7 @@ import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import onDelete from 'components/Dialog/Prop/onDelete.js';
 import { getLang } from 'components/Language';
-import format from 'structures/format.js';
+import formatTypes from 'structures/formatTypes.js';
 import Entity from '../Entity';
 import onEdit from '../Func/onEdit.js';
 
@@ -61,7 +61,7 @@ let Condition = ({
 		<Typography
 			variant="caption"
 			component="div">
-			({format[formatId].text()})
+			({formatTypes[formatId].text()})
 		</Typography>
 		<Typography 
 			variant="body2"

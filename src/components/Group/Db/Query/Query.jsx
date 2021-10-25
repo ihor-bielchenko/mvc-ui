@@ -10,7 +10,7 @@ import {
 	DIALOG_DB_QUERY,
 	DIALOG_DELETE_CONFIRM, 
 } from 'consts/dialog.js';
-import { SOURCE_SCRIPT } from 'structures/source.js';
+import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
 import onDelete from './onDelete.js';
 
 let Query = () => {
@@ -33,8 +33,8 @@ let Query = () => {
 							? <b style={{ color: 'red' }}>┃</b>
 							: <React.Fragment />}
 						{(typeof queryItem.value === 'object' && 
-							queryItem.value.source_id === SOURCE_SCRIPT.id)
-							? SOURCE_SCRIPT.text()
+							queryItem.value.source_type_id === SOURCE_TYPE_SCRIPT.id)
+							? SOURCE_TYPE_SCRIPT.text()
 							: queryItem.value}
 						{queryItem.right
 							? <b style={{ color: 'red' }}>┃</b>

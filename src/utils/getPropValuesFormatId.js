@@ -1,44 +1,48 @@
 import Store from 'components/Store';
 import {
-	SOURCE_DB,
-	SOURCE_PROXY_PASS,
-} from 'structures/source.js';
+	SOURCE_TYPE_DB,
+	SOURCE_TYPE_PROXY_PASS,
+} from 'structures/sourceTypes.js';
 import {
-	COLUMN_ID,
-	COLUMN_NUMBER,
-} from 'structures/columnTypes.js';
+	DATA_TYPE_ID,
+	DATA_TYPE_TEXT,
+	DATA_TYPE_NUMBER,
+	DATA_TYPE_ARRAY,
+	DATA_TYPE_OBJECT,
+	DATA_TYPE_NULL,
+} from 'structures/dataTypes.js';
 
 const getPropValuesFormatId = (body) => {
 	const dbColumns = Store().getState().dbColumns;
 
 	const bodyKeys = Object.keys(body);
-	let formatId = process.env.FORMAT_STR;
+	let formatId = DATA_TYPE_TEXT.id;
 
 	if (bodyKeys.length === 1 && body[bodyKeys[0]]) {
-		switch (body[bodyKeys[0]].source_id) {
-			case SOURCE_DB.id:
+		switch (body[bodyKeys[0]].source_type_id) {
+			case SOURCE_TYPE_DB.id:
 				formatId = (body[bodyKeys[0]].is_collection || body[bodyKeys[0]].select.length > 1)
-					? process.env.FORMAT_ARR
-					: (dbColumns.data[body[bodyKeys[0]].select[0]].type_id === COLUMN_ID.id ||
-						dbColumns.data[body[bodyKeys[0]].select[0]].type_id === COLUMN_NUMBER.id)
-						? process.env.FORMAT_NUM
-						: process.env.FORMAT_STR;
+					? DATA_TYPE_ARRAY.id
+					: (dbColumns.data[body[bodyKeys[0]].select[0]].data_type_id === DATA_TYPE_ID.id ||
+						dbColumns.data[body[bodyKeys[0]].select[0]].data_type_id === DATA_TYPE_NUMBER.id)
+						? DATA_TYPE_NUMBER.id
+						: DATA_TYPE_TEXT.id;
 				break;
-			case SOURCE_PROXY_PASS.id:
-				formatId = process.env.FORMAT_ARR;
+			case SOURCE_TYPE_PROXY_PASS.id:
+				formatId = DATA_TYPE_OBJECT.id;
 				break;
 			default:
 				formatId = Number.isNaN(Number(body[bodyKeys[0]]))
-					? process.env.FORMAT_STR
-					: process.env.FORMAT_NUM;
+					? DATA_TYPE_TEXT.id
+					: DATA_TYPE_NUMBER.id;
 				break;
 		}
 	}
 	else if (bodyKeys.length === 1 && body[bodyKeys[0]] === '') {
-		formatId = process.env.FORMAT_NULL;
+		formatId = DATA_TYPE_NULL.id;
 	}
 	else if (bodyKeys.length > 1) {
-		formatId = process.env.FORMAT_ARR;
+		formatId = DATA_TYPE_ARRAY.id;
 	}
 	return formatId;
 };

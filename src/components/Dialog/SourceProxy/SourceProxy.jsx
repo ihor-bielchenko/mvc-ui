@@ -17,7 +17,7 @@ import Url from 'components/Group/Proxy/Url';
 import Headers from 'components/Group/Proxy/Headers';
 import Requests from 'components/Group/Proxy/Requests';
 import onUnmount from 'components/Dialog/SourceCookie/onUnmount.js';
-import { SOURCE_PROXY_PASS } from 'structures/source.js';
+import { SOURCE_TYPE_PROXY_PASS } from 'structures/sourceTypes.js';
 import onClose from '../onClose.js';
 import onService from './onService.js';
 import onRoute from './onRoute.js';
@@ -25,7 +25,7 @@ import onSave from './onSave';
 import onEdit from './onEdit.js';
 
 let SourceProxy = () => {
-	const dialog = useSelector((state) => state.dialogs[SOURCE_PROXY_PASS.id]);
+	const dialog = useSelector((state) => state.dialogs[SOURCE_TYPE_PROXY_PASS.id]);
 	const bodyId = (dialog || {}).name;
 	const isEditFlag = (dialog || {}).isEditFlag || false;
 	const serviceId = useSelector((state) => state.jsObject.tempValue.service_id || '');
@@ -35,7 +35,7 @@ let SourceProxy = () => {
 		setTab,
 	]);
 	const _onClose = React.useCallback((e, reason) => {
-		onClose(SOURCE_PROXY_PASS.id)(e, reason);
+		onClose(SOURCE_TYPE_PROXY_PASS.id)(e, reason);
 		onUnmount();
 		setTab(0);
 	}, [

@@ -11,8 +11,11 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Store from 'components/Store';
 import InputNumeric from 'components/Input/Numeric';
 import onDialog from 'components/Dialog/onDialog.js';
-import { SOURCE_SCRIPT } from 'structures/source.js';
-import { COLUMN_ID } from 'structures/columnTypes.js';
+import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
+import { 
+	DATA_TYPE_ID,
+	DATA_TYPE_NUMBER, 
+} from 'structures/dataTypes.js';
 import onCollection from './onCollection.js';
 import onOffset from './onOffset.js';
 import onLimit from './onLimit.js';
@@ -77,16 +80,16 @@ let Select = ({
 							xs={6}>
 							<InputNumeric
 								menu
-								onMenu={onDialog(SOURCE_SCRIPT.id, {
+								onMenu={onDialog(SOURCE_TYPE_SCRIPT.id, {
 									onClickEntity: onChangeByLogicOffset,
 									formatValidating: () => ([
-										process.env.FORMAT_NUM,
+										DATA_TYPE_NUMBER.id,
 									]),
 								})}
-								onValue={onDialog(SOURCE_SCRIPT.id, {
+								onValue={onDialog(SOURCE_TYPE_SCRIPT.id, {
 									onClickEntity: onChangeByLogicOffset,
 									formatValidating: () => ([
-										process.env.FORMAT_NUM,
+										DATA_TYPE_NUMBER.id,
 									]),
 								})}
 								onDelete={onClearOffset}
@@ -101,16 +104,16 @@ let Select = ({
 							xs={6}>
 							<InputNumeric
 								menu
-								onMenu={onDialog(SOURCE_SCRIPT.id, {
+								onMenu={onDialog(SOURCE_TYPE_SCRIPT.id, {
 									onClickEntity: onChangeByLogicLimit,
 									formatValidating: () => ([
-										process.env.FORMAT_NUM,
+										DATA_TYPE_NUMBER.id,
 									]),
 								})}
-								onValue={onDialog(SOURCE_SCRIPT.id, {
+								onValue={onDialog(SOURCE_TYPE_SCRIPT.id, {
 									onClickEntity: onChangeByLogicLimit,
 									formatValidating: () => ([
-										process.env.FORMAT_NUM,
+										DATA_TYPE_NUMBER.id,
 									]),
 								})}
 								onDelete={onClearLimit}
@@ -146,7 +149,7 @@ let Select = ({
 						onChange={_onColumn} />}
 					label={<Typography 
 						variant="h6"
-						color={dbColumnsData[key].type_id === COLUMN_ID.id
+						color={dbColumnsData[key].data_type_id === DATA_TYPE_ID.id
 							? 'secondary'
 							: 'initial'}>
 						<b>{dbColumnsData[key].name}</b>

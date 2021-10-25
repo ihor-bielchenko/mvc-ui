@@ -1,5 +1,5 @@
 import Store from 'components/Store';
-import { SOURCE_SCRIPT } from 'structures/source.js';
+import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
 
 const parseSourceValue = (valueFuncId, valuePropId, value) => {
 	const entities = Store().getState().entities;
@@ -12,8 +12,8 @@ const parseSourceValue = (valueFuncId, valuePropId, value) => {
 	return entityId
 		? ({
 			id: entityId,
-			source_id: SOURCE_SCRIPT.id,
-			type_id: entities.data[entityId].type_id,
+			source_type_id: SOURCE_TYPE_SCRIPT.id,
+			data_type_id: entities.data[entityId].type_id,
 		})
 		: value;
 };

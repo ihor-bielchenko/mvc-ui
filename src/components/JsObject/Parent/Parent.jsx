@@ -8,37 +8,37 @@ import Store from 'components/Store';
 import MenuSource from 'components/Menu/Source';
 import onMenu from 'components/Menu/onMenu.js';
 // import onDialog from 'components/Dialog/onDialog.js';
-import { FORMAT_ATOMIC } from 'structures/format.js';
-import columnTypes, {
-	COLUMN_OBJ,
- 	COLUMN_ARR,
- 	COLUMN_NUMBER,
- 	COLUMN_ID,
-} from 'structures/columnTypes.js';
-import source, {
-	SOURCE_DB,
-	SOURCE_PROXY_PASS,
-} from 'structures/source.js';
+import dataTypes, {
+	DATA_TYPE_ATOMIC,
+	DATA_TYPE_OBJECT,
+ 	DATA_TYPE_ARRAY,
+ 	DATA_TYPE_NUMBER,
+ 	DATA_TYPE_ID,
+} from 'structures/dataTypes.js';
+import sourceTypes, {
+	SOURCE_TYPE_DB,
+	SOURCE_TYPE_PROXY_PASS,
+} from 'structures/sourceTypes.js';
 import Header from '../Header';
 import Item from '../Item';
 import onAddItem from './onAddItem.js';
 
 const closures = {
-	[COLUMN_OBJ.id]: [ '{', '}' ],
-	[COLUMN_ARR.id]: [ '[', ']' ],
+	[DATA_TYPE_OBJECT.id]: [ '{', '}' ],
+	[DATA_TYPE_ARRAY.id]: [ '[', ']' ],
 };
-const _onFilterMenuSource = (typeId) => (key, i) => {
-	return typeId === COLUMN_OBJ.id
-		? (source[key].id === SOURCE_DB.id
-			|| source[key].id === SOURCE_PROXY_PASS.id)
-		: (typeId === COLUMN_ARR.id)
-			? (source[key].id === SOURCE_DB.id)
+const _onFilterMenuSource = (dataTypeId) => (key, i) => {
+	return dataTypeId === DATA_TYPE_OBJECT.id
+		? (sourceTypes[key].id === SOURCE_TYPE_DB.id
+			|| sourceTypes[key].id === SOURCE_TYPE_PROXY_PASS.id)
+		: (dataTypeId === DATA_TYPE_ARRAY.id)
+			? (sourceTypes[key].id === SOURCE_TYPE_DB.id)
 			: false;
 };
 
 let Parent = ({ 
 	id,
-	typeId,
+	dataTypeId,
 	last,
 	KeyComponent,
 	ValueComponent,
@@ -48,11 +48,11 @@ let Parent = ({
 	const _onAddItem = React.useCallback((e) => onAddItem(e, id), [
 		id,
 	]);
-	const _onMenu = React.useCallback((e) => onMenu(id.toString(), typeId === COLUMN_ARR.id
+	const _onMenu = React.useCallback((e) => onMenu(id.toString(), dataTypeId === DATA_TYPE_ARRAY.id
 		? ({ isCollection: true })
 		: ({ isCollection: false }))(e, id), [
 		id,
-		typeId,
+		dataTypeId,
 	]);
 	const {
 		// dbColumns,
@@ -67,9 +67,9 @@ let Parent = ({
 
 	return <React.Fragment>
 		{id === 0
-			? <Header typeId={typeId} />
+			? <Header dataTypeId={dataTypeId} />
 			: <React.Fragment />}
-		{(allFirstId > 0 && typeId === FORMAT_ATOMIC.id)
+		{(allFirstId > 0 && dataTypeId === DATA_TYPE_ATOMIC.id)
 			? <Item 
 				id={allFirstId}
 				KeyComponent={KeyComponent}
@@ -80,7 +80,7 @@ let Parent = ({
 				<Box 
 					position="relative"
 					width="100%">
-					{closures[typeId]
+					{closures[dataTypeId]
 						? <React.Fragment>
 							<Typography 
 								variant="h4"
@@ -91,7 +91,7 @@ let Parent = ({
 									height: 56,
 									lineHeight: '56px',
 								}}>
-								<b>{closures[typeId][0]}</b>
+								<b>{closures[dataTypeId][0]}</b>
 							</Typography>
 						</React.Fragment>
 						: <React.Fragment />}
@@ -121,7 +121,7 @@ let Parent = ({
 								Добавить элемент
 							</Button>
 						</Box>
-						{closures[typeId]
+						{closures[dataTypeId]
 							? <React.Fragment>
 								<Box 
 									pt={1}
@@ -131,14 +131,14 @@ let Parent = ({
 										color="primary"
 										startIcon={<AddIcon />}
 										onClick={_onMenu}>
-										Вставить {columnTypes[typeId].text()}
+										Вставить {dataTypes[dataTypeId].text()}
 									</Button>
 									<MenuSource
 										aria={id.toString()}
-										typeId={typeId === COLUMN_ID.id
-											? COLUMN_NUMBER.id
-											: typeId}
-										onFilter={_onFilterMenuSource(typeId)} />
+										dataTypeId={dataTypeId === DATA_TYPE_ID.id
+											? DATA_TYPE_NUMBER.id
+											: dataTypeId}
+										onFilter={_onFilterMenuSource(dataTypeId)} />
 								</Box>
 								<Box display="flex">
 									<Typography
@@ -149,7 +149,7 @@ let Parent = ({
 											height: 56,
 											lineHeight: '56px',
 										}}>
-										<b>{closures[typeId][1]}</b>
+										<b>{closures[dataTypeId][1]}</b>
 									</Typography>
 									{(typeof last === 'boolean' && !last)
 										? <Box 
@@ -174,7 +174,7 @@ let Parent = ({
 Parent = React.memo(Parent);
 Parent.defaultProps = {
 	id: 0,
-	typeId: 0,
+	dataTypeId: 0,
 };
 
 export default Parent;

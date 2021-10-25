@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import CodeIcon from '@material-ui/icons/Code';
 import { getLang } from 'components/Language';
-import format from 'structures/format.js';
+import formatTypes from 'structures/formatTypes.js';
 import Entity from '../Entity';
 import onEdit from './onEdit.js';
 
@@ -51,7 +51,7 @@ let Func = ({
 		<Typography
 			variant="caption"
 			component="div">
-			({format[formatId].text()})
+			({formatTypes[formatId].text()})
 		</Typography>
 		<Typography 
 			variant="body2"

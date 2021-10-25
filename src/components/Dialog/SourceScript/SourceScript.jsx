@@ -6,11 +6,11 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Header from 'components/Header';
 import Script from 'components/Script';
 import getScriptId from 'components/Script/getScriptId.js';
-import { SOURCE_SCRIPT } from 'structures/source.js';
+import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
 import onClose from '../onClose.js';
 
 let SourceScript = () => {
-	const dialog = useSelector((state) => state.dialogs[SOURCE_SCRIPT.id]);
+	const dialog = useSelector((state) => state.dialogs[SOURCE_TYPE_SCRIPT.id]);
 	const displayFlag = !!dialog;
 	const onClickEntity = (dialog || {}).onClickEntity;
 	const formatValidating = (dialog || {}).formatValidating || (() => {});
@@ -22,9 +22,9 @@ let SourceScript = () => {
 			fullWidth
 			maxWidth="lg"
 			open={displayFlag}
-			onClose={onClose(SOURCE_SCRIPT.id)}>
+			onClose={onClose(SOURCE_TYPE_SCRIPT.id)}>
 			<DialogTitle>
-				<Header onClose={onClose(SOURCE_SCRIPT.id)}>
+				<Header onClose={onClose(SOURCE_TYPE_SCRIPT.id)}>
 					Значение из программы
 				</Header>
 			</DialogTitle>

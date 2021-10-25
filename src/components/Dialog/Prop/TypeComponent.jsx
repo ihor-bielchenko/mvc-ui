@@ -3,26 +3,26 @@ import { useSelector } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import JsBoxControlWrapper from 'components/JsObject/BoxControlWrapper';
 import SelectType from 'components/Select/Type';
-import { FORMAT_ATOMIC } from 'structures/format.js';
-import columnTypes, { 
-	COLUMN_ID,
-	COLUMN_OBJ,
-	COLUMN_ARR,
-	COLUMN_NUMBER,
-} from 'structures/columnTypes.js';
+import dataTypes, { 
+	DATA_TYPE_ATOMIC,
+	DATA_TYPE_ID,
+	DATA_TYPE_NUMBER,
+	DATA_TYPE_OBJECT,
+	DATA_TYPE_ARRAY,
+} from 'structures/dataTypes.js';
 
-const _onFilterTypes = (parentTypeId) => (key) => (
-	parentTypeId === FORMAT_ATOMIC.id
-		? (columnTypes[key].id !== COLUMN_ID.id
-			&& columnTypes[key].id !== COLUMN_OBJ.id
-			&& columnTypes[key].id !== COLUMN_ARR.id)
-	: columnTypes[key].id !== COLUMN_ID.id
+const _onFilterTypes = (parentDataTypeId) => (key) => (
+	parentDataTypeId === DATA_TYPE_ATOMIC.id
+		? (dataTypes[key].id !== DATA_TYPE_ID.id
+			&& dataTypes[key].id !== DATA_TYPE_OBJECT.id
+			&& dataTypes[key].id !== DATA_TYPE_ARRAY.id)
+	: dataTypes[key].id !== DATA_TYPE_ID.id
 );
 
 let TypeComponent = ({
-	parentTypeId,
+	parentDataTypeId,
 	id,
-	typeId,
+	dataTypeId,
 	onSelect,
 }) => {
 	const disabledType = useSelector((state) => state.jsObject.data[id].disabledType);
@@ -36,35 +36,35 @@ let TypeComponent = ({
 				lineHeight: '56px',
 				textAlign: 'center',
 			}}>
-			{columnTypes[typeId === COLUMN_ID.id
-				? COLUMN_NUMBER.id
-				: typeId].text()}
+			{dataTypes[dataTypeId === DATA_TYPE_ID.id
+				? DATA_TYPE_NUMBER.id
+				: dataTypeId].text()}
 		</Typography>
 		: <JsBoxControlWrapper
-			data-border_left_radius_0={(parentTypeId !== FORMAT_ATOMIC.id
-				&& parentTypeId !== COLUMN_ARR.id)
-				|| (parentTypeId === FORMAT_ATOMIC.id 
-				&& parentTypeId === COLUMN_OBJ.id)}
-			data-border_right_radius_0={parentTypeId === FORMAT_ATOMIC.id 
-				&& parentTypeId !== COLUMN_OBJ.id
-				&& parentTypeId !== COLUMN_ARR.id}
+			data-border_left_radius_0={(parentDataTypeId !== DATA_TYPE_ATOMIC.id
+				&& parentDataTypeId !== DATA_TYPE_ARRAY.id)
+				|| (parentDataTypeId === DATA_TYPE_ATOMIC.id 
+				&& parentDataTypeId === DATA_TYPE_OBJECT.id)}
+			data-border_right_radius_0={parentDataTypeId === DATA_TYPE_ATOMIC.id 
+				&& parentDataTypeId !== DATA_TYPE_OBJECT.id
+				&& parentDataTypeId !== DATA_TYPE_ARRAY.id}
 			mt="0px">
 				<SelectType 
 					disabled={disabledType}
-					name={'type_id-'+ id}
-					value={typeId === COLUMN_ID.id
-						? COLUMN_NUMBER.id
-						: typeId}
+					name={'data_type_id-'+ id}
+					value={dataTypeId === DATA_TYPE_ID.id
+						? DATA_TYPE_NUMBER.id
+						: dataTypeId}
 					onSelect={onSelect}
-					onFilter={_onFilterTypes(parentTypeId)}
+					onFilter={_onFilterTypes(parentDataTypeId)}
 					label="" />
 			</JsBoxControlWrapper>;
 };
 TypeComponent = React.memo(TypeComponent);
 TypeComponent.defaultProps = {
-	parentTypeId: 0,
+	parentDataTypeId: 0,
 	id: 0,
-	typeId: 0,
+	dataTypeId: 0,
 	onSelect: () => {},
 };
 

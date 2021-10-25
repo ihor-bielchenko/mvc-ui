@@ -11,7 +11,7 @@ export const setEntities = (data = []) => {
 	data.forEach((item) => {
 		return (result[item.id] = { 
 			...item, 
-			name: item[switchTypes[item.type_id]].name, 
+			name: item[switchTypes[item.data_type_id]].name, 
 		})
 	});
 

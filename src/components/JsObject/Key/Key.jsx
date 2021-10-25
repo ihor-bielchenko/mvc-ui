@@ -2,21 +2,21 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import { COLUMN_ARR } from 'structures/columnTypes.js';
+import { DATA_TYPE_ARRAY } from 'structures/dataTypes.js';
 import onChangeLocal from './onChange.js';
 
 let Key = ({
 	id,
 	parentId,
-	typeId,
-	parentTypeId,
+	dataTypeId,
+	parentDataTypeId,
 	KeyComponent,
 	value,
 	disabledRemove,
 	onChange,
 }) => {
-	const _parentTypeId = useSelector((state) => parentTypeId ?? (state.jsObject.data[parentId] || {}).type_id);
-	const _typeId = useSelector((state) => typeId ?? (state.jsObject.data[id] || {}).type_id);
+	const _parentDataTypeId = useSelector((state) => parentDataTypeId ?? (state.jsObject.data[parentId] || {}).data_type_id);
+	const _dataTypeId = useSelector((state) => dataTypeId ?? (state.jsObject.data[id] || {}).data_type_id);
 	const _key = useSelector((state) => value ?? (state.jsObject.data[id] || {}).key);
 	const _disabledRemove = useSelector((state) => disabledRemove ?? (state.jsObject.data[id] || {}).disabledRemove);
 	const _onChange = React.useCallback((e) => typeof onChange === 'function'
@@ -29,7 +29,7 @@ let Key = ({
 	return <Box
 		position="relative"
 		textAlign="center"
-		pr={_parentTypeId === COLUMN_ARR.id
+		pr={_parentDataTypeId === DATA_TYPE_ARRAY.id
 			? '6px'
 			: '0px'}
 		pl={_disabledRemove
@@ -45,9 +45,9 @@ let Key = ({
 				? <React.Fragment>
 					<KeyComponent
 						parentId={parentId}
-						parentTypeId={_parentTypeId}
+						parentDataTypeId={_parentDataTypeId}
 						id={id}
-						typeId={_typeId}
+						dataTypeId={_dataTypeId}
 						value={_key}
 						onChange={_onChange} />
 				</React.Fragment>

@@ -1,13 +1,13 @@
 import onClose from 'components/Dialog/onClose.js';
-import { SOURCE_SCRIPT } from 'structures/source.js';
+import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
 
-const onChangeByLogic = (e, typeId, id, setLogicValue) => {
+const onChangeByLogic = (e, dataTypeId, id, setLogicValue) => {
 	setLogicValue(() => ({
-		source_id: SOURCE_SCRIPT.id,
-		type_id: typeId,
+		source_type_id: SOURCE_TYPE_SCRIPT.id,
+		data_type_id: dataTypeId,
 		id,
 	}));
-	onClose(SOURCE_SCRIPT.id)(e);
+	onClose(SOURCE_TYPE_SCRIPT.id)(e);
 };
 
 export default onChangeByLogic;

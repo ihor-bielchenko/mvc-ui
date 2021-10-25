@@ -10,7 +10,7 @@ const onLoader = (flag, opacity = .6) => {
 		config.loaderOpacity = Number(opacity);
 		Store().dispatch({
 			type: 'config',
-			payload: () => config,
+			payload: () => ({ ...config }),
 		});
 	}, 0);
 };

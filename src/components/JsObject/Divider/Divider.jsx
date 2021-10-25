@@ -2,20 +2,20 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import {
-	COLUMN_OBJ,
-	COLUMN_ARR,
-} from 'structures/columnTypes.js';
-import { FORMAT_ATOMIC } from 'structures/format.js';
+	DATA_TYPE_ATOMIC,
+	DATA_TYPE_OBJECT,
+	DATA_TYPE_ARRAY,
+} from 'structures/dataTypes.js';
 
 let Divider = ({
 	parentId,
 	id,
 }) => {
-	const parentTypeId = useSelector((state) => (state.jsObject.data[parentId] || {}).type_id);
+	const parentDataTypeId = useSelector((state) => (state.jsObject.data[parentId] || {}).data_type_id);
 	
-	return parentTypeId !== FORMAT_ATOMIC.id 
-		|| parentTypeId === COLUMN_OBJ.id
-		|| parentTypeId === COLUMN_ARR.id
+	return parentDataTypeId !== DATA_TYPE_ATOMIC.id 
+		|| parentDataTypeId === DATA_TYPE_OBJECT.id
+		|| parentDataTypeId === DATA_TYPE_ARRAY.id
 		? <Typography	
 			variant="h4"
 			style={{

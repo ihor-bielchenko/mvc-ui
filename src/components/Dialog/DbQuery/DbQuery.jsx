@@ -13,11 +13,11 @@ import CloseIcon from '@material-ui/icons/Close';
 import Header from 'components/Header';
 import InputText from 'components/Input/Text';
 import { DIALOG_DB_QUERY } from 'consts/dialog.js';
-import { SOURCE_SCRIPT } from 'structures/source.js';
+import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
 import {
-	COLUMN_NUMBER,
-	COLUMN_TEXT,
-} from 'structures/columnTypes.js';
+	DATA_TYPE_NUMBER,
+	DATA_TYPE_TEXT,
+} from 'structures/dataTypes.js';
 import onDialog from '../onDialog.js';
 import onClose from './onClose.js';
 import onSubmit from './onSubmit.js';
@@ -31,14 +31,14 @@ let DbQuery = () => {
 	const left = useSelector((state) => ((state.jsObject.tempValue.query || {})[name] || {}).left || '');
 	const right = useSelector((state) => ((state.jsObject.tempValue.query || {})[name] || {}).right || '');
 	const [ logicValue, setLogicValue ] = React.useState(() => (typeof value === 'object' && 
-		value.source_id === SOURCE_SCRIPT.id)
+		value.source_type_id === SOURCE_TYPE_SCRIPT.id)
 		? value
 		: undefined);
-	const _onMenu = React.useCallback((e) => onDialog(SOURCE_SCRIPT.id, {
+	const _onMenu = React.useCallback((e) => onDialog(SOURCE_TYPE_SCRIPT.id, {
 		onClickEntity: (e, entityId, id) => onChangeByLogic(e, entityId, id, setLogicValue),
 		formatValidating: () => ([
-			COLUMN_NUMBER.id,
-			COLUMN_TEXT.id,
+			DATA_TYPE_NUMBER.id,
+			DATA_TYPE_TEXT.id,
 		]),
 	})(e), [
 		setLogicValue,

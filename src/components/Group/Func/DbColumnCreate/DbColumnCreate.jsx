@@ -6,12 +6,12 @@ import Checkbox from '@material-ui/core/Checkbox';
 import SelectType from 'components/Select/Type';
 import InputText from 'components/Input/Text';
 import onDialog from 'components/Dialog/onDialog.js';
-import { SOURCE_SCRIPT } from 'structures/source.js';
+import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
 import {
-	COLUMN_NUMBER,
-	COLUMN_TEXT,
-	COLUMN_NULL,
-} from 'structures/columnTypes.js';
+	DATA_TYPE_NUMBER,
+	DATA_TYPE_TEXT,
+	DATA_TYPE_NULL,
+} from 'structures/dataTypes.js';
 import onSelect from '../onSelect.js';
 import onClear from '../onClear.js';
 import onChangeByLogic from '../onChangeByLogic.js';
@@ -30,12 +30,12 @@ let DbColumnCreate = ({ scriptId }) => {
 	const _onClear2 = React.useCallback((e) => onClear(e, scriptId, '2'), [
 		scriptId,
 	]);
-	const _onMenu2 = React.useCallback((e) => onDialog(SOURCE_SCRIPT.id, {
+	const _onMenu2 = React.useCallback((e) => onDialog(SOURCE_TYPE_SCRIPT.id, {
 		scriptId,
 		onClickEntity: _onChangeByLogic2,
 			formatValidating: () => ([
-				COLUMN_NUMBER.id,
-				COLUMN_TEXT.id,
+				DATA_TYPE_NUMBER.id,
+				DATA_TYPE_TEXT.id,
 			]),
 	})(e), [
 		scriptId,
@@ -46,13 +46,13 @@ let DbColumnCreate = ({ scriptId }) => {
 	const _onClear3 = React.useCallback((e) => onClear(e, scriptId, '3'), [
 		scriptId,
 	]);
-	const _onMenu3 = React.useCallback((e) => onDialog(SOURCE_SCRIPT.id, {
+	const _onMenu3 = React.useCallback((e) => onDialog(SOURCE_TYPE_SCRIPT.id, {
 		scriptId,
 		onClickEntity: _onChangeByLogic3,
 			formatValidating: () => ([
-				COLUMN_NUMBER.id,
-				COLUMN_TEXT.id,
-				COLUMN_NULL.id,
+				DATA_TYPE_NUMBER.id,
+				DATA_TYPE_TEXT.id,
+				DATA_TYPE_NULL.id,
 			]),
 	})(e), [
 		scriptId,

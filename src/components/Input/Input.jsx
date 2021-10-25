@@ -93,15 +93,15 @@ let Input = ({
 					}
 					: {},
 				}} />
-		{(typeof value === 'object' && value.source_id > 0)
+		{(typeof value === 'object' && value.source_type_id > 0)
 			? <LogicValue
 				chipText={chipText}
-				sourceId={value.source_id}
+				sourceTypeId={value.source_type_id}
 				entityId={value.entity_id} />
-			: (defaultValue && typeof defaultValue === 'object' && defaultValue.source_id > 0)
+			: (defaultValue && typeof defaultValue === 'object' && defaultValue.source_type_id > 0)
 				? <LogicValue
 					chipText={chipText}
-					sourceId={defaultValue.source_id}
+					sourceTypeId={defaultValue.source_type_id}
 					entityId={defaultValue.entity_id}
 					onDelete={_onDelete}
 					onClick={_onValue} />

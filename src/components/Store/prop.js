@@ -1,12 +1,14 @@
-import { FORMAT_ATOMIC } from 'structures/format.js';
-import { COLUMN_TEXT } from 'structures/columnTypes.js';
+import { 
+	DATA_TYPE_ATOMIC,
+	DATA_TYPE_TEXT, 
+} from 'structures/dataTypes.js';
 
 export const initialState = () => ({
 	name: '',
-	format_id: FORMAT_ATOMIC.id,
+	data_type_id: DATA_TYPE_ATOMIC.id,
 	body: {
 		[Date.now()]: {
-			type_id: COLUMN_TEXT.id,
+			data_type_id: DATA_TYPE_TEXT.id,
 			key: '0',
 			value: '',
 		},

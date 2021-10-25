@@ -60,7 +60,7 @@ let Entity = ({
 	const addingArrowMouseX = useSelector((state) => state.arrows.addingArrowMouseX);
 	const addingArrowMouseY = useSelector((state) => state.arrows.addingArrowMouseY);
 	const existArrowIndex = useSelector((state) => state.arrows.data.findIndex((item) => item.from_entity_id === id));
-	const typeId = useSelector((state) => state.entities.data[id].type_id);
+	const dataTypeId = useSelector((state) => state.entities.data[id].data_type_id);
 	const formatId = useSelector((state) => state.entities.data[id].format_id);
 	const dragFlag = useSelector((state) => state.entities.data[id].dragFlag);
 	const x = useSelector((state) => state.entities.data[id].x);
@@ -82,9 +82,9 @@ let Entity = ({
 	const _onClick = React.useCallback((e) => onClick(e, id), [
 		id,
 	]);
-	const _onClickEntity = React.useCallback((e) => onClickEntity(e, typeId, id), [
+	const _onClickEntity = React.useCallback((e) => onClickEntity(e, dataTypeId, id), [
 		onClickEntity,
-		typeId,
+		dataTypeId,
 		id,
 	]);
 	const _formatValidating = formatValidating();

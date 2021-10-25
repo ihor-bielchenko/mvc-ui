@@ -6,7 +6,7 @@ const onSubmit = (e, logicValue) => {
 	const jsObject = Store().getState().jsObject;
 	const id = Number(e.target.elements.id.value);
 	const columnId = Number(e.target.elements.column_id.value);
-	const operatorId = Number(e.target.elements.operator_id.value);
+	const operatorId = Number(e.target.elements.operator_if_id.value);
 	const value = logicValue || e.target.elements.value.value;
 
 	if (!jsObject.tempValue.filter) {
@@ -14,7 +14,7 @@ const onSubmit = (e, logicValue) => {
 	}
 	if (id > 0 && jsObject.tempValue.filter[id]) {
 		jsObject.tempValue.filter[id]['column_id'] = columnId;
-		jsObject.tempValue.filter[id]['operator_id'] = operatorId;
+		jsObject.tempValue.filter[id]['operator_if_id'] = operatorId;
 		jsObject.tempValue.filter[id]['value'] = value;
 		delete jsObject.filterFormId;
 		Store().dispatch({
@@ -28,7 +28,7 @@ const onSubmit = (e, logicValue) => {
 		jsObject.tempValue.filter[_id] = {
 			id: _id,
 			column_id: columnId,
-			operator_id: operatorId,
+			operator_if_id: operatorId,
 			value,
 		};
 		delete jsObject.filterFormId;

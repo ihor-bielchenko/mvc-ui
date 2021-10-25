@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
-import format from 'structures/format.js';
+import formatTypes from 'structures/formatTypes.js';
 import onDelete from 'components/Dialog/Prop/onDelete.js';
 import onDialog from 'components/Dialog/onDialog.js';
 import { DIALOG_PROP } from 'consts/dialog.js';
@@ -20,10 +20,10 @@ let Prop = ({
 		.data[id]
 		.name
 		.substr(0, 65));
-	const formatId = useSelector((state) => state
+	const dataTypeId = useSelector((state) => state
 		.entities
 		.data[id]
-		.format_id);
+		.data_type_id);
 	const _onDelete = React.useCallback((e) => onDelete(e, id), [
 		id,
 	]);
@@ -50,7 +50,7 @@ let Prop = ({
 		<Typography
 			variant="caption"
 			component="div">
-			({format[formatId].text()})
+			({formatTypes[dataTypeId].text()})
 		</Typography>
 		<Typography 
 			component="div"

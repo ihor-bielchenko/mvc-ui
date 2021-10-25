@@ -1,7 +1,7 @@
 import getTemplate from './getTemplate.js';
 import getDefaultValueByTypeId from './getDefaultValueByTypeId.js';
 
-const buildBlocks = (typeId, jsObject = { data: {}, blocks: {} }) => {
+const buildBlocks = (jsObject = { data: {}, blocks: {} }) => {
 	const data = jsObject.data;
 	const blocks = jsObject.blocks;
 	const dataKeys = Object.keys(data);
@@ -13,7 +13,7 @@ const buildBlocks = (typeId, jsObject = { data: {}, blocks: {} }) => {
 
 		data[_id] = getTemplate({
 			parent_id: data[_id].parent_id,
-			value: getDefaultValueByTypeId(data[_id].type_id),
+			value: getDefaultValueByTypeId(data[_id].data_type_id),
 			...data[_id],
 		});
 

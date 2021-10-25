@@ -11,12 +11,12 @@ import SelectOperatorIf from 'components/Select/OperatorIf';
 import onDialog from 'components/Dialog/onDialog.js';
 import typeFormatValidating from 'utils/typeFormatValidating.js';
 import loadColumnInputs from 'utils/loadColumnInputs.js';
-import { SOURCE_SCRIPT } from 'structures/source.js';
+import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
 import { 
-	COLUMN_ID,
-	COLUMN_NUMBER, 
-	COLUMN_TIME,
-} from 'structures/columnTypes.js';
+	DATA_TYPE_ID,
+	DATA_TYPE_NUMBER, 
+	DATA_TYPE_TIME,
+} from 'structures/dataTypes.js';
 import onColumn from './onColumn.js';
 import onSubmit from './onSubmit.js';
 import onCancel from './onCancel.js';
@@ -28,11 +28,11 @@ let Form = ({
 	setId, 
 }) => {
 	const value = useSelector((state) => ((state.jsObject.tempValue.filter || {})[name] || {}).value || '');
-	const operatorId = useSelector((state) => ((state.jsObject.tempValue.filter || {})[name] || {}).operator_id || '');
-	const columnId = useSelector((state) => ((state.jsObject.tempValue.filter || {})[name] || {}).column_id || '');
+	const operatorId = useSelector((state) => ((state.jsObject.tempValue.filter || {})[name] || {}).operator_if_id || '');
+	const columnId = useSelector((state) => ((state.jsObject.tempValue.filter || {})[name] || {}).DATA_TYPE_id || '');
 	const [ tempColumnId, setTempColumnId ] = React.useState(() => columnId || '');
 	const [ logicValue, setLogicValue ] = React.useState(() => (typeof value === 'object' && 
-		value.source_id === SOURCE_SCRIPT.id)
+		value.source_type_id === SOURCE_TYPE_SCRIPT.id)
 		? value
 		: undefined);
 	const _column = Store().getState().dbColumns.data[tempColumnId];
@@ -48,9 +48,9 @@ let Form = ({
 	const _onSubmit = React.useCallback((e) => onSubmit(e, logicValue), [
 		logicValue,
 	]);
-	const _onMenu = React.useCallback((e) => onDialog(SOURCE_SCRIPT.id, {
-		onClickEntity: (e, typeId, id) => onChangeByLogic(e, typeId, id, setLogicValue),
-		formatValidating: typeFormatValidating((_column || {}).type_id),
+	const _onMenu = React.useCallback((e) => onDialog(SOURCE_TYPE_SCRIPT.id, {
+		onClickEntity: (e, dataTypeId, id) => onChangeByLogic(e, dataTypeId, id, setLogicValue),
+		formatValidating: typeFormatValidating((_column || {}).data_type_id),
 	})(e), [
 		_column,
 		setLogicValue,
@@ -69,10 +69,10 @@ let Form = ({
 		</Box>
 		{tempColumnId > 0 && _column
 			? (() => {
-				const isNumeric = _column.type_id === COLUMN_ID.id ||
-					_column.type_id === COLUMN_NUMBER.id ||
-					_column.type_id === COLUMN_TIME.id;
-				const Component = React.lazy(loadColumnInputs(_column.type_id));
+				const isNumeric = _column.data_type_id === DATA_TYPE_ID.id ||
+					_column.data_type_id === DATA_TYPE_NUMBER.id ||
+					_column.data_type_id === DATA_TYPE_TIME.id;
+				const Component = React.lazy(loadColumnInputs(_column.data_type_id));
 
 				return <React.Fragment>
 					<Box py={2}>

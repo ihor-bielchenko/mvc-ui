@@ -4,13 +4,13 @@ import Box from '@material-ui/core/Box';
 import Store from 'components/Store';
 import protocol from 'structures/protocol.js';
 import method from 'structures/method.js';
-import { SOURCE_PROXY_PASS } from 'structures/source.js';
+import { SOURCE_TYPE_PROXY_PASS } from 'structures/sourceTypes.js';
 import { 
-	COLUMN_NUMBER,
-	COLUMN_TEXT, 
-	COLUMN_OBJ,
-	COLUMN_ARR,
-} from 'structures/columnTypes.js';
+	DATA_TYPE_NUMBER,
+	DATA_TYPE_TEXT, 
+	DATA_TYPE_OBJECT,
+	DATA_TYPE_ARRAY,
+} from 'structures/dataTypes.js';
 import Remove from '../Remove';
 import Key from '../Key';
 import Type from '../Type';
@@ -28,7 +28,7 @@ let ComplexItem = ({
 	ValueComponent,
 	TypeComponent,
 	onChangeKey,
-	typeId,
+	dataTypeId,
 	keyValue,
 	value,
 	widthDefault,
@@ -53,13 +53,13 @@ let ComplexItem = ({
 			parentId={parentId}
 			id={id}
 			TypeComponent={TypeComponent}
-			value={typeId} />
+			value={dataTypeId} />
 		<Divider
 			parentId={parentId}
 			id={id} />
 		<Values
 			widthDefault={widthDefault}
-			typeId={typeId}
+			dataTypeId={dataTypeId}
 			value={value}
 			last={last} />
 	</Box>;
@@ -95,7 +95,7 @@ let ComplexItemDb = ({
 		id={id}
 		KeyComponent={KeyComponent}
 		TypeComponent={TypeComponent}
-		typeId={dbColumnsData[columnId].type_id}
+		dataTypeId={dbColumnsData[columnId].data_type_id}
 		keyValue={key}
 		value={dbColumnsData[columnId].default_value}
 		onChangeKey={_onChangeKey} />;
@@ -146,7 +146,7 @@ let ComplexItemProxy = ({
 	const routesData = routes.data;
 	const route = routesData.find((item) => item.id === routeId);
 	const responseKeys = Object.keys(route.response);
-	const typeId = route.response[responseKeys[0]].type_id;
+	const dataTypeId = route.response[responseKeys[0]].data_type_id;
 
 	return <React.Fragment>
 		<ComplexItem
@@ -154,7 +154,7 @@ let ComplexItemProxy = ({
 			id={id}
 			KeyComponent={KeyComponent}
 			TypeComponent={TypeComponent}
-			typeId={COLUMN_NUMBER.id}
+			dataTypeId={DATA_TYPE_NUMBER.id}
 			keyValue={keyStatusCode}
 			onChangeKey={_onChangeStatusCode}
 			value="200, ..., 524" />
@@ -163,10 +163,10 @@ let ComplexItemProxy = ({
 			id={id}
 			KeyComponent={KeyComponent}
 			TypeComponent={TypeComponent}
-			typeId={COLUMN_TEXT.id}
+			dataTypeId={DATA_TYPE_TEXT.id}
 			keyValue={keyUri}
 			onChangeKey={_onChangeUri}
-			value={(protocol[route.protocol_id].text() +'://'+ route.domain_path + route.path.map((pathItem) => pathItem.type_id === 2
+			value={(protocol[route.protocol_id].text() +'://'+ route.domain_path + route.path.map((pathItem) => pathItem.data_type_id === 2
 				? ('/'+ placeholder[pathItem.id].value)
 				: ('/'+ pathItem.value))).replaceAll(',', '')} />
 		<ComplexItem
@@ -174,7 +174,7 @@ let ComplexItemProxy = ({
 			id={id}
 			KeyComponent={KeyComponent}
 			TypeComponent={TypeComponent}
-			typeId={COLUMN_TEXT.id}
+			dataTypeId={DATA_TYPE_TEXT.id}
 			keyValue={keyMethod}
 			onChangeKey={_onChangeMethod}
 			value={method[route.method_id].name} />
@@ -184,7 +184,7 @@ let ComplexItemProxy = ({
 				id={id}
 				KeyComponent={KeyComponent}
 				TypeComponent={TypeComponent}
-				typeId={COLUMN_OBJ.id}
+				typeId={DATA_TYPE_OBJECT.id}
 				keyValue={headers}
 				onChangeKey={_onChangeHeaders}
 				value={() => <Value
@@ -200,14 +200,14 @@ let ComplexItemProxy = ({
 				id={id}
 				KeyComponent={KeyComponent}
 				TypeComponent={TypeComponent}
-				typeId={typeId}
+				dataTypeId={dataTypeId}
 				keyValue={keyData}
 				onChangeKey={_onChangeData}
 				value={() => <Value
-					parentId={(typeId !== COLUMN_ARR.id && typeId !== COLUMN_OBJ.id)
+					parentId={(dataTypeId !== DATA_TYPE_ARRAY.id && dataTypeId !== DATA_TYPE_OBJECT.id)
 						? dataId
 						: dataParentId}
-					id={(typeId !== COLUMN_ARR.id && typeId !== COLUMN_OBJ.id)
+					id={(dataTypeId !== DATA_TYPE_ARRAY.id && dataTypeId !== DATA_TYPE_OBJECT.id)
 						? firstChildId
 						: dataId}
 					KeyComponent={KeyComponent}
@@ -234,7 +234,7 @@ let ComplexValue = ({
 }) => {
 	const isCollection = useSelector((state) => ((state.jsObject.data[id] || {}).value || {}).is_collection);
 	const columnsKeys = useSelector((state) => Object.keys(((state.jsObject.data[id] || {}).value || {}).columns || {}));
-	const isSourceProxyPass = useSelector((state) => ((state.jsObject.data[id] || {}).value || {}).source_id === SOURCE_PROXY_PASS.id);
+	const isSourceProxyPass = useSelector((state) => ((state.jsObject.data[id] || {}).value || {}).source_type_id === SOURCE_TYPE_PROXY_PASS.id);
 
 	return <React.Fragment>
 		{isCollection

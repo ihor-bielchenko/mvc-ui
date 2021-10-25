@@ -1,5 +1,5 @@
 import Store from 'components/Store';
-import { SOURCE_PLACEHOLDER } from 'structures/source.js';
+import { SOURCE_TYPE_PLACEHOLDER } from 'structures/sourceTypes.js';
 import onClose from './onClose.js';
 
 const onSave = (e, itemId, valueId) => {
@@ -7,7 +7,7 @@ const onSave = (e, itemId, valueId) => {
 
 	if (typeof jsObject.data[itemId] === 'object') {
 		jsObject.data[itemId].value = { 
-			source_id: SOURCE_PLACEHOLDER.id,
+			source_type_id: SOURCE_TYPE_PLACEHOLDER.id,
 			value: valueId,
 		};
 	}

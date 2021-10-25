@@ -28,7 +28,7 @@ let Column = ({
 				key={id}
 				value={id}>
 				<Typography 
-					color={dbColumnsData[id].type_id === 0
+					color={dbColumnsData[id].data_type_id === 0
 						? 'secondary'
 						: 'initial'}>
 					<b>{dbColumnsData[id].name}</b>

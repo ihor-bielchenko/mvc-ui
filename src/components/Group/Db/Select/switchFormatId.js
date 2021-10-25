@@ -1,29 +1,25 @@
 import {
-	FORMAT_ATOMIC,
-	FORMAT_OBJ,
-	FORMAT_ARR,
-} from 'structures/format.js';
-import {
-	COLUMN_OBJ,
-	COLUMN_ARR,
-} from 'structures/columnTypes.js';
+	DATA_TYPE_ATOMIC,
+	DATA_TYPE_OBJECT,
+	DATA_TYPE_ARRAY,
+} from 'structures/dataTypes.js';
 
 const switchFormatId = (id) => {
 	if (typeof jsObject.data[id] === 'object') {
 		if ((jsObject.tempValue['select'] || []).length > 0) {
-			if (prop.format_id === FORMAT_ATOMIC.id) {
-				prop.format_id = FORMAT_OBJ.id;
+			if (prop.format_TYPE_id === DATA_TYPE_ATOMIC.id) {
+				prop.format_TYPE_id = DATA_TYPE_OBJECT.id;
 			}
 			else {
-				prop.body[id].type_id = COLUMN_OBJ.id;
+				prop.body[id].data_type_id = DATA_TYPE_OBJECT.id;
 			}
 		}
 		if (jsObject.tempValue['is_collection']) {
-			if (prop.format_id === FORMAT_ATOMIC.id) {
-				prop.format_id = FORMAT_ARR.id;
+			if (prop.format_TYPE_id === DATA_TYPE_ATOMIC.id) {
+				prop.format_TYPE_id = DATA_TYPE_ARRAY.id;
 			}
 			else {
-				prop.body[id].type_id = COLUMN_ARR.id;
+				prop.body[id].data_type_id = DATA_TYPE_ARRAY.id;
 			}
 		}
 	}

@@ -11,13 +11,13 @@ import { StyledChip } from 'components/Input/LogicValue.jsx';
 import AddIcon from '@material-ui/icons/Add';
 import Header from 'components/Header';
 import { 
-	SOURCE_PLACEHOLDER,
-	SOURCE_SCRIPT, 
-} from 'structures/source.js';
+	SOURCE_TYPE_PLACEHOLDER,
+	SOURCE_TYPE_SCRIPT, 
+} from 'structures/sourceTypes.js';
 import {
-	COLUMN_NUMBER,
-	COLUMN_TEXT,
-} from 'structures/columnTypes.js';
+	DATA_TYPE_NUMBER,
+	DATA_TYPE_TEXT,
+} from 'structures/dataTypes.js';
 import onDialog from '../onDialog.js';
 import onClear from '../onClear.js';
 import onClose from './onClose.js';
@@ -25,7 +25,7 @@ import onSave from './onSave.js';
 import onChangeByLogic from './onChangeByLogic.js';
 
 let SourcePlaceholder = () => {
-	const dialog = useSelector((state) => state.dialogs[SOURCE_PLACEHOLDER.id]);
+	const dialog = useSelector((state) => state.dialogs[SOURCE_TYPE_PLACEHOLDER.id]);
 	const bodyId = (dialog || {}).name;
 	const path = useSelector((state) => state.routes.form.path || []);
 	const value = useSelector((state) => state.jsObject.tempValue.value);
@@ -35,11 +35,11 @@ let SourcePlaceholder = () => {
 	const _onClear = React.useCallback((e) => onClear(e, bodyId), [
 		bodyId,
 	]);
-	const _onMenu = React.useCallback((e) => onDialog(SOURCE_SCRIPT.id, {
-		onClickEntity: (e, typeId, id) => onChangeByLogic(e, typeId, id, bodyId),
+	const _onMenu = React.useCallback((e) => onDialog(SOURCE_TYPE_SCRIPT.id, {
+		onClickEntity: (e, dataTypeId, id) => onChangeByLogic(e, dataTypeId, id, bodyId),
 		formatValidating: () => ([
-			COLUMN_NUMBER.id,
-			COLUMN_TEXT.id,
+			DATA_TYPE_NUMBER.id,
+			DATA_TYPE_TEXT.id,
 		]),
 	})(e), [
 		bodyId,
@@ -79,7 +79,7 @@ let SourcePlaceholder = () => {
 								height: 60,
 							}}>
 							<StyledChip 
-								label={SOURCE_SCRIPT.text()}
+								label={SOURCE_TYPE_SCRIPT.text()}
 								onDelete={_onClear}
 								onClick={_onMenu} />
 						</div>
@@ -111,7 +111,7 @@ let SourcePlaceholder = () => {
 							}}>
 							{path.map((pathItem, i) => (
 								<React.Fragment key={pathItem.id}>
-									/{pathItem.type_id === 2
+									/{pathItem.data_type_id === 2
 										? <Chip 
 											label={pathItem.value}
 											onClick={_onSave(pathItem.id)}

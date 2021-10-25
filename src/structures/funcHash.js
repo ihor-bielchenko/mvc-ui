@@ -1,10 +1,10 @@
 import CodeIcon from '@material-ui/icons/Code';
-import { COLUMN_TEXT } from 'structures/columnTypes.js';
+import { DATA_TYPE_TEXT } from 'structures/dataTypes.js';
 
 export const HASH_PASSWORD = {
 	id: process.env.HASH_PASSWORD,
 	entity_id: process.env.ENTITY_FUNC,
-	format_id: COLUMN_TEXT.id,
+	format_id: DATA_TYPE_TEXT.id,
 	icon: CodeIcon,
 	color: 'primary',
 	text: () => 'Создать пароль',
@@ -13,7 +13,7 @@ export const HASH_PASSWORD = {
 export const HASH_BASE64 = {
 	id: process.env.HASH_BASE64,
 	entity_id: process.env.ENTITY_FUNC,
-	format_id: COLUMN_TEXT.id,
+	format_id: DATA_TYPE_TEXT.id,
 	icon: CodeIcon,
 	color: 'primary',
 	text: () => 'Простая кодировка',
@@ -22,7 +22,7 @@ export const HASH_BASE64 = {
 export const HASH_HASH = {
 	id: process.env.HASH_HASH,
 	entity_id: process.env.ENTITY_FUNC,
-	format_id: COLUMN_TEXT.id,
+	format_id: DATA_TYPE_TEXT.id,
 	icon: CodeIcon,
 	color: 'primary',
 	text: () => 'Простое хеширование',
@@ -31,7 +31,7 @@ export const HASH_HASH = {
 export const HASH_CRYPTO = {
 	id: process.env.HASH_CRYPTO,
 	entity_id: process.env.ENTITY_FUNC,
-	format_id: COLUMN_TEXT.id,
+	format_id: DATA_TYPE_TEXT.id,
 	icon: CodeIcon,
 	color: 'primary',
 	text: () => 'Шифрование по ключу',

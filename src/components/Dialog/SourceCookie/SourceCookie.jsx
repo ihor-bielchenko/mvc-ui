@@ -11,28 +11,28 @@ import CheckIcon from '@material-ui/icons/Check';
 import Header from 'components/Header';
 import InputText from 'components/Input/Text';
 import { 
-	SOURCE_COOKIE,
-	SOURCE_SCRIPT, 
-} from 'structures/source.js';
+	SOURCE_TYPE_COOKIE,
+	SOURCE_TYPE_SCRIPT, 
+} from 'structures/sourceTypes.js';
 import {
-	COLUMN_NUMBER,
-	COLUMN_TEXT,
-} from 'structures/columnTypes.js';
+	DATA_TYPE_NUMBER,
+	DATA_TYPE_TEXT,
+} from 'structures/dataTypes.js';
 import onDialog from '../onDialog.js';
 import onChangeByLogic from '../onChangeByLogic.js';
 import onClear from '../onClear.js';
 import onClose from './onClose.js';
 import onSubmit from './onSubmit.js';
 
-const _onMenu = onDialog(SOURCE_SCRIPT.id, {
+const _onMenu = onDialog(SOURCE_TYPE_SCRIPT.id, {
 	onClickEntity: onChangeByLogic,
 	formatValidating: () => ([
-		COLUMN_NUMBER.id,
-		COLUMN_TEXT.id,
+		DATA_TYPE_NUMBER.id,
+		DATA_TYPE_TEXT.id,
 	])
 });
 let SourceCookie = () => {
-	const dialog = useSelector((state) => state.dialogs[SOURCE_COOKIE.id]);
+	const dialog = useSelector((state) => state.dialogs[SOURCE_TYPE_COOKIE.id]);
 	const bodyId = (dialog || {}).name;
 	const value = useSelector((state) => state.jsObject.tempValue.value || '');
 	const _onSubmit = React.useCallback((e) => onSubmit(e, bodyId), [
@@ -49,9 +49,9 @@ let SourceCookie = () => {
 				aria-describedby="dialog-description"
 				fullWidth
 				open={!!dialog}
-				onClose={onClose(SOURCE_COOKIE.id)}>
+				onClose={onClose(SOURCE_TYPE_COOKIE.id)}>
 				<DialogTitle>
-					<Header onClose={onClose(SOURCE_COOKIE.id)}>
+					<Header onClose={onClose(SOURCE_TYPE_COOKIE.id)}>
 						Куки входящего запроса
 					</Header>
 				</DialogTitle>
@@ -79,7 +79,7 @@ let SourceCookie = () => {
 								variant="outlined"
 								color="secondary"
 								startIcon={<CloseIcon />}
-								onClick={onClose(SOURCE_COOKIE.id)}>
+								onClick={onClose(SOURCE_TYPE_COOKIE.id)}>
 								Отмена
 							</Button>
 							<Button 

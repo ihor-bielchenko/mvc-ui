@@ -18,14 +18,14 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import Header from 'components/Header';
 import JsObject from 'components/JsObject';
 import InputText from 'components/Input/Text';
-import SelectFormat from 'components/Select/Format';
+import SelectType from 'components/Select/Type';
 import Transition from 'components/Dialog/Transition.jsx';
 import onDialog from 'components/Dialog/onDialog.js';
-import format, { 
-	FORMAT_ATOMIC,
-	FORMAT_OBJ,
-	FORMAT_ARR, 
-} from 'structures/format.js';
+import dataTypes, { 
+	DATA_TYPE_ATOMIC,
+	DATA_TYPE_OBJECT,
+	DATA_TYPE_ARRAY, 
+} from 'structures/dataTypes.js';
 import { 
 	DIALOG_PROP,
 	DIALOG_DELETE_CONFIRM, 
@@ -38,7 +38,7 @@ import onClose from './onClose.js';
 import onChangeName from './onChangeName.js';
 import onSave from './onSave.js';
 import onDelete from './onDelete.js';
-import onSelectFormatId from './onSelectFormatId.js';
+import onSelectDataTypeId from './onSelectDataTypeId.js';
 import onCheckVariable from './onCheckVariable.js';
 
 let Prop = () => {
@@ -47,7 +47,7 @@ let Prop = () => {
 	const id = useSelector((state) => state.prop.id);
 	const name = useSelector((state) => state.prop.name || '');
 	const asVariable = useSelector((state) => !!state.prop.as_variable);
-	const formatId = useSelector((state) => (state.jsObject.data[0] || {}).type_id ?? FORMAT_ATOMIC.id);
+	const dataTypeId = useSelector((state) => (state.jsObject.data[0] || {}).data_type_id ?? DATA_TYPE_ATOMIC.id);
 	const _onDelete = React.useCallback((e) => onDelete(e, id), [
 		id,
 	]);
@@ -124,18 +124,19 @@ let Prop = () => {
 							<Box
 								position="relative"
 								width="300px">
-								<SelectFormat
-									label="Многомерный формат"
-									name="format_id"
-									value={formatId}
-									onSelect={onSelectFormatId}
-									onFilter={(key) => format[key].id === FORMAT_ATOMIC.id
-										|| format[key].id === FORMAT_OBJ.id
-										|| format[key].id === FORMAT_ARR.id} />
+								<SelectType 
+									label="Формат данных"
+									name="data_type_id"
+									value={dataTypeId}
+									onSelect={onSelectDataTypeId}
+									onFilter={(key) => {
+										return dataTypes[key].id === DATA_TYPE_ATOMIC.id
+											|| dataTypes[key].id === DATA_TYPE_OBJECT.id
+											|| dataTypes[key].id === DATA_TYPE_ARRAY.id
+									}} />
 							</Box>
 						</Box>
 						<JsObject 
-							typeId={formatId}
 							KeyComponent={KeyComponent}
 							ValueComponent={ValueComponent}
 							TypeComponent={TypeComponent} />

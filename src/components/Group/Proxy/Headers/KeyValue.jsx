@@ -4,12 +4,12 @@ import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import InputText from 'components/Input/Text';
-import { SOURCE_SCRIPT } from 'structures/source.js';
+import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
 import {
-	COLUMN_NUMBER,
-	COLUMN_TEXT,
-	COLUMN_BOOLEAN,
-} from 'structures/columnTypes.js';
+	DATA_TYPE_NUMBER,
+	DATA_TYPE_TEXT,
+	DATA_TYPE_BOOLEAN,
+} from 'structures/dataTypes.js';
 import onDialog from 'components/Dialog/onDialog.js';
 import onValidate from 'components/Dialog/SourceProxy/onValidate.js';
 import onDelete from './onDelete.js';
@@ -36,22 +36,22 @@ let KeyValue = ({ name }) => {
 	const _onDelete = React.useCallback((e) => onDelete(e, name), [
 		name,
 	]);
-	const _onMenuKey = React.useCallback((e) => onDialog(SOURCE_SCRIPT.id, {
-		onClickEntity: (e, typeId, id) => onChangeByLogic(e, typeId, id, name, 'key'),
+	const _onMenuKey = React.useCallback((e) => onDialog(SOURCE_TYPE_SCRIPT.id, {
+		onClickEntity: (e, dataTypeId, id) => onChangeByLogic(e, dataTypeId, id, name, 'key'),
 		formatValidating: () => ([
-			COLUMN_NUMBER.id,
-			COLUMN_TEXT.id,
-			COLUMN_BOOLEAN.id,
+			DATA_TYPE_NUMBER.id,
+			DATA_TYPE_TEXT.id,
+			DATA_TYPE_BOOLEAN.id,
 		]),
 	})(e), [
 		name,
 	]);
-	const _onMenuValue = React.useCallback((e) => onDialog(SOURCE_SCRIPT.id, {
-		onClickEntity: (e, typeId, id) => onChangeByLogic(e, typeId, id, name, 'value'),
+	const _onMenuValue = React.useCallback((e) => onDialog(SOURCE_TYPE_SCRIPT.id, {
+		onClickEntity: (e, dataTypeId, id) => onChangeByLogic(e, dataTypeId, id, name, 'value'),
 		formatValidating: () => ([
-			COLUMN_NUMBER.id,
-			COLUMN_TEXT.id,
-			COLUMN_BOOLEAN.id,
+			DATA_TYPE_NUMBER.id,
+			DATA_TYPE_TEXT.id,
+			DATA_TYPE_BOOLEAN.id,
 		]),
 	})(e), [
 		name,

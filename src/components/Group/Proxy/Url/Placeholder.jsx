@@ -4,11 +4,11 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import InputText from 'components/Input/Text';
-import { SOURCE_SCRIPT } from 'structures/source.js';
+import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
 import {
-	COLUMN_NUMBER,
-	COLUMN_TEXT,
-} from 'structures/columnTypes.js';
+	DATA_TYPE_NUMBER,
+	DATA_TYPE_TEXT,
+} from 'structures/dataTypes.js';
 import onDialog from 'components/Dialog/onDialog.js';
 import onValidate from 'components/Dialog/SourceProxy/onValidate.js';
 import onPlaceholder from './onPlaceholder.js';
@@ -19,7 +19,7 @@ let Placeholder = ({
 	index,
 	length,
 	routeId, 
-	typeId,
+	pathTypeId,
 	name,
 	label,
 }) => {
@@ -27,11 +27,11 @@ let Placeholder = ({
 	const _onClear = React.useCallback((e) => onClear(e, name), [
 		name,
 	]);
-	const _onMenu = React.useCallback((e) => onDialog(SOURCE_SCRIPT.id, {
-		onClickEntity: (e, typeId, id) => onChangeByLogic(e, typeId, id, routeId, name),
+	const _onMenu = React.useCallback((e) => onDialog(SOURCE_TYPE_SCRIPT.id, {
+		onClickEntity: (e, dataTypeId, id) => onChangeByLogic(e, dataTypeId, id, routeId, name),
 		formatValidating: () => ([
-			COLUMN_NUMBER.id,
-			COLUMN_TEXT.id,
+			DATA_TYPE_NUMBER.id,
+			DATA_TYPE_TEXT.id,
 		]),
 	})(e), [
 		routeId,
@@ -46,7 +46,7 @@ let Placeholder = ({
 		<Grid
 			item
 			xs="auto">
-			{typeId === 2
+			{pathTypeId === 2
 				? <Box maxWidth="160px">
 					<InputText
 						required
@@ -82,7 +82,7 @@ Placeholder.defaultProps = {
 	index: 0,
 	length: 0,
 	routeId: 0,
-	typeId: 0,
+	pathTypeId: 0,
 	name: 0,
 	label: '',
 };

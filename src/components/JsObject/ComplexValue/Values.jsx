@@ -2,15 +2,15 @@ import React from 'react';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { 
-	COLUMN_OBJ,
-	COLUMN_ARR,
-	COLUMN_NULL,
-	COLUMN_NUMBER,
-	COLUMN_BOOLEAN,
-} from 'structures/columnTypes.js';
+	DATA_TYPE_OBJECT,
+	DATA_TYPE_ARRAY,
+	DATA_TYPE_NULL,
+	DATA_TYPE_NUMBER,
+	DATA_TYPE_BOOLEAN,
+} from 'structures/dataTypes.js';
 
 let Values = ({
-	typeId, 
+	dataTypeId, 
 	value,
 	widthDefault,
 	last,
@@ -31,13 +31,13 @@ let Values = ({
 			</Typography>
 			: <React.Fragment />}
 		{(() => {
-			switch (typeId) {
-				case COLUMN_OBJ.id:
-				case COLUMN_ARR.id:
+			switch (dataTypeId) {
+				case DATA_TYPE_OBJECT.id:
+				case DATA_TYPE_ARRAY.id:
 					return typeof value === 'function'
 						? value()
 						: value;
-				case COLUMN_NULL.id:
+				case DATA_TYPE_NULL.id:
 					return <Typography 
 						variant="body1"
 						color="textSecondary"
@@ -47,7 +47,7 @@ let Values = ({
 						}}>
 						<i><b>NULL</b></i>
 					</Typography>;
-				case COLUMN_NUMBER.id:
+				case DATA_TYPE_NUMBER.id:
 					return typeof value === 'function'
 						? value()
 						: <Typography 
@@ -59,7 +59,7 @@ let Values = ({
 							}}>
 							{value.toString()}
 						</Typography>;
-				case COLUMN_BOOLEAN.id:
+				case DATA_TYPE_BOOLEAN.id:
 					return typeof value === 'function'
 						? value()
 						: <Typography 

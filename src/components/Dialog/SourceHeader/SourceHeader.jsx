@@ -13,29 +13,29 @@ import InputText from 'components/Input/Text';
 import onSubmit from 'components/Dialog/SourceCookie/onSubmit.js';
 import onClose from 'components/Dialog/SourceCookie/onClose.js';
 import { 
-	SOURCE_HEADER,
-	SOURCE_SCRIPT, 
-} from 'structures/source.js';
+	SOURCE_TYPE_HEADER,
+	SOURCE_TYPE_SCRIPT, 
+} from 'structures/sourceTypes.js';
 import {
-	COLUMN_NUMBER,
-	COLUMN_TEXT,
-} from 'structures/columnTypes.js';
+	DATA_TYPE_NUMBER,
+	DATA_TYPE_TEXT,
+} from 'structures/dataTypes.js';
 import onDialog from '../onDialog.js';
 import onChangeByLogic from '../onChangeByLogic.js';
 import onClear from '../onClear.js';
 
-const _onMenu = onDialog(SOURCE_SCRIPT.id, {
+const _onMenu = onDialog(SOURCE_TYPE_SCRIPT.id, {
 	onClickEntity: onChangeByLogic,
 	formatValidating: () => ([
-		COLUMN_NUMBER.id,
-		COLUMN_TEXT.id,
+		DATA_TYPE_NUMBER.id,
+		DATA_TYPE_TEXT.id,
 	]),
 });
 let SourceHeader = () => {
-	const dialog = useSelector((state) => state.dialogs[SOURCE_HEADER.id]);
+	const dialog = useSelector((state) => state.dialogs[SOURCE_TYPE_HEADER.id]);
 	const bodyId = (dialog || {}).name;
 	const value = useSelector((state) => state.jsObject.tempValue.value || '');
-	const _onSubmit = React.useCallback((e) => onSubmit(e, bodyId, SOURCE_HEADER.id), [
+	const _onSubmit = React.useCallback((e) => onSubmit(e, bodyId, SOURCE_TYPE_HEADER.id), [
 		bodyId,
 	]);
 	const _onClear = React.useCallback((e) => onClear(e, bodyId), [
@@ -48,9 +48,9 @@ let SourceHeader = () => {
 			aria-describedby="dialog-description"
 			fullWidth
 			open={!!dialog}
-			onClose={onClose(SOURCE_HEADER.id)}>
+			onClose={onClose(SOURCE_TYPE_HEADER.id)}>
 			<DialogTitle>
-				<Header onClose={onClose(SOURCE_HEADER.id)}>
+				<Header onClose={onClose(SOURCE_TYPE_HEADER.id)}>
 					Заголовок входящего запроса
 				</Header>
 			</DialogTitle>
@@ -78,7 +78,7 @@ let SourceHeader = () => {
 							variant="outlined"
 							color="secondary"
 							startIcon={<CloseIcon />}
-							onClick={onClose(SOURCE_HEADER.id)}>
+							onClick={onClose(SOURCE_TYPE_HEADER.id)}>
 							Отмена
 						</Button>
 						<Button 

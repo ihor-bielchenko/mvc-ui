@@ -2,20 +2,20 @@ import React from 'react';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import {
-	COLUMN_OBJ,
- 	COLUMN_ARR,
-} from 'structures/columnTypes.js';
+	DATA_TYPE_OBJECT,
+ 	DATA_TYPE_ARRAY,
+} from 'structures/dataTypes.js';
 
-let Header = ({ typeId }) => {
+let Header = ({ dataTypeId }) => {
 	return <Box
 		position="relative"
 		display="flex"
 		alignItems="flex-start"
 		width="100%"
-		pl={(typeId === COLUMN_OBJ.id || typeId === COLUMN_ARR.id)
+		pl={(dataTypeId === DATA_TYPE_OBJECT.id || dataTypeId === DATA_TYPE_ARRAY.id)
 			? 2
 			: 0}>
-		{(typeId === COLUMN_OBJ.id || typeId === COLUMN_ARR.id)
+		{(dataTypeId === DATA_TYPE_OBJECT.id || dataTypeId === DATA_TYPE_ARRAY.id)
 			? <Typography
 				component="div"
 				variant="caption"

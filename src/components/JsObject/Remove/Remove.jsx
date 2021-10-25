@@ -4,24 +4,24 @@ import Box from '@material-ui/core/Box';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import onDialog from 'components/Dialog/onDialog.js';
-import { FORMAT_ATOMIC } from 'structures/format.js';
 import { 
-	COLUMN_ARR,
-	COLUMN_OBJ, 
-} from 'structures/columnTypes.js';
+	DATA_TYPE_ATOMIC,
+	DATA_TYPE_ARRAY,
+	DATA_TYPE_OBJECT, 
+} from 'structures/dataTypes.js';
 import { DIALOG_DELETE_CONFIRM } from 'consts/dialog.js';
 import onRemoveLocal from './onRemove.js';
 
 let Remove = ({ 
 	id,
 	parentId,
-	parentTypeId,
+	parentDataTypeId,
 	disabledRemove,
 	ValueComponent,
 	TypeComponent,
 	onRemove,
 }) => {
-	const _parentTypeId = useSelector((state) => parentTypeId ?? (state.jsObject.data[parentId] || {}).type_id);
+	const _parentDataTypeId = useSelector((state) => parentDataTypeId ?? (state.jsObject.data[parentId] || {}).data_type_id);
 	const _disabledRemove = useSelector((state) => disabledRemove ?? (state.jsObject.data[id] || {}).disabledRemove);
 	const _onRemove = React.useCallback((e) => typeof onRemove === 'function'
 		? onRemove(e, id)
@@ -30,9 +30,9 @@ let Remove = ({
 		onRemove,
 	]);
 
-	return _parentTypeId !== FORMAT_ATOMIC.id 
-		|| _parentTypeId === COLUMN_OBJ.id
-		|| _parentTypeId === COLUMN_ARR.id
+	return _parentDataTypeId !== DATA_TYPE_ATOMIC.id 
+		|| _parentDataTypeId === DATA_TYPE_OBJECT.id
+		|| _parentDataTypeId === DATA_TYPE_ARRAY.id
 		? <React.Fragment>
 			{_disabledRemove
 				? <React.Fragment />

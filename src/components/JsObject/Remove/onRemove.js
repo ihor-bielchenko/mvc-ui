@@ -1,11 +1,11 @@
 import Store from 'components/Store';
 import onClose from 'components/Dialog/onClose.js';
 import { DIALOG_DELETE_CONFIRM } from 'consts/dialog.js';
-import { SOURCE_DB } from 'structures/source.js';
+import { SOURCE_TYPE_DB } from 'structures/sourceTypes.js';
 import { 
-	COLUMN_ARR,
-	COLUMN_OBJ, 
-} from 'structures/columnTypes.js';
+	DATA_TYPE_ARRAY,
+	DATA_TYPE_OBJECT, 
+} from 'structures/dataTypes.js';
 
 const recursiveDelete = (id, data, blocks) => {
 	if (typeof data[id] === 'object') {
@@ -27,10 +27,10 @@ const recursiveDelete = (id, data, blocks) => {
 				blocks[parentId].splice(index, 1);
 			}
 		});
-		if (data[id].type_id === COLUMN_OBJ.id
-			&& data[parentId].type_id === COLUMN_ARR.id
+		if (data[id].data_type_id === DATA_TYPE_OBJECT.id
+			&& data[parentId].data_type_id === DATA_TYPE_ARRAY.id
 			&& typeof data[id].collection === 'object'
-			&& data[id].collection.source_id === SOURCE_DB.id) {
+			&& data[id].collection.source_type_id === SOURCE_TYPE_DB.id) {
 			(blocks[parentId] || []).forEach((item, index) => {
 				blocks[parentId][index].key = index.toString();
 			});
@@ -58,7 +58,7 @@ const onRemove = (e, id) => {
 			blocks[parentId].splice(findIndex, 1);
 
 			if (data[parentId] 
-				&& data[parentId].type_id === COLUMN_ARR.id) {
+				&& data[parentId].data_type_id === DATA_TYPE_ARRAY.id) {
 				const nOrder = key.includes('n')
 					? Number((key.split('n'))[0])
 					: 0;

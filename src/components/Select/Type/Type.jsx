@@ -1,8 +1,8 @@
 import React from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
-import columnTypes, {
-	// COLUMN_RICHTEXT,
-} from 'structures/columnTypes.js';
+import dataTypes, {
+	DATA_TYPE_ATOMIC,
+} from 'structures/dataTypes.js';
 import Select from '../Select.jsx';
 
 let Type = ({
@@ -25,14 +25,14 @@ let Type = ({
 		label={label}
 		onSelect={onSelect}>
 		{Object
-			.keys(columnTypes)
+			.keys(dataTypes)
 			.filter(onFilter)
 			.map((key, i) => {
 				return <MenuItem 
-					key={columnTypes[key].id.toString()}
-					value={columnTypes[key].id.toString()}
-					disabled={!!columnTypes[key].disabled}>
-					{columnTypes[key].text()}
+					key={dataTypes[key].id.toString()}
+					value={dataTypes[key].id.toString()}
+					disabled={!!dataTypes[key].disabled}>
+					{dataTypes[key].text()}
 				</MenuItem>
 		})}
 		{children}
@@ -41,11 +41,11 @@ let Type = ({
 
 Type = React.memo(Type);
 Type.defaultProps = {
-	name: 'type_id',
+	name: 'data_type_id',
 	label: 'Тип данных',
 	required: false,
 	disabled: false,
-	// onFilter: () => (key, i) => columnTypes[key].id !== COLUMN_RICHTEXT.id,
+	onFilter: (key) => dataTypes[key].id !== DATA_TYPE_ATOMIC.id,
 };
 
 export default Type;

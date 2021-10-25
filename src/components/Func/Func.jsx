@@ -12,7 +12,7 @@ import onChangeName from './onChangeName.js';
 let Func = () => {
 	// const id = useSelector((state) => (state.func || {}).id);
 	const name = useSelector((state) => (state.func || {}).name || '');
-	const typeId = useSelector((state) => (state.func || {}).type_id || '');
+	const dataTypeId = useSelector((state) => (state.func || {}).data_type_id || '');
 	const funcTemplateId = useSelector((state) => (state.func || {}).func_template_id || '');
 
 	return <React.Fragment>
@@ -28,13 +28,13 @@ let Func = () => {
 			<SelectFuncType
 				required 
 				onSelect={onSelectFuncType}
-				value={typeId} />
+				value={dataTypeId} />
 		</Box>
-		{typeId > 0
+		{dataTypeId > 0
 			? <Box py={2}>
 				<SelectFuncTemplate 
 					required
-					typeId={typeId}
+					dataTypeId={dataTypeId}
 					value={funcTemplateId}
 					onSelect={onSelectFuncTemplate} />
 			</Box>

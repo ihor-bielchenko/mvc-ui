@@ -4,31 +4,31 @@ const initialState = {
 	data: {
 		1: {
 			id: 1,
-			type_id: 0,
+			data_type_id: 0,
 			name: 'ID',
 			default_value: 0,
 		},
 		2: {
 			id: 2,
-			type_id: 1,
+			data_type_id: 1,
 			name: 'title',
 			default_value: '',
 		},
 		3: {
 			id: 3,
-			type_id: 3,
+			data_type_id: 3,
 			name: 'age',
 			default_value: 0,
 		},
 		4: {
 			id: 4,
-			type_id: 6,
+			data_type_id: 6,
 			name: 'email',
 			default_value: '',
 		},
 		5: {
 			id: 5,
-			type_id: 10,
+			data_type_id: 10,
 			name: 'password',
 			default_value: '',
 		},

@@ -6,14 +6,13 @@ import MenuItem from '@material-ui/core/MenuItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Typography from '@material-ui/core/Typography';
 import onDialog from 'components/Dialog/onDialog.js';
-import source from 'structures/source.js';
-import { SOURCE_MANUALLY } from 'structures/source.js';
+import sourceTypes from 'structures/sourceTypes.js';
+import { SOURCE_TYPE_MANUALLY } from 'structures/sourceTypes.js';
 import onClose from '../onClose.js';
 
 let Source = ({
 	aria,  
 	children, 
-	typeId,
 	onFilter,
 }) => {
 	const anchorEl = useSelector((state) => state.menu[aria]
@@ -35,10 +34,10 @@ let Source = ({
 			onClose={onClose}>
 			{children}
 			{Object
-				.keys(source)
+				.keys(sourceTypes)
 				.filter(onFilter)
 				.map((key, i) => {
-					const item = source[key];
+					const item = sourceTypes[key];
 
 					return <MenuItem 
 						key={item.id}
@@ -64,8 +63,7 @@ let Source = ({
 Source = React.memo(Source);
 Source.defaultProps = {
 	aria: 'aria-source',
-	typeId: 0,
-	onFilter: (key) => source[key].id !== SOURCE_MANUALLY.id,
+	onFilter: (key) => sourceTypes[key].id !== SOURCE_TYPE_MANUALLY.id,
 };
 
 export default Source;

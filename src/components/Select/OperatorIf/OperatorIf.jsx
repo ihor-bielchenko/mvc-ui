@@ -64,7 +64,7 @@ let OperatorIf = ({
 
 OperatorIf = React.memo(OperatorIf);
 OperatorIf.defaultProps = {
-	name: 'operator_id',
+	name: 'operator_if_id',
 	label: 'Оператор сравнения',
 	required: false,
 	isNumeric: false,

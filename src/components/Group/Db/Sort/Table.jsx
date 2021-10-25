@@ -17,7 +17,7 @@ import MenuEntity from 'components/Menu/Entity';
 import onMenu from 'components/Menu/onMenu.js';
 import onDialog from 'components/Dialog/onDialog.js';
 import { DIALOG_DELETE_CONFIRM } from 'consts/dialog.js';
-import { COLUMN_ID } from 'structures/columnTypes.js';
+import { DATA_TYPE_ID } from 'structures/dataTypes.js';
 import onAdd from './onAdd.js';
 import onEdit from './onEdit.js';
 import onDelete from './onDelete.js';
@@ -48,7 +48,7 @@ let Table = () => {
 								<TableCell>
 									<Typography 
 										variant="h6"
-										color={column.type_id === COLUMN_ID.id
+										color={column.data_type_id === DATA_TYPE_ID.id
 											? 'secondary'
 											: 'primary'}>
 										<b>{column.name}</b>

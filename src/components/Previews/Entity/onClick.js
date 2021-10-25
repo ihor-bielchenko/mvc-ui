@@ -42,7 +42,7 @@ const onClick = async (e, toId) => {
 						script_id: getScriptId(),
 						from_entity_id: arrows.addingArrowFromId,
 						to_entity_id: toId,
-						type_id: process.env.ARROW_BASE,
+						data_type_id: process.env.ARROW_BASE,
 					});
 					const data = ((response || {}).data || {}).data || {};
 

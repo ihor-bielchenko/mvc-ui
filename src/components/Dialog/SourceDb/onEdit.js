@@ -1,12 +1,10 @@
 import Store from 'components/Store';
 import getDefaultValueByTypeId from 'components/JsObject/getDefaultValueByTypeId.js';
-import { SOURCE_DB } from 'structures/source.js';
+import { SOURCE_TYPE_DB } from 'structures/sourceTypes.js';
 import {
-	// COLUMN_ID,
-	COLUMN_OBJ,
-	COLUMN_ARR,
-	// COLUMN_NUMBER,
-} from 'structures/columnTypes.js';
+	DATA_TYPE_OBJECT,
+	DATA_TYPE_ARRAY,
+} from 'structures/dataTypes.js';
 
 const onEdit = (e, id, onClose) => {
 	id = Number(id);
@@ -22,7 +20,7 @@ const onEdit = (e, id, onClose) => {
 	const tempValue = jsObject.tempValue;
 	const sourceValue = {
 		...tempValue,
-		source_id: SOURCE_DB.id,
+		source_type_id: SOURCE_TYPE_DB.id,
 		columns: {},
 	};
 	const {
@@ -41,7 +39,7 @@ const onEdit = (e, id, onClose) => {
 		currentItem.collection = sourceValue;
 
 		blocks[id].forEach((item, index) => {
-			if (item.type_id === COLUMN_OBJ.id
+			if (item.data_type_id === DATA_TYPE_OBJECT.id
 				&& typeof item.value === 'object'
 				&& item.value.is_collection) {
 				data[item.id].value = sourceValue;
@@ -52,11 +50,11 @@ const onEdit = (e, id, onClose) => {
 		currentItem.value = sourceValue;
 	}
 	else if (select.length === 1) {
-		if ((parentItem || {}).type_id !== COLUMN_ARR.id) {
+		if ((parentItem || {}).data_type_id !== DATA_TYPE_ARRAY.id) {
 			currentItem.key = dbColumnsData[select[0]].name;
 		}
-		currentItem.type_id = dbColumnsData[select[0]].type_id;
-		currentItem.value = getDefaultValueByTypeId(currentItem.type_id);
+		currentItem.data_type_id = dbColumnsData[select[0]].data_type_id;
+		currentItem.value = getDefaultValueByTypeId(currentItem.data_type_id);
 		currentItem.disabledType = true;
 		currentItem.value = sourceValue;
 	}

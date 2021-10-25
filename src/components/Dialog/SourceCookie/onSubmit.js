@@ -1,27 +1,27 @@
 import Store from 'components/Store';
 import onClose from 'components/Dialog/onClose.js';
 import { 
-	SOURCE_COOKIE,
-	SOURCE_SCRIPT, 
-} from 'structures/source.js';
+	SOURCE_TYPE_COOKIE,
+	SOURCE_TYPE_SCRIPT, 
+} from 'structures/sourceTypes.js';
 import onUnmount from './onUnmount.js';
 
-const onSubmit = (e, id, sourceId = SOURCE_COOKIE.id) => {
+const onSubmit = (e, id, sourceTypeId = SOURCE_TYPE_COOKIE.id) => {
 	e.preventDefault();
 
 	const jsObject = Store().getState().jsObject;
 	const value = (typeof jsObject.tempValue.value === 'object' 
-		&& jsObject.tempValue.value.source_id === SOURCE_SCRIPT.id)
+		&& jsObject.tempValue.value.source_type_id === SOURCE_TYPE_SCRIPT.id)
 		? jsObject.tempValue.value
 		: e.target.value.value;
 
 	if (typeof jsObject.data[id] === 'object') {
 		jsObject.data[id].value = {
-			source_id: sourceId,
+			source_type_id: sourceTypeId,
 			value,
 		};
 	}
-	onClose(sourceId)(e);
+	onClose(sourceTypeId)(e);
 	onUnmount();
 };
 

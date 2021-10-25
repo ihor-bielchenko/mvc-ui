@@ -1,9 +1,9 @@
 import Store from 'components/Store';
 import {
-	COLUMN_OBJ,
-	COLUMN_ARR,
-} from 'structures/columnTypes.js';
-import { SOURCE_DB } from 'structures/source.js';
+	DATA_TYPE_OBJECT,
+	DATA_TYPE_ARRAY,
+} from 'structures/dataTypes.js';
+import { SOURCE_TYPE_DB } from 'structures/sourceTypes.js';
 import getDefaultValueByTypeId from '../getDefaultValueByTypeId.js';
 
 const onSelect = (e, id) => {
@@ -13,17 +13,17 @@ const onSelect = (e, id) => {
 	const currentItem = data[id];
 	
 	if (typeof currentItem === 'object') {
-		currentItem.type_id = Number(e.target.value);
-		currentItem.value = getDefaultValueByTypeId(currentItem.type_id);
+		currentItem.data_type_id = Number(e.target.value);
+		currentItem.value = getDefaultValueByTypeId(currentItem.data_type_id);
 
-		if (currentItem.type_id === COLUMN_ARR.id) {
+		if (currentItem.data_type_id === DATA_TYPE_ARRAY.id) {
 			let offset = 0;
 
 			blocks[id] = (blocks[id] ?? []);
 			blocks[id].forEach((item, i) => {
-				if (item.type_id === COLUMN_OBJ.id 
+				if (item.data_type_id === DATA_TYPE_OBJECT.id 
 					&& typeof item.value === 'object'
-					&& item.value.source_id === SOURCE_DB.id
+					&& item.value.source_type_id === SOURCE_TYPE_DB.id
 					&& typeof item.value.columns === 'object') {
 					const columnKeys = Object.keys(item.value.columns);
 
@@ -39,7 +39,7 @@ const onSelect = (e, id) => {
 				}
 			});
 		}
-		else if (currentItem.type_id === COLUMN_OBJ.id) {
+		else if (currentItem.data_type_id === DATA_TYPE_OBJECT.id) {
 			blocks[id] = (blocks[id] ?? []);
 			blocks[id].forEach((item, i) => {
 				if (blocks[id][i].key.includes('n+')) {

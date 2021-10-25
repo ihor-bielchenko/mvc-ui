@@ -3,13 +3,13 @@ import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import {
-	COLUMN_NUMBER,
-	COLUMN_BOOLEAN,
-	COLUMN_OBJ,
-	COLUMN_ARR,
-	COLUMN_NULL,
-} from 'structures/columnTypes.js';
-import { FORMAT_ATOMIC } from 'structures/format.js';
+	DATA_TYPE_ATOMIC,
+	DATA_TYPE_NUMBER,
+	DATA_TYPE_BOOLEAN,
+	DATA_TYPE_OBJECT,
+	DATA_TYPE_ARRAY,
+	DATA_TYPE_NULL,
+} from 'structures/dataTypes.js';
 import BoxControlWrapper from '../BoxControlWrapper.jsx';
 import Parent from '../Parent';
 import onChangeLocal from './onChange.js';
@@ -17,8 +17,8 @@ import onChangeLocal from './onChange.js';
 let Value = ({
 	parentId,
 	id,
-	parentTypeId,
-	typeId,
+	parentDataTypeId,
+	dataTypeId,
 	value,
 	KeyComponent,
 	TypeComponent,
@@ -27,8 +27,8 @@ let Value = ({
 	onChange,
 	onMerge,
 }) => {
-	const _parentTypeId = useSelector((state) => parentTypeId ?? (state.jsObject.data[parentId] || {}).type_id);
-	const _typeId = useSelector((state) => typeId ?? (state.jsObject.data[id] || {}).type_id);
+	const _parentDataTypeId = useSelector((state) => parentDataTypeId ?? (state.jsObject.data[parentId] || {}).data_type_id);
+	const _dataTypeId = useSelector((state) => dataTypeId ?? (state.jsObject.data[id] || {}).data_type_id);
 	const _value = useSelector((state) => value ?? (state.jsObject.data[id] || {}).value);
 	const _onChange = React.useCallback((e) => typeof onChange === 'function'
 		? onChange(e, id)
@@ -42,16 +42,16 @@ let Value = ({
 			&& typeof ValueComponent['$$typeof'] === 'symbol'
 			? <ValueComponent
 				parentId={parentId}
-				parentTypeId={_parentTypeId}
+				parentDataTypeId={_parentDataTypeId}
 				id={id}
-				typeId={_typeId}
+				dataTypeId={_dataTypeId}
 				value={(() => {
-					switch (_typeId) {
-						case COLUMN_OBJ.id:
-						case COLUMN_ARR.id:
+					switch (_dataTypeId) {
+						case DATA_TYPE_OBJECT.id:
+						case DATA_TYPE_ARRAY.id:
 							return <Parent
 								id={id}
-								typeId={_typeId}
+								dataTypeId={_dataTypeId}
 								last={last}
 								KeyComponent={KeyComponent}
 								ValueComponent={ValueComponent}
@@ -66,36 +66,36 @@ let Value = ({
 				position="relative"
 				width="100%"
 				minWidth="max-content"
-				maxWidth={(parentId === 0 && _parentTypeId === FORMAT_ATOMIC.id)
+				maxWidth={(parentId === 0 && _parentDataTypeId === DATA_TYPE_ATOMIC.id)
 					? 'inherit'
 					: 'max-content'}
-				data-border_left_radius_0={!(_parentTypeId !== FORMAT_ATOMIC.id 
-					|| _parentTypeId === COLUMN_OBJ.id
-					|| _parentTypeId === COLUMN_ARR.id)}
-				data-border_left_hide={!(_parentTypeId !== FORMAT_ATOMIC.id 
-					|| _parentTypeId === COLUMN_OBJ.id
-					|| _parentTypeId === COLUMN_ARR.id)}>
+				data-border_left_radius_0={!(_parentDataTypeId !== DATA_TYPE_ATOMIC.id 
+					|| _parentDataTypeId === DATA_TYPE_OBJECT.id
+					|| _parentDataTypeId === DATA_TYPE_ARRAY.id)}
+				data-border_left_hide={!(_parentDataTypeId !== DATA_TYPE_ATOMIC.id 
+					|| _parentDataTypeId === DATA_TYPE_OBJECT.id
+					|| _parentDataTypeId === DATA_TYPE_ARRAY.id)}>
 				{(() => {
-					switch (_typeId) {
-						case COLUMN_OBJ.id:
-						case COLUMN_ARR.id:
+					switch (_dataTypeId) {
+						case DATA_TYPE_OBJECT.id:
+						case DATA_TYPE_ARRAY.id:
 							return <Parent
 								id={id}
-								typeId={_typeId}
+								dataTypeId={_dataTypeId}
 								last={last}
 								KeyComponent={KeyComponent}
 								ValueComponent={ValueComponent}
 								TypeComponent={TypeComponent}
 								onMerge={onMerge} />;
-						case COLUMN_NULL.id:
+						case DATA_TYPE_NULL.id:
 							return <Typography color="textSecondary">
 								<i><b>NULL</b></i>
 							</Typography>;
-						case COLUMN_NUMBER.id:
+						case DATA_TYPE_NUMBER.id:
 							return <Typography color="primary">
 								{_value.toString()}
 							</Typography>;
-						case COLUMN_BOOLEAN.id:
+						case DATA_TYPE_BOOLEAN.id:
 							return <Typography 
 								color={_value
 									? 'primary'
@@ -109,8 +109,8 @@ let Value = ({
 					}
 				})()}
 			</BoxControlWrapper>}
-		{last || (_typeId === COLUMN_OBJ.id
-			|| _typeId === COLUMN_ARR.id)
+		{last || (_dataTypeId === DATA_TYPE_OBJECT.id
+			|| _dataTypeId === DATA_TYPE_ARRAY.id)
 			? <React.Fragment />
 			: <Box 
 				position="relative"

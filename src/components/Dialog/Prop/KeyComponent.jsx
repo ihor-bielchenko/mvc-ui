@@ -3,20 +3,20 @@ import { useSelector } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import JsBoxControlWrapper from 'components/JsObject/BoxControlWrapper';
 import InputText from 'components/Input/Text';
-import { COLUMN_ARR } from 'structures/columnTypes.js';
+import { DATA_TYPE_ARRAY } from 'structures/dataTypes.js';
 
 let KeyComponent = ({
 	parentId,
-	parentTypeId,
+	parentDataTypeId,
 	id,
-	typeId,
+	dataTypeId,
 	value,
 	onChange,
 }) => {
 	const disabledKey = useSelector((state) => state.jsObject.data[id].disabledKey);
 	const disabledType = useSelector((state) => state.jsObject.data[id].disabledType);
 
-	return (parentTypeId === COLUMN_ARR.id || disabledKey)
+	return (parentDataTypeId === DATA_TYPE_ARRAY.id || disabledKey)
 		? <Typography 
 			variant="body1"
 			color="primary"
@@ -45,9 +45,9 @@ let KeyComponent = ({
 KeyComponent = React.memo(KeyComponent);
 KeyComponent.defaultProps = {
 	parentId: 0,
-	parentTypeId: 0,
+	parentDataTypeId: 0,
 	id: 0,
-	typeId: 0,
+	dataTypeId: 0,
 	value: '',
 	onChange: () => {},
 };

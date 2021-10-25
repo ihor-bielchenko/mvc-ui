@@ -18,13 +18,13 @@ import Filter from 'components/Group/Db/Filter';
 import Sort from 'components/Group/Db/Sort';
 import Query from 'components/Group/Db/Query';
 import onUnmount from 'components/Dialog/SourceCookie/onUnmount.js';
-import { SOURCE_DB } from 'structures/source.js';
+import { SOURCE_TYPE_DB } from 'structures/sourceTypes.js';
 import onClose from '../onClose.js';
 import onSave from './onSave.js';
 import onEdit from './onEdit.js';
 
 let SourceDb = () => {
-	const dialog = useSelector((state) => state.dialogs[SOURCE_DB.id]);
+	const dialog = useSelector((state) => state.dialogs[SOURCE_TYPE_DB.id]);
 	const bodyId = (dialog || {}).name;
 	const isEditFlag = (dialog || {}).isEditFlag || false;
 	const isCollection = (dialog || {}).isCollection;
@@ -43,7 +43,7 @@ let SourceDb = () => {
 		setStep,
 	]);
 	const _onClose = React.useCallback((e, reason) => {
-		onClose(SOURCE_DB.id)(e, reason);
+		onClose(SOURCE_TYPE_DB.id)(e, reason);
 		setStep(0);
 		onUnmount();
 	}, [

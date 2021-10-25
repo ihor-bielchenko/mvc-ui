@@ -2,11 +2,8 @@ import Store from 'components/Store';
 import getTemplate from 'components/JsObject/getTemplate.js';
 import generateKey from 'components/JsObject/generateKey.js';
 import onRemove from 'components/JsObject/Remove/onRemove.js';
-import { SOURCE_PROXY_PASS } from 'structures/source.js';
-import {
-	COLUMN_OBJ,
-	// COLUMN_NUMBER,
-} from 'structures/columnTypes.js';
+import { SOURCE_TYPE_PROXY_PASS } from 'structures/sourceTypes.js';
+import { DATA_TYPE_OBJECT } from 'structures/dataTypes.js';
 
 const onEdit = (e, id, onClose) => {
 	e.preventDefault();
@@ -23,7 +20,7 @@ const onEdit = (e, id, onClose) => {
 	const route = routesData.find((item) => item.id === routeId);
 	const sourceValue = {
 		...tempValue,
-		source_id: SOURCE_PROXY_PASS.id,
+		source_type_id: SOURCE_TYPE_PROXY_PASS.id,
 	};
 	let newId = Date.now(),
 		sectionItem,
@@ -53,7 +50,7 @@ const onEdit = (e, id, onClose) => {
 	data[newId] = getTemplate({
 		parent_id: currentItem.parent_id,
 		id: newId,
-		type_id: COLUMN_OBJ.id,
+		data_type_id: DATA_TYPE_OBJECT.id,
 		key: generateKey(blocks[currentItem.parent_id] ?? []),
 		value: sourceValue,
 		disabledType: true,
@@ -69,7 +66,7 @@ const onEdit = (e, id, onClose) => {
 	data[newId] = getTemplate({
 		parent_id: sectionItem.id,
 		id: newId,
-		type_id: COLUMN_OBJ.id,
+		data_type_id: DATA_TYPE_OBJECT.id,
 		key: generateKey(blocks[currentItem.id] ?? []),
 		value: undefined,
 		disabledType: true,

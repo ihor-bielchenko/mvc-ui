@@ -13,29 +13,29 @@ import InputText from 'components/Input/Text';
 import onSubmit from 'components/Dialog/SourceCookie/onSubmit.js';
 import onClose from 'components/Dialog/SourceCookie/onClose.js';
 import { 
-	SOURCE_REQUEST,
-	SOURCE_SCRIPT, 
-} from 'structures/source.js';
+	SOURCE_TYPE_REQUEST,
+	SOURCE_TYPE_SCRIPT, 
+} from 'structures/sourceTypes.js';
 import {
-	COLUMN_NUMBER,
-	COLUMN_TEXT,
-} from 'structures/columnTypes.js';
+	DATA_TYPE_NUMBER,
+	DATA_TYPE_TEXT,
+} from 'structures/dataTypes.js';
 import onDialog from '../onDialog.js';
 import onChangeByLogic from '../onChangeByLogic.js';
 import onClear from '../onClear.js';
 
-const _onMenu = onDialog(SOURCE_SCRIPT.id, {
+const _onMenu = onDialog(SOURCE_TYPE_SCRIPT.id, {
 	onClickEntity: onChangeByLogic,
 	formatValidating: () => ([
-		COLUMN_NUMBER.id,
-		COLUMN_TEXT.id,
+		DATA_TYPE_NUMBER.id,
+		DATA_TYPE_TEXT.id,
 	]),
 });
 let SourceRequest = () => {
-	const dialog = useSelector((state) => state.dialogs[SOURCE_REQUEST.id]);
+	const dialog = useSelector((state) => state.dialogs[SOURCE_TYPE_REQUEST.id]);
 	const bodyId = (dialog || {}).name;
 	const value = useSelector((state) => state.jsObject.tempValue.value || '');
-	const _onSubmit = React.useCallback((e) => onSubmit(e, bodyId, SOURCE_REQUEST.id), [
+	const _onSubmit = React.useCallback((e) => onSubmit(e, bodyId, SOURCE_TYPE_REQUEST.id), [
 		bodyId,
 	]);
 	const _onClear = React.useCallback((e) => onClear(e, bodyId), [
@@ -48,9 +48,9 @@ let SourceRequest = () => {
 			aria-describedby="dialog-description"
 			fullWidth
 			open={!!dialog}
-			onClose={onClose(SOURCE_REQUEST.id)}>
+			onClose={onClose(SOURCE_TYPE_REQUEST.id)}>
 			<DialogTitle>
-				<Header onClose={onClose(SOURCE_REQUEST.id)}>
+				<Header onClose={onClose(SOURCE_TYPE_REQUEST.id)}>
 					Параметр входящего запроса
 				</Header>
 			</DialogTitle>
@@ -78,7 +78,7 @@ let SourceRequest = () => {
 							variant="outlined"
 							color="secondary"
 							startIcon={<CloseIcon />}
-							onClick={onClose(SOURCE_REQUEST.id)}>
+							onClick={onClose(SOURCE_TYPE_REQUEST.id)}>
 							Отмена
 						</Button>
 						<Button 

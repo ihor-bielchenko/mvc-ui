@@ -20,13 +20,13 @@ import onMenu from 'components/Menu/onMenu.js';
 import onDialog from 'components/Dialog/onDialog.js';
 import { getLang } from 'components/Language';
 import { DIALOG_DELETE_CONFIRM } from 'consts/dialog.js';
-import { SOURCE_SCRIPT } from 'structures/source.js';
+import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
 import { 
-	COLUMN_ID,
-	COLUMN_BOOLEAN,
-	COLUMN_NUMBER,
-	COLUMN_TIME, 
-} from 'structures/columnTypes.js';
+	DATA_TYPE_ID,
+	DATA_TYPE_BOOLEAN,
+	DATA_TYPE_NUMBER,
+	DATA_TYPE_TIME, 
+} from 'structures/dataTypes.js';
 import onOperatorUnion from './onOperatorUnion.js';
 import onAdd from './onAdd.js';
 import onEdit from './onEdit.js';
@@ -73,7 +73,7 @@ let Table = () => {
 									<TableCell>
 										<Typography 
 											variant="h6"
-											color={column.type_id === COLUMN_ID.id
+											color={column.data_type_id === DATA_TYPE_ID.id
 												? 'secondary'
 												: 'primary'}>
 											<b>{column.name}</b>
@@ -81,11 +81,11 @@ let Table = () => {
 									</TableCell>
 									<TableCell>
 										<Typography variant="h6">
-											{getLang('OperatorIf'+ filterItem.operator_id)}
+											{getLang('OperatorIf'+ filterItem.operator_if_id)}
 										</Typography>
 									</TableCell>
 									<TableCell>
-										{column.type_id === COLUMN_BOOLEAN.id
+										{column.data_type_id === DATA_TYPE_BOOLEAN.id
 											? <b 
 												style={{
 													color: filterItem.value === true
@@ -93,39 +93,39 @@ let Table = () => {
 														: 'red',
 												}}>
 												{(typeof filterItem.value === 'object' && 
-													filterItem.value.source_id === SOURCE_SCRIPT.id)
+													filterItem.value.source_type_id === SOURCE_TYPE_SCRIPT.id)
 													? <div 
 														style={{ 
 															position: 'relative',
 															height: 60, 
 														}}>
-														<StyledChip label={SOURCE_SCRIPT.text()} />
+														<StyledChip label={SOURCE_TYPE_SCRIPT.text()} />
 													</div>
 													: String(Boolean(filterItem.value))}
 											</b>
-											: (column.type_id === COLUMN_ID.id ||
-												column.type_id === COLUMN_NUMBER.id ||
-												column.type_id === COLUMN_TIME.id)
+											: (column.data_type_id === DATA_TYPE_ID.id ||
+												column.data_type_id === DATA_TYPE_NUMBER.id ||
+												column.data_type_id === DATA_TYPE_TIME.id)
 												? <b style={{ color: 'blue' }}>
 													{(typeof filterItem.value === 'object' && 
-														filterItem.value.source_id === SOURCE_SCRIPT.id)
+														filterItem.value.source_type_id === SOURCE_TYPE_SCRIPT.id)
 														? <div 
 															style={{ 
 																position: 'relative',
 																height: 60, 
 															}}>
-															<StyledChip label={SOURCE_SCRIPT.text()} />
+															<StyledChip label={SOURCE_TYPE_SCRIPT.text()} />
 														</div>
 														: String(filterItem.value)}
 												</b>
 												: (typeof filterItem.value === 'object' && 
-													filterItem.value.source_id === SOURCE_SCRIPT.id)
+													filterItem.value.source_type_id === SOURCE_TYPE_SCRIPT.id)
 													? <div 
 														style={{ 
 															position: 'relative',
 															height: 60, 
 														}}>
-														<StyledChip label={SOURCE_SCRIPT.text()} />
+														<StyledChip label={SOURCE_TYPE_SCRIPT.text()} />
 													</div>
 													: String(filterItem.value)}
 									</TableCell>

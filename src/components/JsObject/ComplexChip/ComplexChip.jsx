@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Box from '@material-ui/core/Box';
 import { StyledChip } from 'components/Input/LogicValue.jsx';
-import source from 'structures/source.js';
+import source from 'structures/sourceTypes.js';
 import onDelete from '../Remove/onRemove.js';
 import onChange from './onChange.js';
 
@@ -22,13 +22,13 @@ let ComplexChip = ({
 	id,
 	className,
 }) => {
-	const sourceId = useSelector((state) => ((state.jsObject.data[id] || {}).collection || {}).source_id ?? ((state.jsObject.data[id] || {}).value || {}).source_id);
-	const sourceText = React.useMemo(() => source[sourceId].text(), [
-		sourceId,
+	const sourceTypeId = useSelector((state) => ((state.jsObject.data[id] || {}).collection || {}).source_type_id ?? ((state.jsObject.data[id] || {}).value || {}).source_type_id);
+	const sourceText = React.useMemo(() => source[sourceTypeId].text(), [
+		sourceTypeId,
 	]);
-	const _onChange = React.useCallback((e) => onChange(e, id, sourceId), [
+	const _onChange = React.useCallback((e) => onChange(e, id, sourceTypeId), [
 		id,
-		sourceId,
+		sourceTypeId,
 	]);
 	const _onDelete = React.useCallback((e) => onDelete(e, id), [
 		id,

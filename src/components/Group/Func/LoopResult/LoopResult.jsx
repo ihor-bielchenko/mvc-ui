@@ -4,7 +4,7 @@ import Box from '@material-ui/core/Box';
 import SelectFormat from 'components/Select/Format';
 import onDialog from 'components/Dialog/onDialog.js';
 import { SOURCE_SCRIPT } from 'structures/source.js';
-import * as format from 'structures/format.js';
+import * as format from 'structures/formatTypes.js';
 import typeFormatValidating from 'utils/typeFormatValidating.js';
 import onChangeByLogic from '../onChangeByLogic.js';
 import onClear from '../onClear.js';

@@ -1,12 +1,12 @@
-import * as columnTypes from 'structures/columnTypes.js';
+import * as dataTypes from 'structures/dataTypes.js';
 
-const loadColumnInputs = (typeId) => () => {
-	switch (typeId) {
-		case columnTypes.COLUMN_TEXT.id:
+const loadColumnInputs = (dataTypeId) => () => {
+	switch (dataTypeId) {
+		case dataTypes.DATA_TYPE_TEXT.id:
 		default:
 			return import('components/Input/Text');
-		case columnTypes.COLUMN_NUMBER.id:
-		case columnTypes.COLUMN_ID.id:
+		case dataTypes.DATA_TYPE_NUMBER.id:
+		case dataTypes.DATA_TYPE_ID.id:
 			return import('components/Input/Numeric');
 	}
 };

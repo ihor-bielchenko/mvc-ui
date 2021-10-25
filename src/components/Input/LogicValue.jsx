@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Chip from '@material-ui/core/Chip';
-import { all as source } from 'structures/source.js';
+import { all as source } from 'structures/sourceTypes.js';
 
 export const StyledChip = styled(Chip)`
 	cursor: pointer !important;
@@ -11,7 +11,7 @@ export const StyledChip = styled(Chip)`
 `;
 let LogicValue = ({ 
 	chipText,
-	sourceId, 
+	sourceTypeId, 
 	entityId,
 	onDelete,
 	onClick,
@@ -20,7 +20,7 @@ let LogicValue = ({
 		<StyledChip 
 			label={chipText
 				? chipText
-				: source[sourceId].text()}
+				: source[sourceTypeId].text()}
 			onDelete={onDelete}
 			onClick={onClick} />
 	</React.Fragment>;
@@ -28,7 +28,7 @@ let LogicValue = ({
 
 LogicValue = React.memo(LogicValue);
 LogicValue.defaultProps = {
-	sourceId: 0,
+	sourceTypeId: 0,
 	entityId: 0,
 	onDelete: () => {},
 	onClick: () => {},

@@ -3,11 +3,11 @@ import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import {
-	COLUMN_OBJ,
-	COLUMN_ARR,
-} from 'structures/columnTypes.js';
-import { FORMAT_ATOMIC } from 'structures/format.js';
-import { SOURCE_DB } from 'structures/source.js';
+	DATA_TYPE_ATOMIC,
+	DATA_TYPE_OBJECT,
+	DATA_TYPE_ARRAY,
+} from 'structures/dataTypes.js';
+import { SOURCE_TYPE_DB } from 'structures/sourceTypes.js';
 import ComplexValue from '../ComplexValue';
 import ComplexChip from '../ComplexChip';
 import Remove from '../Remove';
@@ -26,21 +26,21 @@ let Item = ({
 	className,
 	onMerge,
 }) => {
-	const parentTypeId = useSelector((state) => (state.jsObject.data[parentId] || {}).type_id);
-	const typeId = useSelector((state) => (state.jsObject.data[id] || {}).type_id);
+	const parentDataTypeId = useSelector((state) => (state.jsObject.data[parentId] || {}).data_type_id);
+	const dataTypeId = useSelector((state) => (state.jsObject.data[id] || {}).data_type_id);
 	const key = useSelector((state) => (state.jsObject.data[id] || {}).key);
 	const value = useSelector((state) => (state.jsObject.data[id] || {}).value);
 	const collection = useSelector((state) => (state.jsObject.data[id] || {}).collection);
 	const isCollection = useSelector((state) => ((state.jsObject.data[id] || {}).value || {}).is_collection);
-	const arrayLengthIsUndefined = (parentTypeId === COLUMN_ARR.id
+	const arrayLengthIsUndefined = (parentDataTypeId === DATA_TYPE_ARRAY.id
 		&& !key.includes('n+') 
 		&& key.includes('n')
 		&& typeof collection === 'object'
-		&& collection.source_id === SOURCE_DB.id
+		&& collection.source_type_id === SOURCE_TYPE_DB.id
 		&& collection.is_collection);
-	const isCompexValue = (typeId === COLUMN_OBJ.id || typeId === COLUMN_ARR.id)
+	const isCompexValue = (dataTypeId === DATA_TYPE_OBJECT.id || dataTypeId === DATA_TYPE_ARRAY.id)
 		&& typeof value === 'object' 
-		&& value.source_id > 0;
+		&& value.source_type_id > 0;
 
 	return <React.Fragment>
 		{arrayLengthIsUndefined
@@ -67,7 +67,7 @@ let Item = ({
 			</React.Fragment>
 			: <React.Fragment />}
 		<Box 
-			maxWidth={parentTypeId === FORMAT_ATOMIC.id
+			maxWidth={parentDataTypeId === DATA_TYPE_ATOMIC.id
 				? 'inherit'
 				: 'max-content'}
 			mb="8px"
@@ -96,9 +96,9 @@ let Item = ({
 						alignItems="flex-start"
 						width="100%"
 						pb={1}>
-						{parentTypeId !== FORMAT_ATOMIC.id 
-							|| parentTypeId === COLUMN_OBJ.id
-							|| parentTypeId === COLUMN_ARR.id
+						{parentDataTypeId !== DATA_TYPE_ATOMIC.id 
+							|| parentDataTypeId === DATA_TYPE_OBJECT.id
+							|| parentDataTypeId === DATA_TYPE_ARRAY.id
 							? <React.Fragment>
 								<Remove
 									parentId={parentId}

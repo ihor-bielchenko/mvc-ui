@@ -1,12 +1,11 @@
 import Store from 'components/Store';
 import getTemplate from 'components/JsObject/getTemplate.js';
 import generateKey from 'components/JsObject/generateKey.js';
-import { SOURCE_PROXY_PASS } from 'structures/source.js';
-import { FORMAT_ATOMIC } from 'structures/format.js';
-import {
-	COLUMN_OBJ,
-	// COLUMN_NUMBER,
-} from 'structures/columnTypes.js';
+import { SOURCE_TYPE_PROXY_PASS } from 'structures/sourceTypes.js';
+import { 
+	DATA_TYPE_ATOMIC,
+	DATA_TYPE_OBJECT,
+} from 'structures/dataTypes.js';
 
 const onSave = (e, id, onClose) => {
 	e.preventDefault();
@@ -23,7 +22,7 @@ const onSave = (e, id, onClose) => {
 	const route = routesData.find((item) => item.id === routeId);
 	const sourceValue = {
 		...tempValue,
-		source_id: SOURCE_PROXY_PASS.id,
+		source_type_id: SOURCE_TYPE_PROXY_PASS.id,
 		columns: {
 			statusCode: 'statusCode',
 			uri: 'uri',
@@ -36,7 +35,7 @@ const onSave = (e, id, onClose) => {
 	const currentItem = data[id] || {};
 	const parentId = currentItem.parent_id;
 	const parentItem = data[parentId];
-	const parentTypeId = (parentItem || {}).type_id || currentItem.type_id;
+	const parentDataTypeId = (parentItem || {}).data_type_id || currentItem.data_type_id;
 	const responseParsed = {};
 	let responseKeys = Object.keys(route.response),
 		childId = newId - 999999;
@@ -56,11 +55,11 @@ const onSave = (e, id, onClose) => {
 	});
 	responseKeys = Object.keys(responseParsed);
 
-	if (parentTypeId === FORMAT_ATOMIC.id) {
+	if (parentDataTypeId === DATA_TYPE_ATOMIC.id) {
 		let dataItem;
 
-		parentItem.type_id = COLUMN_OBJ.id;
-		currentItem.type_id = COLUMN_OBJ.id;
+		parentItem.data_type_id = DATA_TYPE_OBJECT.id;
+		currentItem.data_type_id = DATA_TYPE_OBJECT.id;
 		currentItem.key = generateKey(blocks[parentId]);
 		currentItem.value = sourceValue;
 		currentItem.disabledType = true;
@@ -69,18 +68,19 @@ const onSave = (e, id, onClose) => {
 		data[newId] = getTemplate({
 			parent_id: currentItem.id,
 			id: newId,
-			type_id: COLUMN_OBJ.id,
+			data_type_id: DATA_TYPE_OBJECT.id,
 			key: generateKey(blocks[currentItem.id] ?? []),
 			value: undefined,
 			disabledType: true,
 			disabledValue: true,
 			disabledRemove: true,
 		});
+		blocks[currentItem.id] = [ data[newId] ];
 
 		data[newId] = getTemplate({
 			parent_id: currentItem.id,
 			id: newId,
-			type_id: COLUMN_OBJ.id,
+			data_type_id: DATA_TYPE_OBJECT.id,
 			key: generateKey(blocks[currentItem.id] ?? []),
 			value: undefined,
 			disabledType: true,
@@ -106,12 +106,12 @@ const onSave = (e, id, onClose) => {
 		let sectionItem,
 			dataItem;
 
-		currentItem.type_id = COLUMN_OBJ.id;
+		currentItem.data_type_id = DATA_TYPE_OBJECT.id;
 		currentItem.value = undefined;
 		data[newId] = getTemplate({
 			parent_id: currentItem.id,
 			id: newId,
-			type_id: COLUMN_OBJ.id,
+			data_type_id: DATA_TYPE_OBJECT.id,
 			key: generateKey(blocks[currentItem.id] ?? []),
 			value: sourceValue,
 			disabledType: true,
@@ -127,7 +127,7 @@ const onSave = (e, id, onClose) => {
 		data[newId] = getTemplate({
 			parent_id: sectionItem.id,
 			id: newId,
-			type_id: COLUMN_OBJ.id,
+			data_type_id: DATA_TYPE_OBJECT.id,
 			key: generateKey(blocks[currentItem.id] ?? []),
 			value: undefined,
 			disabledType: true,

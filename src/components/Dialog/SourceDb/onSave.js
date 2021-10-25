@@ -1,12 +1,12 @@
 import Store from 'components/Store';
 import getTemplate from 'components/JsObject/getTemplate.js';
 import generateKey from 'components/JsObject/generateKey.js';
-import { SOURCE_DB } from 'structures/source.js';
-import { FORMAT_ATOMIC } from 'structures/format.js';
+import { SOURCE_TYPE_DB } from 'structures/sourceTypes.js';
 import {
-	COLUMN_OBJ,
-	COLUMN_ARR,
-} from 'structures/columnTypes.js';
+	DATA_TYPE_ATOMIC,
+	DATA_TYPE_OBJECT,
+	DATA_TYPE_ARRAY,
+} from 'structures/dataTypes.js';
 
 const onSave = (e, id, onClose) => {
 	id = Number(id);
@@ -24,7 +24,7 @@ const onSave = (e, id, onClose) => {
 		offset: 0,
 		limit: 0,
 		...tempValue,
-		source_id: SOURCE_DB.id,
+		source_type_id: SOURCE_TYPE_DB.id,
 		columns: {},
 	};
 	const {
@@ -35,17 +35,17 @@ const onSave = (e, id, onClose) => {
 	const currentItem = data[id] || {};
 	const parentId = currentItem.parent_id;
 	const parentItem = data[parentId];
-	const parentTypeId = (parentItem || {}).type_id || currentItem.type_id;
+	const parentDataTypeId = (parentItem || {}).data_type_id || currentItem.data_type_id;
 
 	select.forEach((columnId) => (
 		sourceValue.columns[columnId] = dbColumnsData[columnId].name
 	));
 
 	if (isCollection) {
-		currentItem.type_id = COLUMN_OBJ.id;
+		currentItem.data_type_id = DATA_TYPE_OBJECT.id;
 
-		if (parentTypeId === FORMAT_ATOMIC.id) {
-			parentItem.type_id = COLUMN_ARR.id;
+		if (parentDataTypeId === DATA_TYPE_ATOMIC.id) {
+			parentItem.data_type_id = DATA_TYPE_ARRAY.id;
 			currentItem.key = generateKey(blocks[parentId], 'n');
 			currentItem.disabledKey = true;
 			currentItem.disabledType = true;
@@ -55,7 +55,7 @@ const onSave = (e, id, onClose) => {
 			data[newId] = getTemplate({
 				parent_id: id,
 				id: newId,
-				type_id: COLUMN_OBJ.id,
+				data_type_id: DATA_TYPE_OBJECT.id,
 				key: generateKey(blocks[id] ?? []),
 				value: sourceValue,
 				disabledType: true,
@@ -68,11 +68,11 @@ const onSave = (e, id, onClose) => {
 			const nId = newId;
 			const oId = (newId += 1);
 
-			currentItem.type_id = COLUMN_ARR.id;
+			currentItem.data_type_id = DATA_TYPE_ARRAY.id;
 			data[nId] = getTemplate({
 				parent_id: id,
 				id: nId,
-				type_id: COLUMN_OBJ.id,
+				data_type_id: DATA_TYPE_OBJECT.id,
 				key: generateKey(blocks[id], 'n'),
 				value: undefined,
 				disabledKey: true,
@@ -85,7 +85,7 @@ const onSave = (e, id, onClose) => {
 			data[oId] = getTemplate({
 				parent_id: nId,
 				id: oId,
-				type_id: COLUMN_OBJ.id,
+				data_type_id: DATA_TYPE_OBJECT.id,
 				key: generateKey(blocks[nId] ?? []),
 				value: sourceValue,
 				disabledType: true,
@@ -96,12 +96,12 @@ const onSave = (e, id, onClose) => {
 		}
 	}
 	else if (select.length > 1) {
-		if (parentTypeId === FORMAT_ATOMIC.id) {
-			parentItem.type_id = COLUMN_OBJ.id;
+		if (parentDataTypeId === DATA_TYPE_ATOMIC.id) {
+			parentItem.data_type_id = DATA_TYPE_OBJECT.id;
 			data[id] = getTemplate({
 				parent_id: parentId,
 				id: id,
-				type_id: COLUMN_OBJ.id,
+				data_type_id: DATA_TYPE_OBJECT.id,
 				key: generateKey(blocks[parentId] ?? []),
 				value: sourceValue,
 				disabledType: true,
@@ -111,12 +111,12 @@ const onSave = (e, id, onClose) => {
 			blocks[parentId] = [ data[id] ];
 		}
 		else {
-			currentItem.type_id = COLUMN_OBJ.id;
+			currentItem.data_type_id = DATA_TYPE_OBJECT.id;
 			blocks[id] = (blocks[id] ?? []);
 			data[newId] = getTemplate({
 				parent_id: id,
 				id: newId,
-				type_id: COLUMN_OBJ.id,
+				data_type_id: DATA_TYPE_OBJECT.id,
 				key: generateKey(blocks[id]),
 				value: sourceValue,
 				disabledType: true,
@@ -127,12 +127,12 @@ const onSave = (e, id, onClose) => {
 		}
 	}
 	else if (select.length === 1) {
-		if (currentItem.type_id === COLUMN_OBJ.id) {
+		if (currentItem.data_type_id === DATA_TYPE_OBJECT.id) {
 			blocks[id] = (blocks[id] ?? []);
 			data[newId] = getTemplate({
 				parent_id: id,
 				id: newId,
-				type_id: dbColumnsData[select[0]].type_id,
+				data_type_id: dbColumnsData[select[0]].data_type_id,
 				key: dbColumnsData[select[0]].name,
 				value: sourceValue,
 				disabledType: true,
@@ -140,10 +140,10 @@ const onSave = (e, id, onClose) => {
 			blocks[id].push(data[newId]);
 		}
 		else {
-			if ((parentItem || {}).type_id !== COLUMN_ARR.id) {
+			if ((parentItem || {}).data_type_id !== DATA_TYPE_ARRAY.id) {
 				currentItem.key = dbColumnsData[select[0]].name;
 			}
-			currentItem.type_id = dbColumnsData[select[0]].type_id;
+			currentItem.data_type_id = dbColumnsData[select[0]].data_type_id;
 			currentItem.disabledType = true;
 			currentItem.value = sourceValue;
 

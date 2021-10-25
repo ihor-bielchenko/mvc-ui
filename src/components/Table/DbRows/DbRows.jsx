@@ -131,7 +131,7 @@ let DbRows = ({
 											onChange={onCheckAll} />
 									</TableCell>
 									{dbColumnKeys.map((key, i) => {
-										return dbColumns[key].type_id > 0
+										return dbColumns[key].data_type_id > 0
 											? <TableCell key={dbColumns[key].id}>
 												<Typography variant="caption">
 													{dbColumns[key].name}
