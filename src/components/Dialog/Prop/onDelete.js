@@ -2,20 +2,18 @@ import Store from 'components/Store';
 import { initialState as propInitialState } from 'components/Store/prop.js';
 import onLoader from 'components/Loader/onLoader';
 import onClose from 'components/Dialog/onClose.js';
-import fetchEntityDelete from 'fetch/entityDelete.js';
+import fetchPropDelete from 'fetch/propDelete.js';
+import fetchCortegeDelete from 'fetch/cortegeDelete.js';
 import axiosError from 'utils/axiosError.js';
 
 const onDelete = async (e, id) => {
 	onLoader(true);
 	
 	try {
-		const entities = Store().getState().entities;
+		const prop = Store().getState().prop;
 		
-		if (!entities.data[id]) {
-			throw new Error('Entity is undefined');
-		}
-
-		await fetchEntityDelete(JSON.stringify([ id ]));
+		await fetchPropDelete(JSON.stringify([ id ]));
+		await fetchCortegeDelete(JSON.stringify([ prop.sourceId ]));
 
 		onClose()();
 		Store().dispatch({
@@ -33,8 +31,8 @@ const onDelete = async (e, id) => {
 				horizontal: 'right',
 			}),
 		});
-		onLoader(false);
 	}
+	onLoader(false);
 };
 
 export default onDelete;
