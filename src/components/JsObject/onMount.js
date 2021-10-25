@@ -1,4 +1,5 @@
 import Store from 'components/Store';
+import onLoader from 'components/Loader/onLoader';
 import fetchCortegeGetMany from 'fetch/cortegeGetMany.js';
 import axiosError from 'utils/axiosError.js';
 import { DATA_TYPE_TEXT } from 'structures/dataTypes.js';
@@ -106,8 +107,8 @@ const parseProxyPass = (item) => {
 		request: {},
 	};
 	sourcePlaceholder.forEach((_item) => {
-		item.value.placeholder[_item.id] = {
-			...item,
+		item.value.placeholder[_item.route_placeholder_id] = {
+			..._item,
 			value: _item.value.source_type_id === SOURCE_TYPE_MANUALLY.id
 				? _item.value.value
 				: '',
@@ -115,7 +116,7 @@ const parseProxyPass = (item) => {
 	});
 	sourceHeader.forEach((_item) => {
 		item.value.header[_item.id] = {
-			...item,
+			..._item,
 			key: _item.key.source_type_id === SOURCE_TYPE_MANUALLY.id
 				? _item.key.value
 				: '',
@@ -126,7 +127,7 @@ const parseProxyPass = (item) => {
 	});
 	sourceRequest.forEach((_item) => {
 		item.value.request[_item.id] = {
-			...item,
+			..._item,
 			key: _item.key.source_type_id === SOURCE_TYPE_MANUALLY.id
 				? _item.key.value
 				: '',
@@ -135,19 +136,18 @@ const parseProxyPass = (item) => {
 				: '',
 		};
 	});
-	console.log('{ ...item }', item);
 	return item;
 };
 
-const onMount = async (entityId, dataTypeId) => {
+const onMount = async (sourceId, dataTypeId) => {
 	const jsObject = Store().getState().jsObject;
 
-	
-	if (entityId > 0) {
+	if (sourceId > 0) {
+		onLoader(true);
 		jsObject.data = {};
 
 		try {
-			const fetchResponse = await fetchCortegeGetMany(1);
+			const fetchResponse = await fetchCortegeGetMany(sourceId);
 			const fetchData = ((fetchResponse || {}).data || {}).data;
 			let parentId = 0;
 
@@ -185,7 +185,6 @@ const onMount = async (entityId, dataTypeId) => {
 
 				jsObject.data[item.id] = { ...item };
 			});
-			// console.log('jsObject', jsObject);
 		}
 		catch (err) {
 			Store().dispatch({
@@ -198,7 +197,7 @@ const onMount = async (entityId, dataTypeId) => {
 				}),
 			});
 		}
-		console.log('jsObject', jsObject);
+		onLoader(false);
 	}
 	else {
 		jsObject.data[0] = jsObject.data[0] ?? getTemplate({

@@ -89,8 +89,6 @@ const onEdit = (e, id, onClose) => {
 		blocks[data[responseParsed[key].id].parent_id].push(data[responseParsed[key].id]);
 	});
 	onClose();
-
-	// console.log('data, blocks', data, blocks);
 };
 
 export default onEdit;

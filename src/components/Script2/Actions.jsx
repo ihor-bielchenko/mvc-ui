@@ -78,9 +78,7 @@ let Actions = ({ emptyScript }) => {
 					</Box>
 					<ButtonGroup>
 						<Button 
-							onClick={onDialog(DIALOG_PROP, {
-								id: 2,
-							})}
+							onClick={onDialog(DIALOG_PROP)}
 							startIcon={<ClassIcon />}
 							style={{ color: '#00695c' }}>
 							Параметр

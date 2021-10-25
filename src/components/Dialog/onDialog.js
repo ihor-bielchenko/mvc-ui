@@ -10,7 +10,7 @@ const onDialog = (name = '', body = {}, dontHideMenu = false) => () => {
 	dialogs[name] = body;
 	Store().dispatch({
 		type: 'dialogs',
-		payload: () => dialogs,
+		payload: () => ({ ...dialogs }),
 	});
 };
 
