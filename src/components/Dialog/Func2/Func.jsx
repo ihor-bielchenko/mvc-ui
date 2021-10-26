@@ -7,30 +7,31 @@ import DialogContent from '@material-ui/core/DialogContent';
 import Box from '@material-ui/core/Box';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Button from '@material-ui/core/Button';
+import Transition from 'components/Dialog/Transition.jsx';
 import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Header from 'components/Header';
-import Transition from 'components/Dialog/Transition.jsx';
-import { DIALOG_JSON } from 'consts/dialog.js';
-import onSubmit from './onSubmit.js';
+import Func from 'components/Func';
+import { DIALOG_FUNC } from 'consts/dialog.js';
+import onSave from './onSave.js';
 import onDelete from './onDelete.js';
 import onMount from './onMount.js';
 import onClose from './onClose.js';
 
-let Json = () => {
-	const dialog = useSelector((state) => state.dialogs[DIALOG_JSON]);
-	const id = useSelector((state) => state.json.id);
-	const name = useSelector((state) => state.json.name || '');
+let DialogFunc = () => {
+	const dialog = useSelector((state) => state.dialogs[DIALOG_FUNC]);
+	const existId = (dialog || {}).id || 0;
+	const id = useSelector((state) => (state.func || {}).id);
+	const name = useSelector((state) => (state.func || {}).name || '');
 	const dialogOpenFlag = !!dialog;
 
 	// onMount
 	React.useEffect(() => {
-		if (dialogOpenFlag) {
-			onMount();
-		}
+		(dialogOpenFlag && existId > 0) && onMount(existId);
 	}, [
 		dialogOpenFlag,
+		existId,
 	]);
 
 	return dialogOpenFlag
@@ -46,14 +47,14 @@ let Json = () => {
 			<DialogTitle>
 				<Header onClose={onClose}>
 					{id >= 1
-						? 'JSON-ответ: '+ name
-						: 'Добавить JSON-ответ'}
+						? 'Действие: '+ name
+						: 'Добавить действие'}
 				</Header>
 			</DialogTitle>
 			{dialogOpenFlag
-				? <form onSubmit={onSubmit}>
+				? <React.Fragment>
 					<DialogContent dividers>
-						json
+						<Func />
 					</DialogContent>
 					<DialogActions>
 					<Box 
@@ -72,10 +73,10 @@ let Json = () => {
 							? <ButtonGroup>
 								<Button
 									disabled={!name}
-									type="submit"
 									variant="outlined"
 									color="primary"
-									startIcon={<SaveIcon />}>
+									startIcon={<SaveIcon />}
+									onClick={onSave}>
 									Сохранить
 								</Button>
 								<Button
@@ -88,22 +89,22 @@ let Json = () => {
 							</ButtonGroup>
 							: <Button
 								disabled={!name}
-								type="submit"
 								variant="outlined"
 								color="primary"
-								startIcon={<SaveIcon />}>
+								startIcon={<SaveIcon />}
+								onClick={onSave}>
 								Сохранить
 							</Button>}
 					</Box>
 					</DialogActions>
-				</form>
+				</React.Fragment>
 				: <React.Fragment />}
 		</Dialog>
 		: <React.Fragment />;
 };
 
-Json = React.memo(Json);
-Json.defaultProps = {
+DialogFunc = React.memo(DialogFunc);
+DialogFunc.defaultProps = {
 };
 
-export default Json;
+export default DialogFunc;

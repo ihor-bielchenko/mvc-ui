@@ -1,36 +1,25 @@
 import Store from 'components/Store';
 import onLoader from 'components/Loader/onLoader';
-import fetchFuncOne from 'fetch/funcOne.js';
+import fetchJsonOne from 'fetch/jsonOne.js';
 import axiosError from 'utils/axiosError.js';
-import parseSourceValue from 'utils/parseSourceValue.js';
 
 const onMount = async (id) => {
-	const func = Store().getState().func;
+	const json = Store().getState().json;
 
 	onLoader(true);
 
 	try {
-		const response = await fetchFuncOne(id);
+		const response = await fetchJsonOne(id);
 		const data = ((response || {}).data || {}).data || {};
+		
+		json.id = id;
+		json.name = data.name;
+		json.sourceId = data.source_id;
+		json.code = data.code;
 
-		func.id = id;
-		func.func_entity_id = data.entity_id;
-		func.name = data.name;
-		func.func_template_id = data.func_template_id;
-		func.type_id = data.template.category_id;
-		func.props = {};
-		data.props.forEach(({
-			index,
-			value_script_id,
-			value_func_id,
-			value_prop_id,
-			value
-		}) => {
-			func.props[index] = parseSourceValue(value_func_id, value_prop_id, value);
-		});
 		Store().dispatch({
-			type: 'func',
-			payload: () => func,
+			type: 'json',
+			payload: () => json,
 		});
 		onLoader(false);
 	}
