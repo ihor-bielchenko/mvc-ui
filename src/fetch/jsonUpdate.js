@@ -1,11 +1,11 @@
 import axios from 'axios';
 import forbidden from './forbidden.js';
 import refreshJWTTimeout from 'utils/refreshJWTTimeout.js';
-import { URL_API_CORE_ENTITY } from 'consts/url.js';
+import { URL_API_SCRIPT_JSON } from 'consts/url.js';
 
-const entityUpdate = async (id, data) => {
+const jsonUpdate = async (id, data) => {
 	try {
-		const r = await axios(process.env.LOGIC_PATH + URL_API_CORE_ENTITY +'/'+ id, {
+		const r = await axios(process.env.SCRIPT_PATH + URL_API_SCRIPT_JSON +'/'+ id, {
 			method: 'patch',
 			params: {
 				access_token: localStorage.getItem('access_token'),
@@ -17,8 +17,8 @@ const entityUpdate = async (id, data) => {
 		return r;
 	}
 	catch (err) {
-		return await forbidden(err, async () => await entityUpdate(id, data));
+		return await forbidden(err, async () => await jsonUpdate(id, data));
 	}
 };
 
-export default entityUpdate;
+export default jsonUpdate;

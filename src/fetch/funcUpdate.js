@@ -1,11 +1,11 @@
 import axios from 'axios';
 import forbidden from './forbidden.js';
 import refreshJWTTimeout from 'utils/refreshJWTTimeout.js';
-import { URL_API_CORE_FUNC } from 'consts/url.js';
+import { URL_API_SCRIPT_FUNC } from 'consts/url.js';
 
 const funcUpdate = async (id, data) => {
 	try {
-		const r = await axios(process.env.LOGIC_PATH + URL_API_CORE_FUNC +'/'+ id, {
+		const r = await axios(process.env.SCRIPT_PATH + URL_API_SCRIPT_FUNC +'/'+ id, {
 			method: 'patch',
 			params: {
 				access_token: localStorage.getItem('access_token'),

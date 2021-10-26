@@ -1,18 +1,7 @@
-import { 
-	DATA_TYPE_ATOMIC,
-	DATA_TYPE_TEXT, 
-} from 'structures/dataTypes.js';
 
 export const initialState = () => ({
 	name: '',
-	data_type_id: DATA_TYPE_ATOMIC.id,
-	body: {
-		[Date.now()]: {
-			data_type_id: DATA_TYPE_TEXT.id,
-			key: '0',
-			value: '',
-		},
-	},
+	sourceId: 0,
 	tempValue: {
 	},
 });

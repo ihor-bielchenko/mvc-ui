@@ -1,11 +1,9 @@
 import React from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
-import dataTypes, {
-	DATA_TYPE_ATOMIC,
-} from 'structures/dataTypes.js';
+import responseCodes from 'structures/responseCodes.js';
 import Select from '../Select.jsx';
 
-let Type = ({
+let ResponseCode = ({
 	disabled, 
 	name,
 	value,
@@ -25,27 +23,27 @@ let Type = ({
 		label={label}
 		onSelect={onSelect}>
 		{Object
-			.keys(dataTypes)
+			.keys(responseCodes)
 			.filter(onFilter)
 			.map((key, i) => {
 				return <MenuItem 
-					key={dataTypes[key].id.toString()}
-					value={dataTypes[key].id.toString()}
-					disabled={!!dataTypes[key].disabled}>
-					{dataTypes[key].text()}
+					key={responseCodes[key].value.toString()}
+					value={responseCodes[key].value.toString()}
+					disabled={!!responseCodes[key].disabled}>
+					{responseCodes[key].text()}
 				</MenuItem>
 		})}
 		{children}
 	</Select>;
 };
 
-Type = React.memo(Type);
-Type.defaultProps = {
-	name: 'data_type_id',
-	label: 'Тип данных',
+ResponseCode = React.memo(ResponseCode);
+ResponseCode.defaultProps = {
+	name: 'code',
+	label: 'Код ответа',
 	required: false,
 	disabled: false,
-	onFilter: (key) => dataTypes[key].id !== DATA_TYPE_ATOMIC.id,
+	onFilter: (item) => true,
 };
 
-export default Type;
+export default ResponseCode;

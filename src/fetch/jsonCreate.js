@@ -1,11 +1,11 @@
 import axios from 'axios';
 import forbidden from './forbidden.js';
 import refreshJWTTimeout from 'utils/refreshJWTTimeout.js';
-import { URL_API_CORE_ARROW } from 'consts/url.js';
+import { URL_API_SCRIPT_JSON } from 'consts/url.js';
 
-const arrowCreate = async (data) => {
+const jsonCreate = async (data) => {
 	try {
-		const r = await axios(process.env.LOGIC_PATH + URL_API_CORE_ARROW, {
+		const r = await axios(process.env.SCRIPT_PATH + URL_API_SCRIPT_JSON, {
 			method: 'post',
 			params: {
 				access_token: localStorage.getItem('access_token'),
@@ -17,8 +17,8 @@ const arrowCreate = async (data) => {
 		return r;
 	}
 	catch (err) {
-		return await forbidden(err, async () => await arrowCreate(data));
+		return await forbidden(err, async () => await jsonCreate(data));
 	}
 };
 
-export default arrowCreate;
+export default jsonCreate;

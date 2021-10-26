@@ -18,7 +18,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import Header from 'components/Header';
 import JsObject from 'components/JsObject';
 import InputText from 'components/Input/Text';
-import SelectType from 'components/Select/Type';
+import SelectDataType from 'components/Select/DataType';
 import Transition from 'components/Dialog/Transition.jsx';
 import onDialog from 'components/Dialog/onDialog.js';
 import dataTypes, { 
@@ -90,7 +90,7 @@ let Prop = () => {
 								required
 								name="name"
 								label="Название"
-								helperText="Для быстрого поиска параметра придумайте название или краткое описание"
+								helperText="Для быстрого поиска придумайте название или краткое описание"
 								value={name}
 								onChange={onChangeName} />
 						</Box>
@@ -115,16 +115,15 @@ let Prop = () => {
 							display="flex"
 							alignItems="center"
 							justifyContent="space-between"
-							height="80px"
-							pt={5}
-							pb={4}>
+							pt={4}
+							pb={2}>
 							<Typography variant="h6">
-								Контент:
+								Данные:
 							</Typography>
 							<Box
 								position="relative"
 								width="300px">
-								<SelectType 
+								<SelectDataType 
 									label="Формат данных"
 									name="data_type_id"
 									value={dataTypeId}

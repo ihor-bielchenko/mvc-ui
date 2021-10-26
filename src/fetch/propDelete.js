@@ -1,11 +1,11 @@
 import axios from 'axios';
 import forbidden from './forbidden.js';
 import refreshJWTTimeout from 'utils/refreshJWTTimeout.js';
-import { URL_API_CORE_PROP } from 'consts/url.js';
+import { URL_API_SCRIPT_PROP } from 'consts/url.js';
 
 const propDelete = async (ids) => {
 	try {
-		const r = await axios(process.env.LOGIC_PATH + URL_API_CORE_PROP, {
+		const r = await axios(process.env.SCRIPT_PATH + URL_API_SCRIPT_PROP, {
 			method: 'delete',
 			params: {
 				access_token: localStorage.getItem('access_token'),

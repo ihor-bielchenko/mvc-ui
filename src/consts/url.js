@@ -13,10 +13,8 @@ export const URL_API_SSO_SIGN_IN = '/api/login';
 export const URL_API_SSO_SIGN_UP = '/api/register';
 export const URL_API_SSO_RECOVERY = '/api/recovery';
 
-export const URL_API_OBJECT_CORTEGE = '/api/cortege';
+export const URL_API_SOURCE_CORTEGE = '/api/cortege';
 
-export const URL_API_CORE_SCRIPT = '/api/script';
-export const URL_API_CORE_ENTITY = '/api/entity';
-export const URL_API_CORE_ARROW = '/api/arrow';
-export const URL_API_CORE_PROP = '/api/prop';
-export const URL_API_CORE_FUNC = '/api/func';
+export const URL_API_SCRIPT_PROP = '/api/prop';
+export const URL_API_SCRIPT_JSON = '/api/json';
+export const URL_API_SCRIPT_FUNC = '/api/func';

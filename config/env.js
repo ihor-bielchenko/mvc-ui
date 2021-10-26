@@ -93,7 +93,7 @@ function getClientEnvironment(publicUrl) {
 
 				SSO_PATH: process.env.SSO_PATH,
 				SCRIPT_PATH: process.env.SCRIPT_PATH,
-				OBJECT_PATH: process.env.OBJECT_PATH,
+				SOURCE_PATH: process.env.SOURCE_PATH,
 
 				DATA_TYPE_ATOMIC: Number(process.env.DATA_TYPE_ATOMIC),
 				DATA_TYPE_ID: Number(process.env.DATA_TYPE_ID),

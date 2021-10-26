@@ -1,11 +1,11 @@
 import axios from 'axios';
 import forbidden from './forbidden.js';
 import refreshJWTTimeout from 'utils/refreshJWTTimeout.js';
-import { URL_API_CORE_SCRIPT } from 'consts/url.js';
+import { URL_API_SCRIPT_JSON } from 'consts/url.js';
 
-const scriptOne = async (id) => {
+const jsonOne = async (id) => {
 	try {
-		const r = await axios(process.env.LOGIC_PATH + URL_API_CORE_SCRIPT +'/'+ id, {
+		const r = await axios(process.env.SCRIPT_PATH + URL_API_SCRIPT_JSON +'/'+ id, {
 			method: 'get',
 			params: {
 				access_token: localStorage.getItem('access_token'),
@@ -16,8 +16,9 @@ const scriptOne = async (id) => {
 		return r;
 	}
 	catch (err) {
-		return await forbidden(err, async () => await scriptOne(id));
+		return await forbidden(err, async () => await jsonOne(id));
 	}
 };
 
-export default scriptOne;
+export default jsonOne;
+

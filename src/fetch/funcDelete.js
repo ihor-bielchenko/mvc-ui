@@ -1,11 +1,11 @@
 import axios from 'axios';
 import forbidden from './forbidden.js';
 import refreshJWTTimeout from 'utils/refreshJWTTimeout.js';
-import { URL_API_CORE_ENTITY } from 'consts/url.js';
+import { URL_API_SCRIPT_FUNC } from 'consts/url.js';
 
-const entityDelete = async (ids) => {
+const funcDelete = async (ids) => {
 	try {
-		const r = await axios(process.env.LOGIC_PATH + URL_API_CORE_ENTITY, {
+		const r = await axios(process.env.SCRIPT_PATH + URL_API_SCRIPT_FUNC, {
 			method: 'delete',
 			params: {
 				access_token: localStorage.getItem('access_token'),
@@ -17,8 +17,8 @@ const entityDelete = async (ids) => {
 		return r;
 	}
 	catch (err) {
-		return await forbidden(err, async () => await entityDelete(ids));
+		return await forbidden(err, async () => await funcDelete(ids));
 	}
 };
 
-export default entityDelete;
+export default funcDelete;
