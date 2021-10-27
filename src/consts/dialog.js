@@ -9,5 +9,6 @@ export const DIALOG_DB_QUERY = 'd6';
 export const DIALOG_DB_FIELD_FORM = 'd7';
 export const DIALOG_DB_ROW_FORM = 'd8';
 export const DIALOG_PROP = 'd9';
+export const DIALOG_IF = 'd12';
 export const DIALOG_FUNC = 'd10';
 export const DIALOG_JSON = 'd11';

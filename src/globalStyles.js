@@ -10,10 +10,8 @@ export default createGlobalStyle`
 		height: 100%;
 	}
 	body {
-		width: calc(100% - 278px);
+		width: 100%;
 		margin: 0 auto;
-		border-right: 1px solid rgba(0, 0, 0, 0.12);
-		border-left: 1px solid rgba(0, 0, 0, 0.12);
 	}
 	#root {
 		height: 100%;
@@ -28,12 +26,6 @@ export default createGlobalStyle`
 	}
 	.MuiTab-textColorSecondary.Mui-disabled {
 		color: rgba(0, 0, 0, 0.2) !important;
-	}
-	.MuiDialog-root,
-	.MuiBackdrop-root {
-		background-color: rgba(0, 0, 0, 0) !important;
-		margin: 0 auto;
-		max-width: calc(100% - 278px);
 	}
 	a {
 		text-decoration: none;

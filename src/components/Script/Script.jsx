@@ -1,22 +1,21 @@
 import React from 'react';
-import Actions from './Actions.jsx';
+import Header from './Header';
+import Sidebar from './Sidebar';
+import Workspace from './Workspace';
 
 let Script = ({ 
-	scriptId, 
-	isSource,
-	withScroll,
-	onClickEntity,
-	formatValidating,
+	id,
 }) => {
-	return <Actions emptyScript />;
+	return <React.Fragment>
+		<Header />
+		<Sidebar />
+		<Workspace />
+	</React.Fragment>;
 };
 
 Script = React.memo(Script);
 Script.defaultProps = {
-	scriptId: 0,
-	isSource: false,
-	withScroll: false,
-	formatValidating: () => ([]),
+	id: 0,
 };
 
 export default Script;

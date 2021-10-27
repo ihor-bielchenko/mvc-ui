@@ -19,6 +19,7 @@ const onSave = async (e) => {
 			const dataSource = await onSaveJsObject(json.sourceId);
 
 			await fetchJsonUpdate(json.id, {
+				script_id: scriptId,
 				source_id: dataSource.id,
 				name: json.name,
 				code: json.code,

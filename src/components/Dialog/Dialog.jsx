@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import DeleteConfirm from './DeleteConfirm';
 import Prop from './Prop';
+import Condition from './Condition';
 import Func from './Func';
 import Json from './Json';
 import SourceDb from './SourceDb';
@@ -25,6 +26,7 @@ let Root = ({
 		{(url[1] === URL_PAGE_SCRIPT)
 			? <React.Fragment>
 				<Prop />
+				<Condition />
 				<Func />
 				<Json />
 				<SourceDb />

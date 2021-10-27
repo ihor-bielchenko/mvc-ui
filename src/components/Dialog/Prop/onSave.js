@@ -19,6 +19,7 @@ const onSave = async (e) => {
 			const dataSource = await onSaveJsObject(prop.sourceId);
 
 			await fetchPropUpdate(prop.id, {
+				script_id: scriptId,
 				source_id: dataSource.id,
 				name: prop.name,
 				as_variable: Number(!!prop.as_variable),

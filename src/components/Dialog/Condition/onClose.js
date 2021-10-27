@@ -1,14 +1,14 @@
 import Store from 'components/Store';
-import { setFunc } from 'components/Store/func.js';
 import onCloseDialog from 'components/Dialog/onClose.js';
-import { DIALOG_FUNC } from 'consts/dialog.js';
+import { initialState } from 'components/Store/func.js';
+import { DIALOG_IF } from 'consts/dialog.js';
 
 const onClose = (e) => {
 	Store().dispatch({
 		type: 'func',
-		payload: () => setFunc(),
+		payload: () => initialState(),
 	});
-	onCloseDialog(DIALOG_FUNC)(e);
+	onCloseDialog(DIALOG_IF)(e);
 };
 
 export default onClose;

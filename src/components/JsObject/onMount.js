@@ -7,6 +7,9 @@ import {
 	SOURCE_TYPE_MANUALLY,
 	SOURCE_TYPE_DB,
 	SOURCE_TYPE_PROXY_PASS,
+	SOURCE_TYPE_HEADER,
+	SOURCE_TYPE_REQUEST,
+	SOURCE_TYPE_COOKIE,
 } from 'structures/sourceTypes.js';
 import getTemplate from './getTemplate.js';
 import buildBlocks from './buildBlocks.js';
@@ -169,6 +172,10 @@ const onMount = async (sourceId, dataTypeId) => {
 						break;
 					case SOURCE_TYPE_PROXY_PASS.id:
 						item = parseProxyPass(item);
+						break;
+					case SOURCE_TYPE_HEADER.id:
+					case SOURCE_TYPE_REQUEST.id:
+					case SOURCE_TYPE_COOKIE.id:
 						break;
 					default:
 						item.value = item.value.value;
