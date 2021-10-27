@@ -13,7 +13,7 @@ import Button from '@material-ui/core/Button';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AddIcon from '@material-ui/icons/Add';
 import Store from 'components/Store';
-import MenuEntity from 'components/Menu/Entity';
+import MenuControl from 'components/Menu/Control';
 import SelectOperatorUnion from 'components/Select/OperatorUnion';
 import { StyledChip } from 'components/Input/LogicValue.jsx';
 import onMenu from 'components/Menu/onMenu.js';
@@ -33,7 +33,7 @@ import onEdit from './onEdit.js';
 import onDelete from './onDelete.js';
 
 let Table = () => {
-	const filterOperatorId = useSelector((state) => state.jsObject.tempValue.filter_operator_id ?? process.env.UNION_AND);
+	const filterOperatorId = useSelector((state) => state.jsObject.tempValue.filter_operator_id ?? process.env.OPERATOR_UNION_AND);
 	const filterKeys = useSelector((state) => Object.keys(state.jsObject.tempValue.filter || {}));
 
 	return <React.Fragment>
@@ -135,7 +135,7 @@ let Table = () => {
 											onClick={onMenu('filter-'+ id)}>
 											<MoreVertIcon />
 										</IconButton>
-										<MenuEntity 
+										<MenuControl 
 											aria={'filter-'+ id}
 											onEdit={onEdit(id)}
 											onDelete={onDialog(DIALOG_DELETE_CONFIRM, {

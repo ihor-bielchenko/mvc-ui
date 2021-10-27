@@ -1,47 +1,39 @@
-import CodeIcon from '@material-ui/icons/Code';
-import { DATA_TYPE_TEXT } from 'structures/dataTypes.js';
+import { FUNC_CATEGORY_HASH } from './funcCategories.js';
+import { DATA_TYPE_TEXT } from './dataTypes.js';
 
-export const HASH_PASSWORD = {
-	id: process.env.HASH_PASSWORD,
-	entity_id: process.env.ENTITY_FUNC,
-	format_id: DATA_TYPE_TEXT.id,
-	icon: CodeIcon,
-	color: 'primary',
+export const FUNC_TEMPLATE_HASH_PASSWORD = {
+	id: process.env.FUNC_TEMPLATE_HASH_PASSWORD,
+	category_id: FUNC_CATEGORY_HASH.id,
+	data_type_id: DATA_TYPE_TEXT.id,
 	text: () => 'Создать пароль',
 	subtext: () => 'Сгенерировать уникальный пароль с выбором сложности',
 };
-export const HASH_BASE64 = {
-	id: process.env.HASH_BASE64,
-	entity_id: process.env.ENTITY_FUNC,
-	format_id: DATA_TYPE_TEXT.id,
-	icon: CodeIcon,
-	color: 'primary',
+export const FUNC_TEMPLATE_HASH_BASE64 = {
+	id: process.env.FUNC_TEMPLATE_HASH_BASE64,
+	category_id: FUNC_CATEGORY_HASH.id,
+	data_type_id: DATA_TYPE_TEXT.id,
 	text: () => 'Простая кодировка',
 	subtext: () => 'Кодировать/раскодировать данные по base64',
 };
-export const HASH_HASH = {
-	id: process.env.HASH_HASH,
-	entity_id: process.env.ENTITY_FUNC,
-	format_id: DATA_TYPE_TEXT.id,
-	icon: CodeIcon,
-	color: 'primary',
+export const FUNC_TEMPLATE_HASH_HASH = {
+	id: process.env.FUNC_TEMPLATE_HASH_HASH,
+	category_id: FUNC_CATEGORY_HASH.id,
+	data_type_id: DATA_TYPE_TEXT.id,
 	text: () => 'Простое хеширование',
 	subtext: () => 'Создание хеш строки с помощью алгоритма md5',
 };
-export const HASH_CRYPTO = {
-	id: process.env.HASH_CRYPTO,
-	entity_id: process.env.ENTITY_FUNC,
-	format_id: DATA_TYPE_TEXT.id,
-	icon: CodeIcon,
-	color: 'primary',
+export const FUNC_TEMPLATE_HASH_CRYPTO = {
+	id: process.env.FUNC_TEMPLATE_HASH_CRYPTO,
+	category_id: FUNC_CATEGORY_HASH.id,
+	data_type_id: DATA_TYPE_TEXT.id,
 	text: () => 'Шифрование по ключу',
 	subtext: () => 'Шифрование данных с помощью алгоритма sha256',
 };
 const funcHash =  {
-	[process.env.HASH_PASSWORD]: HASH_PASSWORD,
-	[process.env.HASH_BASE64]: HASH_BASE64,
-	[process.env.HASH_HASH]: HASH_HASH,
-	[process.env.HASH_CRYPTO]: HASH_CRYPTO,
+	[process.env.FUNC_TEMPLATE_HASH_PASSWORD]: FUNC_TEMPLATE_HASH_PASSWORD,
+	[process.env.FUNC_TEMPLATE_HASH_BASE64]: FUNC_TEMPLATE_HASH_BASE64,
+	[process.env.FUNC_TEMPLATE_HASH_HASH]: FUNC_TEMPLATE_HASH_HASH,
+	[process.env.FUNC_TEMPLATE_HASH_CRYPTO]: FUNC_TEMPLATE_HASH_CRYPTO,
 };
 
 export default funcHash;

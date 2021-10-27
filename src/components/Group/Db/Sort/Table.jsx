@@ -13,7 +13,7 @@ import Button from '@material-ui/core/Button';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AddIcon from '@material-ui/icons/Add';
 import Store from 'components/Store';
-import MenuEntity from 'components/Menu/Entity';
+import MenuControl from 'components/Menu/Control';
 import onMenu from 'components/Menu/onMenu.js';
 import onDialog from 'components/Dialog/onDialog.js';
 import { DIALOG_DELETE_CONFIRM } from 'consts/dialog.js';
@@ -67,7 +67,7 @@ let Table = () => {
 										onClick={onMenu('sort-'+ id)}>
 										<MoreVertIcon />
 									</IconButton>
-									<MenuEntity 
+									<MenuControl 
 										aria={'sort-'+ id}
 										onEdit={onEdit(id)}
 										onDelete={onDialog(DIALOG_DELETE_CONFIRM, {

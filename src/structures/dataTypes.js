@@ -36,7 +36,8 @@ export const DATA_TYPE_BOOLEAN = {
 	icon: ExposureIcon,
 	disabled: true,
 	text: () => 'Логическое значение',
-};export const DATA_TYPE_OBJECT = {
+};
+export const DATA_TYPE_OBJECT = {
 	id: process.env.DATA_TYPE_OBJECT,
 	icon: InsertDriveFileIcon,
 	text: () => 'Объект',

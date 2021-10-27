@@ -2,18 +2,18 @@ import React from 'react';
 import Box from '@material-ui/core/Box';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
-import funcHash from 'structures/funcHash.js';
-import Select from 'components/Select';
+import funcCategories from 'structures/funcCategories.js';
+import Select from '../Select.jsx';
 
-let Hash = ({ 
-	required,
+let FuncCategory = ({ 
 	name,
 	value,
 	label,
 	helperText, 
+	required,
 	onSelect, 
 }) => {
-	return <Select
+	return <Select 
 		required={required}
 		name={name}
 		value={value}
@@ -21,18 +21,18 @@ let Hash = ({
 		helperText={helperText}
 		onSelect={onSelect}>
 		{Object
-			.keys(funcHash)
+			.keys(funcCategories)
 			.map((key, i) => {
-				const item = funcHash[key];
+				const item = funcCategories[key];
 
 				return <MenuItem 
-					key={i}
+					key={item.id}
 					value={item.id}
-					disabled={!!item.disabled}
-					data-entity_id={item.entity_id}
-					data-format_id={item.format_id}>
+					disabled={!!item.disabled}>
 					<Box my={1}>
-						<Typography variant="h6">
+						<Typography 
+							variant="h6"
+							color={item.color}>
 							{item.text()}
 						</Typography>
 						<Typography variant="body2">
@@ -40,18 +40,18 @@ let Hash = ({
 						</Typography>
 					</Box>
 				</MenuItem>;
-			})}
+		})}
 	</Select>;
 };
 
-Hash = React.memo(Hash);
-Hash.defaultProps = {
-	required: false,
-	name: 'func_hash',
-	value: '',
-	label: 'Функция',
+FuncCategory = React.memo(FuncCategory);
+FuncCategory.defaultProps = {
+	name: 'func_category_id',
+	label: 'Категория функции',
 	helperText: '',
+	value: '',
+	required: false,
 	onSelect: () => {},
 };
 
-export default Hash;
+export default FuncCategory;

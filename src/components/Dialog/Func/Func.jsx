@@ -5,7 +5,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
+// import Typography from '@material-ui/core/Typography';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Button from '@material-ui/core/Button';
 // import AddIcon from '@material-ui/icons/Add';
@@ -13,39 +13,31 @@ import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Header from 'components/Header';
-import JsObject from 'components/JsObject';
 import InputText from 'components/Input/Text';
-import SelectDataType from 'components/Select/DataType';
-import SelectResponseCode from 'components/Select/ResponseCode';
+import SelectFuncCategory from 'components/Select/FuncCategory';
+import SelectFuncTemplate from 'components/Select/FuncTemplate';
 import Transition from 'components/Dialog/Transition.jsx';
 import onDialog from 'components/Dialog/onDialog.js';
-import dataTypes, { 
-	DATA_TYPE_ATOMIC,
-	DATA_TYPE_OBJECT,
-	DATA_TYPE_ARRAY, 
-} from 'structures/dataTypes.js';
+import funcTemplates from 'structures/funcTemplates.js';
 import { 
-	DIALOG_JSON,
+	DIALOG_FUNC,
 	DIALOG_DELETE_CONFIRM, 
 } from 'consts/dialog.js';
-import KeyComponent from './KeyComponent.jsx';
-import ValueComponent from './ValueComponent.jsx';
-import TypeComponent from './TypeComponent.jsx';
 import onMount from './onMount.js';
 import onClose from './onClose.js';
 import onChangeName from './onChangeName.js';
 import onSave from './onSave.js';
 import onDelete from './onDelete.js';
-import onSelectDataTypeId from './onSelectDataTypeId.js';
-import onSelectCode from './onSelectCode.js';
+import onSelectCategory from './onSelectCategory.js';
+import onSelectTemplate from './onSelectTemplate.js';
 
-let Json = () => {
-	const dialog = useSelector((state) => state.dialogs[DIALOG_JSON]);
+let Func = () => {
+	const dialog = useSelector((state) => state.dialogs[DIALOG_FUNC]);
 	const existId = (dialog || {}).id || 0;
-	const id = useSelector((state) => state.json.id);
-	const name = useSelector((state) => state.json.name || '');
-	const code = useSelector((state) => state.json.code || 200);
-	const dataTypeId = useSelector((state) => (state.jsObject.data[0] || {}).data_type_id ?? DATA_TYPE_ATOMIC.id);
+	const id = useSelector((state) => state.func.id);
+	const name = useSelector((state) => state.func.name || '');
+	const templateId = useSelector((state) => state.func.template_id || '');
+	const categoryId = useSelector((state) => state.func.category_id ?? funcTemplates[state.func.template_id].category_id);
 	const _onDelete = React.useCallback((e) => onDelete(e, id), [
 		id,
 	]);
@@ -74,8 +66,8 @@ let Json = () => {
 			<DialogTitle>
 				<Header onClose={onClose}>
 					{id >= 1
-						? 'JSON-ответ: '+ name
-						: 'Добавить JSON-ответ'}
+						? 'Функция: '+ name
+						: 'Добавить функцию'}
 				</Header>
 			</DialogTitle>
 			{_dialogOpenFlag
@@ -90,38 +82,17 @@ let Json = () => {
 								value={name}
 								onChange={onChangeName} />
 						</Box>
-						<Box
-							py={2}
-							position="relative">
-							<SelectResponseCode
-								value={code}
-								onSelect={onSelectCode} />
+						<Box py={2}>
+							<SelectFuncCategory
+								value={categoryId}
+								onSelect={onSelectCategory} />
 						</Box>
-						<Box
-							py={2}
-							position="relative">
-							<SelectDataType
-								label="Формат данных"
-								name="data_type_id"
-								value={dataTypeId}
-								onSelect={onSelectDataTypeId}
-								onFilter={(key) => {
-									return dataTypes[key].id === DATA_TYPE_ATOMIC.id
-										|| dataTypes[key].id === DATA_TYPE_OBJECT.id
-										|| dataTypes[key].id === DATA_TYPE_ARRAY.id
-								}} />
+						<Box py={2}>
+							<SelectFuncTemplate
+								categoryId={categoryId}
+								value={templateId}
+								onSelect={onSelectTemplate} />
 						</Box>
-						<Box 
-							pt={4}
-							pb={2}>
-							<Typography variant="h6">
-								Данные:
-							</Typography>
-						</Box>
-						<JsObject 
-							KeyComponent={KeyComponent}
-							ValueComponent={ValueComponent}
-							TypeComponent={TypeComponent} />
 					</DialogContent>
 					<DialogActions>
 					<Box 
@@ -172,8 +143,8 @@ let Json = () => {
 		: <React.Fragment />;
 };
 
-Json = React.memo(Json);
-Json.defaultProps = {
+Func = React.memo(Func);
+Func.defaultProps = {
 };
 
-export default Json;
+export default Func;

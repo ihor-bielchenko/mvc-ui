@@ -1,8 +1,8 @@
 import Store from 'components/Store';
-import { initialState as propInitialState } from 'components/Store/json.js';
+import { initialState as funcInitialState } from 'components/Store/func.js';
 import onLoader from 'components/Loader/onLoader';
 import onClose from 'components/Dialog/onClose.js';
-import fetchJsonDelete from 'fetch/jsonDelete.js';
+import fetchFuncDelete from 'fetch/funcDelete.js';
 import fetchCortegeDelete from 'fetch/cortegeDelete.js';
 import axiosError from 'utils/axiosError.js';
 
@@ -10,15 +10,15 @@ const onDelete = async (e, id) => {
 	onLoader(true);
 	
 	try {
-		const json = Store().getState().json;
+		const func = Store().getState().func;
 		
-		await fetchJsonDelete(JSON.stringify([ id ]));
-		await fetchCortegeDelete(JSON.stringify([ json.sourceId ]));
+		await fetchFuncDelete(JSON.stringify([ id ]));
+		await fetchCortegeDelete(JSON.stringify([ func.sourceId ]));
 
 		onClose()();
 		Store().dispatch({
-			type: 'json',
-			payload: () => propInitialState(),
+			type: 'func',
+			payload: () => funcInitialState(),
 		});
 	}
 	catch (err) {

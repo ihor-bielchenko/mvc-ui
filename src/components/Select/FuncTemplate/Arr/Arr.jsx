@@ -2,7 +2,6 @@ import React from 'react';
 import Box from '@material-ui/core/Box';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import funcArr from 'structures/funcArr.js';
 import Select from 'components/Select';
 
@@ -33,13 +32,8 @@ let Arr = ({
 					disabled={!!item.disabled}
 					data-entity_id={item.entity_id}
 					data-format_id={item.format_id}>
-					<ListItemAvatar>
-						<item.icon color={item.color} />
-					</ListItemAvatar>
 					<Box my={1}>
-						<Typography 
-							variant="h6"
-							color={item.color}>
+						<Typography variant="h6">
 							{item.text()}
 						</Typography>
 						<Typography variant="body2">

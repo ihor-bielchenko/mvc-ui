@@ -1,5 +1,5 @@
 import Store from 'components/Store';
-import { initialState as propInitialState } from 'components/Store/json.js';
+import { initialState as jsonInitialState } from 'components/Store/json.js';
 import onLoader from 'components/Loader/onLoader';
 import onClose from 'components/Dialog/onClose.js';
 import fetchJsonDelete from 'fetch/jsonDelete.js';
@@ -18,7 +18,7 @@ const onDelete = async (e, id) => {
 		onClose()();
 		Store().dispatch({
 			type: 'json',
-			payload: () => propInitialState(),
+			payload: () => jsonInitialState(),
 		});
 	}
 	catch (err) {

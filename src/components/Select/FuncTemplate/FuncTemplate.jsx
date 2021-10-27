@@ -1,28 +1,34 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import * as funcTypes from 'structures/funcTypes.js';
+import * as funcCategories from 'structures/funcCategories.js';
 
-const _load = (typeId) => () => {
-	switch (typeId) {
-		case funcTypes.FUNC_IF.id:
+const _load = (categoryId) => () => {
+	switch (categoryId) {
+		case funcCategories.FUNC_CATEGORY_IF.id:
 			return import('components/Select/FuncTemplate/If');
 
-		case funcTypes.FUNC_DB.id:
-			return import('components/Select/FuncTemplate/Db');
-
-		case funcTypes.FUNC_TEXT.id:
+		case funcCategories.FUNC_CATEGORY_TEXT.id:
 			return import('components/Select/FuncTemplate/Text');
 
-		case funcTypes.FUNC_MATH.id:
+		case funcCategories.FUNC_CATEGORY_MATH.id:
 			return import('components/Select/FuncTemplate/Maths');
 
-		case funcTypes.FUNC_TIME.id:
+		case funcCategories.FUNC_CATEGORY_ARRAY.id:
+			return import('components/Select/FuncTemplate/Arr');
+
+		case funcCategories.FUNC_CATEGORY_OBJECT.id:
+			return import('components/Select/FuncTemplate/Obj');
+
+		case funcCategories.FUNC_CATEGORY_DB.id:
+			return import('components/Select/FuncTemplate/Db');
+
+		case funcCategories.FUNC_CATEGORY_TIME.id:
 			return import('components/Select/FuncTemplate/Time');
 
-		case funcTypes.FUNC_HASH.id:
+		case funcCategories.FUNC_CATEGORY_HASH.id:
 			return import('components/Select/FuncTemplate/Hash');
 
-		case funcTypes.FUNC_SERVER.id:
+		case funcCategories.FUNC_CATEGORY_SERVER.id:
 			return import('components/Select/FuncTemplate/Server');
 
 		case '':
@@ -33,26 +39,27 @@ const _load = (typeId) => () => {
 let FuncTemplate = ({
 	name, 
 	value,
-	typeId,
+	categoryId,
 	required,
 	onSelect, 
 }) => {
-	const Component = React.lazy(_load(typeId));
+	const Component = React.lazy(_load(categoryId));
 
-	return <React.Suspense fallback={<Typography>Подождите...</Typography>}>
-		<Component 
-			required={required}
-			name={name}
-			value={value}
-			onSelect={onSelect} />
-	</React.Suspense>;
+	return categoryId > 0
+		? <React.Suspense fallback={<Typography>Подождите...</Typography>}>
+			<Component 
+				required={required}
+				name={name}
+				value={value}
+				onSelect={onSelect} />
+		</React.Suspense>
+		: <React.Fragment />;
 };
 
 FuncTemplate = React.memo(FuncTemplate);
 FuncTemplate.defaultProps = {
-	name: 'func_template_id',
 	value: '',
-	typeId: 0,
+	categoryId: 0,
 	required: false,
 	onSelect: () => {},
 };

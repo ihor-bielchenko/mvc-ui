@@ -1,118 +1,83 @@
-import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
-import CodeIcon from '@material-ui/icons/Code';
+import { FUNC_CATEGORY_MATH } from './funcCategories.js';
+import { 
+	FUNC_TEMPLATE_IF_TYPE,
+	FUNC_TEMPLATE_IF_PARITY,
+	FUNC_TEMPLATE_IF_INTEGER,
+} from './funcIf.js';
+import { 
+	DATA_TYPE_BOOLEAN,
+	DATA_TYPE_NUMBER, 
+} from './dataTypes.js';
 
-export const MATH_TYPE = {
-	id: process.env.MATH_TYPE,
-	entity_id: process.env.ENTITY_CONDITION,
-	format_id: process.env.FORMAT_BOOL,
-	icon: PlaylistAddCheckIcon,
-	color: 'secondary',
-	text: () => 'Определить число',
-	subtext: () => 'Является ли значение числом или нет',
-};
-export const MATH_PARITY = {
-	id: process.env.MATH_PARITY,
-	entity_id: process.env.ENTITY_CONDITION,
-	format_id: process.env.FORMAT_BOOL,
-	icon: PlaylistAddCheckIcon,
-	color: 'secondary',
-	text: () => 'Проверить четность числа',
-	subtext: () => 'Является ли значение четным или нет',
-};
-export const MATH_INTEGER = {
-	id: process.env.MATH_INTEGER,
-	entity_id: process.env.ENTITY_CONDITION,
-	format_id: process.env.FORMAT_BOOL,
-	icon: PlaylistAddCheckIcon,
-	color: 'secondary',
-	text: () => 'Определить, что число целое',
-	subtext: () => 'Является ли значение целым или дробным',
-};
-export const MATH_INFINITY = {
-	id: process.env.MATH_INFINITY,
-	entity_id: process.env.ENTITY_CONDITION,
-	format_id: process.env.FORMAT_BOOL,
-	icon: PlaylistAddCheckIcon,
-	color: 'secondary',
+export const FUNC_TEMPLATE_MATH_INFINITY = {
+	id: process.env.FUNC_TEMPLATE_MATH_INFINITY,
+	category_id: FUNC_CATEGORY_MATH.id,
+	data_type_id: DATA_TYPE_BOOLEAN.id,
 	text: () => 'Бесконечность',
 	subtext: () => 'Определить, является ли значение бесконечным',
 };
-export const MATH_COUNT = {
-	id: process.env.MATH_COUNT,
-	entity_id: process.env.ENTITY_FUNC,
-	format_id: process.env.FORMAT_NUM,
-	icon: CodeIcon,
-	color: 'primary',
+export const FUNC_TEMPLATE_MATH_COUNT = {
+	id: process.env.FUNC_TEMPLATE_MATH_COUNT,
+	category_id: FUNC_CATEGORY_MATH.id,
+	data_type_id: DATA_TYPE_NUMBER.id,
 	text: () => 'Арифметика',
 	subtext: () => 'Сложение, вычитание, умножение, деление, степень, корень',
 };
-export const MATH_ROUND = {
-	id: process.env.MATH_ROUND,
-	entity_id: process.env.ENTITY_FUNC,
-	format_id: process.env.FORMAT_NUM,
-	icon: CodeIcon,
-	color: 'primary',
+export const FUNC_TEMPLATE_MATH_ROUND = {
+	id: process.env.FUNC_TEMPLATE_MATH_ROUND,
+	category_id: FUNC_CATEGORY_MATH.id,
+	data_type_id: DATA_TYPE_NUMBER.id,
 	text: () => 'Округление',
 	subtext: () => 'Преобразование дробного числа до целого в большую или меньшую сторону',
 };
-export const MATH_MAX = {
-	id: process.env.MATH_MAX,
-	entity_id: process.env.ENTITY_FUNC,
-	format_id: process.env.FORMAT_NUM,
-	icon: CodeIcon,
-	color: 'primary',
+export const FUNC_TEMPLATE_MATH_MAX = {
+	id: process.env.FUNC_TEMPLATE_MATH_MAX,
+	category_id: FUNC_CATEGORY_MATH.id,
+	data_type_id: DATA_TYPE_NUMBER.id,
 	text: () => 'Наибольшее значение',
 	subtext: () => 'Из нескольких значений определить наибольшее число',
 };
-export const MATH_MIN = {
-	id: process.env.MATH_MIN,
-	entity_id: process.env.ENTITY_FUNC,
-	format_id: process.env.FORMAT_NUM,
-	icon: CodeIcon,
-	color: 'primary',
+export const FUNC_TEMPLATE_MATH_MIN = {
+	id: process.env.FUNC_TEMPLATE_MATH_MIN,
+	category_id: FUNC_CATEGORY_MATH.id,
+	data_type_id: DATA_TYPE_NUMBER.id,
 	text: () => 'Наименьшее значение',
 	subtext: () => 'Из нескольких значений определить наименьшее число',
 };
-export const MATH_TRIG = {
-	id: process.env.MATH_TRIG,
-	entity_id: process.env.ENTITY_FUNC,
-	format_id: process.env.FORMAT_NUM,
-	icon: CodeIcon,
-	color: 'primary',
+export const FUNC_TEMPLATE_MATH_TRIG = {
+	id: process.env.FUNC_TEMPLATE_MATH_TRIG,
+	category_id: FUNC_CATEGORY_MATH.id,
+	data_type_id: DATA_TYPE_NUMBER.id,
 	text: () => 'Тригонометрия',
 	subtext: () => 'Синус, косинус, тангенс, арксинус, арккосинус, арктангенс',
 };
-export const MATH_LOG = {
-	id: process.env.MATH_LOG,
-	entity_id: process.env.ENTITY_FUNC,
-	format_id: process.env.FORMAT_NUM,
-	icon: CodeIcon,
-	color: 'primary',
+export const FUNC_TEMPLATE_MATH_LOG = {
+	id: process.env.FUNC_TEMPLATE_MATH_LOG,
+	category_id: FUNC_CATEGORY_MATH.id,
+	data_type_id: DATA_TYPE_NUMBER.id,
 	text: () => 'Логарифмы',
 	subtext: () => 'Действия с логарифмами',
 };
-export const MATH_SYSTEM = {
-	id: process.env.MATH_SYSTEM,
-	entity_id: process.env.ENTITY_FUNC,
-	format_id: process.env.FORMAT_NUM,
-	icon: CodeIcon,
-	color: 'primary',
+export const FUNC_TEMPLATE_MATH_SYSTEM = {
+	id: process.env.FUNC_TEMPLATE_MATH_SYSTEM,
+	category_id: FUNC_CATEGORY_MATH.id,
+	data_type_id: DATA_TYPE_NUMBER.id,
 	text: () => 'Системы счисления',
 	subtext: () => 'Определение и перевод чисел из одной системы в другую',
 };
 
 const funcMaths = {
-	[process.env.MATH_TYPE]: MATH_TYPE,
-	[process.env.MATH_PARITY]: MATH_PARITY,
-	[process.env.MATH_INTEGER]: MATH_INTEGER,
-	[process.env.MATH_INFINITY]: MATH_INFINITY,
-	[process.env.MATH_COUNT]: MATH_COUNT,
-	[process.env.MATH_ROUND]: MATH_ROUND,
-	[process.env.MATH_MAX]: MATH_MAX,
-	[process.env.MATH_MIN]: MATH_MIN,
-	[process.env.MATH_TRIG]: MATH_TRIG,
-	[process.env.MATH_LOG]: MATH_LOG,
-	[process.env.MATH_SYSTEM]: MATH_SYSTEM,
+	[process.env.FUNC_TEMPLATE_IF_TYPE]: FUNC_TEMPLATE_IF_TYPE,
+	[process.env.FUNC_TEMPLATE_IF_PARITY]: FUNC_TEMPLATE_IF_PARITY,
+	[process.env.FUNC_TEMPLATE_IF_INTEGER]: FUNC_TEMPLATE_IF_INTEGER,
+	[process.env.FUNC_TEMPLATE_MATH_INFINITY]: FUNC_TEMPLATE_MATH_INFINITY,
+	[process.env.FUNC_TEMPLATE_MATH_COUNT]: FUNC_TEMPLATE_MATH_COUNT,
+	[process.env.FUNC_TEMPLATE_MATH_ROUND]: FUNC_TEMPLATE_MATH_ROUND,
+	[process.env.FUNC_TEMPLATE_MATH_MAX]: FUNC_TEMPLATE_MATH_MAX,
+	[process.env.FUNC_TEMPLATE_MATH_MIN]: FUNC_TEMPLATE_MATH_MIN,
+	[process.env.FUNC_TEMPLATE_MATH_TRIG]: FUNC_TEMPLATE_MATH_TRIG,
+	[process.env.FUNC_TEMPLATE_MATH_LOG]: FUNC_TEMPLATE_MATH_LOG,
+	[process.env.FUNC_TEMPLATE_MATH_SYSTEM]: FUNC_TEMPLATE_MATH_SYSTEM,
 };
 
 export default funcMaths;

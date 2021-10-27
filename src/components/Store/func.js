@@ -1,13 +1,12 @@
 
-export const setFunc = () => ({
+export const initialState = () => ({
 	name: '',
-	type_id: '',
-	func_template_id: '',
-	func_entity_id: '',
-	func_format_id: '',
-	props: {},
+	category_id: '',
+	template_id: '',
+	arguments: {
+	},
 });
-const func = (state = {}, action) => {
+const func = (state = initialState(), action) => {
 	return action.type === 'func'
 		? action.payload()
 		: state;

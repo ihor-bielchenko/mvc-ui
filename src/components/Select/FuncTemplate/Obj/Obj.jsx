@@ -2,16 +2,17 @@ import React from 'react';
 import Box from '@material-ui/core/Box';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
-import funcHash from 'structures/funcHash.js';
+import funcObj from 'structures/funcObj.js';
 import Select from 'components/Select';
 
-let Hash = ({ 
+let Obj = ({ 
 	required,
 	name,
 	value,
 	label,
-	helperText, 
-	onSelect, 
+	helperText,
+	inArr, 
+	onSelect,
 }) => {
 	return <Select
 		required={required}
@@ -21,9 +22,9 @@ let Hash = ({
 		helperText={helperText}
 		onSelect={onSelect}>
 		{Object
-			.keys(funcHash)
+			.keys(funcObj)
 			.map((key, i) => {
-				const item = funcHash[key];
+				const item = funcObj[key];
 
 				return <MenuItem 
 					key={i}
@@ -44,14 +45,15 @@ let Hash = ({
 	</Select>;
 };
 
-Hash = React.memo(Hash);
-Hash.defaultProps = {
+Obj = React.memo(Obj);
+Obj.defaultProps = {
 	required: false,
-	name: 'func_hash',
+	name: 'func_obj',
 	value: '',
 	label: 'Функция',
 	helperText: '',
+	inArr: false,
 	onSelect: () => {},
 };
 
-export default Hash;
+export default Obj;

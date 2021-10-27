@@ -1,58 +1,48 @@
-import StorageIcon from '@material-ui/icons/Storage';
-// import { getLang } from 'components/Language';
+import { FUNC_CATEGORY_DB } from './funcCategories.js';
+import { DATA_TYPE_BOOLEAN } from './dataTypes.js';
 
-export const DB_CREATE = {
-	id: process.env.DB_CREATE,
-	entity_id: process.env.ENTITY_FUNC,
-	format_id: process.env.FORMAT_BOOL,
-	icon: StorageIcon,
-	color: 'primary',
+export const FUNC_TEMPLATE_DB_CREATE = {
+	id: process.env.FUNC_TEMPLATE_DB_CREATE,
+	category_id: FUNC_CATEGORY_DB.id,
+	data_type_id: DATA_TYPE_BOOLEAN.id,
 	text: () => 'Создать запись',
 	subtext: () => 'Добавить в базу новые данные',
 };
-export const DB_COLUMN_CREATE = {
-	id: process.env.DB_COLUMN_CREATE,
-	entity_id: process.env.ENTITY_FUNC,
-	format_id: process.env.FORMAT_BOOL,
-	icon: StorageIcon,
-	color: 'primary',
+export const FUNC_TEMPLATE_DB_COLUMN_CREATE = {
+	id: process.env.FUNC_TEMPLATE_DB_COLUMN_CREATE,
+	category_id: FUNC_CATEGORY_DB.id,
+	data_type_id: DATA_TYPE_BOOLEAN.id,
 	text: () => 'Добавить поле',
 	subtext: () => 'Добавить в базу новую колонку',
 };
-export const DB_COPY = {
-	id: process.env.DB_COPY,
-	entity_id: process.env.ENTITY_FUNC,
-	format_id: process.env.FORMAT_BOOL,
-	icon: StorageIcon,
-	color: 'primary',
+export const FUNC_TEMPLATE_DB_COPY = {
+	id: process.env.FUNC_TEMPLATE_DB_COPY,
+	category_id: FUNC_CATEGORY_DB.id,
+	data_type_id: DATA_TYPE_BOOLEAN.id,
 	text: () => 'Копировать',
-	subtext: () => 'Копировать существующие данные в базе',
+	subtext: () => 'Копировать данные в базе',
 };
-export const DB_DELETE = {
-	id: process.env.DB_DELETE,
-	entity_id: process.env.ENTITY_FUNC,
-	format_id: process.env.FORMAT_BOOL,
-	icon: StorageIcon,
-	color: 'secondary',
+export const FUNC_TEMPLATE_DB_DELETE = {
+	id: process.env.FUNC_TEMPLATE_DB_DELETE,
+	category_id: FUNC_CATEGORY_DB.id,
+	data_type_id: DATA_TYPE_BOOLEAN.id,
 	text: () => 'Удалить',
 	subtext: () => 'Удалить данные из базы',
 };
-export const DB_COLUMN_DELETE = {
-	id: process.env.DB_COLUMN_DELETE,
-	entity_id: process.env.ENTITY_FUNC,
-	format_id: process.env.FORMAT_BOOL,
-	icon: StorageIcon,
-	color: 'secondary',
+export const FUNC_TEMPLATE_DB_COLUMN_DELETE = {
+	id: process.env.FUNC_TEMPLATE_DB_COLUMN_DELETE,
+	category_id: FUNC_CATEGORY_DB.id,
+	data_type_id: DATA_TYPE_BOOLEAN.id,
 	text: () => 'Удалить поле',
 	subtext: () => 'Удалить поле из базы. Все данных из этой колонки будут потеряны',
 };
 
 const funcDb = {
-	[process.env.DB_CREATE]: DB_CREATE,
-	[process.env.DB_COPY]: DB_COPY,
-	[process.env.DB_DELETE]: DB_DELETE,
-	[process.env.DB_COLUMN_CREATE]: DB_COLUMN_CREATE,
-	[process.env.DB_COLUMN_DELETE]: DB_COLUMN_DELETE,
+	[process.env.FUNC_TEMPLATE_DB_CREATE]: FUNC_TEMPLATE_DB_CREATE,
+	[process.env.FUNC_TEMPLATE_DB_COPY]: FUNC_TEMPLATE_DB_COPY,
+	[process.env.FUNC_TEMPLATE_DB_DELETE]: FUNC_TEMPLATE_DB_DELETE,
+	[process.env.FUNC_TEMPLATE_DB_COLUMN_CREATE]: FUNC_TEMPLATE_DB_COLUMN_CREATE,
+	[process.env.FUNC_TEMPLATE_DB_COLUMN_DELETE]: FUNC_TEMPLATE_DB_COLUMN_DELETE,
 };
 
 export default funcDb;

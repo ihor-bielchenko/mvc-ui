@@ -19,13 +19,13 @@ let OperatorUnion = ({
 		label={label}
 		onSelect={onSelect}>
 		<MenuItem 
-			key={process.env.UNION_AND}
-			value={process.env.UNION_AND}>
+			key={process.env.OPERATOR_UNION_AND}
+			value={process.env.OPERATOR_UNION_AND}>
 			И (&&)
 		</MenuItem>
 		<MenuItem 
-			key={process.env.UNION_OR}
-			value={process.env.UNION_OR}>
+			key={process.env.OPERATOR_UNION_OR}
+			value={process.env.OPERATOR_UNION_OR}>
 			ИЛИ (||)
 		</MenuItem>
 		{children}

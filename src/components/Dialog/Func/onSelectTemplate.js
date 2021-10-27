@@ -1,14 +1,13 @@
 import Store from 'components/Store';
 
-const onChangeName = (e) => {
-	const value = e.target.value;
+const onSelectTemplate = (e) => {
 	const func = Store().getState().func;
 
-	func.name = value;
+	func.template_id = Number(e.target.value);
 	Store().dispatch({
 		type: 'func',
 		payload: () => ({ ...func }),
 	});
 };
 
-export default onChangeName;
+export default onSelectTemplate;

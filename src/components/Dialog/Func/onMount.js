@@ -1,25 +1,24 @@
 import Store from 'components/Store';
 import onLoader from 'components/Loader/onLoader';
-import fetchJsonOne from 'fetch/jsonOne.js';
+import fetchFuncOne from 'fetch/funcOne.js';
 import axiosError from 'utils/axiosError.js';
 
 const onMount = async (id) => {
-	const json = Store().getState().json;
+	const func = Store().getState().func;
 
 	onLoader(true);
 
 	try {
-		const response = await fetchJsonOne(id);
+		const response = await fetchFuncOne(id);
 		const data = ((response || {}).data || {}).data || {};
 		
-		json.id = id;
-		json.name = data.name;
-		json.sourceId = data.source_id;
-		json.code = data.code;
+		func.id = id;
+		func.name = data.name;
+		func.template_id = data.template_id;
 
 		Store().dispatch({
-			type: 'json',
-			payload: () => json,
+			type: 'func',
+			payload: () => func,
 		});
 		onLoader(false);
 	}
