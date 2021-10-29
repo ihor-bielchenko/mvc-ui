@@ -44,6 +44,8 @@ import onCheckVariable from './onCheckVariable.js';
 let Prop = () => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_PROP]);
 	const existId = (dialog || {}).id || 0;
+	const fromEntityId = (dialog || {}).fromEntityId ?? 0;
+	const fromArrowTypeId = (dialog || {}).fromArrowTypeId ?? process.env.ARROW_TYPE_DEFAULT;
 	const id = useSelector((state) => state.prop.id);
 	const name = useSelector((state) => state.prop.name || '');
 	const asVariable = useSelector((state) => !!state.prop.as_variable);
@@ -51,9 +53,14 @@ let Prop = () => {
 	const _onDelete = React.useCallback((e) => onDelete(e, id), [
 		id,
 	]);
+	const _onSave = React.useCallback((e) => onSave(e, fromEntityId, fromArrowTypeId), [
+		fromEntityId,
+		fromArrowTypeId,
+	]);
 	const _dialogOpenFlag = !!dialog;
 
 	// onMount
+	// TODO: если fromEntityId и fromArrowTypeId undefined закрывать окно
 	React.useEffect(() => {
 		if (_dialogOpenFlag && existId > 0) {
 			onMount(existId);
@@ -160,7 +167,7 @@ let Prop = () => {
 									variant="outlined"
 									color="primary"
 									startIcon={<SaveIcon />}
-									onClick={onSave}>
+									onClick={_onSave}>
 									Сохранить
 								</Button>
 								<Button
@@ -178,7 +185,7 @@ let Prop = () => {
 								variant="outlined"
 								color="primary"
 								startIcon={<SaveIcon />}
-								onClick={onSave}>
+								onClick={_onSave}>
 								Сохранить
 							</Button>}
 					</Box>

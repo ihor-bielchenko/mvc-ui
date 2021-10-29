@@ -6,7 +6,7 @@ import {
 	// DATA_TYPE_ARRAY,
 } from 'structures/dataTypes.js';
 
-export const setJsObject = () => ({
+export const initialState = () => ({
 	renderFlag: false,
 	data: {
 		1: {
@@ -68,12 +68,9 @@ export const setJsObject = () => ({
 	},
 	json: {},
 	blocks: {},
-
-
-	temp: {},
 	tempValue: {},
 });
-const jsObject = (state = setJsObject(), action) => {
+const jsObject = (state = initialState(), action) => {
 	return action.type === 'jsObject'
 		? action.payload()
 		: state;

@@ -5,7 +5,7 @@ let Tree = ({ children }) => {
 	return <React.Fragment>
 		<Box 
 			position="relative"
-			width="400"
+			width="588px"
 			mx="auto">
 			{children}
 		</Box>

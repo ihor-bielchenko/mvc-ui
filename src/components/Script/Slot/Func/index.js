@@ -1,3 +1,3 @@
-import Create from './Create.jsx';
+import Func from './Func.jsx';
 
-export default Create;
+export default Func;

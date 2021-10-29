@@ -1,7 +1,11 @@
 
 export const initialState = () => ({
-	id: 0,
-	sidebarFlag: false,
+	1: {
+		id: 1,
+		sidebarFlag: false,
+		data: [],
+		arrows: [],
+	},
 });
 const script = (state = initialState(), action) => {
 	return action.type === 'script'

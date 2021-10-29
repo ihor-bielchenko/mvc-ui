@@ -34,12 +34,18 @@ import onSelectTemplate from './onSelectTemplate.js';
 let Func = () => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_FUNC]);
 	const existId = (dialog || {}).id || 0;
+	const fromEntityId = (dialog || {}).fromEntityId ?? 0;
+	const fromArrowTypeId = (dialog || {}).fromArrowTypeId ?? process.env.ARROW_TYPE_DEFAULT;
 	const id = useSelector((state) => state.func.id);
 	const name = useSelector((state) => state.func.name || '');
 	const templateId = useSelector((state) => state.func.template_id || '');
 	const categoryId = useSelector((state) => state.func.category_id ?? funcTemplates[state.func.template_id].category_id);
 	const _onDelete = React.useCallback((e) => onDelete(e, id), [
 		id,
+	]);
+	const _onSave = React.useCallback((e) => onSave(e, fromEntityId, fromArrowTypeId), [
+		fromEntityId,
+		fromArrowTypeId,
 	]);
 	const _dialogOpenFlag = !!dialog;
 
@@ -114,7 +120,7 @@ let Func = () => {
 									variant="outlined"
 									color="primary"
 									startIcon={<SaveIcon />}
-									onClick={onSave}>
+									onClick={_onSave}>
 									Сохранить
 								</Button>
 								<Button
@@ -132,7 +138,7 @@ let Func = () => {
 								variant="outlined"
 								color="primary"
 								startIcon={<SaveIcon />}
-								onClick={onSave}>
+								onClick={_onSave}>
 								Сохранить
 							</Button>}
 					</Box>

@@ -1,6 +1,6 @@
 
 const axiosError = (err) => {
-	let output = 'bad request';
+	let output = 'Bad request: ';
 
 	if (err.response) {
 		if (((err.response || {}).data || {}).message) {

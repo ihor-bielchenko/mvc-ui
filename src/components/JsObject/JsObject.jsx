@@ -18,8 +18,8 @@ let JsObject = ({
 }) => {
 	const wrapperIsset = useSelector((state) => !!state.jsObject.data[0]);
 	const _sourceId = useSelector((state) => state.prop.sourceId
-		?? state.json.sourceId
-		?? state.func.sourceId);
+		|| state.json.sourceId
+		|| state.func.sourceId);
 	const _dataTypeId = useSelector((state) => (state.jsObject.data[0] || {}).data_type_id ?? DATA_TYPE_ATOMIC.id);
 	const _issetFlag = React.useMemo(() => ((Store().getState().dialogs[DIALOG_PROP] || {}).id
 		?? (Store().getState().dialogs[DIALOG_JSON] || {}).id
@@ -30,7 +30,7 @@ let JsObject = ({
 
 	React.useEffect(() => _issetFlag && _sourceId > 0
 		? onMount(_sourceId, _dataTypeIdMemo)
-		: onMount(0, _dataTypeIdMemo), [
+		: (!_issetFlag) && onMount(0, _dataTypeIdMemo), [
 		_issetFlag,
 		_sourceId,
 		_dataTypeIdMemo,

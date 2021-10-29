@@ -20,6 +20,8 @@ import onClose from '../onClose.js';
 let Entity = ({ 
 	children, 
 	aria, 
+	fromEntityId,
+	fromArrowTypeId,
 	onEdit,
 	onCopy,
 	onDelete,
@@ -30,6 +32,7 @@ let Entity = ({
 	const _onClose = React.useCallback((e) => onClose(e, aria), [
 		aria,
 	]);
+	// fromArrowTypeId = process.env.ARROW_TYPE_TRUE;
 
 	return <React.Fragment>
 		<Menu
@@ -39,7 +42,8 @@ let Entity = ({
 			open={Boolean(anchorEl)}
 			onClose={_onClose}>
 			<MenuItem onClick={onDialog(DIALOG_PROP, {
-				id: 15,
+				fromEntityId,
+				fromArrowTypeId,
 			})}>
 				<ListItemAvatar>
 					<DescriptionIcon />
@@ -48,7 +52,10 @@ let Entity = ({
 					Параметр
 				</Typography>
 			</MenuItem>
-			<MenuItem onClick={onDialog(DIALOG_IF)}>
+			<MenuItem onClick={onDialog(DIALOG_IF, {
+				fromEntityId,
+				fromArrowTypeId,
+			})}>
 				<ListItemAvatar>
 					<DoneAllIcon />
 				</ListItemAvatar>
@@ -56,7 +63,10 @@ let Entity = ({
 					Условие
 				</Typography>
 			</MenuItem>
-			<MenuItem onClick={onDialog(DIALOG_FUNC)}>
+			<MenuItem onClick={onDialog(DIALOG_FUNC, {
+				fromEntityId,
+				fromArrowTypeId,
+			})}>
 				<ListItemAvatar>
 					<AirportShuttleIcon />
 				</ListItemAvatar>
@@ -64,7 +74,10 @@ let Entity = ({
 					Функция
 				</Typography>
 			</MenuItem>
-			<MenuItem onClick={onDialog(DIALOG_JSON)}>
+			<MenuItem onClick={onDialog(DIALOG_JSON, {
+				fromEntityId,
+				fromArrowTypeId,
+			})}>
 				<ListItemAvatar>
 					<TextsmsIcon />
 				</ListItemAvatar>

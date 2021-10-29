@@ -19,7 +19,7 @@ const onMount = async (id) => {
 
 		Store().dispatch({
 			type: 'json',
-			payload: () => json,
+			payload: () => ({ ...json }),
 		});
 		onLoader(false);
 	}

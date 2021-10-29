@@ -1,3 +1,3 @@
-import Create from './Create.jsx';
+import Prop from './Prop.jsx';
 
-export default Create;
+export default Prop;

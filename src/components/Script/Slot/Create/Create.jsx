@@ -5,12 +5,22 @@ import MenuEntity from 'components/Menu/Entity';
 import onMenu from 'components/Menu/onMenu.js';
 import Slot from '../Slot';
 
-let Create = ({
-	id,
-	withControl,
+let Create = ({ 
+	withControl, 
+	viewX,
+	x,
+	y,
+	fromEntityId,
+	fromArrowTypeId,
 }) => {
+	const _id = React.useMemo(() => Date.now(), []);
+
 	return <React.Fragment>
-		<Slot backgroundColor="#FFF">
+		<Slot 
+			withControl={withControl}
+			x={viewX}
+			y={y}
+			backgroundColor="#FFF">
 			<Button 
 				fullWidth
 				startIcon={<AddIcon />}
@@ -19,10 +29,15 @@ let Create = ({
 					height: 70,
 					borderRadius: 0,
 				}}
-				onClick={onMenu('menu-entity-'+ id)}>
+				onClick={onMenu('menu-entity-create-'+ _id)}>
 				Добавить
 			</Button>
-			<MenuEntity aria={'menu-entity-'+ id} />
+			<MenuEntity 
+				aria={'menu-entity-create-'+ _id}
+				fromEntityId={fromEntityId}
+				fromArrowTypeId={fromArrowTypeId}
+				x={x}
+				y={y} />
 		</Slot>
 	</React.Fragment>;
 };
@@ -30,7 +45,11 @@ let Create = ({
 Create = React.memo(Create);
 Create.defaultProps = {
 	withControl: false,
-	id: 0,
+	viewX: 0,
+	x: 0,
+	y: 40,
+	fromEntityId: 0,
+	fromArrowTypeId: process.env.ARROW_TYPE_DEFAULT,
 };
 
 export default Create;

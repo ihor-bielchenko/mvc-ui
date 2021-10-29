@@ -85,7 +85,7 @@ export const DATA_TYPE_URL = {
 	id: process.env.DATA_TYPE_URL,
 	icon: LinkIcon,
 	disabled: true,
-	text: () => 'URL (адрес сайта или сервиса)',
+	text: () => 'URL',
 };
 export const DATA_TYPE_PASSWORD = {
 	id: process.env.DATA_TYPE_PASSWORD,

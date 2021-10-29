@@ -3,9 +3,7 @@ import Script from 'components/Script';
 import getScriptId from 'components/Script/getScriptId.js';
 
 let PageScript = () => {
-	return <Script 
-		withScroll
-		scriptId={getScriptId()} />;
+	return <Script id={getScriptId()} />;
 };
 
 PageScript = React.memo(PageScript);

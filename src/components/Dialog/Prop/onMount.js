@@ -19,7 +19,7 @@ const onMount = async (id) => {
 
 		Store().dispatch({
 			type: 'prop',
-			payload: () => prop,
+			payload: () => ({ ...prop }),
 		});
 		onLoader(false);
 	}

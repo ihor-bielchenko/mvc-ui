@@ -5,7 +5,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import onToggle from '../Sidebar/onToggle.js';
 
-let Header = () => {
+let Header = ({ id }) => {
 	return <React.Fragment>
 		<AppBar 
 			position="static"
@@ -15,7 +15,7 @@ let Header = () => {
 			<Toolbar variant="dense">
 				<IconButton 
 					color="inherit"
-					onClick={onToggle(true)}>
+					onClick={onToggle(id, true)}>
 					<MenuIcon />
 				</IconButton>
 			</Toolbar>
@@ -25,6 +25,7 @@ let Header = () => {
 
 Header = React.memo(Header);
 Header.defaultProps = {
+	id: 0,
 };
 
 export default Header;

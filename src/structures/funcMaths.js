@@ -1,4 +1,7 @@
-import { FUNC_CATEGORY_MATH } from './funcCategories.js';
+import { 
+	FUNC_CATEGORY_IF,
+	FUNC_CATEGORY_MATH, 
+} from './funcCategories.js';
 import { 
 	FUNC_TEMPLATE_IF_TYPE,
 	FUNC_TEMPLATE_IF_PARITY,
@@ -11,7 +14,7 @@ import {
 
 export const FUNC_TEMPLATE_MATH_INFINITY = {
 	id: process.env.FUNC_TEMPLATE_MATH_INFINITY,
-	category_id: FUNC_CATEGORY_MATH.id,
+	category_id: FUNC_CATEGORY_IF.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
 	text: () => 'Бесконечность',
 	subtext: () => 'Определить, является ли значение бесконечным',

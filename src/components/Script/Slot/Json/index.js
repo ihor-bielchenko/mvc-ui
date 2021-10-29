@@ -1,3 +1,3 @@
-import Create from './Create.jsx';
+import Json from './Json.jsx';
 
-export default Create;
+export default Json;

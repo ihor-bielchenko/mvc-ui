@@ -95,6 +95,11 @@ function getClientEnvironment(publicUrl) {
 				SCRIPT_PATH: process.env.SCRIPT_PATH,
 				SOURCE_PATH: process.env.SOURCE_PATH,
 
+				ARROW_TYPE_DEFAULT: Number(process.env.ARROW_TYPE_DEFAULT),
+				ARROW_TYPE_TRUE: Number(process.env.ARROW_TYPE_TRUE),
+				ARROW_TYPE_FALSE: Number(process.env.ARROW_TYPE_FALSE),
+				ARROW_TYPE_LOOP: Number(process.env.ARROW_TYPE_LOOP),
+
 				DATA_TYPE_ATOMIC: Number(process.env.DATA_TYPE_ATOMIC),
 				DATA_TYPE_ID: Number(process.env.DATA_TYPE_ID),
 				DATA_TYPE_TEXT: Number(process.env.DATA_TYPE_TEXT),

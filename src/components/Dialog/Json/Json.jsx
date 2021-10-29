@@ -42,12 +42,18 @@ import onSelectCode from './onSelectCode.js';
 let Json = () => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_JSON]);
 	const existId = (dialog || {}).id || 0;
+	const fromEntityId = (dialog || {}).fromEntityId ?? 0;
+	const fromArrowTypeId = (dialog || {}).fromArrowTypeId ?? process.env.ARROW_TYPE_DEFAULT;
 	const id = useSelector((state) => state.json.id);
 	const name = useSelector((state) => state.json.name || '');
 	const code = useSelector((state) => state.json.code || 200);
 	const dataTypeId = useSelector((state) => (state.jsObject.data[0] || {}).data_type_id ?? DATA_TYPE_ATOMIC.id);
 	const _onDelete = React.useCallback((e) => onDelete(e, id), [
 		id,
+	]);
+	const _onSave = React.useCallback((e) => onSave(e, fromEntityId, fromArrowTypeId), [
+		fromEntityId,
+		fromArrowTypeId,
 	]);
 	const _dialogOpenFlag = !!dialog;
 
@@ -143,7 +149,7 @@ let Json = () => {
 									variant="outlined"
 									color="primary"
 									startIcon={<SaveIcon />}
-									onClick={onSave}>
+									onClick={_onSave}>
 									Сохранить
 								</Button>
 								<Button
@@ -161,7 +167,7 @@ let Json = () => {
 								variant="outlined"
 								color="primary"
 								startIcon={<SaveIcon />}
-								onClick={onSave}>
+								onClick={_onSave}>
 								Сохранить
 							</Button>}
 					</Box>
