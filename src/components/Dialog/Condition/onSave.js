@@ -16,7 +16,10 @@ const onSave = async (e, fromEntityId, fromArrowTypeId) => {
 
 	try {
 		const scriptId = getScriptId();
-		const func = Store().getState().func;
+		const {
+			func,
+			script,
+		} = Store().getState();
 
 		if (func.id > 0 && func.sourceId > 0) {
 			await fetchFuncUpdate(func.id, {
@@ -30,6 +33,7 @@ const onSave = async (e, fromEntityId, fromArrowTypeId) => {
 				type: 'func',
 				payload: () => ({ ...func }),
 			});
+			onLoader(false);
 		}
 		else if (fromEntityId >= 0) {
 			const fetchFuncResponse = await fetchFuncCreate({
@@ -45,6 +49,12 @@ const onSave = async (e, fromEntityId, fromArrowTypeId) => {
 				from_entity_id: fromEntityId, 
 				to_entity_id: fetchFuncData.entity_id,
 				arrow_type_id: fromArrowTypeId,
+			});
+			script[scriptId].loadedFlag = false;
+
+			Store().dispatch({
+				type: 'script',
+				payload: () => ({ ...script }),
 			});
 			Store().dispatch({
 				type: 'func',
@@ -68,8 +78,8 @@ const onSave = async (e, fromEntityId, fromArrowTypeId) => {
 				horizontal: 'right',
 			}),
 		});
+		onLoader(false);
 	}
-	onLoader(false);
 };
 
 export default onSave;

@@ -19,6 +19,7 @@ const onSave = async (e, fromEntityId, fromArrowTypeId) => {
 		const {
 			prop,
 			jsObject,
+			script,
 		} = Store().getState();
 		const scriptId = getScriptId();
 
@@ -35,11 +36,12 @@ const onSave = async (e, fromEntityId, fromArrowTypeId) => {
 				as_variable: Number(!!prop.as_variable),
 			});
 			prop.sourceId = dataSource.id;
-
+			
 			Store().dispatch({
 				type: 'prop',
 				payload: () => ({ ...prop }),
 			});
+			onLoader(false);
 		}
 		else if (fromEntityId >= 0) {
 			const dataSource = await onSaveJsObject();
@@ -59,6 +61,12 @@ const onSave = async (e, fromEntityId, fromArrowTypeId) => {
 				from_entity_id: fromEntityId, 
 				to_entity_id: fetchPropData.entity_id,
 				arrow_type_id: fromArrowTypeId,
+			});
+			script[scriptId].loadedFlag = false;
+			
+			Store().dispatch({
+				type: 'script',
+				payload: () => ({ ...script }),
 			});
 			Store().dispatch({
 				type: 'prop',
@@ -82,8 +90,8 @@ const onSave = async (e, fromEntityId, fromArrowTypeId) => {
 				horizontal: 'right',
 			}),
 		});
+		onLoader(false);
 	}
-	onLoader(false);
 };
 
 export default onSave;
