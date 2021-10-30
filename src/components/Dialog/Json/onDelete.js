@@ -4,6 +4,7 @@ import onLoader from 'components/Loader/onLoader';
 import onClose from 'components/Dialog/onClose.js';
 import fetchJsonDelete from 'fetch/jsonDelete.js';
 import fetchCortegeDelete from 'fetch/cortegeDelete.js';
+import fetchArrowDelete from 'fetch/arrowDelete.js';
 import axiosError from 'utils/axiosError.js';
 
 const onDelete = async (e, id) => {
@@ -12,7 +13,12 @@ const onDelete = async (e, id) => {
 	try {
 		const json = Store().getState().json;
 		
-		await fetchJsonDelete(JSON.stringify([ id ]));
+		if (!(json.entityId > 0)) {
+			throw new Error('entityId is undefined');
+		}
+
+		await fetchArrowDelete(JSON.stringify([ json.entityId ]));
+		await fetchJsonDelete(JSON.stringify([ json.entityId ]));
 		await fetchCortegeDelete(JSON.stringify([ json.sourceId ]));
 
 		onClose()();

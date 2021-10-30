@@ -16,6 +16,7 @@ const onMount = async (id) => {
 		json.name = data.name;
 		json.sourceId = data.source_id;
 		json.code = data.code;
+		json.entityId = data.entity.id;
 
 		Store().dispatch({
 			type: 'json',

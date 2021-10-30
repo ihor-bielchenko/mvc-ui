@@ -16,6 +16,7 @@ const onMount = async (id) => {
 		prop.name = data.name;
 		prop.sourceId = data.source_id;
 		prop.as_variable = data.as_variable;
+		prop.entityId = data.entity.id;
 
 		Store().dispatch({
 			type: 'prop',

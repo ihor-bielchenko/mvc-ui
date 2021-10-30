@@ -41,6 +41,10 @@ const onSave = async (e, fromEntityId, fromArrowTypeId) => {
 				type: 'json',
 				payload: () => ({ ...json }),
 			});
+			Store().dispatch({
+				type: 'jsObject',
+				payload: () => initialStateJsObject(),
+			});
 			onLoader(false);
 		}
 		else if (fromEntityId >= 0) {

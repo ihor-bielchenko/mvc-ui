@@ -15,6 +15,7 @@ const onMount = async (id) => {
 		func.id = id;
 		func.name = data.name;
 		func.template_id = data.template_id;
+		func.entityId = data.entity.id;
 
 		Store().dispatch({
 			type: 'func',

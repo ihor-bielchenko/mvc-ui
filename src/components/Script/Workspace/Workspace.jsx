@@ -64,6 +64,8 @@ let Build = ({
 		}
 	});
 
+	// console.log('entity', _arrow, arrows);
+
 	return <React.Fragment>
 		{entity
 			? <Box 
@@ -136,7 +138,9 @@ let Listing = ({ id }) => {
 	const firstArrow = arrows.find((arrow) => arrow.from_entity_id === 0);
 
 	return <React.Fragment>
-		<Box width="max-content">
+		<Box 
+			width="max-content"
+			minWidth="100%">
 			{firstArrow
 				? <React.Fragment>
 					<Build 
@@ -152,7 +156,9 @@ let Listing = ({ id }) => {
 							arrowTypeId={arrow.arrow_type_id} />;
 					})}
 				</React.Fragment>
-				: <React.Fragment />}
+				: <Box py="34px">
+					<Create scriptId={id} />
+				</Box>}
 		</Box>
 	</React.Fragment>;
 };

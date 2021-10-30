@@ -3,6 +3,7 @@ import { initialState as initialStateFunc } from 'components/Store/func.js';
 import { initialState as initialStateJsObject } from 'components/Store/jsObject.js';
 import onLoader from 'components/Loader/onLoader';
 import getScriptId from 'components/Script/getScriptId.js';
+import onSaveJsObject from 'components/JsObject/onSave.js';
 import onMount from 'components/Script/onMount.js';
 import fetchFuncCreate from 'fetch/funcCreate.js';
 import fetchFuncUpdate from 'fetch/funcUpdate.js';
@@ -22,22 +23,32 @@ const onSave = async (e, fromEntityId, fromArrowTypeId) => {
 		} = Store().getState();
 
 		if (func.id > 0 && func.sourceId > 0) {
+			const dataSource = await onSaveJsObject(func.sourceId);
+
 			await fetchFuncUpdate(func.id, {
 				script_id: scriptId,
+				source_id: dataSource.id,
 				name: func.name,
 				template_id: func.template_id,
 				data_type_id: funcTemplates[func.template_id].data_type_id,
 			});
+			func.sourceId = dataSource.id;
 
 			Store().dispatch({
 				type: 'func',
 				payload: () => ({ ...func }),
 			});
+			Store().dispatch({
+				type: 'jsObject',
+				payload: () => initialStateJsObject(),
+			});
 			onLoader(false);
 		}
 		else if (fromEntityId >= 0) {
+			const dataSource = await onSaveJsObject(func.sourceId);
 			const fetchFuncResponse = await fetchFuncCreate({
 				script_id: scriptId,
+				source_id: dataSource.id,
 				name: func.name,
 				template_id: func.template_id,
 				data_type_id: funcTemplates[func.template_id].data_type_id,

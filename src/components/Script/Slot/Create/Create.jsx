@@ -67,23 +67,25 @@ let Create = ({
 				fromEntityId={fromEntityId}
 				fromArrowTypeId={fromArrowTypeId} />
 		</Slot>
-		<Xarrow
-			start={startArrowName + scriptId +'-'+ fromEntityId}
-			end={createArrowName + scriptId +'-'+ fromEntityId}
-			path="straight"
-			strokeWidth={4}
-			color="#616161"
-			label={{
-				middle: arrowIsTrue
-					? <TypographyLabel style={{ color: '#4caf50' }}>
-						<b>TRUE</b>
-					</TypographyLabel>
-					: arrowIsFalse
-						? <TypographyLabel style={{ color: '#f44336' }}>
-							<b>FALSE</b>
+		{fromEntityId > 0
+			? <Xarrow
+				start={startArrowName + scriptId +'-'+ fromEntityId}
+				end={createArrowName + scriptId +'-'+ fromEntityId}
+				path="straight"
+				strokeWidth={4}
+				color="#616161"
+				label={{
+					middle: arrowIsTrue
+						? <TypographyLabel style={{ color: '#4caf50' }}>
+							<b>TRUE</b>
 						</TypographyLabel>
-						: <React.Fragment />
-			}} />
+						: arrowIsFalse
+							? <TypographyLabel style={{ color: '#f44336' }}>
+								<b>FALSE</b>
+							</TypographyLabel>
+							: <React.Fragment />
+				}} />
+			: <React.Fragment />}
 	</React.Fragment>;
 };
 
