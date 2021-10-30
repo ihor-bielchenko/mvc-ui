@@ -6,6 +6,7 @@ import AddIcon from '@material-ui/icons/Add';
 import MenuEntity from 'components/Menu/Entity';
 import onMenu from 'components/Menu/onMenu.js';
 import Slot from '../Slot';
+import { TypographyLabel } from '../../Arrow';
 
 let Create = ({ 
 	scriptId,
@@ -15,16 +16,20 @@ let Create = ({
 }) => {
 	const _id = React.useMemo(() => Date.now(), []);
 	let startArrowName,
-		createArrowName;
+		createArrowName,
+		arrowIsTrue,
+		arrowIsFalse;
 
 	switch (fromArrowTypeId) {
 		case process.env.ARROW_TYPE_TRUE:
 			startArrowName = 'true-';
 			createArrowName = 'create-true-';
+			arrowIsTrue = true;
 			break;
 		case process.env.ARROW_TYPE_FALSE:
 			startArrowName = 'false-';
 			createArrowName = 'create-false-';
+			arrowIsFalse = true;
 			break;
 		case process.env.ARROW_TYPE_DEFAULT:
 		default:
@@ -67,7 +72,18 @@ let Create = ({
 			end={createArrowName + scriptId +'-'+ fromEntityId}
 			path="straight"
 			strokeWidth={4}
-			color="#616161" />
+			color="#616161"
+			label={{
+				middle: arrowIsTrue
+					? <TypographyLabel style={{ color: '#4caf50' }}>
+						<b>TRUE</b>
+					</TypographyLabel>
+					: arrowIsFalse
+						? <TypographyLabel style={{ color: '#f44336' }}>
+							<b>FALSE</b>
+						</TypographyLabel>
+						: <React.Fragment />
+			}} />
 	</React.Fragment>;
 };
 

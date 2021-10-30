@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import Xarrow from 'react-xarrows';
 import Typography from '@material-ui/core/Typography';
 
-const TypographyLabel = styled(Typography)`
+export const TypographyLabel = styled(Typography)`
 	background-color: #FFF;
 `;
 
@@ -52,25 +52,4 @@ Arrow.defaultProps = {
 	arrowTypeId: process.env.ARROW_TYPE_DEFAULT,
 };
 
-let Arrows = ({ scriptId }) => {
-	const arrows = useSelector((state) => state.script[scriptId].arrows);
-
-	return <React.Fragment>
-		{arrows.map((arrow, i) => {
-			return <Arrow 
-				key={arrow.id}
-				scriptId={scriptId}
-				id={arrow.id}
-				fromEntityId={arrow.from_entity_id}
-				toEntityId={arrow.to_entity_id}
-				arrowTypeId={arrow.arrow_type_id} />;
-		})}
-	</React.Fragment>;
-};
-
-Arrows = React.memo(Arrows);
-Arrows.defaultProps = {
-	scriptId: 0,
-};
-
-export default Arrows;
+export default Arrow;

@@ -8,7 +8,7 @@ import {
 	Create,
 	entities,
 } from '../Slot';
-import Arrows from '../Arrows';
+import Arrow from '../Arrow';
 
 const BoxBackgraund = styled(Box)`
 	background-image: linear-gradient(rgba(198, 198, 198, .2) .1em, transparent .1em), linear-gradient(90deg, rgba(198, 198, 198, .2) .1em, transparent .1em);
@@ -142,7 +142,15 @@ let Listing = ({ id }) => {
 					<Build 
 						scriptId={id}
 						arrow={() => firstArrow} />
-					<Arrows scriptId={id} />
+					{arrows.map((arrow, i) => {
+						return <Arrow 
+							key={arrow.id}
+							scriptId={id}
+							id={arrow.id}
+							fromEntityId={arrow.from_entity_id}
+							toEntityId={arrow.to_entity_id}
+							arrowTypeId={arrow.arrow_type_id} />;
+					})}
 				</React.Fragment>
 				: <React.Fragment />}
 		</Box>
