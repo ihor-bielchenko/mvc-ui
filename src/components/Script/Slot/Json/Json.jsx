@@ -24,6 +24,7 @@ let Json = ({
 		<Slot 
 			withControl
 			backgroundColor="#ff9800"
+			scriptId={scriptId}
 			id={id}
 			entityId={entityId}
 			dialogId={DIALOG_JSON}

@@ -22,6 +22,7 @@ let Func = ({
 		<Slot 
 			withControl
 			backgroundColor="#ef5350"
+			scriptId={scriptId}
 			id={id}
 			entityId={entityId}
 			dialogId={DIALOG_FUNC}

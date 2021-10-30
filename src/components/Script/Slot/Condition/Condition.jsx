@@ -22,6 +22,7 @@ let Condition = ({
 		<Slot 
 			withControl
 			backgroundColor="#ab47bc"
+			scriptId={scriptId}
 			id={id}
 			entityId={entityId}
 			dialogId={DIALOG_IF}

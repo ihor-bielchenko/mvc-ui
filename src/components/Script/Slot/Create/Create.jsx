@@ -1,4 +1,6 @@
 import React from 'react';
+import Xarrow from 'react-xarrows';
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import MenuEntity from 'components/Menu/Entity';
@@ -6,21 +8,44 @@ import onMenu from 'components/Menu/onMenu.js';
 import Slot from '../Slot';
 
 let Create = ({ 
-	withControl, 
-	viewX,
-	x,
-	y,
+	scriptId,
+	withControl,
 	fromEntityId,
 	fromArrowTypeId,
 }) => {
 	const _id = React.useMemo(() => Date.now(), []);
+	let startArrowName,
+		createArrowName;
+
+	switch (fromArrowTypeId) {
+		case process.env.ARROW_TYPE_TRUE:
+			startArrowName = 'true-';
+			createArrowName = 'create-true-';
+			break;
+		case process.env.ARROW_TYPE_FALSE:
+			startArrowName = 'false-';
+			createArrowName = 'create-false-';
+			break;
+		case process.env.ARROW_TYPE_DEFAULT:
+		default:
+			startArrowName = 'default-';
+			createArrowName = 'create-default-';
+			break;
+	}
 
 	return <React.Fragment>
 		<Slot 
+			scriptId={scriptId}
+			entityId={fromEntityId}
 			withControl={withControl}
-			x={viewX}
-			y={y}
 			backgroundColor="#FFF">
+			<Box 
+				id={createArrowName + scriptId +'-'+ fromEntityId}
+				position="absolute"
+				top='-3px'
+				left="50%"
+				width="0px"
+				height="0px" />
 			<Button 
 				fullWidth
 				startIcon={<AddIcon />}
@@ -35,19 +60,21 @@ let Create = ({
 			<MenuEntity 
 				aria={'menu-entity-create-'+ _id}
 				fromEntityId={fromEntityId}
-				fromArrowTypeId={fromArrowTypeId}
-				x={x}
-				y={y} />
+				fromArrowTypeId={fromArrowTypeId} />
 		</Slot>
+		<Xarrow
+			start={startArrowName + scriptId +'-'+ fromEntityId}
+			end={createArrowName + scriptId +'-'+ fromEntityId}
+			path="straight"
+			strokeWidth={4}
+			color="#616161" />
 	</React.Fragment>;
 };
 
 Create = React.memo(Create);
 Create.defaultProps = {
+	scriptId: 0,
 	withControl: false,
-	viewX: 0,
-	x: 0,
-	y: 40,
 	fromEntityId: 0,
 	fromArrowTypeId: process.env.ARROW_TYPE_DEFAULT,
 };

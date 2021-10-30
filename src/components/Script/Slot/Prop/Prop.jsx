@@ -22,6 +22,7 @@ let Prop = ({
 		<Slot 
 			withControl
 			backgroundColor="#4db6ac"
+			scriptId={scriptId}
 			id={id}
 			entityId={entityId}
 			dialogId={DIALOG_PROP}

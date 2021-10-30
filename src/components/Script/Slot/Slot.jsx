@@ -18,6 +18,7 @@ const _onHandler = (dialogId, props) => (e) => {
 	onDialog(dialogId, props)(e)
 };
 let Slot = ({
+	scriptId,
 	id,
 	entityId,
 	dialogId,
@@ -35,8 +36,7 @@ let Slot = ({
 				width="196px"
 				minHeight="54px"
 				maxHeight="120px"
-				mx="auto"
-				py="42px">
+				mx="auto">
 				<Box
 					position="relative"
 					overflow="hidden"
@@ -47,6 +47,13 @@ let Slot = ({
 					style={{
 						backgroundColor,
 					}}>
+					<Box 
+						id={'to-'+ scriptId +'-'+ entityId}
+						position="absolute"
+						top='-3px'
+						left="50%"
+						width="0px"
+						height="0px" />
 					{children}
 					{dataTypeId >= -1
 						? <Box
@@ -97,6 +104,27 @@ let Slot = ({
 							</Box>
 						</Box>
 						: <React.Fragment />}
+					<Box 
+						id={'false-'+ scriptId +'-'+ entityId}
+						position="absolute"
+						top="36px"
+						left="-3px"
+						width="0px"
+						height="0px" />
+					<Box 
+						id={'true-'+ scriptId +'-'+ entityId}
+						position="absolute"
+						top="36px"
+						right="-3px"
+						width="0px"
+						height="0px" />
+					<Box 
+						id={'default-'+ scriptId +'-'+ entityId}
+						bottom="-3px"
+						position="absolute"
+						left="50%"
+						width="0px"
+						height="0px" />
 				</Box>
 				{withControl
 					? <React.Fragment>
@@ -123,6 +151,7 @@ let Slot = ({
 
 Slot = React.memo(Slot);
 Slot.defaultProps = {
+	scriptId: 0,
 	id: 0,
 	entityId: 0,
 	dialogId: DIALOG_PROP,

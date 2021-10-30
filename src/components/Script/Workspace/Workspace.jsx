@@ -8,6 +8,7 @@ import {
 	Create,
 	entities,
 } from '../Slot';
+import Arrows from '../Arrows';
 
 const BoxBackgraund = styled(Box)`
 	background-image: linear-gradient(rgba(198, 198, 198, .2) .1em, transparent .1em), linear-gradient(90deg, rgba(198, 198, 198, .2) .1em, transparent .1em);
@@ -68,10 +69,12 @@ let Build = ({
 			? <Box 
 				position="relative"
 				minWidth="420px">
-				<SlotEntiy 
-					scriptId={scriptId}
-					entityId={entity.id}
-					id={_id} />
+				<Box py="34px">
+					<SlotEntiy 
+						scriptId={scriptId}
+						entityId={entity.id}
+						id={_id} />
+				</Box>
 				{(_slotName === 'Condition')
 					? <Box
 						position="relative"
@@ -85,9 +88,12 @@ let Build = ({
 							: <Box 
 								position="relative"
 								minWidth="300px">
-								<Create
-									fromEntityId={entity.id}
-									fromArrowTypeId={process.env.ARROW_TYPE_FALSE} />
+								<Box py="34px">
+									<Create
+										scriptId={scriptId}
+										fromEntityId={entity.id}
+										fromArrowTypeId={process.env.ARROW_TYPE_FALSE} />
+								</Box>
 							</Box>}
 						{arrowTrue
 							? <Build
@@ -96,18 +102,24 @@ let Build = ({
 							: <Box 
 								position="relative"
 								minWidth="300px">
-								<Create
-									fromEntityId={entity.id}
-									fromArrowTypeId={process.env.ARROW_TYPE_TRUE} />
+								<Box py="34px">
+									<Create
+										scriptId={scriptId}
+										fromEntityId={entity.id}
+										fromArrowTypeId={process.env.ARROW_TYPE_TRUE} />
+								</Box>
 							</Box>}
 					</Box>
 					: arrowDefault
 						? <Build
 							scriptId={scriptId}
 							arrow={() => arrowDefault} />
-						: <Create
-							fromEntityId={entity.id}
-							fromArrowTypeId={process.env.ARROW_TYPE_DEFAULT} />}
+						: <Box py="34px">
+							<Create
+								scriptId={scriptId}
+								fromEntityId={entity.id}
+								fromArrowTypeId={process.env.ARROW_TYPE_DEFAULT} />
+						</Box>}
 			</Box>
 			: <React.Fragment />}
 	</React.Fragment>;
@@ -126,9 +138,12 @@ let Listing = ({ id }) => {
 	return <React.Fragment>
 		<Box width="max-content">
 			{firstArrow
-				? <Build 
-					scriptId={id}
-					arrow={() => firstArrow} />
+				? <React.Fragment>
+					<Build 
+						scriptId={id}
+						arrow={() => firstArrow} />
+					<Arrows scriptId={id} />
+				</React.Fragment>
 				: <React.Fragment />}
 		</Box>
 	</React.Fragment>;
