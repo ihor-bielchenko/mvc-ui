@@ -5,11 +5,13 @@ import onLoader from 'components/Loader/onLoader';
 import getScriptId from 'components/Script/getScriptId.js';
 import onSaveJsObject from 'components/JsObject/onSave.js';
 import onMount from 'components/Script/onMount.js';
+import onMountJsObject from 'components/JsObject/onMount.js';
 import fetchFuncCreate from 'fetch/funcCreate.js';
 import fetchFuncUpdate from 'fetch/funcUpdate.js';
 import fetchArrowCreate from 'fetch/arrowCreate.js';
 import axiosError from 'utils/axiosError.js';
 import funcTemplates from 'structures/funcTemplates.js';
+import { DATA_TYPE_OBJECT } from 'structures/dataTypes.js';
 import onClose from './onClose.js';
 
 const onSave = async (e, fromEntityId, fromArrowTypeId) => {
@@ -34,13 +36,11 @@ const onSave = async (e, fromEntityId, fromArrowTypeId) => {
 			});
 			func.sourceId = dataSource.id;
 
+			await onMountJsObject(func.sourceId, DATA_TYPE_OBJECT.id);
+
 			Store().dispatch({
 				type: 'func',
 				payload: () => ({ ...func }),
-			});
-			Store().dispatch({
-				type: 'jsObject',
-				payload: () => initialStateJsObject(),
 			});
 			onLoader(false);
 		}

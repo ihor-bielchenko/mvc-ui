@@ -15,6 +15,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import Header from 'components/Header';
 import InputText from 'components/Input/Text';
 import SelectFuncTemplate from 'components/Select/FuncTemplate';
+import GroupFunc from 'components/Group/Func';
 import Transition from 'components/Dialog/Transition.jsx';
 import onDialog from 'components/Dialog/onDialog.js';
 import { 
@@ -91,6 +92,9 @@ let Condition = () => {
 								value={templateId}
 								onSelect={onSelectTemplate} />
 						</Box>
+						{templateId > 0
+							? <GroupFunc templateId={templateId} />
+							: <React.Fragment />}
 					</DialogContent>
 					<DialogActions>
 					<Box 

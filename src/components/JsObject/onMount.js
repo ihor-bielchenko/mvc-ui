@@ -2,7 +2,10 @@ import Store from 'components/Store';
 import onLoader from 'components/Loader/onLoader';
 import fetchCortegeGetMany from 'fetch/cortegeGetMany.js';
 import axiosError from 'utils/axiosError.js';
-import { DATA_TYPE_TEXT } from 'structures/dataTypes.js';
+import { 
+	DATA_TYPE_ATOMIC,
+	DATA_TYPE_TEXT, 
+} from 'structures/dataTypes.js';
 import {
 	SOURCE_TYPE_MANUALLY,
 	SOURCE_TYPE_DB,
@@ -223,6 +226,9 @@ const onMount = async (sourceId, dataTypeId) => {
 			key: '0',
 			value: '',
 		});
+		jsObject.data[1].data_type_id = jsObject.data[1].data_type_id === DATA_TYPE_ATOMIC.id
+			? DATA_TYPE_TEXT.id
+			: jsObject.data[1].data_type_id;
 	}
 	jsObject.blocks = {};
 

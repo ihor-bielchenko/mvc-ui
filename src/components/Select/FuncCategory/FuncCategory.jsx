@@ -2,7 +2,9 @@ import React from 'react';
 import Box from '@material-ui/core/Box';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
-import funcCategories from 'structures/funcCategories.js';
+import funcCategories, {
+	FUNC_CATEGORY_IF,
+} from 'structures/funcCategories.js';
 import Select from '../Select.jsx';
 
 let FuncCategory = ({ 
@@ -12,6 +14,7 @@ let FuncCategory = ({
 	helperText, 
 	required,
 	onSelect, 
+	onFilter,
 }) => {
 	return <Select 
 		required={required}
@@ -22,6 +25,7 @@ let FuncCategory = ({
 		onSelect={onSelect}>
 		{Object
 			.keys(funcCategories)
+			.filter(onFilter)
 			.map((key, i) => {
 				const item = funcCategories[key];
 
@@ -52,6 +56,7 @@ FuncCategory.defaultProps = {
 	value: '',
 	required: false,
 	onSelect: () => {},
+	onFilter: (key) => Number(key) !== FUNC_CATEGORY_IF.id,
 };
 
 export default FuncCategory;

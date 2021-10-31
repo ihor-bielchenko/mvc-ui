@@ -16,6 +16,7 @@ import Header from 'components/Header';
 import InputText from 'components/Input/Text';
 import SelectFuncCategory from 'components/Select/FuncCategory';
 import SelectFuncTemplate from 'components/Select/FuncTemplate';
+import GroupFunc from 'components/Group/Func';
 import Transition from 'components/Dialog/Transition.jsx';
 import onDialog from 'components/Dialog/onDialog.js';
 import funcTemplates from 'structures/funcTemplates.js';
@@ -99,6 +100,9 @@ let Func = () => {
 								value={templateId}
 								onSelect={onSelectTemplate} />
 						</Box>
+						{templateId > 0
+							? <GroupFunc templateId={templateId} />
+							: <React.Fragment />}
 					</DialogContent>
 					<DialogActions>
 					<Box 

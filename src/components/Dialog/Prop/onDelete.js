@@ -4,7 +4,6 @@ import onLoader from 'components/Loader/onLoader';
 import onClose from 'components/Dialog/onClose.js';
 import fetchPropDelete from 'fetch/propDelete.js';
 import fetchCortegeDelete from 'fetch/cortegeDelete.js';
-import fetchArrowDelete from 'fetch/arrowDelete.js';
 import axiosError from 'utils/axiosError.js';
 
 const onDelete = async (e, id) => {
@@ -17,7 +16,6 @@ const onDelete = async (e, id) => {
 			throw new Error('entityId is undefined');
 		}
 
-		await fetchArrowDelete(JSON.stringify([ prop.entityId ]));
 		await fetchPropDelete(JSON.stringify([ prop.entityId ]));
 		await fetchCortegeDelete(JSON.stringify([ prop.sourceId ]));
 

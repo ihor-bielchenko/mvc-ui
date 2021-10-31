@@ -70,12 +70,14 @@ let Parent = ({
 			? <Header dataTypeId={dataTypeId} />
 			: <React.Fragment />}
 		{(allFirstId > 0 && dataTypeId === DATA_TYPE_ATOMIC.id)
-			? <Item 
-				id={allFirstId}
-				KeyComponent={KeyComponent}
-				ValueComponent={ValueComponent}
-				TypeComponent={TypeComponent}
-				last />
+			? <React.Fragment>
+				<Item 
+					id={allFirstId}
+					KeyComponent={KeyComponent}
+					ValueComponent={ValueComponent}
+					TypeComponent={TypeComponent}
+					last />
+			</React.Fragment>
 			: <React.Fragment>	
 				<Box 
 					position="relative"

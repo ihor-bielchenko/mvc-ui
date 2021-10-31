@@ -14,36 +14,36 @@ let OperatorIf = ({
 }) => {
 	let items = [
 		<MenuItem 
-			key={3}
-			value={3}>
+			key={process.env.OPERATOR_IF_EQUAL}
+			value={process.env.OPERATOR_IF_EQUAL}>
 			Равно (=)
 		</MenuItem>,
 		<MenuItem 
-			key={4}
-			value={4}>
+			key={process.env.OPERATOR_IF_NOT_EQUAL}
+			value={process.env.OPERATOR_IF_NOT_EQUAL}>
 			Не равно (!=)
 		</MenuItem>,
 	];
 	if (isNumeric) {
 		items = [
 			<MenuItem 
-				key={1}
-				value={1}>
+				key={process.env.OPERATOR_IF_MORE}
+				value={process.env.OPERATOR_IF_MORE}>
 				Больше ({'>'})
 			</MenuItem>,
 			<MenuItem 
-				key={2}
-				value={2}>
+				key={process.env.OPERATOR_IF_LESS}
+				value={process.env.OPERATOR_IF_LESS}>
 				Меньше ({'<'})
 			</MenuItem>,
 			<MenuItem 
-				key={5}
-				value={5}>
+				key={process.env.OPERATOR_IF_MORE_EQUAL}
+				value={process.env.OPERATOR_IF_MORE_EQUAL}>
 				Больше или равно ({'>='})
 			</MenuItem>,
 			<MenuItem 
-				key={6}
-				value={6}>
+				key={process.env.OPERATOR_IF_LESS_EQUAL}
+				value={process.env.OPERATOR_IF_LESS_EQUAL}>
 				Меньше или равно ({'<='})
 			</MenuItem>,
 			...items,

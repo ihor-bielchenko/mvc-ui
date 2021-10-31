@@ -46,6 +46,7 @@ const buildBlocks = (jsObject = { data: {}, blocks: {} }) => {
 	tmp = undefined;
 	jsObject.data = data;
 	jsObject.blocks = blocks;
+	jsObject.renderFlag = true;
 
 	return jsObject;
 };

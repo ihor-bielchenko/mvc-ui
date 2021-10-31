@@ -1,6 +1,7 @@
 
 export const initialState = () => ({
 	name: '',
+	sourceId: 0,
 	category_id: '',
 	template_id: '',
 	arguments: {

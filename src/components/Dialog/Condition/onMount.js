@@ -1,7 +1,9 @@
 import Store from 'components/Store';
 import onLoader from 'components/Loader/onLoader';
+import onMountJsObject from 'components/JsObject/onMount.js';
 import fetchFuncOne from 'fetch/funcOne.js';
 import axiosError from 'utils/axiosError.js';
+import { DATA_TYPE_OBJECT } from 'structures/dataTypes.js';
 
 const onMount = async (id) => {
 	const func = Store().getState().func;
@@ -12,10 +14,13 @@ const onMount = async (id) => {
 		const response = await fetchFuncOne(id);
 		const data = ((response || {}).data || {}).data || {};
 		
+		await onMountJsObject(data.source_id, DATA_TYPE_OBJECT.id);
+
 		func.id = id;
 		func.name = data.name;
 		func.template_id = data.template_id;
 		func.entityId = data.entity.id;
+		func.sourceId = data.source_id;
 
 		Store().dispatch({
 			type: 'func',

@@ -38,10 +38,6 @@ const onSave = async (e, fromEntityId, fromArrowTypeId) => {
 				type: 'func',
 				payload: () => ({ ...func }),
 			});
-			Store().dispatch({
-				type: 'jsObject',
-				payload: () => initialStateJsObject(),
-			});
 			onLoader(false);
 		}
 		else if (fromEntityId >= 0) {
