@@ -11,6 +11,8 @@ import { SOURCE_TYPE_MANUALLY } from 'structures/sourceTypes.js';
 import onClose from '../onClose.js';
 
 let Source = ({
+	scriptId,
+	workspaceId,
 	aria,  
 	children, 
 	onFilter,
@@ -18,8 +20,8 @@ let Source = ({
 	const anchorEl = useSelector((state) => state.menu[aria]
 		? state.menu[aria].anchorEl
 		: null);
-	const name = useSelector((state) => state.menu[aria]
-		? state.menu[aria].name
+	const id = useSelector((state) => state.menu[aria]
+		? state.menu[aria].id
 		: null);
 	const isCollection = useSelector((state) => state.menu[aria]
 		? state.menu[aria].isCollection
@@ -43,7 +45,9 @@ let Source = ({
 						key={item.id}
 						disabled={!!item.disabled}
 						onClick={onDialog(item.id, { 
-							name, 
+							scriptId,
+							workspaceId,
+							id: Number(id),
 							isCollection,
 						})}>
 						<ListItemAvatar>
@@ -62,6 +66,8 @@ let Source = ({
 
 Source = React.memo(Source);
 Source.defaultProps = {
+	scriptId: 0,
+	workspaceId: 0,
 	aria: 'aria-source',
 	onFilter: (key) => sourceTypes[key].id !== SOURCE_TYPE_MANUALLY.id,
 };

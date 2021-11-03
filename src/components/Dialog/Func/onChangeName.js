@@ -1,13 +1,13 @@
 import Store from 'components/Store';
 
-const onChangeName = (e) => {
+const onChangeName = (storeName = 'func') => (e) => {
 	const value = e.target.value;
-	const func = Store().getState().func;
+	const entity = Store().getState()[storeName];
 
-	func.name = value;
+	entity.name = value;
 	Store().dispatch({
-		type: 'func',
-		payload: () => ({ ...func }),
+		type: storeName,
+		payload: () => ({ ...entity }),
 	});
 };
 

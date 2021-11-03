@@ -81,14 +81,14 @@ let Select = ({
 							<InputNumeric
 								menu
 								onMenu={onDialog(SOURCE_TYPE_SCRIPT.id, {
-									onClickEntity: onChangeByLogicOffset,
-									formatValidating: () => ([
+									onClickAsSource: onChangeByLogicOffset,
+									dataTypeValidating: () => ([
 										DATA_TYPE_NUMBER.id,
 									]),
 								})}
 								onValue={onDialog(SOURCE_TYPE_SCRIPT.id, {
-									onClickEntity: onChangeByLogicOffset,
-									formatValidating: () => ([
+									onClickAsSource: onChangeByLogicOffset,
+									dataTypeValidating: () => ([
 										DATA_TYPE_NUMBER.id,
 									]),
 								})}
@@ -105,14 +105,14 @@ let Select = ({
 							<InputNumeric
 								menu
 								onMenu={onDialog(SOURCE_TYPE_SCRIPT.id, {
-									onClickEntity: onChangeByLogicLimit,
-									formatValidating: () => ([
+									onClickAsSource: onChangeByLogicLimit,
+									dataTypeValidating: () => ([
 										DATA_TYPE_NUMBER.id,
 									]),
 								})}
 								onValue={onDialog(SOURCE_TYPE_SCRIPT.id, {
-									onClickEntity: onChangeByLogicLimit,
-									formatValidating: () => ([
+									onClickAsSource: onChangeByLogicLimit,
+									dataTypeValidating: () => ([
 										DATA_TYPE_NUMBER.id,
 									]),
 								})}

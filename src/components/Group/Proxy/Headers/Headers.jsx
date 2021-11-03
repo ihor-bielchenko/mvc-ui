@@ -14,7 +14,7 @@ let Headers = () => {
 			{headerKeys.map((id) => <Box
 				key={id}
 				py={1}>
-				<KeyValue name={id} />
+				<KeyValue id={id} />
 			</Box>)}
 			<Box py={1}>
 				<Button

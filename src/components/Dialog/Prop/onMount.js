@@ -3,7 +3,7 @@ import onLoader from 'components/Loader/onLoader';
 import fetchPropOne from 'fetch/propOne.js';
 import axiosError from 'utils/axiosError.js';
 
-const onMount = async (id) => {
+const onMount = async (id, scriptId, workspaceId) => {
 	const prop = Store().getState().prop;
 
 	onLoader(true);
@@ -17,6 +17,8 @@ const onMount = async (id) => {
 		prop.sourceId = data.source_id;
 		prop.as_variable = data.as_variable;
 		prop.entityId = data.entity.id;
+		prop.scriptId = scriptId;
+		prop.workspaceId = workspaceId;
 
 		Store().dispatch({
 			type: 'prop',

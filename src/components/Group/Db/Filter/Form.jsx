@@ -49,8 +49,8 @@ let Form = ({
 		logicValue,
 	]);
 	const _onMenu = React.useCallback((e) => onDialog(SOURCE_TYPE_SCRIPT.id, {
-		onClickEntity: (e, dataTypeId, id) => onChangeByLogic(e, dataTypeId, id, setLogicValue),
-		formatValidating: typeFormatValidating((_column || {}).data_type_id),
+		onClickAsSource: (e, dataTypeId, id) => onChangeByLogic(e, dataTypeId, id, setLogicValue),
+		dataTypeValidating: typeFormatValidating((_column || {}).data_type_id),
 	})(e), [
 		_column,
 		setLogicValue,

@@ -37,7 +37,7 @@ let Url = () => {
 				length={path.length}
 				routeId={routeId}
 				pathTypeId={pathItem.path_type_id}
-				name={pathItem.id}
+				id={pathItem.id}
 				label={pathItem.value} />)}
 		</Grid>
 	</Box>;

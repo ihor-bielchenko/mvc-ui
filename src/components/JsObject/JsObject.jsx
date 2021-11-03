@@ -15,6 +15,8 @@ import Parent from './Parent';
 import onMount from './onMount.js';
 
 let JsObject = ({ 
+	scriptId,
+	workspaceId,
 	KeyComponent,
 	ValueComponent,
 	TypeComponent,
@@ -65,6 +67,8 @@ let JsObject = ({
 
 	return wrapperIsset
 		? <Parent
+			scriptId={scriptId}
+			workspaceId={workspaceId}
 			id={0}
 			dataTypeId={_dataTypeId}
 			KeyComponent={KeyComponent}
@@ -76,6 +80,8 @@ let JsObject = ({
 
 JsObject = React.memo(JsObject);
 JsObject.defaultProps = {
+	scriptId: 0,
+	workspaceId: 0,
 	onMerge: () => {},
 };
 

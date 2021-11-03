@@ -8,6 +8,7 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
 import AirportShuttleIcon from '@material-ui/icons/AirportShuttle';
 import TextsmsIcon from '@material-ui/icons/Textsms';
+import Store from 'components/Store';
 import onDialog from 'components/Dialog/onDialog.js';
 import {
 	DIALOG_PROP,
@@ -17,9 +18,21 @@ import {
 } from 'consts/dialog.js';
 import onClose from '../onClose.js';
 
+const _onHandler = (dialogId, workspaceId, props) => (e) => {
+	const script = Store().getState().script;
+
+	script[workspaceId].loadedFlag = false;
+	Store().dispatch({
+		type: 'script',
+		payload: () => ({ ...script }),
+	});
+	onDialog(dialogId, props)(e);
+};
 let Entity = ({ 
 	children, 
 	aria, 
+	scriptId,
+	workspaceId,
 	fromEntityId,
 	fromArrowTypeId,
 	onEdit,
@@ -41,7 +54,9 @@ let Entity = ({
 			anchorEl={anchorEl}
 			open={Boolean(anchorEl)}
 			onClose={_onClose}>
-			<MenuItem onClick={onDialog(DIALOG_PROP, {
+			<MenuItem onClick={_onHandler(DIALOG_PROP, workspaceId, {
+				scriptId,
+				workspaceId,
 				fromEntityId,
 				fromArrowTypeId,
 			})}>
@@ -52,7 +67,9 @@ let Entity = ({
 					Параметр
 				</Typography>
 			</MenuItem>
-			<MenuItem onClick={onDialog(DIALOG_IF, {
+			<MenuItem onClick={_onHandler(DIALOG_IF, workspaceId, {
+				scriptId,
+				workspaceId,
 				fromEntityId,
 				fromArrowTypeId,
 			})}>
@@ -63,7 +80,9 @@ let Entity = ({
 					Условие
 				</Typography>
 			</MenuItem>
-			<MenuItem onClick={onDialog(DIALOG_FUNC, {
+			<MenuItem onClick={_onHandler(DIALOG_FUNC, workspaceId, {
+				scriptId,
+				workspaceId,
 				fromEntityId,
 				fromArrowTypeId,
 			})}>
@@ -74,7 +93,9 @@ let Entity = ({
 					Функция
 				</Typography>
 			</MenuItem>
-			<MenuItem onClick={onDialog(DIALOG_JSON, {
+			<MenuItem onClick={_onHandler(DIALOG_JSON, workspaceId, {
+				scriptId,
+				workspaceId,
 				fromEntityId,
 				fromArrowTypeId,
 			})}>
@@ -92,6 +113,9 @@ let Entity = ({
 Entity = React.memo(Entity);
 Entity.defaultProps = {
 	aria: 'menu-entity',
+	scriptId: 0,
+	fromEntityId: 0,
+	fromArrowTypeId: 0,
 };
 
 export default Entity;

@@ -4,8 +4,8 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import JsBoxControlWrapper from 'components/JsObject/BoxControlWrapper';
 import MenuSource from 'components/Menu/Source';
-import onChangeLogic from 'components/JsObject/Value/onChangeLogic.js';
-import onDeleteLogic from 'components/JsObject/Value/onDeleteLogic.js';
+import onClickAsSource from 'components/JsObject/Value/onClickAsSource.js';
+import onDeleteAsSource from 'components/JsObject/Value/onDeleteAsSource.js';
 import onMenu from 'components/Menu/onMenu.js';
 import loadColumnInputs from 'utils/loadColumnInputs.js';
 import { 
@@ -17,10 +17,12 @@ import {
 	DATA_TYPE_NULL,
 } from 'structures/dataTypes.js';
 
-const _onChangeLogic = (id) => (e) => onChangeLogic(e, id);
-const _onDeleteLogic = (id) => (e) => onDeleteLogic(e, id);
+const _onClickAsSource = (id) => (e) => onClickAsSource(e, id);
+const _onDeleteAsSource = (id) => (e) => onDeleteAsSource(e, id);
 
 let ValueComponent = ({
+	scriptId,
+	workspaceId,
 	parentId,
 	parentDataTypeId,
 	id,
@@ -71,8 +73,8 @@ let ValueComponent = ({
 									<Component
 										menu
 										onMenu={onMenu(id.toString())}
-										onValue={_onChangeLogic(id)}
-										onDelete={_onDeleteLogic(id)}
+										onValue={_onClickAsSource(id)}
+										onDelete={_onDeleteAsSource(id)}
 										disabled={disabledValue}
 										name={id.toString()}
 										id={id.toString()}
@@ -81,7 +83,10 @@ let ValueComponent = ({
 										label="" />
 								</React.Suspense>
 							</Box>
-							<MenuSource aria={id.toString()} />
+							<MenuSource 
+								aria={id.toString()}
+								scriptId={scriptId}
+								workspaceId={workspaceId} />
 						</React.Fragment>;
 					}
 			})()}
@@ -89,6 +94,8 @@ let ValueComponent = ({
 };
 ValueComponent = React.memo(ValueComponent);
 ValueComponent.defaultProps = {
+	scriptId: 0,
+	workspaceId: 0,
 	parentId: 0,
 	parentDataTypeId: 0,
 	id: 0,

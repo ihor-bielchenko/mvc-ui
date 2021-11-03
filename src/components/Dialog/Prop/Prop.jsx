@@ -35,7 +35,7 @@ import ValueComponent from './ValueComponent.jsx';
 import TypeComponent from './TypeComponent.jsx';
 import onMount from './onMount.js';
 import onClose from './onClose.js';
-import onChangeName from './onChangeName.js';
+import onChangeName from '../Func/onChangeName.js';
 import onSave from './onSave.js';
 import onDelete from './onDelete.js';
 import onSelectDataTypeId from './onSelectDataTypeId.js';
@@ -44,18 +44,27 @@ import onCheckVariable from './onCheckVariable.js';
 let Prop = () => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_PROP]);
 	const existId = (dialog || {}).id || 0;
+	const workspaceId = (dialog || {}).workspaceId ?? 0;
+	const scriptId = (dialog || {}).scriptId ?? 0;
 	const fromEntityId = (dialog || {}).fromEntityId ?? 0;
 	const fromArrowTypeId = (dialog || {}).fromArrowTypeId ?? process.env.ARROW_TYPE_DEFAULT;
 	const id = useSelector((state) => state.prop.id);
 	const name = useSelector((state) => state.prop.name || '');
 	const asVariable = useSelector((state) => !!state.prop.as_variable);
-	const dataTypeId = useSelector((state) => (state.jsObject.data[0] || {}).data_type_id ?? DATA_TYPE_ATOMIC.id);
-	const _onDelete = React.useCallback((e) => onDelete(e, id), [
+	const dataTypeId = useSelector((state) => ((state.jsObject.data || {})[0] || {}).data_type_id ?? DATA_TYPE_ATOMIC.id);
+	const _onDelete = React.useCallback((e) => onDelete(e, scriptId, workspaceId, id), [
+		scriptId,
+		workspaceId,
 		id,
 	]);
-	const _onSave = React.useCallback((e) => onSave(e, fromEntityId, fromArrowTypeId), [
+	const _onSave = React.useCallback((e) => onSave(e, scriptId, workspaceId, fromEntityId, fromArrowTypeId), [
+		scriptId,
+		workspaceId,
 		fromEntityId,
 		fromArrowTypeId,
+	]);
+	const _onClose = React.useCallback((e) => onClose(e, workspaceId), [
+		workspaceId
 	]);
 	const _dialogOpenFlag = !!dialog;
 
@@ -63,11 +72,13 @@ let Prop = () => {
 	// TODO: если fromEntityId и fromArrowTypeId undefined закрывать окно
 	React.useEffect(() => {
 		if (_dialogOpenFlag && existId > 0) {
-			onMount(existId);
+			onMount(existId, scriptId, workspaceId);
 		}
 	}, [
 		_dialogOpenFlag,
 		existId,
+		scriptId,
+		workspaceId,
 	]);
 
 	return _dialogOpenFlag
@@ -79,9 +90,9 @@ let Prop = () => {
 			fullWidth
 			maxWidth="lg"
 			open={_dialogOpenFlag}
-			onClose={onClose}>
+			onClose={_onClose}>
 			<DialogTitle>
-				<Header onClose={onClose}>
+				<Header onClose={_onClose}>
 					{id >= 1
 						? 'Параметр: '+ name
 						: 'Добавить параметр'}
@@ -99,7 +110,7 @@ let Prop = () => {
 								label="Название"
 								helperText="Для быстрого поиска придумайте название или краткое описание"
 								value={name}
-								onChange={onChangeName} />
+								onChange={onChangeName('prop')} />
 						</Box>
 						<Divider />
 						<Box py={2}>
@@ -157,7 +168,7 @@ let Prop = () => {
 							variant="outlined"
 							color="secondary"
 							startIcon={<CloseIcon />}
-							onClick={onClose}>
+							onClick={_onClose}>
 							Отмена
 						</Button>
 						{id >= 1

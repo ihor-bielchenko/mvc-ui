@@ -17,6 +17,8 @@ import Divider from '../Divider';
 import Value from '../Value';
 
 let Item = ({
+	scriptId,
+	workspaceId,
 	id,
 	parentId,
 	last,
@@ -80,6 +82,8 @@ let Item = ({
 				: {}}>
 			{isCompexValue
 				? <ComplexValue 
+					scriptId={scriptId}
+					workspaceId={workspaceId}
 					parentId={parentId}
 					id={id}
 					last={last}
@@ -117,6 +121,8 @@ let Item = ({
 							parentId={parentId}
 							id={id} />
 						<Value
+							scriptId={scriptId}
+							workspaceId={workspaceId}
 							parentId={parentId}
 							id={id}
 							last={last}
@@ -142,6 +148,8 @@ let Item = ({
 
 Item = React.memo(Item);
 Item.defaultProps = {
+	scriptId: 0,
+	workspaceId: 0,
 	id: 0,
 	parentId: 0,
 	last: false,

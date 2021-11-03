@@ -15,6 +15,8 @@ import Parent from '../Parent';
 import onChangeLocal from './onChange.js';
 
 let Value = ({
+	scriptId,
+	workspaceId,
 	parentId,
 	id,
 	parentDataTypeId,
@@ -41,6 +43,8 @@ let Value = ({
 		{typeof ValueComponent === 'object'
 			&& typeof ValueComponent['$$typeof'] === 'symbol'
 			? <ValueComponent
+				scriptId={scriptId}
+				workspaceId={workspaceId}
 				parentId={parentId}
 				parentDataTypeId={_parentDataTypeId}
 				id={id}
@@ -50,6 +54,8 @@ let Value = ({
 						case DATA_TYPE_OBJECT.id:
 						case DATA_TYPE_ARRAY.id:
 							return <Parent
+								scriptId={scriptId}
+								workspaceId={workspaceId}
 								id={id}
 								dataTypeId={_dataTypeId}
 								last={last}
@@ -80,6 +86,8 @@ let Value = ({
 						case DATA_TYPE_OBJECT.id:
 						case DATA_TYPE_ARRAY.id:
 							return <Parent
+								scriptId={scriptId}
+								workspaceId={workspaceId}
 								id={id}
 								dataTypeId={_dataTypeId}
 								last={last}
@@ -127,6 +135,8 @@ let Value = ({
 
 Value = React.memo(Value);
 Value.defaultProps = {
+	scriptId: 0,
+	workspaceId: 0,
 	parentId: 0,
 	id: 0,
 	onMerge: () => {},

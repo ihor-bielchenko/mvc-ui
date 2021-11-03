@@ -35,29 +35,40 @@ import onSelectTemplate from './onSelectTemplate.js';
 let Func = () => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_FUNC]);
 	const existId = (dialog || {}).id || 0;
+	const workspaceId = (dialog || {}).workspaceId ?? 0;
+	const scriptId = (dialog || {}).scriptId ?? 0;
 	const fromEntityId = (dialog || {}).fromEntityId ?? 0;
 	const fromArrowTypeId = (dialog || {}).fromArrowTypeId ?? process.env.ARROW_TYPE_DEFAULT;
 	const id = useSelector((state) => state.func.id);
 	const name = useSelector((state) => state.func.name || '');
 	const templateId = useSelector((state) => state.func.template_id || '');
 	const categoryId = useSelector((state) => state.func.category_id ?? funcTemplates[state.func.template_id].category_id);
-	const _onDelete = React.useCallback((e) => onDelete(e, id), [
+	const _onDelete = React.useCallback((e) => onDelete(e, scriptId, workspaceId, id), [
+		scriptId,
+		workspaceId,
 		id,
 	]);
-	const _onSave = React.useCallback((e) => onSave(e, fromEntityId, fromArrowTypeId), [
+	const _onSave = React.useCallback((e) => onSave(e, scriptId, workspaceId, fromEntityId, fromArrowTypeId), [
+		scriptId,
+		workspaceId,
 		fromEntityId,
 		fromArrowTypeId,
+	]);
+	const _onClose = React.useCallback((e) => onClose(e, workspaceId), [
+		workspaceId
 	]);
 	const _dialogOpenFlag = !!dialog;
 
 	// onMount
 	React.useEffect(() => {
 		if (_dialogOpenFlag && existId > 0) {
-			onMount(existId);
+			onMount(existId, scriptId, workspaceId);
 		}
 	}, [
 		_dialogOpenFlag,
 		existId,
+		scriptId,
+		workspaceId,
 	]);
 
 	return _dialogOpenFlag
@@ -69,9 +80,9 @@ let Func = () => {
 			fullWidth
 			maxWidth="lg"
 			open={_dialogOpenFlag}
-			onClose={onClose}>
+			onClose={_onClose}>
 			<DialogTitle>
-				<Header onClose={onClose}>
+				<Header onClose={_onClose}>
 					{id >= 1
 						? 'Функция: '+ name
 						: 'Добавить функцию'}
@@ -87,7 +98,7 @@ let Func = () => {
 								label="Название"
 								helperText="Для быстрого поиска придумайте название или краткое описание"
 								value={name}
-								onChange={onChangeName} />
+								onChange={onChangeName('func')} />
 						</Box>
 						<Box py={2}>
 							<SelectFuncCategory
@@ -101,7 +112,11 @@ let Func = () => {
 								onSelect={onSelectTemplate} />
 						</Box>
 						{templateId > 0
-							? <GroupFunc templateId={templateId} />
+							? <GroupFunc 
+								scriptId={scriptId}
+								workspaceId={workspaceId}
+								funcId={id}
+								templateId={templateId} />
 							: <React.Fragment />}
 					</DialogContent>
 					<DialogActions>
@@ -114,7 +129,7 @@ let Func = () => {
 							variant="outlined"
 							color="secondary"
 							startIcon={<CloseIcon />}
-							onClick={onClose}>
+							onClick={_onClose}>
 							Отмена
 						</Button>
 						{id >= 1

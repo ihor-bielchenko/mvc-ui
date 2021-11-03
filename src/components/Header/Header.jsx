@@ -6,7 +6,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import { Link } from 'react-router-dom';
 import { URL_PAGE_SCRIPT } from 'consts/url.js';
 
-let Header = ({ 
+let Title = ({ 
 	onClose,
 	children 
 }) => {
@@ -39,8 +39,8 @@ let Header = ({
 	</Grid>;
 };
 
-Header = React.memo(Header);
-Header.defaultProps = {
+Title = React.memo(Title);
+Title.defaultProps = {
 };
 
-export default Header;
+export default Title;

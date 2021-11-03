@@ -43,69 +43,76 @@ let Input = ({
 	]);
 
 	return <Box position="relative">
-		<TextField
-			fullWidth
-			variant="outlined"
-			disabled={disabled}
-			required={required}
-			error={error}
-			size={size}
-			label={label}
-			helperText={helperText}
-			type={type}
-			onInput={onInput}
-			onChange={onChange}
-			{ ...id
-				? { id }
-				: {} }
-			{ ...className
-				? { className }
-				: {} }
-			{ ...name
-				? { name }
-				: {} }
-			{ ...(typeof value === 'object' || typeof defaultValue === 'object')
-				? { disabled: true }
-				: { 
-					placeholder,
-					...(typeof value === 'string' || typeof value === 'number')
-						? { value }
-						: (typeof defaultValue === 'string' || typeof defaultValue === 'number')
-							? { defaultValue }
-							: {} 
-				} }
-			InputProps={{
-				...inputComponent
-					? { inputComponent }
-					: {},
-				...(menu && name)
-					? {
-						startAdornment: <InputAdornment 
-							aria-controls={name}
-							onClick={_onMenu}
-							position="start">
-							<IconButton 
-								disabled={disabled}
-								size="small">
-								<AddIcon fontSize="small" />
-							</IconButton>
-						</InputAdornment>,
-					}
-					: {},
-				}} />
 		{(typeof value === 'object' && value.source_type_id > 0)
-			? <LogicValue
-				chipText={chipText}
-				sourceTypeId={value.source_type_id}
-				entityId={value.entity_id} />
-			: (defaultValue && typeof defaultValue === 'object' && defaultValue.source_type_id > 0)
-				? <LogicValue
+			? <React.Fragment>
+				<LogicValue
+					label={label}
 					chipText={chipText}
-					sourceTypeId={defaultValue.source_type_id}
-					entityId={defaultValue.entity_id}
+					sourceTypeId={value.source_type_id}
+					entityId={value.id}
 					onDelete={_onDelete}
 					onClick={_onValue} />
-				: <React.Fragment />}
+			</React.Fragment>
+			: (defaultValue && typeof defaultValue === 'object' && defaultValue.source_type_id > 0)
+				? <React.Fragment>
+					<LogicValue
+						label={label}
+						chipText={chipText}
+						sourceTypeId={defaultValue.source_type_id}
+						entityId={defaultValue.id}
+						onDelete={_onDelete}
+						onClick={_onValue} />
+				</React.Fragment>
+				: <TextField
+					fullWidth
+					variant="outlined"
+					disabled={disabled}
+					required={required}
+					error={error}
+					size={size}
+					label={label}
+					helperText={helperText}
+					type={type}
+					onInput={onInput}
+					onChange={onChange}
+					{ ...id
+						? { id }
+						: {} }
+					{ ...className
+						? { className }
+						: {} }
+					{ ...name
+						? { name }
+						: {} }
+					{ ...(typeof value === 'object' || typeof defaultValue === 'object')
+						? { disabled: true }
+						: { 
+							placeholder,
+							...(typeof value === 'string' || typeof value === 'number')
+								? { value }
+								: (typeof defaultValue === 'string' || typeof defaultValue === 'number')
+									? { defaultValue }
+									: {} 
+						} }
+					InputProps={{
+						...inputComponent
+							? { inputComponent }
+							: {},
+						...(menu && name)
+							? {
+								startAdornment: <InputAdornment 
+									aria-controls={name}
+									onClick={_onMenu}
+									position="start">
+									<IconButton 
+										disabled={disabled}
+										size="small">
+										<AddIcon fontSize="small" />
+									</IconButton>
+								</InputAdornment>,
+							}
+							: {},
+						}} />}
 	</Box>;
 };
 

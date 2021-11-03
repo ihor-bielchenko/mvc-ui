@@ -1,7 +1,7 @@
 import Store from 'components/Store';
 import onDialog from 'components/Dialog/onDialog.js';
 
-const onChangeLogic = (e, id) => {
+const onClickAsSource = (e, id) => {
 	const jsObject = Store().getState().jsObject;
 
 	if (typeof jsObject.data[id] === 'object'
@@ -9,9 +9,9 @@ const onChangeLogic = (e, id) => {
 		&& jsObject.data[id].value.source_type_id > 0) {
 		jsObject.tempValue = { ...jsObject.data[id].value };
 		onDialog(jsObject.data[id].value.source_type_id, { 
-			name: id, 
+			id, 
 		})();
 	}
 };
 
-export default onChangeLogic;
+export default onClickAsSource;

@@ -1,6 +1,6 @@
 import Store from 'components/Store';
 
-const _onMenu = (e, aria, options = '', name) => {
+const _onMenu = (e, aria, options = '', id) => {
 	const currentTarget = e.currentTarget;
 
 	if (aria) {
@@ -11,7 +11,7 @@ const _onMenu = (e, aria, options = '', name) => {
 				...menu[aria],
 				anchorEl: currentTarget,
 				label: options,
-				name,
+				id,
 			};
 		}
 		else if (typeof options === 'object') {
@@ -19,7 +19,7 @@ const _onMenu = (e, aria, options = '', name) => {
 				...options,
 				...menu[aria],
 				anchorEl: currentTarget,
-				name,
+				id,
 			};
 		}
 		Store().dispatch({
@@ -28,6 +28,6 @@ const _onMenu = (e, aria, options = '', name) => {
 		});
 	}
 };
-const onMenu = (aria, options) => (e, name) => _onMenu(e, aria, options, name);
+const onMenu = (aria, options) => (e, id) => _onMenu(e, aria, options, id);
 
 export default onMenu;

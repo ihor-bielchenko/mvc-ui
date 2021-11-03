@@ -5,7 +5,8 @@ import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import SelectDataType from 'components/Select/DataType';
-import { StyledChip } from 'components/Input/LogicValue.jsx';
+import LogicValue from 'components/Input/LogicValue.jsx';
+import onDialog from 'components/Dialog/onDialog.js';
 import dataTypes, {
 	DATA_TYPE_ATOMIC,
 	DATA_TYPE_ID,
@@ -13,22 +14,33 @@ import dataTypes, {
 import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
 import onMount from './onMount.js';
 import onSelect from './onSelect.js';
-// import onChange from '../onChange.js';
+import onClear from '../onClear.js';
+import onValueScript from '../onValueScript.js';
+import onValidate from '../onValidate.js';
 import onUnmount from '../onUnmount.js';
 
 let IfType = ({ 
 	scriptId,
-	id, 
+	workspaceId,
+	funcId,
+	templateId,
 }) => {
 	const renderFlag = useSelector((state) => state.jsObject.renderFlag);
-	const prop1 = useSelector((state) => ((state.jsObject.blocks[0] || [])[0] || {}).value);
+	const prop1 = useSelector((state) => ((state.jsObject.blocks[0] || [])[0] || {}).value ?? '');
 	const prop2 = useSelector((state) => ((state.jsObject.blocks[0] || [])[1] || {}).value ?? '');
-	const _onSelect1 = React.useCallback((e) => onSelect(e, id, 0), [
-		id,
+	const prop2Name = useSelector((state) => (((state.script[(prop2 || {}).workspaceId] || {}).data || {})[(prop2 || {}).id] || {}).name ?? '');
+	const _onSelect1 = React.useCallback((e) => onSelect(e, workspaceId, 0), [
+		workspaceId,
 	]);
-	// const _onChange2 = React.useCallback((e) => onChange(e, id, 1), [
-	// 	id,
-	// ]);
+	const _onClear2 = React.useCallback((e) => onClear(e, workspaceId, 1), [
+		workspaceId,
+	]);
+	const _onMenu2 = React.useCallback((e) => onDialog(SOURCE_TYPE_SCRIPT.id, {
+		onClickAsSource: onValueScript(1),
+		dataTypeValidating: onValidate(Number(prop1)),
+	})(e), [
+		prop1,
+	]);
 
 	React.useEffect(() => {
 		!renderFlag && onMount();
@@ -64,13 +76,16 @@ let IfType = ({
 					height: '60px',
 				}}>
 				{prop2
-					? <StyledChip 
-						label={SOURCE_TYPE_SCRIPT.text()} />
+					? <LogicValue 
+						chipText={SOURCE_TYPE_SCRIPT.text(prop2Name)}
+						onDelete={_onClear2}
+						onClick={_onMenu2} />
 					: <Button
-						disabled={typeof prop1 === 'undefined'}
+						disabled={!prop1}
 						variant="outlined"
 						color="primary"
-						startIcon={<AddIcon fontSize="small" />}>
+						startIcon={<AddIcon fontSize="small" />}
+						onClick={_onMenu2}>
 						Выбрать параметр
 					</Button>}
 			</Grid>
@@ -81,7 +96,9 @@ let IfType = ({
 IfType = React.memo(IfType);
 IfType.defaultProps = {
 	scriptId: 0,
-	id: 0,
+	workspaceId: 0,
+	funcId: 0,
+	templateId: 0,
 };
 
 export default IfType;

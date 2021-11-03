@@ -9,13 +9,26 @@ import { DIALOG_FUNC } from 'consts/dialog.js';
 
 let Func = ({
 	scriptId,
+	workspaceId,
 	id,
 	entityId,
+	isSource,
+	dataTypeValidating,
+	onClickAsSource,
 }) => {
-	const name = useSelector((state) => state.script[scriptId].data[entityId].entity_func.name);
-	const dataTypeId = useSelector((state) => state.script[scriptId].data[entityId].data_type_id);
-	const _onDelete = React.useCallback((e) => onDelete(e, id), [
+	const name = useSelector((state) => state.script[workspaceId].data[entityId].entity_func.name);
+	const dataTypeId = useSelector((state) => state.script[workspaceId].data[entityId].data_type_id);
+	const _onDelete = React.useCallback((e) => onDelete(e, scriptId, workspaceId, id), [
+		scriptId,
+		workspaceId,
 		id,
+	]);
+	const _onClick = React.useCallback((e) => onClickAsSource(e, scriptId, workspaceId, entityId, dataTypeId), [
+		onClickAsSource,
+		scriptId,
+		workspaceId,
+		entityId,
+		dataTypeId,
 	]);
 
 	return <React.Fragment>
@@ -23,11 +36,15 @@ let Func = ({
 			withControl
 			backgroundColor="#ef5350"
 			scriptId={scriptId}
+			workspaceId={workspaceId}
 			id={id}
 			entityId={entityId}
 			dialogId={DIALOG_FUNC}
+			isSource={isSource}
 			dataTypeId={dataTypeId}
-			onDelete={_onDelete}>
+			dataTypeValidating={dataTypeValidating}
+			onDelete={_onDelete}
+			onClick={_onClick}>
 			<Box
 				display="flex"
 				alignItems="center"
@@ -50,8 +67,12 @@ let Func = ({
 Func = React.memo(Func);
 Func.defaultProps = {
 	scriptId: 0,
+	workspaceId: 0,
 	id: 0,
 	entityId: 0,
+	isSource: false,
+	dataTypeValidating: () => ([]),
+	onClickAsSource: () => {},
 };
 
 export default Func;

@@ -1,33 +1,55 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Store from 'components/Store';
 import MenuControl from 'components/Menu/Control';
 import onMenu from 'components/Menu/onMenu.js';
 import onDialog from 'components/Dialog/onDialog.js';
 import onLoader from 'components/Loader/onLoader.js';
-import dataTypes from 'structures/dataTypes.js';
 import { 
 	DIALOG_DELETE_CONFIRM,
 	DIALOG_PROP, 
 } from 'consts/dialog.js';
 
-const _onHandler = (dialogId, props) => (e) => {
+const _onHandler = (dialogId, workspaceId, props) => (e) => {
 	onLoader(true);
-	onDialog(dialogId, props)(e)
+
+	const script = Store().getState().script;
+
+	script[workspaceId].loadedFlag = false;
+	Store().dispatch({
+		type: 'script',
+		payload: () => ({ ...script }),
+	});
+	onDialog(dialogId, props)(e);
 };
 let Slot = ({
 	scriptId,
+	workspaceId,
 	id,
 	entityId,
 	dialogId,
 	dataTypeId,
+	isSource,
 	withControl,
 	backgroundColor,
 	children,
+	dataTypeValidating,
 	onDelete,
+	onClick,
 }) => {
+	const formPropId = useSelector((state) => (state.prop || {}).id);
+	const formJsonId = useSelector((state) => (state.json || {}).id);
+	const formFuncId = useSelector((state) => (state.func || {}).id);
+	const _dataTypeValidating = dataTypeValidating();
+	const _dataTypeValidatingFlag = _dataTypeValidating.includes(dataTypeId);
+	const _formIdMatchEntityFlag = formPropId === id 
+		|| formJsonId === id
+		|| formFuncId === id;
+	const isDisabled = (isSource && !_dataTypeValidatingFlag) || _formIdMatchEntityFlag;
+
 	return <React.Fragment>
 			<Box 
 				position="relative"
@@ -44,89 +66,52 @@ let Slot = ({
 					minHeight="54px"
 					maxHeight="120px"
 					border="3px solid #78909C"
-					style={{
-						backgroundColor,
-					}}>
+					{ ...isDisabled
+						? {
+							style: {
+								backgroundColor: '#BDBDBD',
+							},
+						}
+						: {
+							...isSource
+								? { onClick }
+								: {},
+							style: {
+								backgroundColor,
+								cursor: 'pointer',
+							}
+						} }>
 					<Box 
-						id={'to-'+ scriptId +'-'+ entityId}
+						id={'to-'+ workspaceId +'-'+ entityId}
 						position="absolute"
 						top='-3px'
 						left="50%"
 						width="0px"
 						height="0px" />
 					{children}
-					{dataTypeId >= -1
-						? <Box
-							pt="2px"
-							display="flex"
-							alignItems="flex-start">
-							<Box 
-								pl="24px"
-								pr="2px">
-								<Typography 
-									component="div"
-									variant="caption"
-									style={{
-										color: '#FFF',
-										whiteSpace: 'nowrap',
-									}}>
-									Тип:
-								</Typography>
-								{/*<Typography 
-									component="div"
-									variant="caption"
-									style={{
-										color: '#FFF',
-										whiteSpace: 'nowrap',
-									}}>
-									Зависимости:
-								</Typography>*/}
-							</Box>
-							<Box>
-								<Typography 
-									component="div"
-									variant="caption"
-									style={{
-										color: '#FFF',
-										// whiteSpace: 'nowrap',
-									}}>
-									<b>{dataTypes[dataTypeId].text()}</b>
-								</Typography>
-								{/*<Typography 
-									component="div"
-									variant="caption"
-									style={{
-										color: '#FFF',
-										whiteSpace: 'nowrap',
-									}}>
-									<b>0</b>
-								</Typography>*/}
-							</Box>
-						</Box>
-						: <React.Fragment />}
 					<Box 
-						id={'false-'+ scriptId +'-'+ entityId}
+						id={'false-'+ workspaceId +'-'+ entityId}
 						position="absolute"
 						top="36px"
 						left="-3px"
 						width="0px"
 						height="0px" />
 					<Box 
-						id={'true-'+ scriptId +'-'+ entityId}
+						id={'true-'+ workspaceId +'-'+ entityId}
 						position="absolute"
 						top="36px"
 						right="-3px"
 						width="0px"
 						height="0px" />
 					<Box 
-						id={'default-'+ scriptId +'-'+ entityId}
+						id={'default-'+ workspaceId +'-'+ entityId}
 						bottom="-3px"
 						position="absolute"
 						left="50%"
 						width="0px"
 						height="0px" />
 				</Box>
-				{withControl
+				{!isSource && withControl
 					? <React.Fragment>
 						<IconButton 
 							size="small"
@@ -135,7 +120,7 @@ let Slot = ({
 						</IconButton>
 						<MenuControl
 							aria={'menu-slot-'+ entityId}
-							onEdit={_onHandler(dialogId, {
+							onEdit={_onHandler(dialogId, workspaceId, {
 								id,
 								// fromEntityId,
 								// fromArrowTypeId,
@@ -152,12 +137,16 @@ let Slot = ({
 Slot = React.memo(Slot);
 Slot.defaultProps = {
 	scriptId: 0,
+	workspaceId: 0,
 	id: 0,
 	entityId: 0,
 	dialogId: DIALOG_PROP,
 	withControl: false,
+	isSource: false,
 	backgroundColor: 'inherit',
+	dataTypeValidating: () => ([]),
 	onDelete: () => {},
+	onClick: () => {},
 };
 
 export default Slot;

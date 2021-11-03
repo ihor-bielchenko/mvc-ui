@@ -10,6 +10,7 @@ export const TypographyLabel = styled(Typography)`
 
 let Arrow = ({
 	scriptId,
+	workspaceId,
 	id,
 	fromEntityId,
 	toEntityId,
@@ -18,11 +19,11 @@ let Arrow = ({
 	return <React.Fragment>
 		<Xarrow
 			start={arrowTypeId === process.env.ARROW_TYPE_TRUE
-				? 'true-'+ scriptId +'-'+ fromEntityId.toString()
+				? 'true-'+ workspaceId +'-'+ fromEntityId.toString()
 				: arrowTypeId === process.env.ARROW_TYPE_FALSE
-					? 'false-'+ scriptId +'-'+ fromEntityId.toString()
-					: 'default-'+ scriptId +'-'+ fromEntityId.toString()}
-			end={'to-'+ scriptId +'-'+ toEntityId.toString()}
+					? 'false-'+ workspaceId +'-'+ fromEntityId.toString()
+					: 'default-'+ workspaceId +'-'+ fromEntityId.toString()}
+			end={'to-'+ workspaceId +'-'+ toEntityId.toString()}
 			path="straight"
 			strokeWidth={4}
 			color={arrowTypeId === process.env.ARROW_TYPE_TRUE
@@ -46,6 +47,7 @@ let Arrow = ({
 Arrow = React.memo(Arrow);
 Arrow.defaultProps = {
 	scriptId: 0,
+	workspaceId: 0,
 	id: 0,
 	fromEntityId: 0,
 	toEntityId: 0,

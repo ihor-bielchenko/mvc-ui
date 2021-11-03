@@ -2,14 +2,16 @@ import Store from 'components/Store';
 import onClose from 'components/Dialog/onClose.js';
 import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
 
-const onChangeByLogic = (e, dataTypeId, id, name, key) => {
+const onValueScript = (id, keyName = 'key') => (e, scriptId, workspaceId, entityId, dataTypeId) => {
 	const jsObject = Store().getState().jsObject;
 
-	if (jsObject.tempValue.request[name]) {
-		jsObject.tempValue.request[name][key] = {
+	if (jsObject.tempValue.header[id]) {
+		jsObject.tempValue.header[id][keyName] = {
 			source_type_id: SOURCE_TYPE_SCRIPT.id,
+			script_id: scriptId,
 			data_type_id: dataTypeId,
-			id,
+			id: entityId,
+			workspaceId,
 		};
 		Store().dispatch({
 			type: 'jsObject',
@@ -19,4 +21,4 @@ const onChangeByLogic = (e, dataTypeId, id, name, key) => {
 	}
 };
 
-export default onChangeByLogic;
+export default onValueScript;

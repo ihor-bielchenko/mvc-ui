@@ -7,7 +7,7 @@ const onChange = (e, id, sourceTypeId) => {
 	jsObject.tempValue = { ...(jsObject.data[id].collection 
 		?? jsObject.data[id].value) };
 	onDialog(sourceTypeId, { 
-		name: id, 
+		id, 
 		isEditFlag: true,
 	})();
 };

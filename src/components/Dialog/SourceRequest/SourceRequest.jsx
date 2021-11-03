@@ -12,34 +12,33 @@ import Header from 'components/Header';
 import InputText from 'components/Input/Text';
 import onSubmit from 'components/Dialog/SourceCookie/onSubmit.js';
 import onClose from 'components/Dialog/SourceCookie/onClose.js';
+import onValidate from 'components/Group/Func/onValidate.js';
 import { 
 	SOURCE_TYPE_REQUEST,
 	SOURCE_TYPE_SCRIPT, 
 } from 'structures/sourceTypes.js';
-import {
-	DATA_TYPE_NUMBER,
-	DATA_TYPE_TEXT,
-} from 'structures/dataTypes.js';
+import { DATA_TYPE_TEXT } from 'structures/dataTypes.js';
+import onValueScript from '../SourceCookie/onValueScript.js';
+import onClear from '../SourceCookie/onClear.js';
 import onDialog from '../onDialog.js';
-import onChangeByLogic from '../onChangeByLogic.js';
-import onClear from '../onClear.js';
 
-const _onMenu = onDialog(SOURCE_TYPE_SCRIPT.id, {
-	onClickEntity: onChangeByLogic,
-	formatValidating: () => ([
-		DATA_TYPE_NUMBER.id,
-		DATA_TYPE_TEXT.id,
-	]),
-});
 let SourceRequest = () => {
 	const dialog = useSelector((state) => state.dialogs[SOURCE_TYPE_REQUEST.id]);
-	const bodyId = (dialog || {}).name;
+	const id = (dialog || {}).id;
+	const workspaceId = (dialog || {}).workspaceId ?? 0;
 	const value = useSelector((state) => state.jsObject.tempValue.value || '');
-	const _onSubmit = React.useCallback((e) => onSubmit(e, bodyId, SOURCE_TYPE_REQUEST.id), [
-		bodyId,
+	const _onClear = React.useCallback((e) => onClear(e, workspaceId, id, SOURCE_TYPE_REQUEST.id), [
+		workspaceId,
+		id,
 	]);
-	const _onClear = React.useCallback((e) => onClear(e, bodyId), [
-		bodyId,
+	const _onMenu = React.useCallback((e) => onDialog(SOURCE_TYPE_SCRIPT.id, {
+		onClickAsSource: onValueScript(id),
+		dataTypeValidating: onValidate(DATA_TYPE_TEXT.id),
+	})(e), [
+		id,
+	]);
+	const _onSubmit = React.useCallback((e) => onSubmit(e, id, SOURCE_TYPE_REQUEST.id), [
+		id,
 	]);
 
 	return <React.Fragment>
@@ -64,7 +63,7 @@ let SourceRequest = () => {
 						onDelete={_onClear}
 						name="value"
 						type="text"
-						label="Название"
+						label="Название значния"
 						placeholder="Например, user_id"
 						defaultValue={value} />
 				</DialogContent>

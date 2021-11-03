@@ -2,9 +2,8 @@ import Store from 'components/Store';
 import { initialState as initialStateFunc } from 'components/Store/func.js';
 import { initialState as initialStateJsObject } from 'components/Store/jsObject.js';
 import onLoader from 'components/Loader/onLoader';
-import getScriptId from 'components/Script/getScriptId.js';
 import onSaveJsObject from 'components/JsObject/onSave.js';
-import onMount from 'components/Script/onMount.js';
+import onMountScript from 'components/Script/onMount.js';
 import fetchFuncCreate from 'fetch/funcCreate.js';
 import fetchFuncUpdate from 'fetch/funcUpdate.js';
 import fetchArrowCreate from 'fetch/arrowCreate.js';
@@ -12,11 +11,10 @@ import axiosError from 'utils/axiosError.js';
 import funcTemplates from 'structures/funcTemplates.js';
 import onClose from './onClose.js';
 
-const onSave = async (e, fromEntityId, fromArrowTypeId) => {
+const onSave = async (e, scriptId, workspaceId, fromEntityId, fromArrowTypeId) => {
 	onLoader(true);
 
 	try {
-		const scriptId = getScriptId();
 		const {
 			func,
 			script,
@@ -57,7 +55,7 @@ const onSave = async (e, fromEntityId, fromArrowTypeId) => {
 				to_entity_id: fetchFuncData.entity_id,
 				arrow_type_id: fromArrowTypeId,
 			});
-			script[scriptId].loadedFlag = false;
+			script[workspaceId].loadedFlag = false;
 
 			Store().dispatch({
 				type: 'script',
@@ -71,7 +69,7 @@ const onSave = async (e, fromEntityId, fromArrowTypeId) => {
 				type: 'jsObject',
 				payload: () => initialStateJsObject(),
 			});
-			onMount(scriptId);
+			onMountScript(scriptId, workspaceId);
 			onClose(e);
 		}
 	}

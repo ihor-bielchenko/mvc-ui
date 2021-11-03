@@ -5,7 +5,7 @@ import fetchFuncOne from 'fetch/funcOne.js';
 import axiosError from 'utils/axiosError.js';
 import { DATA_TYPE_OBJECT } from 'structures/dataTypes.js';
 
-const onMount = async (id) => {
+const onMount = async (id, scriptId, workspaceId) => {
 	const func = Store().getState().func;
 
 	onLoader(true);
@@ -21,6 +21,8 @@ const onMount = async (id) => {
 		func.template_id = data.template_id;
 		func.entityId = data.entity.id;
 		func.sourceId = data.source_id;
+		func.scriptId = scriptId;
+		func.workspaceId = workspaceId;
 
 		Store().dispatch({
 			type: 'func',

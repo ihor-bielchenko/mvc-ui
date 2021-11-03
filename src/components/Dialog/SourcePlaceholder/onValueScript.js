@@ -6,16 +6,20 @@ import {
 import onCloseDialog from '../onClose.js';
 import onClose from './onClose.js';
 
-const onChangeByLogic = (e, dataTypeId, valueId, itemId) => {
+const onValueScript = (id) => (e, scriptId, workspaceId, entityId, dataTypeId) => {
+	e.preventDefault();
+
 	const jsObject = Store().getState().jsObject;
 
-	if (typeof jsObject.temp[itemId] === 'object') {
-		jsObject.data[itemId] = { 
+	if (typeof jsObject.data[id] === 'object') {
+		jsObject.data[id].value = { 
 			source_type_id: SOURCE_TYPE_PLACEHOLDER.id,
 			value: {
 				source_type_id: SOURCE_TYPE_SCRIPT.id,
+				script_id: scriptId,
 				data_type_id: dataTypeId,
-				id: valueId,
+				id: entityId,
+				workspaceId,
 			},
 		};
 	}
@@ -23,4 +27,4 @@ const onChangeByLogic = (e, dataTypeId, valueId, itemId) => {
 	onCloseDialog(SOURCE_TYPE_SCRIPT.id)(e);
 };
 
-export default onChangeByLogic;
+export default onValueScript;

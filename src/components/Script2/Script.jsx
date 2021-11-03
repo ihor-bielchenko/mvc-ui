@@ -18,8 +18,8 @@ import onMount from './onMount.js';
 let Entities = ({ 
 	scriptRenderId,
 	isSource,
-	onClickEntity,
-	formatValidating,
+	onClickAsSource,
+	dataTypeValidating,
 }) => {
 	const entitiesData = useSelector((state) => state.entities.data);
 
@@ -31,15 +31,15 @@ let Entities = ({
 			scriptRenderId={scriptRenderId}
 			id={Number(id)}
 			isSource={isSource}
-			onClickEntity={onClickEntity}
-			formatValidating={formatValidating} />;
+			onClickAsSource={onClickAsSource}
+			dataTypeValidating={dataTypeValidating} />;
 	});
 };
 Entities = React.memo(Entities);
 Entities.defaultProps = {
 	scriptRenderId: 0,
 	isSource: false,
-	formatValidating: () => ([]),
+	dataTypeValidating: () => ([]),
 };
 
 let Arrow = ({  
@@ -112,8 +112,8 @@ let Script = ({
 	scriptId, 
 	isSource,
 	withScroll,
-	onClickEntity,
-	formatValidating,
+	onClickAsSource,
+	dataTypeValidating,
 }) => {
 	const issetEntities = useSelector((state) => Object.keys((state.entities || {}).data || {}).length > 0);
 	const scriptRenderId = React.useMemo(() => Date.now(), []);
@@ -150,8 +150,8 @@ let Script = ({
 						<Entities 
 							scriptRenderId={scriptRenderId}
 							isSource={isSource}
-							onClickEntity={onClickEntity}
-							formatValidating={formatValidating} />
+							onClickAsSource={onClickAsSource}
+							dataTypeValidating={dataTypeValidating} />
 						<Arrows 
 							scriptRenderId={scriptRenderId}
 							isSource={isSource} />
@@ -178,7 +178,7 @@ Script.defaultProps = {
 	scriptId: 0,
 	isSource: false,
 	withScroll: false,
-	formatValidating: () => ([]),
+	dataTypeValidating: () => ([]),
 };
 
 export default Script;

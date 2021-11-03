@@ -35,8 +35,8 @@ let DbQuery = () => {
 		? value
 		: undefined);
 	const _onMenu = React.useCallback((e) => onDialog(SOURCE_TYPE_SCRIPT.id, {
-		onClickEntity: (e, entityId, id) => onChangeByLogic(e, entityId, id, setLogicValue),
-		formatValidating: () => ([
+		onClickAsSource: (e, entityId, id) => onChangeByLogic(e, entityId, id, setLogicValue),
+		dataTypeValidating: () => ([
 			DATA_TYPE_NUMBER.id,
 			DATA_TYPE_TEXT.id,
 		]),

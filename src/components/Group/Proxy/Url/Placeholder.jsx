@@ -5,14 +5,12 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import InputText from 'components/Input/Text';
 import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
-import {
-	DATA_TYPE_NUMBER,
-	DATA_TYPE_TEXT,
-} from 'structures/dataTypes.js';
+import { DATA_TYPE_TEXT } from 'structures/dataTypes.js';
 import onDialog from 'components/Dialog/onDialog.js';
-import onValidate from 'components/Dialog/SourceProxy/onValidate.js';
+import onValidateInput from 'components/Dialog/SourceProxy/onValidate.js';
+import onValidateSource from 'components/Group/Func/onValidate.js';
 import onPlaceholder from './onPlaceholder.js';
-import onChangeByLogic from './onChangeByLogic.js';
+import onValueScript from './onValueScript.js';
 import onClear from './onClear.js';
 
 let Placeholder = ({ 
@@ -20,26 +18,23 @@ let Placeholder = ({
 	length,
 	routeId, 
 	pathTypeId,
-	name,
+	id,
 	label,
 }) => {
-	const value = useSelector((state) => ((state.jsObject.tempValue.placeholder || {})[name] || {}).value || '');
-	const _onClear = React.useCallback((e) => onClear(e, name), [
-		name,
+	const value = useSelector((state) => ((state.jsObject.tempValue.placeholder || {})[id] || {}).value || '');
+	const _onClear = React.useCallback((e) => onClear(e, id), [
+		id,
 	]);
 	const _onMenu = React.useCallback((e) => onDialog(SOURCE_TYPE_SCRIPT.id, {
-		onClickEntity: (e, dataTypeId, id) => onChangeByLogic(e, dataTypeId, id, routeId, name),
-		formatValidating: () => ([
-			DATA_TYPE_NUMBER.id,
-			DATA_TYPE_TEXT.id,
-		]),
+		onClickAsSource: onValueScript(routeId, id),
+		dataTypeValidating: onValidateSource(DATA_TYPE_TEXT.id),
 	})(e), [
 		routeId,
-		name,
+		id,
 	]);
-	const _onPlaceholder = React.useCallback((e) => onPlaceholder(e, routeId, name), [
+	const _onPlaceholder = React.useCallback((e) => onPlaceholder(e, routeId, id), [
 		routeId,
-		name,
+		id,
 	]);
 
 	return <React.Fragment>
@@ -54,11 +49,11 @@ let Placeholder = ({
 						onMenu={_onMenu}
 						onValue={_onMenu}
 						onDelete={_onClear}
-						name={name.toString()}
+						name={id.toString()}
 						label={label}
 						placeholder="значение"
 						onChange={_onPlaceholder}
-						onInput={onValidate}
+						onInput={onValidateInput}
 						defaultValue={value} />
 				</Box>
 				: <Typography>
@@ -83,7 +78,7 @@ Placeholder.defaultProps = {
 	length: 0,
 	routeId: 0,
 	pathTypeId: 0,
-	name: 0,
+	id: 0,
 	label: '',
 };
 

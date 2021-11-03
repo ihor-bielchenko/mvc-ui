@@ -12,8 +12,6 @@ import dataTypes, {
 	DATA_TYPE_ATOMIC,
 	DATA_TYPE_OBJECT,
  	DATA_TYPE_ARRAY,
- 	DATA_TYPE_NUMBER,
- 	DATA_TYPE_ID,
 } from 'structures/dataTypes.js';
 import sourceTypes, {
 	SOURCE_TYPE_DB,
@@ -37,6 +35,8 @@ const _onFilterMenuSource = (dataTypeId) => (key, i) => {
 };
 
 let Parent = ({ 
+	scriptId,
+	workspaceId,
 	id,
 	dataTypeId,
 	last,
@@ -104,6 +104,8 @@ let Parent = ({
 							while (i < blocksLength) {
 								collector.push(<Item
 									key={blocks[id][i].id}
+									scriptId={scriptId}
+									workspaceId={workspaceId}
 									id={blocks[id][i].id}
 									parentId={id}
 									last={i === blocksLength - 1}
@@ -137,9 +139,8 @@ let Parent = ({
 									</Button>
 									<MenuSource
 										aria={id.toString()}
-										dataTypeId={dataTypeId === DATA_TYPE_ID.id
-											? DATA_TYPE_NUMBER.id
-											: dataTypeId}
+										scriptId={scriptId}
+										workspaceId={workspaceId}
 										onFilter={_onFilterMenuSource(dataTypeId)} />
 								</Box>
 								<Box display="flex">
@@ -175,6 +176,8 @@ let Parent = ({
 
 Parent = React.memo(Parent);
 Parent.defaultProps = {
+	scriptId: 0,
+	workspaceId: 0,
 	id: 0,
 	dataTypeId: 0,
 };

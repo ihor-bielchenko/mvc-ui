@@ -23,38 +23,49 @@ import {
 	DIALOG_DELETE_CONFIRM, 
 } from 'consts/dialog.js';
 import { FUNC_CATEGORY_IF } from 'structures/funcCategories.js';
-import onMount from './onMount.js';
-import onClose from './onClose.js';
-import onChangeName from './onChangeName.js';
-import onSave from './onSave.js';
-import onDelete from './onDelete.js';
+import onMount from '../Func/onMount.js';
+import onChangeName from '../Func/onChangeName.js';
+import onSave from '../Func/onSave.js';
+import onDelete from '../Func/onDelete.js';
 import onSelectTemplate from './onSelectTemplate.js';
+import onClose from './onClose.js';
 
 let Condition = () => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_IF]);
 	const existId = (dialog || {}).id || 0;
+	const workspaceId = (dialog || {}).workspaceId ?? 0;
+	const scriptId = (dialog || {}).scriptId ?? 0;
 	const fromEntityId = (dialog || {}).fromEntityId ?? 0;
 	const fromArrowTypeId = (dialog || {}).fromArrowTypeId ?? process.env.ARROW_TYPE_DEFAULT;
 	const id = useSelector((state) => state.func.id);
 	const name = useSelector((state) => state.func.name || '');
 	const templateId = useSelector((state) => state.func.template_id || '');
-	const _onDelete = React.useCallback((e) => onDelete(e, id), [
+	const _onDelete = React.useCallback((e) => onDelete(e, workspaceId, scriptId, id), [
+		scriptId,
+		workspaceId,
 		id,
 	]);
-	const _onSave = React.useCallback((e) => onSave(e, fromEntityId, fromArrowTypeId), [
+	const _onSave = React.useCallback((e) => onSave(e, workspaceId, scriptId,fromEntityId, fromArrowTypeId), [
+		workspaceId,
+		scriptId,
 		fromEntityId,
 		fromArrowTypeId,
+	]);
+	const _onClose = React.useCallback((e) => onClose(e, workspaceId), [
+		workspaceId,
 	]);
 	const _dialogOpenFlag = !!dialog;
 
 	// onMount
 	React.useEffect(() => {
 		if (_dialogOpenFlag && existId > 0) {
-			onMount(existId);
+			onMount(existId, scriptId, workspaceId);
 		}
 	}, [
 		_dialogOpenFlag,
 		existId,
+		scriptId,
+		workspaceId,
 	]);
 
 	return _dialogOpenFlag
@@ -66,9 +77,9 @@ let Condition = () => {
 			fullWidth
 			maxWidth="lg"
 			open={_dialogOpenFlag}
-			onClose={onClose}>
+			onClose={_onClose}>
 			<DialogTitle>
-				<Header onClose={onClose}>
+				<Header onClose={_onClose}>
 					{id >= 1
 						? 'Условие: '+ name
 						: 'Добавить условие'}
@@ -84,7 +95,7 @@ let Condition = () => {
 								label="Название"
 								helperText="Для быстрого поиска придумайте название или краткое описание"
 								value={name}
-								onChange={onChangeName} />
+								onChange={onChangeName('func')} />
 						</Box>
 						<Box py={2}>
 							<SelectFuncTemplate
@@ -93,7 +104,11 @@ let Condition = () => {
 								onSelect={onSelectTemplate} />
 						</Box>
 						{templateId > 0
-							? <GroupFunc templateId={templateId} />
+							? <GroupFunc
+								scriptId={scriptId}
+								workspaceId={workspaceId}
+								funcId={id}
+								templateId={templateId} />
 							: <React.Fragment />}
 					</DialogContent>
 					<DialogActions>
@@ -106,7 +121,7 @@ let Condition = () => {
 							variant="outlined"
 							color="secondary"
 							startIcon={<CloseIcon />}
-							onClick={onClose}>
+							onClick={_onClose}>
 							Отмена
 						</Button>
 						{id >= 1

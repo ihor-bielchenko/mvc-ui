@@ -3,6 +3,7 @@ import alert from './alert.js';
 import dialogs from './dialogs.js';
 import menu from './menu.js';
 import account from './account.js';
+import services from './services.js';
 import script from './script.js';
 import jsObject from './jsObject.js';
 import func from './func.js';
@@ -17,6 +18,7 @@ const structure = {
 	dialogs,
 	menu,
 	account,
+	services,
 	jsObject,
 	script,
 	func,

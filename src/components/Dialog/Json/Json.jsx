@@ -28,12 +28,12 @@ import {
 	DIALOG_JSON,
 	DIALOG_DELETE_CONFIRM, 
 } from 'consts/dialog.js';
+import onChangeName from '../Func/onChangeName.js';
 import KeyComponent from './KeyComponent.jsx';
 import ValueComponent from './ValueComponent.jsx';
 import TypeComponent from './TypeComponent.jsx';
 import onMount from './onMount.js';
 import onClose from './onClose.js';
-import onChangeName from './onChangeName.js';
 import onSave from './onSave.js';
 import onDelete from './onDelete.js';
 import onSelectDataTypeId from './onSelectDataTypeId.js';
@@ -42,16 +42,22 @@ import onSelectCode from './onSelectCode.js';
 let Json = () => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_JSON]);
 	const existId = (dialog || {}).id || 0;
+	const scriptId = (dialog || {}).scriptId ?? 0;
+	const workspaceId = (dialog || {}).workspaceId ?? 0;
 	const fromEntityId = (dialog || {}).fromEntityId ?? 0;
 	const fromArrowTypeId = (dialog || {}).fromArrowTypeId ?? process.env.ARROW_TYPE_DEFAULT;
 	const id = useSelector((state) => state.json.id);
 	const name = useSelector((state) => state.json.name || '');
 	const code = useSelector((state) => state.json.code || 200);
 	const dataTypeId = useSelector((state) => (state.jsObject.data[0] || {}).data_type_id ?? DATA_TYPE_ATOMIC.id);
-	const _onDelete = React.useCallback((e) => onDelete(e, id), [
+	const _onDelete = React.useCallback((e) => onDelete(e, scriptId, workspaceId, id), [
+		scriptId,
+		workspaceId,
 		id,
 	]);
-	const _onSave = React.useCallback((e) => onSave(e, fromEntityId, fromArrowTypeId), [
+	const _onSave = React.useCallback((e) => onSave(e, scriptId, workspaceId, fromEntityId, fromArrowTypeId), [
+		scriptId,
+		workspaceId,
 		fromEntityId,
 		fromArrowTypeId,
 	]);
@@ -60,11 +66,13 @@ let Json = () => {
 	// onMount
 	React.useEffect(() => {
 		if (_dialogOpenFlag && existId > 0) {
-			onMount(existId);
+			onMount(existId, scriptId, workspaceId);
 		}
 	}, [
 		_dialogOpenFlag,
 		existId,
+		scriptId,
+		workspaceId,
 	]);
 
 	return _dialogOpenFlag
@@ -94,7 +102,7 @@ let Json = () => {
 								label="Название"
 								helperText="Для быстрого поиска придумайте название или краткое описание"
 								value={name}
-								onChange={onChangeName} />
+								onChange={onChangeName('json')} />
 						</Box>
 						<Box
 							py={2}

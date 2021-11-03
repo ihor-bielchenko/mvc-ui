@@ -93,8 +93,10 @@ const _load = (funcTemplateId) => () => {
 };
 
 let Func = ({ 
+	scriptId,
+	workspaceId,
+	funcId,
 	templateId,
-	id,
 }) => {
 	const Component = React.lazy(_load(templateId));
 
@@ -105,13 +107,20 @@ let Func = ({
 			</Typography>
 		</Box>
 		<React.Suspense fallback={<Typography>Подождите...</Typography>}>
-			<Component id={id} />
+			<Component 
+				scriptId={scriptId}
+				workspaceId={workspaceId}
+				funcId={funcId}
+				templateId={templateId} />
 		</React.Suspense>
 	</React.Fragment>;
 };
 
 Func = React.memo(Func);
 Func.defaultProps = {
+	scriptId: 0,
+	workspaceId: 0,
+	funcId: 0,
 	templateId: 0,
 };
 

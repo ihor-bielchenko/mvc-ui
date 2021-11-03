@@ -6,7 +6,7 @@ import fetchFuncDelete from 'fetch/funcDelete.js';
 import fetchCortegeDelete from 'fetch/cortegeDelete.js';
 import axiosError from 'utils/axiosError.js';
 
-const onDelete = async (e, id) => {
+const onDelete = async (e, scriptId, workspaceId, id) => {
 	onLoader(true);
 	
 	try {

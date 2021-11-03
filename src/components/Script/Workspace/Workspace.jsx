@@ -2,8 +2,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Box from '@material-ui/core/Box';
-import { FUNC_CATEGORY_IF } from 'structures/funcCategories.js';
-import funcTemplates from 'structures/funcTemplates.js';
 import {
 	Create,
 	entities,
@@ -16,38 +14,21 @@ const BoxBackgraund = styled(Box)`
 `;
 let Build = ({
 	scriptId,
+	workspaceId,
 	arrow,
+	isSource,
+	dataTypeValidating,
+	onClickAsSource,
 }) => {
 	const _arrow = arrow();
-	const arrows = useSelector((state) => state.script[scriptId].arrows);
-	const entity = useSelector((state) => state.script[scriptId].data[(_arrow || {}).to_entity_id]);
+	const arrows = useSelector((state) => state.script[workspaceId].arrows);
+	const entity = useSelector((state) => state.script[workspaceId].data[(_arrow || {}).to_entity_id]);
 	const nextArrows = arrows.filter((arrow) => arrow.from_entity_id === _arrow.to_entity_id);
 	
 	if (!entity) {
 		return <React.Fragment />;
 	}
-
-	let _slotName,
-		_id;
-
-	if (entity.entity_prop) {
-		_slotName = 'Prop';
-		_id = entity.entity_prop.id;
-	}
-	if (entity.entity_json) {
-		_slotName = 'Json';
-		_id = entity.entity_json.id;
-	}
-	if (entity.entity_func) {
-		if (funcTemplates[entity.entity_func.template_id].category_id === FUNC_CATEGORY_IF.id) {
-			_slotName = 'Condition';
-		}
-		else {
-			_slotName = 'Func';
-		}
-		_id = entity.entity_func.id;
-	}
-	const SlotEntiy = entities[_slotName];
+	const SlotEntiy = entities[entity.slotName];
 	let arrowDefault,
 		arrowFalse,
 		arrowTrue;
@@ -64,64 +45,83 @@ let Build = ({
 		}
 	});
 
-	// console.log('entity', _arrow, arrows);
-
 	return <React.Fragment>
-		{entity
+		{(entity && entity.entityItemId > 0)
 			? <Box 
 				position="relative"
 				minWidth="420px">
 				<Box py="34px">
 					<SlotEntiy 
 						scriptId={scriptId}
+						workspaceId={workspaceId}
 						entityId={entity.id}
-						id={_id} />
+						id={entity.entityItemId}
+						isSource={isSource}
+						dataTypeValidating={dataTypeValidating}
+						onClickAsSource={onClickAsSource} />
 				</Box>
-				{(_slotName === 'Condition')
-					? <Box
-						position="relative"
-						display="flex"
-						alignItems="flex-start"
-						justifyContent="center">
-						{arrowFalse
+				{isSource
+					? <React.Fragment />
+					: (entity.slotName === 'Condition')
+						? <Box
+							position="relative"
+							display="flex"
+							alignItems="flex-start"
+							justifyContent="center">
+							{arrowFalse
+								? <Build
+									scriptId={scriptId}
+									workspaceId={workspaceId}
+									arrow={() => arrowFalse}
+									isSource={isSource}
+									dataTypeValidating={dataTypeValidating}
+									onClickAsSource={onClickAsSource} />
+								: <Box 
+									position="relative"
+									minWidth="300px">
+									<Box py="34px">
+										<Create
+											scriptId={scriptId}
+											workspaceId={workspaceId}
+											fromEntityId={entity.id}
+											fromArrowTypeId={process.env.ARROW_TYPE_FALSE} />
+									</Box>
+								</Box>}
+							{arrowTrue
+								? <Build
+									scriptId={scriptId}
+									workspaceId={workspaceId}
+									arrow={() => arrowTrue}
+									isSource={isSource}
+									dataTypeValidating={dataTypeValidating}
+									onClickAsSource={onClickAsSource} />
+								: <Box 
+									position="relative"
+									minWidth="300px">
+									<Box py="34px">
+										<Create
+											scriptId={scriptId}
+											workspaceId={workspaceId}
+											fromEntityId={entity.id}
+											fromArrowTypeId={process.env.ARROW_TYPE_TRUE} />
+									</Box>
+								</Box>}
+						</Box>
+						: arrowDefault
 							? <Build
 								scriptId={scriptId}
-								arrow={() => arrowFalse} />
-							: <Box 
-								position="relative"
-								minWidth="300px">
-								<Box py="34px">
-									<Create
-										scriptId={scriptId}
-										fromEntityId={entity.id}
-										fromArrowTypeId={process.env.ARROW_TYPE_FALSE} />
-								</Box>
+								workspaceId={workspaceId}
+								arrow={() => arrowDefault}
+								isSource={isSource}
+								dataTypeValidating={dataTypeValidating}
+								onClickAsSource={onClickAsSource} />
+							: <Box py="34px">
+								<Create
+									scriptId={scriptId}
+									workspaceId={workspaceId}
+									fromEntityId={entity.id}
+									fromArrowTypeId={process.env.ARROW_TYPE_DEFAULT} />
 							</Box>}
-						{arrowTrue
-							? <Build
-								scriptId={scriptId}
-								arrow={() => arrowTrue} />
-							: <Box 
-								position="relative"
-								minWidth="300px">
-								<Box py="34px">
-									<Create
-										scriptId={scriptId}
-										fromEntityId={entity.id}
-										fromArrowTypeId={process.env.ARROW_TYPE_TRUE} />
-								</Box>
-							</Box>}
-					</Box>
-					: arrowDefault
-						? <Build
-							scriptId={scriptId}
-							arrow={() => arrowDefault} />
-						: <Box py="34px">
-							<Create
-								scriptId={scriptId}
-								fromEntityId={entity.id}
-								fromArrowTypeId={process.env.ARROW_TYPE_DEFAULT} />
-						</Box>}
 			</Box>
 			: <React.Fragment />}
 	</React.Fragment>;
@@ -129,12 +129,21 @@ let Build = ({
 Build = React.memo(Build);
 Build.defaultProps = {
 	scriptId: 0,
+	workspaceId: 0,
 	arrow: () => {},
+	isSource: false,
+	dataTypeValidating: () => ([]),
+	onClickAsSource: () => {},
 };
 
-let Listing = ({ id }) => {
-	// const data = useSelector((state) => state.script[id].data);
-	const arrows = useSelector((state) => state.script[id].arrows);
+let Listing = ({ 
+	workspaceId,
+	scriptId,
+	isSource,
+	dataTypeValidating,
+	onClickAsSource,
+}) => {
+	const arrows = useSelector((state) => state.script[workspaceId].arrows);
 	const firstArrow = arrows.find((arrow) => arrow.from_entity_id === 0);
 
 	return <React.Fragment>
@@ -144,40 +153,64 @@ let Listing = ({ id }) => {
 			{firstArrow
 				? <React.Fragment>
 					<Build 
-						scriptId={id}
-						arrow={() => firstArrow} />
+						scriptId={scriptId}
+						workspaceId={workspaceId}
+						arrow={() => firstArrow}
+						isSource={isSource}
+						dataTypeValidating={dataTypeValidating}
+						onClickAsSource={onClickAsSource} />
 					{arrows.map((arrow, i) => {
 						return <Arrow 
 							key={arrow.id}
-							scriptId={id}
+							scriptId={scriptId}
+							workspaceId={workspaceId}
 							id={arrow.id}
 							fromEntityId={arrow.from_entity_id}
 							toEntityId={arrow.to_entity_id}
 							arrowTypeId={arrow.arrow_type_id} />;
 					})}
 				</React.Fragment>
-				: <Box py="34px">
-					<Create scriptId={id} />
-				</Box>}
+				: isSource
+					? <React.Fragment />
+					: <Box py="34px">
+						<Create 
+							scriptId={scriptId}
+							workspaceId={workspaceId} />
+					</Box>}
 		</Box>
 	</React.Fragment>;
 };
 Listing = React.memo(Listing);
 Listing.defaultProps = {
-	id: 0,
+	workspaceId: 0,
+	scriptId: 0,
+	isSource: false,
+	dataTypeValidating: () => ([]),
+	onClickAsSource: () => {},
 };
 
-let Workspace = ({ id }) => {
-	const loadedFlag = useSelector((state) => state.script[id].loadedFlag);
+let Workspace = ({ 
+	workspaceId,
+	scriptId,
+	isSource,
+	dataTypeValidating,
+	onClickAsSource,
+}) => {
+	const loadedFlag = useSelector((state) => (state.script[workspaceId] || {}).loadedFlag);
 
 	return <React.Fragment>
 		<BoxBackgraund
 			position="relative"
 			overflow="auto"
 			width="100%"
-			height="calc(100% - 48px)">
+			height="calc(100% - 58px)">
 			{loadedFlag
-				? <Listing id={id} />
+				? <Listing 
+					workspaceId={workspaceId}
+					scriptId={scriptId}
+					isSource={isSource}
+					dataTypeValidating={dataTypeValidating}
+					onClickAsSource={onClickAsSource} />
 				: <React.Fragment />}
 		</BoxBackgraund>
 	</React.Fragment>;
@@ -185,7 +218,11 @@ let Workspace = ({ id }) => {
 
 Workspace = React.memo(Workspace);
 Workspace.defaultProps = {
-	id: 0,
+	workspaceId: 0,
+	scriptId: 0,
+	isSource: false,
+	dataTypeValidating: () => ([]),
+	onClickAsSource: () => {},
 };
 
 export default Workspace;

@@ -12,8 +12,8 @@ import onClose from '../onClose.js';
 let SourceScript = () => {
 	const dialog = useSelector((state) => state.dialogs[SOURCE_TYPE_SCRIPT.id]);
 	const displayFlag = !!dialog;
-	const onClickEntity = (dialog || {}).onClickEntity;
-	const formatValidating = (dialog || {}).formatValidating || (() => {});
+	const onClickAsSource = (dialog || {}).onClickAsSource;
+	const dataTypeValidating = (dialog || {}).dataTypeValidating || (() => {});
 
 	return displayFlag
 		? <Dialog
@@ -36,9 +36,9 @@ let SourceScript = () => {
 				}}>
 				<Script 
 					isSource
-					scriptId={getScriptId()}
-					onClickEntity={onClickEntity}
-					formatValidating={formatValidating} />
+					id={getScriptId()}
+					onClickAsSource={onClickAsSource}
+					dataTypeValidating={dataTypeValidating} />
 			</DialogContent>
 		</Dialog>
 		: <React.Fragment />;

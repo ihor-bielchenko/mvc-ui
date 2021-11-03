@@ -7,42 +7,39 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Chip from '@material-ui/core/Chip';
 import Typography from '@material-ui/core/Typography';
-import { StyledChip } from 'components/Input/LogicValue.jsx';
+import LogicValue from 'components/Input/LogicValue.jsx';
 import AddIcon from '@material-ui/icons/Add';
 import Header from 'components/Header';
+import onValidate from 'components/Group/Func/onValidate.js';
 import { 
 	SOURCE_TYPE_PLACEHOLDER,
 	SOURCE_TYPE_SCRIPT, 
 } from 'structures/sourceTypes.js';
-import {
-	DATA_TYPE_NUMBER,
-	DATA_TYPE_TEXT,
-} from 'structures/dataTypes.js';
+import { DATA_TYPE_TEXT } from 'structures/dataTypes.js';
 import onDialog from '../onDialog.js';
-import onClear from '../onClear.js';
+import onClear from './onClear.js';
 import onClose from './onClose.js';
 import onSave from './onSave.js';
-import onChangeByLogic from './onChangeByLogic.js';
+import onValueScript from './onValueScript.js';
 
 let SourcePlaceholder = () => {
 	const dialog = useSelector((state) => state.dialogs[SOURCE_TYPE_PLACEHOLDER.id]);
-	const bodyId = (dialog || {}).name;
+	const id = (dialog || {}).id;
+	const workspaceId = (dialog || {}).workspaceId ?? 0;
 	const path = useSelector((state) => state.routes.form.path || []);
 	const value = useSelector((state) => state.jsObject.tempValue.value);
-	const _onSave = React.useCallback((placeholderId) => (e) => onSave(e, bodyId, placeholderId), [
-		bodyId,
+	const _onClear = React.useCallback((e) => onClear(e, workspaceId, id), [
+		workspaceId,
+		id,
 	]);
-	const _onClear = React.useCallback((e) => onClear(e, bodyId), [
-		bodyId,
+	const _onSave = React.useCallback((placeholderId) => (e) => onSave(e, id, placeholderId), [
+		id,
 	]);
 	const _onMenu = React.useCallback((e) => onDialog(SOURCE_TYPE_SCRIPT.id, {
-		onClickEntity: (e, dataTypeId, id) => onChangeByLogic(e, dataTypeId, id, bodyId),
-		formatValidating: () => ([
-			DATA_TYPE_NUMBER.id,
-			DATA_TYPE_TEXT.id,
-		]),
+		onClickAsSource: onValueScript(id),
+		dataTypeValidating: onValidate(DATA_TYPE_TEXT.id),
 	})(e), [
-		bodyId,
+		id,
 	]);
 
 	return <React.Fragment>
@@ -62,8 +59,8 @@ let SourcePlaceholder = () => {
 				style={{
 					display: 'flex',
 					alignItems: 'center',
-					paddingTop: 48,
-					paddingBottom: 48,
+					paddingTop: 32,
+					paddingBottom: 38,
 				}}>
 				{typeof value === 'object'
 					? <Box 
@@ -76,10 +73,11 @@ let SourcePlaceholder = () => {
 						<div 
 							style={{ 
 								position: 'relative', 
-								height: 60,
+								height: 56,
 							}}>
-							<StyledChip 
-								label={SOURCE_TYPE_SCRIPT.text()}
+							<LogicValue 
+								sourceTypeId={value.source_type_id}
+								entityId={value.id}
 								onDelete={_onClear}
 								onClick={_onMenu} />
 						</div>
@@ -111,7 +109,7 @@ let SourcePlaceholder = () => {
 							}}>
 							{path.map((pathItem, i) => (
 								<React.Fragment key={pathItem.id}>
-									/{pathItem.data_type_id === 2
+									/{pathItem.path_type_id === 2
 										? <Chip 
 											label={pathItem.value}
 											onClick={_onSave(pathItem.id)}

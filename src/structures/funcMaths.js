@@ -16,8 +16,17 @@ export const FUNC_TEMPLATE_MATH_INFINITY = {
 	id: process.env.FUNC_TEMPLATE_MATH_INFINITY,
 	category_id: FUNC_CATEGORY_IF.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
+	color: 'secondary',
 	text: () => 'Бесконечность',
-	subtext: () => 'Определить, является ли значение бесконечным',
+	subtext: () => 'В результате деления числа на 0 или если результат вычислений, не попадает в допустимый диапазон чисел JavaScript',
+};
+export const FUNC_TEMPLATE_MATH_NAN = {
+	id: process.env.FUNC_TEMPLATE_MATH_NAN,
+	category_id: FUNC_CATEGORY_IF.id,
+	data_type_id: DATA_TYPE_BOOLEAN.id,
+	color: 'secondary',
+	text: () => 'Не числовое значение (NaN)',
+	subtext: () => 'Используется для обозначения математической ошибки, которая возникает в том случае, если математическая операция не может быть совершена',
 };
 export const FUNC_TEMPLATE_MATH_COUNT = {
 	id: process.env.FUNC_TEMPLATE_MATH_COUNT,
@@ -68,12 +77,27 @@ export const FUNC_TEMPLATE_MATH_SYSTEM = {
 	text: () => 'Системы счисления',
 	subtext: () => 'Определение и перевод чисел из одной системы в другую',
 };
+export const funcMathsArr = [
+	FUNC_TEMPLATE_IF_TYPE,
+	FUNC_TEMPLATE_IF_PARITY,
+	FUNC_TEMPLATE_IF_INTEGER,
+	FUNC_TEMPLATE_MATH_INFINITY,
+	FUNC_TEMPLATE_MATH_NAN,
+	FUNC_TEMPLATE_MATH_COUNT,
+	FUNC_TEMPLATE_MATH_ROUND,
+	FUNC_TEMPLATE_MATH_MAX,
+	FUNC_TEMPLATE_MATH_MIN,
+	FUNC_TEMPLATE_MATH_TRIG,
+	FUNC_TEMPLATE_MATH_LOG,
+	FUNC_TEMPLATE_MATH_SYSTEM,
+];
 
 const funcMaths = {
 	[process.env.FUNC_TEMPLATE_IF_TYPE]: FUNC_TEMPLATE_IF_TYPE,
 	[process.env.FUNC_TEMPLATE_IF_PARITY]: FUNC_TEMPLATE_IF_PARITY,
 	[process.env.FUNC_TEMPLATE_IF_INTEGER]: FUNC_TEMPLATE_IF_INTEGER,
 	[process.env.FUNC_TEMPLATE_MATH_INFINITY]: FUNC_TEMPLATE_MATH_INFINITY,
+	[process.env.FUNC_TEMPLATE_MATH_NAN]: FUNC_TEMPLATE_MATH_NAN,
 	[process.env.FUNC_TEMPLATE_MATH_COUNT]: FUNC_TEMPLATE_MATH_COUNT,
 	[process.env.FUNC_TEMPLATE_MATH_ROUND]: FUNC_TEMPLATE_MATH_ROUND,
 	[process.env.FUNC_TEMPLATE_MATH_MAX]: FUNC_TEMPLATE_MATH_MAX,

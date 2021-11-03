@@ -26,7 +26,8 @@ import onEdit from './onEdit.js';
 
 let SourceProxy = () => {
 	const dialog = useSelector((state) => state.dialogs[SOURCE_TYPE_PROXY_PASS.id]);
-	const bodyId = (dialog || {}).name;
+	const id = (dialog || {}).id;
+	const workspaceId = (dialog || {}).workspaceId ?? 0;
 	const isEditFlag = (dialog || {}).isEditFlag || false;
 	const serviceId = useSelector((state) => state.jsObject.tempValue.service_id || '');
 	const routeId = useSelector((state) => state.jsObject.tempValue.route_id || '');
@@ -42,10 +43,10 @@ let SourceProxy = () => {
 		setTab,
 	]);
 	const _onSave = React.useCallback((e) => isEditFlag
-		? onEdit(e, bodyId, _onClose)
-		: onSave(e, bodyId, _onClose), [
+		? onEdit(e, id, _onClose)
+		: onSave(e, id, _onClose), [
 		isEditFlag,
-		bodyId,
+		id,
 		_onClose,
 	]);
 
@@ -95,13 +96,19 @@ let SourceProxy = () => {
 									label="Запрос" />
 							</Tabs>
 							<div style={{ display: tab === 0 ? 'block' : 'none' }}>
-								<Url />
+								<Url 
+									workspaceId={workspaceId}
+									id={id} />
 							</div>
 							<div style={{ display: tab === 1 ? 'block' : 'none' }}>
-								<Headers />
+								<Headers
+									workspaceId={workspaceId}
+									id={id} />
 							</div>
 							<div style={{ display: tab === 2 ? 'block' : 'none' }}>
-								<Requests />
+								<Requests
+									workspaceId={workspaceId}
+									id={id} />
 							</div>
 						</React.Fragment>
 						: <React.Fragment />}

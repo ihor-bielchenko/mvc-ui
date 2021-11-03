@@ -10,6 +10,7 @@ import { TypographyLabel } from '../../Arrow';
 
 let Create = ({ 
 	scriptId,
+	workspaceId,
 	withControl,
 	fromEntityId,
 	fromArrowTypeId,
@@ -41,11 +42,12 @@ let Create = ({
 	return <React.Fragment>
 		<Slot 
 			scriptId={scriptId}
+			workspaceId={workspaceId}
 			entityId={fromEntityId}
 			withControl={withControl}
 			backgroundColor="#FFF">
 			<Box 
-				id={createArrowName + scriptId +'-'+ fromEntityId}
+				id={createArrowName + workspaceId +'-'+ fromEntityId}
 				position="absolute"
 				top='-3px'
 				left="50%"
@@ -64,13 +66,15 @@ let Create = ({
 			</Button>
 			<MenuEntity 
 				aria={'menu-entity-create-'+ _id}
+				scriptId={scriptId}
+				workspaceId={workspaceId}
 				fromEntityId={fromEntityId}
 				fromArrowTypeId={fromArrowTypeId} />
 		</Slot>
 		{fromEntityId > 0
 			? <Xarrow
-				start={startArrowName + scriptId +'-'+ fromEntityId}
-				end={createArrowName + scriptId +'-'+ fromEntityId}
+				start={startArrowName + workspaceId +'-'+ fromEntityId}
+				end={createArrowName + workspaceId +'-'+ fromEntityId}
 				path="straight"
 				strokeWidth={4}
 				color="#616161"
@@ -92,6 +96,7 @@ let Create = ({
 Create = React.memo(Create);
 Create.defaultProps = {
 	scriptId: 0,
+	workspaceId: 0,
 	withControl: false,
 	fromEntityId: 0,
 	fromArrowTypeId: process.env.ARROW_TYPE_DEFAULT,

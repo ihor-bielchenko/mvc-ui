@@ -10,36 +10,35 @@ import CloseIcon from '@material-ui/icons/Close';
 import CheckIcon from '@material-ui/icons/Check';
 import Header from 'components/Header';
 import InputText from 'components/Input/Text';
+import onValidate from 'components/Group/Func/onValidate.js';
 import { 
 	SOURCE_TYPE_COOKIE,
 	SOURCE_TYPE_SCRIPT, 
 } from 'structures/sourceTypes.js';
-import {
-	DATA_TYPE_NUMBER,
-	DATA_TYPE_TEXT,
-} from 'structures/dataTypes.js';
+import { DATA_TYPE_TEXT } from 'structures/dataTypes.js';
 import onDialog from '../onDialog.js';
-import onChangeByLogic from '../onChangeByLogic.js';
-import onClear from '../onClear.js';
+import onClear from './onClear.js';
+import onValueScript from './onValueScript.js';
 import onClose from './onClose.js';
 import onSubmit from './onSubmit.js';
 
-const _onMenu = onDialog(SOURCE_TYPE_SCRIPT.id, {
-	onClickEntity: onChangeByLogic,
-	formatValidating: () => ([
-		DATA_TYPE_NUMBER.id,
-		DATA_TYPE_TEXT.id,
-	])
-});
 let SourceCookie = () => {
 	const dialog = useSelector((state) => state.dialogs[SOURCE_TYPE_COOKIE.id]);
-	const bodyId = (dialog || {}).name;
+	const id = (dialog || {}).id;
+	const workspaceId = (dialog || {}).workspaceId ?? 0;
 	const value = useSelector((state) => state.jsObject.tempValue.value || '');
-	const _onSubmit = React.useCallback((e) => onSubmit(e, bodyId), [
-		bodyId,
+	const _onClear = React.useCallback((e) => onClear(e, workspaceId, id), [
+		workspaceId,
+		id,
 	]);
-	const _onClear = React.useCallback((e) => onClear(e, bodyId), [
-		bodyId,
+	const _onMenu = React.useCallback((e) => onDialog(SOURCE_TYPE_SCRIPT.id, {
+		onClickAsSource: onValueScript(id),
+		dataTypeValidating: onValidate(DATA_TYPE_TEXT.id),
+	})(e), [
+		id,
+	]);
+	const _onSubmit = React.useCallback((e) => onSubmit(e, id), [
+		id,
 	]);
 
 	return !!dialog
@@ -65,7 +64,7 @@ let SourceCookie = () => {
 							onDelete={_onClear}
 							name="value"
 							type="text"
-							label="Название"
+							label="Название значния"
 							placeholder="Например, access_token"
 							defaultValue={value} />
 					</DialogContent>

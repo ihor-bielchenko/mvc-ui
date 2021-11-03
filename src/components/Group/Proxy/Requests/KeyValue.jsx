@@ -6,59 +6,54 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import InputText from 'components/Input/Text';
 import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
 import {
-	DATA_TYPE_NUMBER,
 	DATA_TYPE_TEXT,
 	DATA_TYPE_BOOLEAN,
 } from 'structures/dataTypes.js';
 import onDialog from 'components/Dialog/onDialog.js';
-import onValidate from 'components/Dialog/SourceProxy/onValidate.js';
+import onValidateInput from 'components/Dialog/SourceProxy/onValidate.js';
+import onValidateSource from 'components/Group/Func/onValidate.js';
 import onDelete from './onDelete.js';
-import onKey from './onKey.js';
-import onValue from './onValue.js';
-import onChangeByLogic from './onChangeByLogic.js';
+import onChangeKey from './onKey.js';
+import onChangeValue from './onValue.js';
+import onValueScript from './onValueScript.js';
 import onClear from './onClear.js';
 
-let KeyValue = ({ name }) => {
-	const key = useSelector((state) => (state.jsObject.tempValue.request[name] || {}).key || '');
-	const value = useSelector((state) => (state.jsObject.tempValue.request[name] || {}).value || '');
-	const _onClearKey = React.useCallback((e) => onClear(e, name, 'key'), [
-		name,
+let KeyValue = ({ id }) => {
+	const key = useSelector((state) => (state.jsObject.tempValue.request[id] || {}).key || '');
+	const value = useSelector((state) => (state.jsObject.tempValue.request[id] || {}).value || '');
+	const _onClearKey = React.useCallback((e) => onClear(e, id, 'key'), [
+		id,
 	]);
-	const _onClearValue = React.useCallback((e) => onClear(e, name, 'value'), [
-		name,
+	const _onClearValue = React.useCallback((e) => onClear(e, id, 'value'), [
+		id,
 	]);
-	const _onKey = React.useCallback((e) => onKey(e, name), [
-		name,
+	const _onChangeKey = React.useCallback((e) => onChangeKey(e, id), [
+		id,
 	]);
-	const _onValue = React.useCallback((e) => onValue(e, name), [
-		name,
+	const _onChangeValue = React.useCallback((e) => onChangeValue(e, id), [
+		id,
 	]);
-	const _onDelete = React.useCallback((e) => onDelete(e, name), [
-		name,
+	const _onDelete = React.useCallback((e) => onDelete(e, id), [
+		id,
 	]);
 	const _onMenuKey = React.useCallback((e) => onDialog(SOURCE_TYPE_SCRIPT.id, {
-		onClickEntity: (e, dataTypeId, id) => onChangeByLogic(e, dataTypeId, id, name, 'key'),
-		formatValidating: () => ([
-			DATA_TYPE_NUMBER.id,
-			DATA_TYPE_TEXT.id,
-			DATA_TYPE_BOOLEAN.id,
-		]),
+		onClickAsSource: onValueScript(id, 'key'),
+		dataTypeValidating: onValidateSource(DATA_TYPE_TEXT.id),
 	})(e), [
-		name,
+		id,
 	]);
 	const _onMenuValue = React.useCallback((e) => onDialog(SOURCE_TYPE_SCRIPT.id, {
-		onClickEntity: (e, dataTypeId, id) => onChangeByLogic(e, dataTypeId, id, name, 'value'),
-		formatValidating: () => ([
-			DATA_TYPE_NUMBER.id,
+		onClickAsSource: onValueScript(id, 'value'),
+		dataTypeValidating: onValidateSource([
 			DATA_TYPE_TEXT.id,
 			DATA_TYPE_BOOLEAN.id,
 		]),
 	})(e), [
-		name,
+		id,
 	]);
 
 	return <Grid
-		key={name}
+		key={id}
 		container 
 		alignItems="center"
 		spacing={1}>
@@ -71,11 +66,11 @@ let KeyValue = ({ name }) => {
 				onMenu={_onMenuKey}
 				onValue={_onMenuKey}
 				onDelete={_onClearKey}
-				name={'key-'+ name}
+				name={'key-'+ id}
 				label="Ключ"
 				defaultValue={key}
-				onChange={_onKey}
-				onInput={onValidate} />
+				onChange={_onChangeKey}
+				onInput={onValidateInput} />
 		</Grid>
 		<Grid
 			item
@@ -86,11 +81,11 @@ let KeyValue = ({ name }) => {
 				onMenu={_onMenuValue}
 				onValue={_onMenuValue}
 				onDelete={_onClearValue}
-				name={'value-'+ name}
+				name={'value-'+ id}
 				label="Значение"
 				defaultValue={value}
-				onChange={_onValue}
-				onInput={onValidate} />
+				onChange={_onChangeValue}
+				onInput={onValidateInput} />
 		</Grid>
 		<Grid
 			item
@@ -106,7 +101,7 @@ let KeyValue = ({ name }) => {
 
 KeyValue = React.memo(KeyValue);
 KeyValue.defaultProps = {
-	name: 0,
+	id: 0,
 };
 
 export default KeyValue;

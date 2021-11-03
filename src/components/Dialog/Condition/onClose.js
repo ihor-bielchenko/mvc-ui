@@ -3,10 +3,17 @@ import onCloseDialog from 'components/Dialog/onClose.js';
 import { initialState } from 'components/Store/func.js';
 import { DIALOG_IF } from 'consts/dialog.js';
 
-const onClose = (e) => {
+const onClose = (e, workspaceId) => {
+	const script = Store().getState().script;
+
+	script[workspaceId].loadedFlag = true;
 	Store().dispatch({
 		type: 'func',
 		payload: () => initialState(),
+	});
+	Store().dispatch({
+		type: 'script',
+		payload: () => ({ ...script }),
 	});
 	onCloseDialog(DIALOG_IF)(e);
 };
