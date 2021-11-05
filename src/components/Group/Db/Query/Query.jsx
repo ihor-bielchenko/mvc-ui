@@ -17,7 +17,11 @@ let Query = () => {
 	const queryKeys = useSelector((state) => Object.keys(state.jsObject.tempValue.query || {}));
 
 	return <React.Fragment>
-		{queryKeys.map((id) => {
+		{queryKeys.map((id, i) => {
+			if (!(id > 0)) {
+				return <React.Fragment key={'query-undefined-'+ i} />;
+			}
+
 			const queryItem = Store().getState().jsObject.tempValue.query[id];
 
 			return <Box 
@@ -27,7 +31,7 @@ let Query = () => {
 					onDelete={onDialog(DIALOG_DELETE_CONFIRM, {
 						onDelete: onDelete(id),
 					})}
-					onClick={onDialog(DIALOG_DB_QUERY, { name: id })}
+					onClick={onDialog(DIALOG_DB_QUERY, { id })}
 					label={<Typography variant="subtitle1">
 						{queryItem.left
 							? <b style={{ color: 'red' }}>┃</b>
@@ -45,7 +49,7 @@ let Query = () => {
 		<Button
 			variant="outlined"
 			color="primary"
-			onClick={onDialog(DIALOG_DB_QUERY, { name: 0 })}>
+			onClick={onDialog(DIALOG_DB_QUERY, { id: 0 })}>
 			Добавить
 		</Button>
 	</React.Fragment>;

@@ -11,19 +11,18 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Store from 'components/Store';
 import InputNumeric from 'components/Input/Numeric';
 import onDialog from 'components/Dialog/onDialog.js';
+import onValidateSource from 'components/Group/Func/onValidate.js';
 import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
 import { 
 	DATA_TYPE_ID,
 	DATA_TYPE_NUMBER, 
 } from 'structures/dataTypes.js';
 import onCollection from './onCollection.js';
-import onOffset from './onOffset.js';
-import onLimit from './onLimit.js';
-import onColumn from './onColumn.js';
-import onChangeByLogicOffset from './onChangeByLogicOffset.js';
-import onChangeByLogicLimit from './onChangeByLogicLimit.js';
-import onClearOffset from './onClearOffset.js';
-import onClearLimit from './onClearLimit.js';
+import onChangeOffset from './onOffset.js';
+import onChangeLimit from './onLimit.js';
+import onCheckColumn from './onColumn.js';
+import onValueScript from './onValueScript.js';
+import onClear from './onClear.js';
 
 let Select = ({ 
 	id,
@@ -37,7 +36,25 @@ let Select = ({
 	const _onCollection = React.useCallback((e) => onCollection(e, id), [
 		id,
 	]);
-	const _onColumn = React.useCallback((e) => onColumn(e, id), [
+	const _onCheckColumn = React.useCallback((e) => onCheckColumn(e, id), [
+		id,
+	]);
+	const _onClearOffset = React.useCallback((e) => onClear(e, id, 'offset'), [
+		id,
+	]);
+	const _onClearLimit = React.useCallback((e) => onClear(e, id, 'limit'), [
+		id,
+	]);
+	const _onMenuOffset = React.useCallback((e) => onDialog(SOURCE_TYPE_SCRIPT.id, {
+		onClickAsSource: onValueScript(id, 'offset'),
+		dataTypeValidating: onValidateSource(DATA_TYPE_NUMBER.id),
+	})(e), [
+		id,
+	]);
+	const _onMenuLimit = React.useCallback((e) => onDialog(SOURCE_TYPE_SCRIPT.id, {
+		onClickAsSource: onValueScript(id, 'limit'),
+		dataTypeValidating: onValidateSource(DATA_TYPE_NUMBER.id),
+	})(e), [
 		id,
 	]);
 
@@ -80,48 +97,28 @@ let Select = ({
 							xs={6}>
 							<InputNumeric
 								menu
-								onMenu={onDialog(SOURCE_TYPE_SCRIPT.id, {
-									onClickAsSource: onChangeByLogicOffset,
-									dataTypeValidating: () => ([
-										DATA_TYPE_NUMBER.id,
-									]),
-								})}
-								onValue={onDialog(SOURCE_TYPE_SCRIPT.id, {
-									onClickAsSource: onChangeByLogicOffset,
-									dataTypeValidating: () => ([
-										DATA_TYPE_NUMBER.id,
-									]),
-								})}
-								onDelete={onClearOffset}
+								onMenu={_onMenuOffset}
+								onValue={_onMenuOffset}
+								onDelete={_onClearOffset}
 								name="offset"
 								label="Начало выборки (offset)"
 								placeholder="0"
 								defaultValue={offset}
-								onChange={onOffset} />
+								onChange={onChangeOffset} />
 						</Grid>
 						<Grid
 							item
 							xs={6}>
 							<InputNumeric
 								menu
-								onMenu={onDialog(SOURCE_TYPE_SCRIPT.id, {
-									onClickAsSource: onChangeByLogicLimit,
-									dataTypeValidating: () => ([
-										DATA_TYPE_NUMBER.id,
-									]),
-								})}
-								onValue={onDialog(SOURCE_TYPE_SCRIPT.id, {
-									onClickAsSource: onChangeByLogicLimit,
-									dataTypeValidating: () => ([
-										DATA_TYPE_NUMBER.id,
-									]),
-								})}
-								onDelete={onClearLimit}
+								onMenu={_onMenuLimit}
+								onValue={_onMenuLimit}
+								onDelete={_onClearLimit}
 								name="limit"
 								label="Лимит"
 								placeholder="10"
 								defaultValue={limit}
-								onChange={onLimit} />
+								onChange={onChangeLimit} />
 						</Grid>
 					</Grid>
 					: <React.Fragment />}
@@ -146,7 +143,7 @@ let Select = ({
 					control={<Checkbox 
 						value={key}
 						checked={selectData.indexOf(Number(key)) > -1}
-						onChange={_onColumn} />}
+						onChange={_onCheckColumn} />}
 					label={<Typography 
 						variant="h6"
 						color={dbColumnsData[key].data_type_id === DATA_TYPE_ID.id

@@ -1,13 +1,13 @@
 import Store from 'components/Store';
 
-const onClearOffset = (e) => {
+const onClear = (e, id, keyName = 'offset') => {
 	const jsObject = Store().getState().jsObject;
 
-	jsObject.tempValue['offset'] = '';
+	jsObject.tempValue[keyName] = '';
 	Store().dispatch({
 		type: 'jsObject',
 		payload: () => ({ ...jsObject }),
 	});
 };
 
-export default onClearOffset;
+export default onClear;

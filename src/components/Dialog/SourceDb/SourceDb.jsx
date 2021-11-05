@@ -25,7 +25,7 @@ import onEdit from './onEdit.js';
 
 let SourceDb = () => {
 	const dialog = useSelector((state) => state.dialogs[SOURCE_TYPE_DB.id]);
-	const bodyId = (dialog || {}).name;
+	const id = (dialog || {}).id;
 	const isEditFlag = (dialog || {}).isEditFlag || false;
 	const isCollection = (dialog || {}).isCollection;
 	const issetSelectData = useSelector((state) => (state.jsObject.tempValue.select || []).length > 0);
@@ -50,10 +50,10 @@ let SourceDb = () => {
 		setStep,
 	]);
 	const _onSave = React.useCallback((e) => isEditFlag
-		? onEdit(e, bodyId, _onClose)
-		: onSave(e, bodyId, _onClose), [
+		? onEdit(e, id, _onClose)
+		: onSave(e, id, _onClose), [
 		isEditFlag,
-		bodyId,
+		id,
 		_onClose,
 	]);
 
@@ -82,7 +82,7 @@ let SourceDb = () => {
 						</StepLabel>
 						<StepContent>
 							<Select 
-								id={bodyId}
+								id={id}
 								isCollection={isCollection} />
 						</StepContent>
 					</Step>

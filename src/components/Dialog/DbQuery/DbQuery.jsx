@@ -12,47 +12,44 @@ import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
 import Header from 'components/Header';
 import InputText from 'components/Input/Text';
+import onValidateSource from 'components/Group/Func/onValidate.js';
 import { DIALOG_DB_QUERY } from 'consts/dialog.js';
 import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
-import {
-	DATA_TYPE_NUMBER,
-	DATA_TYPE_TEXT,
-} from 'structures/dataTypes.js';
+import { DATA_TYPE_TEXT } from 'structures/dataTypes.js';
 import onDialog from '../onDialog.js';
+import onChange from './onChange.js';
+import onCheck from './onCheck.js';
 import onClose from './onClose.js';
 import onSubmit from './onSubmit.js';
-import onChangeByLogic from './onChangeByLogic.js';
+import onValueScript from './onValueScript.js';
 import onClear from './onClear.js';
 
 let DbQuery = () => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_DB_QUERY]);
-	const name = (dialog || {}).name || 0;
-	const value = useSelector((state) => ((state.jsObject.tempValue.query || {})[name] || {}).value || '');
-	const left = useSelector((state) => ((state.jsObject.tempValue.query || {})[name] || {}).left || '');
-	const right = useSelector((state) => ((state.jsObject.tempValue.query || {})[name] || {}).right || '');
-	const [ logicValue, setLogicValue ] = React.useState(() => (typeof value === 'object' && 
-		value.source_type_id === SOURCE_TYPE_SCRIPT.id)
-		? value
-		: undefined);
+	const id = (dialog || {}).id || 0;
+	const value = useSelector((state) => ((state.jsObject.tempValue.query || {})[id] || {}).value || '');
+	const left = useSelector((state) => ((state.jsObject.tempValue.query || {})[id] || {}).left || '');
+	const right = useSelector((state) => ((state.jsObject.tempValue.query || {})[id] || {}).right || '');
+	const _onChange = React.useCallback((e) => onChange(e, id), [
+		id,
+	]);
+	const _onCheckLeft = React.useCallback((e) => onCheck(e, id), [
+		id,
+	]);
+	const _onCheckRight = React.useCallback((e) => onCheck(e, id, 'right'), [
+		id,
+	]);
+	const _onSave = React.useCallback((e) => onSubmit(e, id, 'left'), [
+		id,
+	]);
+	const _onClear = React.useCallback((e) => onClear(e, id), [
+		id,
+	]);
 	const _onMenu = React.useCallback((e) => onDialog(SOURCE_TYPE_SCRIPT.id, {
-		onClickAsSource: (e, entityId, id) => onChangeByLogic(e, entityId, id, setLogicValue),
-		dataTypeValidating: () => ([
-			DATA_TYPE_NUMBER.id,
-			DATA_TYPE_TEXT.id,
-		]),
+		onClickAsSource: onValueScript(id),
+		dataTypeValidating: onValidateSource(DATA_TYPE_TEXT.id),
 	})(e), [
-		setLogicValue,
-	]);
-	const _onClear = React.useCallback((e) => onClear(e, name, setLogicValue), [
-		name,
-		setLogicValue,
-	]);
-	const _onClose = React.useCallback((e) => onClose(e, setLogicValue), [
-		setLogicValue,
-	]);
-	const _onSubmit = React.useCallback((e) => onSubmit(e, logicValue, setLogicValue), [
-		logicValue,
-		setLogicValue,
+		id,
 	]);
 
 	return !!dialog
@@ -62,42 +59,45 @@ let DbQuery = () => {
 			fullWidth
 			maxWidth="sm"
 			open={!!dialog}
-			onClose={_onClose}>
+			onClose={onClose}>
 			<DialogTitle>
-				<Header onClose={_onClose}>
+				<Header onClose={onClose}>
 					Поисковый запрос
 				</Header>
 			</DialogTitle>
 			{!!dialog
-				? <form onSubmit={_onSubmit}>
+				? <React.Fragment>
 					<DialogContent dividers>
 						<input
 							type="hidden"
 							name="id"
-							value={name} />
+							value={id} />
 						<InputText 
 							required
 							menu
 							onMenu={_onMenu}
 							onValue={_onMenu}
 							onDelete={_onClear}
+							onChange={_onChange}
 							label="Название"
 							type="text"
 							name="value"
-							defaultValue={logicValue || value || ''} />
+							defaultValue={value || ''} />
 						<Box py={2}>
 							<FormControlLabel
 								label="Начало колонки базы данных должно совпадать с указанным значением"
 								control={<Checkbox 
 									name="left"
-									defaultChecked={!!left} />} />
+									checked={!!left} />}
+									onChange={_onCheckLeft} />
 						</Box>
 						<Box py={2}>
 							<FormControlLabel
 								label="Конец колонки базы данных должен совпадать с указанным значением"
 								control={<Checkbox 
 									name="right"
-									defaultChecked={!!right} />} />
+									checked={!!right}
+									onChange={_onCheckRight} />} />
 						</Box>
 					</DialogContent>
 					<DialogActions>
@@ -110,19 +110,20 @@ let DbQuery = () => {
 								variant="outlined"
 								color="secondary"
 								startIcon={<CloseIcon />}
-								onClick={_onClose}>
+								onClick={onClose}>
 								Отмена
 							</Button>
 							<Button 
 								type="submit"
 								variant="outlined"
 								color="primary"
-								startIcon={<SaveIcon />}>
+								startIcon={<SaveIcon />}
+								onClick={_onSave}>
 								Сохранить
 							</Button>
 						</Box>
 					</DialogActions>
-				</form>
+				</React.Fragment>
 				: <React.Fragment />}
 		</Dialog>
 		: <React.Fragment />;

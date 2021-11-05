@@ -2,13 +2,15 @@ import Store from 'components/Store';
 import onClose from 'components/Dialog/onClose.js';
 import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
 
-const onChangeByLogicLimit = (e, dataTypeId, id) => {
+const onValueScript = (id, keyName = 'offset') => (e, scriptId, workspaceId, entityId, dataTypeId) => {
 	const jsObject = Store().getState().jsObject;
 
-	jsObject.tempValue['limit'] = {
+	jsObject.tempValue[keyName] = {
 		source_type_id: SOURCE_TYPE_SCRIPT.id,
+		script_id: scriptId,
 		data_type_id: dataTypeId,
-		id,
+		id: entityId,
+		workspaceId,
 	};
 	Store().dispatch({
 		type: 'jsObject',
@@ -17,4 +19,4 @@ const onChangeByLogicLimit = (e, dataTypeId, id) => {
 	onClose(SOURCE_TYPE_SCRIPT.id)(e);
 };
 
-export default onChangeByLogicLimit;
+export default onValueScript;
