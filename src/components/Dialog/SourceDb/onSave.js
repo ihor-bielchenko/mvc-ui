@@ -109,7 +109,6 @@ const onSave = (e, id, onClose) => {
 				disabledRemove: true,
 			});
 			blocks[parentId] = [ data[id] ];
-			console.log('jsObject', parentId, jsObject.blocks);
 		}
 		else {
 			currentItem.data_type_id = DATA_TYPE_OBJECT.id;

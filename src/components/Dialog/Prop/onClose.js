@@ -7,6 +7,7 @@ const onClose = (e, workspaceId) => {
 	const script = Store().getState().script;
 
 	script[workspaceId].loadedFlag = true;
+	script.editEntityIndex = undefined;
 	Store().dispatch({
 		type: 'prop',
 		payload: () => initialState(),

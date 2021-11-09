@@ -5,6 +5,7 @@ import axiosError from 'utils/axiosError.js';
 import { 
 	DATA_TYPE_ATOMIC,
 	DATA_TYPE_TEXT, 
+	DATA_TYPE_NUMBER,
 } from 'structures/dataTypes.js';
 import {
 	SOURCE_TYPE_MANUALLY,
@@ -13,11 +14,12 @@ import {
 	SOURCE_TYPE_HEADER,
 	SOURCE_TYPE_REQUEST,
 	SOURCE_TYPE_COOKIE,
+	SOURCE_TYPE_SCRIPT,
 } from 'structures/sourceTypes.js';
 import getTemplate from './getTemplate.js';
 import buildBlocks from './buildBlocks.js';
 
-const parseDb = (item) => {
+const parseDb = (item, scriptId, workspaceId) => {
 	const jsObject = Store().getState().jsObject;
 	const { 
 		value: {
@@ -34,15 +36,38 @@ const parseDb = (item) => {
 		} 
 	} = { ...item };
 
+	// {
+	// 	source_type_id: ({ ...item }).value.source_type_id,
+	// 	value: {
+	// 		source_type_id: SOURCE_TYPE_SCRIPT.id,
+	// 		data_type_id: ({ ...item }).value.dependency.data_type_id,
+	// 		id: Number(({ ...item }).value.dependency.value),
+	// 		script_id: scriptId,
+	// 		workspaceId,
+	// 	}
+	// };
+
 	item.value = {
 		is_collection: isCollection,
 		source_type_id: sourceTypeId,
 		limit: sourceLimit.source_type_id === SOURCE_TYPE_MANUALLY.id
 			? Number(sourceLimit.value)
-			: 0,
+			: {
+				source_type_id: SOURCE_TYPE_SCRIPT.id,
+				data_type_id: DATA_TYPE_NUMBER.id,
+				id: Number(sourceLimit.dependency.value),
+				script_id: scriptId,
+				workspaceId,
+			},
 		offset: sourceOffset.source_type_id === SOURCE_TYPE_MANUALLY.id
 			? Number(sourceOffset.value)
-			: 0,
+			: {
+				source_type_id: SOURCE_TYPE_SCRIPT.id,
+				data_type_id: DATA_TYPE_NUMBER.id,
+				id: Number(sourceOffset.dependency.value),
+				script_id: scriptId,
+				workspaceId,
+			},
 		select: [],
 		columns: {},
 		filter: {},
@@ -58,7 +83,13 @@ const parseDb = (item) => {
 			..._item,
 			value: _item.value.source_type_id === SOURCE_TYPE_MANUALLY.id
 				? _item.value.value
-				: '',
+				: {
+					source_type_id: SOURCE_TYPE_SCRIPT.id,
+					data_type_id: _item.value.dependency.data_type_id,
+					id: Number(_item.value.dependency.value),
+					script_id: scriptId,
+					workspaceId,
+				},
 		};
 	});
 	sourceSort.forEach((_item) => {
@@ -69,7 +100,13 @@ const parseDb = (item) => {
 			..._item,
 			value: _item.value.source_type_id === SOURCE_TYPE_MANUALLY.id
 				? _item.value.value
-				: '',
+				: {
+					source_type_id: SOURCE_TYPE_SCRIPT.id,
+					data_type_id: _item.value.dependency.data_type_id,
+					id: Number(_item.value.dependency.value),
+					script_id: scriptId,
+					workspaceId,
+				},
 		};
 	});
 
@@ -78,7 +115,7 @@ const parseDb = (item) => {
 	}
 	return item;
 };
-const parseProxyPass = (item) => {
+const parseProxyPass = (item, scriptId, workspaceId) => {
 	const { 
 		value: {
 			source_type_id: sourceTypeId,
@@ -117,7 +154,13 @@ const parseProxyPass = (item) => {
 			..._item,
 			value: _item.value.source_type_id === SOURCE_TYPE_MANUALLY.id
 				? _item.value.value
-				: '',
+				: {
+					source_type_id: SOURCE_TYPE_SCRIPT.id,
+					data_type_id: _item.value.dependency.data_type_id,
+					id: Number(_item.value.dependency.value),
+					script_id: scriptId,
+					workspaceId,
+				},
 		};
 	});
 	sourceHeader.forEach((_item) => {
@@ -125,10 +168,22 @@ const parseProxyPass = (item) => {
 			..._item,
 			key: _item.key.source_type_id === SOURCE_TYPE_MANUALLY.id
 				? _item.key.value
-				: '',
+				: {
+					source_type_id: SOURCE_TYPE_SCRIPT.id,
+					data_type_id: _item.key.dependency.data_type_id,
+					id: Number(_item.key.dependency.value),
+					script_id: scriptId,
+					workspaceId,
+				},
 			value: _item.value.source_type_id === SOURCE_TYPE_MANUALLY.id
 				? _item.value.value
-				: '',
+				: {
+					source_type_id: SOURCE_TYPE_SCRIPT.id,
+					data_type_id: _item.value.dependency.data_type_id,
+					id: Number(_item.value.dependency.value),
+					script_id: scriptId,
+					workspaceId,
+				},
 		};
 	});
 	sourceRequest.forEach((_item) => {
@@ -136,16 +191,28 @@ const parseProxyPass = (item) => {
 			..._item,
 			key: _item.key.source_type_id === SOURCE_TYPE_MANUALLY.id
 				? _item.key.value
-				: '',
+				: {
+					source_type_id: SOURCE_TYPE_SCRIPT.id,
+					data_type_id: _item.key.dependency.data_type_id,
+					id: Number(_item.key.dependency.value),
+					script_id: scriptId,
+					workspaceId,
+				},
 			value: _item.value.source_type_id === SOURCE_TYPE_MANUALLY.id
 				? _item.value.value
-				: '',
+				: {
+					source_type_id: SOURCE_TYPE_SCRIPT.id,
+					data_type_id: _item.value.dependency.data_type_id,
+					id: Number(_item.value.dependency.value),
+					script_id: scriptId,
+					workspaceId,
+				},
 		};
 	});
 	return item;
 };
 
-const onMount = async (sourceId, dataTypeId) => {
+const onMount = async (sourceId, dataTypeId, scriptId, workspaceId) => {
 	const jsObject = Store().getState().jsObject;
 
 	if (sourceId > 0) {
@@ -158,6 +225,8 @@ const onMount = async (sourceId, dataTypeId) => {
 			let parentId = 0;
 
 			fetchData.forEach((item, i) => {
+				const sourceTypeId = ({ ...item }).value.source_type_id;
+
 				if (item.parent_id === 0) {
 					parentId = item.id;
 					item.parent_id = undefined;
@@ -169,12 +238,26 @@ const onMount = async (sourceId, dataTypeId) => {
 				item.data_type_id = item.value.data_type_id;
 				item.key = item.key.value;
 
-				switch (({ ...item }).value.source_type_id) {
+				if (({ ...item }).value.dependency_id > 0
+					&& typeof ({ ...item }).value.dependency === 'object') {
+					item.value = {
+						source_type_id: ({ ...item }).value.source_type_id,
+						value: {
+							source_type_id: SOURCE_TYPE_SCRIPT.id,
+							data_type_id: ({ ...item }).value.dependency.data_type_id,
+							id: Number(({ ...item }).value.dependency.value),
+							script_id: scriptId,
+							workspaceId,
+						}
+					};
+				}
+
+				switch (sourceTypeId) {
 					case SOURCE_TYPE_DB.id:
-						item = parseDb(item);
+						item = parseDb(item, scriptId, workspaceId);
 						break;
 					case SOURCE_TYPE_PROXY_PASS.id:
-						item = parseProxyPass(item);
+						item = parseProxyPass(item, scriptId, workspaceId);
 						break;
 					case SOURCE_TYPE_HEADER.id:
 					case SOURCE_TYPE_REQUEST.id:

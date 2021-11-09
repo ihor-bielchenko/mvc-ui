@@ -11,7 +11,7 @@ const onMount = async (id, scriptId, workspaceId) => {
 	try {
 		const response = await fetchPropOne(id);
 		const data = ((response || {}).data || {}).data || {};
-		
+
 		prop.id = id;
 		prop.name = data.name;
 		prop.sourceId = data.source_id;

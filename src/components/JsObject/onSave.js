@@ -3,7 +3,10 @@ import fetchCortegeCreateOne from 'fetch/cortegeCreateOne.js';
 import fetchCortegeCreateMany from 'fetch/cortegeCreateMany.js';
 import fetchCortegeDelete from 'fetch/cortegeDelete.js';
 import axiosError from 'utils/axiosError.js';
-import { SOURCE_TYPE_MANUALLY } from 'structures/sourceTypes.js';
+import { 
+	SOURCE_TYPE_MANUALLY,
+	SOURCE_TYPE_SCRIPT, 
+} from 'structures/sourceTypes.js';
 import { DATA_TYPE_TEXT } from 'structures/dataTypes.js';
 
 const prepareItem = (item = {}, toJsonFlag = false) => {
@@ -24,6 +27,13 @@ const prepareItem = (item = {}, toJsonFlag = false) => {
 	if (typeof item.value === 'object'
 		&& typeof item.value.value === 'object') {
 		delete item.value.value.source_type_id;
+
+		if (typeof item.value.value.value === 'object'
+			&& item.value.value.value.source_type_id === SOURCE_TYPE_SCRIPT.id) {
+			item.value.value.value['value'] = item.value.value.value.id;
+			delete item.value.value.value.workspaceId;
+			delete item.value.value.value.id;
+		}
 	}
 	item.disabled_key = item.disabledKey;
 	item.disabled_type = item.disabledType;
@@ -90,7 +100,6 @@ const onSave = async (sourceId = 0) => {
 			));
 			i++;
 		}
-
 		return fetchParentData;
 	}
 	catch (err) {

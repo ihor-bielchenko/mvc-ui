@@ -12,6 +12,7 @@ let Condition = ({
 	workspaceId,
 	id,
 	entityId,
+	index,
 	isSource,
 	dataTypeValidating,
 	onClickAsSource,
@@ -39,6 +40,7 @@ let Condition = ({
 			workspaceId={workspaceId}
 			id={id}
 			entityId={entityId}
+			index={index}
 			dialogId={DIALOG_IF}
 			isSource={isSource}
 			dataTypeId={dataTypeId}
@@ -70,6 +72,7 @@ Condition.defaultProps = {
 	workspaceId: 0,
 	id: 0,
 	entityId: 0,
+	index: 0,
 	isSource: false,
 	dataTypeValidating: () => ([]),
 	onClickAsSource: () => {},

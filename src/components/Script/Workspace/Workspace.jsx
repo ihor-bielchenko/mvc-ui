@@ -19,6 +19,7 @@ let Build = ({
 	isSource,
 	dataTypeValidating,
 	onClickAsSource,
+	index,
 }) => {
 	const _arrow = arrow();
 	const arrows = useSelector((state) => state.script[workspaceId].arrows);
@@ -47,82 +48,130 @@ let Build = ({
 
 	return <React.Fragment>
 		{(entity && entity.entityItemId > 0)
-			? <Box 
-				position="relative"
-				minWidth="420px">
+			? <React.Fragment>
 				<Box py="34px">
 					<SlotEntiy 
 						scriptId={scriptId}
 						workspaceId={workspaceId}
 						entityId={entity.id}
 						id={entity.entityItemId}
+						index={index}
 						isSource={isSource}
 						dataTypeValidating={dataTypeValidating}
 						onClickAsSource={onClickAsSource} />
 				</Box>
-				{isSource
-					? <React.Fragment />
-					: (entity.slotName === 'Condition')
+				{(entity.slotName === 'Condition')
 						? <Box
 							position="relative"
 							display="flex"
 							alignItems="flex-start"
 							justifyContent="center">
 							{arrowFalse
-								? <Build
-									scriptId={scriptId}
-									workspaceId={workspaceId}
-									arrow={() => arrowFalse}
-									isSource={isSource}
-									dataTypeValidating={dataTypeValidating}
-									onClickAsSource={onClickAsSource} />
-								: <Box 
-									position="relative"
-									minWidth="300px">
-									<Box py="34px">
-										<Create
+								? <React.Fragment>
+									<Box 
+										position="relative"
+										minWidth="420px">
+										<Build
 											scriptId={scriptId}
 											workspaceId={workspaceId}
-											fromEntityId={entity.id}
-											fromArrowTypeId={process.env.ARROW_TYPE_FALSE} />
+											index={index + 1}
+											arrow={() => arrowFalse}
+											isSource={isSource}
+											dataTypeValidating={dataTypeValidating}
+											onClickAsSource={onClickAsSource} />
 									</Box>
-								</Box>}
+									<Arrow 
+										scriptId={scriptId}
+										workspaceId={workspaceId}
+										id={arrowFalse.id}
+										fromEntityId={arrowFalse.from_entity_id}
+										toEntityId={arrowFalse.to_entity_id}
+										arrowTypeId={arrowFalse.arrow_type_id} />
+								</React.Fragment>
+								: isSource
+									? <React.Fragment />
+									: <Box 
+										position="relative"
+										minWidth="300px">
+										<Box py="34px">
+											<Create
+												scriptId={scriptId}
+												workspaceId={workspaceId}
+												index={index + 1}
+												fromEntityId={entity.id}
+												fromArrowTypeId={process.env.ARROW_TYPE_FALSE} />
+										</Box>
+									</Box>}
 							{arrowTrue
-								? <Build
-									scriptId={scriptId}
-									workspaceId={workspaceId}
-									arrow={() => arrowTrue}
-									isSource={isSource}
-									dataTypeValidating={dataTypeValidating}
-									onClickAsSource={onClickAsSource} />
-								: <Box 
-									position="relative"
-									minWidth="300px">
-									<Box py="34px">
-										<Create
+								? <React.Fragment>
+									<Box 
+										position="relative"
+										minWidth="420px">
+										<Build
 											scriptId={scriptId}
 											workspaceId={workspaceId}
-											fromEntityId={entity.id}
-											fromArrowTypeId={process.env.ARROW_TYPE_TRUE} />
+											index={index + 1}
+											arrow={() => arrowTrue}
+											isSource={isSource}
+											dataTypeValidating={dataTypeValidating}
+											onClickAsSource={onClickAsSource} />
 									</Box>
-								</Box>}
+									<Arrow 
+										scriptId={scriptId}
+										workspaceId={workspaceId}
+										id={arrowTrue.id}
+										fromEntityId={arrowTrue.from_entity_id}
+										toEntityId={arrowTrue.to_entity_id}
+										arrowTypeId={arrowTrue.arrow_type_id} />
+								</React.Fragment>
+								: isSource
+									? <React.Fragment />
+									: <Box 
+										position="relative"
+										minWidth="300px">
+										<Box py="34px">
+											<Create
+												scriptId={scriptId}
+												workspaceId={workspaceId}
+												index={index + 1}
+												fromEntityId={entity.id}
+												fromArrowTypeId={process.env.ARROW_TYPE_TRUE} />
+										</Box>
+									</Box>}
 						</Box>
 						: arrowDefault
-							? <Build
-								scriptId={scriptId}
-								workspaceId={workspaceId}
-								arrow={() => arrowDefault}
-								isSource={isSource}
-								dataTypeValidating={dataTypeValidating}
-								onClickAsSource={onClickAsSource} />
-							: <Box py="34px">
-								<Create
+							? <React.Fragment>
+								<Box 
+									position="relative"
+									minWidth="420px">
+									<Build
+										scriptId={scriptId}
+										workspaceId={workspaceId}
+										index={index + 1}
+										arrow={() => arrowDefault}
+										isSource={isSource}
+										dataTypeValidating={dataTypeValidating}
+										onClickAsSource={onClickAsSource} />
+								</Box>
+								<Arrow 
 									scriptId={scriptId}
 									workspaceId={workspaceId}
-									fromEntityId={entity.id}
-									fromArrowTypeId={process.env.ARROW_TYPE_DEFAULT} />
-							</Box>}
-			</Box>
+									id={arrowDefault.id}
+									fromEntityId={arrowDefault.from_entity_id}
+									toEntityId={arrowDefault.to_entity_id}
+									arrowTypeId={arrowDefault.arrow_type_id} />
+							</React.Fragment>
+							: isSource
+								? <React.Fragment />
+								: <Box py="34px">
+									<Create
+										scriptId={scriptId}
+										workspaceId={workspaceId}
+										index={index + 1}
+										fromEntityId={entity.id}
+										fromArrowTypeId={process.env.ARROW_TYPE_DEFAULT} />
+								</Box>}
+			</React.Fragment>
 			: <React.Fragment />}
 	</React.Fragment>;
 };
@@ -130,6 +179,7 @@ Build = React.memo(Build);
 Build.defaultProps = {
 	scriptId: 0,
 	workspaceId: 0,
+	index: 0,
 	arrow: () => {},
 	isSource: false,
 	dataTypeValidating: () => ([]),
@@ -152,23 +202,17 @@ let Listing = ({
 			minWidth="100%">
 			{firstArrow
 				? <React.Fragment>
-					<Build 
-						scriptId={scriptId}
-						workspaceId={workspaceId}
-						arrow={() => firstArrow}
-						isSource={isSource}
-						dataTypeValidating={dataTypeValidating}
-						onClickAsSource={onClickAsSource} />
-					{arrows.map((arrow, i) => {
-						return <Arrow 
-							key={arrow.id}
+					<Box 
+						position="relative"
+						minWidth="420px">
+						<Build 
 							scriptId={scriptId}
 							workspaceId={workspaceId}
-							id={arrow.id}
-							fromEntityId={arrow.from_entity_id}
-							toEntityId={arrow.to_entity_id}
-							arrowTypeId={arrow.arrow_type_id} />;
-					})}
+							arrow={() => firstArrow}
+							isSource={isSource}
+							dataTypeValidating={dataTypeValidating}
+							onClickAsSource={onClickAsSource} />
+					</Box>
 				</React.Fragment>
 				: isSource
 					? <React.Fragment />
@@ -203,7 +247,7 @@ let Workspace = ({
 			position="relative"
 			overflow="auto"
 			width="100%"
-			height="calc(100% - 58px)">
+			height="100%">
 			{loadedFlag
 				? <Listing 
 					workspaceId={workspaceId}

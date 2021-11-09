@@ -1,17 +1,16 @@
 import Store from 'components/Store';
 
-const onClear = (e, name, setLogicValue) => {
+const onClear = (e, id) => {
 	const jsObject = Store().getState().jsObject;
 
-	if (jsObject.tempValue.filter &&
-		jsObject.tempValue.filter[name]) {
-		jsObject.tempValue.filter[name].value = '';
+	if (jsObject.tempValue.filter 
+		&& jsObject.tempValue.filter[id]) {
+		jsObject.tempValue.filter[id].value = '';
 		Store().dispatch({
 			type: 'jsObject',
 			payload: () => ({ ...jsObject }),
 		});
 	}
-	setLogicValue(undefined);
 };
 
 export default onClear;

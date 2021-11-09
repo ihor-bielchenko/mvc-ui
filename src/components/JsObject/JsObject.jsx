@@ -13,6 +13,7 @@ import {
 } from 'consts/dialog.js';
 import Parent from './Parent';
 import onMount from './onMount.js';
+import onUnmount from './onUnmount.js';
 
 let JsObject = ({ 
 	scriptId,
@@ -54,16 +55,22 @@ let JsObject = ({
 
 	React.useEffect(() => {
 		if (_issetFlag && _sourceId > 0) {
-			onMount(_sourceId, _dataTypeIdMemo);
+			onMount(_sourceId, _dataTypeIdMemo, scriptId, workspaceId);
 		}
 		else if (!_issetFlag) {
-			onMount(0, _dataTypeIdMemo);
+			onMount(0, _dataTypeIdMemo, scriptId, workspaceId);
 		}
 	}, [
+		scriptId,
+		workspaceId,
 		_issetFlag,
 		_sourceId,
 		_dataTypeIdMemo,
 	]);
+
+	React.useEffect(() => () => {
+		onUnmount();
+	}, []);
 
 	return wrapperIsset
 		? <Parent

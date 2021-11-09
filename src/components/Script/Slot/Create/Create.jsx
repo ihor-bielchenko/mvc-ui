@@ -11,6 +11,7 @@ import { TypographyLabel } from '../../Arrow';
 let Create = ({ 
 	scriptId,
 	workspaceId,
+	index,
 	withControl,
 	fromEntityId,
 	fromArrowTypeId,
@@ -68,6 +69,7 @@ let Create = ({
 				aria={'menu-entity-create-'+ _id}
 				scriptId={scriptId}
 				workspaceId={workspaceId}
+				index={index}
 				fromEntityId={fromEntityId}
 				fromArrowTypeId={fromArrowTypeId} />
 		</Slot>
@@ -97,6 +99,7 @@ Create = React.memo(Create);
 Create.defaultProps = {
 	scriptId: 0,
 	workspaceId: 0,
+	index: 0,
 	withControl: false,
 	fromEntityId: 0,
 	fromArrowTypeId: process.env.ARROW_TYPE_DEFAULT,

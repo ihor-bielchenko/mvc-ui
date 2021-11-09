@@ -14,7 +14,7 @@ const onMount = async (id, scriptId, workspaceId) => {
 		const response = await fetchFuncOne(id);
 		const data = ((response || {}).data || {}).data || {};
 		
-		await onMountJsObject(data.source_id, DATA_TYPE_OBJECT.id);
+		await onMountJsObject(data.source_id, DATA_TYPE_OBJECT.id, scriptId, workspaceId);
 
 		func.id = id;
 		func.name = data.name;

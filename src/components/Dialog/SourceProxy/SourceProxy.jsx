@@ -28,6 +28,7 @@ let SourceProxy = () => {
 	const dialog = useSelector((state) => state.dialogs[SOURCE_TYPE_PROXY_PASS.id]);
 	const id = (dialog || {}).id;
 	const workspaceId = (dialog || {}).workspaceId ?? 0;
+	const index = (dialog || {}).index ?? 0;
 	const isEditFlag = (dialog || {}).isEditFlag || false;
 	const serviceId = useSelector((state) => state.jsObject.tempValue.service_id || '');
 	const routeId = useSelector((state) => state.jsObject.tempValue.route_id || '');
@@ -98,17 +99,20 @@ let SourceProxy = () => {
 							<div style={{ display: tab === 0 ? 'block' : 'none' }}>
 								<Url 
 									workspaceId={workspaceId}
-									id={id} />
+									id={id}
+									index={index} />
 							</div>
 							<div style={{ display: tab === 1 ? 'block' : 'none' }}>
 								<Headers
 									workspaceId={workspaceId}
-									id={id} />
+									id={id}
+									index={index} />
 							</div>
 							<div style={{ display: tab === 2 ? 'block' : 'none' }}>
 								<Requests
 									workspaceId={workspaceId}
-									id={id} />
+									id={id}
+									index={index} />
 							</div>
 						</React.Fragment>
 						: <React.Fragment />}

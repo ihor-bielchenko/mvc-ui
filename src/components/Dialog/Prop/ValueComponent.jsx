@@ -17,9 +17,6 @@ import {
 	DATA_TYPE_NULL,
 } from 'structures/dataTypes.js';
 
-const _onClickAsSource = (id) => (e) => onClickAsSource(e, id);
-const _onDeleteAsSource = (id) => (e) => onDeleteAsSource(e, id);
-
 let ValueComponent = ({
 	scriptId,
 	workspaceId,
@@ -37,6 +34,12 @@ let ValueComponent = ({
 	const _dataTypeId = dataTypeId === DATA_TYPE_ID.id
 		? DATA_TYPE_NUMBER.id
 		: dataTypeId;
+	const _onClickAsSource = React.useCallback((e) => onClickAsSource(e, id), [
+		id,
+	]);
+	const _onDeleteAsSource = React.useCallback((e) => onDeleteAsSource(e, id), [
+		id,
+	]);
 
 	return <JsBoxControlWrapper 
 		position="relative"
@@ -73,8 +76,8 @@ let ValueComponent = ({
 									<Component
 										menu
 										onMenu={onMenu(id.toString())}
-										onValue={_onClickAsSource(id)}
-										onDelete={_onDeleteAsSource(id)}
+										onValue={_onClickAsSource}
+										onDelete={_onDeleteAsSource}
 										disabled={disabledValue}
 										name={id.toString()}
 										id={id.toString()}

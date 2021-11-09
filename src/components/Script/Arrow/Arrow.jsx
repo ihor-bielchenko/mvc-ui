@@ -16,33 +16,43 @@ let Arrow = ({
 	toEntityId,
 	arrowTypeId,
 }) => {
-	return <React.Fragment>
-		<Xarrow
-			start={arrowTypeId === process.env.ARROW_TYPE_TRUE
-				? 'true-'+ workspaceId +'-'+ fromEntityId.toString()
-				: arrowTypeId === process.env.ARROW_TYPE_FALSE
-					? 'false-'+ workspaceId +'-'+ fromEntityId.toString()
-					: 'default-'+ workspaceId +'-'+ fromEntityId.toString()}
-			end={'to-'+ workspaceId +'-'+ toEntityId.toString()}
-			path="straight"
-			strokeWidth={4}
-			color={arrowTypeId === process.env.ARROW_TYPE_TRUE
-				? '#4caf50'
-				: arrowTypeId === process.env.ARROW_TYPE_FALSE
-					? '#f44336'
-					: '#616161'}
-			label={{
-				middle: arrowTypeId === process.env.ARROW_TYPE_TRUE
-					? <TypographyLabel style={{ color: '#4caf50' }}>
-						<b>TRUE</b>
-					</TypographyLabel>
+	const [ loaded, setLoaded ] = React.useState(() => false);
+
+	React.useEffect(() => {
+		setTimeout(() => setLoaded(true), 0);
+	}, [
+		setLoaded,
+	]);
+
+	return loaded && fromEntityId > 0
+		? <React.Fragment>
+			<Xarrow
+				start={arrowTypeId === process.env.ARROW_TYPE_TRUE
+					? 'true-'+ workspaceId +'-'+ fromEntityId.toString()
 					: arrowTypeId === process.env.ARROW_TYPE_FALSE
-						? <TypographyLabel style={{ color: '#f44336' }}>
-							<b>FALSE</b>
+						? 'false-'+ workspaceId +'-'+ fromEntityId.toString()
+						: 'default-'+ workspaceId +'-'+ fromEntityId.toString()}
+				end={'to-'+ workspaceId +'-'+ toEntityId.toString()}
+				path="straight"
+				strokeWidth={4}
+				color={arrowTypeId === process.env.ARROW_TYPE_TRUE
+					? '#4caf50'
+					: arrowTypeId === process.env.ARROW_TYPE_FALSE
+						? '#f44336'
+						: '#616161'}
+				label={{
+					middle: arrowTypeId === process.env.ARROW_TYPE_TRUE
+						? <TypographyLabel style={{ color: '#4caf50' }}>
+							<b>TRUE</b>
 						</TypographyLabel>
-						: <React.Fragment />
-			}} />
-	</React.Fragment>;
+						: arrowTypeId === process.env.ARROW_TYPE_FALSE
+							? <TypographyLabel style={{ color: '#f44336' }}>
+								<b>FALSE</b>
+							</TypographyLabel>
+							: <React.Fragment />
+				}} />
+		</React.Fragment>
+		: <React.Fragment />;
 };
 Arrow = React.memo(Arrow);
 Arrow.defaultProps = {

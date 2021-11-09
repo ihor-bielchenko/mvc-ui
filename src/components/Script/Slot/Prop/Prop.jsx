@@ -13,6 +13,7 @@ let Prop = ({
 	workspaceId,
 	id,
 	entityId,
+	index,
 	isSource,
 	dataTypeValidating,
 	onClickAsSource,
@@ -40,6 +41,7 @@ let Prop = ({
 			workspaceId={workspaceId}
 			id={id}
 			entityId={entityId}
+			index={index}
 			dialogId={DIALOG_PROP}
 			isSource={isSource}
 			dataTypeId={dataTypeId}
@@ -74,6 +76,7 @@ Prop.defaultProps = {
 	workspaceId: 0,
 	id: 0,
 	entityId: 0,
+	index: 0,
 	isSource: false,
 	dataTypeValidating: () => ([]),
 	onClickAsSource: () => {},

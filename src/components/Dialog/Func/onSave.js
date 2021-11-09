@@ -70,7 +70,7 @@ const onSave = async (e, scriptId, workspaceId, fromEntityId, fromArrowTypeId) =
 				payload: () => initialStateJsObject(),
 			});
 			onMountScript(scriptId, workspaceId);
-			onClose(e);
+			onClose(e, workspaceId);
 		}
 	}
 	catch (err) {

@@ -3,33 +3,27 @@ import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Store from 'components/Store';
 import MenuControl from 'components/Menu/Control';
 import onMenu from 'components/Menu/onMenu.js';
 import onDialog from 'components/Dialog/onDialog.js';
 import onLoader from 'components/Loader/onLoader.js';
+import { onClick } from 'components/Menu/Entity';
 import { 
 	DIALOG_DELETE_CONFIRM,
 	DIALOG_PROP, 
 } from 'consts/dialog.js';
 
-const _onHandler = (dialogId, workspaceId, props) => (e) => {
+const _onHandler = (dialogId, workspaceId, index, props) => (e) => {
 	onLoader(true);
 
-	const script = Store().getState().script;
-
-	script[workspaceId].loadedFlag = false;
-	Store().dispatch({
-		type: 'script',
-		payload: () => ({ ...script }),
-	});
-	onDialog(dialogId, props)(e);
+	onClick(dialogId, workspaceId, index, props)(e);
 };
 let Slot = ({
 	scriptId,
 	workspaceId,
 	id,
 	entityId,
+	index,
 	dialogId,
 	dataTypeId,
 	isSource,
@@ -40,6 +34,7 @@ let Slot = ({
 	onDelete,
 	onClick,
 }) => {
+	const editEntityIndex = useSelector((state) => state.script.editEntityIndex);
 	const formPropId = useSelector((state) => (state.prop || {}).id);
 	const formJsonId = useSelector((state) => (state.json || {}).id);
 	const formFuncId = useSelector((state) => (state.func || {}).id);
@@ -48,7 +43,9 @@ let Slot = ({
 	const _formIdMatchEntityFlag = formPropId === id 
 		|| formJsonId === id
 		|| formFuncId === id;
-	const isDisabled = (isSource && !_dataTypeValidatingFlag) || _formIdMatchEntityFlag;
+	const isDisabled = (isSource && !_dataTypeValidatingFlag) 
+		|| _formIdMatchEntityFlag
+		|| editEntityIndex < index;
 
 	return <React.Fragment>
 			<Box 
@@ -120,8 +117,10 @@ let Slot = ({
 						</IconButton>
 						<MenuControl
 							aria={'menu-slot-'+ entityId}
-							onEdit={_onHandler(dialogId, workspaceId, {
+							onEdit={_onHandler(dialogId, workspaceId, index, {
 								id,
+								scriptId,
+								workspaceId,
 								// fromEntityId,
 								// fromArrowTypeId,
 							})}
@@ -140,6 +139,7 @@ Slot.defaultProps = {
 	workspaceId: 0,
 	id: 0,
 	entityId: 0,
+	index: 0,
 	dialogId: DIALOG_PROP,
 	withControl: false,
 	isSource: false,

@@ -61,6 +61,9 @@ let Json = () => {
 		fromEntityId,
 		fromArrowTypeId,
 	]);
+	const _onClose = React.useCallback((e) => onClose(e, workspaceId), [
+		workspaceId
+	]);
 	const _dialogOpenFlag = !!dialog;
 
 	// onMount
@@ -84,9 +87,9 @@ let Json = () => {
 			fullWidth
 			maxWidth="lg"
 			open={_dialogOpenFlag}
-			onClose={onClose}>
+			onClose={_onClose}>
 			<DialogTitle>
-				<Header onClose={onClose}>
+				<Header onClose={_onClose}>
 					{id >= 1
 						? 'JSON-ответ: '+ name
 						: 'Добавить JSON-ответ'}
@@ -147,7 +150,7 @@ let Json = () => {
 							variant="outlined"
 							color="secondary"
 							startIcon={<CloseIcon />}
-							onClick={onClose}>
+							onClick={_onClose}>
 							Отмена
 						</Button>
 						{id >= 1
