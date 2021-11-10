@@ -35,14 +35,14 @@ let Slot = ({
 	onClick,
 }) => {
 	const editEntityIndex = useSelector((state) => state.script.editEntityIndex);
-	const formPropId = useSelector((state) => (state.prop || {}).id);
-	const formJsonId = useSelector((state) => (state.json || {}).id);
-	const formFuncId = useSelector((state) => (state.func || {}).id);
+	const formPropEntityId = useSelector((state) => (state.prop || {}).entityId);
+	const formJsonEntityId = useSelector((state) => (state.json || {}).entityId);
+	const formFuncEntityId = useSelector((state) => (state.func || {}).entityId);
 	const _dataTypeValidating = dataTypeValidating();
 	const _dataTypeValidatingFlag = _dataTypeValidating.includes(dataTypeId);
-	const _formIdMatchEntityFlag = formPropId === id 
-		|| formJsonId === id
-		|| formFuncId === id;
+	const _formIdMatchEntityFlag = formPropEntityId === entityId 
+		|| formJsonEntityId === entityId
+		|| formFuncEntityId === entityId;
 	const isDisabled = (isSource && !_dataTypeValidatingFlag) 
 		|| _formIdMatchEntityFlag
 		|| editEntityIndex < index;

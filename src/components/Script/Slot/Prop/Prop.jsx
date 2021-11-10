@@ -4,9 +4,9 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import DescriptionIcon from '@material-ui/icons/Description';
 import onDelete from 'components/Dialog/Prop/onDelete.js';
+import { DIALOG_PROP } from 'consts/dialog.js';
 import Slot from '../Slot.jsx';
 import OptionDataType from '../OptionDataType.jsx';
-import { DIALOG_PROP } from 'consts/dialog.js';
 
 let Prop = ({
 	scriptId,
@@ -50,7 +50,7 @@ let Prop = ({
 			onClick={_onClick}>
 			<Box
 				display="flex"
-				alignItems="center"
+				alignItems="flex-start"
 				py="2px">
 				<DescriptionIcon 
 					fontSize="small"
@@ -59,6 +59,7 @@ let Prop = ({
 					style={{ 
 						color: '#FFF',
 						paddingLeft: 4, 
+						lineHeight: '16px',
 					}}>
 					{name}
 				</Typography>

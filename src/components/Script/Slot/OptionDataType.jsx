@@ -10,33 +10,28 @@ let OptionDataType = ({
 }) => {
 	return <React.Fragment>
 		<Box
-			pt="2px"
 			display="flex"
-			alignItems="flex-start">
-			<Box 
-				pl="24px"
-				pr="2px">
-				<Typography 
-					component="div"
-					variant="caption"
-					style={{
-						color: '#FFF',
-						whiteSpace: 'nowrap',
-					}}>
-					Тип:
-				</Typography>
-			</Box>
-			<Box>
-				<Typography 
-					component="div"
-					variant="caption"
-					style={{
-						color: '#FFF',
-						// whiteSpace: 'nowrap',
-					}}>
-					<b>{dataTypes[dataTypeId].text()}</b>
-				</Typography>
-			</Box>
+			alignItems="flex-start"
+			pl="24px">
+			<Typography 
+				component="div"
+				variant="caption"
+				style={{
+					color: '#FFF',
+					whiteSpace: 'nowrap',
+					paddingRight: 2,
+				}}>
+				Тип:
+			</Typography>
+			<Typography 
+				component="div"
+				variant="caption"
+				style={{
+					color: '#FFF',
+					// whiteSpace: 'nowrap',
+				}}>
+				<b>{dataTypes[dataTypeId].text()}</b>
+			</Typography>
 		</Box>
 	</React.Fragment>;
 };

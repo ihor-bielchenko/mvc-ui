@@ -1,7 +1,7 @@
 import Store from 'components/Store';
 import { DATA_TYPE_TEXT } from 'structures/dataTypes.js';
 
-const onClear = (e, workspaceId, index = 0) => {
+const onClear = (e, index) => {
 	const jsObject = Store().getState().jsObject;
 	const blocks = jsObject.blocks[0] || [];
 

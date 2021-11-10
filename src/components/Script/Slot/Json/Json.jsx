@@ -50,7 +50,7 @@ let Json = ({
 			onClick={_onClick}>
 			<Box
 				display="flex"
-				alignItems="center"
+				alignItems="flex-start"
 				py="2px">
 				<TextsmsIcon 
 					fontSize="small"
@@ -59,6 +59,7 @@ let Json = ({
 					style={{ 
 						color: '#FFF',
 						paddingLeft: 4, 
+						lineHeight: '16px',
 					}}>
 					{name}
 				</Typography>

@@ -4,10 +4,15 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import SelectOperatorIf from 'components/Select/OperatorIf';
 import InputText from 'components/Input/Text';
+import onDialog from 'components/Dialog/onDialog.js';
+import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
 import onMount from './onMount.js';
 import onChange from '../onChange.js';
 import onSelect from '../onSelect.js';
 import onUnmount from '../onUnmount.js';
+import onValidate from '../onValidate.js';
+import onValueScript from '../onValueScript.js';
+import onClear from '../onClear.js';
 
 let IfBase = ({ 
 	id, 
@@ -24,6 +29,20 @@ let IfBase = ({
 	]);
 	const _onSelect2 = React.useCallback((e) => onSelect(e, id, 1), [
 		id,
+	]);
+	const _onClear1 = React.useCallback((e) => onClear(e, 0), [
+	]);
+	const _onClear3 = React.useCallback((e) => onClear(e, 2), [
+	]);
+	const _onMenu1 = React.useCallback((e) => onDialog(SOURCE_TYPE_SCRIPT.id, {
+		onClickAsSource: onValueScript(0),
+		dataTypeValidating: onValidate(),
+	})(e), [
+	]);
+	const _onMenu3 = React.useCallback((e) => onDialog(SOURCE_TYPE_SCRIPT.id, {
+		onClickAsSource: onValueScript(2),
+		dataTypeValidating: onValidate(),
+	})(e), [
 	]);
 
 	React.useEffect(() => {
@@ -46,8 +65,11 @@ let IfBase = ({
 				xs={true}>
 				<InputText
 					menu
-					defaultValue={prop1}
+					onMenu={_onMenu1}
+					onValue={_onMenu1}
+					onDelete={_onClear1}
 					onChange={_onChange1}
+					defaultValue={prop1}
 					name="prop-1"
 					label="Первое значение"
 					placeholder="Текст или число"
@@ -67,8 +89,11 @@ let IfBase = ({
 				xs={true}>
 				<InputText
 					menu
-					defaultValue={prop3}
+					onMenu={_onMenu3}
+					onValue={_onMenu3}
+					onDelete={_onClear3}
 					onChange={_onChange3}
+					defaultValue={prop3}
 					name="prop-3"
 					label="Второе значение"
 					placeholder="Текст или число"

@@ -49,7 +49,7 @@ let Func = ({
 			onClick={_onClick}>
 			<Box
 				display="flex"
-				alignItems="center"
+				alignItems="flex-start"
 				py="2px">
 				<AirportShuttleIcon 
 					fontSize="small"
@@ -58,6 +58,7 @@ let Func = ({
 					style={{ 
 						color: '#FFF',
 						paddingLeft: 4, 
+						lineHeight: '16px',
 					}}>
 					{name}
 				</Typography>

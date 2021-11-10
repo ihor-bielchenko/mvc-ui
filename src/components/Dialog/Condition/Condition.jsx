@@ -40,14 +40,14 @@ let Condition = () => {
 	const id = useSelector((state) => state.func.id);
 	const name = useSelector((state) => state.func.name || '');
 	const templateId = useSelector((state) => state.func.template_id || '');
-	const _onDelete = React.useCallback((e) => onDelete(e, workspaceId, scriptId, id), [
+	const _onDelete = React.useCallback((e) => onDelete(e, scriptId, workspaceId, id), [
 		scriptId,
 		workspaceId,
 		id,
 	]);
-	const _onSave = React.useCallback((e) => onSave(e, workspaceId, scriptId,fromEntityId, fromArrowTypeId), [
-		workspaceId,
+	const _onSave = React.useCallback((e) => onSave(e, scriptId, workspaceId, fromEntityId, fromArrowTypeId), [
 		scriptId,
+		workspaceId,
 		fromEntityId,
 		fromArrowTypeId,
 	]);

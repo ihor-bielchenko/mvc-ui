@@ -45,7 +45,6 @@ const onMount = async (scriptId, workspaceId) => {
 					}
 					entity.entityItemId = entity.entity_func.id;
 					entity.name = entity.entity_func.name;
-					entity.slotName = 'Func';
 					entity.type_key_name = 'entity_func';
 				}
 				script[workspaceId].data[entity.id] = { ...entity };
