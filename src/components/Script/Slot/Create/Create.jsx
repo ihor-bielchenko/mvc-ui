@@ -11,7 +11,6 @@ import { TypographyLabel } from '../../Arrow';
 let Create = ({ 
 	scriptId,
 	workspaceId,
-	index,
 	withControl,
 	fromEntityId,
 	fromArrowTypeId,
@@ -69,7 +68,6 @@ let Create = ({
 				aria={'menu-entity-create-'+ _id}
 				scriptId={scriptId}
 				workspaceId={workspaceId}
-				index={index}
 				fromEntityId={fromEntityId}
 				fromArrowTypeId={fromArrowTypeId} />
 		</Slot>
@@ -79,7 +77,11 @@ let Create = ({
 				end={createArrowName + workspaceId +'-'+ fromEntityId}
 				path="straight"
 				strokeWidth={4}
-				color="#616161"
+				color={arrowIsTrue
+					? '#4caf50'
+					: arrowIsFalse
+						? '#f44336'
+						: '#616161'}
 				label={{
 					middle: arrowIsTrue
 						? <TypographyLabel style={{ color: '#4caf50' }}>
@@ -99,7 +101,6 @@ Create = React.memo(Create);
 Create.defaultProps = {
 	scriptId: 0,
 	workspaceId: 0,
-	index: 0,
 	withControl: false,
 	fromEntityId: 0,
 	fromArrowTypeId: process.env.ARROW_TYPE_DEFAULT,

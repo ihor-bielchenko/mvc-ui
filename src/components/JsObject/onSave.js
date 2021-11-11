@@ -24,15 +24,28 @@ const prepareItem = (item = {}, toJsonFlag = false) => {
 			? ({ ...({ ...item }).value }).source_type_id
 			: SOURCE_TYPE_MANUALLY.id,
 	};
+
 	if (typeof item.value === 'object'
 		&& typeof item.value.value === 'object') {
-		delete item.value.value.source_type_id;
+		const _sourceTypeId = item.value.value.source_type_id;
 
+		delete item.value.value.source_type_id;
 		if (typeof item.value.value.value === 'object'
 			&& item.value.value.value.source_type_id === SOURCE_TYPE_SCRIPT.id) {
 			item.value.value.value['value'] = item.value.value.value.id;
 			delete item.value.value.value.workspaceId;
 			delete item.value.value.value.id;
+		}
+		else if (typeof item.value.value.value !== 'object'
+			&& _sourceTypeId === SOURCE_TYPE_SCRIPT.id) {
+			item.value.value['value'] = {
+				script_id: item.value.value.script_id,
+				data_type_id: item.value.value.data_type_id,
+				value: item.value.value.id,
+			};
+			item.value.value['source_type_id'] = _sourceTypeId;
+			delete item.value.value.workspaceId;
+			delete item.value.value.id;
 		}
 	}
 	item.disabled_key = item.disabledKey;

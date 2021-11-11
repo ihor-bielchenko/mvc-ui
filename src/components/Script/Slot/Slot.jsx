@@ -13,17 +13,16 @@ import {
 	DIALOG_PROP, 
 } from 'consts/dialog.js';
 
-const _onHandler = (dialogId, workspaceId, index, props) => (e) => {
+const _onHandler = (dialogId, workspaceId, props) => (e) => {
 	onLoader(true);
 
-	onClick(dialogId, workspaceId, index, props)(e);
+	onClick(dialogId, workspaceId, props)(e);
 };
 let Slot = ({
 	scriptId,
 	workspaceId,
 	id,
 	entityId,
-	index,
 	dialogId,
 	dataTypeId,
 	isSource,
@@ -34,7 +33,6 @@ let Slot = ({
 	onDelete,
 	onClick,
 }) => {
-	const editEntityIndex = useSelector((state) => state.script.editEntityIndex);
 	const formPropEntityId = useSelector((state) => (state.prop || {}).entityId);
 	const formJsonEntityId = useSelector((state) => (state.json || {}).entityId);
 	const formFuncEntityId = useSelector((state) => (state.func || {}).entityId);
@@ -44,8 +42,7 @@ let Slot = ({
 		|| formJsonEntityId === entityId
 		|| formFuncEntityId === entityId;
 	const isDisabled = (isSource && !_dataTypeValidatingFlag) 
-		|| _formIdMatchEntityFlag
-		|| editEntityIndex < index;
+		|| _formIdMatchEntityFlag;
 
 	return <React.Fragment>
 			<Box 
@@ -117,7 +114,7 @@ let Slot = ({
 						</IconButton>
 						<MenuControl
 							aria={'menu-slot-'+ entityId}
-							onEdit={_onHandler(dialogId, workspaceId, index, {
+							onEdit={_onHandler(dialogId, workspaceId, {
 								id,
 								scriptId,
 								workspaceId,
@@ -139,7 +136,6 @@ Slot.defaultProps = {
 	workspaceId: 0,
 	id: 0,
 	entityId: 0,
-	index: 0,
 	dialogId: DIALOG_PROP,
 	withControl: false,
 	isSource: false,

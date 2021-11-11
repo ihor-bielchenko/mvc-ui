@@ -18,6 +18,11 @@ import {
 	DATA_TYPE_NUMBER, 
 	DATA_TYPE_TIME,
 	DATA_TYPE_TEXT,
+	DATA_TYPE_RICHTEXT,
+	DATA_TYPE_EMAIL,
+	DATA_TYPE_IP,
+	DATA_TYPE_MAC,
+	DATA_TYPE_URL,
 	DATA_TYPE_PASSWORD,
 } from 'structures/dataTypes.js';
 import onColumn from './onColumn.js';
@@ -89,16 +94,19 @@ let Form = ({
 		onClickAsSource: onValueScript(id),
 		dataTypeValidating: onValidateSource(columnDataTypeId === DATA_TYPE_PASSWORD.id
 			? ([
-				columnDataTypeId,
 				DATA_TYPE_TEXT.id,
+				DATA_TYPE_RICHTEXT.id,
+				DATA_TYPE_EMAIL.id,
+				DATA_TYPE_IP.id,
+				DATA_TYPE_MAC.id,
+				DATA_TYPE_URL.id,
+				DATA_TYPE_PASSWORD.id,
 			])
 			: columnDataTypeId),
 	})(e), [
 		id,
 		columnDataTypeId,
 	]);
-
-	console.log('columnDataTypeId', columnDataTypeId, columnDataTypeId === DATA_TYPE_PASSWORD.id);
 
 	React.useEffect(() => () => {
 		onUnmount();

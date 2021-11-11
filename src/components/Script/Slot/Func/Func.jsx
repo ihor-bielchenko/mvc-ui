@@ -12,7 +12,6 @@ let Func = ({
 	workspaceId,
 	id,
 	entityId,
-	index,
 	isSource,
 	dataTypeValidating,
 	onClickAsSource,
@@ -40,7 +39,6 @@ let Func = ({
 			workspaceId={workspaceId}
 			id={id}
 			entityId={entityId}
-			index={index}
 			dialogId={DIALOG_FUNC}
 			isSource={isSource}
 			dataTypeId={dataTypeId}
@@ -73,7 +71,6 @@ Func.defaultProps = {
 	workspaceId: 0,
 	id: 0,
 	entityId: 0,
-	index: 0,
 	isSource: false,
 	dataTypeValidating: () => ([]),
 	onClickAsSource: () => {},

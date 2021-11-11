@@ -4,18 +4,27 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import JsBoxControlWrapper from 'components/JsObject/BoxControlWrapper';
 import MenuSource from 'components/Menu/Source';
-import onClickAsSource from 'components/JsObject/Value/onClickAsSource.js';
-import onDeleteAsSource from 'components/JsObject/Value/onDeleteAsSource.js';
-import onMenu from 'components/Menu/onMenu.js';
+import onDialog from 'components/Dialog/onDialog.js';
+import onValidateSource from 'components/Group/Func/onValidate.js';
 import loadColumnInputs from 'utils/loadColumnInputs.js';
+import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
 import { 
 	DATA_TYPE_ATOMIC,
 	DATA_TYPE_ID,
-	DATA_TYPE_NUMBER,
+	DATA_TYPE_NUMBER, 
+	DATA_TYPE_TEXT,
+	DATA_TYPE_RICHTEXT,
+	DATA_TYPE_EMAIL,
+	DATA_TYPE_IP,
+	DATA_TYPE_MAC,
+	DATA_TYPE_URL,
+	DATA_TYPE_PASSWORD,
 	DATA_TYPE_OBJECT,
 	DATA_TYPE_ARRAY,
 	DATA_TYPE_NULL,
 } from 'structures/dataTypes.js';
+import onValueScript from './onValueScript.js';
+import onClear from './onClear.js';
 
 let ValueComponent = ({
 	scriptId,
@@ -34,11 +43,25 @@ let ValueComponent = ({
 	const _dataTypeId = dataTypeId === DATA_TYPE_ID.id
 		? DATA_TYPE_NUMBER.id
 		: dataTypeId;
-	const _onClickAsSource = React.useCallback((e) => onClickAsSource(e, id), [
+	const _onClear = React.useCallback((e) => onClear(e, id), [
 		id,
 	]);
-	const _onDeleteAsSource = React.useCallback((e) => onDeleteAsSource(e, id), [
+	const _onMenu = React.useCallback((e) => onDialog(SOURCE_TYPE_SCRIPT.id, {
+		onClickAsSource: onValueScript(id),
+		dataTypeValidating: onValidateSource(_dataTypeId === DATA_TYPE_PASSWORD.id
+			? ([
+				DATA_TYPE_TEXT.id,
+				DATA_TYPE_RICHTEXT.id,
+				DATA_TYPE_EMAIL.id,
+				DATA_TYPE_IP.id,
+				DATA_TYPE_MAC.id,
+				DATA_TYPE_URL.id,
+				DATA_TYPE_PASSWORD.id,
+			])
+			: _dataTypeId),
+	})(e), [
 		id,
+		_dataTypeId,
 	]);
 
 	return <JsBoxControlWrapper 
@@ -75,14 +98,14 @@ let ValueComponent = ({
 								<React.Suspense fallback={<Typography>Подождите...</Typography>}>
 									<Component
 										menu
-										onMenu={onMenu(id.toString())}
-										onValue={_onClickAsSource}
-										onDelete={_onDeleteAsSource}
+										onMenu={_onMenu}
+										onValue={_onMenu}
+										onDelete={_onClear}
+										onChange={onChange}
 										disabled={disabledValue}
 										name={id.toString()}
 										id={id.toString()}
 										defaultValue={value}
-										onChange={onChange}
 										label="" />
 								</React.Suspense>
 							</Box>

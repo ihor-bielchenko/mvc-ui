@@ -18,11 +18,10 @@ import {
 } from 'consts/dialog.js';
 import onClose from '../onClose.js';
 
-export const onClick = (dialogId, workspaceId, index, props) => (e) => {
+export const onClick = (dialogId, workspaceId, props) => (e) => {
 	const script = Store().getState().script;
 
 	script[workspaceId].loadedFlag = false;
-	script.editEntityIndex = index;
 	Store().dispatch({
 		type: 'script',
 		payload: () => ({ ...script }),
@@ -34,7 +33,6 @@ let Entity = ({
 	aria, 
 	scriptId,
 	workspaceId,
-	index,
 	fromEntityId,
 	fromArrowTypeId,
 	onEdit,
@@ -56,7 +54,7 @@ let Entity = ({
 			anchorEl={anchorEl}
 			open={Boolean(anchorEl)}
 			onClose={_onClose}>
-			<MenuItem onClick={onClick(DIALOG_PROP, workspaceId, index, {
+			<MenuItem onClick={onClick(DIALOG_PROP, workspaceId, {
 				scriptId,
 				workspaceId,
 				fromEntityId,
@@ -69,7 +67,7 @@ let Entity = ({
 					Параметр
 				</Typography>
 			</MenuItem>
-			<MenuItem onClick={onClick(DIALOG_IF, workspaceId, index, {
+			<MenuItem onClick={onClick(DIALOG_IF, workspaceId, {
 				scriptId,
 				workspaceId,
 				fromEntityId,
@@ -82,7 +80,7 @@ let Entity = ({
 					Условие
 				</Typography>
 			</MenuItem>
-			<MenuItem onClick={onClick(DIALOG_FUNC, workspaceId, index, {
+			<MenuItem onClick={onClick(DIALOG_FUNC, workspaceId, {
 				scriptId,
 				workspaceId,
 				fromEntityId,
@@ -95,7 +93,7 @@ let Entity = ({
 					Функция
 				</Typography>
 			</MenuItem>
-			<MenuItem onClick={onClick(DIALOG_JSON, workspaceId, index, {
+			<MenuItem onClick={onClick(DIALOG_JSON, workspaceId, {
 				scriptId,
 				workspaceId,
 				fromEntityId,
@@ -116,7 +114,6 @@ Entity = React.memo(Entity);
 Entity.defaultProps = {
 	aria: 'menu-entity',
 	scriptId: 0,
-	index: 0,
 	fromEntityId: 0,
 	fromArrowTypeId: 0,
 };

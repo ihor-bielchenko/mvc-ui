@@ -36,17 +36,6 @@ const parseDb = (item, scriptId, workspaceId) => {
 		} 
 	} = { ...item };
 
-	// {
-	// 	source_type_id: ({ ...item }).value.source_type_id,
-	// 	value: {
-	// 		source_type_id: SOURCE_TYPE_SCRIPT.id,
-	// 		data_type_id: ({ ...item }).value.dependency.data_type_id,
-	// 		id: Number(({ ...item }).value.dependency.value),
-	// 		script_id: scriptId,
-	// 		workspaceId,
-	// 	}
-	// };
-
 	item.value = {
 		is_collection: isCollection,
 		source_type_id: sourceTypeId,

@@ -9,8 +9,10 @@ import {
 import Arrow from '../Arrow';
 
 const BoxBackgraund = styled(Box)`
-	background-image: linear-gradient(rgba(198, 198, 198, .2) .1em, transparent .1em), linear-gradient(90deg, rgba(198, 198, 198, .2) .1em, transparent .1em);
-	background-size: 20px 20px;
+	& > .MuiBox-root {
+		background-image: linear-gradient(rgba(198, 198, 198, .2) .26em, transparent .26em), linear-gradient(90deg, rgba(198, 198, 198, .2) .26em, transparent .26em);
+		background-size: 40px 40px;
+	}
 `;
 let Build = ({
 	scriptId,
@@ -19,7 +21,6 @@ let Build = ({
 	isSource,
 	dataTypeValidating,
 	onClickAsSource,
-	index,
 }) => {
 	const _arrow = arrow();
 	const arrows = useSelector((state) => state.script[workspaceId].arrows);
@@ -55,7 +56,6 @@ let Build = ({
 						workspaceId={workspaceId}
 						entityId={entity.id}
 						id={entity.entityItemId}
-						index={index}
 						isSource={isSource}
 						dataTypeValidating={dataTypeValidating}
 						onClickAsSource={onClickAsSource} />
@@ -74,7 +74,6 @@ let Build = ({
 										<Build
 											scriptId={scriptId}
 											workspaceId={workspaceId}
-											index={index + 1}
 											arrow={() => arrowFalse}
 											isSource={isSource}
 											dataTypeValidating={dataTypeValidating}
@@ -88,20 +87,13 @@ let Build = ({
 										toEntityId={arrowFalse.to_entity_id}
 										arrowTypeId={arrowFalse.arrow_type_id} />
 								</React.Fragment>
-								: isSource
-									? <React.Fragment />
-									: <Box 
-										position="relative"
-										minWidth="300px">
-										<Box py="34px">
-											<Create
-												scriptId={scriptId}
-												workspaceId={workspaceId}
-												index={index + 1}
-												fromEntityId={entity.id}
-												fromArrowTypeId={process.env.ARROW_TYPE_FALSE} />
-										</Box>
-									</Box>}
+								: <Box py="34px">
+									<Create
+										scriptId={scriptId}
+										workspaceId={workspaceId}
+										fromEntityId={entity.id}
+										fromArrowTypeId={process.env.ARROW_TYPE_FALSE} />
+								</Box>}
 							{arrowTrue
 								? <React.Fragment>
 									<Box 
@@ -110,7 +102,6 @@ let Build = ({
 										<Build
 											scriptId={scriptId}
 											workspaceId={workspaceId}
-											index={index + 1}
 											arrow={() => arrowTrue}
 											isSource={isSource}
 											dataTypeValidating={dataTypeValidating}
@@ -124,20 +115,14 @@ let Build = ({
 										toEntityId={arrowTrue.to_entity_id}
 										arrowTypeId={arrowTrue.arrow_type_id} />
 								</React.Fragment>
-								: isSource
-									? <React.Fragment />
-									: <Box 
-										position="relative"
-										minWidth="300px">
-										<Box py="34px">
-											<Create
-												scriptId={scriptId}
-												workspaceId={workspaceId}
-												index={index + 1}
-												fromEntityId={entity.id}
-												fromArrowTypeId={process.env.ARROW_TYPE_TRUE} />
-										</Box>
-									</Box>}
+								: <Box py="34px">
+									<Create
+										scriptId={scriptId}
+										workspaceId={workspaceId}
+										fromEntityId={entity.id}
+										fromArrowTypeId={process.env.ARROW_TYPE_TRUE}
+										disabled={isSource} />
+								</Box>}
 						</Box>
 						: arrowDefault
 							? <React.Fragment>
@@ -147,7 +132,6 @@ let Build = ({
 									<Build
 										scriptId={scriptId}
 										workspaceId={workspaceId}
-										index={index + 1}
 										arrow={() => arrowDefault}
 										isSource={isSource}
 										dataTypeValidating={dataTypeValidating}
@@ -161,16 +145,14 @@ let Build = ({
 									toEntityId={arrowDefault.to_entity_id}
 									arrowTypeId={arrowDefault.arrow_type_id} />
 							</React.Fragment>
-							: isSource
-								? <React.Fragment />
-								: <Box py="34px">
-									<Create
-										scriptId={scriptId}
-										workspaceId={workspaceId}
-										index={index + 1}
-										fromEntityId={entity.id}
-										fromArrowTypeId={process.env.ARROW_TYPE_DEFAULT} />
-								</Box>}
+							: <Box py="34px">
+								<Create
+									scriptId={scriptId}
+									workspaceId={workspaceId}
+									fromEntityId={entity.id}
+									fromArrowTypeId={process.env.ARROW_TYPE_DEFAULT}
+									disabled={isSource} />
+							</Box>}
 			</React.Fragment>
 			: <React.Fragment />}
 	</React.Fragment>;
@@ -179,7 +161,6 @@ Build = React.memo(Build);
 Build.defaultProps = {
 	scriptId: 0,
 	workspaceId: 0,
-	index: 0,
 	arrow: () => {},
 	isSource: false,
 	dataTypeValidating: () => ([]),

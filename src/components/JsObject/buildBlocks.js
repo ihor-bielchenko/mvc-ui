@@ -34,7 +34,6 @@ const buildBlocks = (jsObject = { data: {}, blocks: {} }) => {
 					|| !tmp[data[_id].parent_id].value) {
 					tmp[data[_id].parent_id].value = {};
 				}
-				// tmp[data[_id].parent_id].value[_id] = tmp[_id];
 				blocks[data[_id].parent_id].push(data[_id]);
 			}
 		}
