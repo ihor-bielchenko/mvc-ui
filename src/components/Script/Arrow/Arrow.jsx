@@ -19,7 +19,7 @@ let Arrow = ({
 	const [ loaded, setLoaded ] = React.useState(() => false);
 
 	React.useEffect(() => {
-		setTimeout(() => setLoaded(true), 0);
+		setTimeout(() => setLoaded(true), 100);
 	}, [
 		setLoaded,
 	]);

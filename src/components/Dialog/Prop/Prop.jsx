@@ -52,6 +52,7 @@ let Prop = () => {
 	const name = useSelector((state) => state.prop.name || '');
 	const asVariable = useSelector((state) => !!state.prop.as_variable);
 	const dataTypeId = useSelector((state) => ((state.jsObject.data || {})[0] || {}).data_type_id ?? DATA_TYPE_ATOMIC.id);
+	console.log('fromEntityId', fromEntityId);
 	const _onDelete = React.useCallback((e) => onDelete(e, scriptId, workspaceId, id), [
 		scriptId,
 		workspaceId,

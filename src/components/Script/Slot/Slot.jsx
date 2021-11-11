@@ -11,7 +11,11 @@ import { onClick } from 'components/Menu/Entity';
 import { 
 	DIALOG_DELETE_CONFIRM,
 	DIALOG_PROP, 
+	DIALOG_JSON,
+	DIALOG_IF,
+	DIALOG_FUNC,   
 } from 'consts/dialog.js';
+import onlyParentTreeValidate from './onlyParentTreeValidate.js';
 
 const _onHandler = (dialogId, workspaceId, props) => (e) => {
 	onLoader(true);
@@ -33,16 +37,22 @@ let Slot = ({
 	onDelete,
 	onClick,
 }) => {
-	const formPropEntityId = useSelector((state) => (state.prop || {}).entityId);
-	const formJsonEntityId = useSelector((state) => (state.json || {}).entityId);
-	const formFuncEntityId = useSelector((state) => (state.func || {}).entityId);
-	const _dataTypeValidating = dataTypeValidating();
-	const _dataTypeValidatingFlag = _dataTypeValidating.includes(dataTypeId);
-	const _formIdMatchEntityFlag = formPropEntityId === entityId 
-		|| formJsonEntityId === entityId
-		|| formFuncEntityId === entityId;
-	const isDisabled = (isSource && !_dataTypeValidatingFlag) 
-		|| _formIdMatchEntityFlag;
+	const dialog = useSelector((state) => state.dialogs[DIALOG_PROP]
+		|| state.dialogs[DIALOG_JSON]
+		|| state.dialogs[DIALOG_IF]
+		|| state.dialogs[DIALOG_FUNC]);
+	const fromEntityIdDialog = (dialog || {}).fromEntityId ?? 0;
+	const fromEntityIdStore = useSelector((state) => (state.prop || {}).entityId
+		|| (state.json || {}).entityId
+		|| (state.func || {}).entityId);
+	const treeValidateIds = onlyParentTreeValidate((fromEntityIdStore || fromEntityIdDialog), workspaceId);
+	const isDisabled = fromEntityIdDialog > 0
+		&& ((!dataTypeId
+			|| ((isSource && !dataTypeValidating().includes(dataTypeId)) 
+			|| (fromEntityIdStore === entityId)))
+		|| (!(!fromEntityIdStore && fromEntityIdDialog > 0
+			? ([ ...treeValidateIds, fromEntityIdDialog ]).includes(entityId)
+			: treeValidateIds.includes(entityId))));
 
 	return <React.Fragment>
 			<Box 

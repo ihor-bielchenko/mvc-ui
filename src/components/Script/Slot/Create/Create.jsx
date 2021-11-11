@@ -9,6 +9,7 @@ import Slot from '../Slot';
 import { TypographyLabel } from '../../Arrow';
 
 let Create = ({ 
+	isSource,
 	scriptId,
 	workspaceId,
 	withControl,
@@ -45,6 +46,7 @@ let Create = ({
 			workspaceId={workspaceId}
 			entityId={fromEntityId}
 			withControl={withControl}
+			isSource={isSource}
 			backgroundColor="#FFF">
 			<Box 
 				id={createArrowName + workspaceId +'-'+ fromEntityId}
@@ -55,6 +57,7 @@ let Create = ({
 				height="0px" />
 			<Button 
 				fullWidth
+				disabled={isSource}
 				startIcon={<AddIcon />}
 				color="primary"
 				style={{
@@ -102,6 +105,7 @@ Create.defaultProps = {
 	scriptId: 0,
 	workspaceId: 0,
 	withControl: false,
+	isSource: false,
 	fromEntityId: 0,
 	fromArrowTypeId: process.env.ARROW_TYPE_DEFAULT,
 };

@@ -92,7 +92,8 @@ let Build = ({
 										scriptId={scriptId}
 										workspaceId={workspaceId}
 										fromEntityId={entity.id}
-										fromArrowTypeId={process.env.ARROW_TYPE_FALSE} />
+										fromArrowTypeId={process.env.ARROW_TYPE_FALSE}
+										isSource={isSource} />
 								</Box>}
 							{arrowTrue
 								? <React.Fragment>
@@ -121,7 +122,7 @@ let Build = ({
 										workspaceId={workspaceId}
 										fromEntityId={entity.id}
 										fromArrowTypeId={process.env.ARROW_TYPE_TRUE}
-										disabled={isSource} />
+										isSource={isSource} />
 								</Box>}
 						</Box>
 						: arrowDefault
@@ -151,7 +152,7 @@ let Build = ({
 									workspaceId={workspaceId}
 									fromEntityId={entity.id}
 									fromArrowTypeId={process.env.ARROW_TYPE_DEFAULT}
-									disabled={isSource} />
+									isSource={isSource} />
 							</Box>}
 			</React.Fragment>
 			: <React.Fragment />}
