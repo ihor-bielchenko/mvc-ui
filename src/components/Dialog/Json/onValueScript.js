@@ -44,7 +44,7 @@ const merge = (prepareData, currentItem, sourceValue, uniqueKey = false) => {
 				}
 				data[prepareData.data[key].id] = { ...prepareData.data[key] };
 				data[prepareData.data[key].id].key = generateKey(blocks[data[prepareData.data[key].id].parent_id] ?? [], prepareData.data[key].key);
-				data[prepareData.data[key].id].disabledKey = true;
+				// data[prepareData.data[key].id].disabledKey = true;
 				data[prepareData.data[key].id].disabledType = true;
 				data[prepareData.data[key].id].disabledValue = true;
 				data[prepareData.data[key].id].disabledRemove = true;
@@ -53,7 +53,6 @@ const merge = (prepareData, currentItem, sourceValue, uniqueKey = false) => {
 			}
 		});
 	onClose(DIALOG_KEY_EXISTS)();
-	console.log('blocks', blocks);
 };
 const onValueScript = (currentItemId) => async (e, scriptId, workspaceId, entityId, dataTypeId) => {
 	onLoader(true);

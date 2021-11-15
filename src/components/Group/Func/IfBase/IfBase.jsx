@@ -55,8 +55,6 @@ let IfBase = ({
 		onUnmount();
 	}, []);
 
-	console.log('prop1', prop1);
-
 	return <React.Fragment>
 		<Box mt={2} />
 		<Grid 
