@@ -21,7 +21,9 @@ let JsObject = ({
 	KeyComponent,
 	ValueComponent,
 	TypeComponent,
+	MergeComponent,
 	onMerge,
+	onMenuComplexValue,
 }) => {
 	const wrapperIsset = useSelector((state) => !!state.jsObject.data[0]);
 	const _sourceId = useSelector((state) => state.prop.sourceId
@@ -81,7 +83,9 @@ let JsObject = ({
 			KeyComponent={KeyComponent}
 			ValueComponent={ValueComponent}
 			TypeComponent={TypeComponent}
-			onMerge={onMerge} />
+			MergeComponent={MergeComponent}
+			onMerge={onMerge}
+			onMenuComplexValue={onMenuComplexValue} />
 		: <React.Fragment />;
 };
 
@@ -90,6 +94,7 @@ JsObject.defaultProps = {
 	scriptId: 0,
 	workspaceId: 0,
 	onMerge: () => {},
+	onMenuComplexValue: () => {},
 };
 
 export default JsObject;

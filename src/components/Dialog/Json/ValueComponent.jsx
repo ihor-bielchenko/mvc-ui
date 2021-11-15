@@ -4,27 +4,17 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import JsBoxControlWrapper from 'components/JsObject/BoxControlWrapper';
 import MenuSource from 'components/Menu/Source';
-import onDialog from 'components/Dialog/onDialog.js';
-import onValidateSource from 'components/Group/Func/onValidate.js';
 import loadColumnInputs from 'utils/loadColumnInputs.js';
-import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
 import { 
 	DATA_TYPE_ATOMIC,
 	DATA_TYPE_ID,
 	DATA_TYPE_NUMBER, 
-	DATA_TYPE_TEXT,
-	DATA_TYPE_RICHTEXT,
-	DATA_TYPE_EMAIL,
-	DATA_TYPE_IP,
-	DATA_TYPE_MAC,
-	DATA_TYPE_URL,
-	DATA_TYPE_PASSWORD,
 	DATA_TYPE_OBJECT,
 	DATA_TYPE_ARRAY,
 	DATA_TYPE_NULL,
 } from 'structures/dataTypes.js';
-import onValueScript from './onValueScript.js';
 import onClear from './onClear.js';
+import onMenuComplexValue from './onMenuComplexValue.js';
 
 let ValueComponent = ({
 	scriptId,
@@ -46,20 +36,7 @@ let ValueComponent = ({
 	const _onClear = React.useCallback((e) => onClear(e, id), [
 		id,
 	]);
-	const _onMenu = React.useCallback((e) => onDialog(SOURCE_TYPE_SCRIPT.id, {
-		onClickAsSource: onValueScript(id),
-		dataTypeValidating: onValidateSource(_dataTypeId === DATA_TYPE_PASSWORD.id
-			? ([
-				DATA_TYPE_TEXT.id,
-				DATA_TYPE_RICHTEXT.id,
-				DATA_TYPE_EMAIL.id,
-				DATA_TYPE_IP.id,
-				DATA_TYPE_MAC.id,
-				DATA_TYPE_URL.id,
-				DATA_TYPE_PASSWORD.id,
-			])
-			: _dataTypeId),
-	})(e), [
+	const _onMenu = React.useCallback((e) => onMenuComplexValue(e, id, _dataTypeId), [
 		id,
 		_dataTypeId,
 	]);

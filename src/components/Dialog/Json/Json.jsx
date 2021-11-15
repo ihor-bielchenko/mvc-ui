@@ -32,12 +32,14 @@ import onChangeName from '../Func/onChangeName.js';
 import KeyComponent from './KeyComponent.jsx';
 import ValueComponent from './ValueComponent.jsx';
 import TypeComponent from './TypeComponent.jsx';
+import MergeComponent from './MergeComponent.jsx';
 import onMount from './onMount.js';
 import onClose from './onClose.js';
 import onSave from './onSave.js';
 import onDelete from './onDelete.js';
 import onSelectDataTypeId from './onSelectDataTypeId.js';
 import onSelectCode from './onSelectCode.js';
+import onMenuComplexValue from './onMenuComplexValue.js';
 
 let Json = () => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_JSON]);
@@ -136,9 +138,13 @@ let Json = () => {
 							</Typography>
 						</Box>
 						<JsObject 
+							scriptId={scriptId}
+							workspaceId={workspaceId}
 							KeyComponent={KeyComponent}
 							ValueComponent={ValueComponent}
-							TypeComponent={TypeComponent} />
+							TypeComponent={TypeComponent}
+							MergeComponent={MergeComponent}
+							onMenuComplexValue={onMenuComplexValue} />
 					</DialogContent>
 					<DialogActions>
 					<Box 

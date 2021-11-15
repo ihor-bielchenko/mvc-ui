@@ -25,9 +25,12 @@ let Value = ({
 	KeyComponent,
 	TypeComponent,
 	ValueComponent,
+	MergeComponent,
 	last,
 	onChange,
 	onMerge,
+	onMenuComplexValue,
+	hideComplexType,
 }) => {
 	const _parentDataTypeId = useSelector((state) => parentDataTypeId ?? (state.jsObject.data[parentId] || {}).data_type_id);
 	const _dataTypeId = useSelector((state) => dataTypeId ?? (state.jsObject.data[id] || {}).data_type_id);
@@ -62,7 +65,10 @@ let Value = ({
 								KeyComponent={KeyComponent}
 								ValueComponent={ValueComponent}
 								TypeComponent={TypeComponent}
-								onMerge={onMerge} />;
+								MergeComponent={MergeComponent}
+								onMerge={onMerge}
+								onMenuComplexValue={onMenuComplexValue}
+								hideComplexType={hideComplexType} />;
 						default:
 							return _value;
 					}
@@ -94,7 +100,10 @@ let Value = ({
 								KeyComponent={KeyComponent}
 								ValueComponent={ValueComponent}
 								TypeComponent={TypeComponent}
-								onMerge={onMerge} />;
+								MergeComponent={MergeComponent}
+								onMerge={onMerge}
+								onMenuComplexValue={onMenuComplexValue}
+								hideComplexType={hideComplexType} />;
 						case DATA_TYPE_NULL.id:
 							return <Typography color="textSecondary">
 								<i><b>NULL</b></i>
@@ -140,6 +149,8 @@ Value.defaultProps = {
 	parentId: 0,
 	id: 0,
 	onMerge: () => {},
+	onMenuComplexValue: () => {},
+	hideComplexType: false,
 };
 
 export default Value;

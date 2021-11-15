@@ -29,12 +29,14 @@ const onMount = async (scriptId, workspaceId) => {
 					entity.name = entity.entity_prop.name;
 					entity.slotName = 'Prop';
 					entity.type_key_name = 'entity_prop';
+					entity.sourceId = entity.entity_prop.source_id;
 				}
 				else if (entity.entity_json) {
 					entity.entityItemId = entity.entity_json.id;
 					entity.name = entity.entity_json.name;
 					entity.slotName = 'Json';
 					entity.type_key_name = 'entity_json';
+					entity.sourceId = entity.entity_json.source_id;
 				}
 				else if (entity.entity_func) {
 					if (funcTemplates[entity.entity_func.template_id].category_id === FUNC_CATEGORY_IF.id) {
@@ -46,6 +48,7 @@ const onMount = async (scriptId, workspaceId) => {
 					entity.entityItemId = entity.entity_func.id;
 					entity.name = entity.entity_func.name;
 					entity.type_key_name = 'entity_func';
+					entity.sourceId = entity.entity_func.source_id;
 				}
 				script[workspaceId].data[entity.id] = { ...entity };
 			});

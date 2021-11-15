@@ -5,18 +5,12 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import Store from 'components/Store';
-import MenuSource from 'components/Menu/Source';
-import onMenu from 'components/Menu/onMenu.js';
 // import onDialog from 'components/Dialog/onDialog.js';
-import dataTypes, {
+import {
 	DATA_TYPE_ATOMIC,
 	DATA_TYPE_OBJECT,
  	DATA_TYPE_ARRAY,
 } from 'structures/dataTypes.js';
-import sourceTypes, {
-	SOURCE_TYPE_DB,
-	SOURCE_TYPE_PROXY_PASS,
-} from 'structures/sourceTypes.js';
 import Header from '../Header';
 import Item from '../Item';
 import onAddItem from './onAddItem.js';
@@ -24,14 +18,6 @@ import onAddItem from './onAddItem.js';
 const closures = {
 	[DATA_TYPE_OBJECT.id]: [ '{', '}' ],
 	[DATA_TYPE_ARRAY.id]: [ '[', ']' ],
-};
-const _onFilterMenuSource = (dataTypeId) => (key, i) => {
-	return dataTypeId === DATA_TYPE_OBJECT.id
-		? (sourceTypes[key].id === SOURCE_TYPE_DB.id
-			|| sourceTypes[key].id === SOURCE_TYPE_PROXY_PASS.id)
-		: (dataTypeId === DATA_TYPE_ARRAY.id)
-			? (sourceTypes[key].id === SOURCE_TYPE_DB.id)
-			: false;
 };
 
 let Parent = ({ 
@@ -43,16 +29,13 @@ let Parent = ({
 	KeyComponent,
 	ValueComponent,
 	TypeComponent,
+	MergeComponent,
+	onMenuComplexValue,
+	hideComplexType,
 }) => {
 	const blocksLength = useSelector((state) => (state.jsObject.blocks[id] || []).length);
 	const _onAddItem = React.useCallback((e) => onAddItem(e, id), [
 		id,
-	]);
-	const _onMenu = React.useCallback((e) => onMenu(id.toString(), dataTypeId === DATA_TYPE_ARRAY.id
-		? ({ isCollection: true })
-		: ({ isCollection: false }))(e, id), [
-		id,
-		dataTypeId,
 	]);
 	const {
 		// dbColumns,
@@ -76,13 +59,15 @@ let Parent = ({
 					KeyComponent={KeyComponent}
 					ValueComponent={ValueComponent}
 					TypeComponent={TypeComponent}
+					MergeComponent={MergeComponent}
+					onMenuComplexValue={onMenuComplexValue}
 					last />
 			</React.Fragment>
 			: <React.Fragment>	
 				<Box 
 					position="relative"
 					width="100%">
-					{closures[dataTypeId]
+					{!hideComplexType && closures[dataTypeId]
 						? <React.Fragment>
 							<Typography 
 								variant="h4"
@@ -111,37 +96,37 @@ let Parent = ({
 									last={i === blocksLength - 1}
 									KeyComponent={KeyComponent}
 									ValueComponent={ValueComponent}
-									TypeComponent={TypeComponent} />);
+									TypeComponent={TypeComponent}
+									MergeComponent={MergeComponent}
+									onMenuComplexValue={onMenuComplexValue} />);
 								i++;
 							}
 							return collector;
 						})()}
-						<Box pl={2}>
-							<Button 
-								variant="outlined"
-								color="primary"
-								startIcon={<AddIcon />}
-								onClick={_onAddItem}>
-								Добавить элемент
-							</Button>
-						</Box>
-						{closures[dataTypeId]
+						{!hideComplexType
+							? <Box pl={2}>
+								<Button 
+									variant="outlined"
+									color="primary"
+									startIcon={<AddIcon />}
+									onClick={_onAddItem}>
+									Добавить элемент
+								</Button>
+							</Box>
+							: <React.Fragment />}
+						{!hideComplexType && closures[dataTypeId]
 							? <React.Fragment>
 								<Box 
 									pt={1}
 									pl={2}>
-									<Button 
-										variant="outlined"
-										color="primary"
-										startIcon={<AddIcon />}
-										onClick={_onMenu}>
-										Вставить {dataTypes[dataTypeId].text()}
-									</Button>
-									<MenuSource
-										aria={id.toString()}
-										scriptId={scriptId}
-										workspaceId={workspaceId}
-										onFilter={_onFilterMenuSource(dataTypeId)} />
+									{(typeof MergeComponent === 'object'
+										&& typeof MergeComponent['$$typeof'] === 'symbol')
+										? <MergeComponent
+											scriptId={scriptId}
+											workspaceId={workspaceId}
+											id={id}
+											dataTypeId={dataTypeId} />
+										: <React.Fragment />}
 								</Box>
 								<Box display="flex">
 									<Typography
@@ -180,6 +165,8 @@ Parent.defaultProps = {
 	workspaceId: 0,
 	id: 0,
 	dataTypeId: 0,
+	onMenuComplexValue: () => {},
+	hideComplexType: false,
 };
 
 export default Parent;

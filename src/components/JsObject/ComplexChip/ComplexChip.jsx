@@ -3,9 +3,11 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Box from '@material-ui/core/Box';
 import { StyledChip } from 'components/Input/LogicValue.jsx';
-import source from 'structures/sourceTypes.js';
+import { 
+	all as allSourceTypes,
+	SOURCE_TYPE_SCRIPT, 
+} from 'structures/sourceTypes.js';
 import onDelete from '../Remove/onRemove.js';
-import onChange from './onChange.js';
 
 const BoxComplexSource = styled(Box)`
 	& > .MuiChip-root {
@@ -19,15 +21,30 @@ const BoxComplexSource = styled(Box)`
 `;
 
 let ComplexChip = ({
+	scriptId,
+	workspaceId,
 	id,
 	className,
+	onMenuComplexValue,
 }) => {
-	const sourceTypeId = useSelector((state) => ((state.jsObject.data[id] || {}).collection || {}).source_type_id ?? ((state.jsObject.data[id] || {}).value || {}).source_type_id);
-	const sourceText = React.useMemo(() => source[sourceTypeId].text(), [
+	const sourceTypeId = useSelector((state) => ((state.jsObject.data[id] || {}).collection || {}).source_type_id 
+		?? ((state.jsObject.data[id] || {}).value || {}).source_type_id);
+	const dataTypeId = useSelector((state) => ((state.jsObject.data[id] || {}).collection || {}).data_type_id 
+		?? ((state.jsObject.data[id] || {}).value || {}).data_type_id);
+	const sourceScriptEntityId = useSelector((state) => sourceTypeId === SOURCE_TYPE_SCRIPT.id
+		? ((state.jsObject.data[id] || {}).value || {}).id
+		: undefined);
+	const nameText = useSelector((state) => sourceScriptEntityId > 0
+		? (((state.script[workspaceId] || {}).data || {})[sourceScriptEntityId] || {}).name
+		: undefined);
+	const sourceText = React.useMemo(() => allSourceTypes[sourceTypeId].text(nameText), [
 		sourceTypeId,
+		nameText,
 	]);
-	const _onChange = React.useCallback((e) => onChange(e, id, sourceTypeId), [
+	const _onMenuComplexValue = React.useCallback((e) => onMenuComplexValue(e, id, dataTypeId, sourceTypeId), [
+		onMenuComplexValue,
 		id,
+		dataTypeId,
 		sourceTypeId,
 	]);
 	const _onDelete = React.useCallback((e) => onDelete(e, id), [
@@ -41,12 +58,15 @@ let ComplexChip = ({
 		<StyledChip 
 			label={sourceText}
 			onDelete={_onDelete}
-			onClick={_onChange} />
+			onClick={_onMenuComplexValue} />
 	</BoxComplexSource>;
 };
 
 ComplexChip = React.memo(ComplexChip);
 ComplexChip.defaultProps = {
+	scriptId: 0,
+	workspaceId: 0,
+	onMenuComplexValue: () => {},
 };
 
 export default ComplexChip;

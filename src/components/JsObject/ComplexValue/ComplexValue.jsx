@@ -4,7 +4,10 @@ import Box from '@material-ui/core/Box';
 import Store from 'components/Store';
 import protocol from 'structures/protocol.js';
 import method from 'structures/method.js';
-import { SOURCE_TYPE_PROXY_PASS } from 'structures/sourceTypes.js';
+import { 
+	SOURCE_TYPE_PROXY_PASS,
+	SOURCE_TYPE_SCRIPT, 
+} from 'structures/sourceTypes.js';
 import { 
 	DATA_TYPE_NUMBER,
 	DATA_TYPE_TEXT, 
@@ -81,6 +84,7 @@ let ComplexItemDb = ({
 	ValueComponent,
 	TypeComponent,
 	columnId,
+	onMenuComplexValue,
 }) => {
 	const key = useSelector((state) => (((state.jsObject.data[id] || {}).value || {}).columns || {})[columnId]);
 	const dbColumnsData = Store().getState().dbColumns.data;
@@ -98,13 +102,15 @@ let ComplexItemDb = ({
 		dataTypeId={dbColumnsData[columnId].data_type_id}
 		keyValue={key}
 		value={dbColumnsData[columnId].default_value}
-		onChangeKey={_onChangeKey} />;
+		onChangeKey={_onChangeKey}
+		onMenuComplexValue={onMenuComplexValue} />;
 };
 ComplexItemDb = React.memo(ComplexItemDb);
 ComplexItemDb.defaultProps = {
 	id: 0,
 	parentId: 0,
 	columnId: 0,
+	onMenuComplexValue: () => {},
 };
 
 let ComplexItemProxy = ({
@@ -114,6 +120,7 @@ let ComplexItemProxy = ({
 	KeyComponent,
 	ValueComponent,
 	TypeComponent,
+	onMenuComplexValue,
 }) => {
 	const keyStatusCode = useSelector((state) => (((state.jsObject.data[id] || {}).value || {}).columns || {}).statusCode);
 	const keyUri = useSelector((state) => (((state.jsObject.data[id] || {}).value || {}).columns || {}).uri);
@@ -212,7 +219,8 @@ let ComplexItemProxy = ({
 						: dataId}
 					KeyComponent={KeyComponent}
 					ValueComponent={ValueComponent}
-					TypeComponent={TypeComponent} />} />
+					TypeComponent={TypeComponent}
+					onMenuComplexValue={onMenuComplexValue} />} />
 			: <React.Fragment />}
 	</React.Fragment>;
 };
@@ -220,62 +228,113 @@ ComplexItemProxy = React.memo(ComplexItemProxy);
 ComplexItemProxy.defaultProps = {
 	id: 0,
 	parentId: 0,
-	columnId: 0,
+	onMenuComplexValue: () => {},
 };
 
-let ComplexValue = ({
+let ComplexItemScript = ({
 	id,
 	parentId,
 	last,
 	KeyComponent,
 	ValueComponent,
 	TypeComponent,
+	onMenuComplexValue,
+}) => {
+	return <React.Fragment>
+		{(id > 0)
+			? <Value
+				parentId={parentId}
+				id={id}
+				KeyComponent={KeyComponent}
+				ValueComponent={ValueComponent}
+				TypeComponent={TypeComponent}
+				onMenuComplexValue={onMenuComplexValue}
+				hideComplexType />
+			: <React.Fragment />}
+	</React.Fragment>;
+};
+ComplexItemScript = React.memo(ComplexItemScript);
+ComplexItemScript.defaultProps = {
+	id: 0,
+	parentId: 0,
+	onMenuComplexValue: () => {},
+};
+
+let ComplexValue = ({
+	scriptId,
+	workspaceId,
+	id,
+	parentId,
+	last,
+	KeyComponent,
+	ValueComponent,
+	TypeComponent,
+	MergeComponent,
 	className,
+	onMenuComplexValue,
 }) => {
 	const isCollection = useSelector((state) => ((state.jsObject.data[id] || {}).value || {}).is_collection);
 	const columnsKeys = useSelector((state) => Object.keys(((state.jsObject.data[id] || {}).value || {}).columns || {}));
 	const isSourceProxyPass = useSelector((state) => ((state.jsObject.data[id] || {}).value || {}).source_type_id === SOURCE_TYPE_PROXY_PASS.id);
+	const isSourceScript = useSelector((state) => ((state.jsObject.data[id] || {}).value || {}).source_type_id === SOURCE_TYPE_SCRIPT.id);
 
 	return <React.Fragment>
 		{isCollection
 			? <React.Fragment />
-			: <ComplexChip id={id} />}
-		{isSourceProxyPass
-			? <ComplexItemProxy
+			: <ComplexChip 
+				scriptId={scriptId}
+				workspaceId={workspaceId}
+				id={id}
+				onMenuComplexValue={onMenuComplexValue} />}
+		{isSourceScript
+			? <ComplexItemScript
 				id={id}
 				parentId={parentId}
 				KeyComponent={KeyComponent}
 				ValueComponent={ValueComponent}
-				TypeComponent={TypeComponent} />
-			: (() => {
-				const columnsLength = columnsKeys.length;
-				let i = 0,
-					collector = [];
+				TypeComponent={TypeComponent}
+				onMenuComplexValue={onMenuComplexValue} />
+			: isSourceProxyPass
+				? <ComplexItemProxy
+					id={id}
+					parentId={parentId}
+					KeyComponent={KeyComponent}
+					ValueComponent={ValueComponent}
+					TypeComponent={TypeComponent}
+					onMenuComplexValue={onMenuComplexValue} />
+				: (() => {
+					const columnsLength = columnsKeys.length;
+					let i = 0,
+						collector = [];
 
-				while (i < columnsLength) {
-					const _columnId = Number(columnsKeys[i]);
+					while (i < columnsLength) {
+						const _columnId = Number(columnsKeys[i]);
 
-					collector.push(
-						<ComplexItemDb 
-							key={id +'-'+ _columnId}
-							id={id}
-							parentId={parentId}
-							columnId={_columnId}
-							last={i === columnsLength - 1 && last}
-							KeyComponent={KeyComponent}
-							ValueComponent={ValueComponent}
-							TypeComponent={TypeComponent} />);
-					i++;
-				}
-				return collector;
-			})()}
+						collector.push(
+							<ComplexItemDb 
+								key={id +'-'+ _columnId}
+								id={id}
+								parentId={parentId}
+								columnId={_columnId}
+								last={i === columnsLength - 1 && last}
+								KeyComponent={KeyComponent}
+								ValueComponent={ValueComponent}
+								TypeComponent={TypeComponent}
+								onMenuComplexValue={onMenuComplexValue} />);
+						i++;
+					}
+					return collector;
+				})()}
 	</React.Fragment>;
 };
 
 ComplexValue = React.memo(ComplexValue);
 ComplexValue.defaultProps = {
+	scriptId: 0,
+	workspaceId: 0,
 	id: 0,
 	parentId: 0,
+	onMenuComplexValue: () => {},
 };
 
 export default ComplexValue;

@@ -33,6 +33,7 @@ import {
 import KeyComponent from './KeyComponent.jsx';
 import ValueComponent from './ValueComponent.jsx';
 import TypeComponent from './TypeComponent.jsx';
+import MergeComponent from './MergeComponent.jsx';
 import onMount from './onMount.js';
 import onClose from './onClose.js';
 import onChangeName from '../Func/onChangeName.js';
@@ -40,6 +41,7 @@ import onSave from './onSave.js';
 import onDelete from './onDelete.js';
 import onSelectDataTypeId from './onSelectDataTypeId.js';
 import onCheckVariable from './onCheckVariable.js';
+import onMenuComplexValue from './onMenuComplexValue.js';
 
 let Prop = () => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_PROP]);
@@ -52,7 +54,6 @@ let Prop = () => {
 	const name = useSelector((state) => state.prop.name || '');
 	const asVariable = useSelector((state) => !!state.prop.as_variable);
 	const dataTypeId = useSelector((state) => ((state.jsObject.data || {})[0] || {}).data_type_id ?? DATA_TYPE_ATOMIC.id);
-	console.log('fromEntityId', fromEntityId);
 	const _onDelete = React.useCallback((e) => onDelete(e, scriptId, workspaceId, id), [
 		scriptId,
 		workspaceId,
@@ -155,9 +156,13 @@ let Prop = () => {
 							</Box>
 						</Box>
 						<JsObject 
+							scriptId={scriptId}
+							workspaceId={workspaceId}
 							KeyComponent={KeyComponent}
 							ValueComponent={ValueComponent}
-							TypeComponent={TypeComponent} />
+							TypeComponent={TypeComponent}
+							MergeComponent={MergeComponent}
+							onMenuComplexValue={onMenuComplexValue} />
 					</DialogContent>
 					<DialogActions>
 					<Box 

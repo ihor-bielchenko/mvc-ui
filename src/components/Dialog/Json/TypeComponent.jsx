@@ -15,8 +15,10 @@ const _onFilterTypes = (parentDataTypeId) => (key) => (
 	parentDataTypeId === DATA_TYPE_ATOMIC.id
 		? (dataTypes[key].id !== DATA_TYPE_ID.id
 			&& dataTypes[key].id !== DATA_TYPE_OBJECT.id
-			&& dataTypes[key].id !== DATA_TYPE_ARRAY.id)
-	: dataTypes[key].id !== DATA_TYPE_ID.id
+			&& dataTypes[key].id !== DATA_TYPE_ARRAY.id
+			&& dataTypes[key].id !== DATA_TYPE_ATOMIC.id)
+	: (dataTypes[key].id !== DATA_TYPE_ID.id
+		&& dataTypes[key].id !== DATA_TYPE_ATOMIC.id)
 );
 
 let TypeComponent = ({

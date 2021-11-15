@@ -19,9 +19,11 @@ let LogicValue = ({
 }) => {
 	const scriptKeys = useSelector((state) => Object.keys(state.script));
 	const script = useSelector((state) => state.script);
-	const workspaceId = scriptKeys.find((key) => typeof script[key] === 'object'
-		? script[key].data[entityId]
-		: undefined);
+	const workspaceId = entityId > 0
+		? scriptKeys.find((key) => typeof script[key] === 'object'
+			? script[key].data[entityId]
+			: undefined)
+		: undefined;
 
 	return <React.Fragment>
 		<Box

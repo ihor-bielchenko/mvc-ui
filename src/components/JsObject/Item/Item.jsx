@@ -25,8 +25,10 @@ let Item = ({
 	KeyComponent,
 	ValueComponent,
 	TypeComponent,
+	MergeComponent,
 	className,
 	onMerge,
+	onMenuComplexValue,
 }) => {
 	const parentDataTypeId = useSelector((state) => (state.jsObject.data[parentId] || {}).data_type_id);
 	const dataTypeId = useSelector((state) => (state.jsObject.data[id] || {}).data_type_id);
@@ -89,10 +91,16 @@ let Item = ({
 					last={last}
 					KeyComponent={KeyComponent}
 					ValueComponent={ValueComponent}
-					TypeComponent={TypeComponent} />
+					TypeComponent={TypeComponent}
+					MergeComponent={MergeComponent}
+					onMenuComplexValue={onMenuComplexValue} />
 				: <React.Fragment>
 					{arrayLengthIsUndefined
-						? <ComplexChip id={id} />
+						? <ComplexChip 
+							scriptId={scriptId}
+							workspaceId={workspaceId}
+							id={id}
+							onMenuComplexValue={onMenuComplexValue} />
 						: <React.Fragment />}
 					<Box
 						position="relative"
@@ -129,7 +137,9 @@ let Item = ({
 							KeyComponent={KeyComponent}
 							ValueComponent={ValueComponent}
 							TypeComponent={TypeComponent}
-							onMerge={onMerge} />
+							MergeComponent={MergeComponent}
+							onMerge={onMerge}
+							onMenuComplexValue={onMenuComplexValue} />
 					</Box>
 				</React.Fragment>}
 		</Box>
@@ -154,6 +164,7 @@ Item.defaultProps = {
 	parentId: 0,
 	last: false,
 	onMerge: () => {},
+	onMenuComplexValue: () => {},
 };
 
 export default Item;
