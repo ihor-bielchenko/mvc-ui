@@ -13,6 +13,7 @@ import SourceCookie from './SourceCookie';
 import SourcePlaceholder from './SourcePlaceholder';
 import SourceScript from './SourceScript';
 import DbQuery from './DbQuery';
+import KeyExists from './KeyExists';
 import { URL_PAGE_SCRIPT } from 'consts/url.js';
 
 let Root = ({ 
@@ -31,6 +32,7 @@ let Root = ({
 				<Json />
 				<SourceDb />
 				<DbQuery />
+				<KeyExists />
 				<SourceProxy />
 				<SourceHeader />
 				<SourceRequest />

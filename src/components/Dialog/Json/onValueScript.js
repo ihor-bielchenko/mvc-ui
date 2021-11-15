@@ -4,11 +4,57 @@ import onLoader from 'components/Loader/onLoader';
 import parseCortegeData from 'components/JsObject/parseCortegeData.js';
 import getTemplate from 'components/JsObject/getTemplate.js';
 import generateKey from 'components/JsObject/generateKey.js';
+import onDialog from 'components/Dialog/onDialog.js';
 import onClose from 'components/Dialog/onClose.js';
 import fetchCortegeGetMany from 'fetch/cortegeGetMany.js';
 import axiosError from 'utils/axiosError.js';
+import unique from 'utils/unique.js';
 import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
+import { DIALOG_KEY_EXISTS } from 'consts/dialog.js';
 
+const merge = (prepareData, currentItem, sourceValue, uniqueKey = false) => {
+	const jsObject = Store().getState().jsObject;
+	const data = jsObject.data;
+	const blocks = jsObject.blocks;
+	let newId = Date.now();
+
+	data[newId] = getTemplate({
+		parent_id: currentItem.id,
+		id: newId,
+		data_type_id: sourceValue.data_type_id,
+		key: generateKey(blocks[currentItem.id] ?? []),
+		value: sourceValue,
+		disabledKey: true,
+		disabledType: true,
+		disabledValue: true,
+		disabledRemove: true,
+	});
+	blocks[currentItem.id] = (blocks[currentItem.id] ?? [])
+	blocks[currentItem.id].push(data[newId]);
+
+	Object
+		.keys(prepareData.data)
+		.forEach((key, i) => {
+			if (prepareData.data[key].id > 0) {
+				if (prepareData.data[key].parent_id === 0) {
+					prepareData.data[key].parent_id = data[newId].id;
+					if (uniqueKey) {
+						prepareData.data[key].key = unique() +'-'+ prepareData.data[key].key;
+					}
+				}
+				data[prepareData.data[key].id] = { ...prepareData.data[key] };
+				data[prepareData.data[key].id].key = generateKey(blocks[data[prepareData.data[key].id].parent_id] ?? [], prepareData.data[key].key);
+				data[prepareData.data[key].id].disabledKey = true;
+				data[prepareData.data[key].id].disabledType = true;
+				data[prepareData.data[key].id].disabledValue = true;
+				data[prepareData.data[key].id].disabledRemove = true;
+				blocks[data[prepareData.data[key].id].parent_id] = (blocks[data[prepareData.data[key].id].parent_id] ?? []);
+				blocks[data[prepareData.data[key].id].parent_id].push(data[prepareData.data[key].id]);
+			}
+		});
+	onClose(DIALOG_KEY_EXISTS)();
+	console.log('blocks', blocks);
+};
 const onValueScript = (currentItemId) => async (e, scriptId, workspaceId, entityId, dataTypeId) => {
 	onLoader(true);
 
@@ -22,7 +68,6 @@ const onValueScript = (currentItemId) => async (e, scriptId, workspaceId, entity
 			const fetchResponse = await fetchCortegeGetMany(script[workspaceId].data[entityId].sourceId);
 			const fetchData = ((fetchResponse || {}).data || {}).data;
 			const prepareData = parseCortegeData(jsObjectInitialState(), fetchData, scriptId, workspaceId);
-			const data = jsObject.data;
 			const blocks = jsObject.blocks;
 			const currentItem = jsObject.data[currentItemId] || {};
 			const sourceValue = {
@@ -32,47 +77,41 @@ const onValueScript = (currentItemId) => async (e, scriptId, workspaceId, entity
 				id: entityId,
 				workspaceId,
 			};
-			const mergeKeys = Object.keys(prepareData.data);
-			let newId = Date.now();
+			let keyExistsFlag = false,
+				childId = Date.now() - 999999;
 
-			data[newId] = getTemplate({
-				parent_id: currentItem.id,
-				id: newId,
-				data_type_id: dataTypeId,
-				key: generateKey(blocks[currentItem.id] ?? [], 'vvvvmvmvmmvmvv'),
-				value: sourceValue,
-				disabledKey: true,
-				disabledType: true,
-				disabledValue: true,
-				disabledRemove: true,
-			});
-			blocks[currentItem.id] = (blocks[currentItem.id] ?? [])
-			blocks[currentItem.id].push(data[newId]);
+			Object
+				.keys(prepareData.data)
+				.forEach((key, i) => {
+					if (prepareData.data[key].id > 0) {
+						const _id = prepareData.data[key].id + childId;
+							
+						if (prepareData.data[key].parent_id === 0) {
+							const findIndex = blocks[currentItem.id].findIndex((item) => (
+								item.key === prepareData.data[key].key
+							));
 
-			console.log('currentItem.id', newId, blocks[currentItem.id], data);
-
-			mergeKeys.forEach((key, i) => {
-				if (prepareData.data[key].id > 0) {
-					if (prepareData.data[key].parent_id === 0) {
-						prepareData.data[key].parent_id = data[newId].id;
+							if (findIndex > -1) {
+								keyExistsFlag = true;
+							}
+						}
+						prepareData.data[key].id = _id;
+						prepareData.data[key].parent_id = prepareData.data[key].parent_id === 0
+							? prepareData.data[key].parent_id
+							: prepareData.data[key].parent_id + childId;
 					}
-					data[prepareData.data[key].id] = { ...prepareData.data[key] };
-					console.log('prepareData.data[key].key', prepareData.data[key].key);
-					data[prepareData.data[key].id].key = generateKey(blocks[data[prepareData.data[key].id].parent_id] ?? [], prepareData.data[key].key);
-					data[prepareData.data[key].id].disabledKey = true;
-					data[prepareData.data[key].id].disabledType = true;
-					data[prepareData.data[key].id].disabledValue = true;
-					data[prepareData.data[key].id].disabledRemove = true;
-					blocks[data[prepareData.data[key].id].parent_id] = (blocks[data[prepareData.data[key].id].parent_id] ?? []);
-					blocks[data[prepareData.data[key].id].parent_id].push(data[prepareData.data[key].id]);
-				}
-			});
-			console.log('blocks', blocks, data);
+				});
+			if (keyExistsFlag) {
+				onDialog(DIALOG_KEY_EXISTS, {
+					merge: () => merge(prepareData, currentItem, sourceValue, true),
+				})(e);
+			}
+			else {
+				merge(prepareData, currentItem, sourceValue);
+			}
 		}
 	}
 	catch (err) {
-		console.log('err', err);
-
 		Store().dispatch({
 			type: 'alert',
 			payload: () => ({

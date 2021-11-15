@@ -240,17 +240,36 @@ let ComplexItemScript = ({
 	TypeComponent,
 	onMenuComplexValue,
 }) => {
-	return <React.Fragment>
-		{(id > 0)
-			? <Value
-				parentId={parentId}
-				id={id}
+	const blocks = Store().getState().jsObject.blocks;
+	const blocksItemLength = useSelector((state) => (state.jsObject.blocks[id] || []).length);
+	let i = 0,
+		collector = [];
+
+	while (i < blocksItemLength) {
+		const item = (blocks[id] || [])[i];
+
+		if (item) {
+			collector.push(<ComplexItem
+				key={item.id}
+				parentId={item.parent_id}
+				id={item.id}
 				KeyComponent={KeyComponent}
-				ValueComponent={ValueComponent}
 				TypeComponent={TypeComponent}
-				onMenuComplexValue={onMenuComplexValue}
-				hideComplexType />
-			: <React.Fragment />}
+				dataTypeId={item.data_type_id}
+				keyValue={item.key}
+				value={() => <Value
+					parentId={item.parent_id}
+					id={item.id}
+					KeyComponent={KeyComponent}
+					ValueComponent={ValueComponent}
+					TypeComponent={TypeComponent}
+					onMenuComplexValue={onMenuComplexValue} />} />);
+		}
+		i++;
+	}
+
+	return <React.Fragment>
+		{collector}
 	</React.Fragment>;
 };
 ComplexItemScript = React.memo(ComplexItemScript);

@@ -13,8 +13,16 @@ const generateKey = (data = [], key) => {
 		nExists = false;
 
 	data.forEach((item, index) => {
-		if (item.key.includes('n')) {
-			const _nSplit = item.key.split('n');
+		const _nSplit = item.key.split('n');
+		const _nPlusSplit = item.key.split('n+');
+
+		if (item.key.includes('n')
+			&& ((_nPlusSplit.length === 2
+				&& Number(_nPlusSplit[1]) > 0
+				&& (!_nPlusSplit[1] || parseInt(_nPlusSplit[1]) > 0))
+			|| (_nSplit.length === 2
+				&& !_nSplit[1]
+				&& (!_nSplit[0] || parseInt(_nSplit[0]) > 0)))) {
 			const _nOrder = Number(_nSplit[0]);
 
 			if (_nOrder > maxNOrder) {

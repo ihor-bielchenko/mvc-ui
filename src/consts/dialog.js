@@ -12,3 +12,4 @@ export const DIALOG_PROP = 'd9';
 export const DIALOG_IF = 'd12';
 export const DIALOG_FUNC = 'd10';
 export const DIALOG_JSON = 'd11';
+export const DIALOG_KEY_EXISTS = 'd13';

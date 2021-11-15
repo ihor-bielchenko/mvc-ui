@@ -26,7 +26,7 @@ let DeleteConfirm = () => {
 			fullWidth
 			maxWidth="xs"
 			open={!!dialog}
-			onClose={onClose}>
+			onClose={onClose(DIALOG_DELETE_CONFIRM)}>
 			<DialogContent dividers>
 				<Typography variant="h6">
 					{_title}
