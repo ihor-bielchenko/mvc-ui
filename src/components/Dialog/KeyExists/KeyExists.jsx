@@ -34,7 +34,8 @@ let KetExists = () => {
 				? <React.Fragment>
 					<DialogContent dividers>
 						<Typography>
-							Измененить совпадающие ключи для новых элементов на уникальные значения?
+							Новые элементы содержат ключи которые уже существуют. <br />
+							Этим элементам будут присвоены новые уникальные значения
 						</Typography>
 					</DialogContent>
 					<DialogActions>

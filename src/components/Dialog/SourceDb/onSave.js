@@ -1,45 +1,50 @@
 import Store from 'components/Store';
 import getTemplate from 'components/JsObject/getTemplate.js';
 import generateKey from 'components/JsObject/generateKey.js';
+import onDialog from 'components/Dialog/onDialog.js';
+import unique from 'utils/unique.js';
 import { SOURCE_TYPE_DB } from 'structures/sourceTypes.js';
 import {
 	DATA_TYPE_ATOMIC,
 	DATA_TYPE_OBJECT,
 	DATA_TYPE_ARRAY,
 } from 'structures/dataTypes.js';
+import { DIALOG_KEY_EXISTS } from 'consts/dialog.js';
+import onClose from '../onClose.js';
 
-const onSave = (e, id, onClose) => {
-	id = Number(id);
-
+const merge = (id, tempValue, sourceValue, onCloseDb) => {
 	const {
 		jsObject,
 		dbColumns: {
 			data: dbColumnsData,
 		},
 	} = Store().getState();
-	const data = jsObject.data;
 	const blocks = jsObject.blocks;
-	const tempValue = jsObject.tempValue;
-	const sourceValue = {
-		offset: 0,
-		limit: 0,
-		...tempValue,
-		source_type_id: SOURCE_TYPE_DB.id,
-		columns: {},
-	};
+	const data = jsObject.data;
 	const {
 		is_collection: isCollection,
 		select,
 	} = (tempValue || {});
-	let newId = Date.now();
 	const currentItem = data[id] || {};
 	const parentId = currentItem.parent_id;
 	const parentItem = data[parentId];
 	const parentDataTypeId = (parentItem || {}).data_type_id || currentItem.data_type_id;
+	const _sourceValue = {
+		...sourceValue,
+		columns: (() => {
+			const collector = {};
 
-	select.forEach((columnId) => (
-		sourceValue.columns[columnId] = dbColumnsData[columnId].name
-	));
+			Object
+				.keys(sourceValue.columns)
+				.forEach((key) => {
+					collector[key] = sourceValue.columns[key][1]
+						? unique() +'-'+ sourceValue.columns[key][0]
+						: sourceValue.columns[key][0];
+				});
+			return collector;
+		})()
+	};
+	let newId = Date.now();
 
 	if (isCollection) {
 		currentItem.data_type_id = DATA_TYPE_OBJECT.id;
@@ -50,14 +55,14 @@ const onSave = (e, id, onClose) => {
 			currentItem.disabledKey = true;
 			currentItem.disabledType = true;
 			currentItem.value = undefined;
-			currentItem.collection = sourceValue;
+			currentItem.collection = _sourceValue;
 			blocks[parentId] = [ currentItem ];
 			data[newId] = getTemplate({
 				parent_id: id,
 				id: newId,
 				data_type_id: DATA_TYPE_OBJECT.id,
 				key: generateKey(blocks[id] ?? []),
-				value: sourceValue,
+				value: _sourceValue,
 				disabledType: true,
 				disabledValue: true,
 				disabledRemove: true,
@@ -77,7 +82,7 @@ const onSave = (e, id, onClose) => {
 				value: undefined,
 				disabledKey: true,
 				disabledType: true,
-				collection: sourceValue,
+				collection: _sourceValue,
 			});
 			blocks[id] = (blocks[id] ?? []);
 			blocks[nId] = [];
@@ -87,7 +92,7 @@ const onSave = (e, id, onClose) => {
 				id: oId,
 				data_type_id: DATA_TYPE_OBJECT.id,
 				key: generateKey(blocks[nId] ?? []),
-				value: sourceValue,
+				value: _sourceValue,
 				disabledType: true,
 				disabledValue: true,
 				disabledRemove: true,
@@ -103,7 +108,7 @@ const onSave = (e, id, onClose) => {
 				id: id,
 				data_type_id: DATA_TYPE_OBJECT.id,
 				key: generateKey(blocks[parentId] ?? []),
-				value: sourceValue,
+				value: _sourceValue,
 				disabledType: true,
 				disabledValue: true,
 				disabledRemove: true,
@@ -118,7 +123,7 @@ const onSave = (e, id, onClose) => {
 				id: newId,
 				data_type_id: DATA_TYPE_OBJECT.id,
 				key: generateKey(blocks[id]),
-				value: sourceValue,
+				value: _sourceValue,
 				disabledType: true,
 				disabledValue: true,
 				disabledRemove: true,
@@ -134,7 +139,7 @@ const onSave = (e, id, onClose) => {
 				id: newId,
 				data_type_id: dbColumnsData[select[0]].data_type_id,
 				key: dbColumnsData[select[0]].name,
-				value: sourceValue,
+				value: _sourceValue,
 				disabledType: true,
 			});
 			blocks[id].push(data[newId]);
@@ -145,13 +150,84 @@ const onSave = (e, id, onClose) => {
 			}
 			currentItem.data_type_id = dbColumnsData[select[0]].data_type_id;
 			currentItem.disabledType = true;
-			currentItem.value = sourceValue;
+			currentItem.value = _sourceValue;
 
 			select.forEach((columnId) => dbColumnsData[columnId].name);
 		}
 	}
 	jsObject.tempValue = {};
-	onClose();
+	onCloseDb();
+	onClose(DIALOG_KEY_EXISTS)();
+};
+
+const onSave = (e, id, onCloseDb) => {
+	id = Number(id);
+
+	const {
+		jsObject,
+		dbColumns: {
+			data: dbColumnsData,
+		},
+	} = Store().getState();
+	const data = jsObject.data;
+	const blocks = jsObject.blocks;
+	const tempValue = jsObject.tempValue;
+	const {
+		is_collection: isCollection,
+		select,
+	} = (tempValue || {});
+	const sourceValue = {
+		offset: 0,
+		limit: 0,
+		...tempValue,
+		source_type_id: SOURCE_TYPE_DB.id,
+		columns: {},
+	};
+	const currentItem = data[id] || {};
+	const parentId = currentItem.parent_id;
+	const parentItem = data[parentId];
+	const parentDataTypeId = (parentItem || {}).data_type_id || currentItem.data_type_id;
+	let keyExistsFlag = false;
+
+	select.forEach((columnId) => {
+		sourceValue.columns[columnId] = [ dbColumnsData[columnId].name ];
+			
+		if (!isCollection) {
+			const findIndex = blocks[parentDataTypeId === DATA_TYPE_ATOMIC.id
+				? parentId
+				: id].findIndex((item) => {
+					let columnExistsFlag = false;
+
+					if ((item.value || {}).columns) {
+						Object
+							.keys((item.value || {}).columns || {})
+							.forEach((columnKey) => {
+								if (((item.value || {}).columns || {})[columnKey] === dbColumnsData[columnId].name) {
+									columnExistsFlag = true;
+									sourceValue.columns[columnId].push(true);
+								}
+							});
+					}
+					return item.key === dbColumnsData[columnId].name
+						|| columnExistsFlag;
+				});
+			if (findIndex > -1) {
+				keyExistsFlag = true;
+				sourceValue.columns[columnId].push(true);
+			}
+		}
+	});
+
+	if (keyExistsFlag) {
+		onDialog(DIALOG_KEY_EXISTS, {
+			merge: () => {
+				merge(id, tempValue, sourceValue, onCloseDb);
+			},
+		})(e);
+	}
+	else {
+		merge(id, tempValue, sourceValue, onCloseDb);
+	}
 };
 
 export default onSave;

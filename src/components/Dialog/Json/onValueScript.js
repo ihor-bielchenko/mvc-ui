@@ -38,8 +38,9 @@ const merge = (prepareData, currentItem, sourceValue, uniqueKey = false) => {
 			if (prepareData.data[key].id > 0) {
 				if (prepareData.data[key].parent_id === 0) {
 					prepareData.data[key].parent_id = data[newId].id;
-					if (uniqueKey) {
+					if (prepareData.data[key].keyExistsFlag) {
 						prepareData.data[key].key = unique() +'-'+ prepareData.data[key].key;
+						delete prepareData.data[key].keyExistsFlag;
 					}
 				}
 				data[prepareData.data[key].id] = { ...prepareData.data[key] };
@@ -86,13 +87,12 @@ const onValueScript = (currentItemId) => async (e, scriptId, workspaceId, entity
 						const _id = prepareData.data[key].id + childId;
 							
 						if (prepareData.data[key].parent_id === 0) {
-							const findIndex = blocks[currentItem.id].findIndex((item) => (
-								item.key === prepareData.data[key].key
-							));
-
-							if (findIndex > -1) {
-								keyExistsFlag = true;
-							}
+							blocks[currentItem.id].forEach((item) => {
+								if (item.key === prepareData.data[key].key) {
+									prepareData.data[key]['keyExistsFlag'] = true;
+									keyExistsFlag = true;
+								}
+							});
 						}
 						prepareData.data[key].id = _id;
 						prepareData.data[key].parent_id = prepareData.data[key].parent_id === 0
