@@ -6,6 +6,7 @@ export const URL_PAGE_RECOVERY = '/recovery';
 export const URL_PAGE_RESET = '/reset';
 export const URL_PAGE_ACCESS_CONFIRM = '/access-confirm';
 export const URL_PAGE_DASHBOARD = '/dashboard';
+export const URL_PAGE_ROUTE = 'route';
 export const URL_PAGE_SCRIPT = 'script';
 
 export const URL_API_SSO_REFRESH = '/api/refresh';

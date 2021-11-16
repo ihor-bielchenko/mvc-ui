@@ -2,6 +2,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import Header from 'components/Header';
 import {
 	Create,
 	entities,
@@ -182,11 +184,39 @@ let Listing = ({
 		<Box 
 			width="max-content"
 			minWidth="100%">
+			<Header>
+				<Box 
+					display="flex"
+					justifyContent="flex-end"
+					width="calc(100% - 192px)">
+					<Box
+						display="flex"
+						alignItems="center"
+						height="48px"
+						width="max-content"
+						overflow="hidden"
+						mr="10px"
+						px="4px"
+						style={{
+							backgroundColor: '#FFF',
+							border: '1px solid #EFEFEF',
+							borderRadius: '7px',
+						}}>
+						<Button>
+							Конфигурация роута
+						</Button>
+						<Button disabled>
+							Логика
+						</Button>
+					</Box>
+				</Box>
+			</Header>
 			{firstArrow
 				? <React.Fragment>
 					<Box 
 						position="relative"
-						minWidth="420px">
+						minWidth="420px"
+						pt="80px">
 						<Build 
 							scriptId={scriptId}
 							workspaceId={workspaceId}
