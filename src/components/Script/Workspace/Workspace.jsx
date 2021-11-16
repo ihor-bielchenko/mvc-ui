@@ -3,7 +3,10 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Header from 'components/Header';
+import SelectScale from 'components/Select/Scale';
 import {
 	Create,
 	entities,
@@ -187,8 +190,33 @@ let Listing = ({
 			<Header>
 				<Box 
 					display="flex"
-					justifyContent="flex-end"
+					justifyContent="space-between"
 					width="calc(100% - 192px)">
+					<Box
+						display="flex"
+						alignItems="center"
+						height="48px"
+						width="max-content"
+						overflow="hidden"
+						mr="10px"
+						px="4px"
+						style={{
+							backgroundColor: '#FFF',
+							border: '1px solid #EFEFEF',
+							borderRadius: '7px',
+						}}>
+						<Button 
+							disabled
+							startIcon={<ArrowBackIcon />}>
+							Назад
+						</Button>
+						<Button 
+							disabled
+							endIcon={<ArrowForwardIcon />}>
+							Вперед
+						</Button>
+						<SelectScale />
+					</Box>
 					<Box
 						display="flex"
 						alignItems="center"
