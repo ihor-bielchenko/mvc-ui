@@ -8,6 +8,7 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
 import AirportShuttleIcon from '@material-ui/icons/AirportShuttle';
 import TextsmsIcon from '@material-ui/icons/Textsms';
+import LoopIcon from '@material-ui/icons/Loop';
 import Store from 'components/Store';
 import onDialog from 'components/Dialog/onDialog.js';
 import {
@@ -104,6 +105,14 @@ let Entity = ({
 				</ListItemAvatar>
 				<Typography>
 					JSON-ответ
+				</Typography>
+			</MenuItem>
+			<MenuItem disabled>
+				<ListItemAvatar>
+					<LoopIcon />
+				</ListItemAvatar>
+				<Typography>
+					Цикл
 				</Typography>
 			</MenuItem>
 		</Menu>
