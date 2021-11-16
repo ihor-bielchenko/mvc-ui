@@ -10,7 +10,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import CloseIcon from '@material-ui/icons/Close';
 import SaveIcon from '@material-ui/icons/Save';
-import Header from 'components/Header';
+import Title from 'components/Title';
 import SelectService from 'components/Select/Service';
 import SelectRoute from 'components/Select/Route';
 import Url from 'components/Group/Proxy/Url';
@@ -60,9 +60,9 @@ let SourceProxy = () => {
 			open={!!dialog}
 			onClose={_onClose}>
 			<DialogTitle>
-				<Header onClose={_onClose}>
+				<Title onClose={_onClose}>
 					Получить значение из другого сервиса
-				</Header>
+				</Title>
 			</DialogTitle>
 			<DialogContent dividers>
 				<form onSubmit={_onSave}>

@@ -8,7 +8,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import CloseIcon from '@material-ui/icons/Close';
 import CheckIcon from '@material-ui/icons/Check';
-import Header from 'components/Header';
+import Title from 'components/Title';
 import InputText from 'components/Input/Text';
 import onSubmit from 'components/Dialog/SourceCookie/onSubmit.js';
 import onClose from 'components/Dialog/SourceCookie/onClose.js';
@@ -49,9 +49,9 @@ let SourceHeader = () => {
 			open={!!dialog}
 			onClose={onClose(SOURCE_TYPE_HEADER.id)}>
 			<DialogTitle>
-				<Header onClose={onClose(SOURCE_TYPE_HEADER.id)}>
+				<Title onClose={onClose(SOURCE_TYPE_HEADER.id)}>
 					Заголовок входящего запроса
-				</Header>
+				</Title>
 			</DialogTitle>
 			<form onSubmit={_onSubmit}>
 				<DialogContent dividers>

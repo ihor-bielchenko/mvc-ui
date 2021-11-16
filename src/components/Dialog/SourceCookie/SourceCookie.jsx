@@ -8,7 +8,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import CloseIcon from '@material-ui/icons/Close';
 import CheckIcon from '@material-ui/icons/Check';
-import Header from 'components/Header';
+import Title from 'components/Title';
 import InputText from 'components/Input/Text';
 import onValidate from 'components/Group/Func/onValidate.js';
 import { 
@@ -50,9 +50,9 @@ let SourceCookie = () => {
 				open={!!dialog}
 				onClose={onClose(SOURCE_TYPE_COOKIE.id)}>
 				<DialogTitle>
-					<Header onClose={onClose(SOURCE_TYPE_COOKIE.id)}>
+					<Title onClose={onClose(SOURCE_TYPE_COOKIE.id)}>
 						Куки входящего запроса
-					</Header>
+					</Title>
 				</DialogTitle>
 				<form onSubmit={_onSubmit}>
 					<DialogContent dividers>

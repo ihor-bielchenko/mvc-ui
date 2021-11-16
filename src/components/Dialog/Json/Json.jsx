@@ -12,7 +12,7 @@ import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
 import DeleteIcon from '@material-ui/icons/Delete';
-import Header from 'components/Header';
+import Title from 'components/Title';
 import JsObject from 'components/JsObject';
 import InputText from 'components/Input/Text';
 import SelectDataType from 'components/Select/DataType';
@@ -91,11 +91,11 @@ let Json = () => {
 			open={_dialogOpenFlag}
 			onClose={_onClose}>
 			<DialogTitle>
-				<Header onClose={_onClose}>
+				<Title onClose={_onClose}>
 					{id >= 1
 						? 'JSON-ответ: '+ name
 						: 'Добавить JSON-ответ'}
-				</Header>
+				</Title>
 			</DialogTitle>
 			{_dialogOpenFlag
 				? <React.Fragment>

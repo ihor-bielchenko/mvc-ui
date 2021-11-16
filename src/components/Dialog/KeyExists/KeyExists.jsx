@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
-import Header from 'components/Header';
+import Title from 'components/Title';
 import { DIALOG_KEY_EXISTS } from 'consts/dialog.js';
 import onClose from '../onClose.js';
 
@@ -26,9 +26,9 @@ let KetExists = () => {
 			open={!!dialog}
 			onClose={onClose(DIALOG_KEY_EXISTS)}>
 			<DialogTitle>
-				<Header onClose={onClose(DIALOG_KEY_EXISTS)}>
+				<Title onClose={onClose(DIALOG_KEY_EXISTS)}>
 					Найдены совпадения ключей
-				</Header>
+				</Title>
 			</DialogTitle>
 			{!!dialog
 				? <React.Fragment>

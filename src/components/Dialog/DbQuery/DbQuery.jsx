@@ -10,7 +10,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
-import Header from 'components/Header';
+import Title from 'components/Title';
 import InputText from 'components/Input/Text';
 import onValidateSource from 'components/Group/Func/onValidate.js';
 import { DIALOG_DB_QUERY } from 'consts/dialog.js';
@@ -61,9 +61,9 @@ let DbQuery = () => {
 			open={!!dialog}
 			onClose={onClose}>
 			<DialogTitle>
-				<Header onClose={onClose}>
+				<Title onClose={onClose}>
 					Поисковый запрос
-				</Header>
+				</Title>
 			</DialogTitle>
 			{!!dialog
 				? <React.Fragment>

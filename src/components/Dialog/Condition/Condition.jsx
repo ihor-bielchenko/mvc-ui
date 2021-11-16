@@ -12,7 +12,7 @@ import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
 import DeleteIcon from '@material-ui/icons/Delete';
-import Header from 'components/Header';
+import Title from 'components/Title';
 import InputText from 'components/Input/Text';
 import SelectFuncTemplate from 'components/Select/FuncTemplate';
 import GroupFunc from 'components/Group/Func';
@@ -79,11 +79,11 @@ let Condition = () => {
 			open={_dialogOpenFlag}
 			onClose={_onClose}>
 			<DialogTitle>
-				<Header onClose={_onClose}>
+				<Title onClose={_onClose}>
 					{id >= 1
 						? 'Условие: '+ name
 						: 'Добавить условие'}
-				</Header>
+				</Title>
 			</DialogTitle>
 			{_dialogOpenFlag
 				? <React.Fragment>

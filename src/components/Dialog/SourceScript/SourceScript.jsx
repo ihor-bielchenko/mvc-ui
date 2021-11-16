@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Header from 'components/Header';
+import Title from 'components/Title';
 import Script from 'components/Script';
 import getScriptId from 'components/Script/getScriptId.js';
 import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
@@ -24,9 +24,9 @@ let SourceScript = () => {
 			open={displayFlag}
 			onClose={onClose(SOURCE_TYPE_SCRIPT.id)}>
 			<DialogTitle>
-				<Header onClose={onClose(SOURCE_TYPE_SCRIPT.id)}>
+				<Title onClose={onClose(SOURCE_TYPE_SCRIPT.id)}>
 					Значение из программы
-				</Header>
+				</Title>
 			</DialogTitle>
 			<DialogContent 
 				dividers

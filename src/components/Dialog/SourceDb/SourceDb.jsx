@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
-import Header from 'components/Header';
+import Title from 'components/Title';
 import Select from 'components/Group/Db/Select';
 import Filter from 'components/Group/Db/Filter';
 import Sort from 'components/Group/Db/Sort';
@@ -66,9 +66,9 @@ let SourceDb = () => {
 			open={!!dialog}
 			onClose={_onClose}>
 			<DialogTitle>
-				<Header onClose={_onClose}>
+				<Title onClose={_onClose}>
 					Значение из базы данных
-				</Header>
+				</Title>
 			</DialogTitle>
 			<DialogContent dividers>
 				<Stepper 
