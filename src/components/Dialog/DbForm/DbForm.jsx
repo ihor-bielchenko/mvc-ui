@@ -70,7 +70,6 @@ let DbForm = () => {
 						</Box>
 						<Tabs 
 							indicatorColor="secondary"
-							textColor="primary"
 							value={tab}
 							onChange={_onTab}>
 							<Tab 

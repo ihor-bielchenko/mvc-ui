@@ -83,7 +83,6 @@ let SourceProxy = () => {
 							<Tabs 
 								variant="fullWidth"
 								indicatorColor="secondary"
-								textColor="primary"
 								value={tab}
 								onChange={_onTab}>
 								<Tab 

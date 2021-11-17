@@ -1,6 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { 
+	Link,
+	withRouter, 
+} from 'react-router-dom';
 import BreadcrumbsMaterial from '@material-ui/core/Breadcrumbs';
 import Typography from '@material-ui/core/Typography';
 import { 
@@ -13,8 +16,8 @@ import {
 	URL_PAGE_LOG,
 } from 'consts/url.js';
 
-let Breadcrumbs = () => {
-	const url = window
+let Breadcrumbs = ({ history }) => {
+	const url = history
 		.location
 		.pathname
 		.split('/');
@@ -96,4 +99,4 @@ Breadcrumbs = React.memo(Breadcrumbs);
 Breadcrumbs.defaultProps = {
 };
 
-export default Breadcrumbs;
+export default withRouter(Breadcrumbs);

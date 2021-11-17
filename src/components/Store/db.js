@@ -6,7 +6,7 @@ import {
 	DATA_TYPE_PASSWORD,
 } from 'structures/dataTypes.js';
 
-const initialState = {
+const initialState = () => ({
 	isCollection: true,
 	tables: {
 		1: {
@@ -60,9 +60,27 @@ const initialState = {
 			required: false,
 		},
 	},
+	list: {
+		rowsPerPage: 10,
+		total: 19,
+		current_page: 0,
+		data: [{
+			1: 1,
+			2: 'test1',
+			3: 19,
+			4: 'eee@eee.eee',
+			5: 'cmcmcmcc',
+		}, {
+			1: 2,
+			2: 'tes2',
+			3: 22,
+			4: 'eee@eee.eee',
+			5: 'mmm',
+		}],
+	},
 	tempValue: {},
-};
-const db = (state = initialState, action) => {
+});
+const db = (state = initialState(), action) => {
 	return action.type === 'db'
 		? action.payload()
 		: state;
