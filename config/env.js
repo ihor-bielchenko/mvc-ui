@@ -94,6 +94,7 @@ function getClientEnvironment(publicUrl) {
 				SSO_PATH: process.env.SSO_PATH,
 				SCRIPT_PATH: process.env.SCRIPT_PATH,
 				SOURCE_PATH: process.env.SOURCE_PATH,
+				DB_PATH: process.env.DB_PATH,
 
 				ARROW_TYPE_DEFAULT: Number(process.env.ARROW_TYPE_DEFAULT),
 				ARROW_TYPE_TRUE: Number(process.env.ARROW_TYPE_TRUE),

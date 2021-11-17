@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import styled from 'styled-components';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
@@ -17,36 +16,19 @@ import dataTypes, {
 	DATA_TYPE_ID,
 	DATA_TYPE_NUMBER,
 } from 'structures/dataTypes.js';
-
-const BoxWrapper = styled(Box)`
-	background-color: #FFF;
-	border: 1px solid #9B9B9B;
-	border-radius: 7px;
-
-	& tr:first-child {
-		border-top: 1px solid rgba(224, 224, 224, 1);
-	}
-
-	& td {
-		padding: 2px 2px 0px;
-	}
-	& td:not(:last-child) {
-		border-right: 1px solid rgba(224, 224, 224, 1);
-	}
-`;
+import Slot from '../Slot';
+import onTable from './onTable.js';
 
 let Table = ({ id }) => {
 	const tableName = useSelector((state) => ((state.db.tables || {})[id] || {}).name);
 	const columns = useSelector((state) => (state.db.columns || {}));
 	const columnsKeys = Object.keys(columns);
+	const _onTable = React.useCallback((e) => onTable(e, id), [
+		id,
+	]);
 
 	return <React.Fragment>
-		<BoxWrapper
-			position="absolute"
-			top="90px"
-			left="90px"
-			maxWidth="280px"
-			width="max-content">
+		<Slot id={id}>
 			<Box
 				display="flex"
 				alignItems="flex-start"
@@ -72,7 +54,7 @@ let Table = ({ id }) => {
 				</IconButton>
 				<MenuControl
 					aria={'menu-table-'+ id}
-					onEdit={() => {}}
+					onEdit={_onTable}
 					onDelete={() => {}} />
 			</Box>
 			{columnsKeys.length > 0
@@ -115,7 +97,7 @@ let Table = ({ id }) => {
 					</TableBody>
 				</TableMaterial>
 				: <React.Fragment />}
-		</BoxWrapper>
+		</Slot>
 	</React.Fragment>;
 };
 

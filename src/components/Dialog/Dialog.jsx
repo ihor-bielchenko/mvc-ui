@@ -14,7 +14,12 @@ import SourcePlaceholder from './SourcePlaceholder';
 import SourceScript from './SourceScript';
 import DbQuery from './DbQuery';
 import KeyExists from './KeyExists';
-import { URL_PAGE_SCRIPT } from 'consts/url.js';
+import DbForm from './DbForm';
+import DbColumn from './DbColumn';
+import { 
+	URL_PAGE_SCRIPT,
+	URL_PAGE_DB, 
+} from 'consts/url.js';
 
 let Root = ({ 
 	location, 
@@ -40,7 +45,12 @@ let Root = ({
 				<SourcePlaceholder />
 				<SourceScript />
 			</React.Fragment>
-			: <React.Fragment />}
+			: (url[4] === URL_PAGE_DB)
+				? <React.Fragment>
+					<DbForm />
+					<DbColumn />
+				</React.Fragment>
+				: <React.Fragment />}
 		{children}
 	</React.Fragment>;
 };

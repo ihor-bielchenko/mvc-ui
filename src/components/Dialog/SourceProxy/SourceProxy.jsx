@@ -82,7 +82,7 @@ let SourceProxy = () => {
 						? <React.Fragment>
 							<Tabs 
 								variant="fullWidth"
-								indicatorColor="primary"
+								indicatorColor="secondary"
 								textColor="primary"
 								value={tab}
 								onChange={_onTab}>

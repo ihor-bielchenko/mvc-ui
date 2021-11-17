@@ -26,3 +26,6 @@ export const URL_API_SCRIPT_ARROW = '/api/arrow';
 export const URL_API_SCRIPT_PROP = '/api/prop';
 export const URL_API_SCRIPT_JSON = '/api/json';
 export const URL_API_SCRIPT_FUNC = '/api/func';
+
+export const URL_API_DB_COLUMN = '/api/column';
+export const URL_API_DB_TABLE = '/api/table';

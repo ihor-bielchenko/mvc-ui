@@ -13,6 +13,8 @@ let Input = ({
 	name,
 	menu,
 	size,
+	multiline,
+	rows,
 	disabled,
 	required,
 	error,
@@ -68,6 +70,8 @@ let Input = ({
 					variant="outlined"
 					disabled={disabled}
 					required={required}
+					multiline={multiline}
+					rows={rows}
 					error={error}
 					size={size}
 					label={label}

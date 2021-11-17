@@ -12,6 +12,10 @@ const initialState = {
 		1: {
 			id: 1,
 			name: 'main',
+			description: 'example text',
+			is_collection: false,
+			x: 90,
+			y: 90,
 		}
 	},
 	columns: {
@@ -19,33 +23,44 @@ const initialState = {
 			id: 1,
 			data_type_id: DATA_TYPE_ID.id,
 			name: 'ID',
+			description: 'example text',
 			default_value: 0,
+			required: true,
 		},
 		2: {
 			id: 2,
 			data_type_id: DATA_TYPE_TEXT.id,
 			name: 'title',
+			description: 'example text',
 			default_value: '',
+			required: false,
 		},
 		3: {
 			id: 3,
 			data_type_id: DATA_TYPE_NUMBER.id,
 			name: 'age',
+			description: 'example text',
 			default_value: 0,
+			required: false,
 		},
 		4: {
 			id: 4,
 			data_type_id: DATA_TYPE_EMAIL.id,
 			name: 'email',
+			description: 'example text',
 			default_value: '',
+			required: false,
 		},
 		5: {
 			id: 5,
 			data_type_id: DATA_TYPE_PASSWORD.id,
 			name: 'password',
+			description: 'example text',
 			default_value: '',
+			required: false,
 		},
 	},
+	tempValue: {},
 };
 const db = (state = initialState, action) => {
 	return action.type === 'db'
