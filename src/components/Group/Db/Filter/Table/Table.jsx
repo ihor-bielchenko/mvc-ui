@@ -67,7 +67,7 @@ let Table = () => {
 						<TableBody>
 							{filterKeys.map((id) => {
 								const filterItem = Store().getState().jsObject.tempValue.filter[id];
-								const column = Store().getState().dbColumns.data[filterItem.column_id];
+								const column = Store().getState().db.columns[filterItem.column_id];
 
 								return <TableRow key={id}>
 									<TableCell>

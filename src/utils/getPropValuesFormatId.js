@@ -13,7 +13,7 @@ import {
 } from 'structures/dataTypes.js';
 
 const getPropValuesFormatId = (body) => {
-	const dbColumns = Store().getState().dbColumns;
+	const db = Store().getState().db;
 
 	const bodyKeys = Object.keys(body);
 	let formatId = DATA_TYPE_TEXT.id;
@@ -23,8 +23,8 @@ const getPropValuesFormatId = (body) => {
 			case SOURCE_TYPE_DB.id:
 				formatId = (body[bodyKeys[0]].is_collection || body[bodyKeys[0]].select.length > 1)
 					? DATA_TYPE_ARRAY.id
-					: (dbColumns.data[body[bodyKeys[0]].select[0]].data_type_id === DATA_TYPE_ID.id ||
-						dbColumns.data[body[bodyKeys[0]].select[0]].data_type_id === DATA_TYPE_NUMBER.id)
+					: (db.columns[body[bodyKeys[0]].select[0]].data_type_id === DATA_TYPE_ID.id ||
+						db.columns[body[bodyKeys[0]].select[0]].data_type_id === DATA_TYPE_NUMBER.id)
 						? DATA_TYPE_NUMBER.id
 						: DATA_TYPE_TEXT.id;
 				break;

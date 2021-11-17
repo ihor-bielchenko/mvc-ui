@@ -28,7 +28,7 @@ let Select = ({
 	id,
 	isCollection, 
 }) => {
-	const dbColumnsKeys = useSelector((state) => Object.keys(state.dbColumns.data));
+	const dbColumnsKeys = useSelector((state) => Object.keys(state.db.columns));
 	const _isCollection = useSelector((state) => isCollection || state.jsObject.tempValue.is_collection);
 	const offset = useSelector((state) => state.jsObject.tempValue.offset);
 	const limit = useSelector((state) => state.jsObject.tempValue.limit);
@@ -136,7 +136,7 @@ let Select = ({
 		</Box>
 		<FormGroup>
 			{dbColumnsKeys.map((key) => {
-				const dbColumnsData = Store().getState().dbColumns.data;
+				const dbColumnsData = Store().getState().db.columns;
 
 				return <FormControlLabel
 					key={key}

@@ -38,7 +38,6 @@ let Parent = ({
 		id,
 	]);
 	const {
-		// dbColumns,
 		jsObject: {
 			blocks,
 			data,

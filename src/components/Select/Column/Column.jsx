@@ -13,7 +13,7 @@ let Column = ({
 	helperText,
 	onSelect, 
 }) => {
-	const dbColumnsData = Store().getState().dbColumns.data;
+	const dbColumnsData = Store().getState().db.columns;
 
 	return <Select
 		name={name}

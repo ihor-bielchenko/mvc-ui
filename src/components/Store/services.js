@@ -10,7 +10,11 @@ export const initialState = () => ({
 		id: 3,
 		name: 'service 3',
 	}],
-	form: {},
+	form: {
+		project_id: 1,
+		id: 1,
+		name: 'service 1',
+	},
 });
 const services = (state = initialState(), action) => {
 	return action.type === 'services'

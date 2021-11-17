@@ -74,7 +74,7 @@ let Form = ({
 	const value = useSelector((state) => ((state.jsObject.tempValue.filter || {})[id] || {}).value || '');
 	const operatorId = useSelector((state) => ((state.jsObject.tempValue.filter || {})[id] || {}).operator_if_id || '');
 	const columnId = useSelector((state) => ((state.jsObject.tempValue.filter || {})[id] || {}).column_id || '');
-	const columnDataTypeId = useSelector((state) => (state.dbColumns.data[columnId] || {}).data_type_id);
+	const columnDataTypeId = useSelector((state) => (state.db.columns[columnId] || {}).data_type_id);
 	const _onChange = React.useCallback((e) => onChange(e, id), [
 		id,
 	]);

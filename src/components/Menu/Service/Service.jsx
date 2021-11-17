@@ -11,6 +11,7 @@ import AirplayIcon from '@material-ui/icons/Airplay';
 import StorageIcon from '@material-ui/icons/Storage';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
+import DescriptionIcon from '@material-ui/icons/Description';
 import onClose from '../onClose.js';
 
 let Service = ({ 
@@ -78,6 +79,15 @@ let Service = ({
 				</ListItemAvatar>
 				<Typography>
 					Логи
+				</Typography>
+			</MenuItem>
+			<Divider />
+			<MenuItem disabled>
+				<ListItemAvatar>
+					<DescriptionIcon />
+				</ListItemAvatar>
+				<Typography>
+					Документация
 				</Typography>
 			</MenuItem>
 		</Menu>

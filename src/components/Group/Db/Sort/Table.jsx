@@ -42,7 +42,7 @@ let Table = () => {
 					<TableBody>
 						{sortKeys.map((id) => {
 							const sortItem = Store().getState().jsObject.tempValue.sort[id];
-							const column = Store().getState().dbColumns.data[sortItem.column_id];
+							const column = Store().getState().db.columns[sortItem.column_id];
 
 							return <TableRow key={id}>
 								<TableCell>

@@ -9,7 +9,7 @@ import jsObject from './jsObject.js';
 import func from './func.js';
 import prop from './prop.js';
 import json from './json.js';
-import dbColumns from './dbColumns.js';
+import db from './db.js';
 import routes from './routes.js';
 
 const structure = {
@@ -24,7 +24,7 @@ const structure = {
 	func,
 	prop,
 	json,
-	dbColumns,
+	db,
 	routes,
 };
 

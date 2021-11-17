@@ -87,7 +87,7 @@ let ComplexItemDb = ({
 	onMenuComplexValue,
 }) => {
 	const key = useSelector((state) => (((state.jsObject.data[id] || {}).value || {}).columns || {})[columnId]);
-	const dbColumnsData = Store().getState().dbColumns.data;
+	const dbColumnsData = Store().getState().db.columns;
 	const _onChangeKey = React.useCallback((e) => onChangeKey(e, id, columnId), [
 		id,
 		columnId,

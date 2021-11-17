@@ -6,8 +6,13 @@ export const URL_PAGE_RECOVERY = '/recovery';
 export const URL_PAGE_RESET = '/reset';
 export const URL_PAGE_ACCESS_CONFIRM = '/access-confirm';
 export const URL_PAGE_DASHBOARD = '/dashboard';
-export const URL_PAGE_ROUTE = 'route';
+export const URL_PAGE_ACCOUNT = 'account';
+export const URL_PAGE_SERVICE = 'service';
+export const URL_PAGE_API = 'api';
+export const URL_PAGE_CRON = 'cron';
 export const URL_PAGE_SCRIPT = 'script';
+export const URL_PAGE_DB = 'db';
+export const URL_PAGE_LOG = 'log';
 
 export const URL_API_SSO_REFRESH = '/api/refresh';
 export const URL_API_SSO_SIGN_IN = '/api/login';

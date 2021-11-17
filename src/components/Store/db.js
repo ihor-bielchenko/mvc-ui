@@ -8,7 +8,13 @@ import {
 
 const initialState = {
 	isCollection: true,
-	data: {
+	tables: {
+		1: {
+			id: 1,
+			name: 'main',
+		}
+	},
+	columns: {
 		1: {
 			id: 1,
 			data_type_id: DATA_TYPE_ID.id,
@@ -41,10 +47,10 @@ const initialState = {
 		},
 	},
 };
-const dbColumns = (state = initialState, action) => {
-	return action.type === 'dbColumns'
+const db = (state = initialState, action) => {
+	return action.type === 'db'
 		? action.payload()
 		: state;
 };
 
-export default dbColumns;
+export default db;

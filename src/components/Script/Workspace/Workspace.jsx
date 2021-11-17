@@ -1,24 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import styled from 'styled-components';
 import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import Header from 'components/Header';
-import SelectScale from 'components/Select/Scale';
 import {
 	Create,
 	entities,
 } from '../Slot';
 import Arrow from '../Arrow';
 
-const BoxBackgraund = styled(Box)`
-	& > .MuiBox-root {
-		background-image: linear-gradient(rgba(198, 198, 198, .2) .26em, transparent .26em), linear-gradient(90deg, rgba(198, 198, 198, .2) .26em, transparent .26em);
-		background-size: 40px 40px;
-	}
-`;
 let Build = ({
 	scriptId,
 	workspaceId,
@@ -184,61 +172,6 @@ let Listing = ({
 	const firstArrow = arrows.find((arrow) => arrow.from_entity_id === 0);
 
 	return <React.Fragment>
-		<Box 
-			width="max-content"
-			minWidth="100%">
-			<Header>
-				<Box 
-					display="flex"
-					justifyContent="space-between"
-					width="calc(100% - 192px)">
-					<Box
-						display="flex"
-						alignItems="center"
-						height="48px"
-						width="max-content"
-						overflow="hidden"
-						mr="10px"
-						px="4px"
-						style={{
-							backgroundColor: '#FFF',
-							border: '1px solid #EFEFEF',
-							borderRadius: '7px',
-						}}>
-						<Button 
-							disabled
-							startIcon={<ArrowBackIcon />}>
-							Назад
-						</Button>
-						<Button 
-							disabled
-							endIcon={<ArrowForwardIcon />}>
-							Вперед
-						</Button>
-						<SelectScale />
-					</Box>
-					<Box
-						display="flex"
-						alignItems="center"
-						height="48px"
-						width="max-content"
-						overflow="hidden"
-						mr="10px"
-						px="4px"
-						style={{
-							backgroundColor: '#FFF',
-							border: '1px solid #EFEFEF',
-							borderRadius: '7px',
-						}}>
-						<Button>
-							Конфигурация роута
-						</Button>
-						<Button disabled>
-							Логика
-						</Button>
-					</Box>
-				</Box>
-			</Header>
 			{firstArrow
 				? <React.Fragment>
 					<Box 
@@ -261,7 +194,6 @@ let Listing = ({
 							scriptId={scriptId}
 							workspaceId={workspaceId} />
 					</Box>}
-		</Box>
 	</React.Fragment>;
 };
 Listing = React.memo(Listing);
@@ -282,22 +214,14 @@ let Workspace = ({
 }) => {
 	const loadedFlag = useSelector((state) => (state.script[workspaceId] || {}).loadedFlag);
 
-	return <React.Fragment>
-		<BoxBackgraund
-			position="relative"
-			overflow="auto"
-			width="100%"
-			height="100%">
-			{loadedFlag
-				? <Listing 
-					workspaceId={workspaceId}
-					scriptId={scriptId}
-					isSource={isSource}
-					dataTypeValidating={dataTypeValidating}
-					onClickAsSource={onClickAsSource} />
-				: <React.Fragment />}
-		</BoxBackgraund>
-	</React.Fragment>;
+	return loadedFlag
+		? <Listing 
+			workspaceId={workspaceId}
+			scriptId={scriptId}
+			isSource={isSource}
+			dataTypeValidating={dataTypeValidating}
+			onClickAsSource={onClickAsSource} />
+		: <React.Fragment />;
 };
 
 Workspace = React.memo(Workspace);

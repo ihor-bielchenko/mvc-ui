@@ -11,8 +11,8 @@ const onEdit = (e, id, onClose) => {
 
 	const {
 		jsObject,
-		dbColumns: {
-			data: dbColumnsData,
+		db: {
+			columns: dbColumnsData,
 		},
 	} = Store().getState();
 	const data = jsObject.data;

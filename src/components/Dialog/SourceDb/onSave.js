@@ -15,8 +15,8 @@ import onClose from '../onClose.js';
 const merge = (id, tempValue, sourceValue, onCloseDb) => {
 	const {
 		jsObject,
-		dbColumns: {
-			data: dbColumnsData,
+		db: {
+			columns: dbColumnsData,
 		},
 	} = Store().getState();
 	const blocks = jsObject.blocks;
@@ -165,8 +165,8 @@ const onSave = (e, id, onCloseDb) => {
 
 	const {
 		jsObject,
-		dbColumns: {
-			data: dbColumnsData,
+		db: {
+			columns: dbColumnsData,
 		},
 	} = Store().getState();
 	const data = jsObject.data;
