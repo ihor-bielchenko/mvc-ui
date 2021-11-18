@@ -8,7 +8,7 @@ import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
 import { DATA_TYPE_TEXT } from 'structures/dataTypes.js';
 import onDialog from 'components/Dialog/onDialog.js';
 import onValidateInput from 'components/Dialog/SourceProxy/onValidate.js';
-import onValidateSource from 'components/Group/Func/onValidate.js';
+import onValidateSource from 'components/Dialog/Func/Props/onValidate.js';
 import onPlaceholder from './onPlaceholder.js';
 import onValueScript from './onValueScript.js';
 import onClear from './onClear.js';

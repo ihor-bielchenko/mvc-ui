@@ -16,7 +16,7 @@ import Title from 'components/Title';
 import InputText from 'components/Input/Text';
 import SelectFuncCategory from 'components/Select/FuncCategory';
 import SelectFuncTemplate from 'components/Select/FuncTemplate';
-import GroupFunc from 'components/Group/Func';
+import FuncProps from './Props';
 import Transition from 'components/Dialog/Transition.jsx';
 import onDialog from 'components/Dialog/onDialog.js';
 import funcTemplates from 'structures/funcTemplates.js';
@@ -112,7 +112,7 @@ let Func = () => {
 								onSelect={onSelectTemplate} />
 						</Box>
 						{templateId > 0
-							? <GroupFunc 
+							? <FuncProps 
 								scriptId={scriptId}
 								workspaceId={workspaceId}
 								funcId={id}

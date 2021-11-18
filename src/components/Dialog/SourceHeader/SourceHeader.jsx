@@ -12,7 +12,7 @@ import Title from 'components/Title';
 import InputText from 'components/Input/Text';
 import onSubmit from 'components/Dialog/SourceCookie/onSubmit.js';
 import onClose from 'components/Dialog/SourceCookie/onClose.js';
-import onValidate from 'components/Group/Func/onValidate.js';
+import onValidate from 'components/Dialog/Func/Props/onValidate.js';
 import { 
 	SOURCE_TYPE_HEADER,
 	SOURCE_TYPE_SCRIPT, 

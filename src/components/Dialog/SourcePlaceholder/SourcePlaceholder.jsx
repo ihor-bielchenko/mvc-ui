@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import LogicValue from 'components/Input/LogicValue.jsx';
 import AddIcon from '@material-ui/icons/Add';
 import Title from 'components/Title';
-import onValidate from 'components/Group/Func/onValidate.js';
+import onValidate from 'components/Dialog/Func/Props/onValidate.js';
 import { 
 	SOURCE_TYPE_PLACEHOLDER,
 	SOURCE_TYPE_SCRIPT, 

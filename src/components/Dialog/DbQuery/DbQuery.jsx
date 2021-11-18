@@ -12,7 +12,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
 import Title from 'components/Title';
 import InputText from 'components/Input/Text';
-import onValidateSource from 'components/Group/Func/onValidate.js';
+import onValidateSource from 'components/Dialog/Func/Props/onValidate.js';
 import { DIALOG_DB_QUERY } from 'consts/dialog.js';
 import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
 import { DATA_TYPE_TEXT } from 'structures/dataTypes.js';

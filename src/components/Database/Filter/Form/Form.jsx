@@ -10,7 +10,7 @@ import InputText from 'components/Input/Text';
 import SelectColumn from 'components/Select/Column';
 import SelectOperatorIf from 'components/Select/OperatorIf';
 import onDialog from 'components/Dialog/onDialog.js';
-import onValidateSource from 'components/Group/Func/onValidate.js';
+import onValidateSource from 'components/Dialog/Func/Props/onValidate.js';
 import loadColumnInputs from 'utils/loadColumnInputs.js';
 import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
 import { 

@@ -10,7 +10,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import CheckIcon from '@material-ui/icons/Check';
 import Title from 'components/Title';
 import InputText from 'components/Input/Text';
-import onValidate from 'components/Group/Func/onValidate.js';
+import onValidate from 'components/Dialog/Func/Props/onValidate.js';
 import { 
 	SOURCE_TYPE_COOKIE,
 	SOURCE_TYPE_SCRIPT, 

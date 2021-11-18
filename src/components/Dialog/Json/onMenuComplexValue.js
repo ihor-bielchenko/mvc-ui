@@ -1,5 +1,5 @@
 import onDialog from 'components/Dialog/onDialog.js';
-import onValidateSource from 'components/Group/Func/onValidate.js';
+import onValidateSource from 'components/Dialog/Func/Props/onValidate.js';
 import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
 import { 
 	DATA_TYPE_TEXT,

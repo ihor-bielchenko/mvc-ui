@@ -11,7 +11,7 @@ import {
 } from 'structures/dataTypes.js';
 import onDialog from 'components/Dialog/onDialog.js';
 import onValidateInput from 'components/Dialog/SourceProxy/onValidate.js';
-import onValidateSource from 'components/Group/Func/onValidate.js';
+import onValidateSource from 'components/Dialog/Func/Props/onValidate.js';
 import onDelete from './onDelete.js';
 import onChangeKey from './onKey.js';
 import onChangeValue from './onValue.js';

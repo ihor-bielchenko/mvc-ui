@@ -1,6 +1,6 @@
 import Store from 'components/Store';
 import onDialog from 'components/Dialog/onDialog.js';
-import onValidate from 'components/Group/Func/onValidate.js';
+import onValidate from 'components/Dialog/Func/Props/onValidate.js';
 import onClose from 'components/Dialog/onClose.js';
 import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
 

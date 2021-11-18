@@ -2,7 +2,7 @@ import React from 'react';
 // import { useSelector } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
-import onValidate from 'components/Group/Func/onValidate.js';
+import onValidate from 'components/Dialog/Func/Props/onValidate.js';
 import onDialog from 'components/Dialog/onDialog.js';
 import dataTypes from 'structures/dataTypes.js';
 import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
