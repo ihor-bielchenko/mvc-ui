@@ -4,24 +4,26 @@ import axiosError from 'utils/axiosError.js';
 import fetchDbTableUpdate from 'fetch/dbTableUpdate.js';
 
 const onStop = async (e, options, id) => {
-	onLoader(true);
-
 	try {
 		const db = Store().getState().db;
 		const tables = db.tables;
 
 		if (tables[id]) {
-			await fetchDbTableUpdate(id, {
-				x: options.x,
-				y: options.y,
-			});
-			tables[id].x = options.x;
-			tables[id].y = options.y;
+			if (tables[id].x !== options.x || tables[id].y !== options.y) {
+				onLoader(true);
 
-			Store().dispatch({
-				type: 'db',
-				payload: () => ({ ...db }),
-			});
+				await fetchDbTableUpdate(id, {
+					x: options.x,
+					y: options.y,
+				});
+				tables[id].x = options.x;
+				tables[id].y = options.y;
+
+				Store().dispatch({
+					type: 'db',
+					payload: () => ({ ...db }),
+				});
+			}
 			onLoader(false);
 		}
 		else {
