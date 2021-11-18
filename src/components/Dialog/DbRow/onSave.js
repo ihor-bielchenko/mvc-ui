@@ -1,6 +1,6 @@
 import Store from 'components/Store';
 import onLoader from 'components/Loader/onLoader';
-import onMountList from 'components/Group/Db/List/onMount.js';
+import onMountList from 'components/Database/List/onMount.js';
 import axiosError from 'utils/axiosError.js';
 import fetchDbRowCreate from 'fetch/dbRowCreate.js';
 import fetchDbRowUpdate from 'fetch/dbRowUpdate.js';

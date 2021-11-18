@@ -15,8 +15,8 @@ import CloseIcon from '@material-ui/icons/Close';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Title from 'components/Title';
 import InputText from 'components/Input/Text';
-import GroupDbColumns from 'components/Group/Db/Columns';
-import GroupDbList from 'components/Group/Db/List';
+import GroupDbColumns from 'components/Database/Columns';
+import GroupDbList from 'components/Database/List';
 import Transition from 'components/Dialog/Transition.jsx';
 import onDialog from 'components/Dialog/onDialog.js';
 import { 
