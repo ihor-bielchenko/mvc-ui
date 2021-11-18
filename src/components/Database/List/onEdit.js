@@ -7,27 +7,23 @@ const onEdit = (e, tableId, rowIndex, rowId) => {
 		db,
 		list,
 	} = Store().getState();
+	const columns = db.columns;
+	const columnKeys = Object.keys(columns);
+	const value = {};
 
-	if (list.data[rowIndex]) {
-		db.tempValue = { 
-			id: rowId,
+	columnKeys.forEach((columnKey) => {
+		value[columnKey] = columns[columnKey].default_value;
+	});
+	db.tempValue = (list.data[rowIndex])
+		? { 
+			...value,
 			...list.data[rowIndex], 
-		};
-		Store().dispatch({
-			type: 'db',
-			payload: () => ({ ...db }),
-		});
-	}
-	else {
-		const columns = db.columns;
-		const columnKeys = Object.keys(columns);
-		const value = {};
-
-		columnKeys.forEach((columnKey) => {
-			value[columnKey] = columns[columnKey].default_value;
-		});
-		db.tempValue = { ...value };
-	}
+		}
+		: { ...value };
+	Store().dispatch({
+		type: 'db',
+		payload: () => ({ ...db }),
+	});
 	onDialog(DIALOG_DB_ROW, {
 		tableId,
 		rowIndex,

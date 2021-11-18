@@ -16,10 +16,9 @@ import dataTypes, {
 	DATA_TYPE_NUMBER,
 } from 'structures/dataTypes.js';
 import { DIALOG_DB_ROW } from 'consts/dialog.js';
-import onClose from '../onClose.js';
-import onUnmount from './onUnmount.js';
 import onSave from './onSave.js';
 import onChange from './onChange.js';
+import onClose from './onClose.js';
 
 let Column = ({ 
 	columnKey,
@@ -61,21 +60,17 @@ Column.defaultProps = {
 	error: false,
 };
 
-const _onClose = (e) => {
-	onUnmount();
-	onClose(DIALOG_DB_ROW)(e);
-};
 let DbRow = () => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_DB_ROW]);
 	const _dialogOpenFlag = !!dialog;
 	const tableId = Number((dialog || {}).tableId || 0);
 	const rowId = Number((dialog || {}).rowId || 0);
-	const data = useSelector((state) => state.db.tempValue);
-	const dataKeys = Object.keys(data);
+	const columns = useSelector((state) => state.db.columns);
+	const columnKeys = Object.keys(columns);
 	const [ error, setError ] = React.useState(() => {
 		const collector = {};
 
-		dataKeys.forEach((columnId) => {
+		columnKeys.forEach((columnId) => {
 			collector[columnId] = false;
 		});
 		return collector;
@@ -93,9 +88,9 @@ let DbRow = () => {
 			fullWidth
 			maxWidth="sm"
 			open={!!dialog}
-			onClose={_onClose}>
+			onClose={onClose}>
 			<DialogTitle>
-				<Title onClose={_onClose}>
+				<Title onClose={onClose}>
 					{rowId > 0
 						? 'Редактировать запись'
 						: 'Новая запись'}
@@ -105,7 +100,7 @@ let DbRow = () => {
 				? <React.Fragment>
 					<DialogContent dividers>
 						<React.Fragment>
-							{dataKeys.map((columnKey) => {
+							{columnKeys.map((columnKey) => {
 								return parseInt(columnKey) > 0
 									? <React.Fragment key={columnKey}>
 										<Column 
@@ -126,7 +121,7 @@ let DbRow = () => {
 								variant="outlined"
 								color="secondary"
 								startIcon={<CloseIcon />}
-								onClick={_onClose}>
+								onClick={onClose}>
 								Отмена
 							</Button>
 							<Button 

@@ -6,18 +6,18 @@ import fetchDbRowDelete from 'fetch/dbRowDelete.js';
 import { DIALOG_DELETE_CONFIRM } from 'consts/dialog.js';
 import onMount from './onMount.js';
 
-const onDelete = async (e, tableId, rowIndex, rowId) => {
+const onDelete = async (e, tableId, rowId) => {
 	onLoader(true);
 
 	try {
 		const list = Store().getState().list;
 
-		if (list.data[rowIndex]
-			&& rowId > 0) {
-			await fetchDbRowDelete(JSON.stringify([ rowId ]));
-			await onMount(tableId, 0, 20);
-			onClose(DIALOG_DELETE_CONFIRM)(e);
-		}
+		await fetchDbRowDelete(JSON.stringify(rowId > 0
+			? ([ rowId ])
+			: list.select));
+		list.select = [];
+		await onMount(tableId, 0, 20);
+		onClose(DIALOG_DELETE_CONFIRM)(e);
 	}
 	catch (err) {
 		Store().dispatch({

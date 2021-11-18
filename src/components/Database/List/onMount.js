@@ -8,13 +8,25 @@ const onMount = async (tableId, currentPage, rowsPerPage) => {
 
 	try {
 		const list = Store().getState().list;
-		/*const fetchDbRowResponse =*/ await fetchDbRowMany(currentPage + 1, {
+		const fetchDbRowResponse = await fetchDbRowMany(currentPage + 1, {
 			limit: rowsPerPage,
-			search: '',
+			// search: new String(),
 		});
-		// const fetchDbRowData = ((fetchDbRowResponse || {}).data || {}).data || [];
-	
-		// list.data = [ ...fetchDbRowData ];
+		const fetchDbRowData = (fetchDbRowResponse || {}).data || {};
+
+		list.select = [];
+		list.data = fetchDbRowData
+			.data
+			.map((row) => {
+				const collector = {};
+
+				row.cells.forEach((cell) => {
+					collector[cell.column_id] = cell.value;
+				});
+				return collector;
+			});
+		list.fetch = fetchDbRowData.data;
+		list.total = fetchDbRowData.total;
 		list.rowsPerPage = rowsPerPage;
 		list.currentPage = currentPage;
 

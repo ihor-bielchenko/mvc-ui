@@ -1,5 +1,5 @@
 
-const initialState = () => ({
+export const initialState = () => ({
 	total: 0,
 	rowsPerPage: 20,
 	currentPage: 0,
@@ -10,6 +10,8 @@ const initialState = () => ({
 			text: 'Test',
 		}*/],
 	},
+	select: [],
+	fetch: [],
 	data: [/*{
 		1: 1,
 		2: 'test1',

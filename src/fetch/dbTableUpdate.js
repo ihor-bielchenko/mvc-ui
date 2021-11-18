@@ -5,6 +5,7 @@ import { URL_API_DB_TABLE } from 'consts/url.js';
 
 const dbTableUpdate = async (tableId, data) => {
 	try {
+		data.is_collection = Number(data.is_collection);
 		const r = await axios(process.env.DB_PATH + URL_API_DB_TABLE +'/'+ tableId, {
 			method: 'patch',
 			params: {

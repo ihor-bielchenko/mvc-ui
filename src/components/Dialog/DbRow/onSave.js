@@ -4,8 +4,7 @@ import onMountList from 'components/Database/List/onMount.js';
 import axiosError from 'utils/axiosError.js';
 import fetchDbRowCreate from 'fetch/dbRowCreate.js';
 import fetchDbRowUpdate from 'fetch/dbRowUpdate.js';
-import { DIALOG_DB_ROW } from 'consts/dialog.js';
-import onClose from '../onClose.js';
+import onClose from './onClose.js';
 
 const onSave = async (e, tableId, rowId, setError = () => {}) => {
 	onLoader(true);
@@ -33,11 +32,9 @@ const onSave = async (e, tableId, rowId, setError = () => {}) => {
 		}
 		else {
 			(rowId > 0)
-				? await fetchDbRowUpdate(rowId, {
-					...db.tempValue,
-				})
-				: await fetchDbRowCreate({ ...db.tempValue });
-			onClose(DIALOG_DB_ROW)(e);
+				? await fetchDbRowUpdate(rowId, { ...db.tempValue })
+				: await fetchDbRowCreate(tableId, { ...db.tempValue });
+			onClose();
 			await onMountList(tableId, 0, 20);
 		}
 	}

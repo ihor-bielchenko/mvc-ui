@@ -19,14 +19,19 @@ const onMount = async () => {
 			const fetchDbTableData = ((fetchDbTableResponse || {}).data || {}).data || [];
 			const collector = {};
 
+			db.columns = {};
 			fetchDbTableData.forEach((item) => {
 				collector[item.id] = { ...item };
+				item.columns.forEach((column) => {
+					db.columns[column.id] = { ...column };
+				});
 			});
 			db.tables = { ...collector };
 			Store().dispatch({
 				type: 'db',
 				payload: () => ({ ...db }),
 			});
+			onLoader(false);
 		}
 		else {
 			throw new Error('undefined serviceId');

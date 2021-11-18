@@ -29,19 +29,27 @@ import onMount from './onMount.js';
 import onUnmount from './onUnmount.js';
 import onEdit from './onEdit.js';
 import onDelete from './onDelete.js';
+import onCheckboxAll from './onCheckboxAll.js';
+import onCheckboxRow from './onCheckboxRow.js';
 
 let List = ({ id }) => {
 	const rowsPerPage = useSelector((state) => state.list.rowsPerPage);
 	const currentPage = useSelector((state) => state.list.currentPage);
+	const select = useSelector((state) => ([ ...state.list.select ]));
 	const total = useSelector((state) => state.list.total);
+	const fetch = useSelector((state) => state.list.fetch);
 	const data = useSelector((state) => state.list.data);
 	const columns = useSelector((state) => state.db.columns);
 	const columnKeys = Object.keys(columns);
 	const _onEdit = React.useCallback((rowIndex, rowId) => (e) => onEdit(e, id, rowIndex, rowId), [
 		id,
 	]);
-	const _onDelete = React.useCallback((rowIndex, rowId) => (e) => onDelete(e, id, rowIndex, rowId), [
+	const _onDelete = React.useCallback((rowId) => (e) => onDelete(e, id, rowId), [
 		id,
+	]);
+	const _onCheckboxAll = React.useCallback((e) => onCheckboxAll(e), [
+	]);
+	const _onCheckboxRow = React.useCallback((rowId) => (e) => onCheckboxRow(e, rowId), [
 	]);
 
 	React.useEffect(() => {
@@ -77,8 +85,12 @@ let List = ({ id }) => {
 						Копировать
 					</Button>
 					<Button
+						disabled={!(select.length > 0)}
 						color="secondary"
-						startIcon={<CloseIcon />}>
+						startIcon={<CloseIcon />}
+						onClick={onDialog(DIALOG_DELETE_CONFIRM, {
+							onDelete: _onDelete(),
+						})}>
 						Удалить
 					</Button>
 				</ButtonGroup>
@@ -94,7 +106,10 @@ let List = ({ id }) => {
 					<TableHead>
 						<TableRow>
 							<TableCell padding="checkbox">
-								<Checkbox />
+								<Checkbox
+									checked={select.length > 0
+										&& select.length === data.length}
+									onChange={_onCheckboxAll} />
 							</TableCell>
 							{columnKeys.map((columnKey) => {
 								return <TableCell key={columns[columnKey].id}>
@@ -108,32 +123,36 @@ let List = ({ id }) => {
 							const itemKeys = Object.keys(item);
 							const findIdKey = itemKeys.find((columnKey) => columns[columnKey].data_type_id === DATA_TYPE_ID.id);
 
-							return <TableRow key={item[findIdKey]}>
-								<TableCell padding="checkbox">
-									<Checkbox />
-								</TableCell>
-								{itemKeys.map((columnKey, i) => {
-									return <TableCell key={columns[columnKey].id}>
-										{item[columnKey]}
-									</TableCell>;
-								})}
-								<TableCell 
-									width="96px"
-									style={{
-										width: 48,
-										padding: 0,
-									}}>
-									<IconButton onClick={onMenu('menu-control-'+ item[findIdKey])}>
-										<MoreVertIcon />
-									</IconButton>
-									<MenuControl 
-										aria={'menu-control-'+ item[findIdKey]}
-										onEdit={_onEdit(i, findIdKey)}
-										onDelete={onDialog(DIALOG_DELETE_CONFIRM, {
-											onDelete: _onDelete(i, findIdKey),
-										})} />
-								</TableCell>
-							</TableRow>;
+							return findIdKey > 0
+								? <TableRow key={item[findIdKey]}>
+									<TableCell padding="checkbox">
+										<Checkbox
+											checked={select.includes(fetch[i].id)}
+											onChange={_onCheckboxRow(fetch[i].id)} />
+									</TableCell>
+									{columnKeys.map((columnKey, i) => {
+										return <TableCell key={columns[columnKey].id}>
+											{item[columnKey]}
+										</TableCell>;
+									})}
+									<TableCell 
+										width="96px"
+										style={{
+											width: 48,
+											padding: 0,
+										}}>
+										<IconButton onClick={onMenu('menu-control-'+ item[findIdKey])}>
+											<MoreVertIcon />
+										</IconButton>
+										<MenuControl 
+											aria={'menu-control-'+ item[findIdKey]}
+											onEdit={_onEdit(i, fetch[i].id)}
+											onDelete={onDialog(DIALOG_DELETE_CONFIRM, {
+												onDelete: _onDelete(fetch[i].id),
+											})} />
+									</TableCell>
+								</TableRow>
+								: <React.Fragment key={'no-'+ i} />;
 						})}
 					</TableBody>
 				</Table>

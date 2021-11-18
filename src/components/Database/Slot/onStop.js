@@ -1,5 +1,5 @@
 import Store from 'components/Store';
-import onLoader from 'components/Loader/onLoader';
+// import onLoader from 'components/Loader/onLoader';
 import axiosError from 'utils/axiosError.js';
 import fetchDbTableUpdate from 'fetch/dbTableUpdate.js';
 
@@ -10,12 +10,6 @@ const onStop = async (e, options, id) => {
 
 		if (tables[id]) {
 			if (tables[id].x !== options.x || tables[id].y !== options.y) {
-				onLoader(true);
-
-				await fetchDbTableUpdate(id, {
-					x: options.x,
-					y: options.y,
-				});
 				tables[id].x = options.x;
 				tables[id].y = options.y;
 
@@ -23,8 +17,15 @@ const onStop = async (e, options, id) => {
 					type: 'db',
 					payload: () => ({ ...db }),
 				});
+
+				// onLoader(true);
+
+				await fetchDbTableUpdate(id, {
+					x: options.x,
+					y: options.y,
+				});
 			}
-			onLoader(false);
+			// onLoader(false);
 		}
 		else {
 			throw new Error('undefined table');
@@ -40,7 +41,7 @@ const onStop = async (e, options, id) => {
 				horizontal: 'right',
 			}),
 		});
-		onLoader(false);
+		// onLoader(false);
 	}
 };
 

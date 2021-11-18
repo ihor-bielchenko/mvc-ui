@@ -1,10 +1,11 @@
 import Store from 'components/Store';
 import onLoader from 'components/Loader/onLoader';
-import onClose from 'components/Dialog/onClose.js';
+// import onClose from 'components/Dialog/onClose.js';
+import onMountDatabase from 'components/Database/onMount.js';
 import axiosError from 'utils/axiosError.js';
 import fetchDbTableUpdate from 'fetch/dbTableUpdate.js';
 import fetchDbColumnCreate from 'fetch/dbColumnCreate.js';
-import { DIALOG_DB_TABLE } from 'consts/dialog.js';
+// import { DIALOG_DB_TABLE } from 'consts/dialog.js';
 
 const onSave = async (e, tableId) => {
 	onLoader(true);
@@ -25,13 +26,15 @@ const onSave = async (e, tableId) => {
 				}
 				i++;
 			}
+			delete tables[tableId].columns;
 			await fetchDbTableUpdate(tableId, {
 				...tables[tableId],
 			});
-			await fetchDbColumnCreate(tableId, {
+			await fetchDbColumnCreate({
 				...collector,
 			});
-			onClose(DIALOG_DB_TABLE)(e);
+			// onClose(DIALOG_DB_TABLE)(e);
+			onMountDatabase();
 		}
 	}
 	catch (err) {

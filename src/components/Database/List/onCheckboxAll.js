@@ -1,16 +1,19 @@
 import Store from 'components/Store';
 
-const onRowsPerPageChange = (e) => {
-	const target = e.target;
-	const value = Number(target.value);
+const onCheckboxAll = (e) => {
 	const list = Store().getState().list;
 
-	list.rowsPerPage = value;
 	list.select = [];
+
+	if (e.target.checked) {
+		list.fetch.forEach((item) => {
+			list.select.push(item.id);
+		});
+	}
 	Store().dispatch({
 		type: 'list',
 		payload: () => ({ ...list }),
 	});
 };
 
-export default onRowsPerPageChange;
+export default onCheckboxAll;
