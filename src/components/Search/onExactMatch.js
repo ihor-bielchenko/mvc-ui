@@ -3,12 +3,12 @@ import Store from 'components/Store';
 const onExactMatch = (e) => {
 	const target = e.target;
 	const value = target.checked;
-	const search = Store().getState().search;
+	const list = Store().getState().list;
 		
-	search.isExactMatch = value;
+	list.search.isExactMatch = value;
 	Store().dispatch({
-		type: 'search',
-		payload: () => search,
+		type: 'list',
+		payload: () => ({ ...list }),
 	});
 };
 

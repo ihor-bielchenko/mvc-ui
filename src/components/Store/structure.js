@@ -3,7 +3,7 @@ import alert from './alert.js';
 import dialogs from './dialogs.js';
 import menu from './menu.js';
 import account from './account.js';
-import search from './search.js';
+import list from './list.js';
 import services from './services.js';
 import script from './script.js';
 import jsObject from './jsObject.js';
@@ -19,7 +19,7 @@ const structure = {
 	dialogs,
 	menu,
 	account,
-	search,
+	list,
 	services,
 	jsObject,
 	script,

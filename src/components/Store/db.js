@@ -60,18 +60,6 @@ const initialState = () => ({
 			required: false,
 		},
 	},
-	list: {
-		total: 49,
-		rowsPerPage: 20,
-		currentPage: 0,
-		data: [/*{
-			1: 1,
-			2: 'test1',
-			3: 19,
-			4: 'eee@eee.eee',
-			5: 'cmcmcmcc',
-		}*/],
-	},
 	tempValue: {},
 });
 const db = (state = initialState(), action) => {

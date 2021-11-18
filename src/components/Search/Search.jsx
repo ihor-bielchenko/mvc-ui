@@ -24,9 +24,9 @@ let Search = ({
 	onSubmit,
 }) => {
 	const submitRef = React.useRef(null);
-	const placeholders = useSelector((state) => state.search.placeholders);
-	const isExactMatch = useSelector((state) => state.search.isExactMatch);
-	const isCollection = useSelector((state) => state.search.isCollection);
+	const placeholders = useSelector((state) => state.list.search.placeholders);
+	const isExactMatch = useSelector((state) => state.list.search.isExactMatch);
+	const isCollection = useSelector((state) => state.list.search.isCollection);
 	const [ value, setValue ] = React.useState(() => '');
 	const _onInput = React.useCallback((e) => setValue(e.target.value), [
 		setValue,
