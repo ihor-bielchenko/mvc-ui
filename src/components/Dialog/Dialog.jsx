@@ -16,6 +16,7 @@ import DbQuery from './DbQuery';
 import KeyExists from './KeyExists';
 import DbForm from './DbForm';
 import DbColumn from './DbColumn';
+import DbRow from './DbRow';
 import { 
 	URL_PAGE_SCRIPT,
 	URL_PAGE_DB, 
@@ -49,6 +50,7 @@ let Root = ({
 				? <React.Fragment>
 					<DbForm />
 					<DbColumn />
+					<DbRow />
 				</React.Fragment>
 				: <React.Fragment />}
 		{children}

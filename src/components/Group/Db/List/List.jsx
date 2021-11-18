@@ -15,19 +15,47 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 import CloseIcon from '@material-ui/icons/Close';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import Search from 'components/Search';
+import MenuControl from 'components/Menu/Control';
+import onMenu from 'components/Menu/onMenu.js';
+import onDialog from 'components/Dialog/onDialog.js';
 import { DATA_TYPE_ID } from 'structures/dataTypes.js';
+import { DIALOG_DELETE_CONFIRM } from 'consts/dialog.js';
 import onPageChange from './onPageChange.js';
 import onRowsPerPageChange from './onRowsPerPageChange.js';
+import onMount from './onMount.js';
+import onUnmount from './onUnmount.js';
+import onEdit from './onEdit.js';
+import onDelete from './onDelete.js';
 
 let List = ({ id }) => {
 	const rowsPerPage = useSelector((state) => state.db.list.rowsPerPage);
-	const currentPage = useSelector((state) => state.db.list.current_page);
+	const currentPage = useSelector((state) => state.db.list.currentPage);
 	const total = useSelector((state) => state.db.list.total);
 	const data = useSelector((state) => state.db.list.data);
 	const columns = useSelector((state) => state.db.columns);
 	const columnKeys = Object.keys(columns);
+	const _onEdit = React.useCallback((rowIndex, rowId) => (e) => onEdit(e, id, rowIndex, rowId), [
+		id,
+	]);
+	const _onDelete = React.useCallback((rowIndex, rowId) => (e) => onDelete(e, id, rowIndex, rowId), [
+		id,
+	]);
+
+	React.useEffect(() => {
+		onMount(id, currentPage, rowsPerPage);
+	}, [
+		id,
+		currentPage,
+		rowsPerPage,
+	]);
+
+	React.useEffect(() => () => {
+		onUnmount();
+	}, [
+	]);
 
 	return (columnKeys.length > 0)
 		? <React.Fragment>
@@ -38,11 +66,12 @@ let List = ({ id }) => {
 				py="14px">
 				<ButtonGroup>
 					<Button
-						color="primary"
-						startIcon={<AddIcon />}>
+						startIcon={<AddIcon />}
+						onClick={_onEdit()}>
 						Добавить
 					</Button>
 					<Button
+						disabled
 						color="primary"
 						startIcon={<EditIcon />}>
 						Копировать
@@ -53,7 +82,7 @@ let List = ({ id }) => {
 						Удалить
 					</Button>
 				</ButtonGroup>
-				<IconButton>
+				<IconButton disabled>
 					<FilterListIcon />
 				</IconButton>
 			</Box>
@@ -91,17 +120,18 @@ let List = ({ id }) => {
 								<TableCell 
 									width="96px"
 									style={{
-										width: 96,
+										width: 48,
 										padding: 0,
 									}}>
-									<IconButton
-										color="primary">
-										<EditIcon />
+									<IconButton onClick={onMenu('menu-control-'+ item[findIdKey])}>
+										<MoreVertIcon />
 									</IconButton>
-									<IconButton
-										color="secondary">
-										<CloseIcon />
-									</IconButton>
+									<MenuControl 
+										aria={'menu-control-'+ item[findIdKey]}
+										onEdit={_onEdit(i, findIdKey)}
+										onDelete={onDialog(DIALOG_DELETE_CONFIRM, {
+											onDelete: _onDelete(i, findIdKey),
+										})} />
 								</TableCell>
 							</TableRow>;
 						})}

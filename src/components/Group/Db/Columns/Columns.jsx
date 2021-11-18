@@ -13,6 +13,7 @@ import onDialog from 'components/Dialog/onDialog.js';
 import loadColumnInputs from 'utils/loadColumnInputs.js';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import onUnmount from 'components/Dialog/DbRow/onUnmount.js';
 import dataTypes, {
 	DATA_TYPE_ID,
 	DATA_TYPE_NUMBER,
@@ -24,6 +25,7 @@ import {
 import onRow from './onRow.js';
 import onDelete from './onDelete.js';
 import onEdit from './onEdit.js';
+import onMount from './onMount.js';
 
 let Column = ({
 	tableId,
@@ -102,6 +104,14 @@ let Columns = ({ id }) => {
 		id,
 	]);
 	const columnKeys = Object.keys(columns);
+
+	React.useEffect(() => {
+		onMount();
+	}, []);
+
+	React.useEffect(() => () => {
+		onUnmount();
+	}, []);
 
 	return <React.Fragment>
 		<Box

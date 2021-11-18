@@ -61,22 +61,16 @@ const initialState = () => ({
 		},
 	},
 	list: {
-		rowsPerPage: 10,
-		total: 19,
-		current_page: 0,
-		data: [{
+		total: 49,
+		rowsPerPage: 20,
+		currentPage: 0,
+		data: [/*{
 			1: 1,
 			2: 'test1',
 			3: 19,
 			4: 'eee@eee.eee',
 			5: 'cmcmcmcc',
-		}, {
-			1: 2,
-			2: 'tes2',
-			3: 22,
-			4: 'eee@eee.eee',
-			5: 'mmm',
-		}],
+		}*/],
 	},
 	tempValue: {},
 });

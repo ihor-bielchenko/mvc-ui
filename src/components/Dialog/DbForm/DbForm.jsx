@@ -24,6 +24,7 @@ import {
 	DIALOG_DELETE_CONFIRM, 
 } from 'consts/dialog.js';
 import onClose from '../onClose.js';
+import onSave from './onSave.js';
 
 let DbForm = () => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_DB_FORM]);
@@ -34,6 +35,9 @@ let DbForm = () => {
 	const [ tab, setTab ] = React.useState((state) => 0);
 	const _onTab = React.useCallback((e, newValue) => setTab(newValue), [
 		setTab,
+	]);
+	const _onSave = React.useCallback((e) => onSave(e, id), [
+		id,
 	]);
 	const _onDelete = React.useCallback((e) => {}, []);
 
@@ -107,7 +111,7 @@ let DbForm = () => {
 										variant="outlined"
 										color="primary"
 										startIcon={<SaveIcon />}
-										onClick={onClose(DIALOG_DB_FORM)}>
+										onClick={_onSave}>
 										Сохранить
 									</Button>
 									<Button
@@ -125,7 +129,7 @@ let DbForm = () => {
 									variant="outlined"
 									color="primary"
 									startIcon={<SaveIcon />}
-									onClick={onClose(DIALOG_DB_FORM)}>
+									onClick={_onSave}>
 									Сохранить
 								</Button>
 							: <React.Fragment />}

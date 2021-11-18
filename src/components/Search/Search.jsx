@@ -39,7 +39,7 @@ let Search = ({
 		submitRef,
 	]);
 
-	return <React.Fragment>
+	return <form onSubmit={onSubmit}>
 		<Grid 
 			container
 			alignItems="center">
@@ -108,7 +108,7 @@ let Search = ({
 					label="Несколько результатов" />
 			</React.Fragment>
 			: <React.Fragment />}
-	</React.Fragment>;
+	</form>;
 };
 
 Search = React.memo(Search);

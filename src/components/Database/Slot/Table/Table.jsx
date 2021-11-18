@@ -12,20 +12,18 @@ import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 import MenuControl from 'components/Menu/Control';
 import onMenu from 'components/Menu/onMenu.js';
+import onDialog from 'components/Dialog/onDialog.js';
+import { DIALOG_DB_FORM } from 'consts/dialog.js';
 import dataTypes, {
 	DATA_TYPE_ID,
 	DATA_TYPE_NUMBER,
 } from 'structures/dataTypes.js';
 import Slot from '../Slot';
-import onTable from './onTable.js';
 
 let Table = ({ id }) => {
 	const tableName = useSelector((state) => ((state.db.tables || {})[id] || {}).name);
 	const columns = useSelector((state) => (state.db.columns || {}));
 	const columnsKeys = Object.keys(columns);
-	const _onTable = React.useCallback((e) => onTable(e, id), [
-		id,
-	]);
 
 	return <React.Fragment>
 		<Slot id={id}>
@@ -54,7 +52,9 @@ let Table = ({ id }) => {
 				</IconButton>
 				<MenuControl
 					aria={'menu-table-'+ id}
-					onEdit={_onTable}
+					onEdit={onDialog(DIALOG_DB_FORM, {
+						id,
+					})}
 					onDelete={() => {}} />
 			</Box>
 			{columnsKeys.length > 0

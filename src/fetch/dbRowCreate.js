@@ -1,11 +1,11 @@
 import axios from 'axios';
 import forbidden from './forbidden.js';
 import refreshJWTTimeout from 'utils/refreshJWTTimeout.js';
-import { URL_API_DB_COLUMN } from 'consts/url.js';
+import { URL_API_DB_ROW } from 'consts/url.js';
 
-const dbColumnCreate = async (tableId, data) => {
+const dbRowCreate = async (data) => {
 	try {
-		const r = await axios(process.env.DB_PATH + URL_API_DB_COLUMN +'/'+ tableId, {
+		const r = await axios(process.env.DB_PATH + URL_API_DB_ROW, {
 			method: 'post',
 			params: {
 				access_token: localStorage.getItem('access_token'),
@@ -17,8 +17,8 @@ const dbColumnCreate = async (tableId, data) => {
 		return r;
 	}
 	catch (err) {
-		return await forbidden(err, async () => await dbColumnCreate(tableId, data));
+		return await forbidden(err, async () => await dbRowCreate(data));
 	}
 };
 
-export default dbColumnCreate;
+export default dbRowCreate;
