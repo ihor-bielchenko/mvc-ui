@@ -21,7 +21,10 @@ import onUnmount from './onUnmount.js';
 import onSave from './onSave.js';
 import onChange from './onChange.js';
 
-let Column = ({ columnKey }) => {
+let Column = ({ 
+	columnKey,
+	error, 
+}) => {
 	const dataTypeId = useSelector((state) => state.db.columns[columnKey].data_type_id);
 	const name = useSelector((state) => state.db.columns[columnKey].name);
 	const description = useSelector((state) => state.db.columns[columnKey].description);
@@ -44,7 +47,10 @@ let Column = ({ columnKey }) => {
 					label={name +' ('+ dataTypes[dataTypeId === DATA_TYPE_ID.id
 						? DATA_TYPE_NUMBER.id
 						: dataTypeId].text() +')'}
-					helperText={description} />
+					helperText={error
+						? 'Поле обязательно для заполнения'
+						: description}
+					error={error} />
 			</React.Suspense>
 		</Box>
 	</React.Fragment>;
@@ -52,6 +58,7 @@ let Column = ({ columnKey }) => {
 Column = React.memo(Column);
 Column.defaultProps = {
 	columnKey: 0,
+	error: false,
 };
 
 const _onClose = (e) => {
@@ -65,9 +72,18 @@ let DbRow = () => {
 	const rowId = Number((dialog || {}).rowId || 0);
 	const data = useSelector((state) => state.db.tempValue);
 	const dataKeys = Object.keys(data);
-	const _onSave = React.useCallback((e) => onSave(e, tableId, rowId), [
+	const [ error, setError ] = React.useState(() => {
+		const collector = {};
+
+		dataKeys.forEach((columnId) => {
+			collector[columnId] = false;
+		});
+		return collector;
+	});
+	const _onSave = React.useCallback((e) => onSave(e, tableId, rowId, setError), [
 		tableId,
 		rowId,
+		setError,
 	]);
 
 	return _dialogOpenFlag
@@ -92,7 +108,9 @@ let DbRow = () => {
 							{dataKeys.map((columnKey) => {
 								return parseInt(columnKey) > 0
 									? <React.Fragment key={columnKey}>
-										<Column columnKey={columnKey} />
+										<Column 
+											columnKey={columnKey}
+											error={error[columnKey]} />
 									</React.Fragment>
 									: <React.Fragment key={columnKey} />;
 							})}
