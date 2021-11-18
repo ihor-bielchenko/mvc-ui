@@ -35,7 +35,7 @@ const onSave = async (e, tableId, columnId, columnNewId, setError) => {
 			onClose(DIALOG_DB_COLUMN)(e);
 		}
 		onLoader(false);
-	}, 600);
+	}, 100);
 };
 
 export default onSave;

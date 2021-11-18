@@ -58,7 +58,7 @@ let List = ({ id }) => {
 	]);
 
 	React.useEffect(() => {
-		onMount(id, currentPage, rowsPerPage, query);
+		onMount(id);
 	}, [
 		id,
 		currentPage,
