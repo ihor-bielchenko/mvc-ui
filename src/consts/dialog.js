@@ -13,4 +13,4 @@ export const DIALOG_IF = 'd12';
 export const DIALOG_FUNC = 'd10';
 export const DIALOG_JSON = 'd11';
 export const DIALOG_KEY_EXISTS = 'd13';
-export const DIALOG_DB_FORM = 'd14';
+export const DIALOG_DB_TABLE = 'd14';

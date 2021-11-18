@@ -14,7 +14,7 @@ import SourcePlaceholder from './SourcePlaceholder';
 import SourceScript from './SourceScript';
 import DbQuery from './DbQuery';
 import KeyExists from './KeyExists';
-import DbForm from './DbForm';
+import DbTable from './DbTable';
 import DbColumn from './DbColumn';
 import DbRow from './DbRow';
 import { 
@@ -48,7 +48,7 @@ let Root = ({
 			</React.Fragment>
 			: (url[4] === URL_PAGE_DB)
 				? <React.Fragment>
-					<DbForm />
+					<DbTable />
 					<DbColumn />
 					<DbRow />
 				</React.Fragment>

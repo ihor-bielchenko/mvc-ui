@@ -13,7 +13,7 @@ import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 import MenuControl from 'components/Menu/Control';
 import onMenu from 'components/Menu/onMenu.js';
 import onDialog from 'components/Dialog/onDialog.js';
-import { DIALOG_DB_FORM } from 'consts/dialog.js';
+import { DIALOG_DB_TABLE } from 'consts/dialog.js';
 import dataTypes, {
 	DATA_TYPE_ID,
 	DATA_TYPE_NUMBER,
@@ -52,7 +52,7 @@ let Table = ({ id }) => {
 				</IconButton>
 				<MenuControl
 					aria={'menu-table-'+ id}
-					onEdit={onDialog(DIALOG_DB_FORM, {
+					onEdit={onDialog(DIALOG_DB_TABLE, {
 						id,
 					})}
 					onDelete={() => {}} />
