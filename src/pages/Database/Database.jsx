@@ -17,7 +17,7 @@ let PageDatabase = () => {
 
 	return <Background
 		position="relative"
-		overflow="auto"
+		overflow="hidden"
 		width="100%"
 		height="100%">
 		<Box
