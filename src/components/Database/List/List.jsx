@@ -31,11 +31,13 @@ import onEdit from './onEdit.js';
 import onDelete from './onDelete.js';
 import onCheckboxAll from './onCheckboxAll.js';
 import onCheckboxRow from './onCheckboxRow.js';
+import onSearch from './onSearch.js';
 
 let List = ({ id }) => {
 	const rowsPerPage = useSelector((state) => state.list.rowsPerPage);
 	const currentPage = useSelector((state) => state.list.currentPage);
 	const select = useSelector((state) => ([ ...state.list.select ]));
+	const query = useSelector((state) => state.list.search.query);
 	const total = useSelector((state) => state.list.total);
 	const fetch = useSelector((state) => state.list.fetch);
 	const data = useSelector((state) => state.list.data);
@@ -51,13 +53,17 @@ let List = ({ id }) => {
 	]);
 	const _onCheckboxRow = React.useCallback((rowId) => (e) => onCheckboxRow(e, rowId), [
 	]);
+	const _onSearch = React.useCallback((e) => onSearch(e, id), [
+		id,
+	]);
 
 	React.useEffect(() => {
-		onMount(id, currentPage, rowsPerPage);
+		onMount(id, currentPage, rowsPerPage, query);
 	}, [
 		id,
 		currentPage,
 		rowsPerPage,
+		query,
 	]);
 
 	React.useEffect(() => () => {
@@ -99,7 +105,7 @@ let List = ({ id }) => {
 				</IconButton>
 			</Box>
 			<Box>
-				<Search />
+				<Search onSubmit={_onSearch} />
 			</Box>
 			<TableContainer>
 				<Table>

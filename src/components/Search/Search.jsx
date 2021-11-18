@@ -77,7 +77,8 @@ let Search = ({
 				item
 				xs={false}>
 				<IconButton
-					ref={submitRef}>
+					ref={submitRef}
+					type="submit">
 					<SearchIcon fontSize="large" />
 				</IconButton>
 			</Grid>

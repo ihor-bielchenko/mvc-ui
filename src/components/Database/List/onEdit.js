@@ -11,6 +11,7 @@ const onEdit = (e, tableId, rowIndex, rowId) => {
 	const columnKeys = Object.keys(columns);
 	const value = {};
 
+	list.search.query = '';
 	columnKeys.forEach((columnKey) => {
 		value[columnKey] = columns[columnKey].default_value;
 	});
@@ -23,6 +24,10 @@ const onEdit = (e, tableId, rowIndex, rowId) => {
 	Store().dispatch({
 		type: 'db',
 		payload: () => ({ ...db }),
+	});
+	Store().dispatch({
+		type: 'list',
+		payload: () => ({ ...list }),
 	});
 	onDialog(DIALOG_DB_ROW, {
 		tableId,

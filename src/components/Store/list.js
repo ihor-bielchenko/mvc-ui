@@ -4,6 +4,7 @@ export const initialState = () => ({
 	rowsPerPage: 20,
 	currentPage: 0,
 	search: {
+		query: '',
 		isExactMatch: false,
 		isCollection: false,
 		placeholders: [/*{

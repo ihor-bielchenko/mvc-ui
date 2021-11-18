@@ -3,14 +3,16 @@ import onLoader from 'components/Loader/onLoader';
 import axiosError from 'utils/axiosError.js';
 import fetchDbRowMany from 'fetch/dbRowMany.js';
 
-const onMount = async (tableId, currentPage, rowsPerPage) => {
+const onMount = async (tableId) => {
 	onLoader(true);
 
 	try {
 		const list = Store().getState().list;
-		const fetchDbRowResponse = await fetchDbRowMany(currentPage + 1, {
-			limit: rowsPerPage,
-			// search: new String(),
+		const fetchDbRowResponse = await fetchDbRowMany(list.currentPage + 1, {
+			limit: list.rowsPerPage,
+			...list.search.query
+				? { search: list.search.query }
+				: {},
 		});
 		const fetchDbRowData = (fetchDbRowResponse || {}).data || {};
 
@@ -27,8 +29,6 @@ const onMount = async (tableId, currentPage, rowsPerPage) => {
 			});
 		list.fetch = fetchDbRowData.data;
 		list.total = fetchDbRowData.total;
-		list.rowsPerPage = rowsPerPage;
-		list.currentPage = currentPage;
 
 		Store().dispatch({
 			type: 'list',

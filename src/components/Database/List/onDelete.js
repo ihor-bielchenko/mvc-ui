@@ -16,6 +16,7 @@ const onDelete = async (e, tableId, rowId) => {
 			? ([ rowId ])
 			: list.select));
 		list.select = [];
+		list.search.query = '';
 		await onMount(tableId, 0, 20);
 		onClose(DIALOG_DELETE_CONFIRM)(e);
 	}

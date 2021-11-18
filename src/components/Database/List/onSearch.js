@@ -1,15 +1,15 @@
 import Store from 'components/Store';
 
-const onPageChange = (e, newPage) => {
+const onSearch = (e, tableId) => {
+	e.preventDefault();
+
 	const list = Store().getState().list;
 
-	list.currentPage = Number(newPage);
-	list.select = [];
-	list.search.query = '';
+	list.search.query = e.currentTarget.elements.query.value;
 	Store().dispatch({
 		type: 'list',
 		payload: () => ({ ...list }),
 	});
 };
 
-export default onPageChange;
+export default onSearch;
