@@ -8,19 +8,32 @@ const onSave = async (e, tableId, columnId, columnNewId, setError) => {
 
 	setTimeout(() => {
 		const db = Store().getState().db;
+		const tempValueKeys = Object.keys(db.tempValue);
 		const id = db.tempValue[columnId]
 			? columnId
 			: columnNewId;
 		const tempValue = { ...db.tempValue[id].tempValue };
-
-		delete db.tempValue[id].tempValue;
-		db.tempValue[id] = { ...tempValue };
-
-		Store().dispatch({
-			type: 'db',
-			payload: () => ({ ...db }),
+		const findExistName = tempValueKeys.findIndex((columnId) => {
+			return id !== columnId
+				&& db.tempValue[columnId].name === tempValue.name
 		});
-		onClose(DIALOG_DB_COLUMN)(e);
+
+		if (findExistName > -1) {
+			setError((currentState) => ({
+				...currentState,
+				name: true,
+			}));
+		}
+		else {
+			delete db.tempValue[id].tempValue;
+			db.tempValue[id] = { ...tempValue };
+
+			Store().dispatch({
+				type: 'db',
+				payload: () => ({ ...db }),
+			});
+			onClose(DIALOG_DB_COLUMN)(e);
+		}
 		onLoader(false);
 	}, 600);
 };

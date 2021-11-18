@@ -1,7 +1,6 @@
 import Store from 'components/Store';
-import { DATA_TYPE_TEXT } from 'structures/dataTypes.js';
 
-const onChange = (e, tableId, columnId, key = 'name') => {
+const onChange = (e, tableId, columnId, key = 'name', setError = () => {}) => {
 	const db = Store().getState().db;
 
 	if (db.tempValue[columnId]) {
@@ -10,9 +9,9 @@ const onChange = (e, tableId, columnId, key = 'name') => {
 	else {
 		const newColumn = {
 			id: columnId,
-			data_type_id: DATA_TYPE_TEXT.id,
-			name: 'column_name',
-			description: 'example text',
+			data_type_id: '',
+			name: '',
+			description: '',
 			default_value: '',
 			required: false,
 		};
@@ -26,6 +25,10 @@ const onChange = (e, tableId, columnId, key = 'name') => {
 		type: 'db',
 		payload: () => ({ ...db }),
 	});
+	setError((currentState) => ({
+		...currentState,
+		name: false,
+	}));
 };
 
 export default onChange;

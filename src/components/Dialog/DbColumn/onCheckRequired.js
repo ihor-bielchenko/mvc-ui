@@ -10,8 +10,8 @@ const onCheckRequired = (e, tableId, columnId) => {
 		const newColumn = {
 			id: columnId,
 			data_type_id: Number(e.target.value),
-			name: 'column_name',
-			description: 'example text',
+			name: '',
+			description: '',
 			default_value: '',
 			required: e.target.checked,
 		};

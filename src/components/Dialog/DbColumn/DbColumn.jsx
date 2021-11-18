@@ -52,7 +52,7 @@ let DbColumn = () => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_DB_COLUMN]);
 	const _dialogOpenFlag = !!dialog;
 	const tableId = Number((dialog || {}).tableId || 0);
-	const columnNewId = React.useMemo(() => Date.now(), []);
+	const [ columnNewId, setColumnNewId ] = React.useState(() => Date.now());
 	const columnId = Number((dialog || {}).columnId || 0);
 	const name = useSelector((state) => ((state.db.tempValue[columnId || columnNewId] || {}).tempValue || {}).name);
 	const description = useSelector((state) => ((state.db.tempValue[columnId || columnNewId] || {}).tempValue || {}).description);
@@ -73,10 +73,11 @@ let DbColumn = () => {
 		columnId,
 		columnNewId,
 	]);
-	const _onChangeName = React.useCallback((e) => onChange(e, tableId, columnId || columnNewId, 'name'), [
+	const _onChangeName = React.useCallback((e) => onChange(e, tableId, columnId || columnNewId, 'name', setError), [
 		tableId,
 		columnId,
 		columnNewId,
+		setError,
 	]);
 	const _onChangeDescription = React.useCallback((e) => onChange(e, tableId, columnId || columnNewId, 'description'), [
 		tableId,
@@ -87,6 +88,14 @@ let DbColumn = () => {
 		tableId,
 		columnId,
 		columnNewId,
+	]);
+
+	React.useEffect(() => {
+		_dialogOpenFlag && setColumnNewId(Date.now());
+	}, [
+		_dialogOpenFlag,
+		setColumnNewId,
+
 	]);
 
 	return _dialogOpenFlag
