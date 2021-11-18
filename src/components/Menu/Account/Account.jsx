@@ -12,6 +12,7 @@ import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import LanguageIcon from '@material-ui/icons/Language';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
+import PersonIcon from '@material-ui/icons/Person';
 import onClose from '../onClose.js';
 
 let Account = ({ 
@@ -41,7 +42,7 @@ let Account = ({
 			onClose={_onClose}>
 			<MenuItem>
 				<ListItemAvatar>
-					<MeetingRoomIcon />
+					<PersonIcon />
 				</ListItemAvatar>
 				<Typography>
 					Аккаунт
