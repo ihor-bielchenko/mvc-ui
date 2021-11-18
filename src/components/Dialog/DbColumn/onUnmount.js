@@ -8,9 +8,6 @@ const onUnmount = (columnId) => {
 			? delete db.tempValue[columnId].tempValue
 			: delete db.tempValue[columnId];
 	}
-	else {
-		db.tempValue = {};
-	}
 	Store().dispatch({
 		type: 'db',
 		payload: () => ({ ...db }),
