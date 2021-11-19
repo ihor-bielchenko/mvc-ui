@@ -97,6 +97,25 @@ function getClientEnvironment(publicUrl) {
 				DB_PATH: process.env.DB_PATH,
 				PROJECT_PATH: process.env.PROJECT_PATH,
 
+				SERVICE_TEMPLATE_BASE: Number(process.env.SERVICE_TEMPLATE_BASE),
+				SERVICE_TEMPLATE_COMMERCE: Number(process.env.SERVICE_TEMPLATE_COMMERCE),
+				SERVICE_TEMPLATE_MESSAGE: Number(process.env.SERVICE_TEMPLATE_MESSAGE),
+				SERVICE_TEMPLATE_DISK: Number(process.env.SERVICE_TEMPLATE_DISK),
+
+				PROTOCOL_TYPE_HTTP: Number(process.env.PROTOCOL_TYPE_HTTP),
+				PROTOCOL_TYPE_HTTPS: Number(process.env.PROTOCOL_TYPE_HTTPS),
+				PROTOCOL_TYPE_WS: Number(process.env.PROTOCOL_TYPE_WS),
+				PROTOCOL_TYPE_TCP: Number(process.env.PROTOCOL_TYPE_TCP),
+
+				METHOD_TYPE_GET: Number(process.env.METHOD_TYPE_GET),
+				METHOD_TYPE_POST: Number(process.env.METHOD_TYPE_POST),
+				METHOD_TYPE_PATCH: Number(process.env.METHOD_TYPE_PATCH),
+				METHOD_TYPE_PUT: Number(process.env.METHOD_TYPE_PUT),
+				METHOD_TYPE_DELETE: Number(process.env.METHOD_TYPE_DELETE),
+
+				ROUTE_URL_TYPE_VALUE: Number(process.env.ROUTE_URL_TYPE_VALUE),
+				ROUTE_URL_TYPE_PLACEHOLDER: Number(process.env.ROUTE_URL_TYPE_PLACEHOLDER),
+
 				ARROW_TYPE_DEFAULT: Number(process.env.ARROW_TYPE_DEFAULT),
 				ARROW_TYPE_TRUE: Number(process.env.ARROW_TYPE_TRUE),
 				ARROW_TYPE_FALSE: Number(process.env.ARROW_TYPE_FALSE),

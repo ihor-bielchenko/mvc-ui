@@ -1,6 +1,6 @@
 
 export const initialState = () => ({
-	data: [{
+	data: [/*{
 		id: 1,
 		name: 'service 1',
 	}, {
@@ -9,12 +9,8 @@ export const initialState = () => ({
 	}, {
 		id: 3,
 		name: 'service 3',
-	}],
-	form: {
-		project_id: 1,
-		id: 1,
-		name: 'service 1',
-	},
+	}*/],
+	form: {},
 });
 const services = (state = initialState(), action) => {
 	return action.type === 'services'

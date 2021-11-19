@@ -1,4 +1,5 @@
 import Store from 'components/Store';
+import { initialState as initialStateServices } from 'components/Store/services.js';
 import onLoader from 'components/Loader/onLoader';
 import axiosError from 'utils/axiosError.js';
 import fetchProjectMany from 'fetch/projectMany.js';
@@ -28,6 +29,10 @@ const onMount = async () => {
 		Store().dispatch({
 			type: 'list',
 			payload: () => ({ ...list }),
+		});
+		Store().dispatch({
+			type: 'services',
+			payload: () => initialStateServices(),
 		});
 	}
 	catch (err) {

@@ -7,6 +7,7 @@ import Box from '@material-ui/core/Box';
 import PageDashboard from 'pages/Dashboard';
 import PageScript from 'pages/Script';
 import PageDatabase from 'pages/Database';
+import PageService from 'pages/Service';
 import Header from 'components/Header';
 import {
 	URL_PAGE_DASHBOARD,
@@ -18,6 +19,11 @@ import {
 let ServiceInside = () => {
 	return <React.Fragment>
 		<Switch>
+			<Route 
+				exact
+				path={`/:projectId/${URL_PAGE_SERVICE}/:serviceId/${URL_PAGE_DB}`}>
+				<PageDatabase />
+			</Route>
 			<Route 
 				exact
 				path={`/${URL_PAGE_DASHBOARD}`}>
@@ -35,15 +41,31 @@ let ServiceInside = () => {
 					</Box>
 				</Box>
 			</Route>
+			<Route path={`/:projectId/${URL_PAGE_SERVICE}/:serviceId`}>
+				<Box 
+					overflow="auto"
+					height="100%">
+					<Header />
+					<Box 
+						position="relative"
+						width="calc(100% - 192px)"
+						mx="auto">
+						<Box p="4px">
+							<Switch>
+								<Route 
+									exact
+									path={`/:projectId/${URL_PAGE_SERVICE}/:serviceId`}>
+									<PageService />
+								</Route>
+							</Switch>
+						</Box>
+					</Box>
+				</Box>
+			</Route>
 			<Route 
 				exact
 				path={`/${URL_PAGE_SCRIPT}/:scriptId`}>
 				<PageScript />
-			</Route>
-			<Route 
-				exact
-				path={`/:projectId/${URL_PAGE_SERVICE}/:serviceId/${URL_PAGE_DB}`}>
-				<PageDatabase />
 			</Route>
 		</Switch>
 	</React.Fragment>;

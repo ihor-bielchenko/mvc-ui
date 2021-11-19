@@ -4,7 +4,7 @@ import {
 	DATA_TYPE_OBJECT,
 	DATA_TYPE_ARRAY,
 } from 'structures/dataTypes.js';
-import { PROTOCOL_HTTP } from 'structures/protocol.js';
+import { PROTOCOL_TYPE_HTTP } from 'structures/protocol.js';
 
 const initialState = {
 	data: [{
@@ -12,7 +12,7 @@ const initialState = {
 		service_id: 1,
 		name: 'route 1 - 1',
 		domain_path: 'drivedatum.com',
-		protocol_id: PROTOCOL_HTTP.id,
+		protocol_id: PROTOCOL_TYPE_HTTP.id,
 		method_id: 1,
 		path: [{
 			id: 1,
@@ -37,7 +37,7 @@ const initialState = {
 		service_id: 1,
 		name: 'route 1 - 2',
 		domain_path: 'drivedatum.com',
-		protocol_id: PROTOCOL_HTTP.id,
+		protocol_id: PROTOCOL_TYPE_HTTP.id,
 		method_id: 2,
 		response: {
 			51: {
@@ -53,7 +53,7 @@ const initialState = {
 		service_id: 1,
 		name: 'route 1 - 3',
 		domain_path: 'drivedatum.com',
-		protocol_id: PROTOCOL_HTTP.id,
+		protocol_id: PROTOCOL_TYPE_HTTP.id,
 		method_id: 1,
 		path: [{
 			id: 3,
@@ -89,7 +89,7 @@ const initialState = {
 		service_id: 1,
 		name: 'route 1 - 4',
 		domain_path: 'drivedatum.com',
-		protocol_id: PROTOCOL_HTTP.id,
+		protocol_id: PROTOCOL_TYPE_HTTP.id,
 		method_id: 3,
 		response: {
 			0: {
@@ -133,7 +133,7 @@ const initialState = {
 		service_id: 1,
 		name: 'route 1 - 5',
 		domain_path: 'drivedatum.com',
-		protocol_id: PROTOCOL_HTTP.id,
+		protocol_id: PROTOCOL_TYPE_HTTP.id,
 		method_id: 1,
 		path: [{
 			id: 6,
@@ -191,7 +191,7 @@ const initialState = {
 		service_id: 1,
 		name: 'route 1 - 5',
 		domain_path: 'drivedatum.com',
-		protocol_id: PROTOCOL_HTTP.id,
+		protocol_id: PROTOCOL_TYPE_HTTP.id,
 		method_id: 1,
 		path: [{
 			id: 6,

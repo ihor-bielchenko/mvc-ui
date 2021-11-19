@@ -1,6 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { 
+	withRouter,
+	Link, 
+} from 'react-router-dom';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -16,9 +19,11 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PermMediaIcon from '@material-ui/icons/PermMedia';
 import onClose from '../onClose.js';
 import { DIALOG_SERVICE_TEMPLATE } from 'consts/dialog.js';
+import { URL_PAGE_SERVICE } from 'consts/url.js';
 
 let ServiceTemplate = ({ history }) => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_SERVICE_TEMPLATE]);
+	const projectId = (dialog || {}).projectId || 0;
 	const _dialogOpenFlag = !!dialog;
 
 	return _dialogOpenFlag 
@@ -46,10 +51,12 @@ let ServiceTemplate = ({ history }) => {
 							mt={2}
 							mb={5}>
 							<Button 
+								component={Link}
+								to={`/${projectId}/${URL_PAGE_SERVICE}/0`}
+								onClick={onClose(DIALOG_SERVICE_TEMPLATE)}
 								variant="outlined" 
 								color="primary"
-								startIcon={<DnsIcon />}
-								onClick={() => {}}>
+								startIcon={<DnsIcon />}>
 								<Typography variant="subtitle1">
 									По умолчанию
 								</Typography>

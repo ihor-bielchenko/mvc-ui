@@ -1,21 +1,26 @@
 
-export const PROTOCOL_HTTP = {
-	id: process.env.PROTOCOL_HTTP,
+export const PROTOCOL_TYPE_HTTP = {
+	id: process.env.PROTOCOL_TYPE_HTTP,
 	text: () => 'http',
 };
-export const PROTOCOL_HTTPS = {
-	id: process.env.PROTOCOL_HTTPS,
+export const PROTOCOL_TYPE_HTTPS = {
+	id: process.env.PROTOCOL_TYPE_HTTPS,
 	text: () => 'https',
 };
-export const PROTOCOL_WS = {
-	id: process.env.PROTOCOL_WS,
+export const PROTOCOL_TYPE_WS = {
+	id: process.env.PROTOCOL_TYPE_WS,
+	text: () => 'ws',
+};
+export const PROTOCOL_TYPE_TCP = {
+	id: process.env.PROTOCOL_TYPE_TCP,
 	text: () => 'ws',
 };
 
 const protocol = {
-	[process.env.PROTOCOL_HTTP]: PROTOCOL_HTTP,
-	[process.env.PROTOCOL_HTTPS]: PROTOCOL_HTTPS,
-	[process.env.PROTOCOL_WS]: PROTOCOL_WS,
+	[process.env.PROTOCOL_TYPE_HTTP]: PROTOCOL_TYPE_HTTP,
+	[process.env.PROTOCOL_TYPE_HTTPS]: PROTOCOL_TYPE_HTTPS,
+	[process.env.PROTOCOL_TYPE_WS]: PROTOCOL_TYPE_WS,
+	[process.env.PROTOCOL_TYPE_TCP]: PROTOCOL_TYPE_TCP,
 };
 
 export default protocol;

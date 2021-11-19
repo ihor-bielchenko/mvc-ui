@@ -29,7 +29,7 @@ let Breadcrumbs = ({ history }) => {
 			</Typography>
 			: <Link 
 				key="all"
-				to={URL_PAGE_DASHBOARD}>
+				to={'/'+ URL_PAGE_DASHBOARD}>
 				<Typography>
 					Все сервисы
 				</Typography>

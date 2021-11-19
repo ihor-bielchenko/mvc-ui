@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import { URL_PAGE_SERVICE } from 'consts/url.js';
 import Slot from '../Slot.jsx';
 
 let Service = ({ 
@@ -20,7 +21,7 @@ let Service = ({
 				fullWidth
 				disableElevation
 				component={Link}
-				to="rww"
+				to={`/${projectId}/${URL_PAGE_SERVICE}/${serviceId}`}
 				variant="contained"
 				style={{
 					backgroundColor: color,

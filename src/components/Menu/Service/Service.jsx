@@ -57,20 +57,20 @@ let Service = ({
 					API
 				</Typography>
 			</MenuItem>
-			<MenuItem>
-				<ListItemAvatar>
-					<StorageIcon />
-				</ListItemAvatar>
-				<Typography>
-					База данных
-				</Typography>
-			</MenuItem>
 			<MenuItem disabled>
 				<ListItemAvatar>
 					<ScheduleIcon />
 				</ListItemAvatar>
 				<Typography>
 					CRON
+				</Typography>
+			</MenuItem>
+			<MenuItem>
+				<ListItemAvatar>
+					<StorageIcon />
+				</ListItemAvatar>
+				<Typography>
+					База данных
 				</Typography>
 			</MenuItem>
 			<MenuItem disabled>
