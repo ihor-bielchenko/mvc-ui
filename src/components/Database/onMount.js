@@ -1,5 +1,6 @@
 import Store from 'components/Store';
 import onLoader from 'components/Loader/onLoader';
+import getServiceId from 'components/Service/getServiceId.js';
 import axiosError from 'utils/axiosError.js';
 import fetchDbTableMany from 'fetch/dbTableMany.js';
 
@@ -7,11 +8,7 @@ const onMount = async () => {
 	onLoader(true);
 
 	try {
-		const url = window
-			.location
-			.pathname
-			.split('/');
-		const serviceId = Number(url[3]);
+		const serviceId = Number(getServiceId());
 
 		if (serviceId > 0) {
 			const db = Store().getState().db;

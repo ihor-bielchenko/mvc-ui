@@ -20,6 +20,7 @@ import SlotCreate from '../Slot/Create';
 import onDelete from './onDelete.js';
 
 let Project = ({ projectId }) => {
+	const domain = useSelector((state) => state.account.path);
 	const name = useSelector((state) => state.list.data[projectId].name);
 	const subdomainPath = useSelector((state) => state.list.data[projectId].subdomain_path);
 	const services = useSelector((state) => state.list.data[projectId].services);
@@ -43,7 +44,7 @@ let Project = ({ projectId }) => {
 						{name}
 					</Typography>
 					<Typography variant="body2">
-						{subdomainPath}.drivedatum.com
+						{subdomainPath}.{domain}
 					</Typography>
 				</Grid>
 				<Grid item>

@@ -21,13 +21,17 @@ let ServiceInside = () => {
 			<Route 
 				exact
 				path={`/${URL_PAGE_DASHBOARD}`}>
-				<Header />
 				<Box 
-					position="relative"
-					width="calc(100% - 192px)"
-					mx="auto">
-					<Box p="4px">
-						<PageDashboard />
+					overflow="auto"
+					height="100%">
+					<Header />
+					<Box 
+						position="relative"
+						width="calc(100% - 192px)"
+						mx="auto">
+						<Box p="4px">
+							<PageDashboard />
+						</Box>
 					</Box>
 				</Box>
 			</Route>

@@ -10,7 +10,7 @@ import onMount from './onMount.js';
 import onUnmount from './onUnmount.js';
 
 let Dashboard = () => {
-	const data = useSelector((state) => state.list.data);
+	const data = useSelector((state) => ({ ...state.list.data }));
 
 	React.useEffect(() => {
 		onMount();

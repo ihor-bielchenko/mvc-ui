@@ -8,13 +8,6 @@ import Breadcrumbs from 'components/Breadcrumbs';
 import AddIcon from '@material-ui/icons/Add';
 
 let PageDatabase = () => {
-	// const url = window
-	// 	.location
-	// 	.pathname
-	// 	.split('/');
-	// const projectId = Number(url[1]);
-	// const serviceId = Number(url[3]);
-
 	return <Background
 		position="relative"
 		overflow="hidden"
