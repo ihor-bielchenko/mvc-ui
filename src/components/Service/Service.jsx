@@ -29,6 +29,7 @@ import { PROTOCOL_TYPE_HTTP } from 'structures/protocol.js';
 import { DIALOG_DELETE_CONFIRM } from 'consts/dialog.js';
 import { 
 	URL_PAGE_SERVICE,
+	URL_PAGE_API,
 	URL_PAGE_DB, 
 } from 'consts/url.js';
 import getProjectId from './getProjectId.js';
@@ -72,6 +73,8 @@ let Service = ({ history }) => {
 		<Box py={4}>
 			<ButtonGroup size="large">
 				<Button 
+					component={Link}
+					to={`/${projectId}/${URL_PAGE_SERVICE}/${id}/${URL_PAGE_API}`}
 					disabled={!(id > 0)}
 					startIcon={<AirplayIcon />}>
 					API

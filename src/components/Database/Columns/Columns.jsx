@@ -1,8 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
@@ -22,7 +20,6 @@ import {
 	DIALOG_DB_COLUMN,
 	DIALOG_DELETE_CONFIRM,
 } from 'consts/dialog.js';
-import onRow from './onRow.js';
 import onDelete from './onDelete.js';
 import onEdit from './onEdit.js';
 import onMount from './onMount.js';
@@ -98,11 +95,7 @@ Column.defaultProps = {
 };
 
 let Columns = ({ id }) => {
-	const isCollection = useSelector((state) => (state.db.tables[id] || {}).is_collection);
 	const columns = useSelector((state) => ({ ...state.db.tempValue || {} }));
-	const _onRow = React.useCallback((e) => onRow(e, id), [
-		id,
-	]);
 	const columnKeys = Object.keys(columns);
 
 	React.useEffect(() => {
@@ -117,15 +110,8 @@ let Columns = ({ id }) => {
 		<Box
 			my={2}
 			display="flex"
-			justifyContent="space-between"
+			justifyContent="flex-end"
 			alignItems="center">
-			<FormControlLabel
-				control={<Switch 
-					id="is_collection"
-					name="is_collection"
-					checked={!!isCollection}
-					onChange={_onRow} />}
-					label="Включить список" />
 			<Button
 				variant="outlined"
 				color="primary"

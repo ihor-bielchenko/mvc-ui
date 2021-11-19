@@ -31,7 +31,6 @@ let DbTable = () => {
 	const _dialogOpenFlag = !!dialog;
 	const id = (dialog || {}).id;
 	const tableName = useSelector((state) => (state.db.tables[id] || {}).name);
-	const isCollection = useSelector((state) => (state.db.tables[id] || {}).is_collection);
 	const [ tab, setTab ] = React.useState((state) => 0);
 	const _onTab = React.useCallback((e, newValue) => setTab(newValue), [
 		setTab,
@@ -80,7 +79,7 @@ let DbTable = () => {
 								value={0}
 								label="Структура" />
 							<Tab
-								disabled={!isCollection}
+								disabled
 								value={1} 
 								label="Список данных" />
 						</Tabs>

@@ -2,22 +2,22 @@ import Store from 'components/Store';
 import onLoader from 'components/Loader/onLoader';
 import axiosError from 'utils/axiosError.js';
 import onClose from 'components/Dialog/onClose.js';
-import fetchDbRowDelete from 'fetch/dbRowDelete.js';
+import fetchRouteDelete from 'fetch/routeDelete.js';
 import { DIALOG_DELETE_CONFIRM } from 'consts/dialog.js';
 import onMount from './onMount.js';
 
-const onDelete = async (e, tableId, rowId) => {
+const onDelete = async (routeId) => async (e) => {
 	onLoader(true);
 
 	try {
 		const list = Store().getState().list;
 
-		await fetchDbRowDelete(JSON.stringify(rowId > 0
-			? ([ rowId ])
+		await fetchRouteDelete(JSON.stringify(routeId > 0
+			? ([ routeId ])
 			: list.select));
 		list.select = [];
 		list.search.query = '';
-		await onMount(tableId);
+		await onMount();
 		onClose(DIALOG_DELETE_CONFIRM)(e);
 	}
 	catch (err) {

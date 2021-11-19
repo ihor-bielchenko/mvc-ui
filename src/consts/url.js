@@ -20,7 +20,8 @@ export const URL_API_SSO_SIGN_UP = '/api/register';
 export const URL_API_SSO_RECOVERY = '/api/recovery';
 
 export const URL_API_PROJECT = '/api/project';
-export const URL_API_SERVICE = '/api/service';
+export const URL_API_PROJECT_SERVICE = '/api/service';
+export const URL_API_PROJECT_ROUTE = '/api/route';
 
 export const URL_API_SOURCE_CORTEGE = '/api/cortege';
 
