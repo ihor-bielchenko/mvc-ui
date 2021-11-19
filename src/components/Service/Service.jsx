@@ -1,6 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { 
+	withRouter,
+	Link, 
+} from 'react-router-dom';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
@@ -24,7 +27,11 @@ import onDialog from 'components/Dialog/onDialog.js';
 import { SERVICE_TEMPLATE_BASE } from 'structures/serviceTemplates.js';
 import { PROTOCOL_TYPE_HTTP } from 'structures/protocol.js';
 import { DIALOG_DELETE_CONFIRM } from 'consts/dialog.js';
-// import getServiceId from './getServiceId.js';
+import { 
+	URL_PAGE_SERVICE,
+	URL_PAGE_DB, 
+} from 'consts/url.js';
+import getProjectId from './getProjectId.js';
 import onMount from './onMount.js';
 import onUnmount from './onUnmount.js';
 import onChange from './onChange.js';
@@ -32,11 +39,15 @@ import onSave from './onSave.js';
 import onDelete from './onDelete.js';
 
 let Service = ({ history }) => {
+	const projectId = getProjectId();
 	const domain = useSelector((state) => state.account.path || '');
 	const id = useSelector((state) => state.services.form.id);
 	const name = useSelector((state) => state.services.form.name || '');
 	const subdomainPath = useSelector((state) => state.services.form.subdomain_path || '');
 	const _onSave = React.useCallback((e) => onSave(e, history.push), [
+		history.push,
+	]);
+	const _onDelete = React.useCallback((e) => onDelete(e, history.push), [
 		history.push,
 	]);
 
@@ -71,6 +82,8 @@ let Service = ({ history }) => {
 					CRON
 				</Button>
 				<Button 
+					component={Link}
+					to={`/${projectId}/${URL_PAGE_SERVICE}/${id}/${URL_PAGE_DB}`}
 					disabled={!(id > 0)}
 					startIcon={<StorageIcon />}>
 					База данных
@@ -207,7 +220,7 @@ let Service = ({ history }) => {
 							color="secondary"
 							startIcon={<DeleteIcon />}
 							onClick={onDialog(DIALOG_DELETE_CONFIRM, {
-								onDelete,
+								onDelete: _onDelete,
 							})}>
 							Удалить
 						</Button>
