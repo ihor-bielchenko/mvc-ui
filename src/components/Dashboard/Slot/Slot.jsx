@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
 
 const GridWrapper = styled(Grid)`
-	& > button {
+	& > button,
+	& > a {
 		text-transform: initial;
 		padding: 4px 8px;
 		height: 72px;
