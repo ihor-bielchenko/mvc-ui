@@ -17,7 +17,10 @@ import KeyExists from './KeyExists';
 import DbTable from './DbTable';
 import DbColumn from './DbColumn';
 import DbRow from './DbRow';
+import ServiceTemplate from './ServiceTemplate';
+import ProjectForm from './ProjectForm';
 import { 
+	URL_PAGE_DASHBOARD,
 	URL_PAGE_SCRIPT,
 	URL_PAGE_DB, 
 } from 'consts/url.js';
@@ -30,29 +33,39 @@ let Root = ({
 
 	return <React.Fragment>
 		<DeleteConfirm />
-		{(url[1] === URL_PAGE_SCRIPT)
+		{(url[4] === URL_PAGE_DB)
 			? <React.Fragment>
-				<Prop />
-				<Condition />
-				<Func />
-				<Json />
-				<SourceDb />
-				<DbQuery />
-				<KeyExists />
-				<SourceProxy />
-				<SourceHeader />
-				<SourceRequest />
-				<SourceCookie />
-				<SourcePlaceholder />
-				<SourceScript />
+				<DbTable />
+				<DbColumn />
+				<DbRow />
 			</React.Fragment>
-			: (url[4] === URL_PAGE_DB)
-				? <React.Fragment>
-					<DbTable />
-					<DbColumn />
-					<DbRow />
-				</React.Fragment>
-				: <React.Fragment />}
+			: (() => {
+				switch (url[1]) {
+					case URL_PAGE_DASHBOARD:
+						return <React.Fragment>
+							<ServiceTemplate />
+							<ProjectForm />
+						</React.Fragment>;
+					case URL_PAGE_SCRIPT:
+						return <React.Fragment>
+							<Prop />
+							<Condition />
+							<Func />
+							<Json />
+							<SourceDb />
+							<DbQuery />
+							<KeyExists />
+							<SourceProxy />
+							<SourceHeader />
+							<SourceRequest />
+							<SourceCookie />
+							<SourcePlaceholder />
+							<SourceScript />
+						</React.Fragment>;
+					default:
+						return <React.Fragment />;
+				}
+			})()}
 		{children}
 	</React.Fragment>;
 };

@@ -30,10 +30,18 @@ let Header = ({ children }) => {
 			mx="10px"
 			style={{
 				backgroundColor: '#FFF',
-				border: '1px solid #EFEFEF',
+				border: children
+					? '1px solid #EFEFEF'
+					: 'none',
 				borderRadius: '50% 50%',
 			}}>
-			<IconButton onClick={onMenu('menu-main-service')}>
+			<IconButton 
+				onClick={onMenu('menu-main-service')}
+				style={{
+					position: children
+						? 'inherit'
+						: 'fixed',
+				}}>
 				<MenuIcon />
 			</IconButton>
 			<MenuService aria="menu-main-service" />
@@ -52,7 +60,9 @@ let Header = ({ children }) => {
 					px="4px"
 					style={{
 						backgroundColor: '#FFF',
-						border: '1px solid #EFEFEF',
+						border: children
+							? '1px solid #EFEFEF'
+							: '1px solid transparent',
 						borderRadius: '7px',
 					}}>
 					<Breadcrumbs />	
@@ -64,10 +74,18 @@ let Header = ({ children }) => {
 			mx="10px"
 			style={{
 				backgroundColor: '#FFF',
-				border: '1px solid #EFEFEF',
+				border: children
+					? '1px solid #EFEFEF'
+					: 'none',
 				borderRadius: '50% 50%',
 			}}>
-			<IconButton onClick={onMenu('menu-main-account')}>
+			<IconButton 
+				onClick={onMenu('menu-main-account')}
+				style={{
+					position: children
+						? 'inherit'
+						: 'fixed',
+				}}>
 				<AccountCircleIcon />
 			</IconButton>
 			<MenuAccount aria="menu-main-account" />

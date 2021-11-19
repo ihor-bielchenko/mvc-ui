@@ -32,7 +32,7 @@ const onSubmit = async (e, locationPush) => {
 				localStorage.setItem('access_token', access_token);
 				localStorage.setItem('refresh_token', refresh_token);
 				user['path'] = 'user1.drivedatum.com';
-				setTimeout(() => locationPush(URL_PAGE_DASHBOARD), 0);
+				setTimeout(() => locationPush('/'+ URL_PAGE_DASHBOARD), 0);
 				return user;
 			},
 		});

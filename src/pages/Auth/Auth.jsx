@@ -3,29 +3,34 @@ import {
 	Switch,
 	Route, 
 } from 'react-router-dom';
+import Box from '@material-ui/core/Box';
+import PageDashboard from 'pages/Dashboard';
 import PageScript from 'pages/Script';
 import PageDatabase from 'pages/Database';
+import Header from 'components/Header';
 import {
+	URL_PAGE_DASHBOARD,
 	URL_PAGE_SCRIPT,
 	URL_PAGE_SERVICE,
 	URL_PAGE_DB,
 } from 'consts/url.js';
-import onMount from './onMount.js';
-import onUnmount from './onUnmount.js';
 
 let ServiceInside = () => {
-	
-	// onMount
-	React.useEffect(() => {
-		onMount();
-
-		return () => {
-			onUnmount();
-		};
-	}, []);
-
 	return <React.Fragment>
 		<Switch>
+			<Route 
+				exact
+				path={`/${URL_PAGE_DASHBOARD}`}>
+				<Header />
+				<Box 
+					position="relative"
+					width="calc(100% - 192px)"
+					mx="auto">
+					<Box p="4px">
+						<PageDashboard />
+					</Box>
+				</Box>
+			</Route>
 			<Route 
 				exact
 				path={`/${URL_PAGE_SCRIPT}/:scriptId`}>

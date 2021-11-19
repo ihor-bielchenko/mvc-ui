@@ -5,7 +5,7 @@ export const URL_PAGE_VERIFY = '/verify';
 export const URL_PAGE_RECOVERY = '/recovery';
 export const URL_PAGE_RESET = '/reset';
 export const URL_PAGE_ACCESS_CONFIRM = '/access-confirm';
-export const URL_PAGE_DASHBOARD = '/dashboard';
+export const URL_PAGE_DASHBOARD = 'dashboard';
 export const URL_PAGE_ACCOUNT = 'account';
 export const URL_PAGE_SERVICE = 'service';
 export const URL_PAGE_API = 'api';
@@ -18,6 +18,9 @@ export const URL_API_SSO_REFRESH = '/api/refresh';
 export const URL_API_SSO_SIGN_IN = '/api/login';
 export const URL_API_SSO_SIGN_UP = '/api/register';
 export const URL_API_SSO_RECOVERY = '/api/recovery';
+
+export const URL_API_PROJECT = '/api/project';
+export const URL_API_SERVICE = '/api/service';
 
 export const URL_API_SOURCE_CORTEGE = '/api/cortege';
 

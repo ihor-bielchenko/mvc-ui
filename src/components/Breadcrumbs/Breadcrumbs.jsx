@@ -23,7 +23,7 @@ let Breadcrumbs = ({ history }) => {
 		.split('/');
 	const serviceName = useSelector((state) => state.services.form.name);
 	const render = [
-		'/'+ url[1] === URL_PAGE_DASHBOARD
+		url[1] === URL_PAGE_DASHBOARD
 			? <Typography key="all">
 				Все сервисы
 			</Typography>

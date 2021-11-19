@@ -16,7 +16,7 @@ let Verify = ({ history: { push } }) => {
 				}
 			});
 			setTimeout(() => {
-				push(URL_PAGE_DASHBOARD);
+				push('/'+ URL_PAGE_DASHBOARD);
 			}, 0);
 	}, [
 		push,
