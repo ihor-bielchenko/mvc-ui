@@ -8,13 +8,13 @@ const onMount = async () => {
 
 	try {
 		const list = Store().getState().list;
-		const fetchDbRowResponse = await fetchRouteMany(list.currentPage + 1, {
+		/*const fetchDbRowResponse = */await fetchRouteMany(list.currentPage + 1, {
 			limit: list.rowsPerPage,
 			...list.search.query
 				? { search: list.search.query }
 				: {},
 		});
-		const fetchDbRowData = (fetchDbRowResponse || {}).data || {};
+		// const fetchDbRowData = (fetchDbRowResponse || {}).data || {};
 
 		list.select = [];
 		// list.data = [ ...fetchDbRowData.data ];

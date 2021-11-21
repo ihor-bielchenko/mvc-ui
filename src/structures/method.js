@@ -1,46 +1,46 @@
 
-export const METHOD_GET = {
-	id: process.env.METHOD_GET,
+export const METHOD_TYPE_GET = {
+	id: process.env.METHOD_TYPE_GET,
 	name: 'GET',
-	description: 'получение',
+	text: () => 'получение',
 	backgroundColor: '#1976d2',
 	textColor: '#FFF',
 };
-export const METHOD_POST = {
-	id: process.env.METHOD_POST,
+export const METHOD_TYPE_POST = {
+	id: process.env.METHOD_TYPE_POST,
 	name: 'POST',
-	description: 'создание',
+	text: () => 'создание',
 	backgroundColor: '#4caf50',
 	textColor: '#FFF',
 };
-export const METHOD_PUT = {
-	id: process.env.METHOD_PUT,
+export const METHOD_TYPE_PUT = {
+	id: process.env.METHOD_TYPE_PUT,
 	name: 'PUT',
-	description: 'перезапись',
+	text: () => 'перезапись',
 	backgroundColor: '#ff9800',
 	textColor: '#FFF',
 };
-export const METHOD_PATCH = {
-	id: process.env.METHOD_PATCH,
+export const METHOD_TYPE_PATCH = {
+	id: process.env.METHOD_TYPE_PATCH,
 	name: 'PATCH',
-	description: 'обновление',
+	text: () => 'обновление',
 	backgroundColor: '#9c27b0',
 	textColor: '#FFF',
 };
-export const METHOD_DELETE = {
-	id: process.env.METHOD_DELETE,
+export const METHOD_TYPE_DELETE = {
+	id: process.env.METHOD_TYPE_DELETE,
 	name: 'DELETE',
-	description: 'удаление',
+	text: () => 'удаление',
 	backgroundColor: '#f44336',
 	textColor: '#FFF',
 };
 
 const method = {
-	[process.env.METHOD_GET]: METHOD_GET,
-	[process.env.METHOD_POST]: METHOD_POST,
-	[process.env.METHOD_PUT]: METHOD_PUT,
-	[process.env.METHOD_PATCH]: METHOD_PATCH,
-	[process.env.METHOD_DELETE]: METHOD_DELETE,
+	[process.env.METHOD_TYPE_GET]: METHOD_TYPE_GET,
+	[process.env.METHOD_TYPE_POST]: METHOD_TYPE_POST,
+	[process.env.METHOD_TYPE_PUT]: METHOD_TYPE_PUT,
+	[process.env.METHOD_TYPE_PATCH]: METHOD_TYPE_PATCH,
+	[process.env.METHOD_TYPE_DELETE]: METHOD_TYPE_DELETE,
 };
 
 export default method;

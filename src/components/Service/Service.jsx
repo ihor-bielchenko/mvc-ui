@@ -44,7 +44,8 @@ let Service = ({ history }) => {
 	const domain = useSelector((state) => state.account.path || '');
 	const id = useSelector((state) => state.services.form.id);
 	const name = useSelector((state) => state.services.form.name || '');
-	const subdomainPath = useSelector((state) => state.services.form.subdomain_path || '');
+	const subdomainProjectPath = useSelector((state) => (state.services.form.project || {}).subdomain_path || '');
+	const subdomainServicePath = useSelector((state) => state.services.form.subdomain_path || '');
 	const _onSave = React.useCallback((e) => onSave(e, history.push), [
 		history.push,
 	]);
@@ -144,7 +145,7 @@ let Service = ({ history }) => {
 						placeholder="example"
 						type="text"
 						name="subdomain_path"
-						value={subdomainPath}
+						value={subdomainServicePath}
 						onChange={onChange('subdomain_path')} />
 				</Grid>
 				<Grid
@@ -158,7 +159,7 @@ let Service = ({ history }) => {
 						<Typography
 							variant="subtitle1"
 							component="span">
-							.{domain}
+							.{subdomainProjectPath}.{domain}
 						</Typography>
 					</Button>
 				</Grid>

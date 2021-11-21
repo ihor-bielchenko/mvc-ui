@@ -8,6 +8,7 @@ import PageDashboard from 'pages/Dashboard';
 import PageScript from 'pages/Script';
 import PageDatabase from 'pages/Database';
 import PageService from 'pages/Service';
+import PageRoute from 'pages/Route';
 import PageApi from 'pages/Api';
 import Header from 'components/Header';
 import onMountService from 'components/Service/onMount.js';
@@ -64,6 +65,13 @@ let ServiceInside = () => {
 				path={`/:projectId/${URL_PAGE_SERVICE}/:serviceId/${URL_PAGE_API}`}>
 					<HeaderWrapper>
 						<PageApi />
+					</HeaderWrapper>
+			</Route>
+			<Route 
+				exact
+				path={`/:projectId/${URL_PAGE_SERVICE}/:serviceId/${URL_PAGE_API}/:routeId`}>
+					<HeaderWrapper>
+						<PageRoute />
 					</HeaderWrapper>
 			</Route>
 		</Switch>

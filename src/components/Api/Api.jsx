@@ -12,10 +12,12 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
+import Typography from '@material-ui/core/Typography';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Button from '@material-ui/core/Button';
+import Chip from '@material-ui/core/Chip';
 import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 import CloseIcon from '@material-ui/icons/Close';
@@ -27,6 +29,8 @@ import onMenu from 'components/Menu/onMenu.js';
 import onDialog from 'components/Dialog/onDialog.js';
 import getProjectId from 'components/Service/getProjectId.js';
 import getServiceId from 'components/Service/getServiceId.js';
+import protocol from 'structures/protocol.js';
+import method from 'structures/method.js';
 import { DIALOG_DELETE_CONFIRM } from 'consts/dialog.js';
 import {
 	URL_PAGE_SERVICE,
@@ -45,7 +49,8 @@ let Api = ({ history }) => {
 	const projectId = getProjectId();
 	const serviceId = getServiceId();
 	const domain = useSelector((state) => state.account.path);
-	const subdomainPath = useSelector((state) => state.services.form.subdomain_path)
+	const subdomainProjectPath = useSelector((state) => (state.services.form.project || {}).subdomain_path || '');
+	const subdomainServicePath = useSelector((state) => state.services.form.subdomain_path)
 	const rowsPerPage = useSelector((state) => state.list.rowsPerPage);
 	const currentPage = useSelector((state) => state.list.currentPage);
 	const select = useSelector((state) => ([ ...state.list.select ]));
@@ -113,26 +118,46 @@ let Api = ({ history }) => {
 								onChange={onCheckboxAll} />
 						</TableCell>
 						<TableCell>
-							Метод
+							<Typography variant="caption">
+								Метод
+							</Typography>
 						</TableCell>
 						<TableCell>
-							Путь
+							<Typography variant="caption">
+								Путь
+							</Typography>
 						</TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
 					{data.map((item, i) => {
-						return <TableRow key={item.id}>
+						return <TableRow 
+							key={item.id}
+							style={{
+								verticalAlign: 'initial',
+							}}>
 							<TableCell padding="checkbox">
 								<Checkbox
 									checked={select.includes(item.id)}
 									onChange={onCheckboxRow(item.id)} />
 							</TableCell>
 							<TableCell>
-								{item.name}
+								<Chip 
+									label={method[item.method_id].name}
+									style={{
+										color: method[item.method_id].textColor,
+										backgroundColor: method[item.method_id].backgroundColor,
+									}} />
 							</TableCell>
 							<TableCell>
-								{subdomainPath}.{domain}
+								<Link to={`/${projectId}/${URL_PAGE_SERVICE}/${serviceId}/${URL_PAGE_API}/${item.id}`}>
+									<Typography variant="h6">
+										{protocol[item.protocol_id].text()}://{subdomainServicePath}.{subdomainProjectPath}.{domain}
+									</Typography>
+								</Link>
+								<Typography style={{ padding: '8px 0 0', }}>
+									{item.name}
+								</Typography>
 							</TableCell>
 							<TableCell 
 								width="96px"
