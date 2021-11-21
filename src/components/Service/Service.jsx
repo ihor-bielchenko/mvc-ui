@@ -54,7 +54,6 @@ let Service = ({ history }) => {
 	]);
 
 	React.useEffect(() => {
-		console.log('----');
 		onMount(history.push);
 	}, [
 		history.push

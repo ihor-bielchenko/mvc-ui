@@ -35,7 +35,12 @@ const onSave = async (e, historyPush) => {
 			});
 			const fetchServiceData = ((fetchServiceResponse || {}).data || {}).data || {};
 			
-			services.form = { ...fetchServiceData };
+			services.form = { 
+				...fetchServiceData,
+				project: {
+					...services.form.project,
+				}, 
+			};
 			Store().dispatch({
 				type: 'services',
 				payload: () => ({ ...services }),
