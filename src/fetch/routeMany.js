@@ -9,7 +9,6 @@ const routeMany = async (page, data = {}) => {
 			method: 'get',
 			params: {
 				access_token: localStorage.getItem('access_token'),
-				limit: 999,
 				...data,
 			},
 		});

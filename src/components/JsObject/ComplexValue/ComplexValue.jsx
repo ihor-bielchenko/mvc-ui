@@ -93,8 +93,6 @@ let ComplexItemDb = ({
 		columnId,
 	]);
 
-	console.log('dbColumnsData', dbColumnsData, columnId);
-
 	return dbColumnsData[columnId]
 		? <ComplexItem
 			widthDefault

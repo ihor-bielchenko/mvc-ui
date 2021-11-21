@@ -6,7 +6,7 @@ const onCheckboxAll = (e) => {
 	list.select = [];
 
 	if (e.target.checked) {
-		list.fetch.forEach((item) => {
+		list.data.forEach((item) => {
 			list.select.push(item.id);
 		});
 	}

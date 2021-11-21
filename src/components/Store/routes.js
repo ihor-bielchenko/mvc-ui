@@ -12,7 +12,6 @@ export const initialState = () => ({
 		id: 1,
 		service_id: 1,
 		name: 'route 1 - 1',
-		domain_path: 'drivedatum.com',
 		protocol_id: PROTOCOL_TYPE_HTTP.id,
 		method_id: 1,
 		path: [{
@@ -201,15 +200,7 @@ export const initialState = () => ({
 			route_url_type_id: 1,
 			value: '',
 		}*/],
-		response: {
-			0: {
-				id: 0,
-				parent_id: 0,
-				data_type_id: DATA_TYPE_TEXT.id,
-				key: '0',
-				value: '',
-			},
-		},
+		response: {},
 	},
 });
 const routes = (state = initialState(), action) => {

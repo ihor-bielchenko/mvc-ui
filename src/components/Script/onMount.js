@@ -3,22 +3,25 @@ import { initialState as initialStateScript } from 'components/Store/script.js';
 import onLoader from 'components/Loader/onLoader';
 import onMountDb from 'components/Database/onMount.js';
 import onMountDbColumns from 'components/Database/Columns/onMount.js';
-import { FUNC_CATEGORY_IF } from 'structures/funcCategories.js';
-import funcTemplates from 'structures/funcTemplates.js';
 import fetchEntityMany from 'fetch/entityMany.js';
 import fetchArrowMany from 'fetch/arrowMany.js';
+import fetchRouteMany from 'fetch/routeMany.js';
+import fetchProjectMany from 'fetch/projectMany.js';
 import axiosError from 'utils/axiosError.js';
+import funcTemplates from 'structures/funcTemplates.js';
+import { FUNC_CATEGORY_IF } from 'structures/funcCategories.js';
 
 const onMount = async (scriptId, workspaceId) => {
-	let script = Store().getState().script;
+	let {
+		services,
+		routes,
+		script,
+	} = Store().getState();
 
 	if (scriptId > 0 && workspaceId > 0) {
 		onLoader(true);
 		
 		try {
-			await onMountDb();
-			onMountDbColumns();
-
 			const fetchArrowResponse = await fetchArrowMany(scriptId);
 			const fetchArrowData = ((fetchArrowResponse || {}).data || {}).data || [];
 
@@ -61,10 +64,61 @@ const onMount = async (scriptId, workspaceId) => {
 
 			Store().dispatch({
 				type: 'script',
-				payload: () => ({ ...script }),
-			});
+				payload: () => {
+					setTimeout(async () => {
+						try {
+							await onMountDb();
+							onMountDbColumns();
 
-			onLoader(false);
+							const fetchProjectResponse = await fetchProjectMany();
+							const fetchProjectData = ((fetchProjectResponse || {}).data || {}).data || [];
+
+							const fetchDbRowResponse = await fetchRouteMany(1, {
+								limit: 999,
+								filter: JSON.stringify({ service_id: scriptId }),
+							});
+							const fetchDbRowData = ((fetchDbRowResponse || {}).data || {}).data || [];
+							const collectorServices = [];
+
+							fetchProjectData.forEach((project) => {
+								project.services.forEach(({ 
+									id, 
+									name, 
+								}) => {
+									collectorServices.push({
+										id,
+										name,
+									});
+								});
+							});
+							services.data = [ ...collectorServices ];
+							routes.data = [ ...fetchDbRowData ];
+
+							Store().dispatch({
+								type: 'services',
+								payload: () => ({ ...services }),
+							});
+							Store().dispatch({
+								type: 'routes',
+								payload: () => ({ ...routes }),
+							});
+						}
+						catch (err) {
+							Store().dispatch({
+								type: 'alert',
+								payload: () => ({
+									flag: true,
+									message: axiosError(err),
+									vertical: 'bottom',
+									horizontal: 'right',
+								}),
+							});
+							onLoader(false);
+						}
+					}, 0);
+					return ({ ...script });
+				},
+			});
 		}
 		catch (err) {
 			Store().dispatch({

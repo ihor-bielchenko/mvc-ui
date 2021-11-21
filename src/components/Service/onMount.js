@@ -8,13 +8,17 @@ import getServiceId from './getServiceId.js';
 import { URL_PAGE_DASHBOARD } from 'consts/url.js';
 
 const onMount = async (historyPush = () => {}) => {
-	onLoader(true);
-
 	try {
+		const url = window
+			.location
+			.pathname
+			.split('/');
 		const projectId = getProjectId();
 		const serviceId = getServiceId();
 
 		if (serviceId > 0) {
+			onLoader(true);
+
 			const services = Store().getState().services;
 			const fetchServiceResponse = await fetchServiceOne(serviceId);
 			const fetchServiceData = ((fetchServiceResponse || {}).data || {}).data || {};
@@ -28,6 +32,9 @@ const onMount = async (historyPush = () => {}) => {
 				type: 'services',
 				payload: () => ({ ...services }),
 			});
+			if (url.length === 4) {
+				onLoader(false);
+			}
 		}
 	}
 	catch (err) {
@@ -42,7 +49,6 @@ const onMount = async (historyPush = () => {}) => {
 		});
 		historyPush('/'+ URL_PAGE_DASHBOARD);
 	}
-	onLoader(false);
 };
 
 export default onMount;
