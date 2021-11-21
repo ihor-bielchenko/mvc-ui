@@ -55,28 +55,27 @@ let Breadcrumbs = ({ history }) => {
 			</Link>);
 			switch (url[4]) {
 				case URL_PAGE_API:
-					if (url[5] > 0 && routeName) {
+					if (url[5] >= 0) {
 						render.push(<Link 
 							key="api"
 							to={`/${url[1]}/${URL_PAGE_SERVICE}/${url[3]}/${URL_PAGE_API}`}>
-								<Typography>
-									API
-								</Typography>
-						</Link>);
-						render.push(<Link 
-							key="route"
-							to={`/${url[1]}/${URL_PAGE_SERVICE}/${url[3]}`}>
-							<Typography key="api">
-								{routeName}
+							<Typography>
+								API
 							</Typography>
 						</Link>);
+						render.push(url[5] > 0 && routeName
+							? <Typography key="route">
+								{routeName}
+							</Typography>
+							: <Typography key="route">
+								Новый роут
+							</Typography>);
 					}
 					else {
 						render.push(<Typography key="api">
 							API
 						</Typography>);
 					}
-
 					break;
 
 				case URL_PAGE_CRON:

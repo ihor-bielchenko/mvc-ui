@@ -8,7 +8,11 @@ import MenuService from 'components/Menu/Service';
 import MenuAccount from 'components/Menu/Account';
 import onMenu from 'components/Menu/onMenu.js';
 
-let Header = ({ children }) => {
+let Header = ({ 
+	children,
+	border, 
+	backgroundColor,
+}) => {
 	return <Box 
 		display="flex"
 		alignItems="center"
@@ -22,7 +26,10 @@ let Header = ({ children }) => {
 		width="calc(100% - 24px)"
 		height="64px"
 		style={{
-			// backgroundColor: '#FFF',
+			backgroundColor: backgroundColor
+				? backgroundColor
+				: 'initial',
+			zIndex: 2,
 		}}>
 		<Box
 			width="48px"
@@ -30,9 +37,7 @@ let Header = ({ children }) => {
 			mx="10px"
 			style={{
 				backgroundColor: '#FFF',
-				border: children
-					? '1px solid #EFEFEF'
-					: 'none',
+				border: '1px solid #EFEFEF',
 				borderRadius: '50% 50%',
 			}}>
 			<IconButton 
@@ -54,15 +59,14 @@ let Header = ({ children }) => {
 					alignItems="center"
 					height="48px"
 					width="max-content"
-					minWidth="580px"
+					maxWidth="680px"
+					minWidth="280px"
 					overflow="hidden"
 					mr="10px"
 					px="4px"
 					style={{
 						backgroundColor: '#FFF',
-						border: children
-							? '1px solid #EFEFEF'
-							: '1px solid transparent',
+						border: '1px solid #EFEFEF',
 						borderRadius: '7px',
 					}}>
 					<Breadcrumbs />	
@@ -74,9 +78,7 @@ let Header = ({ children }) => {
 			mx="10px"
 			style={{
 				backgroundColor: '#FFF',
-				border: children
-					? '1px solid #EFEFEF'
-					: 'none',
+				border: '1px solid #EFEFEF',
 				borderRadius: '50% 50%',
 			}}>
 			<IconButton 
@@ -95,6 +97,7 @@ let Header = ({ children }) => {
 
 Header = React.memo(Header);
 Header.defaultProps = {
+	border: false,
 };
 
 export default Header;

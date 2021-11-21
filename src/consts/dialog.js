@@ -2,8 +2,8 @@
 export const DIALOG_DELETE_CONFIRM = 'd0';
 export const DIALOG_PROJECT_FORM = 'd2';
 export const DIALOG_PROJECT_MEMBER = 'd3';
-export const DIALOG_PATH_VALUE = 'd4';
-export const DIALOG_PLACEHOLDER_VALUE = 'd5';
+export const DIALOG_URL_VALUE = 'd4';
+export const DIALOG_URL_PLACEHOLDER = 'd5';
 export const DIALOG_DB_QUERY = 'd6';
 export const DIALOG_DB_COLUMN = 'd7';
 export const DIALOG_DB_ROW = 'd8';

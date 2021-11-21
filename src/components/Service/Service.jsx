@@ -41,9 +41,9 @@ import onDelete from './onDelete.js';
 
 let Service = ({ history }) => {
 	const projectId = getProjectId();
-	const domain = useSelector((state) => state.account.path || '');
 	const id = useSelector((state) => state.services.form.id);
 	const name = useSelector((state) => state.services.form.name || '');
+	const domain = useSelector((state) => state.account.path || '');
 	const subdomainProjectPath = useSelector((state) => (state.services.form.project || {}).subdomain_path || '');
 	const subdomainServicePath = useSelector((state) => state.services.form.subdomain_path || '');
 	const _onSave = React.useCallback((e) => onSave(e, history.push), [

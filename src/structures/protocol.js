@@ -13,7 +13,7 @@ export const PROTOCOL_TYPE_WS = {
 };
 export const PROTOCOL_TYPE_TCP = {
 	id: process.env.PROTOCOL_TYPE_TCP,
-	text: () => 'ws',
+	text: () => 'tcp/ip',
 };
 
 const protocol = {

@@ -17,7 +17,7 @@ let PageDatabase = () => {
 			width="max-content"
 			minWidth="100%"
 			height="100%">
-			<Header>
+			<Header border>
 				<Box 
 					display="flex"
 					justifyContent="space-between"

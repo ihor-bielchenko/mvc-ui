@@ -70,9 +70,7 @@ let ServiceInside = () => {
 			<Route 
 				exact
 				path={`/:projectId/${URL_PAGE_SERVICE}/:serviceId/${URL_PAGE_API}/:routeId`}>
-					<HeaderWrapper>
-						<PageRoute />
-					</HeaderWrapper>
+					<PageRoute />
 			</Route>
 		</Switch>
 	</React.Fragment>;
