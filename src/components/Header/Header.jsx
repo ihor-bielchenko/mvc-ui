@@ -54,7 +54,7 @@ let Header = ({ children }) => {
 					alignItems="center"
 					height="48px"
 					width="max-content"
-					minWidth="480px"
+					minWidth="580px"
 					overflow="hidden"
 					mr="10px"
 					px="4px"

@@ -22,6 +22,7 @@ let Breadcrumbs = ({ history }) => {
 		.pathname
 		.split('/');
 	const serviceName = useSelector((state) => state.services.form.name);
+	const routeName = useSelector((state) => state.routes.form.name);
 	const render = [
 		url[1] === URL_PAGE_DASHBOARD
 			? <Typography key="all">
@@ -54,9 +55,28 @@ let Breadcrumbs = ({ history }) => {
 			</Link>);
 			switch (url[4]) {
 				case URL_PAGE_API:
-					render.push(<Typography key="api">
-						API
-					</Typography>);
+					if (url[5] > 0 && routeName) {
+						render.push(<Link 
+							key="api"
+							to={`/${url[1]}/${URL_PAGE_SERVICE}/${url[3]}/${URL_PAGE_API}`}>
+								<Typography>
+									API
+								</Typography>
+						</Link>);
+						render.push(<Link 
+							key="route"
+							to={`/${url[1]}/${URL_PAGE_SERVICE}/${url[3]}`}>
+							<Typography key="api">
+								{routeName}
+							</Typography>
+						</Link>);
+					}
+					else {
+						render.push(<Typography key="api">
+							API
+						</Typography>);
+					}
+
 					break;
 
 				case URL_PAGE_CRON:
