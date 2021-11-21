@@ -1,12 +1,25 @@
 import React from 'react';
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Header from 'components/Header';
 import Breadcrumbs from 'components/Breadcrumbs';
 import ComponentRoute from 'components/Route';
+import getProjectId from 'components/Service/getProjectId.js';
+import getServiceId from 'components/Service/getServiceId.js';
+import {
+	URL_PAGE_SCRIPT,
+	URL_PAGE_SERVICE,
+	URL_PAGE_API,
+} from 'consts/url.js';
 
-let Route = () => {
+let Route = ({ history }) => {
+	const projectId = getProjectId();
+	const serviceId = getServiceId();
+	const routeId = useSelector((state) => state.routes.form.id || 0);
+	const scriptId = useSelector((state) => state.routes.form.script_id || 0);
+
 	return <Box
 		position="relative"
 		width="100%"
@@ -54,7 +67,9 @@ let Route = () => {
 							Настройка роута
 						</Button>
 						<Button
-							disabled
+							disabled={!(routeId > 0 && scriptId > 0)}
+							component={Link}
+							to={`/${projectId}/${URL_PAGE_SERVICE}/${serviceId}/${URL_PAGE_API}/${routeId}/${URL_PAGE_SCRIPT}/${scriptId}`}
 							color="primary">
 							Программа
 						</Button>

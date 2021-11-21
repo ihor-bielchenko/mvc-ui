@@ -1,11 +1,19 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Header from 'components/Header';
 import SelectScale from 'components/Select/Scale';
+import getProjectId from 'components/Service/getProjectId.js';
+import getServiceId from 'components/Service/getServiceId.js';
+import getRouteId from 'components/Breadcrumbs/getRouteId.js';
+import {
+	URL_PAGE_SERVICE,
+	URL_PAGE_API,
+} from 'consts/url.js';
 import Workspace from './Workspace';
 import onMount from './onMount.js';
 
@@ -15,6 +23,9 @@ let Script = ({
 	dataTypeValidating,
 	onClickAsSource,
 }) => {
+	const projectId = getProjectId();
+	const serviceId = getServiceId();
+	const routeId = getRouteId();
 	const isExists = useSelector((state) => !!state.script[id]);
 	const workspaceId = React.useMemo(() => isExists
 		? Date.now()
@@ -76,6 +87,8 @@ let Script = ({
 							borderRadius: '7px',
 						}}>
 						<Button
+							component={Link}
+							to={`/${projectId}/${URL_PAGE_SERVICE}/${serviceId}/${URL_PAGE_API}/${routeId}`}
 							color="primary">
 							Настройка роута
 						</Button>

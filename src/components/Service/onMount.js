@@ -9,6 +9,7 @@ import { URL_PAGE_DASHBOARD } from 'consts/url.js';
 
 const onMount = async (historyPush = () => {}) => {
 	try {
+		const services = Store().getState().services;
 		const url = window
 			.location
 			.pathname
@@ -16,25 +17,26 @@ const onMount = async (historyPush = () => {}) => {
 		const projectId = getProjectId();
 		const serviceId = getServiceId();
 
-		if (serviceId > 0) {
-			onLoader(true);
+		onLoader(true);
 
-			const services = Store().getState().services;
+		if (serviceId > 0) {
 			const fetchServiceResponse = await fetchServiceOne(serviceId);
 			const fetchServiceData = ((fetchServiceResponse || {}).data || {}).data || {};
-		
-			const fetchProjectResponse = await fetchProjectOne(projectId);
-			const fetchProjectData = ((fetchProjectResponse || {}).data || {}).data || {};
 
 			services.form = { ...fetchServiceData };
+		}
+		if (projectId > 0) {
+			const fetchProjectResponse = await fetchProjectOne(projectId);
+			const fetchProjectData = ((fetchProjectResponse || {}).data || {}).data || {};
+		
 			services.form.project = { ...fetchProjectData };
-			Store().dispatch({
-				type: 'services',
-				payload: () => ({ ...services }),
-			});
-			if (url.length === 4) {
-				onLoader(false);
-			}
+		}
+		Store().dispatch({
+			type: 'services',
+			payload: () => ({ ...services }),
+		});
+		if (url.length === 4) {
+			onLoader(false);
 		}
 	}
 	catch (err) {
@@ -49,6 +51,7 @@ const onMount = async (historyPush = () => {}) => {
 		});
 		historyPush('/'+ URL_PAGE_DASHBOARD);
 	}
+	console.log('???');
 };
 
 export default onMount;

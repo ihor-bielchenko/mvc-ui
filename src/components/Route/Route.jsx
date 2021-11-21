@@ -52,7 +52,7 @@ let Route = ({ history }) => {
 	]);
 
 	React.useEffect(() => {
-		onMount();
+		setTimeout(() => onMount(), 0);
 	}, []);
 
 	React.useEffect(() => () => {

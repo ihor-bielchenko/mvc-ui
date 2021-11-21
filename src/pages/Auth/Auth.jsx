@@ -44,43 +44,43 @@ HeaderWrapper.defaultProps = {
 
 let ServiceInside = ({ history }) => {
 	React.useEffect(() => {
-		onMountService(history.push);
+		const url = window
+			.location
+			.pathname
+			.split('/');
+
+		if (!(url[2] === URL_PAGE_SERVICE
+			&& url.length === 4
+			&& Number(url[3]) >= 0)) {
+			onMountService(history.push);
+		}
 	}, [
 		history.push,
 	]);
 
 	return <React.Fragment>
-		<Switch>
-			<Route 
-				exact
-				path={`/:projectId/${URL_PAGE_SERVICE}/:serviceId/${URL_PAGE_DB}`}>
-				<PageDatabase />
-			</Route>
-			<Route 
-				exact
-				path={`/:projectId/${URL_PAGE_SERVICE}/:serviceId`}>
-					<HeaderWrapper>
-						<PageService />
-					</HeaderWrapper>
-			</Route>
-			<Route 
-				exact
-				path={`/:projectId/${URL_PAGE_SERVICE}/:serviceId/${URL_PAGE_API}`}>
-					<HeaderWrapper>
-						<PageApi />
-					</HeaderWrapper>
-			</Route>
-			<Route 
-				exact
-				path={`/:projectId/${URL_PAGE_SERVICE}/:serviceId/${URL_PAGE_API}/:routeId`}>
-					<PageRoute />
-			</Route>
-			<Route 
-				exact
-				path={`/:projectId/${URL_PAGE_SERVICE}/:serviceId/${URL_PAGE_API}/:routeId/${URL_PAGE_SCRIPT}/:scriptId`}>
-				<PageScript />
-			</Route>
-		</Switch>
+		<Route 
+			exact
+			path={`/:projectId/${URL_PAGE_SERVICE}/:serviceId/${URL_PAGE_DB}`}>
+			<PageDatabase />
+		</Route>
+		<Route 
+			exact
+			path={`/:projectId/${URL_PAGE_SERVICE}/:serviceId/${URL_PAGE_API}`}>
+				<HeaderWrapper>
+					<PageApi />
+				</HeaderWrapper>
+		</Route>
+		<Route 
+			exact
+			path={`/:projectId/${URL_PAGE_SERVICE}/:serviceId/${URL_PAGE_API}/:routeId`}>
+				<PageRoute />
+		</Route>
+		<Route 
+			exact
+			path={`/:projectId/${URL_PAGE_SERVICE}/:serviceId/${URL_PAGE_API}/:routeId/${URL_PAGE_SCRIPT}/:scriptId`}>
+			<PageScript />
+		</Route>
 	</React.Fragment>;
 };
 ServiceInside = React.memo(ServiceInside);
@@ -99,7 +99,16 @@ let AuthInside = () => {
 				</HeaderWrapper>
 			</Route>
 			<Route path={`/:projectId/${URL_PAGE_SERVICE}/:serviceId`}>
-				<ServiceInside />
+				<Switch>
+					<Route 
+						exact
+						path={`/:projectId/${URL_PAGE_SERVICE}/:serviceId`}>
+							<HeaderWrapper>
+								<PageService />
+							</HeaderWrapper>
+					</Route>
+					<ServiceInside />
+				</Switch>
 			</Route>
 		</Switch>
 	</React.Fragment>;
