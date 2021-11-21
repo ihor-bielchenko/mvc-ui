@@ -48,6 +48,29 @@ let Root = ({
 					return <React.Fragment>
 						<UrlValue />
 						<UrlPlaceholder />
+						{(() => {
+							switch (url[6]) {
+								case URL_PAGE_SCRIPT:
+									return <React.Fragment>
+										<Prop />
+										<Condition />
+										<Func />
+										<Json />
+										<SourceDb />
+										<DbQuery />
+										<KeyExists />
+										<SourceProxy />
+										<SourceHeader />
+										<SourceRequest />
+										<SourceCookie />
+										<SourcePlaceholder />
+										<SourceScript />
+									</React.Fragment>;
+								default:
+									break;
+							}
+							return <React.Fragment />;
+						})()}
 					</React.Fragment>;
 				default:
 					break;
@@ -57,22 +80,6 @@ let Root = ({
 					return <React.Fragment>
 						<ServiceTemplate />
 						<ProjectForm />
-					</React.Fragment>;
-				case URL_PAGE_SCRIPT:
-					return <React.Fragment>
-						<Prop />
-						<Condition />
-						<Func />
-						<Json />
-						<SourceDb />
-						<DbQuery />
-						<KeyExists />
-						<SourceProxy />
-						<SourceHeader />
-						<SourceRequest />
-						<SourceCookie />
-						<SourcePlaceholder />
-						<SourceScript />
 					</React.Fragment>;
 				default:
 					break;

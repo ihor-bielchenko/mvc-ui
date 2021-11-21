@@ -75,6 +75,11 @@ let ServiceInside = ({ history }) => {
 				path={`/:projectId/${URL_PAGE_SERVICE}/:serviceId/${URL_PAGE_API}/:routeId`}>
 					<PageRoute />
 			</Route>
+			<Route 
+				exact
+				path={`/:projectId/${URL_PAGE_SERVICE}/:serviceId/${URL_PAGE_API}/:routeId/${URL_PAGE_SCRIPT}/:scriptId`}>
+				<PageScript />
+			</Route>
 		</Switch>
 	</React.Fragment>;
 };
@@ -95,11 +100,6 @@ let AuthInside = () => {
 			</Route>
 			<Route path={`/:projectId/${URL_PAGE_SERVICE}/:serviceId`}>
 				<ServiceInside />
-			</Route>
-			<Route 
-				exact
-				path={`/${URL_PAGE_SCRIPT}/:scriptId`}>
-				<PageScript />
 			</Route>
 		</Switch>
 	</React.Fragment>;

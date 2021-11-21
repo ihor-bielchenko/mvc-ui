@@ -1,6 +1,8 @@
 import Store from 'components/Store';
 import { initialState as initialStateScript } from 'components/Store/script.js';
 import onLoader from 'components/Loader/onLoader';
+import onMountDb from 'components/Database/onMount.js';
+import onMountDbColumns from 'components/Database/Columns/onMount.js';
 import { FUNC_CATEGORY_IF } from 'structures/funcCategories.js';
 import funcTemplates from 'structures/funcTemplates.js';
 import fetchEntityMany from 'fetch/entityMany.js';
@@ -9,13 +11,14 @@ import axiosError from 'utils/axiosError.js';
 
 const onMount = async (scriptId, workspaceId) => {
 	let script = Store().getState().script;
-	
-	console.log('----------', scriptId);
 
 	if (scriptId > 0 && workspaceId > 0) {
 		onLoader(true);
 		
 		try {
+			await onMountDb();
+			onMountDbColumns();
+
 			const fetchArrowResponse = await fetchArrowMany(scriptId);
 			const fetchArrowData = ((fetchArrowResponse || {}).data || {}).data || [];
 

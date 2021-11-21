@@ -93,17 +93,21 @@ let ComplexItemDb = ({
 		columnId,
 	]);
 
-	return <ComplexItem
-		widthDefault
-		parentId={parentId}
-		id={id}
-		KeyComponent={KeyComponent}
-		TypeComponent={TypeComponent}
-		dataTypeId={dbColumnsData[columnId].data_type_id}
-		keyValue={key}
-		value={dbColumnsData[columnId].default_value}
-		onChangeKey={_onChangeKey}
-		onMenuComplexValue={onMenuComplexValue} />;
+	console.log('dbColumnsData', dbColumnsData, columnId);
+
+	return dbColumnsData[columnId]
+		? <ComplexItem
+			widthDefault
+			parentId={parentId}
+			id={id}
+			KeyComponent={KeyComponent}
+			TypeComponent={TypeComponent}
+			dataTypeId={dbColumnsData[columnId].data_type_id}
+			keyValue={key}
+			value={dbColumnsData[columnId].default_value}
+			onChangeKey={_onChangeKey}
+			onMenuComplexValue={onMenuComplexValue} />
+		: <React.Fragment />;
 };
 ComplexItemDb = React.memo(ComplexItemDb);
 ComplexItemDb.defaultProps = {
