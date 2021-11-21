@@ -33,12 +33,14 @@ import onChange from './onChange.js';
 import onSave from './onSave.js';
 import onDelete from './onDelete.js';
 import onProtocol from './onProtocol.js';
+import onMethod from './onMethod.js';
 
 let Route = ({ history }) => {
 	// const projectId = getProjectId();
 	const id = useSelector((state) => state.routes.form.id);
 	const name = useSelector((state) => state.routes.form.name || '');
 	const protocolId = useSelector((state) => state.routes.form.protocol_id || '');
+	const methodId = useSelector((state) => state.routes.form.method_id || '');
 	const domain = useSelector((state) => state.account.path || '');
 	const subdomainProjectPath = useSelector((state) => (state.services.form.project || {}).subdomain_path || '');
 	const subdomainServicePath = useSelector((state) => state.services.form.subdomain_path || '');
@@ -81,7 +83,9 @@ let Route = ({ history }) => {
 			py={2}
 			width="20%">
 			<SelectMethod
-				required />
+				required
+				value={methodId}
+				onSelect={onMethod} />
 		</Box>
 		<Box 
 			position="relative"
@@ -95,6 +99,7 @@ let Route = ({ history }) => {
 					item
 					xs={2}>
 					<SelectProtocol
+						disabled
 						value={protocolId}
 						onSelect={onProtocol} />
 				</Grid>
@@ -171,12 +176,13 @@ let Route = ({ history }) => {
 					backgroundColor: '#FFF',
 				}}>
 				<Button 
+					disabled={!(name.length > 0 && methodId > 0)}
 					startIcon={<SaveIcon />}
 					onClick={_onSave}>
 					Сохранить
 				</Button>
 				<Button 
-					disabled={!(name.length > 0)}
+					disabled={!(id > 0)}
 					color="secondary"
 					startIcon={<DeleteIcon />}
 					onClick={onDialog(DIALOG_DELETE_CONFIRM, {

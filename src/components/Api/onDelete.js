@@ -6,7 +6,7 @@ import fetchRouteDelete from 'fetch/routeDelete.js';
 import { DIALOG_DELETE_CONFIRM } from 'consts/dialog.js';
 import onMount from './onMount.js';
 
-const onDelete = async (routeId) => async (e) => {
+const onDelete = (routeId) => async (e) => {
 	onLoader(true);
 
 	try {

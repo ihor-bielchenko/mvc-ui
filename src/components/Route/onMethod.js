@@ -1,13 +1,13 @@
 import Store from 'components/Store';
 
-const onProtocol = (e) => {
+const onMethod = (e) => {
 	const routes = Store().getState().routes;
 
-	routes.form.protocol_id = Number(e.target.value);
+	routes.form.method_id = Number(e.target.value);
 	Store().dispatch({
 		type: 'routes',
 		payload: () => ({ ...routes }),
 	});
 };
 
-export default onProtocol;
+export default onMethod;

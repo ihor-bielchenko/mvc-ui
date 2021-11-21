@@ -4,6 +4,7 @@ import {
 	withRouter,
 	Link,
 } from 'react-router-dom';
+import styled from 'styled-components';
 import Box from '@material-ui/core/Box';
 import Table from '@material-ui/core/Table';
 import TableContainer from '@material-ui/core/TableContainer';
@@ -31,6 +32,7 @@ import getProjectId from 'components/Service/getProjectId.js';
 import getServiceId from 'components/Service/getServiceId.js';
 import protocol from 'structures/protocol.js';
 import method from 'structures/method.js';
+import { ROUTE_URL_TYPE_PLACEHOLDER } from 'structures/routeUrl.js';
 import { DIALOG_DELETE_CONFIRM } from 'consts/dialog.js';
 import {
 	URL_PAGE_SERVICE,
@@ -45,9 +47,24 @@ import onCheckboxAll from './onCheckboxAll.js';
 import onCheckboxRow from './onCheckboxRow.js';
 import onSearch from './onSearch.js';
 
+const TableRowWrapper = styled(TableRow)`
+	cursor: pointer;
+	& .row_link {
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+	&:hover {
+		background-color: #f7f7f7;
+	}
+`;
 let Api = ({ history }) => {
 	const projectId = getProjectId();
 	const serviceId = getServiceId();
+	const protocolId = useSelector((state) => (state.services.form || {}).protocol_id || '');
 	const domain = useSelector((state) => state.account.path);
 	const subdomainProjectPath = useSelector((state) => (state.services.form.project || {}).subdomain_path || '');
 	const subdomainServicePath = useSelector((state) => state.services.form.subdomain_path)
@@ -107,6 +124,13 @@ let Api = ({ history }) => {
 		<Box>
 			<Search onSubmit={onSearch} />
 		</Box>
+		<Box py={2}>
+			<Typography 
+				component="span"
+				variant="body2">
+				{protocol[protocolId] && protocol[protocolId].text()}://{subdomainServicePath}.{subdomainProjectPath}.{domain}...
+			</Typography>
+		</Box>
 		<TableContainer>
 			<Table>
 				<TableHead>
@@ -117,13 +141,17 @@ let Api = ({ history }) => {
 									&& select.length === data.length}
 								onChange={onCheckboxAll} />
 						</TableCell>
-						<TableCell>
-							<Typography variant="caption">
+						<TableCell width="1px">
+							<Typography 
+								variant="caption"
+								color="textSecondary">
 								Метод
 							</Typography>
 						</TableCell>
 						<TableCell>
-							<Typography variant="caption">
+							<Typography 
+								variant="caption"
+								color="textSecondary">
 								Путь
 							</Typography>
 						</TableCell>
@@ -131,12 +159,16 @@ let Api = ({ history }) => {
 				</TableHead>
 				<TableBody>
 					{data.map((item, i) => {
-						return <TableRow 
+						return <TableRowWrapper 
 							key={item.id}
 							style={{
 								verticalAlign: 'initial',
+								position: 'relative',
 							}}>
 							<TableCell padding="checkbox">
+								<Link 
+									className="row_link"
+									to={`/${projectId}/${URL_PAGE_SERVICE}/${serviceId}/${URL_PAGE_API}/${item.id}`} />
 								<Checkbox
 									checked={select.includes(item.id)}
 									onChange={onCheckboxRow(item.id)} />
@@ -150,14 +182,42 @@ let Api = ({ history }) => {
 									}} />
 							</TableCell>
 							<TableCell>
-								<Link to={`/${projectId}/${URL_PAGE_SERVICE}/${serviceId}/${URL_PAGE_API}/${item.id}`}>
-									<Typography variant="h6">
-										{protocol[item.protocol_id].text()}://{subdomainServicePath}.{subdomainProjectPath}.{domain}
-									</Typography>
-								</Link>
-								<Typography style={{ padding: '8px 0 0', }}>
+								<Typography 
+									variant="h5"
+									style={{ padding: '0 0 8px' }}>
 									{item.name}
 								</Typography>
+								<Typography component="span">
+									{protocol[item.protocol_id].text()}://
+								</Typography>
+								<Typography component="span">
+									...
+								</Typography>
+								{item.url.length > 0
+									? item.url.map((urlItem) => {
+										return <React.Fragment key={urlItem.id}>
+											<Typography 
+												component="span"
+												variant="subtitle1">
+												/
+											</Typography>
+											<Typography 
+												component="span"
+												variant="subtitle1"
+												color={urlItem.route_url_type_id === ROUTE_URL_TYPE_PLACEHOLDER.id
+													? 'secondary'
+													: 'initial'}>
+												{urlItem.route_url_type_id === ROUTE_URL_TYPE_PLACEHOLDER.id
+													? ':'+ urlItem.value
+													: urlItem.value.toLowerCase()}
+											</Typography>
+										</React.Fragment>;
+									})
+									: <Typography 
+										component="span"
+										variant="subtitle1">
+										/
+									</Typography>}
 							</TableCell>
 							<TableCell 
 								width="96px"
@@ -177,7 +237,7 @@ let Api = ({ history }) => {
 										onDelete: onDelete(item.id),
 									})} />
 							</TableCell>
-						</TableRow>;
+						</TableRowWrapper>;
 					})}
 				</TableBody>
 			</Table>

@@ -5,8 +5,6 @@ import getServiceId from 'components/Service/getServiceId.js';
 import axiosError from 'utils/axiosError.js';
 import fetchRouteCreate from 'fetch/routeCreate.js';
 import fetchRouteUpdate from 'fetch/routeUpdate.js';
-import { SERVICE_TEMPLATE_BASE } from 'structures/serviceTemplates.js';
-import { PROTOCOL_TYPE_HTTP } from 'structures/protocol.js';
 import { 
 	URL_PAGE_SERVICE,
 	URL_PAGE_API, 
@@ -26,26 +24,27 @@ const onSave = async (e, historyPush) => {
 		if (routes.form.id > 0) {
 			await fetchRouteUpdate(routes.form.id, {
 				name: routes.form.name,
-				protocol_id: PROTOCOL_TYPE_HTTP.id,
-				subdomain_path: routes.form.subdomain_path,
+				method_id: routes.form.method_id,
+				protocol_id: routes.form.protocol_id,
+				url: JSON.stringify(routes.form.url || []),
 			});
 		}
 		else {
 			const fetchRouteResponse = await fetchRouteCreate({
-				project_id: getServiceId(),
-				template_id: SERVICE_TEMPLATE_BASE.id,
+				service_id: serviceId,
 				name: routes.form.name,
-				protocol_id: PROTOCOL_TYPE_HTTP.id,
-				subdomain_path: routes.form.subdomain_path,
+				method_id: routes.form.method_id,
+				protocol_id: routes.form.protocol_id,
+				url: JSON.stringify(routes.form.url || []),
 			});
 			const fetchRouteData = ((fetchRouteResponse || {}).data || {}).data || {};
 			
-			routes.form = { ...fetchRouteData };
+			routes.form.id = fetchRouteData.id;
 			Store().dispatch({
 				type: 'routes',
 				payload: () => ({ ...routes }),
 			});
-			historyPush(`/${projectId}/${URL_PAGE_SERVICE}/${fetchRouteData.id}/${URL_PAGE_API}`);
+			historyPush(`/${projectId}/${URL_PAGE_SERVICE}/${serviceId}/${URL_PAGE_API}/${fetchRouteData.id}`);
 		}
 	}
 	catch (err) {
