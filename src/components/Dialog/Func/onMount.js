@@ -28,7 +28,6 @@ const onMount = async (id, scriptId, workspaceId) => {
 			type: 'func',
 			payload: () => func,
 		});
-		onLoader(false);
 	}
 	catch (err) {
 		Store().dispatch({
@@ -40,8 +39,8 @@ const onMount = async (id, scriptId, workspaceId) => {
 				horizontal: 'right',
 			}),
 		});
-		onLoader(false);
 	}
+	onLoader(false);
 };
 
 export default onMount;

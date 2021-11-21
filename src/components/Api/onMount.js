@@ -36,7 +36,6 @@ const onMount = async () => {
 			}),
 		});
 	}
-	console.log('----');
 	onLoader(false);
 };
 

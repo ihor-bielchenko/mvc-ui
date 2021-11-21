@@ -28,7 +28,6 @@ const onMount = async () => {
 				type: 'db',
 				payload: () => ({ ...db }),
 			});
-			onLoader(false);
 		}
 		else {
 			throw new Error('undefined serviceId');
@@ -44,8 +43,8 @@ const onMount = async () => {
 				horizontal: 'right',
 			}),
 		});
-		onLoader(false);
 	}
+	onLoader(false);
 };
 
 export default onMount;

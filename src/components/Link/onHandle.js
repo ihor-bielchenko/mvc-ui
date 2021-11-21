@@ -10,9 +10,10 @@ const onHandle = (e, history, onClick = () => {}) => {
 	onLoader(true);
 	window.scrollTo(0, 0);
 	clearTimeout(timeout);
-	timeout = setTimeout(() => {
+	timeout = setTimeout(async () => {
 		history.push(href.replace(window.location.origin, ''));
-		onClick(e);
+		await onClick(e);
+		onLoader(false);
 	}, 300);
 };
 

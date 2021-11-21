@@ -8,11 +8,11 @@ const BoxWrapper = styled(Box)`
 	background-color: rgba(255, 255, 255, ${(props) => props['data-opacity']});
 `;
 let Loader = ({ children }) => {
-	const loaderFlag = useSelector((state) => state.config.loaderFlag);
+	const loaderQueue = useSelector((state) => state.config.loaderQueue);
 	const loaderOpacity = useSelector((state) => state.config.loaderOpacity);
 
 	return <React.Fragment>
-		{loaderFlag
+		{loaderQueue > 0
 			? <BoxWrapper
 				data-opacity={loaderOpacity}
 				top="0px"

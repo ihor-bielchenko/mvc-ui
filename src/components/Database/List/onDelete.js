@@ -30,8 +30,8 @@ const onDelete = async (e, tableId, rowId) => {
 				horizontal: 'right',
 			}),
 		});
-		onLoader(false);
 	}
+	onLoader(false);
 };
 
 export default onDelete;

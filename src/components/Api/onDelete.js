@@ -30,8 +30,8 @@ const onDelete = (routeId) => async (e) => {
 				horizontal: 'right',
 			}),
 		});
-		onLoader(false);
 	}
+	onLoader(false);
 };
 
 export default onDelete;

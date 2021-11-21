@@ -17,10 +17,10 @@ import {
 } from 'consts/dialog.js';
 import onlyParentTreeValidate from './onlyParentTreeValidate.js';
 
-const _onHandler = (dialogId, workspaceId, props) => (e) => {
+const _onHandler = (dialogId, workspaceId, props) => async (e) => {
 	onLoader(true);
-
-	onClick(dialogId, workspaceId, props)(e);
+	await onClick(dialogId, workspaceId, props)(e);
+	onLoader(false);
 };
 let Slot = ({
 	scriptId,

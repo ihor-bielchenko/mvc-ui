@@ -1,7 +1,7 @@
 import Store from 'components/Store';
 import onLoader from 'components/Loader/onLoader';
 // import onClose from 'components/Dialog/onClose.js';
-import onMountDatabase from 'components/Database/onMount.js';
+import onMountDb from 'components/Database/onMount.js';
 import axiosError from 'utils/axiosError.js';
 import fetchDbTableUpdate from 'fetch/dbTableUpdate.js';
 import fetchDbColumnCreate from 'fetch/dbColumnCreate.js';
@@ -34,7 +34,7 @@ const onSave = async (e, tableId) => {
 				...collector,
 			});
 			// onClose(DIALOG_DB_TABLE)(e);
-			onMountDatabase();
+			onMountDb();
 		}
 	}
 	catch (err) {
@@ -47,8 +47,8 @@ const onSave = async (e, tableId) => {
 				horizontal: 'right',
 			}),
 		});
-		onLoader(false);
 	}
+	onLoader(false);
 };
 
 export default onSave;

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -26,15 +25,11 @@ let Script = ({
 	const projectId = getProjectId();
 	const serviceId = getServiceId();
 	const routeId = getRouteId();
-	const isExists = useSelector((state) => !!state.script[id]);
-	const workspaceId = React.useMemo(() => isExists
-		? Date.now()
-		: id, [
-		isExists,
-		id,
-	]);
+	const workspaceId = React.useMemo(() => Date.now(), []);
 
-	React.useEffect(() => onMount(id, workspaceId), [
+	React.useEffect(() => {
+		return onMount(id, workspaceId);
+	}, [
 		id,
 		workspaceId,
 	]);

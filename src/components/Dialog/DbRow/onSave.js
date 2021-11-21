@@ -28,7 +28,6 @@ const onSave = async (e, tableId, rowId, setError = () => {}) => {
 				...currentState,
 				...error,
 			}));
-			onLoader(false);
 		}
 		else {
 			(rowId > 0)
@@ -48,8 +47,8 @@ const onSave = async (e, tableId, rowId, setError = () => {}) => {
 				horizontal: 'right',
 			}),
 		});
-		onLoader(false);
 	}
+	onLoader(false);
 };
 
 export default onSave;

@@ -42,9 +42,9 @@ const onSubmit = async (e, setState, recaptchaRef, locationPush) => {
 			};
 		});
 	}
+	onLoader(true);
 
 	try {
-		onLoader(true);
 		await fetchSignUp({
 			email,
 			name,
@@ -53,7 +53,6 @@ const onSubmit = async (e, setState, recaptchaRef, locationPush) => {
 		});
 		setTimeout(() => {
 			locationPush(URL_PAGE_ACCESS_CONFIRM);
-			onLoader(false);
 		}, 100);
 	}
 	catch (err) {
@@ -66,8 +65,10 @@ const onSubmit = async (e, setState, recaptchaRef, locationPush) => {
 				horizontal: 'right',
 			}),
 		});
-		onLoader(false);
 	}
+	setTimeout(() => {
+		onLoader(false);
+	}, 100);
 };
 
 export default onSubmit;

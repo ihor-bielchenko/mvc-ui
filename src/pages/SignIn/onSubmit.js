@@ -36,7 +36,6 @@ const onSubmit = async (e, locationPush) => {
 				return user;
 			},
 		});
-		onLoader(false);
 	}
 	catch (err) {
 		Store().dispatch({
@@ -48,8 +47,8 @@ const onSubmit = async (e, locationPush) => {
 				horizontal: 'right',
 			}),
 		});
-		onLoader(false);
 	}
+	onLoader(false);
 };
 
 export default onSubmit;

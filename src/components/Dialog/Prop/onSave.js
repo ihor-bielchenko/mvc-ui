@@ -45,7 +45,6 @@ const onSave = async (e, scriptId, workspaceId, fromEntityId, fromArrowTypeId) =
 				type: 'jsObject',
 				payload: () => initialStateJsObject(),
 			});
-			onLoader(false);
 		}
 		else if (fromEntityId >= 0) {
 			const dataSource = await onSaveJsObject();
@@ -94,8 +93,8 @@ const onSave = async (e, scriptId, workspaceId, fromEntityId, fromArrowTypeId) =
 				horizontal: 'right',
 			}),
 		});
-		onLoader(false);
 	}
+	onLoader(false);
 };
 
 export default onSave;
