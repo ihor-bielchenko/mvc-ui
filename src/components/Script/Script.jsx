@@ -75,11 +75,14 @@ let Script = ({
 							border: '1px solid #EFEFEF',
 							borderRadius: '7px',
 						}}>
-						<Button>
-							Конфигурация роута
+						<Button
+							color="primary">
+							Настройка роута
 						</Button>
-						<Button disabled>
-							Логика
+						<Button
+							disabled
+							color="primary">
+							Программа
 						</Button>
 					</Box>
 				</Box>

@@ -32,6 +32,7 @@ let Header = ({
 			zIndex: 2,
 		}}>
 		<Box
+			position="relative"
 			width="48px"
 			height="48px"
 			mx="10px"
@@ -60,7 +61,6 @@ let Header = ({
 					height="48px"
 					width="max-content"
 					maxWidth="680px"
-					minWidth="280px"
 					overflow="hidden"
 					mr="10px"
 					px="4px"
@@ -73,6 +73,7 @@ let Header = ({
 				</Box>
 			</Box>}
 		<Box
+			position="relative"
 			width="48px"
 			height="48px"
 			mx="10px"

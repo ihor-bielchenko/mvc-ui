@@ -15,10 +15,11 @@ import InputText from 'components/Input/Text';
 import onClose from '../onClose.js';
 import { DIALOG_URL_VALUE } from 'consts/dialog.js';
 import onSubmit from './onSubmit.js';
+import onValidate from 'components/Input/Validate/strOrNum.js';
 
 let UrlValue = ({ history }) => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_URL_VALUE]);
-	const index = (dialog || {}).index || -1;
+	const index = (dialog || {}).index ?? -1;
 	const value = useSelector((state) => (((state.routes.form || {}).url || [])[index] || {}).value || '');
 	const _onSubmit = React.useCallback((e) => onSubmit(e, index), [
 		index,
@@ -50,7 +51,8 @@ let UrlValue = ({ history }) => {
 								placeholder="Например: test"
 								type="text"
 								name="value"
-								defaultValue={value} />
+								defaultValue={value}
+								onInput={onValidate} />
 						</Box>
 					</DialogContent>
 					<DialogActions>

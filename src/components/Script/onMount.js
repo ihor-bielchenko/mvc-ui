@@ -10,6 +10,8 @@ import axiosError from 'utils/axiosError.js';
 const onMount = async (scriptId, workspaceId) => {
 	let script = Store().getState().script;
 	
+	console.log('----------', scriptId);
+
 	if (scriptId > 0 && workspaceId > 0) {
 		onLoader(true);
 		

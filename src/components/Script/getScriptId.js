@@ -2,6 +2,6 @@
 const getScriptId = () => Number(window
 	.location
 	.pathname
-	.split('/')[3]);
+	.split('/')[2]);
 
 export default getScriptId;

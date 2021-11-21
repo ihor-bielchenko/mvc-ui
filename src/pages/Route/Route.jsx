@@ -49,8 +49,14 @@ let Route = () => {
 							borderRadius: '7px',
 						}}>
 						<Button
-							disabled>
-							Новая таблица
+							disabled
+							color="primary">
+							Настройка роута
+						</Button>
+						<Button
+							disabled
+							color="primary">
+							Программа
 						</Button>
 					</Box>
 				</Box>

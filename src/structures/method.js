@@ -2,35 +2,35 @@
 export const METHOD_TYPE_GET = {
 	id: process.env.METHOD_TYPE_GET,
 	name: 'GET',
-	text: () => 'получение',
+	text: () => 'получить',
 	backgroundColor: '#1976d2',
 	textColor: '#FFF',
 };
 export const METHOD_TYPE_POST = {
 	id: process.env.METHOD_TYPE_POST,
 	name: 'POST',
-	text: () => 'создание',
+	text: () => 'создать',
 	backgroundColor: '#4caf50',
 	textColor: '#FFF',
 };
 export const METHOD_TYPE_PUT = {
 	id: process.env.METHOD_TYPE_PUT,
 	name: 'PUT',
-	text: () => 'перезапись',
+	text: () => 'перезаписать',
 	backgroundColor: '#ff9800',
 	textColor: '#FFF',
 };
 export const METHOD_TYPE_PATCH = {
 	id: process.env.METHOD_TYPE_PATCH,
 	name: 'PATCH',
-	text: () => 'обновление',
+	text: () => 'обновить',
 	backgroundColor: '#9c27b0',
 	textColor: '#FFF',
 };
 export const METHOD_TYPE_DELETE = {
 	id: process.env.METHOD_TYPE_DELETE,
 	name: 'DELETE',
-	text: () => 'удаление',
+	text: () => 'удалить',
 	backgroundColor: '#f44336',
 	textColor: '#FFF',
 };

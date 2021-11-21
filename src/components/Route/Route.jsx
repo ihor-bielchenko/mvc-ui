@@ -14,9 +14,12 @@ import FileCopyIcon from '@material-ui/icons/FileCopy';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
+import AddIcon from '@material-ui/icons/Add';
 import InputText from 'components/Input/Text';
 import SelectMethod from 'components/Select/Method';
 import SelectProtocol from 'components/Select/Protocol';
+import MenuUrl from 'components/Menu/Url';
+import onMenu from 'components/Menu/onMenu.js';
 import onDialog from 'components/Dialog/onDialog.js';
 import { DIALOG_DELETE_CONFIRM } from 'consts/dialog.js';
 import { 
@@ -136,6 +139,13 @@ let Route = ({ history }) => {
 				<Grid
 					item
 					xs="auto">
+						<Button 
+							onClick={onMenu('menu-url')}
+							startIcon={<AddIcon />}
+							variant="outlined">
+							Маршрут*
+						</Button>
+						<MenuUrl aria="menu-url" />
 						<IconButton
 							onClick={() => {}}>
 							<FileCopyIcon />

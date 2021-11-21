@@ -18,7 +18,7 @@ import onSubmit from './onSubmit.js';
 
 let UrlPlaceholder = ({ history }) => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_URL_PLACEHOLDER]);
-	const index = (dialog || {}).index || -1;
+	const index = (dialog || {}).index ?? -1;
 	const value = useSelector((state) => (((state.routes.form || {}).url || [])[index] || {}).value || '');
 	const _onSubmit = React.useCallback((e) => onSubmit(e, index), [
 		index,

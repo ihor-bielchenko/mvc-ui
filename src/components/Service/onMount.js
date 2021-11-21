@@ -5,8 +5,9 @@ import fetchProjectOne from 'fetch/projectOne.js';
 import fetchServiceOne from 'fetch/serviceOne.js';
 import getProjectId from './getProjectId.js';
 import getServiceId from './getServiceId.js';
+import { URL_PAGE_DASHBOARD } from 'consts/url.js';
 
-const onMount = async () => {
+const onMount = async (historyPush = () => {}) => {
 	onLoader(true);
 
 	try {
@@ -39,6 +40,7 @@ const onMount = async () => {
 				horizontal: 'right',
 			}),
 		});
+		historyPush('/'+ URL_PAGE_DASHBOARD);
 	}
 	onLoader(false);
 };

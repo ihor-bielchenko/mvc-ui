@@ -2,6 +2,7 @@ import React from 'react';
 import { 
 	Switch,
 	Route, 
+	withRouter,
 } from 'react-router-dom';
 import Box from '@material-ui/core/Box';
 import PageDashboard from 'pages/Dashboard';
@@ -41,10 +42,12 @@ HeaderWrapper = React.memo(HeaderWrapper);
 HeaderWrapper.defaultProps = {
 };
 
-let ServiceInside = () => {
+let ServiceInside = ({ history }) => {
 	React.useEffect(() => {
-		onMountService();
-	}, []);
+		onMountService(history.push);
+	}, [
+		history.push,
+	]);
 
 	return <React.Fragment>
 		<Switch>
@@ -78,6 +81,7 @@ let ServiceInside = () => {
 ServiceInside = React.memo(ServiceInside);
 ServiceInside.defaultProps = {
 };
+ServiceInside = withRouter(ServiceInside);
 
 let AuthInside = () => {
 	return <React.Fragment>

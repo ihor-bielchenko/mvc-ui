@@ -54,8 +54,10 @@ let Service = ({ history }) => {
 	]);
 
 	React.useEffect(() => {
-		onMount();
-	}, []);
+		onMount(history.push);
+	}, [
+		history.push
+	]);
 
 	React.useEffect(() => () => {
 		onUnmount();

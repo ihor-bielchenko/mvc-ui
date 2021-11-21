@@ -6,14 +6,17 @@ export const PROTOCOL_TYPE_HTTP = {
 export const PROTOCOL_TYPE_HTTPS = {
 	id: process.env.PROTOCOL_TYPE_HTTPS,
 	text: () => 'https',
+	disabled: true,
 };
 export const PROTOCOL_TYPE_WS = {
 	id: process.env.PROTOCOL_TYPE_WS,
 	text: () => 'ws',
+	disabled: true,
 };
 export const PROTOCOL_TYPE_TCP = {
 	id: process.env.PROTOCOL_TYPE_TCP,
 	text: () => 'tcp/ip',
+	disabled: true,
 };
 
 const protocol = {
