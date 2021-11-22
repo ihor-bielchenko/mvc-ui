@@ -96,6 +96,7 @@ function getClientEnvironment(publicUrl) {
 				SOURCE_PATH: process.env.SOURCE_PATH,
 				DB_PATH: process.env.DB_PATH,
 				PROJECT_PATH: process.env.PROJECT_PATH,
+				ENGINE_PATH: process.env.ENGINE_PATH,
 
 				SERVICE_TEMPLATE_BASE: Number(process.env.SERVICE_TEMPLATE_BASE),
 				SERVICE_TEMPLATE_COMMERCE: Number(process.env.SERVICE_TEMPLATE_COMMERCE),

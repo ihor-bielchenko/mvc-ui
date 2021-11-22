@@ -27,8 +27,6 @@ import {
 	PROTOCOL_TYPE_TCP,
 } from 'structures/protocol.js';
 import Url from './Url';
-import onMount from './onMount.js';
-import onUnmount from './onUnmount.js';
 import onChange from './onChange.js';
 import onSave from './onSave.js';
 import onDelete from './onDelete.js';
@@ -50,14 +48,6 @@ let Route = ({ history }) => {
 	const _onDelete = React.useCallback((e) => onDelete(e, history.push), [
 		history.push,
 	]);
-
-	React.useEffect(() => {
-		onMount();
-	}, []);
-
-	React.useEffect(() => () => {
-		onUnmount();
-	}, []);
 
 	return <React.Fragment>
 		<Box>

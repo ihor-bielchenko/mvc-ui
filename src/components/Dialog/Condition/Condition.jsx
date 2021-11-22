@@ -18,6 +18,7 @@ import SelectFuncTemplate from 'components/Select/FuncTemplate';
 import FuncProps from 'components/Dialog/Func/Props';
 import Transition from 'components/Dialog/Transition.jsx';
 import onDialog from 'components/Dialog/onDialog.js';
+import onDelete from 'components/Dialog/Prop/onDelete.js';
 import { 
 	DIALOG_IF,
 	DIALOG_DELETE_CONFIRM, 
@@ -26,7 +27,6 @@ import { FUNC_CATEGORY_IF } from 'structures/funcCategories.js';
 import onMount from '../Func/onMount.js';
 import onChangeName from '../Func/onChangeName.js';
 import onSave from '../Func/onSave.js';
-import onDelete from '../Func/onDelete.js';
 import onSelectTemplate from './onSelectTemplate.js';
 import onClose from './onClose.js';
 

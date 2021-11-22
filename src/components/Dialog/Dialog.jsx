@@ -21,8 +21,10 @@ import ServiceTemplate from './ServiceTemplate';
 import ProjectForm from './ProjectForm';
 import UrlValue from './UrlValue';
 import UrlPlaceholder from './UrlPlaceholder';
+import Build from './Build';
 import { 
 	URL_PAGE_DASHBOARD,
+	URL_PAGE_SERVICE,
 	URL_PAGE_SCRIPT,
 	URL_PAGE_DB, 
 	URL_PAGE_API, 
@@ -37,6 +39,13 @@ let Root = ({
 	return <React.Fragment>
 		<DeleteConfirm />
 		{(() => {
+			if (url.length === 4
+				&& url[2] === URL_PAGE_SERVICE
+				&& url[3] > 0) {
+				return <React.Fragment>
+					<Build />
+				</React.Fragment>;
+			}
 			switch (url[4]) {
 				case URL_PAGE_DB:
 					return <React.Fragment>

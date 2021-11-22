@@ -19,10 +19,10 @@ let Prop = ({
 }) => {
 	const name = useSelector((state) => state.script[workspaceId].data[entityId].entity_prop.name);
 	const dataTypeId = useSelector((state) => state.script[workspaceId].data[entityId].data_type_id);
-	const _onDelete = React.useCallback((e) => onDelete(e, scriptId, workspaceId, id), [
+	const _onDelete = React.useCallback((e) => onDelete(e, scriptId, workspaceId, entityId), [
 		scriptId,
 		workspaceId,
-		id,
+		entityId,
 	]);
 	const _onClick = React.useCallback((e) => onClickAsSource(e, scriptId, workspaceId, entityId, dataTypeId), [
 		onClickAsSource,

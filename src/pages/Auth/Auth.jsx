@@ -13,6 +13,8 @@ import PageRoute from 'pages/Route';
 import PageApi from 'pages/Api';
 import Header from 'components/Header';
 import onMountService from 'components/Service/onMount.js';
+import onMountRoute from 'components/Route/onMount.js';
+import onUnmountRoute from 'components/Route/onUnmount.js';
 import {
 	URL_PAGE_DASHBOARD,
 	URL_PAGE_SCRIPT,
@@ -42,6 +44,32 @@ HeaderWrapper = React.memo(HeaderWrapper);
 HeaderWrapper.defaultProps = {
 };
 
+let RouteInside = () => {
+	React.useEffect(() => {
+		onMountRoute();
+	}, []);
+
+	React.useEffect(() => () => {
+		onUnmountRoute();
+	}, []);
+
+	return <Switch>
+		<Route 
+			exact
+			path={`/:projectId/${URL_PAGE_SERVICE}/:serviceId/${URL_PAGE_API}/:routeId`}>
+			<PageRoute />
+		</Route>
+		<Route 
+			exact
+			path={`/:projectId/${URL_PAGE_SERVICE}/:serviceId/${URL_PAGE_API}/:routeId/${URL_PAGE_SCRIPT}/:scriptId`}>
+			<PageScript />
+		</Route>
+	</Switch>;
+};
+RouteInside = React.memo(RouteInside);
+RouteInside.defaultProps = {
+};
+
 let ServiceInside = ({ history }) => {
 	React.useEffect(() => {
 		const url = window
@@ -67,19 +95,12 @@ let ServiceInside = ({ history }) => {
 		<Route 
 			exact
 			path={`/:projectId/${URL_PAGE_SERVICE}/:serviceId/${URL_PAGE_API}`}>
-				<HeaderWrapper>
-					<PageApi />
-				</HeaderWrapper>
+			<HeaderWrapper>
+				<PageApi />
+			</HeaderWrapper>
 		</Route>
-		<Route 
-			exact
-			path={`/:projectId/${URL_PAGE_SERVICE}/:serviceId/${URL_PAGE_API}/:routeId`}>
-				<PageRoute />
-		</Route>
-		<Route 
-			exact
-			path={`/:projectId/${URL_PAGE_SERVICE}/:serviceId/${URL_PAGE_API}/:routeId/${URL_PAGE_SCRIPT}/:scriptId`}>
-			<PageScript />
+		<Route path={`/:projectId/${URL_PAGE_SERVICE}/:serviceId/${URL_PAGE_API}/:routeId`}>
+			<RouteInside />
 		</Route>
 	</React.Fragment>;
 };
@@ -103,9 +124,9 @@ let AuthInside = () => {
 					<Route 
 						exact
 						path={`/:projectId/${URL_PAGE_SERVICE}/:serviceId`}>
-							<HeaderWrapper>
-								<PageService />
-							</HeaderWrapper>
+						<HeaderWrapper>
+							<PageService />
+						</HeaderWrapper>
 					</Route>
 					<ServiceInside />
 				</Switch>

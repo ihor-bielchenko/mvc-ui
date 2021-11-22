@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import AirportShuttleIcon from '@material-ui/icons/AirportShuttle';
-import onDelete from 'components/Dialog/Func/onDelete.js';
+import onDelete from 'components/Dialog/Prop/onDelete.js';
 import Slot from '../Slot';
 import { DIALOG_FUNC } from 'consts/dialog.js';
 
@@ -18,10 +18,10 @@ let Func = ({
 }) => {
 	const name = useSelector((state) => state.script[workspaceId].data[entityId].entity_func.name);
 	const dataTypeId = useSelector((state) => state.script[workspaceId].data[entityId].data_type_id);
-	const _onDelete = React.useCallback((e) => onDelete(e, scriptId, workspaceId, id), [
+	const _onDelete = React.useCallback((e) => onDelete(e, scriptId, workspaceId, entityId), [
 		scriptId,
 		workspaceId,
-		id,
+		entityId,
 	]);
 	const _onClick = React.useCallback((e) => onClickAsSource(e, scriptId, workspaceId, entityId, dataTypeId), [
 		onClickAsSource,

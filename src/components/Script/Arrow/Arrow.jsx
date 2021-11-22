@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Xarrow from 'react-xarrows';
 import Typography from '@material-ui/core/Typography';
 
@@ -16,6 +16,7 @@ let Arrow = ({
 	toEntityId,
 	arrowTypeId,
 }) => {
+	const loaderQueue = useSelector((state) => state.config.loaderQueue);
 	const [ loaded, setLoaded ] = React.useState(() => false);
 
 	React.useEffect(() => {
@@ -24,7 +25,9 @@ let Arrow = ({
 		setLoaded,
 	]);
 
-	return loaded && fromEntityId > 0
+	return loaded 
+		&& fromEntityId > 0
+		&& loaderQueue === 0
 		? <React.Fragment>
 			<Xarrow
 				start={arrowTypeId === process.env.ARROW_TYPE_TRUE

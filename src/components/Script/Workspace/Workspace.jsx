@@ -176,8 +176,7 @@ let Listing = ({
 				? <React.Fragment>
 					<Box 
 						position="relative"
-						minWidth="420px"
-						pt="80px">
+						minWidth="420px">
 						<Build 
 							scriptId={scriptId}
 							workspaceId={workspaceId}

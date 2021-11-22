@@ -19,6 +19,7 @@ import SelectDataType from 'components/Select/DataType';
 import SelectResponseCode from 'components/Select/ResponseCode';
 import Transition from 'components/Dialog/Transition.jsx';
 import onDialog from 'components/Dialog/onDialog.js';
+import onDelete from 'components/Dialog/Prop/onDelete.js';
 import dataTypes, { 
 	DATA_TYPE_ATOMIC,
 	DATA_TYPE_OBJECT,
@@ -36,7 +37,6 @@ import MergeComponent from './MergeComponent.jsx';
 import onMount from './onMount.js';
 import onClose from './onClose.js';
 import onSave from './onSave.js';
-import onDelete from './onDelete.js';
 import onSelectDataTypeId from './onSelectDataTypeId.js';
 import onSelectCode from './onSelectCode.js';
 import onMenuComplexValue from './onMenuComplexValue.js';

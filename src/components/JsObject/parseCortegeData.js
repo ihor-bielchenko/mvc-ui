@@ -5,6 +5,7 @@ import {
 	SOURCE_TYPE_HEADER,
 	SOURCE_TYPE_REQUEST,
 	SOURCE_TYPE_COOKIE,
+	SOURCE_TYPE_PLACEHOLDER,
 	SOURCE_TYPE_SCRIPT,
 } from 'structures/sourceTypes.js';
 import { DATA_TYPE_NUMBER } from 'structures/dataTypes.js';
@@ -209,16 +210,37 @@ const parseCortegeData = (jsObject, data, scriptId, workspaceId) => {
 
 		if (({ ...item }).value.dependency_id > 0
 			&& typeof ({ ...item }).value.dependency === 'object') {
-			item.value = {
-				source_type_id: ({ ...item }).value.source_type_id,
-				value: {
-					source_type_id: SOURCE_TYPE_SCRIPT.id,
-					data_type_id: ({ ...item }).value.dependency.data_type_id,
-					id: Number(({ ...item }).value.dependency.value),
-					script_id: scriptId,
-					workspaceId,
-				}
-			};
+			if (({ ...item }).value.source_type_id === SOURCE_TYPE_PLACEHOLDER.id) {
+				const dependency = { ...({ ...({ ...item }).value }).dependency };
+			
+				item.value = dependency.source_type_id === SOURCE_TYPE_SCRIPT.id
+					? ({
+						source_type_id: SOURCE_TYPE_PLACEHOLDER.id,
+						value: {
+							source_type_id: SOURCE_TYPE_SCRIPT.id,
+							data_type_id: dependency.data_type_id,
+							id: Number(dependency.value),
+							script_id: scriptId,
+							workspaceId,
+						},
+					})
+					: ({
+						source_type_id: SOURCE_TYPE_PLACEHOLDER.id,
+						value: Number(dependency.value),
+					});
+			}
+			else {
+				item.value = {
+					source_type_id: ({ ...item }).value.source_type_id,
+					value: {
+						source_type_id: SOURCE_TYPE_SCRIPT.id,
+						data_type_id: ({ ...item }).value.dependency.data_type_id,
+						id: Number(({ ...item }).value.dependency.value),
+						script_id: scriptId,
+						workspaceId,
+					}
+				};
+			}
 		}
 		switch (sourceTypeId) {
 			case SOURCE_TYPE_DB.id:
@@ -230,6 +252,7 @@ const parseCortegeData = (jsObject, data, scriptId, workspaceId) => {
 			case SOURCE_TYPE_HEADER.id:
 			case SOURCE_TYPE_REQUEST.id:
 			case SOURCE_TYPE_COOKIE.id:
+			case SOURCE_TYPE_PLACEHOLDER.id:
 				break;
 			default:
 				item.value = item.value.value;

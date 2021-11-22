@@ -16,6 +16,7 @@ import {
 	SOURCE_TYPE_SCRIPT, 
 } from 'structures/sourceTypes.js';
 import { DATA_TYPE_TEXT } from 'structures/dataTypes.js';
+import { ROUTE_URL_TYPE_PLACEHOLDER } from 'structures/routeUrl.js';
 import onDialog from '../onDialog.js';
 import onClear from './onClear.js';
 import onClose from './onClose.js';
@@ -26,7 +27,7 @@ let SourcePlaceholder = () => {
 	const dialog = useSelector((state) => state.dialogs[SOURCE_TYPE_PLACEHOLDER.id]);
 	const id = (dialog || {}).id;
 	const workspaceId = (dialog || {}).workspaceId ?? 0;
-	const path = useSelector((state) => state.routes.form.path || []);
+	const url = useSelector((state) => state.routes.form.url || []);
 	const value = useSelector((state) => state.jsObject.tempValue.value);
 	const _onClear = React.useCallback((e) => onClear(e, workspaceId, id), [
 		workspaceId,
@@ -107,19 +108,19 @@ let SourcePlaceholder = () => {
 							style={{
 								whiteSpace: 'nowrap',
 							}}>
-							{path.map((pathItem, i) => (
-								<React.Fragment key={pathItem.id}>
-									/{pathItem.path_type_id === 2
+							{url.map((urlItem, i) => (
+								<React.Fragment key={urlItem.id}>
+									/{urlItem.route_url_type_id === ROUTE_URL_TYPE_PLACEHOLDER.id
 										? <Chip 
-											label={pathItem.value}
-											onClick={_onSave(pathItem.id)}
-											color={pathItem.id === value
+											label={urlItem.value}
+											onClick={_onSave(urlItem.id)}
+											color={urlItem.id === value
 												? 'primary'
 												: 'default'} />
 										: <Typography 
 											component="span"
 											variant="body2">
-											{pathItem.value}
+											{urlItem.value}
 										</Typography>}
 								</React.Fragment>
 							))}

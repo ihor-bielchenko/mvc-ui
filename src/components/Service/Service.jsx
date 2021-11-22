@@ -26,7 +26,10 @@ import SelectProtocol from 'components/Select/Protocol';
 import onDialog from 'components/Dialog/onDialog.js';
 import { SERVICE_TEMPLATE_BASE } from 'structures/serviceTemplates.js';
 import { PROTOCOL_TYPE_HTTP } from 'structures/protocol.js';
-import { DIALOG_DELETE_CONFIRM } from 'consts/dialog.js';
+import { 
+	DIALOG_DELETE_CONFIRM,
+	DIALOG_BUILD, 
+} from 'consts/dialog.js';
 import { 
 	URL_PAGE_SERVICE,
 	URL_PAGE_API,
@@ -201,7 +204,9 @@ let Service = ({ history }) => {
 						<Button startIcon={<PlayArrowIcon/>}>
 							Запустить
 						</Button>
-						<Button startIcon={<GetAppIcon/>}>
+						<Button 
+							startIcon={<GetAppIcon/>}
+							onClick={onDialog(DIALOG_BUILD)}>
 							Скачать
 						</Button>
 					</ButtonGroup>

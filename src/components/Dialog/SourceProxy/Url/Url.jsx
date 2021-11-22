@@ -10,7 +10,7 @@ let Url = () => {
 	const routeId = useSelector((state) => state.jsObject.tempValue.route_id);
 	const routeIndex = useSelector((state) => state.routes.data.findIndex((routeItem) => routeItem.id === routeId));
 	const domainPath = useSelector((state) => state.routes.data[routeIndex].domain_path);
-	const path = (Store().getState().routes.data[routeIndex] || {}).path || [];
+	const url = (Store().getState().routes.data[routeIndex] || {}).url || [];
 
 	return <Box py={6}>
 		<Grid 
@@ -31,14 +31,14 @@ let Url = () => {
 					/
 				</Typography>
 			</Grid>
-			{path.map((pathItem, i) => <Placeholder 
-				key={pathItem.id}
+			{url.map((urlItem, i) => <Placeholder 
+				key={urlItem.id}
 				index={i}
-				length={path.length}
+				length={url.length}
 				routeId={routeId}
-				pathTypeId={pathItem.path_type_id}
-				id={pathItem.id}
-				label={pathItem.value} />)}
+				urlTypeId={urlItem.route_url_type_id}
+				id={urlItem.id}
+				label={urlItem.value} />)}
 		</Grid>
 	</Box>;
 };

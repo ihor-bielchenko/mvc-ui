@@ -5,6 +5,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import InputText from 'components/Input/Text';
 import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
+import { ROUTE_URL_TYPE_PLACEHOLDER } from 'structures/routeUrl.js';
 import { DATA_TYPE_TEXT } from 'structures/dataTypes.js';
 import onDialog from 'components/Dialog/onDialog.js';
 import onValidateInput from 'components/Dialog/SourceProxy/onValidate.js';
@@ -17,7 +18,7 @@ let Placeholder = ({
 	index,
 	length,
 	routeId, 
-	pathTypeId,
+	urlTypeId,
 	id,
 	label,
 }) => {
@@ -41,7 +42,7 @@ let Placeholder = ({
 		<Grid
 			item
 			xs="auto">
-			{pathTypeId === 2
+			{urlTypeId === ROUTE_URL_TYPE_PLACEHOLDER.id
 				? <Box maxWidth="160px">
 					<InputText
 						required
@@ -77,7 +78,7 @@ Placeholder.defaultProps = {
 	index: 0,
 	length: 0,
 	routeId: 0,
-	pathTypeId: 0,
+	urlTypeId: 0,
 	id: 0,
 	label: '',
 };

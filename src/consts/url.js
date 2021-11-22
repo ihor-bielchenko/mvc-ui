@@ -34,3 +34,6 @@ export const URL_API_SCRIPT_FUNC = '/api/func';
 export const URL_API_DB_TABLE = '/api/table';
 export const URL_API_DB_COLUMN = '/api/column';
 export const URL_API_DB_ROW = '/api/row';
+
+export const URL_API_ENGINE_ROUTE = '/api/route';
+export const URL_API_ENGINE_SCRIPT = '/api/script';
