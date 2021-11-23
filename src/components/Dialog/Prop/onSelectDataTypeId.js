@@ -12,7 +12,8 @@ const onSelectDataTypeId = (e) => {
 	const jsObject = Store().getState().jsObject;
 	const newId = Date.now();
 
-	if (newValue === DATA_TYPE_ATOMIC.id && jsObject.blocks[0][0].data_type_id !== DATA_TYPE_TEXT.id) {
+	if (newValue === DATA_TYPE_ATOMIC.id 
+		&& jsObject.data[0].data_type_id !== DATA_TYPE_ATOMIC.id) {
 		jsObject.data = {
 			0: jsObject.data[0],
 			[newId]: {
