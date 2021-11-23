@@ -27,6 +27,9 @@ export default createGlobalStyle`
 	.MuiTab-textColorSecondary.Mui-disabled {
 		color: rgba(0, 0, 0, 0.2) !important;
 	}
+	.MuiPaper-root.MuiDialog-paper.MuiDialog-paperFullScreenMuiDialog-paperFullWidth {
+		background-color: #FFF !important;
+	}
 	a {
 		text-decoration: none;
 		color: #2196f3;

@@ -5,11 +5,13 @@ import getServiceId from 'components/Service/getServiceId.js';
 import axiosError from 'utils/axiosError.js';
 import fetchRouteCreate from 'fetch/routeCreate.js';
 import fetchRouteUpdate from 'fetch/routeUpdate.js';
+import fetchRouteOne from 'fetch/routeOne.js';
 import { 
 	URL_PAGE_SERVICE,
 	URL_PAGE_API, 
 } from 'consts/url.js';
 
+let interval;
 const onSave = async (e, historyPush) => {
 	onLoader(true);
 
@@ -38,12 +40,34 @@ const onSave = async (e, historyPush) => {
 				url: JSON.stringify(routes.form.url || []),
 			});
 			const fetchRouteData = ((fetchRouteResponse || {}).data || {}).data || {};
-			
-			routes.form.id = fetchRouteData.id;
+			const controllerId = fetchRouteData.id;
+
+			routes.form.id = controllerId;
+			routes.form.script_id = 0;
 			Store().dispatch({
 				type: 'routes',
 				payload: () => ({ ...routes }),
 			});
+
+			onLoader(true);
+			interval = setInterval(async () => {
+				if (controllerId > 0) {
+					const fetchRouteGetResponse = await fetchRouteOne(controllerId);
+					const fetchRouteGetData = ((fetchRouteGetResponse || {}).data || {}).data || {};
+				
+					if (fetchRouteGetData.script_id > 0) {
+						const routes = Store().getState().routes;
+
+						routes.form.script_id = fetchRouteGetData.script_id;
+						Store().dispatch({
+							type: 'routes',
+							payload: () => ({ ...routes }),
+						});
+						clearInterval(interval);
+						onLoader(false);
+					}
+				}
+			}, 3000);
 			historyPush(`/${projectId}/${URL_PAGE_SERVICE}/${serviceId}/${URL_PAGE_API}/${fetchRouteData.id}`);
 		}
 	}

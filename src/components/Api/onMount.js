@@ -1,5 +1,6 @@
 import Store from 'components/Store';
 import onLoader from 'components/Loader/onLoader';
+import getServiceId from 'components/Service/getServiceId.js';
 import axiosError from 'utils/axiosError.js';
 import fetchRouteMany from 'fetch/routeMany.js';
 
@@ -10,6 +11,7 @@ const onMount = async () => {
 		const list = Store().getState().list;
 		const fetchRouteResponse = await fetchRouteMany(list.currentPage + 1, {
 			limit: list.rowsPerPage,
+			filter: JSON.stringify({ service_id: getServiceId() }),
 			...list.search.query
 				? { search: list.search.query }
 				: {},

@@ -13,7 +13,7 @@ export const RESPONSE_CODE_403 = {
 };
 export const RESPONSE_CODE_404 = {
 	value: '404',
-	text: () => '404 - Ресурс не наайден',
+	text: () => '404 - Ресурс не найден',
 };
 export const RESPONSE_CODE_500 = {
 	value: '500',

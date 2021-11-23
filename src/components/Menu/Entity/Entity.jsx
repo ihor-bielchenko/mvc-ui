@@ -58,6 +58,7 @@ let Entity = ({
 			<MenuItem onClick={onClick(DIALOG_PROP, workspaceId, {
 				scriptId,
 				workspaceId,
+				entityId: 0,
 				fromEntityId,
 				fromArrowTypeId,
 			})}>
@@ -71,6 +72,7 @@ let Entity = ({
 			<MenuItem onClick={onClick(DIALOG_IF, workspaceId, {
 				scriptId,
 				workspaceId,
+				entityId: 0,
 				fromEntityId,
 				fromArrowTypeId,
 			})}>
@@ -84,6 +86,7 @@ let Entity = ({
 			<MenuItem onClick={onClick(DIALOG_FUNC, workspaceId, {
 				scriptId,
 				workspaceId,
+				entityId: 0,
 				fromEntityId,
 				fromArrowTypeId,
 			})}>
@@ -97,6 +100,7 @@ let Entity = ({
 			<MenuItem onClick={onClick(DIALOG_JSON, workspaceId, {
 				scriptId,
 				workspaceId,
+				entityId: 0,
 				fromEntityId,
 				fromArrowTypeId,
 			})}>

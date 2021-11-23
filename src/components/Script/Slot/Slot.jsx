@@ -41,18 +41,19 @@ let Slot = ({
 		|| state.dialogs[DIALOG_JSON]
 		|| state.dialogs[DIALOG_IF]
 		|| state.dialogs[DIALOG_FUNC]);
-	const fromEntityIdDialog = (dialog || {}).fromEntityId ?? 0;
-	const fromEntityIdStore = useSelector((state) => (state.prop || {}).entityId
+	const dialogEntityId = (dialog || {}).entityId;
+	const storeEntityId = useSelector((state) => (state.prop || {}).entityId
 		|| (state.json || {}).entityId
 		|| (state.func || {}).entityId);
-	const treeValidateIds = onlyParentTreeValidate((fromEntityIdStore || fromEntityIdDialog), workspaceId);
-	const isDisabled = fromEntityIdDialog > 0
-		&& ((!dataTypeId
+	const treeValidateIds = onlyParentTreeValidate((storeEntityId || dialogEntityId), workspaceId);
+	const isDisabled = dialogEntityId > 0
+		? ((!dataTypeId
 			|| ((isSource && !dataTypeValidating().includes(dataTypeId)) 
-			|| (fromEntityIdStore === entityId)))
-		|| (!(!fromEntityIdStore && fromEntityIdDialog > 0
-			? ([ ...treeValidateIds, fromEntityIdDialog ]).includes(entityId)
-			: treeValidateIds.includes(entityId))));
+			|| (storeEntityId === entityId)))
+			|| (!(!storeEntityId && dialogEntityId > 0
+				? ([ ...treeValidateIds, dialogEntityId ]).includes(entityId)
+				: treeValidateIds.includes(entityId))))
+		: (isSource && !dataTypeValidating().includes(dataTypeId));
 
 	return <React.Fragment>
 			<Box 
@@ -128,7 +129,8 @@ let Slot = ({
 								id,
 								scriptId,
 								workspaceId,
-								// fromEntityId,
+								entityId: entityId,
+								fromEntityId: entityId,
 								// fromArrowTypeId,
 							})}
 							onDelete={onDialog(DIALOG_DELETE_CONFIRM, {

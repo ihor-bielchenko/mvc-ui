@@ -8,6 +8,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import Divider from '@material-ui/core/Divider';
 import CloseIcon from '@material-ui/icons/Close';
 import Title from 'components/Title';
 import onClose from '../onClose.js';
@@ -25,7 +26,10 @@ let Build = ({ history }) => {
 	React.useEffect(() => {
 		_dialogOpenFlag
 			? onMount(setProgress)
-			: setProgress(0);
+			: setProgress({
+				value: 0,
+				logs: [],
+			});
 	}, [
 		_dialogOpenFlag,
 		setProgress,
@@ -46,7 +50,16 @@ let Build = ({ history }) => {
 					</Title>
 				</DialogTitle>
 				<DialogContent dividers>
-					{progress.value < 0
+					{progress.value === -2
+						? <Box pb="16px">
+							<Typography 
+								variant="h6"
+								color="primary">
+								Все файлы сервиса успешно собраны
+							</Typography>
+						</Box>
+						: <React.Fragment />}
+					{progress.value === -1
 						? <Box>
 							<Typography 
 								variant="h6"
@@ -56,7 +69,25 @@ let Build = ({ history }) => {
 						</Box>
 						: <LinearProgress 
 							variant="determinate"
-							value={progress.value} />}
+							value={progress.value === -2
+								? 100
+								: progress.value} />}
+					<Divider style={{ marginTop: 16, }} />
+					<Box 
+						px="8px"
+						py="4px"
+						height="100px"
+						minHeight="100px"
+						overflow="auto">
+						{progress
+							.logs
+							.map((logItem, i) => {
+								return <Typography key={i}>
+									{logItem}
+								</Typography>;
+						})}
+					</Box>
+					<Divider />
 				</DialogContent>
 				<DialogActions
 					style={{

@@ -13,6 +13,7 @@ import {
 	URL_PAGE_SERVICE,
 	URL_PAGE_API,
 } from 'consts/url.js';
+import Background from './Background';
 import Workspace from './Workspace';
 import onMount from './onMount.js';
 
@@ -95,12 +96,18 @@ let Script = ({
 					</Box>
 				</Box>
 			</Header>
-			<Workspace 
-				scriptId={id}
-				workspaceId={workspaceId}
-				isSource={isSource}
-				dataTypeValidating={dataTypeValidating}
-				onClickAsSource={onClickAsSource} />
+			<Background
+				position="relative"
+				overflow="auto"
+				width="100%"
+				height="100%">
+				<Workspace 
+					scriptId={id}
+					workspaceId={workspaceId}
+					isSource={isSource}
+					dataTypeValidating={dataTypeValidating}
+					onClickAsSource={onClickAsSource} />
+			</Background>
 		</Box>
 	</React.Fragment>;
 };

@@ -6,6 +6,8 @@ import unique from 'utils/unique.js';
 import { SOURCE_TYPE_DB } from 'structures/sourceTypes.js';
 import {
 	DATA_TYPE_ATOMIC,
+	DATA_TYPE_ID,
+	DATA_TYPE_NUMBER,
 	DATA_TYPE_OBJECT,
 	DATA_TYPE_ARRAY,
 } from 'structures/dataTypes.js';
@@ -137,7 +139,9 @@ const merge = (id, tempValue, sourceValue, onCloseDb) => {
 			data[newId] = getTemplate({
 				parent_id: id,
 				id: newId,
-				data_type_id: dbColumnsData[select[0]].data_type_id,
+				data_type_id: dbColumnsData[select[0]].data_type_id === DATA_TYPE_ID.id
+					? DATA_TYPE_NUMBER.id
+					: dbColumnsData[select[0]].data_type_id,
 				key: dbColumnsData[select[0]].name,
 				value: _sourceValue,
 				disabledType: true,
@@ -148,7 +152,9 @@ const merge = (id, tempValue, sourceValue, onCloseDb) => {
 			if ((parentItem || {}).data_type_id !== DATA_TYPE_ARRAY.id) {
 				currentItem.key = dbColumnsData[select[0]].name;
 			}
-			currentItem.data_type_id = dbColumnsData[select[0]].data_type_id;
+			currentItem.data_type_id = dbColumnsData[select[0]].data_type_id === DATA_TYPE_ID.id
+				? DATA_TYPE_NUMBER.id
+				: dbColumnsData[select[0]].data_type_id;
 			currentItem.disabledType = true;
 			currentItem.value = _sourceValue;
 
