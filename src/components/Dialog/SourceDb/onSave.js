@@ -195,11 +195,19 @@ const onSave = (e, id, onCloseDb) => {
 	const parentDataTypeId = (parentItem || {}).data_type_id || currentItem.data_type_id;
 	let keyExistsFlag = false;
 
+	console.log('data[id] || {}', (parentDataTypeId === DATA_TYPE_ATOMIC.id
+				|| (currentItem.data_type_id !== DATA_TYPE_OBJECT.id
+					&& (parentItem || {}).data_type_id === DATA_TYPE_OBJECT.id))
+				? parentId
+				: id);
+
 	select.forEach((columnId) => {
 		sourceValue.columns[columnId] = [ dbColumnsData[columnId].name ];
 			
 		if (!isCollection) {
-			const findIndex = blocks[parentDataTypeId === DATA_TYPE_ATOMIC.id
+			const findIndex = blocks[(parentDataTypeId === DATA_TYPE_ATOMIC.id
+				|| (currentItem.data_type_id !== DATA_TYPE_OBJECT.id
+					&& (parentItem || {}).data_type_id === DATA_TYPE_OBJECT.id))
 				? parentId
 				: id].findIndex((item) => {
 					let columnExistsFlag = false;
