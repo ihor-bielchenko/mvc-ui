@@ -44,7 +44,7 @@ const merge = (id, tempValue, sourceValue, onCloseDb) => {
 						: sourceValue.columns[key][0];
 				});
 			return collector;
-		})()
+		})(),
 	};
 	let newId = Date.now();
 
@@ -134,6 +134,7 @@ const merge = (id, tempValue, sourceValue, onCloseDb) => {
 		}
 	}
 	else if (select.length === 1) {
+		console.log('_sourceValue', _sourceValue.columns[Object.keys(_sourceValue.columns)[0]]);
 		if (currentItem.data_type_id === DATA_TYPE_OBJECT.id) {
 			blocks[id] = (blocks[id] ?? []);
 			data[newId] = getTemplate({
@@ -142,7 +143,7 @@ const merge = (id, tempValue, sourceValue, onCloseDb) => {
 				data_type_id: dbColumnsData[select[0]].data_type_id === DATA_TYPE_ID.id
 					? DATA_TYPE_NUMBER.id
 					: dbColumnsData[select[0]].data_type_id,
-				key: dbColumnsData[select[0]].name,
+				key: _sourceValue.columns[Object.keys(_sourceValue.columns)[0]],
 				value: _sourceValue,
 				disabledType: true,
 			});
@@ -156,6 +157,7 @@ const merge = (id, tempValue, sourceValue, onCloseDb) => {
 				? DATA_TYPE_NUMBER.id
 				: dbColumnsData[select[0]].data_type_id;
 			currentItem.disabledType = true;
+			currentItem.key = _sourceValue.columns[Object.keys(_sourceValue.columns)[0]];
 			currentItem.value = _sourceValue;
 
 			select.forEach((columnId) => dbColumnsData[columnId].name);
@@ -193,36 +195,38 @@ const onSave = (e, id, onCloseDb) => {
 	const parentId = currentItem.parent_id;
 	const parentItem = data[parentId];
 	const parentDataTypeId = (parentItem || {}).data_type_id || currentItem.data_type_id;
+	const blockId = (currentItem.data_type_id === DATA_TYPE_OBJECT.id 
+		&& parentDataTypeId === DATA_TYPE_ATOMIC.id
+		|| (currentItem.data_type_id !== DATA_TYPE_OBJECT.id
+			&& parentDataTypeId !== DATA_TYPE_ATOMIC.id
+			&& select.length === 1))
+		? parentId
+		: id;
 	let keyExistsFlag = false;
 
 	select.forEach((columnId) => {
 		sourceValue.columns[columnId] = [ dbColumnsData[columnId].name ];
-			
-		if (!isCollection
-			&& currentItem.data_type_id === DATA_TYPE_OBJECT.id) {
-			const findIndex = blocks[(parentDataTypeId === DATA_TYPE_ATOMIC.id)
-				? parentId
-				: id].findIndex((item) => {
-
-					let columnExistsFlag = false;
-
-					if ((item.value || {}).columns) {
-						Object
-							.keys((item.value || {}).columns || {})
-							.forEach((columnKey) => {
-								if (((item.value || {}).columns || {})[columnKey] === dbColumnsData[columnId].name) {
-									columnExistsFlag = true;
-									sourceValue.columns[columnId].push(true);
-								}
-							});
-					}
-					return item.key === dbColumnsData[columnId].name
-						|| columnExistsFlag;
-				});
-			if (findIndex > -1) {
-				keyExistsFlag = true;
-				sourceValue.columns[columnId].push(true);
-			}
+		
+		if (!isCollection) {
+			(blocks[blockId] || []).forEach((item) => {
+				if (item.value.source_type_id === SOURCE_TYPE_DB.id
+					&& typeof item.value === 'object'
+					&& typeof item.value.columns === 'object') {
+					Object
+						.keys(item.value.columns)
+						.forEach((columnKey) => {
+							if (item.value.columns[columnKey] === dbColumnsData[columnId].name) {
+								keyExistsFlag = true;
+								sourceValue.columns[columnId].push(true);
+								console.log('columnKey', item.value.columns[columnKey], dbColumnsData[columnId].name);
+							}
+						});
+				}
+				else if (item.key === dbColumnsData[columnId].name) {
+					keyExistsFlag = true;
+					sourceValue.columns[columnId].push(true);
+				}
+			});
 		}
 	});
 
