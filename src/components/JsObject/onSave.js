@@ -101,16 +101,19 @@ const onSave = async (sourceId = 0) => {
 		ids[0] = fetchParentData.id;
 		while (i < blockKeys.length) {
 			const key = blockKeys[i];
-			const fetchManyProps = blocks[key].map((item) => {
-				item.parent_id = ids[key];
-				return prepareItem(item, true);
-			});
-			const fetchManyResponse = await fetchCortegeCreateMany(fetchManyProps);
-			const fetchManyData = ((fetchManyResponse || {}).data || {}).data || [];
 
-			blocks[key].forEach((item, i) => (
-				ids[item.id] = ids[item.id] ?? fetchManyData[i].id
-			));
+			if (blocks[key].length > 0) {
+				const fetchManyProps = blocks[key].map((item) => {
+					item.parent_id = ids[key];
+					return prepareItem(item, true);
+				});
+				const fetchManyResponse = await fetchCortegeCreateMany(fetchManyProps);
+				const fetchManyData = ((fetchManyResponse || {}).data || {}).data || [];
+
+				blocks[key].forEach((item, i) => (
+					ids[item.id] = ids[item.id] ?? fetchManyData[i].id
+				));
+			}
 			i++;
 		}
 		return fetchParentData;
