@@ -40,7 +40,7 @@ const merge = (id, tempValue, sourceValue, onCloseDb) => {
 				.keys(sourceValue.columns)
 				.forEach((key) => {
 					collector[key] = sourceValue.columns[key][1]
-						? unique() +'-'+ sourceValue.columns[key][0]
+						? unique() +'_'+ sourceValue.columns[key][0]
 						: sourceValue.columns[key][0];
 				});
 			return collector;
@@ -119,6 +119,9 @@ const merge = (id, tempValue, sourceValue, onCloseDb) => {
 		}
 		else {
 			currentItem.data_type_id = DATA_TYPE_OBJECT.id;
+			currentItem.value = '';
+			currentItem.source = undefined;
+			currentItem.disabledType = false;
 			blocks[id] = (blocks[id] ?? []);
 			data[newId] = getTemplate({
 				parent_id: id,
@@ -130,11 +133,10 @@ const merge = (id, tempValue, sourceValue, onCloseDb) => {
 				disabledValue: true,
 				disabledRemove: true,
 			});
-			blocks[id].push(data[newId]);
+			blocks[id] = [ ...blocks[id], data[newId] ];
 		}
 	}
 	else if (select.length === 1) {
-		console.log('_sourceValue', _sourceValue.columns[Object.keys(_sourceValue.columns)[0]]);
 		if (currentItem.data_type_id === DATA_TYPE_OBJECT.id) {
 			blocks[id] = (blocks[id] ?? []);
 			data[newId] = getTemplate({
@@ -166,6 +168,7 @@ const merge = (id, tempValue, sourceValue, onCloseDb) => {
 	jsObject.tempValue = {};
 	onCloseDb();
 	onClose(DIALOG_KEY_EXISTS)();
+	console.log('==========', data);
 };
 
 const onSave = (e, id, onCloseDb) => {
@@ -195,8 +198,8 @@ const onSave = (e, id, onCloseDb) => {
 	const parentId = currentItem.parent_id;
 	const parentItem = data[parentId];
 	const parentDataTypeId = (parentItem || {}).data_type_id || currentItem.data_type_id;
-	const blockId = (currentItem.data_type_id === DATA_TYPE_OBJECT.id 
-		&& parentDataTypeId === DATA_TYPE_ATOMIC.id
+	const blockId = ((currentItem.data_type_id === DATA_TYPE_OBJECT.id 
+		&& parentDataTypeId === DATA_TYPE_ATOMIC.id)
 		|| (currentItem.data_type_id !== DATA_TYPE_OBJECT.id
 			&& parentDataTypeId !== DATA_TYPE_ATOMIC.id
 			&& select.length === 1))
@@ -218,7 +221,6 @@ const onSave = (e, id, onCloseDb) => {
 							if (item.value.columns[columnKey] === dbColumnsData[columnId].name) {
 								keyExistsFlag = true;
 								sourceValue.columns[columnId].push(true);
-								console.log('columnKey', item.value.columns[columnKey], dbColumnsData[columnId].name);
 							}
 						});
 				}

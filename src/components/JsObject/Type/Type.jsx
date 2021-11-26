@@ -21,6 +21,8 @@ let Type = ({
 		id,
 		onSelect,
 	]);
+
+	// console.log('id', id, _dataTypeId);
 	
 	return <Box
 		position="relative"

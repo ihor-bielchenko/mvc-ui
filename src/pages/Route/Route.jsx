@@ -20,8 +20,6 @@ let Route = ({ history }) => {
 	const routeId = useSelector((state) => state.routes.form.id || 0);
 	const scriptId = useSelector((state) => state.routes.form.script_id || 0);
 
-	console.log('scriptId', scriptId);
-
 	return <Box
 		position="relative"
 		width="100%"

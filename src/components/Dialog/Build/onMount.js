@@ -55,7 +55,6 @@ const setProgress = async (setProgress) => {
 					logs: [],
 				});
 			}
-			console.log('fetchRouteData', fetchRouteData.data[i].id, fetchRouteData.data[i].script_id);
 			i++;
 		}
 		setTimeout(() => {
