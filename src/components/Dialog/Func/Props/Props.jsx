@@ -12,23 +12,25 @@ const _load = (funcTemplateId) => () => {
 		case funcTemplates.FUNC_TEMPLATE_IF_TYPE.id:
 			return import('components/Dialog/Func/Props/IfType');
 
-		// case funcTemplates.FUNC_TEMPLATE_IF_PARITY.id:
 		// case funcTemplates.FUNC_TEMPLATE_IF_INTEGER.id:
 		// case funcTemplates.FUNC_TEMPLATE_MATH_PARITY.id:
 		// case funcTemplates.FUNC_TEMPLATE_MATH_INTEGER.id:
 		// case funcTemplates.FUNC_TEMPLATE_MATH_INFINITY.id:
 		// case funcTemplates.FUNC_TEMPLATE_MATH_ROUND.id:
-		// 	return import('components/Dialog/Func/Props/IfInt');
+		//	return import('components/Dialog/Func/Props/IfInt');
 
-		// case funcTemplates.FUNC_TEMPLATE_IF_NOT_NULL.id:
+		case funcTemplates.FUNC_TEMPLATE_IF_NOT_NULL.id:
+		case funcTemplates.FUNC_TEMPLATE_IF_PARITY.id:
+		case funcTemplates.FUNC_TEMPLATE_IF_INTEGER.id:
+		case funcTemplates.FUNC_TEMPLATE_MATH_INFINITY.id:
+		case funcTemplates.FUNC_TEMPLATE_MATH_NAN.id:
 		// case funcTemplates.FUNC_TEMPLATE_TEXT_TYPE.id:
 		// case funcTemplates.FUNC_TEMPLATE_TEXT_NOT_NULL.id:
 		// case funcTemplates.FUNC_TEMPLATE_MATH_TYPE.id:
-		// 	return import('components/Dialog/Func/Props/IfLogic');
+			return import('components/Dialog/Func/Props/IfNull');
 
-		// case funcTemplates.FUNC_TEMPLATE_TEXT_REG_EXP.id:
-		// case funcTemplates.FUNC_TEMPLATE_IF_REG_EXP.id:
-		// 	return import('components/Dialog/Func/Props/IfRegExp');
+		case funcTemplates.FUNC_TEMPLATE_IF_REG_EXP.id:
+			return import('components/Dialog/Func/Props/IfRegExp');
 
 		// case funcTemplates.FUNC_TEMPLATE_TEXT_LENGTH.id:
 		// case funcTemplates.FUNC_TEMPLATE_TEXT_UPPERCASE.id:

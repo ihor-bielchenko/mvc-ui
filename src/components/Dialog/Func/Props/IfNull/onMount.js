@@ -3,10 +3,10 @@ import getTemplate from 'components/JsObject/getTemplate.js';
 import buildBlocks from 'components/JsObject/buildBlocks.js';
 import { 
 	DATA_TYPE_OBJECT,
-	DATA_TYPE_NUMBER, 
+	DATA_TYPE_TEXT, 
 } from 'structures/dataTypes.js';
 
-const onMount = (scriptId = 0) => {
+const onMount = () => {
 	const jsObject = Store().getState().jsObject;
 	const blocks = jsObject.blocks;
 	let _id = Date.now();
@@ -26,14 +26,7 @@ const onMount = (scriptId = 0) => {
 		parent_id: 0,
 		key: '0',
 		value: ({ ...(([ ...(blocks[0] || []) ])[0] || {}) }).value || '',
-		data_type_id: DATA_TYPE_NUMBER.id,
-	});
-	jsObject.data[++_id] = getTemplate({
-		id: _id,
-		parent_id: 0,
-		key: '1',
-		value: ({ ...(([ ...(blocks[0] || []) ])[1] || {}) }).value || '',
-		data_type_id: DATA_TYPE_NUMBER.id,
+		data_type_id: DATA_TYPE_TEXT.id,
 	});
 	jsObject.blocks = {};
 

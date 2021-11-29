@@ -138,6 +138,7 @@ function getClientEnvironment(publicUrl) {
 				DATA_TYPE_URL: Number(process.env.DATA_TYPE_URL),
 				DATA_TYPE_PASSWORD: Number(process.env.DATA_TYPE_PASSWORD),
 				DATA_TYPE_FILE: Number(process.env.DATA_TYPE_FILE),
+				DATA_TYPE_MIXED: Number(process.env.DATA_TYPE_MIXED),
 
 				SOURCE_TYPE_MANUALLY: Number(process.env.SOURCE_TYPE_MANUALLY),
 				SOURCE_TYPE_DB: Number(process.env.SOURCE_TYPE_DB),

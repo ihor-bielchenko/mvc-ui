@@ -8,7 +8,7 @@ import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
 import { ROUTE_URL_TYPE_PLACEHOLDER } from 'structures/routeUrl.js';
 import { DATA_TYPE_TEXT } from 'structures/dataTypes.js';
 import onDialog from 'components/Dialog/onDialog.js';
-import onValidateInput from 'components/Dialog/SourceProxy/onValidate.js';
+import onValidateInput from 'components/Input/Validate/constStr.js';
 import onValidateSource from 'components/Dialog/Func/Props/onValidate.js';
 import onPlaceholder from './onPlaceholder.js';
 import onValueScript from './onValueScript.js';
@@ -33,6 +33,7 @@ let Placeholder = ({
 		routeId,
 		id,
 	]);
+	// TODO: rename route_url_id and route_placeholder_id
 	const _onPlaceholder = React.useCallback((e) => onPlaceholder(e, routeId, id), [
 		routeId,
 		id,

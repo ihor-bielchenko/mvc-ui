@@ -40,7 +40,7 @@ const merge = (id, tempValue, sourceValue, onCloseDb) => {
 				.keys(sourceValue.columns)
 				.forEach((key) => {
 					collector[key] = sourceValue.columns[key][1]
-						? unique() +'_'+ sourceValue.columns[key][0]
+						? sourceValue.columns[key][0] +'_'+ unique()
 						: sourceValue.columns[key][0];
 				});
 			return collector;
@@ -168,7 +168,6 @@ const merge = (id, tempValue, sourceValue, onCloseDb) => {
 	jsObject.tempValue = {};
 	onCloseDb();
 	onClose(DIALOG_KEY_EXISTS)();
-	console.log('==========', data);
 };
 
 const onSave = (e, id, onCloseDb) => {

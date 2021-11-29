@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import JsBoxControlWrapper from 'components/JsObject/BoxControlWrapper';
 import InputText from 'components/Input/Text';
+import onValidate from 'components/Input/Validate/keyStr.js';
 import { DATA_TYPE_ARRAY } from 'structures/dataTypes.js';
 
 let KeyComponent = ({
@@ -38,6 +39,7 @@ let KeyComponent = ({
 				id={'key-'+ id}
 				value={(value || '').toString()}
 				onChange={onChange}
+				onInput={onValidate}
 				label="" />
 		</JsBoxControlWrapper>;
 };

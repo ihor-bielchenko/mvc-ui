@@ -21,6 +21,7 @@ import InputText from 'components/Input/Text';
 import SelectDataType from 'components/Select/DataType';
 import Transition from 'components/Dialog/Transition.jsx';
 import onDialog from 'components/Dialog/onDialog.js';
+import onValidateName from 'components/Input/Validate/constStr.js';
 import dataTypes, { 
 	DATA_TYPE_ATOMIC,
 	DATA_TYPE_OBJECT,
@@ -112,7 +113,8 @@ let Prop = () => {
 								label="Название"
 								helperText="Для быстрого поиска придумайте название или краткое описание"
 								value={name}
-								onChange={onChangeName('prop')} />
+								onChange={onChangeName('prop')}
+								onInput={onValidateName} />
 						</Box>
 						<Divider />
 						<Box py={2}>

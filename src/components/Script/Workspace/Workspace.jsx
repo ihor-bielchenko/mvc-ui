@@ -115,7 +115,11 @@ let Build = ({
 									toEntityId={arrowTrue.to_entity_id}
 									arrowTypeId={arrowTrue.arrow_type_id} />
 							</React.Fragment>
-							: <Box py="34px">
+							: <Box 
+								py="34px"
+								width={entity.slotName !== 'Json'
+									? '420px'
+									: 'initial'}>
 								{entity.slotName !== 'Json'
 									? <Create
 										scriptId={scriptId}

@@ -2,7 +2,11 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import dataTypes from 'structures/dataTypes.js';
+import dataTypes, { 
+	DATA_TYPE_ID,
+	DATA_TYPE_NUMBER,
+	DATA_TYPE_MIXED,
+} from 'structures/dataTypes.js';
 import onSelectLocal from './onSelect.js';
 
 let Type = ({
@@ -22,8 +26,6 @@ let Type = ({
 		onSelect,
 	]);
 
-	// console.log('id', id, _dataTypeId);
-	
 	return <Box
 		position="relative"
 		width="14%"
@@ -37,7 +39,11 @@ let Type = ({
 				dataTypeId={_dataTypeId}
 				onSelect={_onSelect} />
 			: <Typography>
-				{dataTypes[_dataTypeId].text()}
+				{_dataTypeId === DATA_TYPE_MIXED.id
+					? DATA_TYPE_MIXED.text()
+					: (dataTypes[_dataTypeId === DATA_TYPE_ID.id
+						? DATA_TYPE_NUMBER.id
+						: _dataTypeId].text())}
 			</Typography>}
 	</Box>;
 };

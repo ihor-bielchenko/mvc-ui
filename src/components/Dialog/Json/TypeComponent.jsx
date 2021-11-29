@@ -9,6 +9,7 @@ import dataTypes, {
 	DATA_TYPE_NUMBER,
 	DATA_TYPE_OBJECT,
 	DATA_TYPE_ARRAY,
+	DATA_TYPE_MIXED,
 } from 'structures/dataTypes.js';
 
 const _onFilterTypes = (parentDataTypeId) => (key) => (
@@ -38,9 +39,11 @@ let TypeComponent = ({
 				lineHeight: '56px',
 				textAlign: 'center',
 			}}>
-			{dataTypes[dataTypeId === DATA_TYPE_ID.id
-				? DATA_TYPE_NUMBER.id
-				: dataTypeId].text()}
+			{dataTypeId === DATA_TYPE_MIXED.id
+				? DATA_TYPE_MIXED.text()
+				: (dataTypes[dataTypeId === DATA_TYPE_ID.id
+					? DATA_TYPE_NUMBER.id
+					: dataTypeId].text())}
 		</Typography>
 		: <JsBoxControlWrapper
 			data-border_left_radius_0={(parentDataTypeId !== DATA_TYPE_ATOMIC.id

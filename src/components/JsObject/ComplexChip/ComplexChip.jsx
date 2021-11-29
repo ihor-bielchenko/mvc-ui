@@ -10,6 +10,8 @@ import {
 import onDelete from '../Remove/onRemove.js';
 
 const BoxComplexSource = styled(Box)`
+	display: inline-block;
+
 	& > .MuiChip-root {
 		overflow: hidden;
 		position: relative !important;

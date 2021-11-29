@@ -1,6 +1,6 @@
 import Store from 'components/Store';
 
-const onSelect = (e, workspaceId, index = 0) => {
+const onSelect = (e, entityId, index = 0) => {
 	const jsObject = Store().getState().jsObject;
 	const blocks = jsObject.blocks[0] || [];
 

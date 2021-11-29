@@ -9,16 +9,17 @@ import axiosError from 'utils/axiosError.js';
 
 const onDelete = async (e, scriptId, workspaceId, id) => {
 	onLoader(true);
-	
-	try {
-		const script = Store().getState().script;
 
+	const script = Store().getState().script;
+	
+	if (script[workspaceId].data[id].sourceId > 0) {
+		await fetchCortegeDelete(JSON.stringify([ script[workspaceId].data[id].sourceId ]));
+	}
+	try {
 		if (!(script[workspaceId].data[id].sourceId > 0)) {
 			throw new Error('sourceId is undefined');
 		}
-
 		await fetchPropDelete(JSON.stringify([ id ]));
-		await fetchCortegeDelete(JSON.stringify([ script[workspaceId].data[id].sourceId ]));
 		await onMountScript(scriptId, workspaceId);
 
 		onClose()();

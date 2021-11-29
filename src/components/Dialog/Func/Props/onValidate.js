@@ -23,6 +23,7 @@ const onValidate = (value) => () => {
 					dataTypes.DATA_TYPE_EMAIL.id,
 					dataTypes.DATA_TYPE_MAC.id,
 					dataTypes.DATA_TYPE_URL.id,
+					dataTypes.DATA_TYPE_PASSWORD.id,
 				];
 			case dataTypes.DATA_TYPE_BOOLEAN.id:
 				return [ dataTypes.DATA_TYPE_BOOLEAN.id ];

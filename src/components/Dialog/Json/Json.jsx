@@ -20,6 +20,7 @@ import SelectResponseCode from 'components/Select/ResponseCode';
 import Transition from 'components/Dialog/Transition.jsx';
 import onDialog from 'components/Dialog/onDialog.js';
 import onDelete from 'components/Dialog/Prop/onDelete.js';
+import onValidateName from 'components/Input/Validate/constStr.js';
 import dataTypes, { 
 	DATA_TYPE_ATOMIC,
 	DATA_TYPE_OBJECT,
@@ -107,7 +108,8 @@ let Json = () => {
 								label="Название"
 								helperText="Для быстрого поиска придумайте название или краткое описание"
 								value={name}
-								onChange={onChangeName('json')} />
+								onChange={onChangeName('json')}
+								onInput={onValidateName} />
 						</Box>
 						<Box
 							py={2}

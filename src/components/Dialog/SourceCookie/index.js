@@ -1,3 +1,8 @@
-import SourceCookie from './SourceCookie.jsx';
+import SourceCookie, {
+	Input,
+} from './SourceCookie.jsx';
 
 export default SourceCookie;
+export {
+	Input,
+};

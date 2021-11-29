@@ -1,9 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
 import Store from 'components/Store';
 import protocol from 'structures/protocol.js';
 import method from 'structures/method.js';
+import { ROUTE_URL_TYPE_PLACEHOLDER } from 'structures/routeUrl.js';
 import { 
 	SOURCE_TYPE_PROXY_PASS,
 	SOURCE_TYPE_SCRIPT, 
@@ -11,8 +13,9 @@ import {
 import { 
 	DATA_TYPE_NUMBER,
 	DATA_TYPE_TEXT, 
-	DATA_TYPE_OBJECT,
-	DATA_TYPE_ARRAY,
+	// DATA_TYPE_OBJECT,
+	// DATA_TYPE_ARRAY,
+	DATA_TYPE_MIXED,
 } from 'structures/dataTypes.js';
 import Remove from '../Remove';
 import Key from '../Key';
@@ -22,6 +25,7 @@ import ComplexChip from '../ComplexChip';
 import Value from '../Value';
 import Values from './Values.jsx';
 import onChangeKey from './onChangeKey.js';
+import onMount from './onMount.js';
 
 let ComplexItem = ({
 	id,
@@ -127,15 +131,10 @@ let ComplexItemProxy = ({
 	const keyStatusCode = useSelector((state) => (((state.jsObject.data[id] || {}).value || {}).columns || {}).statusCode);
 	const keyUri = useSelector((state) => (((state.jsObject.data[id] || {}).value || {}).columns || {}).uri);
 	const keyMethod = useSelector((state) => (((state.jsObject.data[id] || {}).value || {}).columns || {}).method);
-	// const headers = useSelector((state) => (((state.jsObject.data[id] || {}).value || {}).columns || {}).headers);
 	const keyData = useSelector((state) => (((state.jsObject.data[id] || {}).value || {}).columns || {}).data);
 	const placeholder = useSelector((state) => ((state.jsObject.data[id] || {}).value || {}).placeholder);
 	const routeId = useSelector((state) => ((state.jsObject.data[id] || {}).value || {}).route_id);
-	// const headerId = useSelector((state) => ((state.jsObject.blocks[id] || [])[0] || {}).id);
-	// const headerParentId = useSelector((state) => ((state.jsObject.blocks[id] || [])[0] || {}).parent_id);
-	const dataId = useSelector((state) => ((state.jsObject.blocks[id] || [])[0] || {}).id);
-	const dataParentId = useSelector((state) => ((state.jsObject.blocks[id] || [])[0] || {}).parent_id);
-	const firstChildId = useSelector((state) => ((state.jsObject.blocks[dataId] || [])[0] || {}).id);
+	const route = useSelector((state) => (state.routes.fetch || {})[routeId]);
 	const _onChangeStatusCode = React.useCallback((e) => onChangeKey(e, id, 'statusCode'), [
 		id,
 	]);
@@ -145,86 +144,58 @@ let ComplexItemProxy = ({
 	const _onChangeMethod = React.useCallback((e) => onChangeKey(e, id, 'method'), [
 		id,
 	]);
-	// const _onChangeHeaders = React.useCallback((e) => onChangeKey(e, id, 'headers'), [
-	// 	id,
-	// ]);
 	const _onChangeData = React.useCallback((e) => onChangeKey(e, id, 'data'), [
 		id,
 	]);
-	const routes = Store().getState().routes;
-	const routesData = routes.data;
-	const route = routesData.find((item) => item.id === routeId);
-	const responseKeys = Object.keys(route.response);
-	const dataTypeId = route.response[responseKeys[0]].data_type_id;
 
-	return <React.Fragment>
-		<ComplexItem
-			parentId={parentId}
-			id={id}
-			KeyComponent={KeyComponent}
-			TypeComponent={TypeComponent}
-			dataTypeId={DATA_TYPE_NUMBER.id}
-			keyValue={keyStatusCode}
-			onChangeKey={_onChangeStatusCode}
-			value="200, ..., 524" />
-		<ComplexItem
-			parentId={parentId}
-			id={id}
-			KeyComponent={KeyComponent}
-			TypeComponent={TypeComponent}
-			dataTypeId={DATA_TYPE_TEXT.id}
-			keyValue={keyUri}
-			onChangeKey={_onChangeUri}
-			value={(protocol[route.protocol_id].text() +'://'+ route.domain_path + route.path.map((pathItem) => pathItem.data_type_id === 2
-				? ('/'+ placeholder[pathItem.id].value)
-				: ('/'+ pathItem.value))).replaceAll(',', '')} />
-		<ComplexItem
-			parentId={parentId}
-			id={id}
-			KeyComponent={KeyComponent}
-			TypeComponent={TypeComponent}
-			dataTypeId={DATA_TYPE_TEXT.id}
-			keyValue={keyMethod}
-			onChangeKey={_onChangeMethod}
-			value={method[route.method_id].name} />
-		{/*(headerId > 0 && headerParentId > 0)
-			? <ComplexItem
+	React.useEffect(() => {
+		routeId > 0 && onMount(routeId);
+	}, [
+		routeId,
+	]);
+
+	return route
+		? <React.Fragment>
+			<ComplexItem
 				parentId={parentId}
 				id={id}
 				KeyComponent={KeyComponent}
 				TypeComponent={TypeComponent}
-				typeId={DATA_TYPE_OBJECT.id}
-				keyValue={headers}
-				onChangeKey={_onChangeHeaders}
-				value={() => <Value
-					parentId={headerParentId}
-					id={headerId}
-					KeyComponent={KeyComponent}
-					ValueComponent={ValueComponent}
-					TypeComponent={TypeComponent} />} />
-			: <React.Fragment />*/}
-		{(dataId > 0 && dataParentId > 0)
-			? <ComplexItem
+				dataTypeId={DATA_TYPE_NUMBER.id}
+				keyValue={keyStatusCode}
+				onChangeKey={_onChangeStatusCode}
+				value="200, ..., 500" />
+			<ComplexItem
 				parentId={parentId}
 				id={id}
 				KeyComponent={KeyComponent}
 				TypeComponent={TypeComponent}
-				dataTypeId={dataTypeId}
+				dataTypeId={DATA_TYPE_TEXT.id}
+				keyValue={keyUri}
+				onChangeKey={_onChangeUri}
+				value={(protocol[route.protocol_id].text() +'://...'+ route.url.map((urlItem) => urlItem.route_url_type_id === ROUTE_URL_TYPE_PLACEHOLDER.id
+					? ('/'+ placeholder[urlItem.id].value)
+					: ('/'+ urlItem.value))).replaceAll(',', '')} />
+			<ComplexItem
+				parentId={parentId}
+				id={id}
+				KeyComponent={KeyComponent}
+				TypeComponent={TypeComponent}
+				dataTypeId={DATA_TYPE_TEXT.id}
+				keyValue={keyMethod}
+				onChangeKey={_onChangeMethod}
+				value={method[route.method_id].name} />
+			<ComplexItem
+				parentId={parentId}
+				id={id}
+				KeyComponent={KeyComponent}
+				TypeComponent={TypeComponent}
+				dataTypeId={DATA_TYPE_MIXED.id}
 				keyValue={keyData}
 				onChangeKey={_onChangeData}
-				value={() => <Value
-					parentId={(dataTypeId !== DATA_TYPE_ARRAY.id && dataTypeId !== DATA_TYPE_OBJECT.id)
-						? dataId
-						: dataParentId}
-					id={(dataTypeId !== DATA_TYPE_ARRAY.id && dataTypeId !== DATA_TYPE_OBJECT.id)
-						? firstChildId
-						: dataId}
-					KeyComponent={KeyComponent}
-					ValueComponent={ValueComponent}
-					TypeComponent={TypeComponent}
-					onMenuComplexValue={onMenuComplexValue} />} />
-			: <React.Fragment />}
-	</React.Fragment>;
+				value="..." />
+		</React.Fragment>
+		: <React.Fragment />;
 };
 ComplexItemProxy = React.memo(ComplexItemProxy);
 ComplexItemProxy.defaultProps = {
@@ -300,6 +271,17 @@ let ComplexValue = ({
 	const isSourceScript = useSelector((state) => ((state.jsObject.data[id] || {}).value || {}).source_type_id === SOURCE_TYPE_SCRIPT.id);
 
 	return <React.Fragment>
+		{isSourceScript
+			? <Typography 
+				component="span"
+				variant="h4"
+				style={{
+					lineHeight: '0px',
+					padding: '8px 8px 24px',
+				}}>
+				...
+			</Typography>
+			: <React.Fragment />}
 		{isCollection
 			? <React.Fragment />
 			: <ComplexChip 
@@ -308,13 +290,14 @@ let ComplexValue = ({
 				id={id}
 				onMenuComplexValue={onMenuComplexValue} />}
 		{isSourceScript
-			? <ComplexItemScript
-				id={id}
-				parentId={parentId}
-				KeyComponent={KeyComponent}
-				ValueComponent={ValueComponent}
-				TypeComponent={TypeComponent}
-				onMenuComplexValue={onMenuComplexValue} />
+			? <Typography
+				component="span"
+				variant="h5"
+				style={{
+					padding: '8px 8px 24px',
+				}}>
+				,
+			</Typography>
 			: isSourceProxyPass
 				? <ComplexItemProxy
 					id={id}

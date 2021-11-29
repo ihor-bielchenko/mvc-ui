@@ -16,11 +16,13 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
 import AddIcon from '@material-ui/icons/Add';
 import InputText from 'components/Input/Text';
+import InputNumeric from 'components/Input/Numeric';
 import SelectMethod from 'components/Select/Method';
 import SelectProtocol from 'components/Select/Protocol';
 import MenuUrl from 'components/Menu/Url';
 import onMenu from 'components/Menu/onMenu.js';
 import onDialog from 'components/Dialog/onDialog.js';
+import onValidateName from 'components/Input/Validate/constStr.js';
 import { DIALOG_DELETE_CONFIRM } from 'consts/dialog.js';
 import { 
 	PROTOCOL_TYPE_WS,
@@ -67,7 +69,18 @@ let Route = ({ history }) => {
 				type="text"
 				name="name"
 				value={name}
-				onChange={onChange('name')} />
+				onChange={onChange('name')}
+				onInput={onValidateName} />
+		</Box>
+		<Box py={2}>
+			<InputNumeric 
+				required
+				disabled
+				label="Время синхронизации данных с репликами этого сервиса после запуска текущего роута (в секундах)"
+				placeholder="Роут для ..."
+				type="number"
+				name="sync_time"
+				defaultValue="0" />
 		</Box>
 		<Box 
 			py={2}

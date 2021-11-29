@@ -19,6 +19,7 @@ import FuncProps from 'components/Dialog/Func/Props';
 import Transition from 'components/Dialog/Transition.jsx';
 import onDialog from 'components/Dialog/onDialog.js';
 import onDelete from 'components/Dialog/Prop/onDelete.js';
+import onValidateName from 'components/Input/Validate/constStr.js';
 import { 
 	DIALOG_IF,
 	DIALOG_DELETE_CONFIRM, 
@@ -95,7 +96,8 @@ let Condition = () => {
 								label="Название"
 								helperText="Для быстрого поиска придумайте название или краткое описание"
 								value={name}
-								onChange={onChangeName('func')} />
+								onChange={onChangeName('func')}
+								onInput={onValidateName} />
 						</Box>
 						<Box py={2}>
 							<SelectFuncTemplate

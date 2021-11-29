@@ -29,11 +29,9 @@ let IfType = ({
 	const prop1 = useSelector((state) => ((state.jsObject.blocks[0] || [])[0] || {}).value ?? '');
 	const prop2 = useSelector((state) => ((state.jsObject.blocks[0] || [])[1] || {}).value ?? '');
 	const prop2Name = useSelector((state) => (((state.script[(prop2 || {}).workspaceId] || {}).data || {})[(prop2 || {}).id] || {}).name ?? '');
-	const _onSelect1 = React.useCallback((e) => onSelect(e, workspaceId, 0), [
-		workspaceId,
+	const _onSelect1 = React.useCallback((e) => onSelect(e, 0), [
 	]);
-	const _onClear2 = React.useCallback((e) => onClear(e, workspaceId, 1), [
-		workspaceId,
+	const _onClear2 = React.useCallback((e) => onClear(e, 1), [
 	]);
 	const _onMenu2 = React.useCallback((e) => onDialog(SOURCE_TYPE_SCRIPT.id, {
 		onClickAsSource: onValueScript(1),

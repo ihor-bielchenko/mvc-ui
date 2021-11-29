@@ -98,6 +98,12 @@ export const DATA_TYPE_FILE = {
 	disabled: true,
 	text: () => 'Файл',
 };
+export const DATA_TYPE_MIXED = {
+	id: process.env.DATA_TYPE_MIXED,
+	icon: InsertDriveFileIcon,
+	disabled: true,
+	text: () => 'Смешанный',
+};
 
 const dataTypes = {
 	[process.env.DATA_TYPE_ATOMIC]: DATA_TYPE_ATOMIC,

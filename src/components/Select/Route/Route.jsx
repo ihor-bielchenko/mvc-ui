@@ -14,6 +14,7 @@ let Route = ({
 	onSelect, 
 }) => {
 	const routes = useSelector((state) => state.routes.data);
+	const form = useSelector((state) => state.routes.form);
 
 	return <Select
 		name={name}
@@ -24,7 +25,8 @@ let Route = ({
 		helperText={helperText}
 		onSelect={onSelect}>
 		{routes
-			.filter((routeItem) => routeItem.method_id === METHOD_TYPE_GET.id)
+			.filter((routeItem) => routeItem.method_id === METHOD_TYPE_GET.id
+				&& routeItem.id !== form.id)
 			.map((routeItem) => {
 			return <MenuItem 
 				key={routeItem.id}

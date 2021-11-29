@@ -12,6 +12,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import SaveIcon from '@material-ui/icons/Save';
 import Title from 'components/Title';
 import InputText from 'components/Input/Text';
+import onValidate from 'components/Input/Validate/constStr.js';
 import onClose from '../onClose.js';
 import { DIALOG_URL_PLACEHOLDER } from 'consts/dialog.js';
 import onSubmit from './onSubmit.js';
@@ -50,7 +51,8 @@ let UrlPlaceholder = ({ history }) => {
 								placeholder="Например: value_id"
 								type="text"
 								name="value"
-								defaultValue={value} />
+								defaultValue={value}
+								onInput={onValidate} />
 						</Box>
 					</DialogContent>
 					<DialogActions>

@@ -12,23 +12,14 @@ import { DIALOG_KEY_EXISTS } from 'consts/dialog.js';
 import onClose from '../onClose.js';
 
 const merge = (id, tempValue, sourceValue, onCloseProxy) => {
-	const {
-		jsObject,
-		routes,
-	} = Store().getState();
+	const jsObject = Store().getState().jsObject;
 	const data = jsObject.data;
 	const blocks = jsObject.blocks;
-	const routesData = routes.data;
-	const routeId = tempValue.route_id;
-	const route = routesData.find((item) => item.id === routeId);
 	let newId = Date.now();
 	const currentItem = data[id] || {};
 	const parentId = currentItem.parent_id;
 	const parentItem = data[parentId];
 	const parentDataTypeId = (parentItem || {}).data_type_id || currentItem.data_type_id;
-	const responseParsed = {};
-	let responseKeys = Object.keys(route.response),
-		childId = newId - 999999;
 	const _sourceValue = {
 		...sourceValue,
 		columns: (() => {
@@ -38,31 +29,29 @@ const merge = (id, tempValue, sourceValue, onCloseProxy) => {
 				.keys(sourceValue.columns)
 				.forEach((key) => {
 					collector[key] = sourceValue.columns[key][1]
-						? unique() +'-'+ sourceValue.columns[key][0]
+						? sourceValue.columns[key][0] +'_'+ unique()
 						: sourceValue.columns[key][0];
 				});
 			return collector;
 		})()
 	};
 
-	responseKeys.forEach((key) => {
-		if (route.response[key].id > 0) {
-			const _id = route.response[key].id + childId;
+	// responseKeys.forEach((key) => {
+	// 	if (route.response[key].id > 0) {
+	// 		const _id = route.response[key].id + childId;
 
-			responseParsed[_id] = ({
-				...route.response[key],
-				id: _id,
-				parent_id: route.response[key].parent_id === 0
-					? route.response[key].parent_id
-					: route.response[key].parent_id + childId,
-			});
-		}
-	});
-	responseKeys = Object.keys(responseParsed);
+	// 		responseParsed[_id] = ({
+	// 			...route.response[key],
+	// 			id: _id,
+	// 			parent_id: route.response[key].parent_id === 0
+	// 				? route.response[key].parent_id
+	// 				: route.response[key].parent_id + childId,
+	// 		});
+	// 	}
+	// });
+	// responseKeys = Object.keys(responseParsed);
 
 	if (parentDataTypeId === DATA_TYPE_ATOMIC.id) {
-		let dataItem;
-
 		parentItem.data_type_id = DATA_TYPE_OBJECT.id;
 		currentItem.data_type_id = DATA_TYPE_OBJECT.id;
 		currentItem.key = generateKey(blocks[parentId]);
@@ -92,20 +81,19 @@ const merge = (id, tempValue, sourceValue, onCloseProxy) => {
 			disabledValue: true,
 			disabledRemove: true,
 		});
-		dataItem = data[newId];
 		blocks[newId] = [];
-		responseKeys.forEach((key) => {
-			if (responseParsed[key].parent_id === 0) {
-				responseParsed[key].parent_id = dataItem.id;
-			}
-			data[responseParsed[key].id] = { ...responseParsed[key] };
-			data[responseParsed[key].id].disabledKey = true;
-			data[responseParsed[key].id].disabledType = true;
-			data[responseParsed[key].id].disabledValue = true;
-			data[responseParsed[key].id].disabledRemove = true;
-			blocks[data[responseParsed[key].id].parent_id] = (blocks[data[responseParsed[key].id].parent_id] ?? []);
-			blocks[data[responseParsed[key].id].parent_id].push(data[responseParsed[key].id]);
-		});
+		// responseKeys.forEach((key) => {
+		// 	if (responseParsed[key].parent_id === 0) {
+		// 		responseParsed[key].parent_id = dataItem.id;
+		// 	}
+		// 	data[responseParsed[key].id] = { ...responseParsed[key] };
+		// 	data[responseParsed[key].id].disabledKey = true;
+		// 	data[responseParsed[key].id].disabledType = true;
+		// 	data[responseParsed[key].id].disabledValue = true;
+		// 	data[responseParsed[key].id].disabledRemove = true;
+		// 	blocks[data[responseParsed[key].id].parent_id] = (blocks[data[responseParsed[key].id].parent_id] ?? []);
+		// 	blocks[data[responseParsed[key].id].parent_id].push(data[responseParsed[key].id]);
+		// });
 	}
 	else {
 		let sectionItem,
@@ -143,18 +131,18 @@ const merge = (id, tempValue, sourceValue, onCloseProxy) => {
 		blocks[dataItem.id] = [];
 		blocks[sectionItem.id].push(data[newId]);
 
-		responseKeys.forEach((key) => {
-			if (responseParsed[key].parent_id === 0) {
-				responseParsed[key].parent_id = dataItem.id;
-			}
-			data[responseParsed[key].id] = { ...responseParsed[key] };
-			data[responseParsed[key].id].disabledKey = true;
-			data[responseParsed[key].id].disabledType = true;
-			data[responseParsed[key].id].disabledValue = true;
-			data[responseParsed[key].id].disabledRemove = true;
-			blocks[data[responseParsed[key].id].parent_id] = (blocks[data[responseParsed[key].id].parent_id] ?? []);
-			blocks[data[responseParsed[key].id].parent_id].push(data[responseParsed[key].id]);
-		});
+		// responseKeys.forEach((key) => {
+		// 	if (responseParsed[key].parent_id === 0) {
+		// 		responseParsed[key].parent_id = dataItem.id;
+		// 	}
+		// 	data[responseParsed[key].id] = { ...responseParsed[key] };
+		// 	data[responseParsed[key].id].disabledKey = true;
+		// 	data[responseParsed[key].id].disabledType = true;
+		// 	data[responseParsed[key].id].disabledValue = true;
+		// 	data[responseParsed[key].id].disabledRemove = true;
+		// 	blocks[data[responseParsed[key].id].parent_id] = (blocks[data[responseParsed[key].id].parent_id] ?? []);
+		// 	blocks[data[responseParsed[key].id].parent_id].push(data[responseParsed[key].id]);
+		// });
 	}
 	onCloseProxy();
 	onClose(DIALOG_KEY_EXISTS)();
@@ -182,34 +170,33 @@ const onSave = (e, id, onClose) => {
 	const parentId = currentItem.parent_id;
 	const parentItem = data[parentId];
 	const parentDataTypeId = (parentItem || {}).data_type_id || currentItem.data_type_id;
+	const blockId = (currentItem.data_type_id === DATA_TYPE_OBJECT.id 
+		&& parentDataTypeId === DATA_TYPE_ATOMIC.id)
+		? parentId
+		: id;
 	let keyExistsFlag = false;
 
 	Object
 		.keys(sourceValue.columns)
 		.forEach((nowColumnKey) => {
-			const findIndex = blocks[parentDataTypeId === DATA_TYPE_ATOMIC.id
-				? parentId
-				: id].findIndex((item) => {
-				let columnExistsFlag = false;
-
-				if ((item.value || {}).columns) {
+			(blocks[blockId] || []).forEach((item) => {
+				if (item.value.source_type_id === SOURCE_TYPE_PROXY_PASS.id
+					&& typeof item.value === 'object'
+					&& typeof item.value.columns === 'object') {
 					Object
-						.keys((item.value || {}).columns || {})
+						.keys(item.value.columns)
 						.forEach((columnKey) => {
-							if (((item.value || {}).columns || {})[columnKey] === sourceValue.columns[nowColumnKey][0]) {
-								columnExistsFlag = true;
+							if (item.value.columns[columnKey] === sourceValue.columns[nowColumnKey][0]) {
+								keyExistsFlag = true;
 								sourceValue.columns[nowColumnKey][1] = true;
 							}
 						});
-					}
-					return item.key === sourceValue.columns[nowColumnKey][0]
-						|| columnExistsFlag;
-				});
-
-			if (findIndex > -1) {
-				keyExistsFlag = true;
-				sourceValue.columns[nowColumnKey][1] = true;
-			}
+				}
+				else if (item.key === sourceValue.columns[nowColumnKey][0]) {
+					keyExistsFlag = true;
+					sourceValue.columns[nowColumnKey][1] = true;
+				}
+			});
 		});
 
 	if (keyExistsFlag) {

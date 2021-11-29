@@ -6,26 +6,29 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import CheckIcon from '@material-ui/icons/Check';
 import Title from 'components/Title';
-import InputText from 'components/Input/Text';
 import onValidate from 'components/Dialog/Func/Props/onValidate.js';
+import loadColumnInputs from 'utils/loadColumnInputs.js';
 import { 
 	SOURCE_TYPE_COOKIE,
 	SOURCE_TYPE_SCRIPT, 
 } from 'structures/sourceTypes.js';
-import { DATA_TYPE_TEXT } from 'structures/dataTypes.js';
 import onDialog from '../onDialog.js';
 import onClear from './onClear.js';
 import onValueScript from './onValueScript.js';
 import onClose from './onClose.js';
 import onSubmit from './onSubmit.js';
 
-let SourceCookie = () => {
-	const dialog = useSelector((state) => state.dialogs[SOURCE_TYPE_COOKIE.id]);
-	const id = (dialog || {}).id;
-	const workspaceId = (dialog || {}).workspaceId ?? 0;
+export let Input = ({
+	workspaceId,
+	id,
+	label,
+	placeholder,
+}) => {
+	const dataTypeId = useSelector((state) => (state.jsObject.data[id] || {}).data_type_id);
 	const value = useSelector((state) => state.jsObject.tempValue.value || '');
 	const _onClear = React.useCallback((e) => onClear(e, workspaceId, id), [
 		workspaceId,
@@ -33,10 +36,39 @@ let SourceCookie = () => {
 	]);
 	const _onMenu = React.useCallback((e) => onDialog(SOURCE_TYPE_SCRIPT.id, {
 		onClickAsSource: onValueScript(id),
-		dataTypeValidating: onValidate(DATA_TYPE_TEXT.id),
+		dataTypeValidating: onValidate(dataTypeId),
 	})(e), [
 		id,
+		dataTypeId,
 	]);
+	const Component = React.useMemo(() => React.lazy(loadColumnInputs(dataTypeId)), [
+		dataTypeId,
+	]);
+
+	return <React.Suspense fallback={<Typography>Подождите...</Typography>}>
+		<Component 
+			required
+			menu
+			onMenu={_onMenu}
+			onValue={_onMenu}
+			onDelete={_onClear}
+			name="value"
+			type="text"
+			label={label}
+			placeholder={placeholder}
+			defaultValue={value} />
+	</React.Suspense>;
+};
+Input = React.memo(Input);
+Input.defaultProps = {
+	label: 'Название значния',
+	placeholder: 'Например, access_token',
+};
+
+let SourceCookie = () => {
+	const dialog = useSelector((state) => state.dialogs[SOURCE_TYPE_COOKIE.id]);
+	const id = (dialog || {}).id;
+	const workspaceId = (dialog || {}).workspaceId ?? 0;
 	const _onSubmit = React.useCallback((e) => onSubmit(e, id), [
 		id,
 	]);
@@ -56,17 +88,9 @@ let SourceCookie = () => {
 				</DialogTitle>
 				<form onSubmit={_onSubmit}>
 					<DialogContent dividers>
-						<InputText 
-							required
-							menu
-							onMenu={_onMenu}
-							onValue={_onMenu}
-							onDelete={_onClear}
-							name="value"
-							type="text"
-							label="Название значния"
-							placeholder="Например, access_token"
-							defaultValue={value} />
+						<Input
+							workspaceId={workspaceId}
+							id={id} />
 					</DialogContent>
 					<DialogActions>
 						<Box 

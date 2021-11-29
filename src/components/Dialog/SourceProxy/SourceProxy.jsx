@@ -23,6 +23,7 @@ import onService from './onService.js';
 import onRoute from './onRoute.js';
 import onSave from './onSave';
 import onEdit from './onEdit.js';
+import onMount from './onMount.js';
 
 let SourceProxy = () => {
 	const dialog = useSelector((state) => state.dialogs[SOURCE_TYPE_PROXY_PASS.id]);
@@ -30,6 +31,7 @@ let SourceProxy = () => {
 	const workspaceId = (dialog || {}).workspaceId ?? 0;
 	const index = (dialog || {}).index ?? 0;
 	const isEditFlag = (dialog || {}).isEditFlag || false;
+	const routeLength = useSelector((state) => (state.routes.data || []).length);
 	const serviceId = useSelector((state) => state.jsObject.tempValue.service_id || '');
 	const routeId = useSelector((state) => state.jsObject.tempValue.route_id || '');
 	const [ tab, setTab ] = React.useState((state) => 0);
@@ -49,6 +51,14 @@ let SourceProxy = () => {
 		isEditFlag,
 		id,
 		_onClose,
+	]);
+	const _dialogOpenFlag = !!dialog;
+
+	React.useEffect(() => {
+		(_dialogOpenFlag && serviceId > 0) && onMount(serviceId);
+	}, [
+		_dialogOpenFlag,
+		serviceId,
 	]);
 
 	return !!dialog
@@ -79,6 +89,7 @@ let SourceProxy = () => {
 						</Box>
 						: <React.Fragment />}
 					{routeId > 0
+						&& routeLength > 0
 						? <React.Fragment>
 							<Tabs 
 								variant="fullWidth"

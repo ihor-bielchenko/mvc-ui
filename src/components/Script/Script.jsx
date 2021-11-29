@@ -99,8 +99,8 @@ let Script = ({
 			<Background
 				position="relative"
 				overflow="auto"
-				width="100%"
-				height="100%">
+				width={window.innerWidth}
+				height={window.innerHeight}>
 				<Workspace 
 					scriptId={id}
 					workspaceId={workspaceId}
