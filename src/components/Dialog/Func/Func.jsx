@@ -118,6 +118,7 @@ let Func = () => {
 								scriptId={scriptId}
 								workspaceId={workspaceId}
 								funcId={id}
+								categoryId={categoryId}
 								templateId={templateId} />
 							: <React.Fragment />}
 					</DialogContent>

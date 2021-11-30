@@ -53,13 +53,14 @@ export const FUNC_TEMPLATE_ARR_REVERSE = {
 	id: process.env.FUNC_TEMPLATE_ARR_REVERSE,
 	category_id: FUNC_CATEGORY_ARRAY.id,
 	data_type_id: DATA_TYPE_ARRAY.id,
-	text: () => 'Обернуть порядок следования элементов массива',
+	text: () => 'Изменить порядок следования элементов массива',
 	subtext: () => 'Первый элемент массива становится последним, а последний — первым',
 };
 export const FUNC_TEMPLATE_ARR_MERGE = {
 	id: process.env.FUNC_TEMPLATE_ARR_MERGE,
 	category_id: FUNC_CATEGORY_ARRAY.id,
 	data_type_id: DATA_TYPE_ARRAY.id,
+	disabled: true,
 	text: () => 'Соединить массивы',
 	subtext: () => 'Сливает значения из 2х или более массивов в один',
 };
@@ -67,6 +68,7 @@ export const FUNC_TEMPLATE_ARR_REDUCE = {
 	id: process.env.FUNC_TEMPLATE_ARR_REDUCE,
 	category_id: FUNC_CATEGORY_ARRAY.id,
 	data_type_id: -1,
+	disabled: true,
 	text: () => 'Результирующее значение массивов',
 	subtext: () => 'Перебора элементов массива для вычисления одного результирующего значения',
 };
@@ -74,6 +76,7 @@ export const FUNC_TEMPLATE_ARR_FOR_EACH = {
 	id: process.env.FUNC_TEMPLATE_ARR_FOR_EACH,
 	category_id: FUNC_CATEGORY_ARRAY.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
+	disabled: true,
 	text: () => 'Перебрать массив',
 	subtext: () => 'Цикл для перебора элементов массива',
 };
@@ -81,6 +84,7 @@ export const FUNC_TEMPLATE_ARR_FILTER = {
 	id: process.env.FUNC_TEMPLATE_ARR_FILTER,
 	category_id: FUNC_CATEGORY_ARRAY.id,
 	data_type_id: DATA_TYPE_ARRAY.id,
+	disabled: true,
 	text: () => 'Фильтрция массива',
 	subtext: () => 'Функция возвращает новый массив со всеми элементами, прошедшими проверку фильтрции',
 };
@@ -88,6 +92,7 @@ export const FUNC_TEMPLATE_ARR_SORT = {
 	id: process.env.FUNC_TEMPLATE_ARR_SORT,
 	category_id: FUNC_CATEGORY_ARRAY.id,
 	data_type_id: DATA_TYPE_ARRAY.id,
+	disabled: true,
 	text: () => 'Сортировка массива',
 	subtext: () => 'Функция сортирует элементы массива и возвращает отсортированный массив',
 };
@@ -95,6 +100,7 @@ export const FUNC_TEMPLATE_ARR_FIND = {
 	id: process.env.FUNC_TEMPLATE_ARR_FIND,
 	category_id: FUNC_CATEGORY_ARRAY.id,
 	data_type_id: -1,
+	disabled: true,
 	text: () => 'Поиск по массиву',
 	subtext: () => 'Возвращает значение первого найденного в массиве элемента, которое удовлетворяет условию поиска',
 };
@@ -102,6 +108,7 @@ export const FUNC_TEMPLATE_ARR_TO_OBJ = {
 	id: process.env.FUNC_TEMPLATE_ARR_TO_OBJ,
 	category_id: FUNC_CATEGORY_ARRAY.id,
 	data_type_id: DATA_TYPE_OBJECT.id,
+	disabled: true,
 	text: () => 'Преобразовать в объект',
 	subtext: () => 'Преобразовать массив в объект',
 };

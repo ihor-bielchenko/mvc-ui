@@ -18,6 +18,7 @@ const onMount = async (id, scriptId, workspaceId) => {
 
 		func.id = id;
 		func.name = data.name;
+		func.category_id = data.category_id;
 		func.template_id = data.template_id;
 		func.entityId = data.entity.id;
 		func.sourceId = data.source_id;

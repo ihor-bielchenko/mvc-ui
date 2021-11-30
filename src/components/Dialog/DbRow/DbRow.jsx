@@ -20,7 +20,7 @@ import onSave from './onSave.js';
 import onChange from './onChange.js';
 import onClose from './onClose.js';
 
-let Column = ({ 
+export let Column = ({ 
 	columnKey,
 	error, 
 }) => {
@@ -58,6 +58,28 @@ Column = React.memo(Column);
 Column.defaultProps = {
 	columnKey: 0,
 	error: false,
+};
+
+export let DbRowContent = ({ error }) => {
+	const columns = useSelector((state) => state.db.columns);
+	const columnKeys = Object.keys(columns);
+	const _error = error();
+
+	return <React.Fragment>
+		{columnKeys.map((columnKey) => {
+			return parseInt(columnKey) > 0
+				? <React.Fragment key={columnKey}>
+					<Column 
+						columnKey={columnKey}
+						error={_error[columnKey]} />
+				</React.Fragment>
+				: <React.Fragment key={columnKey} />;
+		})}
+	</React.Fragment>;
+};
+DbRowContent = React.memo(DbRowContent);
+DbRowContent.defaultProps = {
+	error: () => ({}),
 };
 
 let DbRow = () => {
@@ -99,17 +121,7 @@ let DbRow = () => {
 			{_dialogOpenFlag
 				? <React.Fragment>
 					<DialogContent dividers>
-						<React.Fragment>
-							{columnKeys.map((columnKey) => {
-								return parseInt(columnKey) > 0
-									? <React.Fragment key={columnKey}>
-										<Column 
-											columnKey={columnKey}
-											error={error[columnKey]} />
-									</React.Fragment>
-									: <React.Fragment key={columnKey} />;
-							})}
-						</React.Fragment>
+						<DbRowContent error={() => error} />
 					</DialogContent>
 					<DialogActions>
 						<Box 

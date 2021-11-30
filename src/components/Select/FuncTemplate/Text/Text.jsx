@@ -32,7 +32,9 @@ let Text = ({
 					data-entity_id={item.entity_id}
 					data-format_id={item.format_id}>
 					<Box my={1}>
-						<Typography variant="h6">
+						<Typography 
+							variant="h6"
+							color={item.color ?? 'inherit'}>
 							{item.text()}
 						</Typography>
 						<Typography variant="body2">

@@ -79,7 +79,6 @@ let DbTable = () => {
 								value={0}
 								label="Структура" />
 							<Tab
-								disabled
 								value={1} 
 								label="Список данных" />
 						</Tabs>

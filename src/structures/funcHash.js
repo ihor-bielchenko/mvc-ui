@@ -8,12 +8,19 @@ export const FUNC_TEMPLATE_HASH_PASSWORD = {
 	text: () => 'Создать пароль',
 	subtext: () => 'Сгенерировать уникальный пароль с выбором сложности',
 };
-export const FUNC_TEMPLATE_HASH_BASE64 = {
-	id: process.env.FUNC_TEMPLATE_HASH_BASE64,
+export const FUNC_TEMPLATE_HASH_BASE64_ENCODE = {
+	id: process.env.FUNC_TEMPLATE_HASH_BASE64_ENCODE,
 	category_id: FUNC_CATEGORY_HASH.id,
 	data_type_id: DATA_TYPE_TEXT.id,
-	text: () => 'Простая кодировка',
-	subtext: () => 'Кодировать/раскодировать данные по base64',
+	text: () => 'Преобразовать в base64',
+	subtext: () => 'Кодировать данные в base64',
+};
+export const FUNC_TEMPLATE_HASH_BASE64_DECODE = {
+	id: process.env.FUNC_TEMPLATE_HASH_BASE64_DECODE,
+	category_id: FUNC_CATEGORY_HASH.id,
+	data_type_id: DATA_TYPE_TEXT.id,
+	text: () => 'Декодировать base64',
+	subtext: () => 'Декодировать base64 код в исходный вид',
 };
 export const FUNC_TEMPLATE_HASH_HASH = {
 	id: process.env.FUNC_TEMPLATE_HASH_HASH,
@@ -31,7 +38,8 @@ export const FUNC_TEMPLATE_HASH_CRYPTO = {
 };
 const funcHash =  {
 	[process.env.FUNC_TEMPLATE_HASH_PASSWORD]: FUNC_TEMPLATE_HASH_PASSWORD,
-	[process.env.FUNC_TEMPLATE_HASH_BASE64]: FUNC_TEMPLATE_HASH_BASE64,
+	[process.env.FUNC_TEMPLATE_HASH_BASE64_ENCODE]: FUNC_TEMPLATE_HASH_BASE64_ENCODE,
+	[process.env.FUNC_TEMPLATE_HASH_BASE64_DECODE]: FUNC_TEMPLATE_HASH_BASE64_DECODE,
 	[process.env.FUNC_TEMPLATE_HASH_HASH]: FUNC_TEMPLATE_HASH_HASH,
 	[process.env.FUNC_TEMPLATE_HASH_CRYPTO]: FUNC_TEMPLATE_HASH_CRYPTO,
 };

@@ -10,8 +10,23 @@ import onDialog from 'components/Dialog/onDialog.js';
 import dataTypes, {
 	DATA_TYPE_ATOMIC,
 	DATA_TYPE_ID,
+	DATA_TYPE_TEXT,
+	DATA_TYPE_NUMBER,
+	DATA_TYPE_OBJECT,
+	DATA_TYPE_ARRAY,
 } from 'structures/dataTypes.js';
 import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
+import { FUNC_TEMPLATE_IF_TYPE } from 'structures/funcIf.js';
+import {
+	FUNC_TEMPLATE_MATH_MIN,
+	FUNC_TEMPLATE_MATH_MAX,
+} from 'structures/funcMaths.js';
+import {
+	FUNC_CATEGORY_TEXT,
+	FUNC_CATEGORY_MATH,
+	FUNC_CATEGORY_ARRAY,
+	FUNC_CATEGORY_OBJECT,
+} from 'structures/funcCategories.js';
 import onMount from './onMount.js';
 import onSelect from './onSelect.js';
 import onClear from '../onClear.js';
@@ -19,14 +34,50 @@ import onValueScript from '../onValueScript.js';
 import onValidate from '../onValidate.js';
 import onUnmount from '../onUnmount.js';
 
+const _filtterCategoryFunc = (key, categoryId, templateId, defaultValueFlag = false) => {
+	if (templateId === FUNC_TEMPLATE_MATH_MIN.id
+		|| templateId === FUNC_TEMPLATE_MATH_MAX.id) {
+		return defaultValueFlag
+			? DATA_TYPE_ARRAY.id
+			: dataTypes[key].id === DATA_TYPE_ARRAY.id;
+	}
+	else if (templateId === FUNC_TEMPLATE_IF_TYPE.id) {
+		if (categoryId === FUNC_CATEGORY_TEXT.id) {
+			return defaultValueFlag
+				? DATA_TYPE_TEXT.id
+				: dataTypes[key].id === DATA_TYPE_TEXT.id;
+		}
+		else if (categoryId === FUNC_CATEGORY_MATH.id) {
+			return defaultValueFlag
+				? DATA_TYPE_NUMBER.id
+				: dataTypes[key].id === DATA_TYPE_NUMBER.id;
+		}
+		else if (categoryId === FUNC_CATEGORY_ARRAY.id) {
+			return defaultValueFlag
+				? DATA_TYPE_ARRAY.id
+				: dataTypes[key].id === DATA_TYPE_ARRAY.id;
+		}
+		else if (categoryId === FUNC_CATEGORY_OBJECT.id) {
+			return defaultValueFlag
+				? DATA_TYPE_OBJECT.id
+				: dataTypes[key].id === DATA_TYPE_OBJECT.id;
+		}
+	}
+	return defaultValueFlag
+		? false
+		: true;
+};
+
 let IfType = ({ 
 	scriptId,
 	workspaceId,
 	funcId,
+	categoryId,
 	templateId,
 }) => {
 	const renderFlag = useSelector((state) => state.jsObject.renderFlag);
-	const prop1 = useSelector((state) => ((state.jsObject.blocks[0] || [])[0] || {}).value ?? '');
+	const prop1 = useSelector((state) => _filtterCategoryFunc('', categoryId, templateId, true)
+		|| (((state.jsObject.blocks[0] || [])[0] || {}).value ?? ''));
 	const prop2 = useSelector((state) => ((state.jsObject.blocks[0] || [])[1] || {}).value ?? '');
 	const prop2Name = useSelector((state) => (((state.script[(prop2 || {}).workspaceId] || {}).data || {})[(prop2 || {}).id] || {}).name ?? '');
 	const _onSelect1 = React.useCallback((e) => onSelect(e, 0), [
@@ -50,6 +101,8 @@ let IfType = ({
 		onUnmount();
 	}, []);
 
+	console.log('prop1', categoryId, templateId);
+
 	return <React.Fragment>
 		<Box mt={2} />
 		<Grid 
@@ -64,7 +117,8 @@ let IfType = ({
 					value={prop1}
 					onSelect={_onSelect1}
 					onFilter={(key) => dataTypes[key].id !== DATA_TYPE_ATOMIC.id
-						&& dataTypes[key].id !== DATA_TYPE_ID.id} />
+						&& dataTypes[key].id !== DATA_TYPE_ID.id
+						&& _filtterCategoryFunc(key, categoryId, templateId)} />
 			</Grid>
 			<Grid 
 				item

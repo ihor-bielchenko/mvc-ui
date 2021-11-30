@@ -67,6 +67,7 @@ export const FUNC_TEMPLATE_MATH_LOG = {
 	id: process.env.FUNC_TEMPLATE_MATH_LOG,
 	category_id: FUNC_CATEGORY_MATH.id,
 	data_type_id: DATA_TYPE_NUMBER.id,
+	disabled: true,
 	text: () => 'Логарифмы',
 	subtext: () => 'Действия с логарифмами',
 };
@@ -74,6 +75,7 @@ export const FUNC_TEMPLATE_MATH_SYSTEM = {
 	id: process.env.FUNC_TEMPLATE_MATH_SYSTEM,
 	category_id: FUNC_CATEGORY_MATH.id,
 	data_type_id: DATA_TYPE_NUMBER.id,
+	disabled: true,
 	text: () => 'Системы счисления',
 	subtext: () => 'Определение и перевод чисел из одной системы в другую',
 };

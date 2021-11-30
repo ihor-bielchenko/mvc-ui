@@ -33,6 +33,7 @@ export const FUNC_TEMPLATE_DB_COPY = {
 	id: process.env.FUNC_TEMPLATE_DB_COPY,
 	category_id: FUNC_CATEGORY_DB.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
+	disabled: true,
 	text: () => 'Копировать',
 	subtext: () => 'Копировать данные в базе',
 };

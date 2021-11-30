@@ -7,7 +7,7 @@ import {
 } from './dataTypes.js';
 
 export const FUNC_TEMPLATE_OBJ_GET = {
-	id: process.env.FUNC_TEMPLATE_OBJ_EXTRACT,
+	id: process.env.FUNC_TEMPLATE_OBJ_GET,
 	category_id: FUNC_CATEGORY_OBJECT.id,
 	data_type_id: -1,
 	text: () => 'Выбрать значение',
@@ -38,6 +38,7 @@ export const FUNC_TEMPLATE_OBJ_FOR_EACH = {
 	id: process.env.FUNC_TEMPLATE_OBJ_FOR_EACH,
 	category_id: FUNC_CATEGORY_OBJECT.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
+	disabled: true,
 	text: () => 'Перебрать объект',
 	subtext: () => 'Цикл для перебора элементов объекта',
 };
@@ -45,6 +46,7 @@ export const FUNC_TEMPLATE_OBJ_KEYS = {
 	id: process.env.FUNC_TEMPLATE_OBJ_KEYS,
 	category_id: FUNC_CATEGORY_OBJECT.id,
 	data_type_id: DATA_TYPE_ARRAY.id,
+	disabled: true,
 	text: () => 'Массив ключей',
 	subtext: () => 'Возвращает массив состоящий из ключей данного объекта',
 };
@@ -52,6 +54,7 @@ export const FUNC_TEMPLATE_OBJ_TO_ARR = {
 	id: process.env.FUNC_TEMPLATE_OBJ_TO_ARR,
 	category_id: FUNC_CATEGORY_OBJECT.id,
 	data_type_id: DATA_TYPE_ARRAY.id,
+	disabled: true,
 	text: () => 'Преобразовать в массив',
 	subtext: () => 'Преобразовать объект в массив',
 };

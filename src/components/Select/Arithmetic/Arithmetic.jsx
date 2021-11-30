@@ -40,38 +40,38 @@ let Arithmetic = ({
 			Деление ({'/'})
 		</MenuItem>
 		<MenuItem 
-			key={4}
-			value={4}>
-			В степень ({'^'})
-		</MenuItem>
-		<MenuItem 
 			key={5}
 			value={5}>
-			Корень ({'√'})
+			В степень ({'^'})
 		</MenuItem>
 		<MenuItem 
 			key={6}
 			value={6}>
-			Факториал ({'!'})
+			Корень ({'√'})
 		</MenuItem>
 		<MenuItem 
 			key={7}
 			value={7}>
-			Проценты ({'%'})
+			Факториал ({'!'})
 		</MenuItem>
 		<MenuItem 
 			key={8}
 			value={8}>
-			Число π ({'π'})
+			Проценты ({'%'})
 		</MenuItem>
 		<MenuItem 
 			key={9}
 			value={9}>
-			Число Эйлера ({'e'})
+			Число π ({'π'})
 		</MenuItem>
 		<MenuItem 
 			key={10}
 			value={10}>
+			Число Эйлера ({'e'})
+		</MenuItem>
+		<MenuItem 
+			key={11}
+			value={11}>
 			Модуль числа
 		</MenuItem>
 	</Select>;
