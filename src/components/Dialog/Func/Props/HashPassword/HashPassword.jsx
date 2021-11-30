@@ -12,8 +12,8 @@ import onClear from '../onClear.js';
 import onValueScript from '../onValueScript.js';
 import onValidate from '../onValidate.js';
 import onUnmount from '../onUnmount.js';
+import onCheck from '../onCheck.js';
 import onMount from './onMount.js';
-import onCheck from './onCheck.js';
 
 let ArrSplice = ({ 
 	id, 

@@ -2,6 +2,7 @@ import React from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
 import Store from 'components/Store';
+import { DATA_TYPE_ID } from 'structures/dataTypes.js';
 import Select from '../Select.jsx';
 
 let Column = ({ 
@@ -12,6 +13,7 @@ let Column = ({
 	label,
 	helperText,
 	onSelect, 
+	onFilter,
 }) => {
 	const dbColumnsData = Store().getState().db.columns;
 
@@ -23,18 +25,21 @@ let Column = ({
 		label={label}
 		helperText={helperText}
 		onSelect={onSelect}>
-		{Object.keys(dbColumnsData).map((id) => {
-			return <MenuItem 
-				key={id}
-				value={id}>
-				<Typography 
-					color={dbColumnsData[id].data_type_id === 0
-						? 'secondary'
-						: 'initial'}>
-					<b>{dbColumnsData[id].name}</b>
-				</Typography>
-			</MenuItem>
-		})}
+		{Object
+			.keys(dbColumnsData)
+			.filter(onFilter)
+			.map((id) => {
+				return <MenuItem 
+					key={id}
+					value={id}>
+					<Typography 
+						color={dbColumnsData[id].data_type_id === DATA_TYPE_ID.id
+							? 'secondary'
+							: 'initial'}>
+						<b>{dbColumnsData[id].name}</b>
+					</Typography>
+				</MenuItem>
+			})}
 	</Select>;
 };
 
@@ -43,6 +48,7 @@ Column.defaultProps = {
 	name: 'column_id',
 	label: 'Выбрать поле',
 	required: false,
+	onFilter: () => true,
 };
 
 export default Column;

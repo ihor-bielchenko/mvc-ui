@@ -89,6 +89,18 @@ const _load = (funcTemplateId) => () => {
 
 		case funcTemplates.FUNC_TEMPLATE_DB_DELETE.id:
 			return import('components/Dialog/Func/Props/DbDelete');
+
+		case funcTemplates.FUNC_TEMPLATE_DB_COLUMN_CREATE.id:
+			return import('components/Dialog/Func/Props/ColumnCreate');
+
+		case funcTemplates.FUNC_TEMPLATE_DB_COLUMN_DELETE.id:
+			return import('components/Dialog/Func/Props/ColumnDelete');
+
+		case funcTemplates.FUNC_TEMPLATE_DB_UPDATE.id:
+			return import('components/Dialog/Func/Props/DbUpdate');
+
+		case funcTemplates.FUNC_TEMPLATE_DB_COLUMN_UPDATE.id:
+			return import('components/Dialog/Func/Props/ColumnUpdate');
 	}
 };
 
