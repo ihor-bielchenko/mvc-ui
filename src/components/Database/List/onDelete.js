@@ -12,7 +12,7 @@ const onDelete = async (e, tableId, rowId) => {
 	try {
 		const list = Store().getState().list;
 
-		await fetchDbRowDelete(JSON.stringify(rowId > 0
+		await fetchDbRowDelete(tableId, JSON.stringify(rowId > 0
 			? ([ rowId ])
 			: list.select));
 		list.select = [];

@@ -9,6 +9,10 @@ import fetchFuncUpdate from 'fetch/funcUpdate.js';
 import fetchArrowCreate from 'fetch/arrowCreate.js';
 import axiosError from 'utils/axiosError.js';
 import funcTemplates from 'structures/funcTemplates.js';
+import { 
+	FUNC_TEMPLATE_DB_UPDATE,
+	FUNC_TEMPLATE_DB_DELETE, 
+} from 'structures/funcDb.js';
 import onClose from './onClose.js';
 
 const onSave = async (e, scriptId, workspaceId, fromEntityId, fromArrowTypeId) => {
@@ -18,7 +22,15 @@ const onSave = async (e, scriptId, workspaceId, fromEntityId, fromArrowTypeId) =
 		const {
 			func,
 			script,
+			jsObject,
 		} = Store().getState();
+
+		if (func.template_id === FUNC_TEMPLATE_DB_UPDATE.id
+			|| func.template_id === FUNC_TEMPLATE_DB_DELETE.id) {
+			jsObject.blocks[0][1].value = JSON.stringify(jsObject.tempValue.filter);
+			jsObject.blocks[0][2].value = JSON.stringify(jsObject.tempValue.sort);
+			jsObject.blocks[0][3].value = JSON.stringify(jsObject.tempValue.query);
+		}
 
 		if (func.id > 0 && func.sourceId > 0) {
 			const dataSource = await onSaveJsObject(func.sourceId);

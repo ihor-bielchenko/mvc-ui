@@ -20,11 +20,11 @@ import Transition from 'components/Dialog/Transition.jsx';
 import onDialog from 'components/Dialog/onDialog.js';
 import onDelete from 'components/Dialog/Prop/onDelete.js';
 import onValidateName from 'components/Input/Validate/constStr.js';
+import { FUNC_CATEGORY_IF } from 'structures/funcCategories.js';
 import { 
 	DIALOG_IF,
 	DIALOG_DELETE_CONFIRM, 
 } from 'consts/dialog.js';
-import { FUNC_CATEGORY_IF } from 'structures/funcCategories.js';
 import onMount from '../Func/onMount.js';
 import onChangeName from '../Func/onChangeName.js';
 import onSave from '../Func/onSave.js';
@@ -59,8 +59,8 @@ let Condition = () => {
 
 	// onMount
 	React.useEffect(() => {
-		if (_dialogOpenFlag && existId > 0) {
-			onMount(existId, scriptId, workspaceId);
+		if (_dialogOpenFlag) {
+			onMount(existId, scriptId, workspaceId, FUNC_CATEGORY_IF.id);
 		}
 	}, [
 		_dialogOpenFlag,

@@ -91,6 +91,8 @@ function getClientEnvironment(publicUrl) {
 				// It is defined here so it is available in the webpackHotDevClient.
 				FAST_REFRESH: process.env.FAST_REFRESH !== 'false',
 
+				CAPTCHA_KEY: process.env.CAPTCHA_KEY,
+
 				SSO_PATH: process.env.SSO_PATH,
 				SCRIPT_PATH: process.env.SCRIPT_PATH,
 				SOURCE_PATH: process.env.SOURCE_PATH,
@@ -227,6 +229,7 @@ function getClientEnvironment(publicUrl) {
 				FUNC_TEMPLATE_DB_COLUMN_DELETE: Number(process.env.FUNC_TEMPLATE_DB_COLUMN_DELETE),
 				FUNC_TEMPLATE_DB_UPDATE: Number(process.env.FUNC_TEMPLATE_DB_UPDATE),
 				FUNC_TEMPLATE_DB_COLUMN_UPDATE: Number(process.env.FUNC_TEMPLATE_DB_COLUMN_UPDATE),
+				FUNC_TEMPLATE_DB_COUNT: Number(process.env.FUNC_TEMPLATE_DB_COUNT),
 
 				FUNC_TEMPLATE_TIME_FORMAT: Number(process.env.FUNC_TEMPLATE_TIME_FORMAT),
 				FUNC_TEMPLATE_TIME_UPDATE: Number(process.env.FUNC_TEMPLATE_TIME_UPDATE),

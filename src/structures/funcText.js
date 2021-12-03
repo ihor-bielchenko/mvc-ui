@@ -57,7 +57,7 @@ export const FUNC_TEMPLATE_TEXT_FIND = {
 	category_id: FUNC_CATEGORY_TEXT.id,
 	data_type_id: DATA_TYPE_TEXT.id,
 	text: () => 'Найти в тексте нужную строку или символ',
-	subtext: () => 'Определить, что в тексте есть нужные слова или символы',
+	subtext: () => 'Возвращает первый индекс, по которому символ может быть найден в строке или -1, если такого символа нет',
 };
 export const FUNC_TEMPLATE_TEXT_REPLACE = {
 	id: process.env.FUNC_TEMPLATE_TEXT_REPLACE,
@@ -70,6 +70,7 @@ export const FUNC_TEMPLATE_TEXT_SUBSTR = {
 	id: process.env.FUNC_TEMPLATE_TEXT_SUBSTR,
 	category_id: FUNC_CATEGORY_TEXT.id,
 	data_type_id: DATA_TYPE_TEXT.id,
+	disabled: true,
 	text: () => 'Вырезать строку',
 	subtext: () => 'Удалить из текста нужную строку или предложение',
 };

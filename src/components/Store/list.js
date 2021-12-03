@@ -3,6 +3,7 @@ export const initialState = () => ({
 	total: 0,
 	rowsPerPage: 20,
 	currentPage: 0,
+	filter_operator_id: process.env.OPERATOR_UNION_AND,
 	search: {
 		query: '',
 		isExactMatch: false,
@@ -11,6 +12,8 @@ export const initialState = () => ({
 			text: 'Test',
 		}*/],
 	},
+	filter: '',
+	sort: '',
 	select: [],
 	fetch: [],
 	data: [/*{

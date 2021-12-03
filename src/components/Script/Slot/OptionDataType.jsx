@@ -30,7 +30,9 @@ let OptionDataType = ({
 					color: '#FFF',
 					// whiteSpace: 'nowrap',
 				}}>
-				<b>{dataTypes[dataTypeId].text()}</b>
+				<b>{dataTypes[dataTypeId]
+					? dataTypes[dataTypeId].text()
+					: 'Не определен'}</b>
 			</Typography>
 		</Box>
 	</React.Fragment>;

@@ -100,9 +100,7 @@ let IfType = ({
 	React.useEffect(() => () => {
 		onUnmount();
 	}, []);
-
-	console.log('prop1', categoryId, templateId);
-
+	
 	return <React.Fragment>
 		<Box mt={2} />
 		<Grid 

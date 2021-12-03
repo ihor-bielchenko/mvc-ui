@@ -50,26 +50,31 @@ let Arithmetic = ({
 			Корень ({'√'})
 		</MenuItem>
 		<MenuItem 
+			disabled
 			key={7}
 			value={7}>
 			Факториал ({'!'})
 		</MenuItem>
 		<MenuItem 
+			disabled
 			key={8}
 			value={8}>
 			Проценты ({'%'})
 		</MenuItem>
 		<MenuItem 
+			disabled
 			key={9}
 			value={9}>
 			Число π ({'π'})
 		</MenuItem>
 		<MenuItem 
+			disabled
 			key={10}
 			value={10}>
 			Число Эйлера ({'e'})
 		</MenuItem>
 		<MenuItem 
+			disabled
 			key={11}
 			value={11}>
 			Модуль числа

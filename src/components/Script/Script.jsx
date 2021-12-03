@@ -98,9 +98,13 @@ let Script = ({
 			</Header>
 			<Background
 				position="relative"
-				overflow="auto"
-				width={window.innerWidth}
-				height={window.innerHeight}>
+				{ ...isSource
+					? {}
+					: {
+						overflow: 'auto',
+						width: window.innerWidth,
+						height: window.innerHeight,
+					} }>
 				<Workspace 
 					scriptId={id}
 					workspaceId={workspaceId}

@@ -13,7 +13,7 @@ const onSave = async (e, tableId, columnId, columnNewId, setError) => {
 		: columnNewId;
 	const tempValue = { ...db.tempValue[id].tempValue };
 	const findExistName = tempValueKeys.findIndex((columnId) => {
-		return id !== columnId
+		return Number(id) !== Number(columnId)
 			&& db.tempValue[columnId].name === tempValue.name
 	});
 

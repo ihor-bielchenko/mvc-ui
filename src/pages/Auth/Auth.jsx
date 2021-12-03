@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { 
 	Switch,
 	Route, 
@@ -11,17 +12,20 @@ import PageDatabase from 'pages/Database';
 import PageService from 'pages/Service';
 import PageRoute from 'pages/Route';
 import PageApi from 'pages/Api';
+import PageAccount from 'pages/Account';
 import Header from 'components/Header';
 import onMountService from 'components/Service/onMount.js';
 import onMountRoute from 'components/Route/onMount.js';
 import onUnmountRoute from 'components/Route/onUnmount.js';
 import {
+	URL_PAGE_ACCOUNT,
 	URL_PAGE_DASHBOARD,
 	URL_PAGE_SCRIPT,
 	URL_PAGE_SERVICE,
 	URL_PAGE_DB,
 	URL_PAGE_API,
 } from 'consts/url.js';
+import onMount from './onMount.js';
 
 let HeaderWrapper = ({ children }) => {
 	return <React.Fragment>
@@ -110,8 +114,23 @@ ServiceInside.defaultProps = {
 ServiceInside = withRouter(ServiceInside);
 
 let AuthInside = () => {
+	const userName = useSelector((state) => state.account.name);
+
+	React.useEffect(() => {
+		!userName && onMount();
+	}, [
+		userName,
+	]);
+
 	return <React.Fragment>
 		<Switch>
+			<Route 
+				exact
+				path={`/${URL_PAGE_ACCOUNT}`}>
+				<HeaderWrapper>
+					<PageAccount />
+				</HeaderWrapper>
+			</Route>
 			<Route 
 				exact
 				path={`/${URL_PAGE_DASHBOARD}`}>

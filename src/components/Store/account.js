@@ -1,8 +1,9 @@
 
 export const initialState = () => ({
-	id: 1,
-	path: 'user1.drivedatum.com',
-	email: 'ihor@drivedatum.com',
+	id: 0,
+	unique_name: '',
+	path: '',
+	email: '',
 	name: '',
 });
 const account = (state = initialState(), action) => {

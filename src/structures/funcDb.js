@@ -1,5 +1,8 @@
 import { FUNC_CATEGORY_DB } from './funcCategories.js';
-import { DATA_TYPE_BOOLEAN } from './dataTypes.js';
+import { 
+	DATA_TYPE_BOOLEAN,
+	DATA_TYPE_NUMBER, 
+} from './dataTypes.js';
 
 export const FUNC_TEMPLATE_DB_CREATE = {
 	id: process.env.FUNC_TEMPLATE_DB_CREATE,
@@ -51,6 +54,13 @@ export const FUNC_TEMPLATE_DB_COLUMN_DELETE = {
 	text: () => 'Удалить колонку',
 	subtext: () => 'Удалить колонку из базы. Все данных из этого поля будут потеряны',
 };
+export const FUNC_TEMPLATE_DB_COUNT = {
+	id: process.env.FUNC_TEMPLATE_DB_COUNT,
+	category_id: FUNC_CATEGORY_DB.id,
+	data_type_id: DATA_TYPE_NUMBER.id,
+	text: () => 'Получить количество строк',
+	subtext: () => 'Функция для получения количества строк таблицы',
+};
 
 const funcDb = {
 	[process.env.FUNC_TEMPLATE_DB_CREATE]: FUNC_TEMPLATE_DB_CREATE,
@@ -60,6 +70,7 @@ const funcDb = {
 	[process.env.FUNC_TEMPLATE_DB_COLUMN_CREATE]: FUNC_TEMPLATE_DB_COLUMN_CREATE,
 	[process.env.FUNC_TEMPLATE_DB_COLUMN_UPDATE]: FUNC_TEMPLATE_DB_COLUMN_UPDATE,
 	[process.env.FUNC_TEMPLATE_DB_COLUMN_DELETE]: FUNC_TEMPLATE_DB_COLUMN_DELETE,
+	[process.env.FUNC_TEMPLATE_DB_COUNT]: FUNC_TEMPLATE_DB_COUNT,
 };
 
 export default funcDb;

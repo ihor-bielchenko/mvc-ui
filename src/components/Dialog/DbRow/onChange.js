@@ -1,13 +1,17 @@
 import Store from 'components/Store';
 
 const onChange = (e, columnId) => {
-	const db = Store().getState().db;
+	const newValue = e.target.value;
 
-	db.tempValue[columnId] = e.target.value;
-	Store().dispatch({
-		type: 'db',
-		payload: () => ({ ...db }),
-	});
+	setTimeout(() => {
+		const db = Store().getState().db;
+
+		db.tempValue[columnId] = newValue;
+		Store().dispatch({
+			type: 'db',
+			payload: () => db,
+		});
+	}, 0);
 };
 
 export default onChange;

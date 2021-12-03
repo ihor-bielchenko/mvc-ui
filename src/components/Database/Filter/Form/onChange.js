@@ -8,7 +8,7 @@ const onChange = (e, id) => {
 	jsObject.tempValue.filter[id].value = e.target.value;
 	Store().dispatch({
 		type: 'jsObject',
-		payload: () => ({ ...jsObject }),
+		payload: () => jsObject,
 	});
 };
 

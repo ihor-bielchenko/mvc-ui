@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
@@ -13,7 +14,9 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import LanguageIcon from '@material-ui/icons/Language';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import PersonIcon from '@material-ui/icons/Person';
+import { URL_PAGE_ACCOUNT } from 'consts/url.js';
 import onClose from '../onClose.js';
+import onExit from './onExit.js';
 
 let Account = ({ 
 	aria, 
@@ -40,7 +43,15 @@ let Account = ({
 			anchorEl={anchorEl}
 			open={Boolean(anchorEl)}
 			onClose={_onClose}>
-			<MenuItem>
+			<MenuItem
+				{ ...window.location.pathname.includes(URL_PAGE_ACCOUNT)
+					? {
+						disabled: true,
+					}
+					: {
+						component: Link,
+						to: `/${URL_PAGE_ACCOUNT}`,
+					} }>
 				<ListItemAvatar>
 					<PersonIcon />
 				</ListItemAvatar>
@@ -98,7 +109,7 @@ let Account = ({
 					</ListItem>
 				</List>
 			</Collapse>
-			<MenuItem>
+			<MenuItem onClick={onExit}>
 				<ListItemAvatar>
 					<MeetingRoomIcon />
 				</ListItemAvatar>

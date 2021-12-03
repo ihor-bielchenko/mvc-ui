@@ -23,6 +23,7 @@ import {
 import onDelete from './onDelete.js';
 import onEdit from './onEdit.js';
 import onMount from './onMount.js';
+import onChange from './onChange.js';
 
 let Column = ({
 	tableId,
@@ -44,6 +45,10 @@ let Column = ({
 		tableId,
 		columnId,
 	]);
+	const _onChange = React.useCallback((e) => onChange(e, tableId, columnId), [
+		tableId,
+		columnId,
+	]);
 
 	return <Box
 		display="flex"
@@ -61,12 +66,14 @@ let Column = ({
 		<Box width="calc(100% - 120px)">
 			<React.Suspense fallback={<Typography>Подождите...</Typography>}>
 				<Component
+					disabled={dataTypeId === DATA_TYPE_ID.id}
 					name={'column-'+ columnId}
 					label={name +' ('+ dataTypes[dataTypeId === DATA_TYPE_ID.id
 						? DATA_TYPE_NUMBER.id
 						: dataTypeId].text() +')'}
 					helperText={description}
-					defaultValue={defaultValue} />
+					value={defaultValue}
+					onChange={_onChange} />
 			</React.Suspense>
 		</Box>
 		<Box

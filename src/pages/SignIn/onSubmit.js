@@ -1,7 +1,7 @@
 import Store from 'components/Store';
 import onLoader from 'components/Loader/onLoader.js';
 import fetchSignIn from 'fetch/signIn.js';
-import axiosError from 'utils/axiosError.js';
+// import axiosError from 'utils/axiosError.js';
 import { URL_PAGE_DASHBOARD } from 'consts/url.js';
 
 const onSubmit = async (e, locationPush) => {
@@ -42,7 +42,7 @@ const onSubmit = async (e, locationPush) => {
 			type: 'alert',
 			payload: () => ({
 				flag: true,
-				message: axiosError(err),
+				message: 'Ошибка авторизации. Убедитесь, что Вы указали правильные данные',
 				vertical: 'bottom',
 				horizontal: 'right',
 			}),

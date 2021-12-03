@@ -19,7 +19,7 @@ export const DATA_TYPE_ATOMIC = {
 export const DATA_TYPE_ID = {
 	id: process.env.DATA_TYPE_ID,
 	icon: FindInPageIcon,
-	text: () => 'ID',
+	text: () => 'id',
 };
 export const DATA_TYPE_TEXT = {
 	id: process.env.DATA_TYPE_TEXT,

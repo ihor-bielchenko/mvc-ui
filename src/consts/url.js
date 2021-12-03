@@ -18,6 +18,7 @@ export const URL_API_SSO_REFRESH = '/api/refresh';
 export const URL_API_SSO_SIGN_IN = '/api/login';
 export const URL_API_SSO_SIGN_UP = '/api/register';
 export const URL_API_SSO_RECOVERY = '/api/recovery';
+export const URL_API_SSO_USER = '/api/user';
 
 export const URL_API_PROJECT = '/api/project';
 export const URL_API_PROJECT_SERVICE = '/api/service';

@@ -2,9 +2,11 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import AirportShuttleIcon from '@material-ui/icons/AirportShuttle';
+import SettingsEthernetIcon from '@material-ui/icons/SettingsEthernet';
 import onDelete from 'components/Dialog/Prop/onDelete.js';
+import funcTemplates from 'structures/funcTemplates.js';
 import Slot from '../Slot';
+import OptionDataType from '../OptionDataType.jsx';
 import { DIALOG_FUNC } from 'consts/dialog.js';
 
 let Func = ({
@@ -17,6 +19,7 @@ let Func = ({
 	onClickAsSource,
 }) => {
 	const name = useSelector((state) => state.script[workspaceId].data[entityId].entity_func.name);
+	const templateId = useSelector((state) => state.script[workspaceId].data[entityId].entity_func.template_id);
 	const dataTypeId = useSelector((state) => state.script[workspaceId].data[entityId].data_type_id);
 	const _onDelete = React.useCallback((e) => onDelete(e, scriptId, workspaceId, entityId), [
 		scriptId,
@@ -49,7 +52,7 @@ let Func = ({
 				display="flex"
 				alignItems="flex-start"
 				py="2px">
-				<AirportShuttleIcon 
+				<SettingsEthernetIcon 
 					fontSize="small"
 					style={{ color: '#FFF' }} />
 				<Typography 
@@ -58,9 +61,14 @@ let Func = ({
 						paddingLeft: 4, 
 						lineHeight: '16px',
 					}}>
-					{name}
+					{name} <span style={{ fontSize: 11 }}>
+						({funcTemplates[templateId].text()})
+					</span>
 				</Typography>
 			</Box>
+			{dataTypeId >= -1
+				? <OptionDataType dataTypeId={dataTypeId} />
+				: <React.Fragment />}
 		</Slot>
 	</React.Fragment>;
 };

@@ -17,6 +17,7 @@ import KeyExists from './KeyExists';
 import DbTable from './DbTable';
 import DbColumn from './DbColumn';
 import DbRow from './DbRow';
+import DbProps from './DbProps';
 import ServiceTemplate from './ServiceTemplate';
 import ProjectForm from './ProjectForm';
 import UrlValue from './UrlValue';
@@ -52,6 +53,7 @@ let Root = ({
 						<DbTable />
 						<DbColumn />
 						<DbRow />
+						<DbProps />
 					</React.Fragment>;
 				case URL_PAGE_API:
 					return <React.Fragment>

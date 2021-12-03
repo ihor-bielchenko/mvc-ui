@@ -92,7 +92,7 @@ let SignUp = ({ history }) => {
 						<Grid 
 							container
 							display="flex"
-							justify="space-between">
+							justifyContent="space-between">
 							<Button
 								disabled={state.activeStep === 0}
 								onClick={_onBack}

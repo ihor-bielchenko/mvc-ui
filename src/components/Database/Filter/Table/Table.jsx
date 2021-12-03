@@ -32,7 +32,7 @@ import onAdd from './onAdd.js';
 import onEdit from './onEdit.js';
 import onDelete from './onDelete.js';
 
-let Table = () => {
+let Table = ({ disabledSource }) => {
 	const filterOperatorId = useSelector((state) => state.jsObject.tempValue.filter_operator_id ?? process.env.OPERATOR_UNION_AND);
 	const filterKeys = useSelector((state) => Object.keys(state.jsObject.tempValue.filter || {}));
 
@@ -172,6 +172,7 @@ let Table = () => {
 
 Table = React.memo(Table);
 Table.defaultProps = {
+	disabledSource: false,
 };
 
 export default Table;

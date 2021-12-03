@@ -31,7 +31,7 @@ const onSave = async (e, tableId, rowId, setError = () => {}) => {
 		}
 		else {
 			(rowId > 0)
-				? await fetchDbRowUpdate(rowId, { ...db.tempValue })
+				? await fetchDbRowUpdate(rowId, tableId, { ...db.tempValue })
 				: await fetchDbRowCreate(tableId, { ...db.tempValue });
 			onClose();
 			await onMountList(tableId, 0, 20);

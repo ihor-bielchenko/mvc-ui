@@ -44,6 +44,8 @@ let MathTrigonometry = ({
 		onUnmount();
 	}, []);
 
+	console.log('prop1', prop1);
+
 	return <React.Fragment>
 		<Box my={2} />
 		<Grid
@@ -51,7 +53,7 @@ let MathTrigonometry = ({
 			spacing={3}>
 			<Grid
 				item
-				xs={5}>
+				xs={6}>
 				<SelectTrigonometry
 					name="prop-1"
 					value={prop1}
@@ -59,7 +61,7 @@ let MathTrigonometry = ({
 			</Grid>
 			<Grid
 				item
-				xs={7}>
+				xs={6}>
 				<InputNumeric
 					menu
 					onMenu={_onMenu2}

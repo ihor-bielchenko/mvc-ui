@@ -1,7 +1,10 @@
 import Store from 'components/Store';
 import getTemplate from 'components/JsObject/getTemplate.js';
 import buildBlocks from 'components/JsObject/buildBlocks.js';
-import { DATA_TYPE_OBJECT } from 'structures/dataTypes.js';
+import { 
+	DATA_TYPE_OBJECT,
+	DATA_TYPE_NUMBER, 
+} from 'structures/dataTypes.js';
 
 const onMount = (scriptId = 0) => {
 	const {
@@ -22,14 +25,23 @@ const onMount = (scriptId = 0) => {
 			: {},
 	});
 
+	jsObject.data[++_id] = getTemplate({
+		id: _id,
+		parent_id: 0,
+		key: '0',
+		value: ({ ...(([ ...(blocks[0] || []) ])[0] || {}) }).value || '',
+		data_type_id: DATA_TYPE_NUMBER.id,
+	});
 	Object
 		.keys(db.columns)
 		.forEach((key, index) => {
+			let _index = index + 1;
+
 			jsObject.data[++_id] = getTemplate({
 				id: _id,
 				parent_id: 0,
-				key: db.columns[key].name,
-				value: ({ ...(([ ...(blocks[0] || []) ])[index] || {}) }).value || '',
+				key: db.columns[key].id,
+				value: ({ ...(([ ...(blocks[0] || []) ])[_index] || {}) }).value || '',
 				data_type_id: db.columns[key].data_type_id,
 			});
 	});

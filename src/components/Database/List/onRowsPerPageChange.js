@@ -6,6 +6,7 @@ const onRowsPerPageChange = (e) => {
 	const list = Store().getState().list;
 
 	list.rowsPerPage = value;
+	list.currentPage = 0;
 	list.select = [];
 	list.search.query = '';
 	Store().dispatch({

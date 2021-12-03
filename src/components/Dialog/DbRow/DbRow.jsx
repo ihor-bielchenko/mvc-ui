@@ -9,6 +9,7 @@ import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
+import Store from 'components/Store';
 import Title from 'components/Title';
 import loadColumnInputs from 'utils/loadColumnInputs.js';
 import dataTypes, {
@@ -24,10 +25,11 @@ export let Column = ({
 	columnKey,
 	error, 
 }) => {
-	const dataTypeId = useSelector((state) => state.db.columns[columnKey].data_type_id);
-	const name = useSelector((state) => state.db.columns[columnKey].name);
-	const description = useSelector((state) => state.db.columns[columnKey].description);
-	const value = useSelector((state) => state.db.tempValue[columnKey] ?? '');
+	const db = Store().getState().db;
+	const dataTypeId = db.columns[columnKey].data_type_id;
+	const name = db.columns[columnKey].name;
+	const description = db.columns[columnKey].description;
+	const value = db.tempValue[columnKey] ?? '';
 	const _onChange = React.useCallback((e) => onChange(e, columnKey), [
 		columnKey,
 	]);
@@ -41,8 +43,8 @@ export let Column = ({
 				<Component
 					disabled={dataTypeId === DATA_TYPE_ID.id}
 					name={columnKey.toString()}
-					value={value}
 					onChange={_onChange}
+					defaultValue={value}
 					label={name +' ('+ dataTypes[dataTypeId === DATA_TYPE_ID.id
 						? DATA_TYPE_NUMBER.id
 						: dataTypeId].text() +')'}

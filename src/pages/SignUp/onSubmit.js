@@ -14,6 +14,14 @@ const onSubmit = async (e, setState, recaptchaRef, locationPush) => {
 	const confirmPassword = e.currentTarget.elements.confirm_password.value;
 
 	try {
+		if (password !== confirmPassword) {
+			return setState((currentState) => {
+				return {
+					...currentState,
+					password: 'Пароль и подтверждение пароля не совпадают',
+				};
+			});
+		}
 		passwordCheck(password);
 	}
 	catch (err) {
@@ -25,20 +33,11 @@ const onSubmit = async (e, setState, recaptchaRef, locationPush) => {
 		});
 	}
 
-	if (password !== confirmPassword) {
-		return setState((currentState) => {
-			return {
-				...currentState,
-				password: 'ErrorValidationEqualPassword',
-			};
-		});
-	}
-
 	if (!recaptchaRef.current.getValue()) {
 		return setState((currentState) => {
 			return {
 				...currentState,
-				password: 'ErrorValidationRecaptcha',
+				password: 'Ошибка капчи',
 			};
 		});
 	}

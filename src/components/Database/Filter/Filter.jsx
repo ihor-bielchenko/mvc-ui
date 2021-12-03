@@ -4,7 +4,7 @@ import Form from './Form';
 import Table from './Table';
 import onCancel from './Form/onCancel.js';
 
-let Filter = () => {
+let Filter = ({ disabledSource }) => {
 	const id = useSelector((state) => state.jsObject.filterFormId);
 
 	// onUnmount
@@ -12,13 +12,16 @@ let Filter = () => {
 
 	return <React.Fragment>
 		{id >= 0
-			? <Form id={id} />
-			: <Table />}
+			? <Form 
+				id={id}
+				disabledSource={disabledSource} />
+			: <Table disabledSource={disabledSource} />}
 	</React.Fragment>;
 };
 
 Filter = React.memo(Filter);
 Filter.defaultProps = {
+	disabledSource: false,
 };
 
 export default Filter;

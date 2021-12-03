@@ -2,16 +2,19 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
+import SelectTable from 'components/Select/Table';
+import onDialog from 'components/Dialog/onDialog.js';
+import loadColumnInputs from 'utils/loadColumnInputs.js';
+import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
 import dataTypes, {
 	DATA_TYPE_ID,
 	DATA_TYPE_NUMBER,
 } from 'structures/dataTypes.js';
-import loadColumnInputs from 'utils/loadColumnInputs.js';
 import onMount from './onMount.js';
 import onChange from '../onChange.js';
-// import onClear from '../onClear.js';
-// import onValueScript from '../onValueScript.js';
-// import onValidate from '../onValidate.js';
+import onClear from '../onClear.js';
+import onValueScript from '../onValueScript.js';
+import onValidate from '../onValidate.js';
 import onUnmount from '../onUnmount.js';
 
 let Column = ({
@@ -30,10 +33,24 @@ let Column = ({
 		sourceId,
 		index,
 	]);
+	const _onClear = React.useCallback((e) => onClear(e, index), [
+		index,
+	]);
+	const _onMenu = React.useCallback((e) => onDialog(SOURCE_TYPE_SCRIPT.id, {
+		onClickAsSource: onValueScript(index),
+		dataTypeValidating: onValidate(dataTypeId),
+	})(e), [
+		index,
+		dataTypeId,
+	]);
 
-	return <Box my={2}>
+	return <Box py={2}>
 		<React.Suspense fallback={<Typography>Подождите...</Typography>}>
 			<Component
+				menu
+				onMenu={_onMenu}
+				onValue={_onMenu}
+				onDelete={_onClear}
 				required={required}
 				disabled={dataTypeId === DATA_TYPE_ID.id}
 				name={id.toString()}
@@ -68,16 +85,19 @@ let DbCreate = ({
 	}, []);
 
 	return <React.Fragment>
-		<Box 
-			mt={2}
-			mb={6}>
+		<Box py={2}>
+			<SelectTable
+				disabled
+				value={1} />
+		</Box>
+		<Box>
 			{Object
 				.keys(columns)
 				.map((columnKey, i) => {
 					return <React.Fragment key={columns[columnKey].id}>
 						<Column
 							id={columns[columnKey].id}
-							index={i} />
+							index={i + 1} />
 					</React.Fragment>;
 			})}
 		</Box>

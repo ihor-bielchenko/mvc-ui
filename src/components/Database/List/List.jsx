@@ -22,7 +22,10 @@ import MenuControl from 'components/Menu/Control';
 import onMenu from 'components/Menu/onMenu.js';
 import onDialog from 'components/Dialog/onDialog.js';
 import { DATA_TYPE_ID } from 'structures/dataTypes.js';
-import { DIALOG_DELETE_CONFIRM } from 'consts/dialog.js';
+import { 
+	DIALOG_DELETE_CONFIRM,
+	DIALOG_DB_PROPS, 
+} from 'consts/dialog.js';
 import onPageChange from './onPageChange.js';
 import onRowsPerPageChange from './onRowsPerPageChange.js';
 import onMount from './onMount.js';
@@ -41,6 +44,9 @@ let List = ({ id }) => {
 	const total = useSelector((state) => state.list.total);
 	const fetch = useSelector((state) => state.list.fetch);
 	const data = useSelector((state) => state.list.data);
+	const filter = useSelector((state) => state.list.filter || '');
+	const sort = useSelector((state) => state.list.sort || '');
+	const filterOperatorId = useSelector((state) => state.list.filter_operator_id);
 	const columns = useSelector((state) => state.db.columns);
 	const columnKeys = Object.keys(columns);
 	const _onEdit = React.useCallback((rowIndex, rowId) => (e) => onEdit(e, id, rowIndex, rowId), [
@@ -64,6 +70,9 @@ let List = ({ id }) => {
 		currentPage,
 		rowsPerPage,
 		query,
+		filter,
+		sort,
+		filterOperatorId,
 	]);
 
 	React.useEffect(() => () => {
@@ -100,7 +109,7 @@ let List = ({ id }) => {
 						Удалить
 					</Button>
 				</ButtonGroup>
-				<IconButton disabled>
+				<IconButton onClick={onDialog(DIALOG_DB_PROPS)}>
 					<FilterListIcon />
 				</IconButton>
 			</Box>

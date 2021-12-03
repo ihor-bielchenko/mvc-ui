@@ -41,6 +41,7 @@ let Input = ({
 	onMenu,
 	onClear,
 	onChange,
+	disabledSource,
 }) => {
 	const value = React.useMemo(() => ((Store().getState().jsObject.tempValue.filter || {})[id] || {}).value || '', [
 		id,
@@ -50,10 +51,14 @@ let Input = ({
 	return <React.Fragment>
 		<React.Suspense fallback={<Typography>Подождите...</Typography>}>
 			<Component
-				menu
-				onMenu={onMenu}
-				onValue={onMenu}
-				onDelete={onClear}
+				{ ...disabledSource
+					? {}
+					: {
+						menu: true,
+						onMenu: onMenu,
+						onValue: onMenu,
+						onDelete: onClear,
+					} }
 				onChange={onChange}
 				required={isNumeric}
 				defaultValue={value}
@@ -66,10 +71,12 @@ Input.defaultProps = {
 	id: 0,
 	columnDataTypeId: 0,
 	isNumeric: false,
+	disabledSource: false,
 };
 
 let Form = ({ 
-	id, 
+	id,
+	disabledSource, 
 }) => {
 	const value = useSelector((state) => ((state.jsObject.tempValue.filter || {})[id] || {}).value || '');
 	const operatorId = useSelector((state) => ((state.jsObject.tempValue.filter || {})[id] || {}).operator_if_id || '');
@@ -136,15 +143,20 @@ let Form = ({
 					<Box py={2}>
 						{typeof value === 'object'
 							? <InputText
-								menu
-								onMenu={_onMenu}
-								onValue={_onMenu}
-								onDelete={_onClear}
+								{ ...disabledSource
+									? {}
+									: {
+										menu: true,
+										onMenu: _onMenu,
+										onValue: _onMenu,
+										onDelete: _onClear,
+									} }
 								onChange={_onChange}
 								required={isNumeric}
 								defaultValue={value}
 								name="value" />
 							: <Input
+								disabledSource={disabledSource}
 								id={id}
 								columnDataTypeId={columnDataTypeId}
 								isNumeric={isNumeric}
@@ -181,6 +193,7 @@ let Form = ({
 Form = React.memo(Form);
 Form.defaultProps = {
 	id: 0,
+	disabledSource: false,
 };
 
 export default Form;

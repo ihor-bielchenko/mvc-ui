@@ -1,16 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
+import Store from 'components/Store';
+import SelectTable from 'components/Select/Table';
 import DatabaseSearch from 'components/Database/Search';
-// import dataTypes, {
-// 	DATA_TYPE_ID,
-// 	DATA_TYPE_NUMBER,
-// } from 'structures/dataTypes.js';
-// import onMount from './onMount.js';
-// import onChange from '../onChange.js';
-// import onClear from '../onClear.js';
-// import onValueScript from '../onValueScript.js';
-// import onValidate from '../onValidate.js';
+import onMount from './onMount.js';
 import onUnmount from '../onUnmount.js';
 
 let DbDelete = ({ 
@@ -19,7 +13,20 @@ let DbDelete = ({
 	const renderFlag = useSelector((state) => state.jsObject.renderFlag);
 
 	React.useEffect(() => {
-		// !renderFlag && onMount();
+		const jsObject = Store().getState().jsObject;
+		const blocks = jsObject.blocks;
+
+		jsObject.tempValue.filter = JSON.parse(((blocks[0] || [])[1] || {}).value || '{}');
+		jsObject.tempValue.sort = JSON.parse(((blocks[0] || [])[2] || {}).value || '{}');
+		jsObject.tempValue.query = JSON.parse(((blocks[0] || [])[3] || {}).value || '{}');
+
+		Store().dispatch({
+			type: 'jsObject',
+			payload: () => ({ ...jsObject }),
+		});
+		if (!renderFlag) {
+			onMount();
+		}
 	}, [
 		renderFlag,
 	]);
@@ -29,9 +36,12 @@ let DbDelete = ({
 	}, []);
 
 	return <React.Fragment>
-		<Box 
-			mt={2}
-			mb={6}>
+		<Box py={2}>
+			<SelectTable
+				disabled
+				value={1} />
+		</Box>
+		<Box>
 			<DatabaseSearch />
 		</Box>
 	</React.Fragment>;

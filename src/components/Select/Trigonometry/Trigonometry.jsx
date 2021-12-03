@@ -70,6 +70,7 @@ let Trigonometry = ({
 			Гиперболический арккосинус ({'acosh'})
 		</MenuItem>
 		<MenuItem 
+			disabled
 			key={11}
 			value={11}>
 			Арктангенс двух переменных ({'atan2'})
@@ -90,6 +91,7 @@ let Trigonometry = ({
 			Преобразует значение из радианов в градусы ({'rad2deg'})
 		</MenuItem>
 		<MenuItem 
+			disabled
 			key={15}
 			value={15}>
 			Рассчитывает длину гипотенузы прямоугольного треугольника ({'hypot'})

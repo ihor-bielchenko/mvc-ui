@@ -128,7 +128,7 @@ let ArrSplice = ({
 			<Typography
 				variant="caption"
 				color="textSecondary">
-				Массив новых элементов (будут добавлены вместо удааленных)
+				Массив новых элементов (будут добавлены вместо удаленных)
 			</Typography>
 			<Box mt="6px">
 			{prop4

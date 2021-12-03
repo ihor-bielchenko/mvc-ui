@@ -35,6 +35,8 @@ import onSelectTemplate from './onSelectTemplate.js';
 
 let Func = () => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_FUNC]);
+	const filterFormId = useSelector((state) => state.jsObject.filterFormId);
+	const sortFormId = useSelector((state) => state.jsObject.sortFormId);
 	const existId = (dialog || {}).id || 0;
 	const workspaceId = (dialog || {}).workspaceId ?? 0;
 	const scriptId = (dialog || {}).scriptId ?? 0;
@@ -62,7 +64,7 @@ let Func = () => {
 
 	// onMount
 	React.useEffect(() => {
-		if (_dialogOpenFlag && existId > 0) {
+		if (_dialogOpenFlag) {
 			onMount(existId, scriptId, workspaceId);
 		}
 	}, [
@@ -129,6 +131,7 @@ let Func = () => {
 						display="flex"
 						justifyContent="space-between">
 						<Button 
+							disabled={filterFormId >= 0 || sortFormId >= 0}
 							variant="outlined"
 							color="secondary"
 							startIcon={<CloseIcon />}
@@ -138,7 +141,7 @@ let Func = () => {
 						{id >= 1
 							? <ButtonGroup>
 								<Button
-									disabled={!name}
+									disabled={!name || filterFormId >= 0 || sortFormId >= 0}
 									variant="outlined"
 									color="primary"
 									startIcon={<SaveIcon />}
@@ -146,6 +149,7 @@ let Func = () => {
 									Сохранить
 								</Button>
 								<Button
+									disabled={filterFormId >= 0 || sortFormId >= 0}
 									variant="outlined"
 									color="secondary"
 									startIcon={<DeleteIcon />}
@@ -156,7 +160,7 @@ let Func = () => {
 								</Button>
 							</ButtonGroup>
 							: <Button
-								disabled={!name}
+								disabled={!name || filterFormId >= 0 || sortFormId >= 0}
 								variant="outlined"
 								color="primary"
 								startIcon={<SaveIcon />}

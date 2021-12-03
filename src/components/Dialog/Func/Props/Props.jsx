@@ -37,8 +37,10 @@ const _load = (funcTemplateId) => () => {
 			return import('components/Dialog/Func/Props/TextLength');
 
 		case funcTemplates.FUNC_TEMPLATE_TEXT_SPLIT.id:
-		case funcTemplates.FUNC_TEMPLATE_TEXT_FIND.id:
 			return import('components/Dialog/Func/Props/TextSplit');
+
+		case funcTemplates.FUNC_TEMPLATE_TEXT_FIND.id:
+			return import('components/Dialog/Func/Props/TextFind');
 
 		case funcTemplates.FUNC_TEMPLATE_TEXT_REPLACE.id:
 			return import('components/Dialog/Func/Props/TextReplace');
@@ -101,6 +103,9 @@ const _load = (funcTemplateId) => () => {
 
 		case funcTemplates.FUNC_TEMPLATE_DB_COLUMN_UPDATE.id:
 			return import('components/Dialog/Func/Props/ColumnUpdate');
+
+		case funcTemplates.FUNC_TEMPLATE_DB_COUNT.id:
+			return import('components/Dialog/Func/Props/DbCount');
 	}
 };
 

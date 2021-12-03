@@ -3,9 +3,9 @@ import forbidden from './forbidden.js';
 import refreshJWTTimeout from 'utils/refreshJWTTimeout.js';
 import { URL_API_DB_ROW } from 'consts/url.js';
 
-const dbRowMany = async (page, data = {}) => {
+const dbRowMany = async (data = {}) => {
 	try {
-		const r = await axios(process.env.DB_PATH + URL_API_DB_ROW +'?page='+ page, {
+		const r = await axios(process.env.DB_PATH + URL_API_DB_ROW, {
 			method: 'get',
 			params: {
 				access_token: localStorage.getItem('access_token'),
@@ -17,7 +17,7 @@ const dbRowMany = async (page, data = {}) => {
 		return r;
 	}
 	catch (err) {
-		return await forbidden(err, async () => await dbRowMany(page, data));
+		return await forbidden(err, async () => await dbRowMany(data));
 	}
 };
 

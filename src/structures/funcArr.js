@@ -18,8 +18,8 @@ export const FUNC_TEMPLATE_ARR_SET = {
 	id: process.env.FUNC_TEMPLATE_ARR_SET,
 	category_id: FUNC_CATEGORY_ARRAY.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
-	text: () => 'Установить значение',
-	subtext: () => 'Установить значение в массиве',
+	text: () => 'Добавить значение',
+	subtext: () => 'Добавить новое значение в конец массива',
 };
 export const FUNC_TEMPLATE_ARR_DEL = {
 	id: process.env.FUNC_TEMPLATE_ARR_DEL,
