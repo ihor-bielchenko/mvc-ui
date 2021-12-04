@@ -11,6 +11,7 @@ import {
 	DATA_TYPE_OBJECT,
  	DATA_TYPE_ARRAY,
 } from 'structures/dataTypes.js';
+import { SOURCE_TYPE_DB } from 'structures/sourceTypes.js';
 import Header from '../Header';
 import Item from '../Item';
 import onAddItem from './onAddItem.js';
@@ -33,6 +34,7 @@ let Parent = ({
 	onMenuComplexValue,
 	hideComplexType,
 }) => {
+	const sourceTypeId = useSelector((state) => ((state.jsObject.data[id] || {}).collection || {}).source_type_id);
 	const blocksLength = useSelector((state) => (state.jsObject.blocks[id] || []).length);
 	const _onAddItem = React.useCallback((e) => onAddItem(e, id), [
 		id,
@@ -103,6 +105,7 @@ let Parent = ({
 							return collector;
 						})()}
 						{!hideComplexType
+							&& sourceTypeId !== SOURCE_TYPE_DB.id
 							? <Box pl={2}>
 								<Button 
 									variant="outlined"
@@ -113,7 +116,9 @@ let Parent = ({
 								</Button>
 							</Box>
 							: <React.Fragment />}
-						{!hideComplexType && closures[dataTypeId]
+						{!hideComplexType 
+							&& closures[dataTypeId]
+							&& sourceTypeId !== SOURCE_TYPE_DB.id
 							? <React.Fragment>
 								<Box 
 									pt={1}
