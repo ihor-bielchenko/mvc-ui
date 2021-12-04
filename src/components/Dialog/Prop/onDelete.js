@@ -12,8 +12,12 @@ const onDelete = async (e, scriptId, workspaceId, id) => {
 
 	const script = Store().getState().script;
 	
-	if (script[workspaceId].data[id].sourceId > 0) {
-		await fetchCortegeDelete(JSON.stringify([ script[workspaceId].data[id].sourceId ]));
+	try {
+		if (script[workspaceId].data[id].sourceId > 0) {
+			await fetchCortegeDelete(JSON.stringify([ script[workspaceId].data[id].sourceId ]));
+		}
+	}
+	catch (err) {
 	}
 	try {
 		if (!(script[workspaceId].data[id].sourceId > 0)) {

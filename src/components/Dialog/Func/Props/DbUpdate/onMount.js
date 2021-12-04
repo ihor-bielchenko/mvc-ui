@@ -71,7 +71,7 @@ const onMount = (scriptId = 0) => {
 			jsObject.data[++_id] = getTemplate({
 				id: _id,
 				parent_id: 0,
-				key: db.columns[key].name,
+				key: db.columns[key].id,
 				value: ({ ...(([ ...(blocks[0] || []) ])[_index] || {}) }).value || '',
 				data_type_id: db.columns[key].data_type_id,
 			});

@@ -50,7 +50,7 @@ let HashCrypto = ({
 	}, []);
 
 	return <React.Fragment>
-		<Box my={2}>
+		<Box py={2}>
 			<InputText
 				menu
 				onMenu={_onMenu1}
@@ -63,7 +63,7 @@ let HashCrypto = ({
 				placeholder="Текст или число"
 				helperText="Выберите созданный параметр или укажите значение вручную" />
 		</Box>
-		<Box my={2}>
+		<Box py={2}>
 			<InputText
 				menu
 				onMenu={_onMenu2}

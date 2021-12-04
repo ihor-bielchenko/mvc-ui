@@ -33,21 +33,21 @@ const onMount = (scriptId = 0) => {
 		id: _id,
 		parent_id: 0,
 		key: '1',
-		value: ({ ...(([ ...(blocks[0] || []) ])[1] || {}) }).value || '',
+		value: Number(({ ...(([ ...(blocks[0] || []) ])[1] || {}) }).value || ''),
 		data_type_id: DATA_TYPE_BOOLEAN.id,
 	});
 	jsObject.data[++_id] = getTemplate({
 		id: _id,
 		parent_id: 0,
 		key: '2',
-		value: ({ ...(([ ...(blocks[0] || []) ])[2] || {}) }).value || '',
+		value: Number(({ ...(([ ...(blocks[0] || []) ])[2] || {}) }).value || ''),
 		data_type_id: DATA_TYPE_BOOLEAN.id,
 	});
 	jsObject.data[++_id] = getTemplate({
 		id: _id,
 		parent_id: 0,
 		key: '3',
-		value: ({ ...(([ ...(blocks[0] || []) ])[3] || {}) }).value || '',
+		value: Number(({ ...(([ ...(blocks[0] || []) ])[3] || {}) }).value || ''),
 		data_type_id: DATA_TYPE_BOOLEAN.id,
 	});
 	jsObject.blocks = {};
