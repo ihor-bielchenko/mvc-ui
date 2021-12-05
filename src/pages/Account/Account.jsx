@@ -20,7 +20,7 @@ let Account = () => {
 					xs={3}>
 					<AccountCircleIcon
 						style={{
-							fontSize: 92,
+							fontSize: 202,
 							color: '#90caf9',
 						}} />
 				</Grid>
