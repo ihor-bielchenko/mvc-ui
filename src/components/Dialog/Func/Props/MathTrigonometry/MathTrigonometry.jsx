@@ -44,8 +44,6 @@ let MathTrigonometry = ({
 		onUnmount();
 	}, []);
 
-	console.log('prop1', prop1);
-
 	return <React.Fragment>
 		<Box my={2} />
 		<Grid

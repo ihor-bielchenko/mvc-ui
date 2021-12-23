@@ -9,7 +9,7 @@ const serviceDelete = async (ids) => {
 			method: 'delete',
 			params: {
 				access_token: localStorage.getItem('access_token'),
-				ids,
+				ids: JSON.stringify(ids),
 			},
 		});
 		refreshJWTTimeout();

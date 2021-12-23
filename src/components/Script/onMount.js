@@ -25,18 +25,21 @@ const onMount = async (scriptId, workspaceId) => {
 			script[workspaceId].data = {};
 			fetchEntitiesData.forEach((entity) => {
 				if (entity.entity_prop) {
-					entity.entityItemId = entity.entity_prop.id;
-					entity.name = entity.entity_prop.name;
-					entity.slotName = 'Prop';
+					entity.entityItemId = entity.entity_prop.id;					entity.slotName = 'Prop';
 					entity.type_key_name = 'entity_prop';
-					entity.sourceId = entity.entity_prop.source_id;
+					entity.entity_prop.name = entity.name;
+					entity.entity_prop.source_id = entity.source_id;
+					entity.entity_prop.status_id = entity.status_id;
+					entity.sourceId = entity.source_id;
 				}
 				else if (entity.entity_json) {
 					entity.entityItemId = entity.entity_json.id;
-					entity.name = entity.entity_json.name;
 					entity.slotName = 'Json';
 					entity.type_key_name = 'entity_json';
-					entity.sourceId = entity.entity_json.source_id;
+					entity.entity_json.name = entity.name;
+					entity.entity_json.source_id = entity.source_id;
+					entity.entity_json.status_id = entity.status_id;
+					entity.sourceId = entity.source_id;
 				}
 				else if (entity.entity_func) {
 					if (funcTemplates[entity.entity_func.template_id].category_id === FUNC_CATEGORY_IF.id) {
@@ -46,9 +49,11 @@ const onMount = async (scriptId, workspaceId) => {
 						entity.slotName = 'Func';
 					}
 					entity.entityItemId = entity.entity_func.id;
-					entity.name = entity.entity_func.name;
 					entity.type_key_name = 'entity_func';
-					entity.sourceId = entity.entity_func.source_id;
+					entity.entity_func.name = entity.name;
+					entity.entity_func.source_id = entity.source_id;
+					entity.entity_func.status_id = entity.status_id;
+					entity.sourceId = entity.source_id;
 				}
 				script[workspaceId].data[entity.id] = { ...entity };
 			});

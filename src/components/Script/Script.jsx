@@ -38,7 +38,14 @@ let Script = ({
 	return <React.Fragment>
 		<Box 
 			width="max-content"
-			minWidth="100%">
+			minWidth="100%"
+			{ ...isSource
+				? {}
+				: {
+					position: 'absolute',
+					top: 0,
+					bottom: 0,
+				} }>
 			<Header>
 				<Box 
 					display="flex"
@@ -96,22 +103,41 @@ let Script = ({
 					</Box>
 				</Box>
 			</Header>
-			<Background
-				position="relative"
-				{ ...isSource
-					? {}
-					: {
-						overflow: 'auto',
-						width: window.innerWidth,
-						height: window.innerHeight,
-					} }>
-				<Workspace 
-					scriptId={id}
-					workspaceId={workspaceId}
-					isSource={isSource}
-					dataTypeValidating={dataTypeValidating}
-					onClickAsSource={onClickAsSource} />
-			</Background>
+			{isSource
+				? <Background
+					position="relative"
+					{ ...isSource
+						? {}
+						: {
+							height: window.innerHeight,
+						} }>
+					<Workspace 
+							scriptId={id}
+							workspaceId={workspaceId}
+							isSource={isSource}
+							dataTypeValidating={dataTypeValidating}
+							onClickAsSource={onClickAsSource} />
+				</Background>
+				: <Box
+					position="relative"
+					overflow="auto"
+					width={window.innerWidth}
+					height="100%">
+					<Background
+						position="relative"
+						{ ...isSource
+							? {}
+							: {
+								height: window.innerHeight,
+							} }>
+						<Workspace 
+							scriptId={id}
+							workspaceId={workspaceId}
+							isSource={isSource}
+							dataTypeValidating={dataTypeValidating}
+							onClickAsSource={onClickAsSource} />
+					</Background>
+				</Box>}
 		</Box>
 	</React.Fragment>;
 };

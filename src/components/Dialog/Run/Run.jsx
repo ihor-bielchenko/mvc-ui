@@ -12,26 +12,28 @@ import Divider from '@material-ui/core/Divider';
 import CloseIcon from '@material-ui/icons/Close';
 import Title from 'components/Title';
 import onClose from '../onClose.js';
-import { DIALOG_BUILD } from 'consts/dialog.js';
+import { DIALOG_RUN } from 'consts/dialog.js';
 import onMount from './onMount.js';
 
-let Build = ({ history }) => {
+let Run = ({ history }) => {
 	const [ progress, setProgress ] = React.useState(() => ({
 		value: 0,
 		logs: [],
 	}));
-	const dialog = useSelector((state) => state.dialogs[DIALOG_BUILD]);
+	const dialog = useSelector((state) => state.dialogs[DIALOG_RUN]);
+	const serverStatusId = (dialog || {}).serverStatusId;
 	const _dialogOpenFlag = !!dialog;
 
 	React.useEffect(() => {
 		_dialogOpenFlag
-			? onMount(setProgress)
+			? onMount(serverStatusId, setProgress)
 			: setProgress({
 				value: 0,
 				logs: [],
 			});
 	}, [
 		_dialogOpenFlag,
+		serverStatusId,
 		setProgress,
 	]);
 
@@ -43,10 +45,10 @@ let Build = ({ history }) => {
 				fullWidth
 				maxWidth="sm"
 				open={_dialogOpenFlag}
-				onClose={onClose(DIALOG_BUILD)}>
+				onClose={onClose(DIALOG_RUN)}>
 				<DialogTitle>
-					<Title onClose={onClose(DIALOG_BUILD)}>
-						Сборка сервиса
+					<Title onClose={onClose(DIALOG_RUN)}>
+						Запуск сервиса
 					</Title>
 				</DialogTitle>
 				<DialogContent dividers>
@@ -55,7 +57,7 @@ let Build = ({ history }) => {
 							<Typography 
 								variant="h6"
 								color="primary">
-								Все файлы сервиса успешно собраны
+								Сервис успешно запущен.
 							</Typography>
 						</Box>
 						: <React.Fragment />}
@@ -64,7 +66,7 @@ let Build = ({ history }) => {
 							<Typography 
 								variant="h6"
 								color="secondary">
-								Возникла критическая ошибка в сборке сервиса. Пожалуйста, обратитесь в техническую поддержку
+								Возникла критическая ошибка. Пожалуйста, обратитесь в техническую поддержку
 							</Typography>
 						</Box>
 						: <LinearProgress 
@@ -97,7 +99,7 @@ let Build = ({ history }) => {
 						variant="outlined"
 						color="secondary"
 						startIcon={<CloseIcon />}
-						onClick={onClose(DIALOG_BUILD)}>
+						onClick={onClose(DIALOG_RUN)}>
 						{progress.value === -2
 							? 'Закрыть'
 							: 'Отмена'}
@@ -108,8 +110,8 @@ let Build = ({ history }) => {
 		: <React.Fragment />;
 };
 
-Build = React.memo(Build);
-Build.defaultProps = {
+Run = React.memo(Run);
+Run.defaultProps = {
 };
 
-export default Build;
+export default Run;

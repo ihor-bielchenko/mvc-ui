@@ -35,6 +35,12 @@ const onSave = async (e, historyPush) => {
 			});
 			const fetchServiceData = ((fetchServiceResponse || {}).data || {}).data || {};
 			
+			localStorage.setItem('access_token', fetchServiceData.access_token);
+			localStorage.setItem('refresh_token', fetchServiceData.refresh_token);
+
+			delete fetchServiceData.access_token;
+			delete fetchServiceData.refresh_token;
+
 			services.form = { 
 				...fetchServiceData,
 				project: {

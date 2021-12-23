@@ -4,6 +4,7 @@ import {
 	URL_API_SSO_REFRESH, 
 } from 'consts/url.js';
 
+
 const forbidden = async (err, callback) => {
 	const status = (err.response || {}).status;
 
@@ -41,7 +42,6 @@ const forbidden = async (err, callback) => {
 	else if (status === 401) {
 		return window.location = URL_PAGE_SIGN_IN;
 	}
-
 	throw err;
 };
 

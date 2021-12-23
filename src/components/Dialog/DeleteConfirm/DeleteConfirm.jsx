@@ -14,6 +14,7 @@ import onClose from '../onClose.js';
 let DeleteConfirm = () => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_DELETE_CONFIRM]);
 	const _title = ((dialog || {}).title) || 'Вы уверены, что хотите удалить этот элемент?';
+	const _handleText = ((dialog || {}).handleText) || 'Удалить';
 	const _onDelete = ((dialog || {}).onDelete) || (() => {});
 	const _onClick = React.useCallback(_onDelete, [ 
 		_onDelete, 
@@ -43,7 +44,7 @@ let DeleteConfirm = () => {
 						color="primary"
 						startIcon={<CheckIcon />}
 						onClick={_onClick}>
-						Удалить
+						{_handleText}
 					</Button>
 					<Button 
 						variant="outlined"

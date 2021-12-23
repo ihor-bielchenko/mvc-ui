@@ -23,6 +23,7 @@ import ProjectForm from './ProjectForm';
 import UrlValue from './UrlValue';
 import UrlPlaceholder from './UrlPlaceholder';
 import Build from './Build';
+import Run from './Run';
 import { 
 	URL_PAGE_DASHBOARD,
 	URL_PAGE_SERVICE,
@@ -45,6 +46,7 @@ let Root = ({
 				&& url[3] > 0) {
 				return <React.Fragment>
 					<Build />
+					<Run />
 				</React.Fragment>;
 			}
 			switch (url[4]) {

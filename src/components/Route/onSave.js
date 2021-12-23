@@ -24,11 +24,18 @@ const onSave = async (e, historyPush) => {
 			throw new Error('undefined serviceId');
 		}
 		if (routes.form.id > 0) {
-			await fetchRouteUpdate(routes.form.id, {
+			const fetchRouteResponse = await fetchRouteUpdate(routes.form.id, {
 				name: routes.form.name,
 				method_id: routes.form.method_id,
 				protocol_id: routes.form.protocol_id,
 				url: JSON.stringify(routes.form.url || []),
+			});
+			const fetchRouteData = ((fetchRouteResponse || {}).data || {}).data || {};
+		
+			routes.form.url = fetchRouteData.url;
+			Store().dispatch({
+				type: 'routes',
+				payload: () => ({ ...routes }),
 			});
 		}
 		else {

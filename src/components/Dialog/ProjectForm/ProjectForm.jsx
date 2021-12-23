@@ -13,6 +13,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import SaveIcon from '@material-ui/icons/Save';
 import Title from 'components/Title';
 import InputText from 'components/Input/Text';
+import onValidateSubdomain from 'components/Input/Validate/strOrNum.js';
 import onClose from '../onClose.js';
 import { DIALOG_PROJECT_FORM } from 'consts/dialog.js';
 import onSubmit from './onSubmit.js';
@@ -68,7 +69,8 @@ let ProjectForm = ({ history }) => {
 									placeholder="my-project"
 									type="text"
 									name="subdomain_path"
-									defaultValue={subdomainPath} />
+									defaultValue={subdomainPath}
+									onInput={onValidateSubdomain} />
 							</Grid>
 							<Grid
 								item

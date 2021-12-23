@@ -37,8 +37,6 @@ const onMount = (scriptId = 0) => {
 	});
 	jsObject.blocks = {};
 
-	console.log('jsObject.data', ({ ...(([ ...(blocks[0] || []) ])[1] || {}) }).value || '');
-
 	Store().dispatch({
 		type: 'jsObject',
 		payload: () => ({ ...buildBlocks(jsObject) }),

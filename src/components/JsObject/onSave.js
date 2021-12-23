@@ -78,18 +78,17 @@ const onSave = async (sourceId = 0) => {
 		if (sourceId > 0) {
 			await fetchCortegeDelete(JSON.stringify([ sourceId ]));
 		}
-
 		const fetchParentResponse = await fetchCortegeCreateOne({
-			key: {
+			key: JSON.stringify({
 				data_type_id: DATA_TYPE_TEXT.id,
 				source_type_id: SOURCE_TYPE_MANUALLY.id,
 				value: String(data[0].key),
-			},
-			value: {
+			}),
+			value: JSON.stringify({
 				data_type_id: data[0].data_type_id,
 				source_type_id: SOURCE_TYPE_MANUALLY.id,
 				value: '',
-			},
+			}),
 			parent_id: 0,
 			disabled_remove: Number(!!data[0].disabledRemove),
 			disabled_type: Number(!!data[0].disabledType),

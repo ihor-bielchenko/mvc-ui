@@ -1,6 +1,7 @@
 import Store from 'components/Store';
 import onCloseDialog from 'components/Dialog/onClose.js';
-import { initialState } from 'components/Store/prop.js';
+import { initialState as initialStateProp } from 'components/Store/prop.js';
+import { initialState as initialStateJsObject } from 'components/Store/jsObject.js';
 import { DIALOG_PROP } from 'consts/dialog.js';
 
 const onClose = (e, workspaceId) => {
@@ -16,7 +17,7 @@ const onClose = (e, workspaceId) => {
 	delete routes.fetch;
 	Store().dispatch({
 		type: 'prop',
-		payload: () => initialState(),
+		payload: () => initialStateProp(),
 	});
 	Store().dispatch({
 		type: 'script',
@@ -29,6 +30,10 @@ const onClose = (e, workspaceId) => {
 	Store().dispatch({
 		type: 'routes',
 		payload: () => ({ ...routes }),
+	});
+	Store().dispatch({
+		type: 'jsObject',
+		payload: () => initialStateJsObject(),
 	});
 	onCloseDialog(DIALOG_PROP)(e);
 };

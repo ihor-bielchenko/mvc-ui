@@ -13,8 +13,8 @@ const onMount = async (id, scriptId, workspaceId) => {
 		const data = ((response || {}).data || {}).data || {};
 		
 		json.id = id;
-		json.name = data.name;
-		json.sourceId = data.source_id;
+		json.name = data.entity.name;
+		json.sourceId = data.entity.source_id;
 		json.code = data.code;
 		json.entityId = data.entity.id;
 		json.scriptId = scriptId;

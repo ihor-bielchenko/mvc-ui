@@ -8,6 +8,10 @@ import generateKey from 'components/JsObject/generateKey.js';
 import onClose from 'components/Dialog/onClose.js';
 import fetchCortegeGetMany from 'fetch/cortegeGetMany.js';
 import axiosError from 'utils/axiosError.js';
+import { 
+	DATA_TYPE_OBJECT,
+	DATA_TYPE_ARRAY,
+} from 'structures/dataTypes.js';
 import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
 import { DIALOG_KEY_EXISTS } from 'consts/dialog.js';
 
@@ -17,41 +21,25 @@ const merge = (prepareData, currentItem, sourceValue, uniqueKey = false) => {
 	const blocks = jsObject.blocks;
 	let newId = Date.now();
 
-	data[newId] = getTemplate({
-		parent_id: currentItem.id,
-		id: newId,
-		data_type_id: sourceValue.data_type_id,
-		key: generateKey(blocks[currentItem.id] ?? []),
-		value: sourceValue,
-		disabledKey: true,
-		disabledType: true,
-		disabledValue: true,
-		disabledRemove: true,
-	});
-	blocks[currentItem.id] = (blocks[currentItem.id] ?? [])
-	blocks[currentItem.id].push(data[newId]);
-
-	// Object
-	// 	.keys(prepareData.data)
-	// 	.forEach((key, i) => {
-	// 		if (prepareData.data[key].id > 0) {
-	// 			if (prepareData.data[key].parent_id === 0) {
-	// 				prepareData.data[key].parent_id = data[newId].id;
-	// 				if (prepareData.data[key].keyExistsFlag) {
-	// 					prepareData.data[key].key = prepareData.data[key].key +'_'+ unique();
-	// 					delete prepareData.data[key].keyExistsFlag;
-	// 				}
-	// 			}
-	// 			data[prepareData.data[key].id] = { ...prepareData.data[key] };
-	// 			data[prepareData.data[key].id].key = generateKey(blocks[data[prepareData.data[key].id].parent_id] ?? [], prepareData.data[key].key);
-	// 			// data[prepareData.data[key].id].disabledKey = true;
-	// 			data[prepareData.data[key].id].disabledType = true;
-	// 			data[prepareData.data[key].id].disabledValue = true;
-	// 			data[prepareData.data[key].id].disabledRemove = true;
-	// 			blocks[data[prepareData.data[key].id].parent_id] = (blocks[data[prepareData.data[key].id].parent_id] ?? []);
-	// 			blocks[data[prepareData.data[key].id].parent_id].push(data[prepareData.data[key].id]);
-	// 		}
-	// 	});
+	if (currentItem.data_type_id === DATA_TYPE_OBJECT.id
+		|| currentItem.data_type_id === DATA_TYPE_ARRAY.id) {
+		data[newId] = getTemplate({
+			parent_id: currentItem.id,
+			id: newId,
+			data_type_id: sourceValue.data_type_id,
+			key: generateKey(blocks[currentItem.id] ?? []),
+			value: sourceValue,
+			disabledKey: true,
+			disabledType: true,
+			disabledValue: true,
+			disabledRemove: true,
+		});
+		blocks[currentItem.id] = (blocks[currentItem.id] ?? [])
+		blocks[currentItem.id].push(data[newId]);
+	}
+	else {
+		currentItem.value = sourceValue;
+	}
 	onClose(DIALOG_KEY_EXISTS)();
 };
 const onValueScript = (currentItemId) => async (e, scriptId, workspaceId, entityId, dataTypeId) => {

@@ -8,6 +8,7 @@ import onMountScript from 'components/Script/onMount.js';
 import fetchPropCreate from 'fetch/propCreate.js';
 import fetchPropUpdate from 'fetch/propUpdate.js';
 import fetchArrowCreate from 'fetch/arrowCreate.js';
+import fetchEntityTest from 'fetch/entityTest.js';
 import axiosError from 'utils/axiosError.js';
 import { DATA_TYPE_ATOMIC } from 'structures/dataTypes.js';
 import onClose from './onClose.js';
@@ -24,6 +25,11 @@ const onSave = async (e, scriptId, workspaceId, fromEntityId, fromArrowTypeId) =
 		const scriptId = getScriptId();
 
 		if (prop.id > 0 && prop.sourceId > 0) {
+			await fetchEntityTest(prop.id, {
+				script_id: scriptId,
+				name: prop.name,
+			});
+
 			const dataSource = await onSaveJsObject(prop.sourceId);
 
 			await fetchPropUpdate(prop.id, {

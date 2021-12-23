@@ -84,6 +84,9 @@ let Build = ({
 								py="34px"
 								width={entity.slotName !== 'Json'
 									? '420px'
+									: 'initial'}
+								minWidth={entity.slotName !== 'Json'
+									? '420px'
 									: 'initial'}>
 								{entity.slotName !== 'Json'
 									? <Create
@@ -118,6 +121,9 @@ let Build = ({
 							: <Box 
 								py="34px"
 								width={entity.slotName !== 'Json'
+									? '420px'
+									: 'initial'}
+								minWidth={entity.slotName !== 'Json'
 									? '420px'
 									: 'initial'}>
 								{entity.slotName !== 'Json'

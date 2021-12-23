@@ -17,7 +17,7 @@ export const FUNC_CATEGORY_MATH = {
 export const FUNC_CATEGORY_ARRAY = {
 	id: 4,
 	text: () => 'Массивы',
-	subtext: () => 'Функции для создания и управлния массивами',
+	subtext: () => 'Функции для создания и управления массивами',
 };
 export const FUNC_CATEGORY_OBJECT = {
 	id: 5,

@@ -15,13 +15,13 @@ const _load = (funcTemplateId) => () => {
 			return import('components/Dialog/Func/Props/IfType');
 
 		case funcTemplates.FUNC_TEMPLATE_MATH_ROUND.id:
-			return import('components/Dialog/Func/Props/MathInt');
-
-		case funcTemplates.FUNC_TEMPLATE_IF_NOT_NULL.id:
 		case funcTemplates.FUNC_TEMPLATE_IF_PARITY.id:
 		case funcTemplates.FUNC_TEMPLATE_IF_INTEGER.id:
 		case funcTemplates.FUNC_TEMPLATE_MATH_INFINITY.id:
 		case funcTemplates.FUNC_TEMPLATE_MATH_NAN.id:
+			return import('components/Dialog/Func/Props/MathInt');
+
+		case funcTemplates.FUNC_TEMPLATE_IF_NOT_NULL.id:
 			return import('components/Dialog/Func/Props/IfNull');
 
 		case funcTemplates.FUNC_TEMPLATE_IF_REG_EXP.id:

@@ -59,29 +59,29 @@ const merge = (id, tempValue, sourceValue, onCloseProxy) => {
 		currentItem.disabledType = true;
 		currentItem.disabledRemove = true;
 
-		data[newId] = getTemplate({
-			parent_id: currentItem.id,
-			id: newId,
-			data_type_id: DATA_TYPE_OBJECT.id,
-			key: generateKey(blocks[currentItem.id] ?? []),
-			value: undefined,
-			disabledType: true,
-			disabledValue: true,
-			disabledRemove: true,
-		});
-		blocks[currentItem.id] = [ data[newId] ];
+		// data[newId] = getTemplate({
+		// 	parent_id: currentItem.id,
+		// 	id: newId,
+		// 	data_type_id: DATA_TYPE_OBJECT.id,
+		// 	key: generateKey(blocks[currentItem.id] ?? []),
+		// 	value: undefined,
+		// 	disabledType: true,
+		// 	disabledValue: true,
+		// 	disabledRemove: true,
+		// });
+		// blocks[currentItem.id] = [ data[newId] ];
 
-		data[newId] = getTemplate({
-			parent_id: currentItem.id,
-			id: newId,
-			data_type_id: DATA_TYPE_OBJECT.id,
-			key: generateKey(blocks[currentItem.id] ?? []),
-			value: undefined,
-			disabledType: true,
-			disabledValue: true,
-			disabledRemove: true,
-		});
-		blocks[newId] = [];
+		// data[newId] = getTemplate({
+		// 	parent_id: currentItem.id,
+		// 	id: newId,
+		// 	data_type_id: DATA_TYPE_OBJECT.id,
+		// 	key: generateKey(blocks[currentItem.id] ?? []),
+		// 	value: undefined,
+		// 	disabledType: true,
+		// 	disabledValue: true,
+		// 	disabledRemove: true,
+		// });
+		// blocks[newId] = [];
 		// responseKeys.forEach((key) => {
 		// 	if (responseParsed[key].parent_id === 0) {
 		// 		responseParsed[key].parent_id = dataItem.id;
@@ -96,8 +96,7 @@ const merge = (id, tempValue, sourceValue, onCloseProxy) => {
 		// });
 	}
 	else {
-		let sectionItem,
-			dataItem;
+		let sectionItem
 
 		currentItem.data_type_id = DATA_TYPE_OBJECT.id;
 		currentItem.value = undefined;
@@ -116,20 +115,20 @@ const merge = (id, tempValue, sourceValue, onCloseProxy) => {
 		blocks[currentItem.id] = (blocks[currentItem.id] ?? []);
 		blocks[currentItem.id].push(data[newId]);
 
-		newId += 1;
-		data[newId] = getTemplate({
-			parent_id: sectionItem.id,
-			id: newId,
-			data_type_id: DATA_TYPE_OBJECT.id,
-			key: generateKey(blocks[currentItem.id] ?? []),
-			value: undefined,
-			disabledType: true,
-			disabledValue: true,
-			disabledRemove: true,
-		});
-		dataItem = data[newId];
-		blocks[dataItem.id] = [];
-		blocks[sectionItem.id].push(data[newId]);
+		// newId += 1;
+		// data[newId] = getTemplate({
+		// 	parent_id: sectionItem.id,
+		// 	id: newId,
+		// 	data_type_id: DATA_TYPE_OBJECT.id,
+		// 	key: generateKey(blocks[currentItem.id] ?? []),
+		// 	value: undefined,
+		// 	disabledType: true,
+		// 	disabledValue: true,
+		// 	disabledRemove: true,
+		// });
+		// dataItem = data[newId];
+		// blocks[dataItem.id] = [];
+		// blocks[sectionItem.id].push(data[newId]);
 
 		// responseKeys.forEach((key) => {
 		// 	if (responseParsed[key].parent_id === 0) {

@@ -7,6 +7,7 @@ import onMountScript from 'components/Script/onMount.js';
 import fetchFuncCreate from 'fetch/funcCreate.js';
 import fetchFuncUpdate from 'fetch/funcUpdate.js';
 import fetchArrowCreate from 'fetch/arrowCreate.js';
+import fetchEntityTest from 'fetch/entityTest.js';
 import axiosError from 'utils/axiosError.js';
 import funcTemplates from 'structures/funcTemplates.js';
 import { 
@@ -33,6 +34,11 @@ const onSave = async (e, scriptId, workspaceId, fromEntityId, fromArrowTypeId) =
 		}
 
 		if (func.id > 0 && func.sourceId > 0) {
+			await fetchEntityTest(func.id, {
+				script_id: scriptId,
+				name: func.name,
+			});
+
 			const dataSource = await onSaveJsObject(func.sourceId);
 
 			await fetchFuncUpdate(func.id, {

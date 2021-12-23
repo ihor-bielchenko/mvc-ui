@@ -13,7 +13,7 @@ const onDelete = async (e, historyPush) => {
 		const services = Store().getState().services;
 
 		if (services.form.id > 0) {
-			await fetchServiceDelete(JSON.stringify([ services.form.id ]));
+			await fetchServiceDelete([ services.form.id ]);
 
 			historyPush(`/${URL_PAGE_DASHBOARD}`);
 			onClose(DIALOG_DELETE_CONFIRM)(e);

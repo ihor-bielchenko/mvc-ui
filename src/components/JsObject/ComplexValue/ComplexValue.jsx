@@ -174,7 +174,7 @@ let ComplexItemProxy = ({
 				keyValue={keyUri}
 				onChangeKey={_onChangeUri}
 				value={(protocol[route.protocol_id].text() +'://...'+ route.url.map((urlItem) => urlItem.route_url_type_id === ROUTE_URL_TYPE_PLACEHOLDER.id
-					? ('/'+ placeholder[urlItem.id].value)
+					? ('/'+ ((placeholder[urlItem.id] || {}).value || ''))
 					: ('/'+ urlItem.value))).replaceAll(',', '')} />
 			<ComplexItem
 				parentId={parentId}

@@ -20,16 +20,20 @@ import AirplayIcon from '@material-ui/icons/Airplay';
 import StorageIcon from '@material-ui/icons/Storage';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
+import PauseIcon from '@material-ui/icons/Pause';
+import SettingsBackupRestoreIcon from '@material-ui/icons/SettingsBackupRestore';
 import InputText from 'components/Input/Text';
 import SelectServiceTemplate from 'components/Select/ServiceTemplate';
 import SelectProtocol from 'components/Select/Protocol';
 import onDialog from 'components/Dialog/onDialog.js';
 import onValidateName from 'components/Input/Validate/constStr.js';
+import onValidateSubdomain from 'components/Input/Validate/strOrNum.js';
 import { SERVICE_TEMPLATE_BASE } from 'structures/serviceTemplates.js';
 import { PROTOCOL_TYPE_HTTP } from 'structures/protocol.js';
 import { 
 	DIALOG_DELETE_CONFIRM,
 	DIALOG_BUILD, 
+	DIALOG_RUN,
 } from 'consts/dialog.js';
 import { 
 	URL_PAGE_SERVICE,
@@ -42,6 +46,7 @@ import onUnmount from './onUnmount.js';
 import onChange from './onChange.js';
 import onSave from './onSave.js';
 import onDelete from './onDelete.js';
+import onStop from './onStop.js';
 
 let Service = ({ history }) => {
 	const projectId = getProjectId();
@@ -50,6 +55,7 @@ let Service = ({ history }) => {
 	const domain = useSelector((state) => state.account.path || '');
 	const subdomainProjectPath = useSelector((state) => (state.services.form.project || {}).subdomain_path || '');
 	const subdomainServicePath = useSelector((state) => state.services.form.subdomain_path || '');
+	const serverStatusId = useSelector((state) => state.services.form.server_status_id);
 	const _onSave = React.useCallback((e) => onSave(e, history.push), [
 		history.push,
 	]);
@@ -153,7 +159,8 @@ let Service = ({ history }) => {
 						type="text"
 						name="subdomain_path"
 						value={subdomainServicePath}
-						onChange={onChange('subdomain_path')} />
+						onChange={onChange('subdomain_path')}
+						onInput={onValidateSubdomain} />
 				</Grid>
 				<Grid
 					item
@@ -203,9 +210,34 @@ let Service = ({ history }) => {
 						style={{
 							backgroundColor: '#FFF',
 						}}>
-						<Button startIcon={<PlayArrowIcon/>}>
-							Запустить
-						</Button>
+						{serverStatusId === process.env.SERVER_STATUS_RUN
+							? <Button 
+								startIcon={<PauseIcon/>}
+								onClick={onDialog(DIALOG_DELETE_CONFIRM, {
+									title: 'Вы уверены? Пользователи и другие сервисы больше не будут иметь доступ к этому API.',
+									handleText: 'Остановить',
+									onDelete: onStop,
+								})}
+								style={{
+									color: '#e65100'
+								}}>
+								Остановить
+							</Button>
+							: (serverStatusId === process.env.SERVER_STATUS_RESTART
+								? <Button 
+									startIcon={<SettingsBackupRestoreIcon/>}
+									style={{
+										color: '#e65100'
+									}}>
+									Перезапустить
+								</Button>
+								: <Button 
+									startIcon={<PlayArrowIcon/>}
+									onClick={onDialog(DIALOG_RUN, {
+										serverStatusId,
+									})}>
+									Запустить
+								</Button>)}
 						<Button 
 							startIcon={<GetAppIcon/>}
 							onClick={onDialog(DIALOG_BUILD)}>

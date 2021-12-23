@@ -44,7 +44,7 @@ const onMount = async (historyPush = () => {}) => {
 
 				const fetchRouteResponse = await fetchRouteMany(1, {
 					limit: 999,
-					filter: JSON.stringify({ service_id: scriptId }),
+					filter: JSON.stringify({ service_id: serviceId }),
 				});
 				const fetchRouteData = ((fetchRouteResponse || {}).data || {}).data || [];
 

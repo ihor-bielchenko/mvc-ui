@@ -1,5 +1,6 @@
 import Store from 'components/Store';
 import getServiceId from 'components/Service/getServiceId.js';
+import getProjectId from 'components/Service/getProjectId.js';
 import fetchBuildScriptCreate from 'fetch/buildScriptCreate.js';
 import fetchBuildServiceCreate from 'fetch/buildServiceCreate.js';
 import fetchBuildDbCreate from 'fetch/buildDbCreate.js';
@@ -9,8 +10,8 @@ import axiosError from 'utils/axiosError.js';
 import { URL_API_ENGINE_DOWNLOAD } from 'consts/url.js';
 import { DIALOG_BUILD } from 'consts/dialog.js';
 
-const setProgress = async (setProgress) => {
-	if (!Store().getState().dialogs[DIALOG_BUILD]) {
+const onMount = async (setProgress, dialog = DIALOG_BUILD, disabledDowndload = false) => {
+	if (!Store().getState().dialogs[dialog]) {
 		return setProgress({
 			value: 0,
 			logs: [],
@@ -36,11 +37,12 @@ const setProgress = async (setProgress) => {
 		}, 0);
 		await fetchBuildServiceCreate({
 			service_id: fetchRouteData.data[i].service_id,
+			project_id: getProjectId(),
 		});
 		while (i < fetchRouteData.data.length) {
 			const _index = i;
 
-			if (!Store().getState().dialogs[DIALOG_BUILD]) {
+			if (!Store().getState().dialogs[dialog]) {
 				return setProgress({
 					value: 0,
 					logs: [],
@@ -61,7 +63,7 @@ const setProgress = async (setProgress) => {
 				script_id: fetchRouteData.data[i].script_id,
 				route_id: fetchRouteData.data[i].id
 			});
-			if (!Store().getState().dialogs[DIALOG_BUILD]) {
+			if (!Store().getState().dialogs[dialog]) {
 				return setProgress({
 					value: 0,
 					logs: [],
@@ -103,10 +105,22 @@ const setProgress = async (setProgress) => {
 				'Все файлы успешно собраны!',
 			],
 		}));
-		const a = document.createElement('a');
-		a.href = process.env.ENGINE_PATH + URL_API_ENGINE_DOWNLOAD +'?access_token='+ localStorage.getItem('access_token') +'&name='+ folderName;
-		a.setAttribute('download', folderName +'.zip');
-		a.click();
+		if (!disabledDowndload) {
+			const a = document.createElement('a');
+			a.href = process.env.ENGINE_PATH + URL_API_ENGINE_DOWNLOAD +'?access_token='+ localStorage.getItem('access_token') +'&name='+ folderName;
+			a.setAttribute('download', folderName +'.zip');
+			a.click();
+		}
+
+		const services = Store().getState().services;
+
+		if (services.form.server_status_id === process.env.SERVER_STATUS_INIT) {
+			services.form.server_status_id = process.env.SERVER_STATUS_BUILDED;
+		}
+		Store().dispatch({
+			type: 'services',
+			payload: () => ({ ...services }),
+		});
 	}
 	catch (err) {
 		Store().dispatch({
@@ -125,4 +139,4 @@ const setProgress = async (setProgress) => {
 	}
 };
 
-export default setProgress;
+export default onMount;

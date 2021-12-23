@@ -21,8 +21,8 @@ const onMount = async (id, scriptId, workspaceId) => {
 		const data = ((response || {}).data || {}).data || {};
 
 		prop.id = id;
-		prop.name = data.name;
-		prop.sourceId = data.source_id;
+		prop.name = data.entity.name;
+		prop.sourceId = data.entity.source_id;
 		prop.as_variable = data.as_variable;
 		prop.entityId = data.entity.id;
 		prop.scriptId = scriptId;

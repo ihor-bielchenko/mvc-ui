@@ -41,10 +41,12 @@ let Slot = ({
 		|| state.dialogs[DIALOG_JSON]
 		|| state.dialogs[DIALOG_IF]
 		|| state.dialogs[DIALOG_FUNC]);
-	const dialogEntityId = (dialog || {}).entityId;
-	const storeEntityId = useSelector((state) => (state.prop || {}).entityId
+	const dialogEntityId = (dialog || {}).entityId || (dialog || {}).fromEntityId;
+	const storeEntityId = useSelector((state) => {
+		return (state.prop || {}).entityId
 		|| (state.json || {}).entityId
-		|| (state.func || {}).entityId);
+		|| (state.func || {}).entityId;
+	});
 	const treeValidateIds = onlyParentTreeValidate((storeEntityId || dialogEntityId), workspaceId);
 	const isDisabled = dialogEntityId > 0
 		? ((!dataTypeId
@@ -54,6 +56,8 @@ let Slot = ({
 				? ([ ...treeValidateIds, dialogEntityId ]).includes(entityId)
 				: treeValidateIds.includes(entityId))))
 		: (isSource && !dataTypeValidating().includes(dataTypeId));
+
+	// console.log('treeValidateIds', storeEntityId, dialogEntityId, treeValidateIds);
 
 	return <React.Fragment>
 			<Box 
@@ -93,6 +97,7 @@ let Slot = ({
 						left="50%"
 						width="0px"
 						height="0px" />
+					{(storeEntityId || dialogEntityId)}
 					{children}
 					<Box 
 						id={'false-'+ workspaceId +'-'+ entityId}

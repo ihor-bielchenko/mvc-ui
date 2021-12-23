@@ -15,4 +15,5 @@ export const DIALOG_KEY_EXISTS = 'd13';
 export const DIALOG_DB_TABLE = 'd14';
 export const DIALOG_SERVICE_TEMPLATE = 'd15';
 export const DIALOG_BUILD = 'd16';
+export const DIALOG_RUN = 'd18';
 export const DIALOG_DB_PROPS = 'd17';

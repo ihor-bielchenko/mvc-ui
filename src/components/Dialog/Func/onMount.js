@@ -15,14 +15,14 @@ const onMount = async (id, scriptId, workspaceId, categoryId = 0) => {
 			const response = await fetchFuncOne(id);
 			const data = ((response || {}).data || {}).data || {};
 			
-			await onMountJsObject(data.source_id, DATA_TYPE_OBJECT.id, scriptId, workspaceId);
+			await onMountJsObject(data.entity.source_id, DATA_TYPE_OBJECT.id, scriptId, workspaceId);
 
 			func.id = id;
-			func.name = data.name;
+			func.name = data.entity.name;
 			func.category_id = data.category_id;
 			func.template_id = data.template_id;
 			func.entityId = data.entity.id;
-			func.sourceId = data.source_id;
+			func.sourceId = data.entity.source_id;
 			func.scriptId = scriptId;
 			func.workspaceId = workspaceId;
 
