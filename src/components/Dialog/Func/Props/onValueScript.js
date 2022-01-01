@@ -13,6 +13,7 @@ const onValueScript = (index) => (e, scriptId, workspaceId, entityId, dataTypeId
 			id: entityId,
 			workspaceId,
 		};
+		console.log('index', index);
 		Store().dispatch({
 			type: 'jsObject',
 			payload: () => ({ ...jsObject }),

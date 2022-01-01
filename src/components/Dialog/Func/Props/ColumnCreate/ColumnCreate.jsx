@@ -123,7 +123,7 @@ let ColumnCreate = ({
 				name="prop-5"
 				label="Сделать поле обязательным"
 				control={<Checkbox 
-					checked={Boolean(prop5)}
+					checked={Boolean(Number(prop5))}
 					onChange={onCheck(4)} />} />
 		</Box>
 	</React.Fragment>;

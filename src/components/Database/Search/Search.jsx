@@ -25,6 +25,7 @@ const StepperWrapper = styled(Stepper)`
 let Search = ({ 
 	disabledQuery,
 	disabledSource, 
+	disabledSort,
 }) => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_DB_QUERY]);
 	const queryFormId = (dialog || {}).id || 0;
@@ -57,24 +58,26 @@ let Search = ({
 					<Filter disabledSource={disabledSource} />
 				</StepContent>
 			</Step>
-			<Step>
-				<StepLabel 
-					className={disabled
-						? ''
-						: (step === 1
-							? 'current-step' 
-							: 'not-current-step')}>
-					<Typography 
-						onClick={() => (!disabled && step !== 1) && setStep(1)}
-						component="span"
-						variant="h6">
-						Сортировка:
-					</Typography>
-				</StepLabel>
-				<StepContent>
-					<Sort />
-				</StepContent>
-			</Step>
+			{disabledSort
+				? <React.Fragment />
+				: <Step>
+					<StepLabel 
+						className={disabled
+							? ''
+							: (step === 1
+								? 'current-step' 
+								: 'not-current-step')}>
+						<Typography 
+							onClick={() => (!disabled && step !== 1) && setStep(1)}
+							component="span"
+							variant="h6">
+							Сортировка:
+						</Typography>
+					</StepLabel>
+					<StepContent>
+						<Sort />
+					</StepContent>
+				</Step>}
 			{disabledQuery 
 				? <React.Fragment />
 				: <Step>
@@ -103,6 +106,7 @@ Search = React.memo(Search);
 Search.defaultProps = {
 	disabledQuery: false,
 	disabledSource: false,
+	disabledSort: false,
 };
 
 export default Search;

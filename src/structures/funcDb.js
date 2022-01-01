@@ -7,7 +7,7 @@ import {
 export const FUNC_TEMPLATE_DB_CREATE = {
 	id: process.env.FUNC_TEMPLATE_DB_CREATE,
 	category_id: FUNC_CATEGORY_DB.id,
-	data_type_id: DATA_TYPE_BOOLEAN.id,
+	data_type_id: DATA_TYPE_NUMBER.id,
 	text: () => 'Создать запись',
 	subtext: () => 'Добавить в базу новые данные',
 };

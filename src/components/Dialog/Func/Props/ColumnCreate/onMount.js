@@ -48,7 +48,7 @@ const onMount = () => {
 		id: _id,
 		parent_id: 0,
 		key: '3',
-		value: Number(({ ...(([ ...(blocks[0] || []) ])[3] || {}) }).value || ''),
+		value: ({ ...(([ ...(blocks[0] || []) ])[3] || {}) }).value || '',
 		data_type_id: DATA_TYPE_TEXT.id,
 	});
 	jsObject.data[++_id] = getTemplate({

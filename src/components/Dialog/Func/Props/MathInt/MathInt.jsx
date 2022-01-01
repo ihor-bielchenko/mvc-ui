@@ -16,7 +16,7 @@ let MathInt = ({
 	id, 
 }) => {
 	const renderFlag = useSelector((state) => state.jsObject.renderFlag);
-	const prop1 = useSelector((state) => Number(((state.jsObject.blocks[0] || [])[0] || {}).value ?? 0));
+	const prop1 = useSelector((state) => ((state.jsObject.blocks[0] || [])[0] || {}).value ?? 0);
 	const _onChange1 = React.useCallback((e) => onChange(e, id, 0), [
 		id,
 	]);
@@ -46,7 +46,7 @@ let MathInt = ({
 				onValue={_onMenu1}
 				onDelete={_onClear1}
 				onChange={_onChange1}
-				defaultValue={prop1}
+				value={prop1}
 				name="prop-1"
 				label="Значение"
 				placeholder="Число"

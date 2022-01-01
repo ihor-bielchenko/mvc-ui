@@ -16,6 +16,7 @@ const onMount = (scriptId = 0) => {
 	const filter = ({ ...(([ ...(blocks[0] || []) ])[1] || {}) }).value || '{}';
 	const sort = ({ ...(([ ...(blocks[0] || []) ])[2] || {}) }).value || '{}';
 	const query = ({ ...(([ ...(blocks[0] || []) ])[3] || {}) }).value || '{}';
+	const filterOperatorId = ({ ...(([ ...(blocks[0] || []) ])[4] || {}) }).value || process.env.OPERATOR_UNION_AND;
 	let _id = Date.now();
 
 	if (!jsObject.tempValue) {
@@ -62,11 +63,18 @@ const onMount = (scriptId = 0) => {
 		value: query,
 		data_type_id: DATA_TYPE_TEXT.id,
 	});
+	jsObject.data[++_id] = getTemplate({
+		id: _id,
+		parent_id: 0,
+		key: '4',
+		value: filterOperatorId,
+		data_type_id: DATA_TYPE_NUMBER.id,
+	});
 
 	Object
 		.keys(db.columns)
 		.forEach((key, index) => {
-			const _index = index + 4;
+			const _index = index + 5;
 
 			jsObject.data[++_id] = getTemplate({
 				id: _id,

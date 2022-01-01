@@ -18,7 +18,7 @@ const onMount = async (serverStatusId, setProgress) => {
 		});
 	}
 	try {
-		if (serverStatusId !== process.env.SERVER_STATUS_BUILDED) {
+		// if (serverStatusId !== process.env.SERVER_STATUS_BUILDED) {
 			const fetchRouteResponse = await fetchRouteMany(1, {
 				limit: 999,
 				filter: JSON.stringify({ service_id: getServiceId() }),
@@ -60,7 +60,8 @@ const onMount = async (serverStatusId, setProgress) => {
 				await fetchBuildScriptCreate({
 					service_id: fetchRouteData.data[i].service_id,
 					script_id: fetchRouteData.data[i].script_id,
-					route_id: fetchRouteData.data[i].id
+					route_id: fetchRouteData.data[i].id,
+					isServer: 1,
 				});
 				if (!Store().getState().dialogs[DIALOG_RUN]) {
 					return setProgress({
@@ -93,7 +94,7 @@ const onMount = async (serverStatusId, setProgress) => {
 			await fetchBuildArchiveCreate({
 				service_id: getServiceId(),
 			});
-		}
+		// }
 		await fetchBuildServiceRun({
 			service_id: getServiceId(),
 			project_id: getProjectId(),

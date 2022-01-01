@@ -62,7 +62,7 @@ let ArrSplice = ({
 			<FormControlLabel
 				control={<Checkbox
 					name="prop-2"
-					checked={Boolean(prop2)}
+					checked={Boolean(Number(prop2))}
 					onChange={onCheck(1)} />}
 				label="Включить специальные символы" />
 		</Box>
@@ -70,7 +70,7 @@ let ArrSplice = ({
 			<FormControlLabel
 				control={<Checkbox
 					name="prop-3"
-					checked={Boolean(prop3)}
+					checked={Boolean(Number(prop3))}
 					onChange={onCheck(2)} />}
 				label="Включить использование заглавных букв" />
 		</Box>
@@ -78,7 +78,7 @@ let ArrSplice = ({
 			<FormControlLabel
 				control={<Checkbox
 					name="prop-4"
-					checked={Boolean(prop4)}
+					checked={Boolean(Number(prop4))}
 					onChange={onCheck(3)} />}
 				label="Включить использование цифр" />
 		</Box>
