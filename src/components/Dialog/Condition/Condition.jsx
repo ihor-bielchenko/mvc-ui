@@ -19,7 +19,7 @@ import FuncProps from 'components/Dialog/Func/Props';
 import Transition from 'components/Dialog/Transition.jsx';
 import onDialog from 'components/Dialog/onDialog.js';
 import onDelete from 'components/Dialog/Prop/onDelete.js';
-import onValidateName from 'components/Input/Validate/constStr.js';
+import onValidateName from 'components/Input/Validate/constStrTranslit.js';
 import { FUNC_CATEGORY_IF } from 'structures/funcCategories.js';
 import { 
 	DIALOG_IF,

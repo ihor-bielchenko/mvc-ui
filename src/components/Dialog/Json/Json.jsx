@@ -20,7 +20,7 @@ import SelectResponseCode from 'components/Select/ResponseCode';
 import Transition from 'components/Dialog/Transition.jsx';
 import onDialog from 'components/Dialog/onDialog.js';
 import onDelete from 'components/Dialog/Prop/onDelete.js';
-import onValidateName from 'components/Input/Validate/constStr.js';
+import onValidateName from 'components/Input/Validate/constStrTranslit.js';
 import dataTypes, { 
 	DATA_TYPE_ATOMIC,
 	DATA_TYPE_OBJECT,

@@ -21,7 +21,7 @@ import InputText from 'components/Input/Text';
 import SelectDataType from 'components/Select/DataType';
 import Transition from 'components/Dialog/Transition.jsx';
 import onDialog from 'components/Dialog/onDialog.js';
-import onValidateName from 'components/Input/Validate/constStr.js';
+import onValidateName from 'components/Input/Validate/constStrTranslit.js';
 import dataTypes, { 
 	DATA_TYPE_ATOMIC,
 	DATA_TYPE_OBJECT,

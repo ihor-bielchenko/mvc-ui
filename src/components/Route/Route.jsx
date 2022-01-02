@@ -22,7 +22,7 @@ import SelectProtocol from 'components/Select/Protocol';
 import MenuUrl from 'components/Menu/Url';
 import onMenu from 'components/Menu/onMenu.js';
 import onDialog from 'components/Dialog/onDialog.js';
-import onValidateName from 'components/Input/Validate/constStr.js';
+import onValidateName from 'components/Input/Validate/constStrTranslit.js';
 import { DIALOG_DELETE_CONFIRM } from 'consts/dialog.js';
 import { 
 	PROTOCOL_TYPE_WS,

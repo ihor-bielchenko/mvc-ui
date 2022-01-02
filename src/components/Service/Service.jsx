@@ -26,8 +26,8 @@ import InputText from 'components/Input/Text';
 import SelectServiceTemplate from 'components/Select/ServiceTemplate';
 import SelectProtocol from 'components/Select/Protocol';
 import onDialog from 'components/Dialog/onDialog.js';
-import onValidateName from 'components/Input/Validate/constStr.js';
-import onValidateSubdomain from 'components/Input/Validate/strOrNum.js';
+import onValidateName from 'components/Input/Validate/constStrTranslit.js';
+import onValidateSubdomain from 'components/Input/Validate/constStr.js';
 import { SERVICE_TEMPLATE_BASE } from 'structures/serviceTemplates.js';
 import { PROTOCOL_TYPE_HTTP } from 'structures/protocol.js';
 import { 
