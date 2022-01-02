@@ -31,7 +31,7 @@ const onSubmit = async (e, locationPush) => {
 			payload: () => {
 				localStorage.setItem('access_token', access_token);
 				localStorage.setItem('refresh_token', refresh_token);
-				user['path'] = user.unique_name +'.api.drivedatum.com';
+				user['path'] = user.unique_name +'.client.drivedatum.com';
 				setTimeout(() => locationPush('/'+ URL_PAGE_DASHBOARD), 0);
 				return user;
 			},

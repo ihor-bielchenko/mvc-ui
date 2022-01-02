@@ -13,7 +13,7 @@ const onMount = async () => {
 		account.name = fetchData.name;
 		account.unique_name = fetchData.unique_name;
 		account.tariff_id = fetchData.tariff_id;
-		account.path = account.unique_name +'.api.drivedatum.com';
+		account.path = account.unique_name +'.client.drivedatum.com';
 
 		Store().dispatch({
 			type: 'account',
