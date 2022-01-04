@@ -77,7 +77,7 @@ let Account = ({
 				in={lang} 
 				timeout="auto">
 				<List component="nav">
-					<ListItem button>
+					<ListItem button disabled>
 						<ListItemIcon>
 							{typeof String.fromCodePoint === 'function'
 								?  'UA'.replace(/./g, (char) => String.fromCodePoint(char.charCodeAt(0) + 127397))
@@ -97,7 +97,7 @@ let Account = ({
 							RU
 						</Typography>
 					</ListItem>
-					<ListItem button>
+					<ListItem button disabled>
 						<ListItemIcon>
 							{typeof String.fromCodePoint === 'function'
 								?  'GB'.replace(/./g, (char) => String.fromCodePoint(char.charCodeAt(0) + 127397))
