@@ -17,6 +17,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import CloseIcon from '@material-ui/icons/Close';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import FilterListIcon from '@material-ui/icons/FilterList';
+import { getLang } from 'components/Language';
 import Search from 'components/Search';
 import MenuControl from 'components/Menu/Control';
 import onMenu from 'components/Menu/onMenu.js';
@@ -91,13 +92,13 @@ let List = ({ id }) => {
 					<Button
 						startIcon={<AddIcon />}
 						onClick={_onEdit()}>
-						Добавить
+						{getLang('cmpDatabaseListAdd')}
 					</Button>
 					<Button
 						disabled
 						color="primary"
 						startIcon={<EditIcon />}>
-						Копировать
+						{getLang('cmpDatabaseListCopy')}
 					</Button>
 					<Button
 						disabled={!(select.length > 0)}
@@ -106,7 +107,7 @@ let List = ({ id }) => {
 						onClick={onDialog(DIALOG_DELETE_CONFIRM, {
 							onDelete: _onDelete(),
 						})}>
-						Удалить
+						{getLang('cmpDatabaseListRem')}
 					</Button>
 				</ButtonGroup>
 				<IconButton onClick={onDialog(DIALOG_DB_PROPS)}>

@@ -4,6 +4,7 @@ import Box from '@material-ui/core/Box';
 import DatabaseSearch from 'components/Database/Search';
 import Typography from '@material-ui/core/Typography';
 import Store from 'components/Store';
+import { getLang } from 'components/Language';
 import SelectTable from 'components/Select/Table';
 import onDialog from 'components/Dialog/onDialog.js';
 import loadColumnInputs from 'utils/loadColumnInputs.js';
@@ -48,7 +49,7 @@ let Column = ({
 	]);
 
 	return <Box py={2}>
-		<React.Suspense fallback={<Typography>Подождите...</Typography>}>
+		<React.Suspense fallback={<Typography>{getLang('cmpDialogFuncPropsDBUpdateWait')}</Typography>}>
 			<Component
 				menu
 				onMenu={_onMenu}
@@ -124,14 +125,14 @@ let DbUpdate = ({
 		</Box>
 		<Box py={2}>
 			<Typography variant="subtitle1">
-				<b>Какую запись нужно обновить:</b>
+				<b>{getLang('cmpDialogFuncPropsDBUpdateNoteUpdate')}</b>
 			</Typography>
 			<DatabaseSearch disabledSort />
 		</Box>
 		<Box 
 			my={2}>
 			<Typography variant="subtitle1">
-				<b>Новые данные:</b>
+				<b>{getLang('cmpDialogFuncPropsDBUpdateNewData')}</b>
 			</Typography>
 			{Object
 				.keys(columns)

@@ -11,6 +11,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
+import { getLang } from 'components/Language';
 import {
 	URL_PAGE_SIGN_UP,
 	URL_PAGE_RECOVERY,
@@ -32,7 +33,7 @@ let SignIn = ({ history }) => {
 						component="h1" 
 						variant="h5"
 						align="center">
-						Вход
+						{getLang('pageSigIn')}
 					</Typography>
 					<form 
 						noValidate 
@@ -53,7 +54,7 @@ let SignIn = ({ history }) => {
 							name="password"
 							type="password"
 							autoComplete="current-password"
-							label="Пароль"
+							label={getLang('pageSigInPassword')}
 							variant="outlined"
 							margin="normal" />
 						<FormControlLabel
@@ -61,14 +62,14 @@ let SignIn = ({ history }) => {
 							name="remember"
 							value="remember"
 							color="primary" />}
-							label="Запомнить" />
+							label={getLang('pageSigInRemember')} />
 						<Box my={4} />
 						<Button
 							fullWidth
 							type="submit"
 							variant="contained"
 							color="primary">
-							Войти
+							{getLang('pageSigIn2')}
 						</Button>
 					</form>
 				</Box>
@@ -79,12 +80,12 @@ let SignIn = ({ history }) => {
 				component={Link}
 				to={URL_PAGE_SIGN_UP}
 				variant="body2">
-				Создать аккаунт
+				{getLang('pageSigInCreate')}
 			</Typography>
 		</Box>
 		<Link to={URL_PAGE_RECOVERY}>
 			<Typography variant="body2">
-				Восстановить аккаунт
+				{getLang('pageSigInRecovery')}
 			</Typography>
 		</Link>
 	</Container>;

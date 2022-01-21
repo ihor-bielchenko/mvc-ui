@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 import CloseIcon from '@material-ui/icons/Close';
+import { getLang } from 'components/Language';
 import onDialog from 'components/Dialog/onDialog.js';
 import loadColumnInputs from 'utils/loadColumnInputs.js';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
@@ -64,7 +65,7 @@ let Column = ({
 				: <CheckBoxOutlineBlankIcon fontSize="small" />}
 		</Box>
 		<Box width="calc(100% - 120px)">
-			<React.Suspense fallback={<Typography>Подождите...</Typography>}>
+			<React.Suspense fallback={<Typography>{getLang('cmpDatabaseColWait')}</Typography>}>
 				<Component
 					disabled={dataTypeId === DATA_TYPE_ID.id}
 					name={'column-'+ columnId}
@@ -124,7 +125,7 @@ let Columns = ({ id }) => {
 				color="primary"
 				startIcon={<AddIcon />}
 				onClick={onDialog(DIALOG_DB_COLUMN)}>
-				Добавить поле
+				{getLang('cmpDatabaseColAddField')}
 			</Button>
 		</Box>
 		{columnKeys.map((columnId) => {

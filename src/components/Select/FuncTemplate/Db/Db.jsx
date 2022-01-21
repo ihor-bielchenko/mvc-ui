@@ -2,6 +2,7 @@ import React from 'react';
 import Box from '@material-ui/core/Box';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
+import { getLang } from 'components/Language';
 import funcDb from 'structures/funcDb.js';
 import Select from 'components/Select';
 
@@ -49,7 +50,7 @@ Db.defaultProps = {
 	required: false,
 	name: 'func_db',
 	value: '',
-	label: 'Функция',
+	label: getLang('cmpSelectFuncTempDBFun'),
 	helperText: '',
 	onSelect: () => {},
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import Box from '@material-ui/core/Box';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
+import { getLang } from 'components/Language';
 import funcText from 'structures/funcText.js';
 import Select from 'components/Select';
 
@@ -51,7 +52,7 @@ Text.defaultProps = {
 	required: false,
 	name: 'func_text',
 	value: '',
-	label: 'Функция',
+	label: getLang('cmpSelectFuncTempTextFun'),
 	helperText: '',
 	onSelect: () => {},
 };

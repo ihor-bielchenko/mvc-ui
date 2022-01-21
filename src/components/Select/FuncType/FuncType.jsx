@@ -3,6 +3,7 @@ import Box from '@material-ui/core/Box';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import { getLang } from 'components/Language';
 import funcTypes from 'structures/funcTypes.js';
 import Select from '../Select.jsx';
 
@@ -51,8 +52,8 @@ let FuncType = ({
 FuncType = React.memo(FuncType);
 FuncType.defaultProps = {
 	name: 'type_id',
-	label: 'Тип функции',
-	helperText: 'Выбрать категорию для быстрого поиска нужной функции',
+	label: getLang('cmpSelectFuncType'),
+	helperText: getLang('cmpSelectFuncTypeSelect'),
 	value: '',
 	required: false,
 	onSelect: () => {},

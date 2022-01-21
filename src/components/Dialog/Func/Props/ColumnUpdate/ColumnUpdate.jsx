@@ -5,6 +5,7 @@ import Box from '@material-ui/core/Box';
 import Store from 'components/Store';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import { getLang } from 'components/Language';
 import SelectDataType from 'components/Select/DataType';
 import SelectTable from 'components/Select/Table';
 import InputText from 'components/Input/Text';
@@ -127,9 +128,9 @@ let ColumnUpdate = ({
 						onChange={_onChange4}
 						defaultValue={prop4}
 						name="prop-4"
-						label="Название поля"
-						placeholder="Текст"
-						helperText="Выберите созданный параметр или укажите значение вручную" />
+						label={getLang('cmpDialogFuncPropsColumnUpdateName')}
+						placeholder={getLang('cmpDialogFuncPropsColumnUpdateText')}
+						helperText={getLang('cmpDialogFuncPropsColumnUpdateSelectProp')} />
 				</Box>
 				<Box py={2}>
 					<InputText
@@ -141,14 +142,14 @@ let ColumnUpdate = ({
 						onChange={_onChange5}
 						defaultValue={prop5}
 						name="prop-5"
-						label="Описание"
-						placeholder="Текст"
-						helperText="Выберите созданный параметр или укажите значение вручную" />
+						label={getLang('cmpDialogFuncPropsColumnUpdateDescr')}
+						placeholder={getLang('cmpDialogFuncPropsColumnUpdateText2')}
+						helperText={getLang('cmpDialogFuncPropsColumnUpdateSelectProp2')} />
 				</Box>
 				<Box py={2}>
 					<FormControlLabel
 						name="prop-6"
-						label="Сделать поле обязательным"
+						label={getLang('cmpDialogFuncPropsColumnUpdateFieldRequired')}
 						control={<Checkbox 
 							checked={Boolean(prop6)}
 							onChange={onCheck(5)} />} />

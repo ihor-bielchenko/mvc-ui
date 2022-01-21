@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+import { getLang } from 'components/Language';
 import LogicValue from 'components/Input/LogicValue.jsx';
 import InputText from 'components/Input/Text';
 import onDialog from 'components/Dialog/onDialog.js';
@@ -76,7 +77,7 @@ let ObjSet = ({
 					color="primary"
 					startIcon={<AddIcon fontSize="small" />}
 					onClick={_onMenu1}>
-					Выбрать объект
+					{getLang('cmpDialogFuncPropsObjSetSelectObj')}
 			</Button>}
 		</Box>
 		<Box py={2}>
@@ -88,9 +89,9 @@ let ObjSet = ({
 				onChange={_onChange2}
 				defaultValue={prop2}
 				name="prop-2"
-				label="Ключ"
-				placeholder="Текст или число"
-				helperText="Выберите созданный параметр или укажите значение вручную" />
+				label={getLang('cmpDialogFuncPropsObjSetKey')}
+				placeholder={getLang('cmpDialogFuncPropsObjSetTextOrNumber')}
+				helperText={getLang('cmpDialogFuncPropsObjSetSelectProp')} />
 		</Box>
 		<Box py={2}>
 			<InputText
@@ -101,9 +102,9 @@ let ObjSet = ({
 				onChange={_onChange3}
 				defaultValue={prop3}
 				name="prop-3"
-				label="Значение"
-				placeholder="Текст или число"
-				helperText="Выберите созданный параметр или укажите значение вручную" />
+				label={getLang('cmpDialogFuncPropsObjSetValue')}
+				placeholder={getLang('cmpDialogFuncPropsObjSetTextOrNumber2')}
+				helperText={getLang('cmpDialogFuncPropsObjSetSelectProp2')} />
 		</Box>
 	</React.Fragment>;
 };

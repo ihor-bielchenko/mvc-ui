@@ -4,6 +4,7 @@ import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import { getLang } from 'components/Language';
 import Link from 'components/Link';
 import {
 	URL_PAGE_SIGN_IN,
@@ -21,11 +22,11 @@ let AccessConfirm = ({ history }) => {
 						component="h1" 
 						variant="h5"
 						align="center">
-						Подтверждение регистрации
+						{getLang('pageAccessConfirm')}
 					</Typography>
 					<Box my={3}>
 						<Typography>
-							На указанную почту отправлено письмо с инструкциями для подтверждения регистрации.
+							{getLang('pageAccessConfirmSend')}
 						</Typography>
 					</Box>
 				</Box>
@@ -36,12 +37,12 @@ let AccessConfirm = ({ history }) => {
 				component={Link}
 				to={URL_PAGE_SIGN_IN}
 				variant="body2">
-				Вход
+				{getLang('pageAccessConfirmLogin')}
 			</Typography>
 		</Box>
 		<Link to={URL_PAGE_RECOVERY}>
 			<Typography variant="body2">
-				Восстановить аккаунт
+				{getLang('pageAccessConfirmRecovery')}
 			</Typography>
 		</Link>
 	</Container>;

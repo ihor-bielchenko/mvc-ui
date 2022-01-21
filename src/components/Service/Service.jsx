@@ -23,6 +23,7 @@ import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import PauseIcon from '@material-ui/icons/Pause';
 import SettingsBackupRestoreIcon from '@material-ui/icons/SettingsBackupRestore';
 import InputText from 'components/Input/Text';
+import { getLang } from 'components/Language';
 import SelectServiceTemplate from 'components/Select/ServiceTemplate';
 import SelectProtocol from 'components/Select/Protocol';
 import onDialog from 'components/Dialog/onDialog.js';
@@ -78,9 +79,9 @@ let Service = ({ history }) => {
 			<Typography variant="h5">
 				{id > 0
 					? <React.Fragment>
-						Сервис <b>{name}</b>
+						{getLang('cmpService')} <b>{name}</b>
 					</React.Fragment>
-					: 'Новый сервис'}
+					: getLang('cmpServiceNew')}
 			</Typography>
 		</Box>
 		<Box py={4}>
@@ -102,20 +103,20 @@ let Service = ({ history }) => {
 					to={`/${projectId}/${URL_PAGE_SERVICE}/${id}/${URL_PAGE_DB}`}
 					disabled={!(id > 0)}
 					startIcon={<StorageIcon />}>
-					База данных
+					{getLang('cmpServiceDB')}
 				</Button>
 				<Button
 					disabled
 					startIcon={<LibraryBooksIcon />}>
-					Логи
+					{getLang('cmpServiceLog')}
 				</Button>
 			</ButtonGroup>
 		</Box>
 		<Box py={2}>
 			<InputText 
 				required
-				label="Название сервиса"
-				placeholder="Мой сервис"
+				label={getLang('cmpServiceName')}
+				placeholder={getLang('cmpServiceMy')}
 				type="text"
 				name="name"
 				value={name}
@@ -154,7 +155,7 @@ let Service = ({ history }) => {
 					xs={3}>
 					<InputText
 						required
-						label="Субдомен сервиса"
+						label={getLang('cmpServiceSubdom')}
 						placeholder="example"
 						type="text"
 						name="subdomain_path"
@@ -214,14 +215,14 @@ let Service = ({ history }) => {
 							? <Button 
 								startIcon={<PauseIcon/>}
 								onClick={onDialog(DIALOG_DELETE_CONFIRM, {
-									title: 'Вы уверены? Пользователи и другие сервисы больше не будут иметь доступ к этому API.',
-									handleText: 'Остановить',
+									title: getLang('cmpServiceShure'),
+									handleText: getLang('cmpServiceStop'),
 									onDelete: onStop,
 								})}
 								style={{
 									color: '#e65100'
 								}}>
-								Остановить
+								{getLang('cmpServiceStop2')}
 							</Button>
 							: (serverStatusId === process.env.SERVER_STATUS_RESTART
 								? <Button 
@@ -229,19 +230,19 @@ let Service = ({ history }) => {
 									style={{
 										color: '#e65100'
 									}}>
-									Перезапустить
+									{getLang('cmpServiceRestore')}
 								</Button>
 								: <Button 
 									startIcon={<PlayArrowIcon/>}
 									onClick={onDialog(DIALOG_RUN, {
 										serverStatusId,
 									})}>
-									Запустить
+									{getLang('cmpServiceStart')}
 								</Button>)}
 						<Button 
 							startIcon={<GetAppIcon/>}
 							onClick={onDialog(DIALOG_BUILD)}>
-							Скачать
+							{getLang('cmpServiceDownload')}
 						</Button>
 					</ButtonGroup>
 				</Grid>
@@ -258,7 +259,7 @@ let Service = ({ history }) => {
 						<Button 
 							startIcon={<SaveIcon />}
 							onClick={_onSave}>
-							Сохранить
+							{getLang('cmpServiceSave')}
 						</Button>
 						<Button 
 							disabled={!(name.length > 0)}
@@ -267,7 +268,7 @@ let Service = ({ history }) => {
 							onClick={onDialog(DIALOG_DELETE_CONFIRM, {
 								onDelete: _onDelete,
 							})}>
-							Удалить
+							{getLang('cmpServiceRem')}
 						</Button>
 					</ButtonGroup>
 				</Grid>

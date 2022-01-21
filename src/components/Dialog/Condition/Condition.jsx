@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { getLang } from 'components/Language';
 import Title from 'components/Title';
 import InputText from 'components/Input/Text';
 import SelectFuncTemplate from 'components/Select/FuncTemplate';
@@ -82,8 +83,8 @@ let Condition = () => {
 			<DialogTitle>
 				<Title onClose={_onClose}>
 					{id >= 1
-						? 'Условие: '+ name
-						: 'Добавить условие'}
+						? getLang('cmpDialogConditionCond') + name
+						: getLang('cmpDialogConditionAddCond')}
 				</Title>
 			</DialogTitle>
 			{_dialogOpenFlag
@@ -93,8 +94,8 @@ let Condition = () => {
 							<InputText 
 								required
 								name="name"
-								label="Название"
-								helperText="Для быстрого поиска придумайте название или краткое описание"
+								label={getLang('cmpDialogConditionName')}
+								helperText={getLang('cmpDialogConditionFastSearch')}
 								value={name}
 								onChange={onChangeName('func')}
 								onInput={onValidateName} />
@@ -124,7 +125,7 @@ let Condition = () => {
 							color="secondary"
 							startIcon={<CloseIcon />}
 							onClick={_onClose}>
-							Отмена
+							{getLang('cmpDialogConditionCancel')}
 						</Button>
 						{id >= 1
 							? <ButtonGroup>
@@ -134,7 +135,7 @@ let Condition = () => {
 									color="primary"
 									startIcon={<SaveIcon />}
 									onClick={_onSave}>
-									Сохранить
+									{getLang('cmpDialogConditionSave')}
 								</Button>
 								<Button
 									variant="outlined"
@@ -143,7 +144,7 @@ let Condition = () => {
 									onClick={onDialog(DIALOG_DELETE_CONFIRM, {
 										onDelete: _onDelete,
 									})}>
-									Удалить
+									{getLang('cmpDialogConditionRem')}
 								</Button>
 							</ButtonGroup>
 							: <Button
@@ -152,7 +153,7 @@ let Condition = () => {
 								color="primary"
 								startIcon={<SaveIcon />}
 								onClick={_onSave}>
-								Сохранить
+								{getLang('cmpDialogConditionSave2')}
 							</Button>}
 					</Box>
 					</DialogActions>

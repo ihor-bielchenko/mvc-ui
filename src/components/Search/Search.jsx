@@ -11,6 +11,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import SearchIcon from '@material-ui/icons/Search';
 import CloseIcon from '@material-ui/icons/Close';
+import { getLang } from 'components/Language';
 // import MenuFilter from 'components/Menu/Filter';
 import onExactMatch from './onExactMatch.js';
 import onCollection from './onCollection.js';
@@ -93,7 +94,7 @@ let Search = ({
 						name="is_exact_match" />}
 					color="primary"
 					label={<Typography variant="body2">
-						Точное совпадение
+						{getLang('cmpSearchExact')}
 					</Typography>} />
 			</React.Fragment>
 			: <React.Fragment />}
@@ -106,7 +107,7 @@ let Search = ({
 						onChange={onCollection}
 						name="is_collection" />}
 					color="primary"
-					label="Несколько результатов" />
+					label={getLang('cmpSearchSomeResult')} />
 			</React.Fragment>
 			: <React.Fragment />}
 	</form>;
@@ -115,8 +116,8 @@ let Search = ({
 Search = React.memo(Search);
 Search.defaultProps = {
 	aria: 'menu-filter-list',
-	label: 'Поиск',
-	placeholder: 'Поисковой запрос',
+	label: getLang('cmpSearch'),
+	placeholder: getLang('cmpSearchQuery'),
 	withExactMatch: false,
 	withSomeResults: false,
 };

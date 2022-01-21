@@ -1,6 +1,7 @@
 import React from 'react';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
+import { getLang } from 'components/Language';
 import { 
 	DATA_TYPE_OBJECT,
 	DATA_TYPE_ARRAY,
@@ -27,7 +28,7 @@ let Values = ({
 					lineHeight: '56px',
 					minWidth: 108,
 				}}>
-				По умолучанию:
+				{getLang('cmpJsObjectComplexValueDefault')}
 			</Typography>
 			: <React.Fragment />}
 		{(() => {
@@ -92,7 +93,7 @@ let Values = ({
 								height: 56,
 								lineHeight: '56px'
 							}}>
-							<i>пустая строка</i>
+							<i>{getLang('cmpJsObjectComplexValueEmpty')}</i>
 						</Typography>;		
 				}
 		})()}

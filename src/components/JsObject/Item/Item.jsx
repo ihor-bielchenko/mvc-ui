@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
+import { getLang } from 'components/Language';
 import {
 	DATA_TYPE_ATOMIC,
 	DATA_TYPE_OBJECT,
@@ -63,8 +64,8 @@ let Item = ({
 						component="span"
 						variant="caption"
 						color="secondary">
-						Длина массива неизвестна {collection.limit > 0
-							? `(макс. ${collection.limit} элементов)`
+						{getLang('cmpJsObjectItemLanArr')} {collection.limit > 0
+							? `(${getLang('cmpJsObjectItemMax')} ${collection.limit} ${getLang('cmpJsObjectItemElem')})`
 							: ''}
 					</Typography>
 					: <React.Fragment />}

@@ -1,5 +1,6 @@
 import React from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
+import { getLang } from 'components/Language';
 import Select from '../Select.jsx';
 
 let Trigonometry = ({ 
@@ -22,79 +23,79 @@ let Trigonometry = ({
 		<MenuItem 
 			key={1}
 			value={1}>
-			Синус ({'sin'})
+			{getLang('cmpSelectTrigonometrySin')} ({'sin'})
 		</MenuItem>
 		<MenuItem 
 			key={2}
 			value={2}>
-			Гиперболический синус ({'sinh'})
+			{getLang('cmpSelectTrigonometrySinh')} ({'sinh'})
 		</MenuItem>
 		<MenuItem 
 			key={3}
 			value={3}>
-			Косинус ({'cos'})
+			{getLang('cmpSelectTrigonometryCos')} ({'cos'})
 		</MenuItem>
 		<MenuItem 
 			key={4}
 			value={4}>
-			Тангенс ({'tan'})
+			{getLang('cmpSelectTrigonometryTan')} ({'tan'})
 		</MenuItem>
 		<MenuItem 
 			key={5}
 			value={5}>
-			Гиперболический тангенс ({'tanh'})
+			{getLang('cmpSelectTrigonometryTanh')} ({'tanh'})
 		</MenuItem>
 		<MenuItem 
 			key={6}
 			value={6}>
-			Гиперболический косинус ({'cosh'})
+			{getLang('cmpSelectTrigonometryCosh')} ({'cosh'})
 		</MenuItem>
 		<MenuItem 
 			key={7}
 			value={7}>
-			Арксинус ({'asin'})
+			{getLang('cmpSelectTrigonometryAsin')} ({'asin'})
 		</MenuItem>
 		<MenuItem 
 			key={8}
 			value={8}>
-			Гиперболический арксинус ({'asinh'})
+			{getLang('cmpSelectTrigonometryAsinh')} ({'asinh'})
 		</MenuItem>
 		<MenuItem 
 			key={9}
 			value={9}>
-			Арккосинус ({'acos'})
+			{getLang('cmpSelectTrigonometryAcos')} ({'acos'})
 		</MenuItem>
 		<MenuItem 
 			key={10}
 			value={10}>
-			Гиперболический арккосинус ({'acosh'})
+			{getLang('cmpSelectTrigonometryAcosh')} ({'acosh'})
 		</MenuItem>
 		<MenuItem 
 			disabled
 			key={11}
 			value={11}>
-			Арктангенс двух переменных ({'atan2'})
+			{getLang('cmpSelectTrigonometryAtan2')} ({'atan2'})
 		</MenuItem>
 		<MenuItem 
 			key={12}
 			value={12}>
-			Гиперболический арктангенс ({'atanh'})
+			{getLang('cmpSelectTrigonometryAtanh')} ({'atanh'})
 		</MenuItem>
 		<MenuItem 
 			key={13}
 			value={13}>
-			Преобразует значение из градусов в радианы ({'deg2rad'})
+			{getLang('cmpSelectTrigonometryDeg2Rad')} ({'deg2rad'})
 		</MenuItem>
 		<MenuItem 
 			key={14}
 			value={14}>
-			Преобразует значение из радианов в градусы ({'rad2deg'})
+			{getLang('cmpSelectTrigonometryRad2Deg')} ({'rad2deg'})
 		</MenuItem>
 		<MenuItem 
 			disabled
 			key={15}
 			value={15}>
-			Рассчитывает длину гипотенузы прямоугольного треугольника ({'hypot'})
+			{getLang('cmpSelectTrigonometryHypot')} ({'hypot'})
 		</MenuItem>
 	</Select>;
 };
@@ -102,7 +103,7 @@ let Trigonometry = ({
 Trigonometry = React.memo(Trigonometry);
 Trigonometry.defaultProps = {
 	name: 'trigonometry_id',
-	label: 'Тригонометрическое действие',
+	label: getLang('cmpSelectTrigonometryActions'),
 	required: false,
 };
 

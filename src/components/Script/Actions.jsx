@@ -9,6 +9,7 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import ClassIcon from '@material-ui/icons/Class';
 import CodeIcon from '@material-ui/icons/Code';
 import VerticalSplitIcon from '@material-ui/icons/VerticalSplit';
+import { getLang } from 'components/Language';
 import SelectScale from 'components/Select/Scale';
 import onDialog from 'components/Dialog/onDialog.js';
 import {
@@ -38,7 +39,7 @@ let Actions = ({ emptyScript }) => {
 						<Button 
 							disabled
 							startIcon={<DeleteForeverIcon />}>
-							Очистить
+							{getLang('cmpScriptActionsClear')}
 						</Button>
 						<SelectScale />
 					</ButtonGroup>
@@ -47,19 +48,19 @@ let Actions = ({ emptyScript }) => {
 							onClick={onDialog(DIALOG_PROP)}
 							startIcon={<ClassIcon />}
 							style={{ color: '#00695c' }}>
-							Параметр
+							{getLang('cmpScriptActionsProp')}
 						</Button>
 						<Button 
 							onClick={onDialog(DIALOG_FUNC)}
 							color="secondary"
 							startIcon={<CodeIcon />}>
-							Действие
+							{getLang('cmpScriptActions')}
 						</Button>
 						<Button 
 							onClick={onDialog(DIALOG_JSON)}
 							startIcon={<VerticalSplitIcon />}
 							style={{ color: '#000' }}>
-							JSON-ответ
+							{getLang('cmpScriptActionsRes')}
 						</Button>
 					</ButtonGroup>
 				</Box>
@@ -68,12 +69,12 @@ let Actions = ({ emptyScript }) => {
 						<Typography 
 							variant="h5"
 							color="textSecondary">
-							Программа пустая
+							{getLang('cmpScriptActionsEmpty')}
 						</Typography>
 					</Box>
 					<Box py={4}>
 						<Typography color="textSecondary">
-							Добавить:
+							{getLang('cmpScriptActionsAdd')}
 						</Typography>
 					</Box>
 					<ButtonGroup>
@@ -81,19 +82,19 @@ let Actions = ({ emptyScript }) => {
 							onClick={onDialog(DIALOG_PROP)}
 							startIcon={<ClassIcon />}
 							style={{ color: '#00695c' }}>
-							Параметр
+							{getLang('cmpScriptActionsProp2')}
 						</Button>
 						<Button 
 							onClick={onDialog(DIALOG_FUNC)}
 							color="secondary"
 							startIcon={<CodeIcon />}>
-							Действие
+							{getLang('cmpScriptActions2')}
 						</Button>
 						<Button 
 							onClick={onDialog(DIALOG_JSON)}
 							startIcon={<VerticalSplitIcon />}
 							style={{ color: '#000' }}>
-							JSON-ответ
+							{getLang('cmpScriptActionsRes2')}
 						</Button>
 					</ButtonGroup>
 				</Box>}

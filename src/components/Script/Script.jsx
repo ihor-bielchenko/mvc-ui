@@ -4,6 +4,7 @@ import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import { getLang } from 'components/Language';
 import Header from 'components/Header';
 import SelectScale from 'components/Select/Scale';
 import getProjectId from 'components/Service/getProjectId.js';
@@ -67,12 +68,12 @@ let Script = ({
 						<Button 
 							disabled
 							startIcon={<ArrowBackIcon />}>
-							Назад
+							{getLang('cmpScriptBack')}
 						</Button>
 						<Button 
 							disabled
 							endIcon={<ArrowForwardIcon />}>
-							Вперед
+							{getLang('cmpScriptForward')}
 						</Button>
 						<SelectScale />
 					</Box>
@@ -93,12 +94,12 @@ let Script = ({
 							component={Link}
 							to={`/${projectId}/${URL_PAGE_SERVICE}/${serviceId}/${URL_PAGE_API}/${routeId}`}
 							color="primary">
-							Настройка роута
+							{getLang('cmpScriptSettings')}
 						</Button>
 						<Button
 							disabled
 							color="primary">
-							Программа
+							{getLang('cmpScriptProg')}
 						</Button>
 					</Box>
 				</Box>

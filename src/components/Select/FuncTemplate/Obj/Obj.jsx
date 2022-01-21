@@ -2,6 +2,7 @@ import React from 'react';
 import Box from '@material-ui/core/Box';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
+import { getLang } from 'components/Language';
 import funcObj from 'structures/funcObj.js';
 import Select from 'components/Select';
 
@@ -52,7 +53,7 @@ Obj.defaultProps = {
 	required: false,
 	name: 'func_obj',
 	value: '',
-	label: 'Функция',
+	label: getLang('cmpSelectFuncTempObjFun'),
 	helperText: '',
 	inArr: false,
 	onSelect: () => {},

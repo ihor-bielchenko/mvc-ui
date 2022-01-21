@@ -1,5 +1,6 @@
 import React from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
+import { getLang } from 'components/Language';
 import dataTypes, {
 	DATA_TYPE_ATOMIC,
 } from 'structures/dataTypes.js';
@@ -42,7 +43,7 @@ let DataType = ({
 DataType = React.memo(DataType);
 DataType.defaultProps = {
 	name: 'data_type_id',
-	label: 'Тип данных',
+	label: getLang('cmpSelectDataType'),
 	required: false,
 	disabled: false,
 	onFilter: (key) => dataTypes[key].id !== DATA_TYPE_ATOMIC.id,

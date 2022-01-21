@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { getLang } from 'components/Language';
 import Title from 'components/Title';
 import Script from 'components/Script';
 import getScriptId from 'components/Script/getScriptId.js';
@@ -25,7 +26,7 @@ let SourceScript = () => {
 			onClose={onClose(SOURCE_TYPE_SCRIPT.id)}>
 			<DialogTitle>
 				<Title onClose={onClose(SOURCE_TYPE_SCRIPT.id)}>
-					Значение из программы
+					{getLang('cmpDialogSourceScriptVal')}
 				</Title>
 			</DialogTitle>
 			<DialogContent 

@@ -11,6 +11,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
+import { getLang } from 'components/Language';
 import Title from 'components/Title';
 import SelectDataType from 'components/Select/DataType';
 import InputText from 'components/Input/Text';
@@ -110,9 +111,9 @@ let DbColumn = () => {
 				<Title onClose={onClose(DIALOG_DB_COLUMN)}>
 					{name
 						? <React.Fragment>
-							Колонка <b>{name}</b>
+							{getLang('cmpDialogDBColumnCol')} <b>{name}</b>
 						</React.Fragment>
-						: 'Новая колонка'}
+						: getLang('cmpDialogDBColumnNew')}
 				</Title>
 			</DialogTitle>
 			{_dialogOpenFlag
@@ -142,13 +143,13 @@ let DbColumn = () => {
 							<InputText
 								required
 								name="name"
-								label="Название поля"
+								label={getLang('cmpDialogDBColumnNameField')}
 								onChange={_onChangeName}
 								defaultValue={name}
 								error={error.name}
 								{ ...error.name
 									? {
-										helperText: 'Поле с таким названием уже существует',
+										helperText: getLang('cmpDialogDBColumnFieldIs'),
 									}
 									: {} } />
 						</Box>
@@ -156,7 +157,7 @@ let DbColumn = () => {
 							<InputText
 								multiline
 								rows={3}
-								label="Описание"
+								label={getLang('cmpDialogDBColumnDescr')}
 								name="description"
 								onChange={_onChangeDescription}
 								defaultValue={description} />
@@ -164,7 +165,7 @@ let DbColumn = () => {
 						<Box py={1}>
 							<FormControlLabel
 								name="required"
-								label="Сделать поле обязательным"
+								label={getLang('cmpDialogDBColumnFieldRequir')}
 								disabled={isDisabled}
 								control={<Checkbox 
 									checked={!!required}
@@ -182,7 +183,7 @@ let DbColumn = () => {
 								color="secondary"
 								startIcon={<CloseIcon />}
 								onClick={onClose(DIALOG_DB_COLUMN)}>
-								Отмена
+								{getLang('cmpDialogDBColumnCancel')}
 							</Button>
 							<Button 
 								type="submit"
@@ -191,8 +192,8 @@ let DbColumn = () => {
 								startIcon={<SaveIcon />}
 								onClick={_onSave}>
 								{name
-									? 'Сохранить'
-									: 'Добавить'}
+									? getLang('cmpDialogDBColumnSave')
+									: getLang('cmpDialogDBColumnAdd')}
 							</Button>
 						</Box>
 					</DialogActions>

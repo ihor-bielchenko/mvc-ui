@@ -9,6 +9,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import CheckIcon from '@material-ui/icons/Check';
+import { getLang } from 'components/Language';
 import Title from 'components/Title';
 import onValidate from 'components/Dialog/Func/Props/onValidate.js';
 import loadColumnInputs from 'utils/loadColumnInputs.js';
@@ -45,7 +46,7 @@ export let Input = ({
 		dataTypeId,
 	]);
 
-	return <React.Suspense fallback={<Typography>Подождите...</Typography>}>
+	return <React.Suspense fallback={<Typography>{getLang('cmpDialogSourceCookieWait')}</Typography>}>
 		<Component 
 			required
 			menu
@@ -61,8 +62,8 @@ export let Input = ({
 };
 Input = React.memo(Input);
 Input.defaultProps = {
-	label: 'Название значния',
-	placeholder: 'Например, access_token',
+	label: getLang('cmpDialogSourceCookieName'),
+	placeholder: getLang('cmpDialogSourceCookieForExamp'),
 };
 
 let SourceCookie = () => {
@@ -83,7 +84,7 @@ let SourceCookie = () => {
 				onClose={onClose(SOURCE_TYPE_COOKIE.id)}>
 				<DialogTitle>
 					<Title onClose={onClose(SOURCE_TYPE_COOKIE.id)}>
-						Куки входящего запроса
+						{getLang('cmpDialogSourceCookieReq')}
 					</Title>
 				</DialogTitle>
 				<form onSubmit={_onSubmit}>
@@ -103,14 +104,14 @@ let SourceCookie = () => {
 								color="secondary"
 								startIcon={<CloseIcon />}
 								onClick={onClose(SOURCE_TYPE_COOKIE.id)}>
-								Отмена
+								{getLang('cmpDialogSourceCookieCancel')}
 							</Button>
 							<Button 
 								variant="outlined"
 								color="primary"
 								type="submit"
 								startIcon={<CheckIcon />}>
-								Добавить
+								{getLang('cmpDialogSourceCookieAdd')}
 							</Button>
 						</Box>
 					</DialogActions>

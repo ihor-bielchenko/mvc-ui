@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
+import { getLang } from 'components/Language';
 import InputText from 'components/Input/Text';
 import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
 import { ROUTE_URL_TYPE_PLACEHOLDER } from 'structures/routeUrl.js';
@@ -53,7 +54,7 @@ let Placeholder = ({
 						onDelete={_onClear}
 						name={id.toString()}
 						label={label}
-						placeholder="значение"
+						placeholder={getLang('cmpDialogSourceProxyUrlPlaceholderVal')}
 						onChange={_onPlaceholder}
 						onInput={onValidateInput}
 						defaultValue={value} />

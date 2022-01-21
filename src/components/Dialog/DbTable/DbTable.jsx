@@ -13,6 +13,7 @@ import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { getLang } from 'components/Language';
 import Title from 'components/Title';
 import InputText from 'components/Input/Text';
 import GroupDbColumns from 'components/Database/Columns';
@@ -54,9 +55,9 @@ let DbTable = () => {
 				<Title onClose={onClose(DIALOG_DB_TABLE)}>
 					{tableName
 						? <React.Fragment>
-							Таблица <b>{tableName}</b>
+							{getLang('cmpDialogDBTableT')} <b>{tableName}</b>
 						</React.Fragment>
-						: 'Новая таблица'}
+						: getLang('cmpDialogDBTableNewT')}
 				</Title>
 			</DialogTitle>
 			{_dialogOpenFlag
@@ -68,7 +69,7 @@ let DbTable = () => {
 							<InputText
 								disabled
 								name="name"
-								label="Название таблицы"
+								label={getLang('cmpDialogDBTableNameT')}
 								defaultValue={tableName} />
 						</Box>
 						<Tabs 
@@ -77,10 +78,10 @@ let DbTable = () => {
 							onChange={_onTab}>
 							<Tab 
 								value={0}
-								label="Структура" />
+								label={getLang('cmpDialogDBTableStruct')} />
 							<Tab
 								value={1} 
-								label="Список данных" />
+								label={getLang('cmpDialogDBTableListData')}/>
 						</Tabs>
 						{tab === 0
 							? <GroupDbColumns id={id} />
@@ -100,7 +101,7 @@ let DbTable = () => {
 							color="secondary"
 							startIcon={<CloseIcon />}
 							onClick={onClose(DIALOG_DB_TABLE)}>
-							Отмена
+							{getLang('cmpDialogDBTableCancel')}
 						</Button>
 						{tab === 0
 							? id >= 1
@@ -110,7 +111,7 @@ let DbTable = () => {
 										color="primary"
 										startIcon={<SaveIcon />}
 										onClick={_onSave}>
-										Сохранить
+										{getLang('cmpDialogDBTableSave')}
 									</Button>
 									<Button
 										disabled={true}
@@ -120,7 +121,7 @@ let DbTable = () => {
 										onClick={onDialog(DIALOG_DELETE_CONFIRM, {
 											onDelete: _onDelete,
 										})}>
-										Удалить
+										{getLang('cmpDialogDBTableRem')}
 									</Button>
 								</ButtonGroup>
 								: <Button
@@ -128,7 +129,7 @@ let DbTable = () => {
 									color="primary"
 									startIcon={<SaveIcon />}
 									onClick={_onSave}>
-									Сохранить
+									{getLang('cmpDialogDBTableSave2')}
 								</Button>
 							: <React.Fragment />}
 					</Box>

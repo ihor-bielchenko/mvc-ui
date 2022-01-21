@@ -10,6 +10,7 @@ import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import CloseIcon from '@material-ui/icons/Close';
 import SaveIcon from '@material-ui/icons/Save';
+import { getLang } from 'components/Language';
 import Title from 'components/Title';
 import InputText from 'components/Input/Text';
 import onValidate from 'components/Input/Validate/constStrTranslit.js';
@@ -39,16 +40,16 @@ let UrlPlaceholder = ({ history }) => {
 					<DialogTitle>
 						<Title onClose={onClose(DIALOG_URL_PLACEHOLDER)}>
 							{index > -1
-								? 'Редактировать плэйсхолдер'
-								: 'Добавить плэйсхолдер'}
+								? getLang('cmpDialogSourceScriptUrlPlaceholderEdit')
+								: getLang('cmpDialogSourceScriptUrlPlaceholderAdd')}
 						</Title>
 					</DialogTitle>
 					<DialogContent dividers>
 						<Box my={2}>
 							<InputText 
 								required
-								label="Название плэйсхолдер"
-								placeholder="Например: value_id"
+								label={getLang('cmpDialogSourceScriptUrlPlaceholderName')}
+								placeholder={getLang('cmpDialogSourceScriptUrlPlaceholderForExamp')}
 								type="text"
 								name="value"
 								defaultValue={value}
@@ -66,14 +67,14 @@ let UrlPlaceholder = ({ history }) => {
 								color="secondary"
 								startIcon={<CloseIcon />}
 								onClick={onClose(DIALOG_URL_PLACEHOLDER)}>
-								Отмена
+								{getLang('cmpDialogSourceScriptUrlPlaceholderCancel')}
 							</Button>
 							<Button 
 								type="submit"
 								variant="outlined"
 								color="primary"
 								startIcon={<SaveIcon />}>
-								Сохранить
+								{getLang('cmpDialogSourceScriptUrlPlaceholderSave')}
 							</Button>
 						</Box>
 					</DialogActions>

@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import Store from 'components/Store';
+import { getLang } from 'components/Language';
 // import onDialog from 'components/Dialog/onDialog.js';
 import {
 	DATA_TYPE_ATOMIC,
@@ -112,7 +113,7 @@ let Parent = ({
 									color="primary"
 									startIcon={<AddIcon />}
 									onClick={_onAddItem}>
-									Добавить элемент
+									{getLang('cmpJsObjectParentAdd')}
 								</Button>
 							</Box>
 							: <React.Fragment />}

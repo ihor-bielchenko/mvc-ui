@@ -9,6 +9,7 @@ import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
+import { getLang } from 'components/Language';
 import Store from 'components/Store';
 import Title from 'components/Title';
 import loadColumnInputs from 'utils/loadColumnInputs.js';
@@ -39,7 +40,7 @@ export let Column = ({
 
 	return <React.Fragment>
 		<Box py={1}>
-			<React.Suspense fallback={<Typography>Подождите...</Typography>}>
+			<React.Suspense fallback={<Typography>{getLang('cmpDialogDBRowWait')}</Typography>}>
 				<Component
 					disabled={dataTypeId === DATA_TYPE_ID.id}
 					name={columnKey.toString()}
@@ -49,7 +50,7 @@ export let Column = ({
 						? DATA_TYPE_NUMBER.id
 						: dataTypeId].text() +')'}
 					helperText={error
-						? 'Поле обязательно для заполнения'
+						? getLang('cmpDialogDBRowFieldRequired')
 						: description}
 					error={error} />
 			</React.Suspense>
@@ -116,8 +117,8 @@ let DbRow = () => {
 			<DialogTitle>
 				<Title onClose={onClose}>
 					{rowId > 0
-						? 'Редактировать запись'
-						: 'Новая запись'}
+						? getLang('cmpDialogDBRowEdit')
+						: getLang('cmpDialogDBRowNew')}
 				</Title>
 			</DialogTitle>
 			{_dialogOpenFlag
@@ -136,7 +137,7 @@ let DbRow = () => {
 								color="secondary"
 								startIcon={<CloseIcon />}
 								onClick={onClose}>
-								Отмена
+								{getLang('cmpDialogDBRowCancel')}
 							</Button>
 							<Button 
 								type="submit"
@@ -145,8 +146,8 @@ let DbRow = () => {
 								startIcon={<SaveIcon />}
 								onClick={_onSave}>
 								{rowId > 0
-									? 'Сохранить'
-									: 'Добавить'}
+									? getLang('cmpDialogDBRowSave')
+									: getLang('cmpDialogDBRowAdd')}
 							</Button>
 						</Box>
 					</DialogActions>

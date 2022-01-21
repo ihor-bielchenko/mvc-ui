@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
+import { getLang } from 'components/Language';
 import SelectArithmetic from 'components/Select/Arithmetic';
 import InputNumeric from 'components/Input/Numeric';
 import onDialog from 'components/Dialog/onDialog.js';
@@ -13,6 +14,8 @@ import onUnmount from '../onUnmount.js';
 import onValidate from '../onValidate.js';
 import onValueScript from '../onValueScript.js';
 import onClear from '../onClear.js';
+
+
 
 let MathCount = ({ 
 	id, 
@@ -71,9 +74,9 @@ let MathCount = ({
 					onChange={_onChange1}
 					defaultValue={prop1}
 					name="prop-1"
-					label="Первое значение"
-					placeholder="Число"
-					helperText="Выберите созданный параметр или укажите значение вручную" />
+					label={getLang('cmpDialogFuncPropsMathCountFirstValue')}
+					placeholder={getLang('cmpDialogFuncPropsMathCountNumber')}
+					helperText={getLang('cmpDialogFuncPropsMathCountSelectProp')} />
 			</Grid>
 			<Grid 
 				item
@@ -94,9 +97,9 @@ let MathCount = ({
 					onChange={_onChange3}
 					defaultValue={prop3}
 					name="prop-3"
-					label="Второе значение"
-					placeholder="Число"
-					helperText="Выберите созданный параметр или укажите значение вручную" />
+					label={getLang('cmpDialogFuncPropsMathCountSecondValue')}
+					placeholder={getLang('cmpDialogFuncPropsMathCountNumber2')}
+					helperText={getLang('cmpDialogFuncPropsMathCountSelectProp2')} />
 			</Grid>
 		</Grid>
 	</React.Fragment>;

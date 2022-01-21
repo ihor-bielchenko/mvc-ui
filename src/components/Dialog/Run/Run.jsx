@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Divider from '@material-ui/core/Divider';
 import CloseIcon from '@material-ui/icons/Close';
+import { getLang } from 'components/Language'
 import Title from 'components/Title';
 import onClose from '../onClose.js';
 import { DIALOG_RUN } from 'consts/dialog.js';
@@ -48,7 +49,7 @@ let Run = ({ history }) => {
 				onClose={onClose(DIALOG_RUN)}>
 				<DialogTitle>
 					<Title onClose={onClose(DIALOG_RUN)}>
-						Запуск сервиса
+						{getLang('cmpDialogRun')}
 					</Title>
 				</DialogTitle>
 				<DialogContent dividers>
@@ -57,7 +58,7 @@ let Run = ({ history }) => {
 							<Typography 
 								variant="h6"
 								color="primary">
-								Сервис успешно запущен.
+								{getLang('cmpDialogRunSuccess')}
 							</Typography>
 						</Box>
 						: <React.Fragment />}
@@ -66,7 +67,7 @@ let Run = ({ history }) => {
 							<Typography 
 								variant="h6"
 								color="secondary">
-								Возникла критическая ошибка. Пожалуйста, обратитесь в техническую поддержку
+								{getLang('cmpDialogRunErr')}
 							</Typography>
 						</Box>
 						: <LinearProgress 
@@ -101,8 +102,8 @@ let Run = ({ history }) => {
 						startIcon={<CloseIcon />}
 						onClick={onClose(DIALOG_RUN)}>
 						{progress.value === -2
-							? 'Закрыть'
-							: 'Отмена'}
+							? getLang('cmpDialogRunClose')
+							: getLang('cmpDialogRunCancel')}
 					</Button>
 				</DialogActions>
 			</Dialog>

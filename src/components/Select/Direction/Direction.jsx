@@ -4,6 +4,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Box from '@material-ui/core/Box';
 import TextRotateUpIcon from '@material-ui/icons/TextRotateUp';
 import TextRotationDownIcon from '@material-ui/icons/TextRotationDown';
+import { getLang } from 'components/Language';
 import Select from '../Select.jsx';
 
 let Direction = ({ 
@@ -29,7 +30,7 @@ let Direction = ({
 				<TextRotateUpIcon />
 			</ListItemAvatar>
 			<Box my={1}>
-				По возрастанию
+				{getLang('cmpSelectDirectionUp')}
 			</Box>
 		</MenuItem>
 		<MenuItem value={1}>
@@ -37,7 +38,7 @@ let Direction = ({
 				<TextRotationDownIcon />
 			</ListItemAvatar>
 			<Box my={1}>
-				По убыванию
+				{getLang('cmpSelectDirectionDown')}
 			</Box>
 		</MenuItem>
 		{children}
@@ -47,7 +48,7 @@ let Direction = ({
 Direction = React.memo(Direction);
 Direction.defaultProps = {
 	name: 'direction',
-	label: 'Направление сортировки',
+	label: getLang('cmpSelectDirection'),
 	required: false,
 };
 

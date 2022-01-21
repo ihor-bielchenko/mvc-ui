@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+import { getLang } from 'components/Language';
 import SelectDataType from 'components/Select/DataType';
 import LogicValue from 'components/Input/LogicValue.jsx';
 import onDialog from 'components/Dialog/onDialog.js';
@@ -136,7 +137,7 @@ let IfType = ({
 						color="primary"
 						startIcon={<AddIcon fontSize="small" />}
 						onClick={_onMenu2}>
-						Выбрать параметр
+						{getLang('cmpDialogFuncPropsIfTypeSelectProp')}
 					</Button>}
 			</Grid>
 		</Grid>

@@ -4,6 +4,7 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+import { getLang } from 'components/Language';
 import LogicValue from 'components/Input/LogicValue.jsx';
 import InputText from 'components/Input/Text';
 import onDialog from 'components/Dialog/onDialog.js';
@@ -69,7 +70,7 @@ let ArrSet = ({
 						color="primary"
 						startIcon={<AddIcon fontSize="small" />}
 						onClick={_onMenu1}>
-						Выбрать массив
+						{getLang('cmpDialogFuncPropsArrSetSelectArr')}
 					</Button>}
 			</Grid>
 			<Grid
@@ -83,9 +84,9 @@ let ArrSet = ({
 					onChange={_onChange2}
 					defaultValue={prop2}
 					name="prop-2"
-					label="Значение"
-					placeholder="Текст или число"
-					helperText="Выберите созданный параметр или укажите значение вручную" />
+					label={getLang('cmpDialogFuncPropsArrSetValue')}
+					placeholder={getLang('cmpDialogFuncPropsArrSetTextOrNumb')}
+					helperText={getLang('cmpDialogFuncPropsArrSetSelectProp')} />
 			</Grid>
 		</Grid>
 	</React.Fragment>;

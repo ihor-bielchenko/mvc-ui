@@ -25,6 +25,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import Search from 'components/Search';
+import { getLang } from 'components/Language';
 import MenuControl from 'components/Menu/Control';
 import onMenu from 'components/Menu/onMenu.js';
 import onDialog from 'components/Dialog/onDialog.js';
@@ -99,13 +100,13 @@ let Api = ({ history }) => {
 					component={Link}
 					to={`/${projectId}/${URL_PAGE_SERVICE}/${serviceId}/${URL_PAGE_API}/0`}
 					startIcon={<AddIcon />}>
-					Добавить
+					{getLang('cmpApiAdd')}
 				</Button>
 				<Button
 					disabled
 					color="primary"
 					startIcon={<EditIcon />}>
-					Копировать
+					{getLang('cmpApiCopy')}
 				</Button>
 				<Button
 					disabled={!(select.length > 0)}
@@ -114,7 +115,7 @@ let Api = ({ history }) => {
 					onClick={onDialog(DIALOG_DELETE_CONFIRM, {
 						onDelete: onDelete(),
 					})}>
-					Удалить
+					{getLang('cmpApiRem')}
 				</Button>
 			</ButtonGroup>
 			<IconButton disabled>
@@ -145,14 +146,14 @@ let Api = ({ history }) => {
 							<Typography 
 								variant="caption"
 								color="textSecondary">
-								Метод
+								{getLang('cmpApiMet')}
 							</Typography>
 						</TableCell>
 						<TableCell>
 							<Typography 
 								variant="caption"
 								color="textSecondary">
-								Путь
+								{getLang('cmpApiPath')}
 							</Typography>
 						</TableCell>
 					</TableRow>

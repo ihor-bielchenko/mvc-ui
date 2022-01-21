@@ -9,6 +9,7 @@ import Chip from '@material-ui/core/Chip';
 import Typography from '@material-ui/core/Typography';
 import LogicValue from 'components/Input/LogicValue.jsx';
 import AddIcon from '@material-ui/icons/Add';
+import { getLang } from 'components/Language';
 import Title from 'components/Title';
 import onValidate from 'components/Dialog/Func/Props/onValidate.js';
 import { 
@@ -52,7 +53,7 @@ let SourcePlaceholder = () => {
 			onClose={onClose}>
 			<DialogTitle>
 				<Title onClose={onClose}>
-					Выбрать плэйсхолдер
+					{getLang('cmpDialogSourcePlaceHolderSelect')}
 				</Title>
 			</DialogTitle>
 			<DialogContent 
@@ -69,7 +70,7 @@ let SourcePlaceholder = () => {
 						display="flex"
 						alignItems="center">
 						<Typography>
-							Параметр из программы:
+							{getLang('cmpDialogSourcePlaceHolderProp')}
 						</Typography>
 						<div 
 							style={{ 
@@ -93,7 +94,7 @@ let SourcePlaceholder = () => {
 							style={{
 								minWidth: 130,
 							}}>
-							Из логики
+							{getLang('cmpDialogSourcePlaceHolderLogic')}
 						</Button>
 						<Typography 
 							component="span"
@@ -102,7 +103,7 @@ let SourcePlaceholder = () => {
 								paddingLeft: 18,
 								paddingRight: 18,
 							}}>
-							или
+							{getLang('cmpDialogSourcePlaceHolderOr')}
 						</Typography>
 						<Box
 							style={{

@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { getLang } from 'components/Language';
 import Title from 'components/Title';
 import InputText from 'components/Input/Text';
 import SelectFuncCategory from 'components/Select/FuncCategory';
@@ -87,8 +88,8 @@ let Func = () => {
 			<DialogTitle>
 				<Title onClose={_onClose}>
 					{id >= 1
-						? 'Функция: '+ name
-						: 'Добавить функцию'}
+						? getLang('cmpDialogFuncF') + name
+						: getLang('cmpDialogFuncAddF')}
 				</Title>
 			</DialogTitle>
 			{_dialogOpenFlag
@@ -98,8 +99,8 @@ let Func = () => {
 							<InputText 
 								required
 								name="name"
-								label="Название"
-								helperText="Для быстрого поиска придумайте название или краткое описание"
+								label={getLang('cmpDialogFuncName')}
+								helperText={getLang('cmpDialogFuncForFastSearch')}
 								value={name}
 								onChange={onChangeName('func')}
 								onInput={onValidateName} />
@@ -136,7 +137,7 @@ let Func = () => {
 							color="secondary"
 							startIcon={<CloseIcon />}
 							onClick={_onClose}>
-							Отмена
+							{getLang('cmpDialogFuncCancel')}
 						</Button>
 						{id >= 1
 							? <ButtonGroup>
@@ -146,7 +147,7 @@ let Func = () => {
 									color="primary"
 									startIcon={<SaveIcon />}
 									onClick={_onSave}>
-									Сохранить
+									{getLang('cmpDialogFuncSave')}
 								</Button>
 								<Button
 									disabled={filterFormId >= 0 || sortFormId >= 0}
@@ -156,7 +157,7 @@ let Func = () => {
 									onClick={onDialog(DIALOG_DELETE_CONFIRM, {
 										onDelete: _onDelete,
 									})}>
-									Удалить
+									{getLang('cmpDialogFuncRem')}
 								</Button>
 							</ButtonGroup>
 							: <Button
@@ -165,7 +166,7 @@ let Func = () => {
 								color="primary"
 								startIcon={<SaveIcon />}
 								onClick={_onSave}>
-								Сохранить
+								{getLang('cmpDialogFuncSave2')}
 							</Button>}
 					</Box>
 					</DialogActions>

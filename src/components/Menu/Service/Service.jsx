@@ -16,6 +16,7 @@ import StorageIcon from '@material-ui/icons/Storage';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import DescriptionIcon from '@material-ui/icons/Description';
+import { getLang } from 'components/Language';
 import { 
 	URL_PAGE_DASHBOARD,
 	URL_PAGE_SERVICE, 
@@ -55,7 +56,7 @@ let Service = ({
 				<ViewListIcon />
 			</ListItemAvatar>
 			<Typography>
-				Все сервисы
+				{getLang('cmpMenuServiceAll')}
 			</Typography>
 		</MenuItem>,
 	];
@@ -123,7 +124,7 @@ let Service = ({
 					<StorageIcon />
 				</ListItemAvatar>
 				<Typography>
-					База данных
+					{getLang('cmpMenuServiceDB')}
 				</Typography>
 			</MenuItem>,
 			<MenuItem 
@@ -133,7 +134,7 @@ let Service = ({
 					<LibraryBooksIcon />
 				</ListItemAvatar>
 				<Typography>
-					Логи
+					{getLang('cmpMenuServiceLog')}
 				</Typography>
 			</MenuItem>,
 		];
@@ -148,7 +149,7 @@ let Service = ({
 				<DescriptionIcon />
 			</ListItemAvatar>
 			<Typography>
-				Документация
+				{getLang('cmpMenuServiceDoc')}
 			</Typography>
 		</MenuItem>,
 	];

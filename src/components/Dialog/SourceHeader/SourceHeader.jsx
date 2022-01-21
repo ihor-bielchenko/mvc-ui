@@ -8,6 +8,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import CloseIcon from '@material-ui/icons/Close';
 import CheckIcon from '@material-ui/icons/Check';
+import { getLang } from 'components/Language';
 import Title from 'components/Title';
 import { Input } from 'components/Dialog/SourceCookie';
 import onSubmit from 'components/Dialog/SourceCookie/onSubmit.js';
@@ -31,7 +32,7 @@ let SourceHeader = () => {
 			onClose={onClose(SOURCE_TYPE_HEADER.id)}>
 			<DialogTitle>
 				<Title onClose={onClose(SOURCE_TYPE_HEADER.id)}>
-					Заголовок входящего запроса
+					{getLang('cmpDialogSourceHeader')}
 				</Title>
 			</DialogTitle>
 			<form onSubmit={_onSubmit}>
@@ -39,8 +40,8 @@ let SourceHeader = () => {
 					<Input
 						workspaceId={workspaceId}
 						id={id}
-						label="Название значния"
-						placeholder="Например, Access-Control-Allow-Methods" />
+						label={getLang('cmpDialogSourceHeaderNameValue')}
+						placeholder={getLang('cmpDialogSourceHeaderForExamp')} />
 				</DialogContent>
 				<DialogActions>
 					<Box 
@@ -53,14 +54,14 @@ let SourceHeader = () => {
 							color="secondary"
 							startIcon={<CloseIcon />}
 							onClick={onClose(SOURCE_TYPE_HEADER.id)}>
-							Отмена
+							{getLang('cmpDialogSourceHeaderCancel')}
 						</Button>
 						<Button 
 							variant="outlined"
 							color="primary"
 							type="submit"
 							startIcon={<CheckIcon />}>
-							Добавить
+							{getLang('cmpDialogSourceHeaderAdd')}
 						</Button>
 					</Box>
 				</DialogActions>

@@ -2,6 +2,7 @@ import React from 'react';
 // import { useSelector } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+import { getLang } from 'components/Language';
 import onValidate from 'components/Dialog/Func/Props/onValidate.js';
 import onDialog from 'components/Dialog/onDialog.js';
 import dataTypes from 'structures/dataTypes.js';
@@ -28,7 +29,7 @@ let MergeComponent = ({
 			color="primary"
 			startIcon={<AddIcon />}
 			onClick={_onMenu}>
-			Вставить {dataTypes[dataTypeId].text()}
+			{getLang('cmpDialogJsonMergeCmpPust')} {dataTypes[dataTypeId].text()}
 		</Button>
 	</React.Fragment>;
 };

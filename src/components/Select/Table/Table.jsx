@@ -1,5 +1,6 @@
 import React from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
+import { getLang } from 'components/Language';
 import Select from '../Select.jsx';
 
 let Table = ({ 
@@ -31,7 +32,7 @@ let Table = ({
 Table = React.memo(Table);
 Table.defaultProps = {
 	name: 'table_id',
-	label: 'Таблица',
+	label: getLang('cmpSelectTable'),
 	required: false,
 	disabled: false,
 };

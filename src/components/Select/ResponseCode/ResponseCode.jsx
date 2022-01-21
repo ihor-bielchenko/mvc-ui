@@ -1,5 +1,6 @@
 import React from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
+import { getLang } from 'components/Language';
 import responseCodes from 'structures/responseCodes.js';
 import Select from '../Select.jsx';
 
@@ -40,7 +41,7 @@ let ResponseCode = ({
 ResponseCode = React.memo(ResponseCode);
 ResponseCode.defaultProps = {
 	name: 'code',
-	label: 'Код ответа',
+	label: getLang('cmpSelectResponseCode'),
 	required: false,
 	disabled: false,
 	onFilter: (item) => true,

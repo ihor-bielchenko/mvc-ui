@@ -2,6 +2,7 @@ import React from 'react';
 // import { useSelector } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+import { getLang } from 'components/Language'
 import MenuSource from 'components/Menu/Source';
 import onMenu from 'components/Menu/onMenu.js';
 import dataTypes, {
@@ -40,7 +41,7 @@ let MergeComponent = ({
 			color="primary"
 			startIcon={<AddIcon />}
 			onClick={_onMenu}>
-			Вставить {dataTypes[dataTypeId].text()}
+			{getLang('cmpDialogPropMergeCmpPust')} {dataTypes[dataTypeId].text()}
 		</Button>
 		<MenuSource
 			aria={id.toString()}

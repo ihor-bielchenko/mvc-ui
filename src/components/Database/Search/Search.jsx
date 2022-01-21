@@ -6,6 +6,7 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import StepContent from '@material-ui/core/StepContent';
 import Typography from '@material-ui/core/Typography';
+import { getLang } from 'components/Language';
 import { DIALOG_DB_QUERY } from 'consts/dialog.js';
 import Filter from '../Filter';
 import Sort from '../Sort';
@@ -51,7 +52,7 @@ let Search = ({
 						onClick={() => (!disabled && step !== 0) && setStep(0)}
 						component="span"
 						variant="h6">
-						Фильтры:
+						{getLang('cmpDatabaseSearchFiltr')}
 					</Typography>
 				</StepLabel>
 				<StepContent>
@@ -71,7 +72,7 @@ let Search = ({
 							onClick={() => (!disabled && step !== 1) && setStep(1)}
 							component="span"
 							variant="h6">
-							Сортировка:
+							{getLang('cmpDatabaseSearchSort')}:
 						</Typography>
 					</StepLabel>
 					<StepContent>
@@ -91,7 +92,7 @@ let Search = ({
 							onClick={() => (!disabled && step !== 2) && setStep(2)}
 							component="span"
 							variant="h6">
-							Поисковой запрос:
+							{getLang('cmpDatabaseSearchQuere')}
 						</Typography>
 					</StepLabel>
 					<StepContent>

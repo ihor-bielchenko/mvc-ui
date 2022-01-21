@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { getLang } from 'components/Language';
 import Title from 'components/Title';
 import DatabaseSearch from 'components/Database/Search';
 import { DIALOG_DB_PROPS } from 'consts/dialog.js';
@@ -31,7 +32,7 @@ let DbProps = () => {
 			onClose={onClose(DIALOG_DB_PROPS)}>
 			<DialogTitle>
 				<Title onClose={onClose(DIALOG_DB_PROPS)}>
-					Параметры запроса:
+					{getLang('cmpDialogDBPropsReq')}
 				</Title>
 			</DialogTitle>
 			{_dialogOpenFlag
@@ -53,14 +54,14 @@ let DbProps = () => {
 									color="secondary"
 									startIcon={<CloseIcon />}
 									onClick={onClose(DIALOG_DB_PROPS)}>
-									Отмена
+									{getLang('cmpDialogDBPropsCancel')}
 								</Button>
 								<Button 
 									variant="outlined"
 									color="secondary"
 									startIcon={<DeleteIcon />}
 									onClick={onClear}>
-									Очистить
+									{getLang('cmpDialogDBPropsClear')}
 								</Button>
 							</ButtonGroup>
 							<Button 
@@ -69,7 +70,7 @@ let DbProps = () => {
 								color="primary"
 								startIcon={<SaveIcon />}
 								onClick={onApply}>
-								Применить
+								{getLang('cmpDialogDBPropsAply')}
 							</Button>
 						</Box>
 					</DialogActions>

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+import { getLang } from 'components/Language';
 import KeyValue from './KeyValue.jsx';
 import onAdd from './onAdd.js';
 
@@ -23,7 +24,7 @@ let Headers = () => {
 					size="small"
 					startIcon={<AddIcon />}
 					onClick={onAdd}>
-					Добавить заголовок
+					{getLang('cmpDialogSourceProxyHeaders')}
 				</Button>
 			</Box>
 		</Box>

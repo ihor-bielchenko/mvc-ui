@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
+import { getLang } from 'components/Language';
 import LogicValue from './LogicValue.jsx';
 
 let Input = ({
@@ -128,9 +129,9 @@ Input.defaultProps = {
 	required: false,
 	error: false,
 	size: 'medium',
-	label: 'Поле для ввода',
+	label: getLang('cmpInputField'),
 	helperText: '',
-	placeholder: 'Ничего не написано',
+	placeholder: getLang('cmpInputFieldEmpty'),
 	onInput: () => {},
 	onChange: () => {},
 	onMenu: () => {},

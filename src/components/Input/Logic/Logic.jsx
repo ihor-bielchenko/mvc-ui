@@ -2,6 +2,7 @@ import React from 'react';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+import { getLang } from 'components/Language';
 import { StyledChip } from 'components/Input/LogicValue.jsx';
 import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
 
@@ -24,7 +25,7 @@ let Logic = ({
 				color="primary"
 				startIcon={<AddIcon fontSize="small" />}
 				onClick={onMenu}>
-				Выбрать параметр из логики
+				{getLang('cmpInputLogicSelect')}
 			</Button>}
 	</Box>;
 };

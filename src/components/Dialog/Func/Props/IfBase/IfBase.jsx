@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
+import { getLang } from 'components/Language';
 import SelectOperatorIf from 'components/Select/OperatorIf';
 import InputText from 'components/Input/Text';
 import onDialog from 'components/Dialog/onDialog.js';
@@ -13,6 +14,7 @@ import onUnmount from '../onUnmount.js';
 import onValidate from '../onValidate.js';
 import onValueScript from '../onValueScript.js';
 import onClear from '../onClear.js';
+
 
 let IfBase = ({ 
 	id, 
@@ -71,9 +73,9 @@ let IfBase = ({
 					onChange={_onChange1}
 					defaultValue={prop1}
 					name="prop-1"
-					label="Первое значение"
-					placeholder="Текст или число"
-					helperText="Выберите созданный параметр или укажите значение вручную" />
+					label={getLang('cmpDialogFuncPropsIfBaseFirstValue')}
+					placeholder={getLang('cmpDialogFuncPropsIfBaseTextOrNumber')}
+					helperText={getLang('cmpDialogFuncPropsIfBaseSelectProp')} />
 			</Grid>
 			<Grid 
 				item
@@ -95,9 +97,9 @@ let IfBase = ({
 					onChange={_onChange3}
 					defaultValue={prop3}
 					name="prop-3"
-					label="Второе значение"
-					placeholder="Текст или число"
-					helperText="Выберите созданный параметр или укажите значение вручную" />
+					label={getLang('cmpDialogFuncPropsIfBaseSecondValue')}
+					placeholder={getLang('cmpDialogFuncPropsIfBaseTextOrNumber2')}
+					helperText={getLang('cmpDialogFuncPropsIfBaseSelectProp2')} />
 			</Grid>
 		</Grid>
 	</React.Fragment>;

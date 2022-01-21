@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import { getLang } from 'components/Language';
 import InputNumeric from 'components/Input/Numeric';
 import onDialog from 'components/Dialog/onDialog.js';
 import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
@@ -14,6 +15,7 @@ import onValidate from '../onValidate.js';
 import onUnmount from '../onUnmount.js';
 import onCheck from '../onCheck.js';
 import onMount from './onMount.js';
+
 
 let ArrSplice = ({ 
 	id, 
@@ -54,9 +56,9 @@ let ArrSplice = ({
 				onChange={_onChange1}
 				defaultValue={prop1}
 				name="prop-1"
-				label="Длина пароля (минимум 5 символов)"
+				label={getLang('cmpDialogFuncPropsHashPasswordLangth')}
 				placeholder="5"
-				helperText="Выберите созданный параметр или укажите значение вручную" />
+				helperText={getLang('cmpDialogFuncPropsHashPasswordSelectProp')} />
 		</Box>
 		<Box my={1}>
 			<FormControlLabel
@@ -64,7 +66,7 @@ let ArrSplice = ({
 					name="prop-2"
 					checked={Boolean(Number(prop2))}
 					onChange={onCheck(1)} />}
-				label="Включить специальные символы" />
+				label={getLang('cmpDialogFuncPropsHashPasswordTurnOnSymbols')} />
 		</Box>
 		<Box mt={1}>
 			<FormControlLabel
@@ -72,7 +74,7 @@ let ArrSplice = ({
 					name="prop-3"
 					checked={Boolean(Number(prop3))}
 					onChange={onCheck(2)} />}
-				label="Включить использование заглавных букв" />
+				label={getLang('cmpDialogFuncPropsHashPasswordTurnOnUpperCase')} />
 		</Box>
 		<Box mt={1}>
 			<FormControlLabel
@@ -80,7 +82,7 @@ let ArrSplice = ({
 					name="prop-4"
 					checked={Boolean(Number(prop4))}
 					onChange={onCheck(3)} />}
-				label="Включить использование цифр" />
+				label={getLang('cmpDialogFuncPropsHashPasswordTurnOnNumb')} />
 		</Box>
 	</React.Fragment>;
 };

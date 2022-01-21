@@ -12,6 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AddIcon from '@material-ui/icons/Add';
+import { getLang } from 'components/Language';
 import Store from 'components/Store';
 import MenuControl from 'components/Menu/Control';
 import onMenu from 'components/Menu/onMenu.js';
@@ -32,10 +33,10 @@ let Table = () => {
 					<TableHead>
 						<TableRow>
 							<TableCell width="60%">
-								По какому полю сортировать
+								{getLang('cmpDatabaseSortTableFieldSort')}
 							</TableCell>
 							<TableCell>
-								Направление сортировки
+								{getLang('cmpDatabaseSortTableDirectSort')}
 							</TableCell>
 						</TableRow>
 					</TableHead>
@@ -57,8 +58,8 @@ let Table = () => {
 								<TableCell>
 									<Typography variant="h6">
 										{sortItem.direction === 0
-											? '↑ По возрастанию'
-											: '↓ По убыванию'}
+											? getLang('cmpDatabaseSortTableSortUp')
+											: getLang('cmpDatabaseSortTableSortDown')}
 									</Typography>
 								</TableCell>
 								<TableCell width="1%">
@@ -85,7 +86,7 @@ let Table = () => {
 				<Typography 
 					variant="body2"
 					color="textSecondary">
-					Нет ни одной настройки
+					{getLang('cmpDatabaseSortTableNothing')}
 				</Typography>
 			</Box>}
 			<Box mt={2}>
@@ -95,7 +96,7 @@ let Table = () => {
 					variant="outlined"
 					startIcon={<AddIcon />}
 					onClick={onAdd}>
-					Добавить
+					{getLang('cmpDatabaseSortTableAdd')}
 				</Button>
 			</Box>
 		</React.Fragment>;

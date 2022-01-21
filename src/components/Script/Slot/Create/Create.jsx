@@ -3,6 +3,7 @@ import Xarrow from 'react-xarrows';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+import { getLang } from 'components/Language';
 import MenuEntity from 'components/Menu/Entity';
 import onMenu from 'components/Menu/onMenu.js';
 import Slot from '../Slot';
@@ -65,7 +66,7 @@ let Create = ({
 					borderRadius: 0,
 				}}
 				onClick={onMenu('menu-entity-create-'+ _id)}>
-				Добавить
+				{getLang('cmpScriptActionsSlotCreate')}
 			</Button>
 			<MenuEntity 
 				aria={'menu-entity-create-'+ _id}

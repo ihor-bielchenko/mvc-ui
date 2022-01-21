@@ -2,6 +2,7 @@ import React from 'react';
 import Box from '@material-ui/core/Box';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
+import { getLang } from 'components/Language';
 import { funcIfArr } from 'structures/funcIf.js';
 import Select from 'components/Select';
 
@@ -47,7 +48,7 @@ If.defaultProps = {
 	required: false,
 	name: 'func_if',
 	value: '',
-	label: 'Функция',
+	label: getLang('cmpSelectFuncTempIfFun'),
 	helperText: '',
 	onSelect: () => {},
 };

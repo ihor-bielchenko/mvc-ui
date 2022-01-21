@@ -15,6 +15,7 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
 import AddIcon from '@material-ui/icons/Add';
+import { getLang } from 'components/Language';
 import InputText from 'components/Input/Text';
 import InputNumeric from 'components/Input/Numeric';
 import SelectMethod from 'components/Select/Method';
@@ -56,16 +57,16 @@ let Route = ({ history }) => {
 			<Typography variant="h5">
 				{id > 0
 					? <React.Fragment>
-						Роут <b>{name}</b>
+						{getLang('cmpMenuRoute')}<b>{name}</b>
 					</React.Fragment>
-					: 'Новый роут'}
+					: getLang('cmpMenuRouteNew')}
 			</Typography>
 		</Box>
 		<Box py={2}>
 			<InputText 
 				required
-				label="Название роута"
-				placeholder="Роут для ..."
+				label={getLang('cmpMenuRouteName')}
+				placeholder={getLang('cmpMenuRouteFor')}
 				type="text"
 				name="name"
 				value={name}
@@ -76,8 +77,8 @@ let Route = ({ history }) => {
 			<InputNumeric 
 				required
 				disabled
-				label="Время синхронизации данных с репликами этого сервиса после запуска текущего роута (в секундах)"
-				placeholder="Роут для ..."
+				label={getLang('cmpMenuRouteTime')}
+				placeholder={getLang('cmpMenuRouteFor2')}
 				type="number"
 				name="sync_time"
 				defaultValue="0" />
@@ -151,7 +152,7 @@ let Route = ({ history }) => {
 							onClick={onMenu('menu-url')}
 							startIcon={<AddIcon />}
 							variant="outlined">
-							Маршрут*
+							{getLang('cmpMenuRouteRout')}
 						</Button>
 						<MenuUrl aria="menu-url" />
 						<IconButton
@@ -182,7 +183,7 @@ let Route = ({ history }) => {
 					disabled={!(name.length > 0 && methodId > 0)}
 					startIcon={<SaveIcon />}
 					onClick={_onSave}>
-					Сохранить
+					{getLang('cmpMenuRouteSave')}
 				</Button>
 				<Button 
 					disabled={!(id > 0)}
@@ -191,7 +192,7 @@ let Route = ({ history }) => {
 					onClick={onDialog(DIALOG_DELETE_CONFIRM, {
 						onDelete: _onDelete,
 					})}>
-					Удалить
+					{getLang('cmpMenuRouteRem')}
 				</Button>
 			</ButtonGroup>
 		</Box>

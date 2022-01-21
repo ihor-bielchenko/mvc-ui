@@ -1,6 +1,7 @@
 import React from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
+import { getLang } from 'components/Language';
 import Store from 'components/Store';
 import { DATA_TYPE_ID } from 'structures/dataTypes.js';
 import Select from '../Select.jsx';
@@ -46,7 +47,7 @@ let Column = ({
 Column = React.memo(Column);
 Column.defaultProps = {
 	name: 'column_id',
-	label: 'Выбрать поле',
+	label: getLang('cmpSelectColumnSelect'),
 	required: false,
 	onFilter: () => true,
 };

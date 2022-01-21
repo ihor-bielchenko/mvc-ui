@@ -9,6 +9,7 @@ import DoneAllIcon from '@material-ui/icons/DoneAll';
 import AirportShuttleIcon from '@material-ui/icons/AirportShuttle';
 import TextsmsIcon from '@material-ui/icons/Textsms';
 import LoopIcon from '@material-ui/icons/Loop';
+import { getLang } from 'components/Language';
 import Store from 'components/Store';
 import onDialog from 'components/Dialog/onDialog.js';
 import {
@@ -66,7 +67,7 @@ let Entity = ({
 					<DescriptionIcon />
 				</ListItemAvatar>
 				<Typography>
-					Параметр
+					{getLang('cmpMenuEntityProp')}
 				</Typography>
 			</MenuItem>
 			<MenuItem onClick={onClick(DIALOG_IF, workspaceId, {
@@ -80,7 +81,7 @@ let Entity = ({
 					<DoneAllIcon />
 				</ListItemAvatar>
 				<Typography>
-					Условие
+					{getLang('cmpMenuEntityCondition')}
 				</Typography>
 			</MenuItem>
 			<MenuItem onClick={onClick(DIALOG_FUNC, workspaceId, {
@@ -94,7 +95,7 @@ let Entity = ({
 					<AirportShuttleIcon />
 				</ListItemAvatar>
 				<Typography>
-					Функция
+					{getLang('cmpMenuEntityFunc')}
 				</Typography>
 			</MenuItem>
 			<MenuItem onClick={onClick(DIALOG_JSON, workspaceId, {
@@ -108,7 +109,7 @@ let Entity = ({
 					<TextsmsIcon />
 				</ListItemAvatar>
 				<Typography>
-					JSON-ответ
+					{getLang('cmpMenuEntityRes')}
 				</Typography>
 			</MenuItem>
 			<MenuItem disabled>
@@ -116,7 +117,7 @@ let Entity = ({
 					<LoopIcon />
 				</ListItemAvatar>
 				<Typography>
-					Цикл
+					{getLang('cmpMenuEntityCycle')}
 				</Typography>
 			</MenuItem>
 		</Menu>

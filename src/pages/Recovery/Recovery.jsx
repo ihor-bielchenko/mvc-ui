@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
+import { getLang } from 'components/Language';
 import {
 	URL_PAGE_SIGN_UP,
 	URL_PAGE_SIGN_IN,
@@ -30,12 +31,12 @@ let Recovery = () => {
 						component="h1" 
 						variant="h5"
 						align="center">
-						Восстановление доступа
+						{getLang('pageRecovery')}
 					</Typography>
 					{state.success
 						? <Box my={2}>
 							<Typography>
-								На указанный email отправлено письмо с инструкциями для восстановления учетной записи.
+								{getLang('pageRecoveryForEmail')}
 							</Typography>
 						</Box>
 						: <form 
@@ -56,7 +57,7 @@ let Recovery = () => {
 								type="submit"
 								variant="contained"
 								color="primary">
-								Далее
+								{getLang('pageRecoveryNext')}
 							</Button>
 						</form>}
 				</Box>
@@ -69,12 +70,12 @@ let Recovery = () => {
 				component={Link}
 				to={URL_PAGE_SIGN_UP}
 				variant="body2">
-				Создать аккаунт
+				{getLang('pageRecoveryCreate')}
 			</Typography>
 		</Box>
 		<Link to={URL_PAGE_SIGN_IN}>
 			<Typography variant="body2">
-				Вход
+				{getLang('pageRecoverySignIn')}
 			</Typography>
 		</Link>
 	</Container>;

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import { getLang } from 'components/Language';
 import SelectDataType from 'components/Select/DataType';
 import SelectTable from 'components/Select/Table';
 import InputText from 'components/Input/Text';
@@ -100,9 +101,9 @@ let ColumnCreate = ({
 				onChange={_onChange3}
 				defaultValue={prop3}
 				name="prop-3"
-				label="Название поля"
-				placeholder="Текст"
-				helperText="Выберите созданный параметр или укажите значение вручную" />
+				label={getLang('cmpDialogFuncPropsColumnCreateNameField')}
+				placeholder={getLang('cmpDialogFuncPropsColumnCreateText')}
+				helperText={getLang('cmpDialogFuncPropsColumnCreateSelectProp')} />
 		</Box>
 		<Box py={2}>
 			<InputText
@@ -114,14 +115,14 @@ let ColumnCreate = ({
 				onChange={_onChange4}
 				defaultValue={prop4}
 				name="prop-4"
-				label="Описание"
-				placeholder="Текст"
-				helperText="Выберите созданный параметр или укажите значение вручную" />
+				label={getLang('cmpDialogFuncPropsColumnCreateDescrip')}
+				placeholder={getLang('cmpDialogFuncPropsColumnCreateText2')}
+				helperText={getLang('cmpDialogFuncPropsColumnCreateSelectProp2')} />
 		</Box>
 		<Box py={2}>
 			<FormControlLabel
 				name="prop-5"
-				label="Сделать поле обязательным"
+				label={getLang('cmpDialogFuncPropsColumnCreateFieldRequired')}
 				control={<Checkbox 
 					checked={Boolean(Number(prop5))}
 					onChange={onCheck(4)} />} />

@@ -2,6 +2,7 @@ import React from 'react';
 import Box from '@material-ui/core/Box';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
+import { getLang } from 'components/Language';
 import funcServer from 'structures/funcServer.js';
 import Select from 'components/Select';
 
@@ -49,7 +50,7 @@ Server.defaultProps = {
 	required: false,
 	name: 'func_server',
 	value: '',
-	label: 'Функция',
+	label: getLang('cmpSelectFuncTempServerFun'),
 	helperText: '',
 	onSelect: () => {},
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import Box from '@material-ui/core/Box';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
+import { getLang } from 'components/Language';
 import { funcMathsArr } from 'structures/funcMaths.js';
 import Select from 'components/Select';
 
@@ -47,7 +48,7 @@ Maths.defaultProps = {
 	required: false,
 	name: 'func_maths',
 	value: '',
-	label: 'Функция',
+	label: getLang('cmpSelectFuncTempMathsFun'),
 	helperText: '',
 	onSelect: () => {},
 };

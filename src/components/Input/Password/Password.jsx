@@ -1,4 +1,5 @@
 import React from 'react';
+import { getLang } from 'components/Language';
 import Input from '../Input.jsx';
 
 let Password = (props) => {
@@ -9,7 +10,7 @@ let Password = (props) => {
 
 Password = React.memo(Password);
 Password.defaultProps = {
-	placeholder: 'Пароль',
+	placeholder: getLang('cmpInputPassword'),
 };
 
 export default Password;

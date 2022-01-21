@@ -2,6 +2,7 @@ import React from 'react';
 import Box from '@material-ui/core/Box';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
+import { getLang } from 'components/Language';
 import funcHash from 'structures/funcHash.js';
 import Select from 'components/Select';
 
@@ -49,7 +50,7 @@ Hash.defaultProps = {
 	required: false,
 	name: 'func_hash',
 	value: '',
-	label: 'Функция',
+	label: getLang('cmpSelectFuncTempHashFun'),
 	helperText: '',
 	onSelect: () => {},
 };

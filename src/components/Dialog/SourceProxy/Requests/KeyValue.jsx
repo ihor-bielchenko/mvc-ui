@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { getLang } from 'components/Language';
 import InputText from 'components/Input/Text';
 import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
 import {
@@ -67,7 +68,7 @@ let KeyValue = ({ id }) => {
 				onValue={_onMenuKey}
 				onDelete={_onClearKey}
 				name={'key-'+ id}
-				label="Ключ"
+				label={getLang('cmpDialogSourceProxyRequestsKeyValueKey')}
 				defaultValue={key}
 				onChange={_onChangeKey}
 				onInput={onValidateInput} />
@@ -82,7 +83,7 @@ let KeyValue = ({ id }) => {
 				onValue={_onMenuValue}
 				onDelete={_onClearValue}
 				name={'value-'+ id}
-				label="Значение"
+				label={getLang('cmpDialogSourceProxyRequestsKeyValue')}
 				defaultValue={value}
 				onChange={_onChangeValue}
 				onInput={onValidateInput} />

@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
+import { getLang } from 'components/Language';
 import InputText from 'components/Input/Text';
 import onDialog from 'components/Dialog/onDialog.js';
 import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
@@ -66,9 +67,9 @@ let TextFind = ({
 					onChange={_onChange1}
 					defaultValue={prop1}
 					name="prop-1"
-					label="Текст, который нужно разделить"
-					placeholder="Текст или число"
-					helperText="Выберите созданный параметр или укажите значение вручную" />
+					label={getLang('cmpDialogFuncPropsTextFindTextSplice')}
+					placeholder={getLang('cmpDialogFuncPropsTextFindTExtOrNumber')}
+					helperText={getLang('cmpDialogFuncPropsTextFindSelectProp')} />
 			</Grid>
 			<Grid
 				item
@@ -81,9 +82,9 @@ let TextFind = ({
 					onChange={_onChange2}
 					defaultValue={prop2}
 					name="prop-2"
-					label="Значение"
-					placeholder="Символ или регулярное выражение"
-					helperText="Выберите созданный параметр или укажите значение вручную" />
+					label={getLang('cmpDialogFuncPropsTextFindValue')}
+					placeholder={getLang('cmpDialogFuncPropsTextFindSymbol')}
+					helperText={getLang('cmpDialogFuncPropsTextFindSelectProp2')} />
 			</Grid>
 		</Grid>
 	</React.Fragment>;

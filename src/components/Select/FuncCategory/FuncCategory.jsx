@@ -2,6 +2,7 @@ import React from 'react';
 import Box from '@material-ui/core/Box';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
+import { getLang } from 'components/Language';
 import funcCategories, {
 	FUNC_CATEGORY_IF,
 } from 'structures/funcCategories.js';
@@ -51,7 +52,7 @@ let FuncCategory = ({
 FuncCategory = React.memo(FuncCategory);
 FuncCategory.defaultProps = {
 	name: 'func_category_id',
-	label: 'Категория функции',
+	label: getLang('cmpSelectFuncCategor'),
 	helperText: '',
 	value: '',
 	required: false,

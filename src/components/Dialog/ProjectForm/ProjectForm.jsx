@@ -11,6 +11,7 @@ import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import CloseIcon from '@material-ui/icons/Close';
 import SaveIcon from '@material-ui/icons/Save';
+import { getLang } from 'components/Language';
 import Title from 'components/Title';
 import InputText from 'components/Input/Text';
 import onValidateSubdomain from 'components/Input/Validate/strOrNum.js';
@@ -42,16 +43,16 @@ let ProjectForm = ({ history }) => {
 					<DialogTitle>
 						<Title onClose={onClose(DIALOG_PROJECT_FORM)}>
 							{projectId > 0
-								? 'Редактировать'
-								: 'Создать проект'}
+								? getLang('cmpDialogProjectFormEdit')
+								: getLang('cmpDialogProjectFormAddProj')}
 						</Title>
 					</DialogTitle>
 					<DialogContent dividers>
 						<Box my={2}>
 							<InputText 
 								required
-								label="Название проекта"
-								placeholder="Например: мой тестовый проект"
+								label={getLang('cmpDialogProjectFormNameProj')}
+								placeholder={getLang('cmpDialogProjectFormExample')}
 								type="text"
 								name="name"
 								defaultValue={name} />
@@ -65,7 +66,7 @@ let ProjectForm = ({ history }) => {
 								xs={5}>
 								<InputText
 									required
-									label="Субдомен проекта"
+									label={getLang('cmpDialogProjectFormSubdomProj')}
 									placeholder="my-project"
 									type="text"
 									name="subdomain_path"
@@ -94,14 +95,14 @@ let ProjectForm = ({ history }) => {
 								color="secondary"
 								startIcon={<CloseIcon />}
 								onClick={onClose(DIALOG_PROJECT_FORM)}>
-								Отмена
+								{getLang('cmpDialogProjectFormCancel')}
 							</Button>
 							<Button 
 								type="submit"
 								variant="outlined"
 								color="primary"
 								startIcon={<SaveIcon />}>
-								Сохранить
+								{getLang('cmpDialogProjectFormSave')}
 							</Button>
 						</Box>
 					</DialogActions>

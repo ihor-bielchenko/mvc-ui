@@ -9,6 +9,7 @@ import GroupIcon from '@material-ui/icons/Group';
 import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { getLang } from 'components/Language';
 import onDialog from 'components/Dialog/onDialog.js';
 import { 
 	DIALOG_SERVICE_TEMPLATE,
@@ -58,14 +59,14 @@ let Project = ({ projectId }) => {
 						<Button 
 							disabled
 							startIcon={<GroupIcon />}>
-							Участники
+							{getLang('cmpDashbordProjPatric')}
 						</Button>
 						<Button 
 							startIcon={<EditIcon />}
 							onClick={onDialog(DIALOG_PROJECT_FORM, {
 								projectId,
 							})}>
-							Изменить
+							{getLang('cmpDashbordProjChange')}
 						</Button>
 						<Button 
 							color="secondary"

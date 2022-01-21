@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
+import { getLang } from 'components/Language';
 import InputText from 'components/Input/Text';
 import onDialog from 'components/Dialog/onDialog.js';
 import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
@@ -77,9 +78,9 @@ let TextReplace = ({
 					onChange={_onChange1}
 					defaultValue={prop1}
 					name="prop-1"
-					label="Текст, в котором нужно выполнить замену"
-					placeholder="Текст"
-					helperText="Выберите созданный параметр или укажите значение вручную" />
+					label={getLang('cmpDialogFuncPropsTextReplaceEdit')}
+					placeholder={getLang('cmpDialogFuncPropsTextReplaceText')}
+					helperText={getLang('cmpDialogFuncPropsTextReplaceSelectProp')} />
 			</Grid>
 			<Grid
 				item
@@ -92,9 +93,9 @@ let TextReplace = ({
 					onChange={_onChange2}
 					defaultValue={prop2}
 					name="prop-2"
-					label="Что заменить"
-					placeholder="Текст или регулярное выражение"
-					helperText="Выберите созданный параметр или укажите значение вручную" />
+					label={getLang('cmpDialogFuncPropsTextReplaceValue')}
+					placeholder={getLang('cmpDialogFuncPropsTextReplaceTextOr')}
+					helperText={getLang('cmpDialogFuncPropsTextReplaceSelectProp2')} />
 			</Grid>
 			<Grid
 				item
@@ -107,9 +108,9 @@ let TextReplace = ({
 					onChange={_onChange3}
 					defaultValue={prop3}
 					name="prop-3"
-					label="На что заменить"
-					placeholder="Текст"
-					helperText="Выберите созданный параметр или укажите значение вручную" />
+					label={getLang('cmpDialogFuncPropsTextReplaceValue2')}
+					placeholder={getLang('cmpDialogFuncPropsTextReplaceText2')}
+					helperText={getLang('cmpDialogFuncPropsTextReplaceSelectProp3')} />
 			</Grid>
 		</Grid>
 	</React.Fragment>;

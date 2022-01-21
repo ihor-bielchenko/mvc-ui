@@ -3,6 +3,7 @@ import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
+import { getLang } from 'components/Language';
 import Store from 'components/Store';
 import SelectColumn from 'components/Select/Column';
 import SelectDirection from 'components/Select/Direction';
@@ -43,14 +44,14 @@ let Form = ({
 				color="secondary"
 				startIcon={<CloseIcon />}
 				onClick={onCancel}>
-				Отменить
+				{getLang('cmpDatabaseSortFormCancel')}
 			</Button>
 			<Button
 				type="submit"
 				variant="outlined"
 				color="primary"
 				startIcon={<CheckIcon />}>
-				Сохранить
+				{getLang('cmpDatabaseSortFormSave')}
 			</Button>
 		</Box>
 	</form>;

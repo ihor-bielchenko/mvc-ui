@@ -3,11 +3,13 @@ import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+import { getLang } from 'components/Language';
 import onDialog from 'components/Dialog/onDialog.js';
 import { DIALOG_PROJECT_FORM } from 'consts/dialog.js';
 import Project from './Project';
 import onMount from './onMount.js';
 import onUnmount from './onUnmount.js';
+
 
 let Dashboard = () => {
 	const data = useSelector((state) => ({ ...state.list.data }));
@@ -27,7 +29,7 @@ let Dashboard = () => {
 				startIcon={<AddIcon />}
 				variant="outlined"
 				color="primary">
-				Новый проект
+				{getLang('cmpDashboardNewProj')}
 			</Button>
 		</Box>
 		{Object.keys(data).map((projectId) => {

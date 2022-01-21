@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+import { getLang } from 'components/Language';
 import LogicValue from 'components/Input/LogicValue.jsx';
 import onDialog from 'components/Dialog/onDialog.js';
 import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
@@ -49,7 +50,7 @@ let ObjLength = ({
 					color="primary"
 					startIcon={<AddIcon fontSize="small" />}
 					onClick={_onMenu1}>
-					Выбрать объект
+					{getLang('cmpDialogFuncPropsObjLengthSelectObj')}
 				</Button>}
 		</Box>
 	</React.Fragment>;

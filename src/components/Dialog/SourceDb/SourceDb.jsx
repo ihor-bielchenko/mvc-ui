@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
+import { getLang } from 'components/Language';
 import Title from 'components/Title';
 import Select from 'components/Database/Select';
 import Filter from 'components/Database/Filter';
@@ -67,7 +68,7 @@ let SourceDb = () => {
 			onClose={_onClose}>
 			<DialogTitle>
 				<Title onClose={_onClose}>
-					Значение из базы данных
+					{getLang('cmpDialogSourceDBValue')}
 				</Title>
 			</DialogTitle>
 			<DialogContent dividers>
@@ -77,7 +78,7 @@ let SourceDb = () => {
 					<Step>
 						<StepLabel>
 							<Typography variant="h6">
-								Настройка данных
+								{getLang('cmpDialogSourceDBSetting')}
 							</Typography>
 						</StepLabel>
 						<StepContent>
@@ -89,7 +90,7 @@ let SourceDb = () => {
 					<Step>
 						<StepLabel>
 							<Typography variant="h6">
-								Фильтры
+								{getLang('cmpDialogSourceDBFilt')}
 							</Typography>
 						</StepLabel>
 						<StepContent>
@@ -99,7 +100,7 @@ let SourceDb = () => {
 					<Step>
 						<StepLabel>
 							<Typography variant="h6">
-								Сортировка
+								{getLang('cmpDialogSourceDBSort')}
 							</Typography>
 						</StepLabel>
 						<StepContent>
@@ -109,7 +110,7 @@ let SourceDb = () => {
 					<Step>
 						<StepLabel>
 							<Typography variant="h6">
-								Поиск
+								{getLang('cmpDialogSourceDBSearch')}
 							</Typography>
 						</StepLabel>
 						<StepContent>
@@ -124,7 +125,7 @@ let SourceDb = () => {
 						color="secondary"
 						startIcon={<NavigateBeforeIcon />}
 						onClick={_onBack}>
-						Назад
+						{getLang('cmpDialogSourceDBBack')}
 					</Button>
 					{step >= 3
 						? <Button 
@@ -132,7 +133,7 @@ let SourceDb = () => {
 							color="primary"
 							endIcon={<NavigateNextIcon />}
 							onClick={_onSave}>
-							Сохранить
+							{getLang('cmpDialogSourceDBSave')}
 						</Button>
 						: <Button 
 							disabled={!issetSelectData || filterFormId >= 0 || sortFormId >= 0}
@@ -140,7 +141,7 @@ let SourceDb = () => {
 							color="primary"
 							endIcon={<NavigateNextIcon />}
 							onClick={_onNext}>
-							Далее
+							{getLang('cmpDialogSourceDBNext')}
 						</Button>}
 				</DialogActions>
 			</DialogContent>

@@ -1,6 +1,7 @@
 import React from 'react';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
+import { getLang } from 'components/Language';
 import dataTypes from 'structures/dataTypes.js';
 
 let OptionDataType = ({
@@ -32,7 +33,7 @@ let OptionDataType = ({
 				}}>
 				<b>{dataTypes[dataTypeId]
 					? dataTypes[dataTypeId].text()
-					: 'Не определен'}</b>
+					: getLang('cmpScriptActionsSlotOptionDataType')}</b>
 			</Typography>
 		</Box>
 	</React.Fragment>;

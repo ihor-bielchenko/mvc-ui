@@ -1,5 +1,6 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
+import { getLang } from 'components/Language';
 import * as funcCategories from 'structures/funcCategories.js';
 
 const _load = (categoryId) => () => {
@@ -46,7 +47,7 @@ let FuncTemplate = ({
 	const Component = React.lazy(_load(categoryId));
 
 	return categoryId > 0
-		? <React.Suspense fallback={<Typography>Подождите...</Typography>}>
+		? <React.Suspense fallback={<Typography>{getLang('cmpSelectFuncTempWait')}</Typography>}>
 			<Component 
 				required={required}
 				name={name}

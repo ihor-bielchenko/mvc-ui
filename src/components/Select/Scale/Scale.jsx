@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
+import { getLang } from 'components/Language';
 import Select from '../Select.jsx';
 
 const StyledWrapper = styled.div`
@@ -54,7 +55,7 @@ let Scale = ({
 Scale = React.memo(Scale);
 Scale.defaultProps = {
 	name: 'scale',
-	label: 'Масштаб',
+	label: getLang('cmpSelectScale'),
 	helperText: '',
 	value: '',
 	onSelect: () => {},

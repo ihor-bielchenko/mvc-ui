@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
+import { getLang } from 'components/Language';
 import InputText from 'components/Input/Text';
 import onDialog from 'components/Dialog/onDialog.js';
 import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
@@ -48,9 +49,9 @@ let MathInt = ({
 				onChange={_onChange1}
 				value={prop1}
 				name="prop-1"
-				label="Значение"
-				placeholder="Число"
-				helperText="Выберите созданный параметр или укажите значение вручную" />
+				label={getLang('cmpDialogFuncPropsMathIntValue')}
+				placeholder={getLang('cmpDialogFuncPropsMathIntNumb')}
+				helperText={getLang('cmpDialogFuncPropsMathIntSelectProp')} />
 		</Box>
 	</React.Fragment>;
 };

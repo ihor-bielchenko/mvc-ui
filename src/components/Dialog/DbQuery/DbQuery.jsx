@@ -11,6 +11,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
 import Title from 'components/Title';
+import { getLang } from 'components/Language';
 import InputText from 'components/Input/Text';
 import onValidateSource from 'components/Dialog/Func/Props/onValidate.js';
 import { DIALOG_DB_QUERY } from 'consts/dialog.js';
@@ -62,7 +63,7 @@ let DbQuery = () => {
 			onClose={onClose}>
 			<DialogTitle>
 				<Title onClose={onClose}>
-					Поисковый запрос
+					{getLang('cmpDialogDBQuerySearch')}
 				</Title>
 			</DialogTitle>
 			{!!dialog
@@ -79,13 +80,13 @@ let DbQuery = () => {
 							onValue={_onMenu}
 							onDelete={_onClear}
 							onChange={_onChange}
-							label="Название"
+							label={getLang('cmpDialogDBQueryName')}
 							type="text"
 							name="value"
 							defaultValue={value || ''} />
 						<Box py={2}>
 							<FormControlLabel
-								label="Начало колонки базы данных должно совпадать с указанным значением"
+								label={getLang('cmpDialogDBQueryStartCol')}
 								control={<Checkbox 
 									name="left"
 									checked={!!left} />}
@@ -93,7 +94,7 @@ let DbQuery = () => {
 						</Box>
 						<Box py={2}>
 							<FormControlLabel
-								label="Конец колонки базы данных должен совпадать с указанным значением"
+								label={getLang('cmpDialogDBQueryEndCol')}
 								control={<Checkbox 
 									name="right"
 									checked={!!right}
@@ -111,7 +112,7 @@ let DbQuery = () => {
 								color="secondary"
 								startIcon={<CloseIcon />}
 								onClick={onClose}>
-								Отмена
+								{getLang('cmpDialogDBQueryCancel')}
 							</Button>
 							<Button 
 								type="submit"
@@ -119,7 +120,7 @@ let DbQuery = () => {
 								color="primary"
 								startIcon={<SaveIcon />}
 								onClick={_onSave}>
-								Сохранить
+								{getLang('cmpDialogDBQuerySave')}
 							</Button>
 						</Box>
 					</DialogActions>

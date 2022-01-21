@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import MenuItem from '@material-ui/core/MenuItem';
+import { getLang } from 'components/Language';
 import Select from '../Select.jsx';
 
 let Service = ({ 
@@ -35,7 +36,7 @@ let Service = ({
 Service = React.memo(Service);
 Service.defaultProps = {
 	name: 'service_id',
-	label: 'Сервис',
+	label: getLang('cmpSelectService'),
 	required: false,
 };
 

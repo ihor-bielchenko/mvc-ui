@@ -1,4 +1,5 @@
 import React from 'react';
+import { getLang } from 'components/Language';
 import Input from '../Input.jsx';
 import onValidate from './onValidate.js';
 
@@ -18,7 +19,7 @@ let Numeric = ({ onInput, ...props }) => {
 
 Numeric = React.memo(Numeric);
 Numeric.defaultProps = {
-	placeholder: 'Только числа',
+	placeholder: getLang('cmpInputNumericOnly'),
 };
 
 export default Numeric;

@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
+import { getLang } from 'components/Language';
 import InputNumeric from 'components/Input/Numeric';
 import SelectMathLog from 'components/Select/MathLog';
 import onDialog from 'components/Dialog/onDialog.js';
@@ -68,9 +69,9 @@ let MathTrigonometry = ({
 					onChange={_onChange2}
 					defaultValue={prop2}
 					name="prop-2"
-					label="Значение"
-					placeholder="Число"
-					helperText="Выберите созданный параметр или укажите значение вручную" />
+					label={getLang('cmpDialogFuncPropsMathLogValue')}
+					placeholder={getLang('cmpDialogFuncPropsMathLogNumb')}
+					helperText={getLang('cmpDialogFuncPropsMathLogSelectProp')}/>
 			</Grid>
 		</Grid>
 	</React.Fragment>;

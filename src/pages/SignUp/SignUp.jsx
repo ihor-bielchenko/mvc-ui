@@ -13,6 +13,7 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Grid from '@material-ui/core/Grid';
+import { getLang } from 'components/Language';
 import Info from './Info.jsx';
 import Passwords from './Passwords.jsx';
 import onNext from './onNext.js';
@@ -53,17 +54,17 @@ let SignUp = ({ history }) => {
 						component="h1" 
 						variant="h5"
 						align="center">
-						Регистрация
+						{getLang('pageSigUp')}
 					</Typography>
 					<Stepper activeStep={state.activeStep}>
 						<Step>
 							<StepLabel>
-								Данные
+								{getLang('pageSigUpData')}
 							</StepLabel>
 						</Step>
 						<Step>
 							<StepLabel>
-								Пароль
+								{getLang('pageSigUpPassword')}
 							</StepLabel>
 						</Step>
 					</Stepper>
@@ -98,20 +99,20 @@ let SignUp = ({ history }) => {
 								onClick={_onBack}
 								variant="contained"
 								color="primary">
-								Назад
+								{getLang('pageSigUpBack')}
 							</Button>
 							{state.activeStep === 0
 								? <Button
 									onClick={_onNext}
 									variant="contained"
 									color="primary">
-									Далее
+									{getLang('pageSigUpNext')}
 								</Button>
 								: <Button
 									type="submit"
 									variant="contained"
 									color="primary">
-									Создать
+									{getLang('pageSigUpCreate')}
 								</Button>}
 						</Grid>
 					</form>
@@ -124,12 +125,12 @@ let SignUp = ({ history }) => {
 				component={Link}
 				to={URL_PAGE_SIGN_IN}
 				variant="body2">
-				Вход
+				{getLang('pageSigUpSigIn')}
 			</Typography>
 		</Box>
 		<Link to={URL_PAGE_RECOVERY}>
 			<Typography variant="body2">
-				Восстановить аккаунт
+				{getLang('pageSigUpRecovery')}
 			</Typography>
 		</Link>
 	</Container>;

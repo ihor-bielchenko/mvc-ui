@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
+import { getLang } from 'components/Language';
 import InputText from 'components/Input/Text';
 import onDialog from 'components/Dialog/onDialog.js';
 import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
@@ -11,6 +12,7 @@ import onChange from '../onChange.js';
 import onValueScript from '../onValueScript.js';
 import onValidate from '../onValidate.js';
 import onUnmount from '../onUnmount.js';
+
 
 let HashCrypto = ({ 
 	id, 
@@ -59,9 +61,9 @@ let HashCrypto = ({
 				onChange={_onChange1}
 				defaultValue={prop1}
 				name="prop-1"
-				label="Какое значение нужно зашифровать"
-				placeholder="Текст или число"
-				helperText="Выберите созданный параметр или укажите значение вручную" />
+				label={getLang('cmpDialogFuncPropsHashCryptoValueCrypt')}
+				placeholder={getLang('cmpDialogFuncPropsHashCryptoTextOrNumber')}
+				helperText={getLang('cmpDialogFuncPropsHashCryptoSelectProp')} />
 		</Box>
 		<Box py={2}>
 			<InputText
@@ -72,9 +74,9 @@ let HashCrypto = ({
 				onChange={_onChange2}
 				defaultValue={prop2}
 				name="prop-2"
-				label="Секретный ключ"
-				placeholder="Текст"
-				helperText="Выберите созданный параметр или укажите значение вручную" />
+				label={getLang('cmpDialogFuncPropsHashCryptoSecretKey')}
+				placeholder={getLang('cmpDialogFuncPropsHashCryptoText')}
+				helperText={getLang('cmpDialogFuncPropsHashCryptoSelectProp2')} />
 		</Box>
 	</React.Fragment>;
 };

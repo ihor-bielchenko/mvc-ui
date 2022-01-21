@@ -1,5 +1,6 @@
 import React from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
+import { getLang } from 'components/Language';
 import Select from '../Select.jsx';
 
 let Arithmetic = ({ 
@@ -22,62 +23,62 @@ let Arithmetic = ({
 		<MenuItem 
 			key={1}
 			value={1}>
-			Плюс ({'+'})
+			{getLang('cmpSelectArithPlus')} ({'+'})
 		</MenuItem>
 		<MenuItem 
 			key={2}
 			value={2}>
-			Минус ({'-'})
+			{getLang('cmpSelectArithMinus')} ({'-'})
 		</MenuItem>
 		<MenuItem 
 			key={3}
 			value={3}>
-			Умножение ({'*'})
+			{getLang('cmpSelectArithMultip')} ({'*'})
 		</MenuItem>
 		<MenuItem 
 			key={4}
 			value={4}>
-			Деление ({'/'})
+			{getLang('cmpSelectArithDivision')} ({'/'})
 		</MenuItem>
 		<MenuItem 
 			key={5}
 			value={5}>
-			В степень ({'^'})
+			{getLang('cmpSelectArithInStep')} ({'^'})
 		</MenuItem>
 		<MenuItem 
 			key={6}
 			value={6}>
-			Корень ({'√'})
+			{getLang('cmpSelectArithRoot')} ({'√'})
 		</MenuItem>
 		<MenuItem 
 			disabled
 			key={7}
 			value={7}>
-			Факториал ({'!'})
+			{getLang('cmpSelectArithFactor')} ({'!'})
 		</MenuItem>
 		<MenuItem 
 			disabled
 			key={8}
 			value={8}>
-			Проценты ({'%'})
+			{getLang('cmpSelectArithProc')} ({'%'})
 		</MenuItem>
 		<MenuItem 
 			disabled
 			key={9}
 			value={9}>
-			Число π ({'π'})
+			{getLang('cmpSelectArithP')} ({'π'})
 		</MenuItem>
 		<MenuItem 
 			disabled
 			key={10}
 			value={10}>
-			Число Эйлера ({'e'})
+			{getLang('cmpSelectArithEuler')} ({'e'})
 		</MenuItem>
 		<MenuItem 
 			disabled
 			key={11}
 			value={11}>
-			Модуль числа
+			{getLang('cmpSelectArithMod')}
 		</MenuItem>
 	</Select>;
 };
@@ -85,7 +86,7 @@ let Arithmetic = ({
 Arithmetic = React.memo(Arithmetic);
 Arithmetic.defaultProps = {
 	name: 'arithmetic_id',
-	label: 'Действие',
+	label: getLang('cmpSelectArithAction'),
 	required: false,
 };
 

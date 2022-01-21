@@ -2,6 +2,7 @@ import React from 'react';
 import Box from '@material-ui/core/Box';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
+import { getLang } from 'components/Language';
 import funcTime from 'structures/funcTime.js';
 import Select from 'components/Select';
 
@@ -49,7 +50,7 @@ Time.defaultProps = {
 	required: false,
 	name: 'func_time',
 	value: '',
-	label: 'Функция',
+	label: getLang('cmpSelectFuncTempTimeFun'),
 	helperText: '',
 	onSelect: () => {},
 };

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import { getLang } from 'components/Language';
 import InputText from 'components/Input/Text';
 
 let Account = () => {
@@ -31,14 +32,14 @@ let Account = () => {
 						<InputText
 							disabled
 							name="unique_name"
-							label="Уникальный идентификатор"
+							label={getLang('pageAccountUniq')}
 							value={uniqueName} />
 					</Box>
 					<Box py={2}>
 						<InputText
 							disabled
 							name="name"
-							label="Имя пользователя"
+							label={getLang('pageAccountName')}
 							value={name} />
 					</Box>
 					<Box py={2}>

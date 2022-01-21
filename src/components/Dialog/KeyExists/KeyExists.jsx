@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
+import { getLang } from 'components/Language';
 import Title from 'components/Title';
 import { DIALOG_KEY_EXISTS } from 'consts/dialog.js';
 import onClose from '../onClose.js';
@@ -27,15 +28,15 @@ let KetExists = () => {
 			onClose={onClose(DIALOG_KEY_EXISTS)}>
 			<DialogTitle>
 				<Title onClose={onClose(DIALOG_KEY_EXISTS)}>
-					Найдены совпадения ключей
+					{getLang('cmpDialogKeyExistsFind')}
 				</Title>
 			</DialogTitle>
 			{!!dialog
 				? <React.Fragment>
 					<DialogContent dividers>
 						<Typography>
-							Новые элементы содержат ключи которые уже существуют. <br />
-							Этим элементам будут присвоены новые уникальные значения
+							{getLang('cmpDialogKeyExistsNewElem')}<br />
+							{getLang('cmpDialogKeyExistsThisElem')}
 						</Typography>
 					</DialogContent>
 					<DialogActions>
@@ -49,7 +50,7 @@ let KetExists = () => {
 								color="secondary"
 								startIcon={<CloseIcon />}
 								onClick={onClose(DIALOG_KEY_EXISTS)}>
-								Отмена
+								{getLang('cmpDialogKeyExistsCancel')}
 							</Button>
 							<Button 
 								type="submit"
@@ -57,7 +58,7 @@ let KetExists = () => {
 								color="primary"
 								startIcon={<SaveIcon />}
 								onClick={merge}>
-								Продолжить
+								{getLang('cmpDialogKeyExistsCont')}
 							</Button>
 						</Box>
 					</DialogActions>

@@ -14,6 +14,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import LanguageIcon from '@material-ui/icons/Language';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import PersonIcon from '@material-ui/icons/Person';
+import { getLang } from 'components/Language';
 import { URL_PAGE_ACCOUNT } from 'consts/url.js';
 import onClose from '../onClose.js';
 import onExit from './onExit.js';
@@ -56,7 +57,7 @@ let Account = ({
 					<PersonIcon />
 				</ListItemAvatar>
 				<Typography>
-					Аккаунт
+					{getLang('cmpMenuAccount')}
 				</Typography>
 			</MenuItem>
 			<MenuItem onClick={_onLang}>
@@ -66,7 +67,7 @@ let Account = ({
 						: <LanguageIcon />}
 				</ListItemIcon>
 				<Typography>
-					Язык
+					{getLang('cmpMenuAccountLang')}
 				</Typography>
 				{lang 
 					? <ExpandLessIcon /> 
@@ -114,7 +115,7 @@ let Account = ({
 					<MeetingRoomIcon />
 				</ListItemAvatar>
 				<Typography>
-					Выход
+					{getLang('cmpMenuAccountExit')}
 				</Typography>
 			</MenuItem>
 		</Menu>

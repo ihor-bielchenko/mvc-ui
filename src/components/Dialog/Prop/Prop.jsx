@@ -16,6 +16,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Title from 'components/Title';
+import { getLang } from 'components/Language'
 import JsObject from 'components/JsObject';
 import InputText from 'components/Input/Text';
 import SelectDataType from 'components/Select/DataType';
@@ -97,8 +98,8 @@ let Prop = () => {
 			<DialogTitle>
 				<Title onClose={_onClose}>
 					{id >= 1
-						? 'Параметр: '+ name
-						: 'Добавить параметр'}
+						? getLang('cmpDialogPropProp') + name
+						: getLang('cmpDialogPropAdd')}
 				</Title>
 			</DialogTitle>
 			{_dialogOpenFlag
@@ -110,8 +111,8 @@ let Prop = () => {
 							<InputText 
 								required
 								name="name"
-								label="Название"
-								helperText="Для быстрого поиска придумайте название или краткое описание"
+								label={getLang('cmpDialogPropName')}
+								helperText={getLang('cmpDialogPropFastSearch')}
 								value={name}
 								onChange={onChangeName('prop')}
 								onInput={onValidateName} />
@@ -122,10 +123,10 @@ let Prop = () => {
 								onChange={onCheckVariable}
 								label={<React.Fragment>
 									<Typography>
-										Переменная
+										{getLang('cmpDialogPropVariable')}
 									</Typography>
 									<Typography variant="caption">
-										Возможность перезаписывать контент пераметра во время выполнения программы
+										{getLang('cmpDialogPropContentOverwrite')}
 									</Typography>
 								</React.Fragment>}
 								control={<Checkbox 
@@ -140,13 +141,13 @@ let Prop = () => {
 							pt={4}
 							pb={2}>
 							<Typography variant="h6">
-								Данные:
+								{getLang('cmpDialogPropData')}
 							</Typography>
 							<Box
 								position="relative"
 								width="300px">
 								<SelectDataType 
-									label="Формат данных"
+									label={getLang('cmpDialogPropFormatData')}
 									name="data_type_id"
 									value={dataTypeId}
 									onSelect={onSelectDataTypeId}
@@ -177,7 +178,7 @@ let Prop = () => {
 							color="secondary"
 							startIcon={<CloseIcon />}
 							onClick={_onClose}>
-							Отмена
+							{getLang('cmpDialogPropCancel')}
 						</Button>
 						{id >= 1
 							? <ButtonGroup>
@@ -187,7 +188,7 @@ let Prop = () => {
 									color="primary"
 									startIcon={<SaveIcon />}
 									onClick={_onSave}>
-									Сохранить
+									{getLang('cmpDialogPropSave')}
 								</Button>
 								<Button
 									variant="outlined"
@@ -196,7 +197,7 @@ let Prop = () => {
 									onClick={onDialog(DIALOG_DELETE_CONFIRM, {
 										onDelete: _onDelete,
 									})}>
-									Удалить
+									{getLang('cmpDialogPropRem')}
 								</Button>
 							</ButtonGroup>
 							: <Button
@@ -205,7 +206,7 @@ let Prop = () => {
 								color="primary"
 								startIcon={<SaveIcon />}
 								onClick={_onSave}>
-								Сохранить
+								{getLang('cmpDialogPropSave2')}
 							</Button>}
 					</Box>
 					</DialogActions>

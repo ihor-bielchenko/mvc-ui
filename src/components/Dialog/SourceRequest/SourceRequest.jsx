@@ -8,6 +8,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import CloseIcon from '@material-ui/icons/Close';
 import CheckIcon from '@material-ui/icons/Check';
+import { getLang } from 'components/Language';
 import Title from 'components/Title';
 import onSubmit from 'components/Dialog/SourceCookie/onSubmit.js';
 import onClose from 'components/Dialog/SourceCookie/onClose.js';
@@ -31,7 +32,7 @@ let SourceRequest = () => {
 			onClose={onClose(SOURCE_TYPE_REQUEST.id)}>
 			<DialogTitle>
 				<Title onClose={onClose(SOURCE_TYPE_REQUEST.id)}>
-					Параметр входящего запроса
+					{getLang('cmpDialogSourceRequestProp')}
 				</Title>
 			</DialogTitle>
 			<form onSubmit={_onSubmit}>
@@ -39,8 +40,8 @@ let SourceRequest = () => {
 					<Input
 						workspaceId={workspaceId}
 						id={id}
-						label="Название значния"
-						placeholder="Например, user_id" />
+						label={getLang('cmpDialogSourceRequestNameVal')}
+						placeholder={getLang('cmpDialogSourceRequestForExamp')} />
 				</DialogContent>
 				<DialogActions>
 					<Box 
@@ -53,14 +54,14 @@ let SourceRequest = () => {
 							color="secondary"
 							startIcon={<CloseIcon />}
 							onClick={onClose(SOURCE_TYPE_REQUEST.id)}>
-							Отмена
+							{getLang('cmpDialogSourceRequestCancel')}
 						</Button>
 						<Button 
 							variant="outlined"
 							color="primary"
 							type="submit"
 							startIcon={<CheckIcon />}>
-							Добавить
+							{getLang('cmpDialogSourceRequestAdd')}
 						</Button>
 					</Box>
 				</DialogActions>

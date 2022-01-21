@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
+import { getLang } from 'components/Language';
 import SelectTable from 'components/Select/Table';
 import onDialog from 'components/Dialog/onDialog.js';
 import loadColumnInputs from 'utils/loadColumnInputs.js';
@@ -45,7 +46,7 @@ let Column = ({
 	]);
 
 	return <Box py={2}>
-		<React.Suspense fallback={<Typography>Подождите...</Typography>}>
+		<React.Suspense fallback={<Typography>{getLang('cmpDialogFuncPropsDBCreateWait')}</Typography>}>
 			<Component
 				menu
 				onMenu={_onMenu}

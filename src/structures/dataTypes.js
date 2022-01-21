@@ -10,11 +10,12 @@ import LinkIcon from '@material-ui/icons/Link';
 import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
 import TextFormatIcon from '@material-ui/icons/TextFormat';
 import LockIcon from '@material-ui/icons/Lock';
+import { getLang } from 'components/Language';
 
 export const DATA_TYPE_ATOMIC = {
 	id: process.env.DATA_TYPE_ATOMIC,
 	icon: FindInPageIcon,
-	text: () => 'Атомарное значение',
+	text: () => getLang('structuresDataTypeAtomic'),
 };
 export const DATA_TYPE_ID = {
 	id: process.env.DATA_TYPE_ID,
@@ -24,45 +25,45 @@ export const DATA_TYPE_ID = {
 export const DATA_TYPE_TEXT = {
 	id: process.env.DATA_TYPE_TEXT,
 	icon: TextFieldsIcon,
-	text: () => 'Строка',
+	text: () => getLang('structuresDataTypeText'),
 };
 export const DATA_TYPE_NUMBER = {
 	id: process.env.DATA_TYPE_NUMBER,
 	icon: AllInclusiveIcon,
-	text: () => 'Число',
+	text: () => getLang('structuresDataTypeNumb'),
 };
 export const DATA_TYPE_BOOLEAN = {
 	id: process.env.DATA_TYPE_BOOLEAN,
 	icon: ExposureIcon,
 	disabled: true,
-	text: () => 'Логическое значение',
+	text: () => getLang('structuresDataTypeBoolean'),
 };
 export const DATA_TYPE_OBJECT = {
 	id: process.env.DATA_TYPE_OBJECT,
 	icon: InsertDriveFileIcon,
-	text: () => 'Объект',
+	text: () => getLang('structuresDataTypeObj'),
 };
 export const DATA_TYPE_ARRAY = {
 	id: process.env.DATA_TYPE_ARRAY,
 	icon: InsertDriveFileIcon,
-	text: () => 'Массив',
+	text: () => getLang('structuresDataTypeArr'),
 };
 export const DATA_TYPE_NULL = {
 	id: process.env.DATA_TYPE_NULL,
 	icon: InsertDriveFileIcon,
-	text: () => 'Пустота (NULL)',
+	text: () => getLang('structuresDataTypeNull'),
 };
 export const DATA_TYPE_RICHTEXT = {
 	id: process.env.DATA_TYPE_RICHTEXT,
 	icon: TextFormatIcon,
 	disabled: true,
-	text: () => 'Текстовый редактор',
+	text: () => getLang('structuresDataTypeRichText'),
 };
 export const DATA_TYPE_TIME = {
 	id: process.env.DATA_TYPE_TIME,
 	icon: QueryBuilderIcon,
 	disabled: true,
-	text: () => 'Дата и время',
+	text: () => getLang('structuresDataTypeTime'),
 };
 export const DATA_TYPE_EMAIL = {
 	id: process.env.DATA_TYPE_EMAIL,
@@ -73,13 +74,13 @@ export const DATA_TYPE_IP = {
 	id: process.env.DATA_TYPE_IP,
 	icon: DnsIcon,
 	disabled: true,
-	text: () => 'IP адрес',
+	text: () => getLang('structuresDataTypeIP'),
 };
 export const DATA_TYPE_MAC = {
 	id: process.env.DATA_TYPE_MAC,
 	icon: MemoryIcon,
 	disabled: true,
-	text: () => 'MAC адрес',
+	text: () => getLang('structuresDataTypeMAC'),
 };
 export const DATA_TYPE_URL = {
 	id: process.env.DATA_TYPE_URL,
@@ -90,19 +91,19 @@ export const DATA_TYPE_URL = {
 export const DATA_TYPE_PASSWORD = {
 	id: process.env.DATA_TYPE_PASSWORD,
 	icon: LockIcon,
-	text: () => 'Пароль',
+	text: () => getLang('structuresDataTypePassword'),
 };
 export const DATA_TYPE_FILE = {
 	id: process.env.DATA_TYPE_FILE,
 	icon: InsertDriveFileIcon,
 	disabled: true,
-	text: () => 'Файл',
+	text: () => getLang('structuresDataTypeFile'),
 };
 export const DATA_TYPE_MIXED = {
 	id: process.env.DATA_TYPE_MIXED,
 	icon: InsertDriveFileIcon,
 	disabled: true,
-	text: () => 'Смешанный',
+	text: () => getLang('structuresDataTypeMix'),
 };
 
 const dataTypes = {

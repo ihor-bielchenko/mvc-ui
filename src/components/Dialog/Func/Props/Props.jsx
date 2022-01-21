@@ -2,6 +2,7 @@ import React from 'react';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { funcTemplates } from 'structures/funcTemplates.js';
+import { getLang } from 'components/Language';
 
 const _load = (funcTemplateId) => () => {
 	switch (funcTemplateId) {
@@ -121,10 +122,10 @@ let Props = ({
 	return <React.Fragment>
 		<Box py={2}>
 			<Typography variant="h6">
-				Параметры функции:
+				{getLang('cmpDialogFuncPropsF')}
 			</Typography>
 		</Box>
-		<React.Suspense fallback={<Typography>Подождите...</Typography>}>
+		<React.Suspense fallback={<Typography>{getLang('cmpDialogFuncPropsWait')}</Typography>}>
 			<Component 
 				scriptId={scriptId}
 				workspaceId={workspaceId}

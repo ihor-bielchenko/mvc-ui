@@ -1,5 +1,6 @@
 import React from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
+import { getLang } from 'components/Language';
 import Select from '../Select.jsx';
 
 let OperatorUnion = ({ 
@@ -21,12 +22,12 @@ let OperatorUnion = ({
 		<MenuItem 
 			key={process.env.OPERATOR_UNION_AND}
 			value={process.env.OPERATOR_UNION_AND}>
-			И (&&)
+			{getLang('cmpSelectOperatorUnionI')} (&&)
 		</MenuItem>
 		<MenuItem 
 			key={process.env.OPERATOR_UNION_OR}
 			value={process.env.OPERATOR_UNION_OR}>
-			ИЛИ (||)
+			{getLang('cmpSelectOperatorUnionOr')} (||)
 		</MenuItem>
 		{children}
 	</Select>;
@@ -35,7 +36,7 @@ let OperatorUnion = ({
 OperatorUnion = React.memo(OperatorUnion);
 OperatorUnion.defaultProps = {
 	name: 'operator_union',
-	label: 'Оператор соединения',
+	label: getLang('cmpSelectOperatorUnion'),
 	required: false,
 };
 

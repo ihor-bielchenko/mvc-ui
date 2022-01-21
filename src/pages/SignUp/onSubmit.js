@@ -1,5 +1,6 @@
 import Store from 'components/Store';
 import onLoader from 'components/Loader/onLoader.js';
+import { getLang } from 'components/Language';
 import fetchSignUp from 'fetch/signUp.js';
 import axiosError from 'utils/axiosError.js';
 import { passwordCheck } from 'utils/validators.js';
@@ -18,7 +19,7 @@ const onSubmit = async (e, setState, recaptchaRef, locationPush) => {
 			return setState((currentState) => {
 				return {
 					...currentState,
-					password: 'Пароль и подтверждение пароля не совпадают',
+					password: getLang('pageSigUpOnSubmitNotMatch'),
 				};
 			});
 		}
@@ -37,7 +38,7 @@ const onSubmit = async (e, setState, recaptchaRef, locationPush) => {
 		return setState((currentState) => {
 			return {
 				...currentState,
-				password: 'Ошибка капчи',
+				password: getLang('pageSigUpOnSubmitErrCapch'),
 			};
 		});
 	}

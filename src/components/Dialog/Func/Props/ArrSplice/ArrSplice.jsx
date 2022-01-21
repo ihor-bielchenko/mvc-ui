@@ -4,6 +4,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+import { getLang } from 'components/Language';
 import InputText from 'components/Input/Text';
 import LogicValue from 'components/Input/LogicValue.jsx';
 import onDialog from 'components/Dialog/onDialog.js';
@@ -81,7 +82,7 @@ let ArrSplice = ({
 			<Typography
 				variant="caption"
 				color="textSecondary">
-				Какой массив нужно изменить
+				{getLang('cmpDialogFuncPropsArrSpliceEditArr')}
 			</Typography>
 			<Box mt="6px">
 			{prop1
@@ -94,7 +95,7 @@ let ArrSplice = ({
 					color="primary"
 					startIcon={<AddIcon fontSize="small" />}
 					onClick={_onMenu1}>
-					Выбрать массив
+					{getLang('cmpDialogFuncPropsArrSpliceSelectArr')}
 				</Button>}
 			</Box>
 		</Box>
@@ -107,9 +108,9 @@ let ArrSplice = ({
 				onChange={_onChange2}
 				defaultValue={prop2}
 				name="prop-2"
-				label="Индекс, по которому функция начинает изменять массив"
-				placeholder="Число"
-				helperText="Выберите созданный параметр или укажите значение вручную" />
+				label={getLang('cmpDialogFuncPropsArrSpliceIndex')}
+				placeholder={getLang('cmpDialogFuncPropsArrSpliceNumb')}
+				helperText={getLang('cmpDialogFuncPropsArrSpliceSelectProp')} />
 		</Box>
 		<Box my={3}>
 			<InputText
@@ -120,15 +121,15 @@ let ArrSplice = ({
 				onChange={_onChange3}
 				defaultValue={prop3}
 				name="prop-3"
-				label="Количество удаляемых из массива элементов"
-				placeholder="Текст или число"
-				helperText="Выберите созданный параметр или укажите значение вручную" />
+				label={getLang('cmpDialogFuncPropsArrSpliceCountRemElemens')}
+				placeholder={getLang('cmpDialogFuncPropsArrSpliceTextOrNumb')}
+				helperText={getLang('cmpDialogFuncPropsArrSpliceSelectProp2')} />
 		</Box>
 		<Box my={3}>
 			<Typography
 				variant="caption"
 				color="textSecondary">
-				Массив новых элементов (будут добавлены вместо удаленных)
+				{getLang('cmpDialogFuncPropsArrSpliceNewArr')}
 			</Typography>
 			<Box mt="6px">
 			{prop4
@@ -141,7 +142,7 @@ let ArrSplice = ({
 					color="primary"
 					startIcon={<AddIcon fontSize="small" />}
 					onClick={_onMenu4}>
-					Выбрать массив
+					{getLang('cmpDialogFuncPropsArrSpliceSelectNumb')}
 				</Button>}
 			</Box>
 		</Box>

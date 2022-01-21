@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Divider from '@material-ui/core/Divider';
 import CloseIcon from '@material-ui/icons/Close';
+import { getLang } from 'components/Language';
 import Title from 'components/Title';
 import onClose from '../onClose.js';
 import { DIALOG_BUILD } from 'consts/dialog.js';
@@ -46,7 +47,7 @@ let Build = ({ history }) => {
 				onClose={onClose(DIALOG_BUILD)}>
 				<DialogTitle>
 					<Title onClose={onClose(DIALOG_BUILD)}>
-						Сборка сервиса
+						{getLang('cmpDialogBuildServ')}
 					</Title>
 				</DialogTitle>
 				<DialogContent dividers>
@@ -55,7 +56,7 @@ let Build = ({ history }) => {
 							<Typography 
 								variant="h6"
 								color="primary">
-								Все файлы сервиса успешно собраны
+								{getLang('cmpDialogBuildAllGood')}
 							</Typography>
 						</Box>
 						: <React.Fragment />}
@@ -64,7 +65,7 @@ let Build = ({ history }) => {
 							<Typography 
 								variant="h6"
 								color="secondary">
-								Возникла критическая ошибка в сборке сервиса. Пожалуйста, обратитесь в техническую поддержку
+								{getLang('cmpDialogBuildCritErr')}
 							</Typography>
 						</Box>
 						: <LinearProgress 
@@ -99,8 +100,8 @@ let Build = ({ history }) => {
 						startIcon={<CloseIcon />}
 						onClick={onClose(DIALOG_BUILD)}>
 						{progress.value === -2
-							? 'Закрыть'
-							: 'Отмена'}
+							? getLang('cmpDialogBuildClose')
+							: getLang('cmpDialogBuildCancel')}
 					</Button>
 				</DialogActions>
 			</Dialog>

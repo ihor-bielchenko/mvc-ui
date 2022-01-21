@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
+import { getLang } from 'components/Language';
 import Passwords from 'pages/SignUp/Passwords.jsx';
 import {
 	URL_PAGE_SIGN_UP,
@@ -37,7 +38,7 @@ let Reset = ({ history }) => {
 						component="h1" 
 						variant="h5"
 						align="center">
-						Обновите доступы
+						{getLang('pageResetUpdate')}
 					</Typography>
 					<form 
 						noValidate 
@@ -53,7 +54,7 @@ let Reset = ({ history }) => {
 							type="submit"
 							variant="contained"
 							color="primary">
-							Подтвердить
+							{getLang('pageResetOk')}
 						</Button>
 					</form>
 				</Box>
@@ -66,12 +67,12 @@ let Reset = ({ history }) => {
 				component={Link}
 				to={URL_PAGE_SIGN_UP}
 				variant="body2">
-				Создать аккаунт
+				{getLang('pageResetCreate')}
 			</Typography>
 		</Box>
 		<Link to={URL_PAGE_SIGN_IN}>
 			<Typography variant="body2">
-				Вход
+				{getLang('pageResetSignIn')}
 			</Typography>
 		</Link>
 	</Container>;

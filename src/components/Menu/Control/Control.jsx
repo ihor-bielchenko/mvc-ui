@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import EditIcon from '@material-ui/icons/Edit';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import { getLang } from 'components/Language';
 import onClose from '../onClose.js';
 
 let Control = ({ 
@@ -36,7 +37,7 @@ let Control = ({
 						<EditIcon />
 					</ListItemAvatar>
 					<Typography>
-						Редактировать
+						{getLang('cmpMenuControlEdit')}
 					</Typography>
 				</MenuItem>}
 			{typeof onCopy === 'function'
@@ -45,7 +46,7 @@ let Control = ({
 						<FileCopyIcon color="primary" />
 					</ListItemAvatar>
 					<Typography color="primary">
-						Копировать
+						{getLang('cmpMenuControlCopy')}
 					</Typography>
 				</MenuItem>}
 			{typeof onDelete === 'function'
@@ -54,7 +55,7 @@ let Control = ({
 						<DeleteForeverIcon color="secondary" />
 					</ListItemAvatar>
 					<Typography color="secondary">
-						Удалить
+						{getLang('cmpMenuControlRem')}
 					</Typography>
 				</MenuItem>}
 			{children}

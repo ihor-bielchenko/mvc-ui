@@ -10,6 +10,7 @@ import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import CloseIcon from '@material-ui/icons/Close';
 import SaveIcon from '@material-ui/icons/Save';
+import { getLang } from 'components/Language';
 import Title from 'components/Title';
 import InputText from 'components/Input/Text';
 import onClose from '../onClose.js';
@@ -39,16 +40,16 @@ let UrlValue = ({ history }) => {
 					<DialogTitle>
 						<Title onClose={onClose(DIALOG_URL_VALUE)}>
 							{index > 0
-								? 'Редактировать url параметр'
-								: 'Добавить url параметр'}
+								? getLang('cmpDialogSourceScriptUrlValueEdit')
+								: getLang('cmpDialogSourceScriptUrlValueAdd')}
 						</Title>
 					</DialogTitle>
 					<DialogContent dividers>
 						<Box my={2}>
 							<InputText 
 								required
-								label="Путь"
-								placeholder="Например: test"
+								label={getLang('cmpDialogSourceScriptUrlValuePath')}
+								placeholder={getLang('cmpDialogSourceScriptUrlValueExamp')}
 								type="text"
 								name="value"
 								defaultValue={value}
@@ -66,14 +67,14 @@ let UrlValue = ({ history }) => {
 								color="secondary"
 								startIcon={<CloseIcon />}
 								onClick={onClose(DIALOG_URL_VALUE)}>
-								Отмена
+								{getLang('cmpDialogSourceScriptUrlValueCancel')}
 							</Button>
 							<Button 
 								type="submit"
 								variant="outlined"
 								color="primary"
 								startIcon={<SaveIcon />}>
-								Сохранить
+								{getLang('cmpDialogSourceScriptUrlValueSave')}
 							</Button>
 						</Box>
 					</DialogActions>

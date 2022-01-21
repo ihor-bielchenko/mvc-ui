@@ -2,6 +2,7 @@ import React from 'react';
 import Box from '@material-ui/core/Box';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
+import { getLang } from 'components/Language';
 import funcArr from 'structures/funcArr.js';
 import Select from 'components/Select';
 
@@ -52,7 +53,7 @@ Arr.defaultProps = {
 	required: false,
 	name: 'func_arr',
 	value: '',
-	label: 'Функция',
+	label: getLang('cmpSelectFuncTempArrFun'),
 	helperText: '',
 	inArr: false,
 	onSelect: () => {},

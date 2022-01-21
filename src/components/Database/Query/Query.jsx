@@ -5,6 +5,7 @@ import Chip from '@material-ui/core/Chip';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Store from 'components/Store';
+import { getLang } from 'components/Language';
 import onDialog from 'components/Dialog/onDialog.js';
 import { 
 	DIALOG_DB_QUERY,
@@ -50,7 +51,7 @@ let Query = () => {
 			variant="outlined"
 			color="primary"
 			onClick={onDialog(DIALOG_DB_QUERY, { id: 0 })}>
-			Добавить
+			{getLang('cmpDatabaseQueryAdd')}
 		</Button>
 	</React.Fragment>;
 };

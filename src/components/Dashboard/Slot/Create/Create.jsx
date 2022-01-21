@@ -3,9 +3,11 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+import { getLang } from 'components/Language';
 import onDialog from 'components/Dialog/onDialog.js';
 import { DIALOG_SERVICE_TEMPLATE } from 'consts/dialog.js';
 import Slot from '../Slot.jsx';
+
 
 let Create = ({ 
 	projectId,
@@ -29,7 +31,7 @@ let Create = ({
 					justifyContent: 'center',
 				}}>
 				<Typography variant="subtitle1">
-					Новый сервис
+					{getLang('cmpDashbordSlotCreateNewSer')}
 				</Typography>
 			</Button>
 		</Slot>

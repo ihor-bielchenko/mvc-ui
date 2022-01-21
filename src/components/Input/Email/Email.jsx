@@ -1,4 +1,5 @@
 import React from 'react';
+import { getLang } from 'components/Language';
 import Input from '../Input.jsx';
 import onValidate from './onValidate.js';
 
@@ -23,7 +24,7 @@ let Email = ({
 
 Email = React.memo(Email);
 Email.defaultProps = {
-	label: 'Email (адрес электронной почты)',
+	label: getLang('cmpInputEmail'),
 	placeholder: 'example@mail.com',
 	onInput: () => {},
 };

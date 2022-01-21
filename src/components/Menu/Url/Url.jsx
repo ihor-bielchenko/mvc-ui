@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
+import { getLang } from 'components/Language';
 import onDialog from 'components/Dialog/onDialog.js';
 import { 
 	DIALOG_URL_VALUE,
@@ -32,14 +33,14 @@ let Url = ({
 				index,
 			})}>
 				<Typography>
-					Путь
+					{getLang('cmpMenuUrlPath')}
 				</Typography>
 			</MenuItem>
 			<MenuItem onClick={onDialog(DIALOG_URL_PLACEHOLDER, {
 				index,
 			})}>
 				<Typography>
-					Плэйсхолдер
+					{getLang('cmpMenuUrlPlace')}
 				</Typography>
 			</MenuItem>
 		</Menu>

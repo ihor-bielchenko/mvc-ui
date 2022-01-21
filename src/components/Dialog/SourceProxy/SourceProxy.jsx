@@ -10,6 +10,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import CloseIcon from '@material-ui/icons/Close';
 import SaveIcon from '@material-ui/icons/Save';
+import { getLang } from 'components/Language';
 import Title from 'components/Title';
 import SelectService from 'components/Select/Service';
 import SelectRoute from 'components/Select/Route';
@@ -71,7 +72,7 @@ let SourceProxy = () => {
 			onClose={_onClose}>
 			<DialogTitle>
 				<Title onClose={_onClose}>
-					Получить значение из другого сервиса
+					{getLang('cmpDialogSourceProxy')}
 				</Title>
 			</DialogTitle>
 			<DialogContent dividers>
@@ -101,10 +102,10 @@ let SourceProxy = () => {
 									label="URL *" />
 								<Tab
 									value={1} 
-									label="Заголовки" />
+									label={getLang('cmpDialogSourceProxyNames')} />
 								<Tab 
 									value={2}
-									label="Запрос" />
+									label={getLang('cmpDialogSourceProxyQuery')} />
 							</Tabs>
 							<div style={{ display: tab === 0 ? 'block' : 'none' }}>
 								<Url 
@@ -132,14 +133,14 @@ let SourceProxy = () => {
 							color="secondary"
 							startIcon={<CloseIcon />}
 							onClick={_onClose}>
-							Отмена
+							{getLang('cmpDialogSourceProxyCancel')}
 						</Button>
 						<Button 
 							type="submit"
 							variant="outlined"
 							color="primary"
 							startIcon={<SaveIcon />}>
-							Сохранить
+							{getLang('cmpDialogSourceProxySave')}
 						</Button>
 					</DialogActions>
 				</form>

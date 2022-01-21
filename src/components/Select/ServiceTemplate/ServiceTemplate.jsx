@@ -1,5 +1,6 @@
 import React from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
+import { getLang } from 'components/Language';
 import {
 	SERVICE_TEMPLATE_BASE,
 	SERVICE_TEMPLATE_COMMERCE,
@@ -46,7 +47,7 @@ let ServiceTemplate = ({
 ServiceTemplate = React.memo(ServiceTemplate);
 ServiceTemplate.defaultProps = {
 	name: 'template_id',
-	label: 'Шааблон сервиса',
+	label: getLang('cmpSelectServiceTemp'),
 	required: false,
 	disabled: false,
 };

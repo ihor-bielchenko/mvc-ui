@@ -32,6 +32,7 @@ import onAdd from './onAdd.js';
 import onEdit from './onEdit.js';
 import onDelete from './onDelete.js';
 
+
 let Table = ({ disabledSource }) => {
 	const filterOperatorId = useSelector((state) => state.jsObject.tempValue.filter_operator_id ?? process.env.OPERATOR_UNION_AND);
 	const filterKeys = useSelector((state) => Object.keys(state.jsObject.tempValue.filter || {}));
@@ -54,13 +55,13 @@ let Table = ({ disabledSource }) => {
 						<TableHead>
 							<TableRow>
 								<TableCell>
-									Поле
+									{getLang('cmpDatabaseFilterTableField')}
 								</TableCell>
 								<TableCell>
-									Оператор
+									{getLang('cmpDatabaseFilterTableOper')}
 								</TableCell>
 								<TableCell>
-									Значение
+									{getLang('cmpDatabaseFilterTableValue')}
 								</TableCell>
 							</TableRow>
 						</TableHead>
@@ -154,7 +155,7 @@ let Table = ({ disabledSource }) => {
 				<Typography 
 					variant="body2"
 					color="textSecondary">
-					Не создан ни один фильтр
+					{getLang('cmpDatabaseFilterTableNoFilter')}
 				</Typography>
 			</Box>}
 			<Box mt={2}>
@@ -164,7 +165,7 @@ let Table = ({ disabledSource }) => {
 					variant="outlined"
 					startIcon={<AddIcon />}
 					onClick={onAdd}>
-					Добавить
+					{getLang('cmpDatabaseFilterTableAdd')}
 				</Button>
 			</Box>
 		</React.Fragment>;

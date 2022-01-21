@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
 import Store from 'components/Store';
+import { getLang } from 'components/Language';
 import InputText from 'components/Input/Text';
 import SelectColumn from 'components/Select/Column';
 import SelectOperatorIf from 'components/Select/OperatorIf';
@@ -49,7 +50,7 @@ let Input = ({
 	const Component = React.lazy(loadColumnInputs(columnDataTypeId));
 
 	return <React.Fragment>
-		<React.Suspense fallback={<Typography>Подождите...</Typography>}>
+		<React.Suspense fallback={<Typography>{getLang('cmpDatabaseFilterFormWait')}</Typography>}>
 			<Component
 				{ ...disabledSource
 					? {}
@@ -176,7 +177,7 @@ let Form = ({
 				color="secondary"
 				startIcon={<CloseIcon />}
 				onClick={onCancel}>
-				Отменить
+				{getLang('cmpDatabaseFilterFormCancel')}
 			</Button>
 			<Button
 				type="submit"
@@ -184,7 +185,7 @@ let Form = ({
 				color="primary"
 				startIcon={<CheckIcon />}
 				onClick={_onSave}>
-				Сохранить
+				{getLang('cmpDatabaseFilterFormSave')}
 			</Button>
 		</Box>
 	</React.Fragment>;

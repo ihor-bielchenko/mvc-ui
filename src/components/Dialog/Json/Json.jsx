@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { getLang } from 'components/Language';
 import Title from 'components/Title';
 import JsObject from 'components/JsObject';
 import InputText from 'components/Input/Text';
@@ -94,8 +95,8 @@ let Json = () => {
 			<DialogTitle>
 				<Title onClose={_onClose}>
 					{id >= 1
-						? 'JSON-ответ: '+ name
-						: 'Добавить JSON-ответ'}
+						? getLang('cmpDialogJsonResp') + name
+						: getLang('cmpDialogJsonRespAdd')}
 				</Title>
 			</DialogTitle>
 			{_dialogOpenFlag
@@ -105,8 +106,8 @@ let Json = () => {
 							<InputText 
 								required
 								name="name"
-								label="Название"
-								helperText="Для быстрого поиска придумайте название или краткое описание"
+								label={getLang('cmpDialogJsonName')}
+								helperText={getLang('cmpDialogJsonForFast')}
 								value={name}
 								onChange={onChangeName('json')}
 								onInput={onValidateName} />
@@ -122,7 +123,7 @@ let Json = () => {
 							py={2}
 							position="relative">
 							<SelectDataType
-								label="Формат данных"
+								label={getLang('cmpDialogJsonFormatData')}
 								name="data_type_id"
 								value={dataTypeId}
 								onSelect={onSelectDataTypeId}
@@ -136,7 +137,7 @@ let Json = () => {
 							pt={4}
 							pb={2}>
 							<Typography variant="h6">
-								Данные:
+								{getLang('cmpDialogJsonData')}
 							</Typography>
 						</Box>
 						<JsObject 
@@ -159,7 +160,7 @@ let Json = () => {
 							color="secondary"
 							startIcon={<CloseIcon />}
 							onClick={_onClose}>
-							Отмена
+							{getLang('cmpDialogJsonCancel')}
 						</Button>
 						{id >= 1
 							? <ButtonGroup>
@@ -169,7 +170,7 @@ let Json = () => {
 									color="primary"
 									startIcon={<SaveIcon />}
 									onClick={_onSave}>
-									Сохранить
+									{getLang('cmpDialogJsonSave')}
 								</Button>
 								<Button
 									variant="outlined"
@@ -178,7 +179,7 @@ let Json = () => {
 									onClick={onDialog(DIALOG_DELETE_CONFIRM, {
 										onDelete: _onDelete,
 									})}>
-									Удалить
+									{getLang('cmpDialogJsonRem')}
 								</Button>
 							</ButtonGroup>
 							: <Button
@@ -187,7 +188,7 @@ let Json = () => {
 								color="primary"
 								startIcon={<SaveIcon />}
 								onClick={_onSave}>
-								Сохранить
+								{getLang('cmpDialogJsonSave2')}
 							</Button>}
 					</Box>
 					</DialogActions>

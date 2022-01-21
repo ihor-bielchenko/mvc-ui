@@ -1,5 +1,6 @@
 import React from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
+import { getLang } from 'components/Language';
 import method from 'structures/method.js';
 import Select from '../Select.jsx';
 
@@ -39,7 +40,7 @@ let Method = ({
 Method = React.memo(Method);
 Method.defaultProps = {
 	name: 'method_id',
-	label: 'Метод',
+	label: getLang('cmpSelectMethod'),
 	required: false,
 	disabled: false,
 };

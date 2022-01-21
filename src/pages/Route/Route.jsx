@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import { getLang } from 'components/Language';
 import Header from 'components/Header';
 import Breadcrumbs from 'components/Breadcrumbs';
 import ComponentRoute from 'components/Route';
@@ -64,14 +65,14 @@ let Route = ({ history }) => {
 						<Button
 							disabled
 							color="primary">
-							Настройка роута
+							{getLang('pageRouteSetting')}
 						</Button>
 						<Button
 							disabled={!(routeId > 0 && scriptId > 0)}
 							component={Link}
 							to={`/${projectId}/${URL_PAGE_SERVICE}/${serviceId}/${URL_PAGE_API}/${routeId}/${URL_PAGE_SCRIPT}/${scriptId}`}
 							color="primary">
-							Программа
+							{getLang('pageRouteProg')}
 						</Button>
 					</Box>
 				</Box>

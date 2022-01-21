@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import MenuItem from '@material-ui/core/MenuItem';
+import { getLang } from 'components/Language';
 import { METHOD_TYPE_GET } from 'structures/method.js';
 import Select from '../Select.jsx';
 
@@ -40,7 +41,7 @@ let Route = ({
 Route = React.memo(Route);
 Route.defaultProps = {
 	name: 'route_id',
-	label: 'Роут',
+	label: getLang('cmpSelectRoute'),
 	required: false,
 };
 

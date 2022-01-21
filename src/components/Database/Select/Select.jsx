@@ -9,6 +9,7 @@ import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import Checkbox from '@material-ui/core/Checkbox';
 import Store from 'components/Store';
+import { getLang } from 'components/Language';
 import InputNumeric from 'components/Input/Numeric';
 import onDialog from 'components/Dialog/onDialog.js';
 import onValidateSource from 'components/Dialog/Func/Props/onValidate.js';
@@ -75,7 +76,7 @@ let Select = ({
 					xs={6}> 
 					<Box py={2}>
 						<FormControlLabel
-							label="Получать из базы коллекцию элементов"
+							label={getLang('cmpDatabaseSelectGetColle')}
 							name="is_collection"
 							control={<Switch 
 								{ ...typeof isCollection === 'boolean'
@@ -101,7 +102,7 @@ let Select = ({
 								onValue={_onMenuOffset}
 								onDelete={_onClearOffset}
 								name="offset"
-								label="Начало выборки (offset)"
+								label={getLang('cmpDatabaseSelectStart')}
 								placeholder="0"
 								defaultValue={offset}
 								onChange={onChangeOffset} />
@@ -115,7 +116,7 @@ let Select = ({
 								onValue={_onMenuLimit}
 								onDelete={_onClearLimit}
 								name="limit"
-								label="Лимит"
+								label={getLang('cmpDatabaseSelectLimit')}
 								placeholder="10"
 								defaultValue={limit}
 								onChange={onChangeLimit} />
@@ -131,7 +132,7 @@ let Select = ({
 			<Typography 
 				variant="subtitle2"
 				color="textSecondary">
-				Какие поля нужно выбрать из базы данных?
+				{getLang('cmpDatabaseSelectFieldOfDB')}
 			</Typography>
 		</Box>
 		<FormGroup>

@@ -1,5 +1,6 @@
 import React from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
+import { getLang } from 'components/Language';
 import protocol from 'structures/protocol.js';
 import Select from '../Select.jsx';
 
@@ -39,7 +40,7 @@ let Protocol = ({
 Protocol = React.memo(Protocol);
 Protocol.defaultProps = {
 	name: 'protocol_id',
-	label: 'Протокол',
+	label: getLang('cmpSelectProtocol'),
 	required: false,
 	disabled: false,
 };
