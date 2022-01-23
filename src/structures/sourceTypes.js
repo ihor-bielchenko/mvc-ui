@@ -8,6 +8,7 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import SyncAltIcon from '@material-ui/icons/SyncAlt';
 import AccountTreeIcon from '@material-ui/icons/AccountTree';
 import LinearScaleIcon from '@material-ui/icons/LinearScale';
+import { getLang } from 'components/Language';
 import {
 	DATA_TYPE_TEXT,
 	DATA_TYPE_RICHTEXT,
@@ -27,7 +28,7 @@ import {
 export const SOURCE_TYPE_MANUALLY = {
 	id: process.env.SOURCE_TYPE_MANUALLY,
 	icon: EditIcon,
-	text: () => 'Вручную',
+	text: () => getLang('structuresSourceTypesManual'),
 	dataTypeValidating: () => ([
 		DATA_TYPE_TEXT.id,
 		DATA_TYPE_RICHTEXT.id,
@@ -45,7 +46,7 @@ export const SOURCE_TYPE_MANUALLY = {
 export const SOURCE_TYPE_DB = {
 	id: process.env.SOURCE_TYPE_DB,
 	icon: StorageIcon,
-	text: () => 'База данных',
+	text: () => getLang('structuresSourceTypesDB'),
 	dataTypeValidating: () => ([
 		DATA_TYPE_TEXT.id,
 		DATA_TYPE_RICHTEXT.id,
@@ -64,7 +65,7 @@ export const SOURCE_TYPE_DB = {
 export const SOURCE_TYPE_PROXY_PASS = {
 	id: process.env.SOURCE_TYPE_PROXY_PASS,
 	icon: LinkIcon,
-	text: () => 'Из другого сервиса',
+	text: () => getLang('structuresSourceTypesPass'),
 	dataTypeValidating: () => ([
 		DATA_TYPE_OBJECT.id,
 	]),
@@ -72,7 +73,7 @@ export const SOURCE_TYPE_PROXY_PASS = {
 export const SOURCE_TYPE_HEADER = {
 	id: process.env.SOURCE_TYPE_HEADER,
 	icon: SyncAltIcon,
-	text: () => 'Заголовок запроса',
+	text: () => getLang('structuresSourceTypesHeader'),
 	dataTypeValidating: () => ([
 		DATA_TYPE_TEXT.id,
 		DATA_TYPE_NUMBER.id,
@@ -88,7 +89,7 @@ export const SOURCE_TYPE_HEADER = {
 export const SOURCE_TYPE_REQUEST = {
 	id: process.env.SOURCE_TYPE_REQUEST,
 	icon: SendIcon,
-	text: () => 'Параметр запроса',
+	text: () => getLang('structuresSourceTypesReq'),
 	dataTypeValidating: () => ([
 		DATA_TYPE_TEXT.id,
 		DATA_TYPE_NUMBER.id,
@@ -104,7 +105,7 @@ export const SOURCE_TYPE_REQUEST = {
 export const SOURCE_TYPE_COOKIE = {
 	id: process.env.SOURCE_TYPE_COOKIE,
 	icon: AssignmentIcon,
-	text: () => 'Куки',
+	text: () => getLang('structuresSourceTypesCookie'),
 	dataTypeValidating: () => ([
 		DATA_TYPE_TEXT.id,
 		DATA_TYPE_NUMBER.id,
@@ -120,7 +121,7 @@ export const SOURCE_TYPE_COOKIE = {
 export const SOURCE_TYPE_PLACEHOLDER = {
 	id: process.env.SOURCE_TYPE_PLACEHOLDER,
 	icon: LinearScaleIcon,
-	text: () => 'Плэйсхолдер',
+	text: () => getLang('structuresSourceTypesPlace'),
 	dataTypeValidating: () => ([
 		DATA_TYPE_TEXT.id,
 		DATA_TYPE_NUMBER.id,
@@ -136,7 +137,7 @@ export const SOURCE_TYPE_PLACEHOLDER = {
 export const SOURCE_TYPE_RAND = {
 	id: process.env.SOURCE_TYPE_RAND,
 	icon: BubbleChartIcon,
-	text: () => 'Рандом',
+	text: () => getLang('structuresSourceTypesRand'),
 	disabled: true,
 	dataTypeValidating: () => ([]),
 };
@@ -145,7 +146,7 @@ export const SOURCE_TYPE_SCRIPT = {
 	icon: AccountTreeIcon,
 	disabled: true,
 	text: (text = '') => <React.Fragment>
-		Программа {text
+		{getLang('structuresSourceTypesProg')} {text
 			? <b>- {text}</b>
 			: ''}
 	</React.Fragment>,

@@ -1,36 +1,37 @@
+import { getLang } from 'components/Language';
 
 export const METHOD_TYPE_GET = {
 	id: process.env.METHOD_TYPE_GET,
 	name: 'GET',
-	text: () => 'получить',
+	text: () => getLang('structuresMethodGet'),
 	backgroundColor: '#1976d2',
 	textColor: '#FFF',
 };
 export const METHOD_TYPE_POST = {
 	id: process.env.METHOD_TYPE_POST,
 	name: 'POST',
-	text: () => 'создать',
+	text: () => getLang('structuresMethodPost'),
 	backgroundColor: '#4caf50',
 	textColor: '#FFF',
 };
 export const METHOD_TYPE_PUT = {
 	id: process.env.METHOD_TYPE_PUT,
 	name: 'PUT',
-	text: () => 'перезаписать',
+	text: () => getLang('structuresMethodPut'),
 	backgroundColor: '#ff9800',
 	textColor: '#FFF',
 };
 export const METHOD_TYPE_PATCH = {
 	id: process.env.METHOD_TYPE_PATCH,
 	name: 'PATCH',
-	text: () => 'обновить',
+	text: () => getLang('structuresMethodPatch'),
 	backgroundColor: '#9c27b0',
 	textColor: '#FFF',
 };
 export const METHOD_TYPE_DELETE = {
 	id: process.env.METHOD_TYPE_DELETE,
 	name: 'DELETE',
-	text: () => 'удалить',
+	text: () => getLang('structuresMethodDelete'),
 	backgroundColor: '#f44336',
 	textColor: '#FFF',
 };

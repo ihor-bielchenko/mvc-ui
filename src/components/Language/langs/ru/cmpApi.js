@@ -72,6 +72,29 @@ export const cmpDialogBuildCritErr = "Возникла критическая о
 export const cmpDialogBuildClose = 'Закрыть';
 export const cmpDialogBuild = "Отмена";
 
+//cmpDialogBuildOnMount
+export const cmpDialogBuildOnMountStartConf = 'Запуск процесса конфигурации';
+export const cmpDialogBuildOnMountStartBuild = 'Запуск сборки  "';
+export const cmpDialogBuildOnMountContr = 'Контроллер "';
+export const cmpDialogBuildOnMountContr2 = '" успешно собран';
+export const cmpDialogBuildOnMountDump = 'Дамп базы данных';
+export const cmpDialogBuildOnMountStartArh = 'Запуск архивации';
+export const cmpDialogBuildOnMountEndConf = 'Завершение конфигурации';
+export const cmpDialogBuildOnMountAllOk = 'Все файлы успешно собраны!';
+
+//cmpDialogRunOnMount
+export const cmpDialogRunOnMountStart = 'Запуск процесса конфигурации';
+export const cmpDialogRunOnMountStartBuild = 'Запуск сборки  "';
+export const cmpDialogRunOnMountControl = 'Контроллер "';
+export const cmpDialogRunOnMountControl2 = '" успешно собран';
+export const cmpDialogRunOnMountDump = 'Дамп базы данных';
+export const cmpDialogRunOnMountArh = 'Запуск архивации';
+export const cmpDialogRunOnMountConfig = 'Конфигурация...';
+export const cmpDialogRunOnMountAddCloud = 'Добавление в облако...';
+export const cmpDialogRunOnMountEndConfig = 'Завершение конфигурации';
+export const cmpDialogRunOnMountAllOk = 'Все файлы успешно собраны!';
+export const cmpDialogRunOnMountServStart = 'Сервис запущен!';
+
 //cmpDialogCondition
 export const cmpDialogConditionCond = 'Условие: ';
 export const cmpDialogConditionAddCond = 'Добавить условие';
@@ -552,6 +575,7 @@ export const cmpScriptActionsRes2 = 'JSON-ответ';
 
 //cmpScriptActionsSlotOptionDataType
 export const cmpScriptActionsSlotOptionDataType = 'Не определен';
+export const cmpScriptActionsSlotOptionDataType2 = 'Тип:';
 
 //cmpScriptActionsSlotCreate
 export const cmpScriptActionsSlotCreate = 'Добавить';
@@ -736,6 +760,7 @@ export const pageRouteProg = "Программа";
 //pageSigIn
 export const pageSigIn = "Вход";
 export const pageSigIn2 = "Войти";
+export const pageSigInEmailAdr = "Email адрес";
 export const pageSigInCreate = "Создать аккаунт";
 export const pageSigInRecovery = "Восстановить аккаунт";
 export const pageSigInPassword = "Пароль";
@@ -812,12 +837,184 @@ export const structuresFuncArrFindSub = 'Возвращает значение �
 export const structuresFuncArrToObj = 'Преобразовать в объект';
 export const structuresFuncArrToObjSub = 'Преобразовать массив в объект';
 
+//structuresFuncCategories
+export const structuresFuncCategoriesIf = 'Сравнение данных';
+export const structuresFuncCategoriesIfAct = 'Основные действия для проверки данных';
+export const structuresFuncCategoriesText = 'Текстовые функции';
+export const structuresFuncCategoriesTextAct = 'Обработка, преобразование и генерация текстов';
+export const structuresFuncCategoriesMath = 'Математика и числа';
+export const structuresFuncCategoriesMathAct = 'Работа с числами и выполнение расчетов';
+export const structuresFuncCategoriesArr = 'Массивы';
+export const structuresFuncCategoriesArrAct = 'Функции для создания и управления массивами';
+export const structuresFuncCategoriesObj = 'Объекты';
+export const structuresFuncCategoriesObjAct = 'Функции для создания и управлeния объектами';
+export const structuresFuncCategoriesDB = 'База данных';
+export const structuresFuncCategoriesDBAct = 'Работа с базой данных';
+export const structuresFuncCategoriesTime = 'Дата и время';
+export const structuresFuncCategoriesTimeAct = 'Создание и форматирование временных значений';
+export const structuresFuncCategoriesHash = 'Шифрование и кодировка';
+export const structuresFuncCategoriesHashAct = 'Генерация паролей и работа с зашифрованными данными';
+export const structuresFuncCategoriesServer = 'Сервер и URL';
+export const structuresFuncCategoriesServerAct = 'Отправка запросов на другие ресурсы';
 
+//structuresFuncDB
+export const structuresFuncDBCreate = 'Создать запись';
+export const structuresFuncDBCreateAct = 'Добавить в базу новые данные';
+export const structuresFuncDBUpdate = 'Обновить запись';
+export const structuresFuncDBUpdateAct = 'Обновить даннык в базе данных';
+export const structuresFuncDBCreateCol = 'Добавить колонку';
+export const structuresFuncDBCreateColAct = 'Добавить в базу новую колонку';
+export const structuresFuncDBUpdateCol = 'Обновить колонку';
+export const structuresFuncDBUpdateColAct = 'Обновить колонку в базе данных';
+export const structuresFuncDBCopy = 'Копировать';
+export const structuresFuncDBCopyAct = 'Копировать данные в базе';
+export const structuresFuncDBRem = 'Удалить';
+export const structuresFuncDBRemAct = 'Удалить данные из базы';
+export const structuresFuncDBRemCol = 'Удалить колонку';
+export const structuresFuncDBRemColAct = 'Удалить колонку из базы. Все данных из этого поля будут потеряны';
+export const structuresFuncDBCount = 'Получить количество строк';
+export const structuresFuncDBCountAct = 'Функция для получения количества строк таблицы';
 
+//structuresFuncHash
+export const structuresFuncHashCreatPas = 'Создать пароль';
+export const structuresFuncHashCreatPasSub = 'Сгенерировать уникальный пароль с выбором сложности';
+export const structuresFuncHashEncode = 'Преобразовать в base64';
+export const structuresFuncHashEncodeSub = 'Кодировать данные в base64';
+export const structuresFuncHashDecode = 'Декодировать base64';
+export const structuresFuncHashDecodeSub = 'Декодировать base64 код в исходный вид';
+export const structuresFuncHashSimple = 'Простое хеширование';
+export const structuresFuncHashSimpleSub = 'Создание хеш строки с помощью алгоритма md5';
+export const structuresFuncHashCrypto = 'Шифрование по ключу';
+export const structuresFuncHashCryptoSub = 'Шифрование данных с помощью алгоритма sha256';
 
+//structuresFuncIf
+export const structuresFuncIfCompare = 'Сравнить два значения';
+export const structuresFuncIfCompareSub = 'Больше, меньше или равно';
+export const structuresFuncIfType = 'Тип значения';
+export const structuresFuncIfTypeSub = 'Проверить тип значения (строка, число, файл и т.д.)';
+export const structuresFuncIfNot = 'Значение не пустое';
+export const structuresFuncIfNotSub = 'Проверить, что значение состоит из каких-то данных';
+export const structuresFuncIfParity = 'Четность числа';
+export const structuresFuncIfParitySub = 'Является ли значение четным или нет';
+export const structuresFuncIfInt = 'Определить, что число целое';
+export const structuresFuncIfIntSub = 'Является ли значение целым или дробным';
+export const structuresFuncIfInfin = 'Бесконечность';
+export const structuresFuncIfInfinSub = 'В результате деления числа на 0 или если результат вычислений, не попадает в допустимый диапазон чисел JavaScript';
+export const structuresFuncIfNan = 'Не числовое значение (NaN)';
+export const structuresFuncIfNanSub = 'Используется для обозначения математической ошибки, которая возникает в том случае, если математическая операция не может быть совершена';
+export const structuresFuncIfRegExp = 'Регулярное выражение';
+export const structuresFuncIfRegExpSub = 'Соответствует ли значение указанному шаблону';
 
+//structuresFuncMaths
+export const structuresFuncMathsInf = 'Бесконечность';
+export const structuresFuncMathsInfSub = 'В результате деления числа на 0 или если результат вычислений, не попадает в допустимый диапазон чисел JavaScript';
+export const structuresFuncMathsNan = 'Не числовое значение (NaN)';
+export const structuresFuncMathsNanSub = 'Используется для обозначения математической ошибки, которая возникает в том случае, если математическая операция не может быть совершена';
+export const structuresFuncMathsCount = 'Арифметика';
+export const structuresFuncMathsCountSub = 'Сложение, вычитание, умножение, деление, степень, корень';
+export const structuresFuncMathsRound = 'Округление';
+export const structuresFuncMathsRoundSub = 'Преобразование дробного числа до целого в большую или меньшую сторону';
+export const structuresFuncMathsMax = 'Наибольшее значение';
+export const structuresFuncMathsMaxSub = 'Из нескольких значений определить наибольшее число';
+export const structuresFuncMathsMin = 'Наименьшее значение';
+export const structuresFuncMathsMinSub = 'Из нескольких значений определить наименьшее число';
+export const structuresFuncMathsTrig = 'Тригонометрия';
+export const structuresFuncMathsTrigSub = 'Синус, косинус, тангенс, арксинус, арккосинус, арктангенс';
+export const structuresFuncMathsLog = 'Логарифмы';
+export const structuresFuncMathsLogSub = 'Действия с логарифмами';
+export const structuresFuncMathsSyst = 'Системы счисления';
+export const structuresFuncMathsSystSub = 'Определение и перевод чисел из одной системы в другую';
 
+//structuresFuncObj
+export const structuresFuncObjGet = 'Выбрать значение';
+export const structuresFuncObjGetSub = 'Извлечь значение из объекта';
+export const structuresFuncObjSet = 'Установить значение';
+export const structuresFuncObjSetSub = 'Установить значение в объкте';
+export const structuresFuncObjDel = 'Удалить значние';
+export const structuresFuncObjDelSub = 'Удалить значение из объекта по ключу';
+export const structuresFuncObjLen = 'Длина объекта';
+export const structuresFuncObjLenSub = 'Количество элементов в объекте';
+export const structuresFuncObjEach = 'Перебрать объект';
+export const structuresFuncObjEachSub = 'Цикл для перебора элементов объекта';
+export const structuresFuncObjKeys = 'Массив ключей';
+export const structuresFuncObjKeysSub = 'Возвращает массив состоящий из ключей данного объекта';
+export const structuresFuncObjArr = 'Преобразовать в массив';
+export const structuresFuncObjArrSub = 'Преобразовать объект в массив';
 
+//structuresServer
+export const structuresServerReq = 'HTTP запрос';
+export const structuresServerReqSub = 'Отправка и получение данных по HTTP';
+
+//structuresText
+export const structuresTextLen = 'Длина текста';
+export const structuresTextLenSub = 'Определить количество символов в строке';
+export const structuresTextSplit = 'Разделить текст по символу';
+export const structuresTextSplitSub = 'Разделить текст на две или больше строк по определенному символу или подстроке. Если в тексте нет указанного символа, тогда значение останется неизменным';
+export const structuresTextJoin = 'Объединить несколько строк в один текст';
+export const structuresTextJoinSub = 'Можно объединять по символу или слову';
+export const structuresTextUpp = 'В верхний регистр (заглавные буквы)';
+export const structuresTextUppSub = 'Преобразовать все символы текста в большие буквы';
+export const structuresTextLow = 'В нижний регистр';
+export const structuresTextLowSub = 'Все символы текста в нижний регистр';
+export const structuresTextRevers = 'Задом наперед';
+export const structuresTextReversSub = 'Перевернуть текст задом наперед';
+export const structuresTextFind = 'Найти в тексте нужную строку или символ';
+export const structuresTextFindSub = 'Возвращает первый индекс, по которому символ может быть найден в строке или -1, если такого символа нет';
+export const structuresTextReplace = 'Заменить часть текста на другие символы';
+export const structuresTextReplaceSub = 'Найти в тексте слова и заменить их на нужное значение';
+export const structuresTextSubstr = 'Вырезать строку';
+export const structuresTextSubstrSub = 'Удалить из текста нужную строку или предложение';
+
+//structuresTime
+export const structuresTimeFormat = 'Форматирование даты';
+export const structuresTimeFormatSub = 'Перевод времени из одного формата в другой';
+export const structuresTimeUpdate = 'Изменение значение';
+export const structuresTimeUpdateSub = 'Добавить или отнять время от заданной даты';
+export const structuresTimeZone = 'Часовой пояс';
+export const structuresTimeZoneSub = 'Информации о временной зоне заданной даты';
+
+//structuresMethod
+export const structuresMethodGet = 'получить';
+export const structuresMethodPost = 'создать';
+export const structuresMethodPut = 'перезаписать';
+export const structuresMethodPatch = 'обновить';
+export const structuresMethodDelete = 'удалить';
+
+//structuresResponseCodes
+export const structuresResponseCodes200 = '200 - Запрос успешно выполнен';
+export const structuresResponseCodes401 = '401 - Требуется авторизация';
+export const structuresResponseCodes403 = '403 - Доступ запрещен';
+export const structuresResponseCodes404 = '404 - Ресурс не найден';
+export const structuresResponseCodes500 = '500 - Ошибка на сервере';
+
+//structuresRouteUrl
+export const structuresRouteUrlPath = 'Путь';
+export const structuresRouteUrlPlace = 'Плэйсхолдер';
+
+//structuresServiceTemp
+export const structuresServiceTempDefault = 'По умолчанию';
+export const structuresServiceTempCommerce = 'Коммуникация';
+export const structuresServiceTempMessage = 'Коммерция';
+export const structuresServiceTempDisk = 'Файлы';
+
+//structuresSourceTypes
+export const structuresSourceTypesManual = 'Вручную';
+export const structuresSourceTypesDB = 'База данных';
+export const structuresSourceTypesPass = 'Из другого сервиса';
+export const structuresSourceTypesHeader = 'Заголовок запроса';
+export const structuresSourceTypesReq = 'Параметр запроса';
+export const structuresSourceTypesCookie = 'Куки';
+export const structuresSourceTypesPlace = 'Плэйсхолдер';
+export const structuresSourceTypesRand = 'Рандом';
+export const structuresSourceTypesProg = 'Программа ';
+
+//utilsCheck
+export const utilsCheckMess = 'Элемент с таким названием уже существует';
+
+//utilsValidators
+export const utilsValidatorsNoCorrect = 'Не корректный Email';
+export const utilsValidatorsNoName = 'Недопустимое имя пользователя';
+export const utilsValidatorsNoPass = 'Пароль должен содержать хотя бы одну заглавную букву, одну прописную букву и одну цифру. Длина пароля должна быть равна 8 или больше символов';
 
 
 

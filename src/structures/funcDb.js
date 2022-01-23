@@ -1,3 +1,4 @@
+import { getLang } from 'components/Language';
 import { FUNC_CATEGORY_DB } from './funcCategories.js';
 import { 
 	DATA_TYPE_BOOLEAN,
@@ -8,58 +9,58 @@ export const FUNC_TEMPLATE_DB_CREATE = {
 	id: process.env.FUNC_TEMPLATE_DB_CREATE,
 	category_id: FUNC_CATEGORY_DB.id,
 	data_type_id: DATA_TYPE_NUMBER.id,
-	text: () => 'Создать запись',
-	subtext: () => 'Добавить в базу новые данные',
+	text: () => getLang('structuresFuncDBCreate'),
+	subtext: () => getLang('structuresFuncDBCreateAct'),
 };
 export const FUNC_TEMPLATE_DB_UPDATE = {
 	id: process.env.FUNC_TEMPLATE_DB_UPDATE,
 	category_id: FUNC_CATEGORY_DB.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
-	text: () => 'Обновить запись',
-	subtext: () => 'Обновить даннык в базе данных',
+	text: () => getLang('structuresFuncDBUpdate'),
+	subtext: () => getLang('structuresFuncDBUpdateAct'),
 };
 export const FUNC_TEMPLATE_DB_COLUMN_CREATE = {
 	id: process.env.FUNC_TEMPLATE_DB_COLUMN_CREATE,
 	category_id: FUNC_CATEGORY_DB.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
-	text: () => 'Добавить колонку',
-	subtext: () => 'Добавить в базу новую колонку',
+	text: () => getLang('structuresFuncDBCreateCol'),
+	subtext: () => getLang('structuresFuncDBCreateColAct'),
 };
 export const FUNC_TEMPLATE_DB_COLUMN_UPDATE = {
 	id: process.env.FUNC_TEMPLATE_DB_COLUMN_UPDATE,
 	category_id: FUNC_CATEGORY_DB.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
-	text: () => 'Обновить колонку',
-	subtext: () => 'Обновить колонку в базе данных',
+	text: () => getLang('structuresFuncDBUpdateCol'),
+	subtext: () => getLang('structuresFuncDBUpdateColAct'),
 };
 export const FUNC_TEMPLATE_DB_COPY = {
 	id: process.env.FUNC_TEMPLATE_DB_COPY,
 	category_id: FUNC_CATEGORY_DB.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
 	disabled: true,
-	text: () => 'Копировать',
-	subtext: () => 'Копировать данные в базе',
+	text: () => getLang('structuresFuncDBCopy'),
+	subtext: () => getLang('structuresFuncDBCopyAct'),
 };
 export const FUNC_TEMPLATE_DB_DELETE = {
 	id: process.env.FUNC_TEMPLATE_DB_DELETE,
 	category_id: FUNC_CATEGORY_DB.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
-	text: () => 'Удалить',
-	subtext: () => 'Удалить данные из базы',
+	text: () => getLang('structuresFuncDBRem'),
+	subtext: () => getLang('structuresFuncDBRemAct'),
 };
 export const FUNC_TEMPLATE_DB_COLUMN_DELETE = {
 	id: process.env.FUNC_TEMPLATE_DB_COLUMN_DELETE,
 	category_id: FUNC_CATEGORY_DB.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
-	text: () => 'Удалить колонку',
-	subtext: () => 'Удалить колонку из базы. Все данных из этого поля будут потеряны',
+	text: () => getLang('structuresFuncDBRemCol'),
+	subtext: () => getLang('structuresFuncDBRemColAct'),
 };
 export const FUNC_TEMPLATE_DB_COUNT = {
 	id: process.env.FUNC_TEMPLATE_DB_COUNT,
 	category_id: FUNC_CATEGORY_DB.id,
 	data_type_id: DATA_TYPE_NUMBER.id,
-	text: () => 'Получить количество строк',
-	subtext: () => 'Функция для получения количества строк таблицы',
+	text: () => getLang('structuresFuncDBCount'),
+	subtext: () => getLang('structuresFuncDBCountAct'),
 };
 
 const funcDb = {

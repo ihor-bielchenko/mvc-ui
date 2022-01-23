@@ -22,7 +22,7 @@ let OptionDataType = ({
 					whiteSpace: 'nowrap',
 					paddingRight: 2,
 				}}>
-				Тип:
+				{getLang('cmpScriptActionsSlotOptionDataType2')}
 			</Typography>
 			<Typography 
 				component="div"

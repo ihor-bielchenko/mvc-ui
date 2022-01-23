@@ -1,3 +1,4 @@
+import { getLang } from 'components/Language';
 import { FUNC_CATEGORY_IF } from './funcCategories.js';
 import { DATA_TYPE_BOOLEAN } from './dataTypes.js';
 
@@ -6,56 +7,56 @@ export const FUNC_TEMPLATE_IF_COMPARE = {
 	category_id: FUNC_CATEGORY_IF.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
 	color: 'secondary',
-	text: () => 'Сравнить два значения',
-	subtext: () => 'Больше, меньше или равно',
+	text: () => getLang('structuresFuncIfCompare'),
+	subtext: () => getLang('structuresFuncIfCompareSub'),
 };
 export const FUNC_TEMPLATE_IF_TYPE = {
 	id: process.env.FUNC_TEMPLATE_IF_TYPE,
 	category_id: FUNC_CATEGORY_IF.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
 	color: 'secondary',
-	text: () => 'Тип значения',
-	subtext: () => 'Проверить тип значения (строка, число, файл и т.д.)',
+	text: () => getLang('structuresFuncIfType'),
+	subtext: () => getLang('structuresFuncIfTypeSub'),
 };
 export const FUNC_TEMPLATE_IF_NOT_NULL = {
 	id: process.env.FUNC_TEMPLATE_IF_NOT_NULL,
 	category_id: FUNC_CATEGORY_IF.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
 	color: 'secondary',
-	text: () => 'Значение не пустое',
-	subtext: () => 'Проверить, что значение состоит из каких-то данных',
+	text: () => getLang('structuresFuncIfNot'),
+	subtext: () => getLang('structuresFuncIfNotSub'),
 };
 export const FUNC_TEMPLATE_IF_PARITY = {
 	id: process.env.FUNC_TEMPLATE_IF_PARITY,
 	category_id: FUNC_CATEGORY_IF.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
 	color: 'secondary',
-	text: () => 'Четность числа',
-	subtext: () => 'Является ли значение четным или нет',
+	text: () => getLang('structuresFuncIfParity'),
+	subtext: () => getLang('structuresFuncIfParitySub'),
 };
 export const FUNC_TEMPLATE_IF_INTEGER = {
 	id: process.env.FUNC_TEMPLATE_IF_INTEGER,
 	category_id: FUNC_CATEGORY_IF.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
 	color: 'secondary',
-	text: () => 'Определить, что число целое',
-	subtext: () => 'Является ли значение целым или дробным',
+	text: () => getLang('structuresFuncIfInt'),
+	subtext: () => getLang('structuresFuncIfIntSub'),
 };
 export const FUNC_TEMPLATE_MATH_INFINITY = {
 	id: process.env.FUNC_TEMPLATE_MATH_INFINITY,
 	category_id: FUNC_CATEGORY_IF.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
 	color: 'secondary',
-	text: () => 'Бесконечность',
-	subtext: () => 'В результате деления числа на 0 или если результат вычислений, не попадает в допустимый диапазон чисел JavaScript',
+	text: () => getLang('structuresFuncIfInfin'),
+	subtext: () => getLang('structuresFuncIfInfinSub'),
 };
 export const FUNC_TEMPLATE_MATH_NAN = {
 	id: process.env.FUNC_TEMPLATE_MATH_NAN,
 	category_id: FUNC_CATEGORY_IF.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
 	color: 'secondary',
-	text: () => 'Не числовое значение (NaN)',
-	subtext: () => 'Используется для обозначения математической ошибки, которая возникает в том случае, если математическая операция не может быть совершена',
+	text: () => getLang('structuresFuncIfNan'),
+	subtext: () => getLang('structuresFuncIfNanSub'),
 };
 
 export const FUNC_TEMPLATE_IF_REG_EXP = {
@@ -63,8 +64,8 @@ export const FUNC_TEMPLATE_IF_REG_EXP = {
 	category_id: FUNC_CATEGORY_IF.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
 	color: 'secondary',
-	text: () => 'Регулярное выражение',
-	subtext: () => 'Соответствует ли значение указанному шаблону',
+	text: () => getLang('structuresFuncIfRegExp'),
+	subtext: () => getLang('structuresFuncIfRegExpSub'),
 };
 export const funcIfArr = [
 	FUNC_TEMPLATE_IF_COMPARE,

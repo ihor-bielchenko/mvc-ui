@@ -1,4 +1,5 @@
 import Store from 'components/Store';
+import { getLang } from 'components/Language';
 import getServiceId from 'components/Service/getServiceId.js';
 import getProjectId from 'components/Service/getProjectId.js';
 import fetchBuildScriptCreate from 'fetch/buildScriptCreate.js';
@@ -31,7 +32,7 @@ const onMount = async (setProgress, dialog = DIALOG_BUILD, disabledDowndload = f
 				...currentState,
 				logs: [
 					...currentState.logs,
-					'Запуск процесса конфигурации',
+					getLang('cmpDialogBuildOnMountStartConf'),
 				],
 			}));
 		}, 0);
@@ -53,7 +54,7 @@ const onMount = async (setProgress, dialog = DIALOG_BUILD, disabledDowndload = f
 					...currentState,
 					logs: [
 						...currentState.logs,
-						'Запуск сборки  "'+ fetchRouteData.data[_index].name +'"',
+						getLang('cmpDialogBuildOnMountStartBuild') + fetchRouteData.data[_index].name +'"',
 					],
 				}));
 			}
@@ -74,7 +75,7 @@ const onMount = async (setProgress, dialog = DIALOG_BUILD, disabledDowndload = f
 					value: currentState.value + routesStep,
 					logs: [
 						...currentState.logs,
-						'Контроллер "'+ fetchRouteData.data[_index].name +'" успешно собран',
+						getLang('cmpDialogBuildOnMountContr') + fetchRouteData.data[_index].name +getLang('cmpDialogBuildOnMountContr2'),
 					],
 				}));
 			}
@@ -87,8 +88,8 @@ const onMount = async (setProgress, dialog = DIALOG_BUILD, disabledDowndload = f
 			value: currentState.value + 10,
 			logs: [
 				...currentState.logs,
-				'Дамп базы данных',
-				'Запуск архивации',
+				getLang('cmpDialogBuildOnMountDump'),
+				getLang('cmpDialogBuildOnMountStartArh'),
 			],
 		}));
 		const fetchArchiveResponse = await fetchBuildArchiveCreate({
@@ -101,8 +102,8 @@ const onMount = async (setProgress, dialog = DIALOG_BUILD, disabledDowndload = f
 			value: -2,
 			logs: [
 				...currentState.logs,
-				'Завершение конфигурации',
-				'Все файлы успешно собраны!',
+				getLang('cmpDialogBuildOnMountEndConf'),
+				getLang('cmpDialogBuildOnMountAllOk'),
 			],
 		}));
 		if (!disabledDowndload) {

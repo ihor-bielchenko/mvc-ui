@@ -44,7 +44,7 @@ let SignIn = ({ history }) => {
 							id="email"
 							name="email"
 							autoComplete="email"
-							label="Email адрес"
+							label={getLang('pageSigInEmailAdr')}
 							variant="outlined"
 							margin="normal" />
 						<TextField

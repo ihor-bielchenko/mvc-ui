@@ -1,4 +1,5 @@
 import Store from 'components/Store';
+import { getLang } from 'components/Language';
 
 const checkScriptEntityNameExists = (name) => {
 	const entities = Store().getState().entities;
@@ -10,7 +11,7 @@ const checkScriptEntityNameExists = (name) => {
 			type: 'alert',
 			payload: () => ({
 				flag: true,
-				message: 'Элемент с таким названием уже существует',
+				message: getLang('utilsCheckMess'),
 			}),
 		});
 		return true;

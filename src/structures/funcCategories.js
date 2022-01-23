@@ -1,50 +1,51 @@
+import { getLang } from 'components/Language';
 
 export const FUNC_CATEGORY_IF = {
 	id: 1,
-	text: () => 'Сравнение данных',
-	subtext: () => 'Основные действия для проверки данных',
+	text: () => getLang('structuresFuncCategoriesIf'),
+	subtext: () => getLang('structuresFuncCategoriesIfAct'),
 };
 export const FUNC_CATEGORY_TEXT = {
 	id: 2,
-	text: () => 'Текстовые функции',
-	subtext: () => 'Обработка, преобразование и генерация текстов',
+	text: () => getLang('structuresFuncCategoriesText'),
+	subtext: () => getLang('structuresFuncCategoriesTextAct'),
 };
 export const FUNC_CATEGORY_MATH = {
 	id: 3,
-	text: () => 'Математика и числа',
-	subtext: () => 'Работа с числами и выполнение расчетов',
+	text: () => getLang('structuresFuncCategoriesMath'),
+	subtext: () => getLang('structuresFuncCategoriesMathAct'),
 };
 export const FUNC_CATEGORY_ARRAY = {
 	id: 4,
-	text: () => 'Массивы',
-	subtext: () => 'Функции для создания и управления массивами',
+	text: () => getLang('structuresFuncCategoriesArr'),
+	subtext: () => getLang('structuresFuncCategoriesArrAct'),
 };
 export const FUNC_CATEGORY_OBJECT = {
 	id: 5,
-	text: () => 'Объекты',
-	subtext: () => 'Функции для создания и управлния объектами',
+	text: () => getLang('structuresFuncCategoriesObj'),
+	subtext: () => getLang('structuresFuncCategoriesObjAct'),
 };
 export const FUNC_CATEGORY_DB = {
 	id: 6,
-	text: () => 'База данных',
-	subtext: () => 'Работа с базой данных',
+	text: () => getLang('structuresFuncCategoriesDB'),
+	subtext: () => getLang('structuresFuncCategoriesDBAct'),
 };
 export const FUNC_CATEGORY_TIME = {
 	id: 7,
 	disabled: true,
-	text: () => 'Дата и время',
-	subtext: () => 'Создание и форматирование временных значений',
+	text: () => getLang('structuresFuncCategoriesTime'),
+	subtext: () => getLang('structuresFuncCategoriesTimeAct'),
 };
 export const FUNC_CATEGORY_HASH = {
 	id: 8,
-	text: () => 'Шифрование и кодировка',
-	subtext: () => 'Генерация паролей и работа с зашифрованными данными',
+	text: () => getLang('structuresFuncCategoriesHash'),
+	subtext: () => getLang('structuresFuncCategoriesHashAct'),
 };
 export const FUNC_CATEGORY_SERVER = {
 	id: 9,
 	disabled: true,
-	text: () => 'Сервер и URL',
-	subtext: () => 'Отправка запросов на другие ресурсы',
+	text: () => getLang('structuresFuncCategoriesServer'),
+	subtext: () => getLang('structuresFuncCategoriesServerAct'),
 };
 
 const funcCategories = {

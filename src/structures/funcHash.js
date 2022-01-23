@@ -1,3 +1,4 @@
+import { getLang } from 'components/Language';
 import { FUNC_CATEGORY_HASH } from './funcCategories.js';
 import { DATA_TYPE_TEXT } from './dataTypes.js';
 
@@ -5,36 +6,36 @@ export const FUNC_TEMPLATE_HASH_PASSWORD = {
 	id: process.env.FUNC_TEMPLATE_HASH_PASSWORD,
 	category_id: FUNC_CATEGORY_HASH.id,
 	data_type_id: DATA_TYPE_TEXT.id,
-	text: () => 'Создать пароль',
-	subtext: () => 'Сгенерировать уникальный пароль с выбором сложности',
+	text: () => getLang('structuresFuncHashCreatPas'),
+	subtext: () => getLang('structuresFuncHashCreatPasSub'),
 };
 export const FUNC_TEMPLATE_HASH_BASE64_ENCODE = {
 	id: process.env.FUNC_TEMPLATE_HASH_BASE64_ENCODE,
 	category_id: FUNC_CATEGORY_HASH.id,
 	data_type_id: DATA_TYPE_TEXT.id,
-	text: () => 'Преобразовать в base64',
-	subtext: () => 'Кодировать данные в base64',
+	text: () => getLang('structuresFuncHashEncode'),
+	subtext: () => getLang('structuresFuncHashEncodeSub'),
 };
 export const FUNC_TEMPLATE_HASH_BASE64_DECODE = {
 	id: process.env.FUNC_TEMPLATE_HASH_BASE64_DECODE,
 	category_id: FUNC_CATEGORY_HASH.id,
 	data_type_id: DATA_TYPE_TEXT.id,
-	text: () => 'Декодировать base64',
-	subtext: () => 'Декодировать base64 код в исходный вид',
+	text: () => getLang('structuresFuncHashDecode'),
+	subtext: () => getLang('structuresFuncHashDecodeSub'),
 };
 export const FUNC_TEMPLATE_HASH_HASH = {
 	id: process.env.FUNC_TEMPLATE_HASH_HASH,
 	category_id: FUNC_CATEGORY_HASH.id,
 	data_type_id: DATA_TYPE_TEXT.id,
-	text: () => 'Простое хеширование',
-	subtext: () => 'Создание хеш строки с помощью алгоритма md5',
+	text: () => getLang('structuresFuncHashSimple'),
+	subtext: () => getLang('structuresFuncHashSimpleSub'),
 };
 export const FUNC_TEMPLATE_HASH_CRYPTO = {
 	id: process.env.FUNC_TEMPLATE_HASH_CRYPTO,
 	category_id: FUNC_CATEGORY_HASH.id,
 	data_type_id: DATA_TYPE_TEXT.id,
-	text: () => 'Шифрование по ключу',
-	subtext: () => 'Шифрование данных с помощью алгоритма sha256',
+	text: () => getLang('structuresFuncHashCrypto'),
+	subtext: () => getLang('structuresFuncHashCryptoSub'),
 };
 const funcHash =  {
 	[process.env.FUNC_TEMPLATE_HASH_PASSWORD]: FUNC_TEMPLATE_HASH_PASSWORD,

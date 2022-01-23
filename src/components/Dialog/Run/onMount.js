@@ -1,4 +1,5 @@
 import Store from 'components/Store';
+import { getLang } from 'components/Language';
 import getServiceId from 'components/Service/getServiceId.js';
 import getProjectId from 'components/Service/getProjectId.js';
 import fetchBuildScriptCreate from 'fetch/buildScriptCreate.js';
@@ -31,7 +32,7 @@ const onMount = async (serverStatusId, setProgress) => {
 				...currentState,
 				logs: [
 					...currentState.logs,
-					'Запуск процесса конфигурации',
+					getLang('cmpDialogRunOnMountStart'),
 				],
 			}));
 			await fetchBuildServiceCreate({
@@ -52,7 +53,7 @@ const onMount = async (serverStatusId, setProgress) => {
 						...currentState,
 						logs: [
 							...currentState.logs,
-							'Запуск сборки  "'+ fetchRouteData.data[_index].name +'"',
+							getLang('cmpDialogRunOnMountStartBuild') + fetchRouteData.data[_index].name +'"',
 						],
 					}));
 				}
@@ -74,7 +75,7 @@ const onMount = async (serverStatusId, setProgress) => {
 						value: currentState.value + routesStep,
 						logs: [
 							...currentState.logs,
-							'Контроллер "'+ fetchRouteData.data[_index].name +'" успешно собран',
+							getLang('cmpDialogRunOnMountControl') + fetchRouteData.data[_index].name + getLang('cmpDialogRunOnMountControl2'),
 						],
 					}));
 				}
@@ -87,8 +88,8 @@ const onMount = async (serverStatusId, setProgress) => {
 				value: currentState.value + 10,
 				logs: [
 					...currentState.logs,
-					'Дамп базы данных',
-					'Запуск архивации',
+					getLang('cmpDialogRunOnMountDump'),
+					getLang('cmpDialogRunOnMountArh'),
 				],
 			}));
 			await fetchBuildArchiveCreate({
@@ -103,7 +104,7 @@ const onMount = async (serverStatusId, setProgress) => {
 			value: currentState.value + 10,
 			logs: [
 				...currentState.logs,
-				'Конфигурация...',
+				getLang('cmpDialogRunOnMountConfig'),
 			],
 		}));
 		setTimeout(() => {
@@ -111,7 +112,7 @@ const onMount = async (serverStatusId, setProgress) => {
 				value: 90,
 				logs: [
 					...currentState.logs,
-					'Добавление в облако...',
+					getLang('cmpDialogRunOnMountAddCloud'),
 				],
 			}));
 			setTimeout(() => {
@@ -120,9 +121,9 @@ const onMount = async (serverStatusId, setProgress) => {
 					value: -2,
 					logs: [
 						...currentState.logs,
-						'Завершение конфигурации',
-						'Все файлы успешно собраны!',
-						'Сервис запущен!',
+						getLang('cmpDialogRunOnMountEndConfig'),
+						getLang('cmpDialogRunOnMountAllOk'),
+						getLang('cmpDialogRunOnMountServStart'),
 					],
 				}));
 
