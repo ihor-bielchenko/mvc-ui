@@ -5,6 +5,8 @@ export const initialState = () => ({
 	path: '',
 	email: '',
 	name: '',
+	editFlag: false,
+	avatar: '',
 });
 const account = (state = initialState(), action) => {
 	return action.type === 'account'
