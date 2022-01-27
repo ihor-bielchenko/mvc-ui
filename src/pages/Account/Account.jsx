@@ -7,11 +7,13 @@ import EditIcon from '@material-ui/icons/Edit';
 import SaveIcon from '@material-ui/icons/Save';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import CancelIcon from '@material-ui/icons/Cancel';
+import Avatar from '@material-ui/core/Avatar';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import InputText from 'components/Input/Text';
 import onSave from './onSave';
 import onMount from './onMount';
 import onChange from './onChange';
+import onUpload from './onUpload';
 
 let Account = () => {
 	const uniqueName = useSelector((state) => state.account.unique_name);
@@ -34,10 +36,10 @@ let Account = () => {
 						flexDirection: 'column',
 						alignItems: 'center' }} >
 					{avatar
-						?	<img 
+						?	<Avatar 
 								src={avatar} 
 								alt='avatar'
-								style={styles.img}
+								style={{ width: '180px', height: '180px' }}
 							/> 
 						:	<AccountCircleIcon
 								style={{
@@ -49,7 +51,7 @@ let Account = () => {
 								<input
 									accept="image/*"
 									name="avatar"
-									onChange={onChange}
+									onChange={onUpload}
 									id="contained-button-file"
 									multiple
 									type="file"
@@ -128,17 +130,5 @@ let Account = () => {
 Account = React.memo(Account);
 Account.defaultProps = {
 };
-
-const styles = {
-	img: {
-		fontSize: '202px',
-		width: '1em',
-		height: '1em',
-		display: 'inlineBlock',
-		transition: 'fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
-		flexShrink: 0,
-		borderRadius: '50%'
-	}
-}
 
 export default Account;

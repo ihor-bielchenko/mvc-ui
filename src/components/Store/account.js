@@ -7,6 +7,7 @@ export const initialState = () => ({
 	name: '',
 	editFlag: false,
 	avatar: '',
+	avatarFile: '',
 });
 const account = (state = initialState(), action) => {
 	return action.type === 'account'
