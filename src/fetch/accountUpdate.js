@@ -5,27 +5,31 @@ import { URL_API_SSO_USER } from 'consts/url.js';
 
 const accountUpdate = async (data) => {
 	
-	const dataAvatar = { avatarFile: data.avatarFile }
-	delete data.avatarFile
-	delete data.avatar
+	let r = {};
 	
 	try {
-		let r = await axios(process.env.SSO_PATH + URL_API_SSO_USER, {
-			method: 'patch',
-			params: {
-				access_token: localStorage.getItem('access_token'),
-				...data,
-			},
-		});
-		if(dataAvatar.avatarFile){
-			r = { ...r, ...await axios(process.env.SSO_PATH + URL_API_SSO_USER +'/avatar', {
+		if(data.avatarFile){
+			const formData = new FormData();
+			formData.append("avatarFile", data.avatarFile);
+
+			r =  await axios(process.env.SSO_PATH + URL_API_SSO_USER +'/avatar', {
 				method: 'patch',
 				params: {
 					access_token: localStorage.getItem('access_token'),
-					...dataAvatar,
+					...formData,
 				},
-			}) }
+			}) 
 		}
+		delete data.avatarFile
+		delete data.avatar
+		r = { ...await axios(process.env.SSO_PATH + URL_API_SSO_USER, {
+					method: 'patch',
+					params: {
+						access_token: localStorage.getItem('access_token'),
+						...data,
+					},
+				}), ...r }
+		
 		refreshJWTTimeout();
 
 		return r;

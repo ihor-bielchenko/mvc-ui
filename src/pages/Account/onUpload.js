@@ -10,8 +10,8 @@ const onUpload = (e) =>  {
 	if (!file.type.match('image')) {
 			return
 		}
-
-		const reader = new FileReader()
+		
+		const reader = new FileReader();
 		account.avatarFile = file;
 
 		reader.onload = ev => {
@@ -24,7 +24,7 @@ const onUpload = (e) =>  {
 			});
 	}
 	reader.readAsDataURL(file)
-		
+	
 		
 }
 
