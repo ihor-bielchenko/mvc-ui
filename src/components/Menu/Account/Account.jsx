@@ -36,6 +36,18 @@ let Account = ({
 		setLang,
 		aria,
 	]);
+	const onLangEN = React.useCallback((e) => {
+		window.dispatchEvent((new CustomEvent('onSwitchLang', { detail: 'en' })))
+	}, [
+	]);
+	const onLangRU = React.useCallback((e) => {
+		window.dispatchEvent((new CustomEvent('onSwitchLang', { detail: 'ru' })))
+	}, [
+	]);
+	const onLangUA = React.useCallback((e) => {
+		window.dispatchEvent((new CustomEvent('onSwitchLang', { detail: 'ua' })))
+	}, [
+	]);
 
 	return <React.Fragment>
 		<Menu
@@ -78,7 +90,9 @@ let Account = ({
 				in={lang} 
 				timeout="auto">
 				<List component="nav">
-					<ListItem button>
+					<ListItem 
+						button
+						onClick={onLangUA}>
 						<ListItemIcon>
 							{typeof String.fromCodePoint === 'function'
 								?  'UA'.replace(/./g, (char) => String.fromCodePoint(char.charCodeAt(0) + 127397))
@@ -88,7 +102,9 @@ let Account = ({
 							UA
 						</Typography>
 					</ListItem>
-					<ListItem button>
+					<ListItem 
+						button
+						onClick={onLangRU}>
 						<ListItemIcon>
 							{typeof String.fromCodePoint === 'function'
 								?  'RU'.replace(/./g, (char) => String.fromCodePoint(char.charCodeAt(0) + 127397))
@@ -98,7 +114,9 @@ let Account = ({
 							RU
 						</Typography>
 					</ListItem>
-					<ListItem button>
+					<ListItem 
+						button
+						onClick={onLangEN}>
 						<ListItemIcon>
 							{typeof String.fromCodePoint === 'function'
 								?  'GB'.replace(/./g, (char) => String.fromCodePoint(char.charCodeAt(0) + 127397))
