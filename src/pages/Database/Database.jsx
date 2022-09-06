@@ -6,6 +6,7 @@ import Background from 'components/Script/Background';
 import Header from 'components/Header';
 import Breadcrumbs from 'components/Breadcrumbs';
 import AddIcon from '@material-ui/icons/Add';
+import { getLang } from 'components/Language';
 
 let PageDatabase = () => {
 	return <Background
@@ -53,7 +54,7 @@ let PageDatabase = () => {
 						<Button
 							disabled
 							startIcon={<AddIcon />}>
-							Новая таблица
+							{getLang('NewTableText')}
 						</Button>
 					</Box>
 				</Box>

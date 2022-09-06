@@ -14,6 +14,7 @@ import onChange from '../onChange.js';
 import onValueScript from '../onValueScript.js';
 import onValidate from '../onValidate.js';
 import onUnmount from '../onUnmount.js';
+import { getLang } from 'components/Language';
 
 let MathTrigonometry = ({ 
 	id, 
@@ -68,9 +69,9 @@ let MathTrigonometry = ({
 					onChange={_onChange2}
 					defaultValue={prop2}
 					name="prop-2"
-					label="Значение"
-					placeholder="Число"
-					helperText="Выберите созданный параметр или укажите значение вручную" />
+					label={getLang('Value')}
+					placeholder={getLang('Num')}
+					helperText={getLang('SelectCreatedPar')} />
 			</Grid>
 		</Grid>
 	</React.Fragment>;

@@ -13,6 +13,7 @@ import {
 	URL_PAGE_SERVICE,
 	URL_PAGE_API,
 } from 'consts/url.js';
+import { getLang } from 'components/Language';
 
 let Route = ({ history }) => {
 	const projectId = getProjectId();
@@ -64,14 +65,14 @@ let Route = ({ history }) => {
 						<Button
 							disabled
 							color="primary">
-							Настройка роута
+							{getLang('RouteConfigText')}
 						</Button>
 						<Button
 							disabled={!(routeId > 0 && scriptId > 0)}
 							component={Link}
 							to={`/${projectId}/${URL_PAGE_SERVICE}/${serviceId}/${URL_PAGE_API}/${routeId}/${URL_PAGE_SCRIPT}/${scriptId}`}
 							color="primary">
-							Программа
+							{getLang('Programm')}
 						</Button>
 					</Box>
 				</Box>

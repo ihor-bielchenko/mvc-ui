@@ -49,7 +49,7 @@ Hash.defaultProps = {
 	required: false,
 	name: 'func_hash',
 	value: '',
-	label: 'Функция',
+	label: 'Function',
 	helperText: '',
 	onSelect: () => {},
 };

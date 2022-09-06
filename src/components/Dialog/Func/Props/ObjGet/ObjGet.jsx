@@ -18,6 +18,7 @@ import onChange from '../onChange.js';
 import onValueScript from '../onValueScript.js';
 import onValidate from '../onValidate.js';
 import onUnmount from '../onUnmount.js';
+import { getLang } from 'components/Language';
 
 let ObjGet = ({ 
 	id, 
@@ -72,7 +73,7 @@ let ObjGet = ({
 						color="primary"
 						startIcon={<AddIcon fontSize="small" />}
 						onClick={_onMenu1}>
-						Выбрать объект
+						{getLang('DialogFuncContent16Text')}
 					</Button>}
 			</Grid>
 			<Grid
@@ -86,9 +87,9 @@ let ObjGet = ({
 					onChange={_onChange2}
 					defaultValue={prop2}
 					name="prop-2"
-					label="Ключ"
-					placeholder="Текст или число"
-					helperText="Выберите созданный параметр или укажите значение вручную" />
+					label={getLang('Key')}
+					placeholder={getLang('TorN')}
+					helperText={getLang('SelectCreatedPar')} />
 			</Grid>
 		</Grid>
 	</React.Fragment>;

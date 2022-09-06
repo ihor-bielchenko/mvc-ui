@@ -49,7 +49,7 @@ Server.defaultProps = {
 	required: false,
 	name: 'func_server',
 	value: '',
-	label: 'Функция',
+	label: 'Function',
 	helperText: '',
 	onSelect: () => {},
 };

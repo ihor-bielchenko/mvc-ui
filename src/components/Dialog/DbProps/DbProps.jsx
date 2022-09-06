@@ -16,6 +16,7 @@ import { DIALOG_DB_PROPS } from 'consts/dialog.js';
 import onClose from '../onClose.js';
 import onApply from './onApply.js';
 import onClear from './onClear.js';
+import { getLang } from 'components/Language';
 
 let DbProps = () => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_DB_PROPS]);
@@ -31,7 +32,7 @@ let DbProps = () => {
 			onClose={onClose(DIALOG_DB_PROPS)}>
 			<DialogTitle>
 				<Title onClose={onClose(DIALOG_DB_PROPS)}>
-					Параметры запроса:
+					{getLang('RequestParams')}:
 				</Title>
 			</DialogTitle>
 			{_dialogOpenFlag
@@ -53,14 +54,14 @@ let DbProps = () => {
 									color="secondary"
 									startIcon={<CloseIcon />}
 									onClick={onClose(DIALOG_DB_PROPS)}>
-									Отмена
+									{getLang('Cancel')}
 								</Button>
 								<Button 
 									variant="outlined"
 									color="secondary"
 									startIcon={<DeleteIcon />}
 									onClick={onClear}>
-									Очистить
+									{getLang('Clear')}
 								</Button>
 							</ButtonGroup>
 							<Button 
@@ -69,7 +70,7 @@ let DbProps = () => {
 								color="primary"
 								startIcon={<SaveIcon />}
 								onClick={onApply}>
-								Применить
+								{getLang('DialogDbPropsContent1Text')}
 							</Button>
 						</Box>
 					</DialogActions>

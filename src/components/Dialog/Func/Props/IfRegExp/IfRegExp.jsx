@@ -11,6 +11,7 @@ import onChange from '../onChange.js';
 import onValueScript from '../onValueScript.js';
 import onValidate from '../onValidate.js';
 import onUnmount from '../onUnmount.js';
+import { getLang } from 'components/Language';
 
 let IfRegExp = ({ 
 	id, 
@@ -59,9 +60,9 @@ let IfRegExp = ({
 				onChange={_onChange1}
 				defaultValue={prop1}
 				name="prop-1"
-				label="Какое значение нужно проверить?"
-				placeholder="Текст или число"
-				helperText="Выберите созданный параметр или укажите значение вручную" />
+				label={getLang('ValueToCheck')}
+				placeholder={getLang('TorN')}
+				helperText={getLang('SelectCreatedPar')} />
 		</Box>
 		<Box my={2}>
 			<InputText
@@ -72,9 +73,9 @@ let IfRegExp = ({
 				onChange={_onChange2}
 				defaultValue={prop2}
 				name="prop-2"
-				label="Регулярное выражение"
+				label={getLang('FUNC_TEMPLATE_IF_REG_EXPtext')}
 				placeholder="/[^A-Za-z0-9]/ig"
-				helperText="Выберите созданный параметр или укажите значение вручную" />
+				helperText={getLang('SelectCreatedPar')} />
 		</Box>
 	</React.Fragment>;
 };

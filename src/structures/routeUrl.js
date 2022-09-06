@@ -1,11 +1,12 @@
+import { getLang } from 'components/Language';
 
 export const ROUTE_URL_TYPE_VALUE = {
 	id: process.env.ROUTE_URL_TYPE_VALUE,
-	text: () => 'Путь',
+	text: () => getLang('Route2'),
 };
 export const ROUTE_URL_TYPE_PLACEHOLDER = {
 	id: process.env.ROUTE_URL_TYPE_PLACEHOLDER,
-	text: () => 'Плэйсхолдер',
+	text: () => getLang('SPlaceholder'),
 };
 
 const routeUrl = {

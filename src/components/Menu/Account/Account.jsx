@@ -15,6 +15,7 @@ import LanguageIcon from '@material-ui/icons/Language';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import PersonIcon from '@material-ui/icons/Person';
 import { URL_PAGE_ACCOUNT } from 'consts/url.js';
+import { getLang } from 'components/Language';
 import onClose from '../onClose.js';
 import onExit from './onExit.js';
 
@@ -56,7 +57,7 @@ let Account = ({
 					<PersonIcon />
 				</ListItemAvatar>
 				<Typography>
-					Аккаунт
+					{getLang('Acc')}
 				</Typography>
 			</MenuItem>
 			<MenuItem onClick={_onLang}>
@@ -66,7 +67,7 @@ let Account = ({
 						: <LanguageIcon />}
 				</ListItemIcon>
 				<Typography>
-					Язык
+					{getLang('Languages')}
 				</Typography>
 				{lang 
 					? <ExpandLessIcon /> 
@@ -77,7 +78,7 @@ let Account = ({
 				in={lang} 
 				timeout="auto">
 				<List component="nav">
-					<ListItem button disabled>
+					<ListItem button>
 						<ListItemIcon>
 							{typeof String.fromCodePoint === 'function'
 								?  'UA'.replace(/./g, (char) => String.fromCodePoint(char.charCodeAt(0) + 127397))
@@ -97,7 +98,7 @@ let Account = ({
 							RU
 						</Typography>
 					</ListItem>
-					<ListItem button disabled>
+					<ListItem button>
 						<ListItemIcon>
 							{typeof String.fromCodePoint === 'function'
 								?  'GB'.replace(/./g, (char) => String.fromCodePoint(char.charCodeAt(0) + 127397))
@@ -114,7 +115,7 @@ let Account = ({
 					<MeetingRoomIcon />
 				</ListItemAvatar>
 				<Typography>
-					Выход
+					{getLang('Exit')}
 				</Typography>
 			</MenuItem>
 		</Menu>

@@ -1,0 +1,13 @@
+export const SCookieplaceholderEx = 'Наприклад, access_token';
+export const SHeaderplaceholderEx = 'Наприклад, Access-Control-Allow-Methods';
+export const SPlaceholder = 'Плейсхолдер';
+export const SPlaceholderEx = 'Наприклад, myId';
+export const SRequestplaceholder = 'Наприклад, user_id';
+export const TorN = 'Текст або число';
+export const Text = 'Текст';
+export const RouteLink = 'Посилання на роут';
+export const Empty = 'Нічого не написано';
+export const Empty2 = 'Пусте значення';
+export const ShortDescription = 'Короткий опис';
+export const WhatHow = 'Що робить, як працює і т.д.';
+export const MyService = 'Мій сервіс';

@@ -12,6 +12,7 @@ import sourceTypes, {
 	SOURCE_TYPE_DB,
 	SOURCE_TYPE_PROXY_PASS,
 } from 'structures/sourceTypes.js';
+import { getLang } from 'components/Language';
 
 const _onFilterMenuSource = (dataTypeId) => (key, i) => {
 	return dataTypeId === DATA_TYPE_OBJECT.id
@@ -40,7 +41,7 @@ let MergeComponent = ({
 			color="primary"
 			startIcon={<AddIcon />}
 			onClick={_onMenu}>
-			Вставить {dataTypes[dataTypeId].text()}
+			{getLang('DialogJsonContent3Text')} {dataTypes[dataTypeId].text()}
 		</Button>
 		<MenuSource
 			aria={id.toString()}

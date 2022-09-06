@@ -24,6 +24,7 @@ import onRoute from './onRoute.js';
 import onSave from './onSave';
 import onEdit from './onEdit.js';
 import onMount from './onMount.js';
+import { getLang } from 'components/Language';
 
 let SourceProxy = () => {
 	const dialog = useSelector((state) => state.dialogs[SOURCE_TYPE_PROXY_PASS.id]);
@@ -71,7 +72,7 @@ let SourceProxy = () => {
 			onClose={_onClose}>
 			<DialogTitle>
 				<Title onClose={_onClose}>
-					Получить значение из другого сервиса
+					{getLang('GetValue1')}
 				</Title>
 			</DialogTitle>
 			<DialogContent dividers>
@@ -101,10 +102,10 @@ let SourceProxy = () => {
 									label="URL *" />
 								<Tab
 									value={1} 
-									label="Заголовки" />
+									label={getLang('Headers')} />
 								<Tab 
 									value={2}
-									label="Запрос" />
+									label={getLang('Request')} />
 							</Tabs>
 							<div style={{ display: tab === 0 ? 'block' : 'none' }}>
 								<Url 
@@ -132,14 +133,14 @@ let SourceProxy = () => {
 							color="secondary"
 							startIcon={<CloseIcon />}
 							onClick={_onClose}>
-							Отмена
+							{getLang('Cancel')}
 						</Button>
 						<Button 
 							type="submit"
 							variant="outlined"
 							color="primary"
 							startIcon={<SaveIcon />}>
-							Сохранить
+							{getLang('Save')}
 						</Button>
 					</DialogActions>
 				</form>

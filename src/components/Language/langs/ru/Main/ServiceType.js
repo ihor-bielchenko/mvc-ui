@@ -1,0 +1,16 @@
+export const SelectServiceType = 'Выберите тип сервиса';
+export const ServiceForStoring = 'Сервис для хранения и управления данными:';
+export const Service3 = 'По умолчанию';
+export const Service4 = 'со специальными действиями:';
+export const Communication = 'Коммуникация';
+export const Service6 = 'Коммерция';
+export const Files = 'Файлы';
+export const File = 'Файл';
+export const TypeOfService= 'Тип сервиса';
+export const SelectService = 'Выбрать сервис';
+export const AllServices = 'Все сервисы';
+export const CreateService = 'Создание нового сервиса';
+export const AddService = 'Добавить сервис';
+export const ServiceName = 'Название сервиса';
+export const ServiceSub = 'Субдомен сервиса';
+export const NewService = 'Новый сервис';

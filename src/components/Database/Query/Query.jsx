@@ -12,6 +12,7 @@ import {
 } from 'consts/dialog.js';
 import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
 import onDelete from './onDelete.js';
+import { getLang } from 'components/Language';
 
 let Query = () => {
 	const queryKeys = useSelector((state) => Object.keys(state.jsObject.tempValue.query || {}));
@@ -50,7 +51,7 @@ let Query = () => {
 			variant="outlined"
 			color="primary"
 			onClick={onDialog(DIALOG_DB_QUERY, { id: 0 })}>
-			Добавить
+			{getLang('Add')}
 		</Button>
 	</React.Fragment>;
 };

@@ -22,6 +22,7 @@ import {
 	URL_PAGE_RECOVERY,
 } from 'consts/url.js';
 import onSubmit from './onSubmit.js';
+import { getLang } from 'components/Language';
 
 let SignUp = ({ history }) => {
 	const recaptchaRef = React.createRef();
@@ -53,17 +54,17 @@ let SignUp = ({ history }) => {
 						component="h1" 
 						variant="h5"
 						align="center">
-						Регистрация
+						{getLang('Registration')}
 					</Typography>
 					<Stepper activeStep={state.activeStep}>
 						<Step>
 							<StepLabel>
-								Данные
+								{getLang('Info')}
 							</StepLabel>
 						</Step>
 						<Step>
 							<StepLabel>
-								Пароль
+								{getLang('Password')}
 							</StepLabel>
 						</Step>
 					</Stepper>
@@ -98,20 +99,20 @@ let SignUp = ({ history }) => {
 								onClick={_onBack}
 								variant="contained"
 								color="primary">
-								Назад
+								{getLang('LogicBack')}
 							</Button>
 							{state.activeStep === 0
 								? <Button
 									onClick={_onNext}
 									variant="contained"
 									color="primary">
-									Далее
+									{getLang('LogicNext')}
 								</Button>
 								: <Button
 									type="submit"
 									variant="contained"
 									color="primary">
-									Создать
+									{getLang('Create')}
 								</Button>}
 						</Grid>
 					</form>
@@ -124,12 +125,12 @@ let SignUp = ({ history }) => {
 				component={Link}
 				to={URL_PAGE_SIGN_IN}
 				variant="body2">
-				Вход
+				{getLang('AccLogin')}
 			</Typography>
 		</Box>
 		<Link to={URL_PAGE_RECOVERY}>
 			<Typography variant="body2">
-				Восстановить аккаунт
+				{getLang('Restore')}
 			</Typography>
 		</Link>
 	</Container>;

@@ -14,6 +14,7 @@ import onValidate from '../onValidate.js';
 import onUnmount from '../onUnmount.js';
 import onCheck from '../onCheck.js';
 import onMount from './onMount.js';
+import { getLang } from 'components/Language';
 
 let ArrSplice = ({ 
 	id, 
@@ -54,9 +55,9 @@ let ArrSplice = ({
 				onChange={_onChange1}
 				defaultValue={prop1}
 				name="prop-1"
-				label="Длина пароля (минимум 5 символов)"
+				label={getLang('DialogFuncContent12Text')}
 				placeholder="5"
-				helperText="Выберите созданный параметр или укажите значение вручную" />
+				helperText={getLang('SelectCreatedPar')} />
 		</Box>
 		<Box my={1}>
 			<FormControlLabel
@@ -64,7 +65,7 @@ let ArrSplice = ({
 					name="prop-2"
 					checked={Boolean(Number(prop2))}
 					onChange={onCheck(1)} />}
-				label="Включить специальные символы" />
+				label={getLang('DialogFuncContent13Text')} />
 		</Box>
 		<Box mt={1}>
 			<FormControlLabel
@@ -72,7 +73,7 @@ let ArrSplice = ({
 					name="prop-3"
 					checked={Boolean(Number(prop3))}
 					onChange={onCheck(2)} />}
-				label="Включить использование заглавных букв" />
+				label={getLang('DialogFuncContent14Text')} />
 		</Box>
 		<Box mt={1}>
 			<FormControlLabel
@@ -80,7 +81,7 @@ let ArrSplice = ({
 					name="prop-4"
 					checked={Boolean(Number(prop4))}
 					onChange={onCheck(3)} />}
-				label="Включить использование цифр" />
+				label={getLang('DialogFuncContent15Text')} />
 		</Box>
 	</React.Fragment>;
 };

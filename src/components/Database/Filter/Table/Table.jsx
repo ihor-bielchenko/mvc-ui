@@ -18,7 +18,6 @@ import SelectOperatorUnion from 'components/Select/OperatorUnion';
 import { StyledChip } from 'components/Input/LogicValue.jsx';
 import onMenu from 'components/Menu/onMenu.js';
 import onDialog from 'components/Dialog/onDialog.js';
-import { getLang } from 'components/Language';
 import { DIALOG_DELETE_CONFIRM } from 'consts/dialog.js';
 import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
 import { 
@@ -31,6 +30,7 @@ import onOperatorUnion from './onOperatorUnion.js';
 import onAdd from './onAdd.js';
 import onEdit from './onEdit.js';
 import onDelete from './onDelete.js';
+import { getLang } from 'components/Language';
 
 let Table = ({ disabledSource }) => {
 	const filterOperatorId = useSelector((state) => state.jsObject.tempValue.filter_operator_id ?? process.env.OPERATOR_UNION_AND);
@@ -54,13 +54,13 @@ let Table = ({ disabledSource }) => {
 						<TableHead>
 							<TableRow>
 								<TableCell>
-									Поле
+									{getLang('Field')}
 								</TableCell>
 								<TableCell>
-									Оператор
+									{getLang('Operator')}
 								</TableCell>
 								<TableCell>
-									Значение
+									{getLang('Value')}
 								</TableCell>
 							</TableRow>
 						</TableHead>
@@ -154,7 +154,7 @@ let Table = ({ disabledSource }) => {
 				<Typography 
 					variant="body2"
 					color="textSecondary">
-					Не создан ни один фильтр
+					{getLang('NoFilters')}
 				</Typography>
 			</Box>}
 			<Box mt={2}>
@@ -164,7 +164,7 @@ let Table = ({ disabledSource }) => {
 					variant="outlined"
 					startIcon={<AddIcon />}
 					onClick={onAdd}>
-					Добавить
+					{getLang('Add')}
 				</Button>
 			</Box>
 		</React.Fragment>;

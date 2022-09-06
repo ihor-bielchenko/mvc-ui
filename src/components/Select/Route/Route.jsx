@@ -40,7 +40,7 @@ let Route = ({
 Route = React.memo(Route);
 Route.defaultProps = {
 	name: 'route_id',
-	label: 'Роут',
+	label: 'Route',
 	required: false,
 };
 

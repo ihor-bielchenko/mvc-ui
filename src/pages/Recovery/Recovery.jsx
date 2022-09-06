@@ -11,6 +11,7 @@ import {
 	URL_PAGE_SIGN_IN,
 } from 'consts/url.js';
 import onSubmit from './onSubmit.js';
+import { getLang } from 'components/Language';
 
 let Recovery = () => {
 	const [ state, setState ] = React.useState(() => ({
@@ -30,12 +31,12 @@ let Recovery = () => {
 						component="h1" 
 						variant="h5"
 						align="center">
-						Восстановление доступа
+						{getLang('AccessRecovery')}
 					</Typography>
 					{state.success
 						? <Box my={2}>
 							<Typography>
-								На указанный email отправлено письмо с инструкциями для восстановления учетной записи.
+								{getLang('EmailSent')}
 							</Typography>
 						</Box>
 						: <form 
@@ -56,7 +57,7 @@ let Recovery = () => {
 								type="submit"
 								variant="contained"
 								color="primary">
-								Далее
+								{getLang('Next')}
 							</Button>
 						</form>}
 				</Box>
@@ -69,12 +70,12 @@ let Recovery = () => {
 				component={Link}
 				to={URL_PAGE_SIGN_UP}
 				variant="body2">
-				Создать аккаунт
+				{getLang('CreateAcc')}
 			</Typography>
 		</Box>
 		<Link to={URL_PAGE_SIGN_IN}>
 			<Typography variant="body2">
-				Вход
+				{getLang('AccLogin')}
 			</Typography>
 		</Link>
 	</Container>;

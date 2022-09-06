@@ -17,6 +17,7 @@ import onChangeKey from './onKey.js';
 import onChangeValue from './onValue.js';
 import onValueScript from './onValueScript.js';
 import onClear from './onClear.js';
+import { getLang } from 'components/Language';
 
 let KeyValue = ({ id }) => {
 	const key = useSelector((state) => (state.jsObject.tempValue.header[id] || {}).key || '');
@@ -67,7 +68,7 @@ let KeyValue = ({ id }) => {
 				onChangeValue={_onMenuKey}
 				onDelete={_onClearKey}
 				name={'key-'+ id}
-				label="Заголовок"
+				label={getLang('Header')}
 				defaultValue={key}
 				onChange={_onChangeKey}
 				onInput={onValidateInput} />
@@ -82,7 +83,7 @@ let KeyValue = ({ id }) => {
 				onChangeValue={_onMenuValue}
 				onDelete={_onClearValue}
 				name={'value-'+ id}
-				label="Значение"
+				label={getLang('Value')}
 				defaultValue={value}
 				onChange={_onChangeValue}
 				onInput={onValidateInput} />

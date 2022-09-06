@@ -1,0 +1,13 @@
+export const SCookieplaceholderEx = 'For example, access_token';
+export const SHeaderplaceholderEx = 'For example, Access-Control-Allow-Methods';
+export const SPlaceholder = 'Placeholder';
+export const SPlaceholderEx = 'For example, myId';
+export const SRequestplaceholder = 'For example, user_id';
+export const TorN = 'Text or number';
+export const Text = 'Text';
+export const RouteLink = 'Link to rout';
+export const Empty = 'Nothing is written';
+export const Empty2 = 'Empty value';
+export const ShortDescription = 'Short description';
+export const WhatHow = 'What does it do, how does it work, etc.';
+export const MyService = 'My service';

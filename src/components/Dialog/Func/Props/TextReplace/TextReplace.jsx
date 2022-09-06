@@ -12,6 +12,7 @@ import onChange from '../onChange.js';
 import onValueScript from '../onValueScript.js';
 import onValidate from '../onValidate.js';
 import onUnmount from '../onUnmount.js';
+import { getLang } from 'components/Language';
 
 let TextReplace = ({ 
 	id, 
@@ -77,9 +78,9 @@ let TextReplace = ({
 					onChange={_onChange1}
 					defaultValue={prop1}
 					name="prop-1"
-					label="Текст, в котором нужно выполнить замену"
-					placeholder="Текст"
-					helperText="Выберите созданный параметр или укажите значение вручную" />
+					label={getLang('DialogFuncContent19Text')}
+					placeholder={getLang('Text')}
+					helperText={getLang('SelectCreatedPar')} />
 			</Grid>
 			<Grid
 				item
@@ -92,9 +93,9 @@ let TextReplace = ({
 					onChange={_onChange2}
 					defaultValue={prop2}
 					name="prop-2"
-					label="Что заменить"
-					placeholder="Текст или регулярное выражение"
-					helperText="Выберите созданный параметр или укажите значение вручную" />
+					label={getLang('DialogFuncContent20Text')}
+					placeholder={getLang('Text')}
+					helperText={getLang('SelectCreatedPar')} />
 			</Grid>
 			<Grid
 				item
@@ -107,9 +108,9 @@ let TextReplace = ({
 					onChange={_onChange3}
 					defaultValue={prop3}
 					name="prop-3"
-					label="На что заменить"
-					placeholder="Текст"
-					helperText="Выберите созданный параметр или укажите значение вручную" />
+					label={getLang('DialogFuncContent21Text')}
+					placeholder={getLang('Text')}
+					helperText={getLang('SelectCreatedPar')} />
 			</Grid>
 		</Grid>
 	</React.Fragment>;

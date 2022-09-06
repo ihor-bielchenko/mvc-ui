@@ -49,7 +49,7 @@ Time.defaultProps = {
 	required: false,
 	name: 'func_time',
 	value: '',
-	label: 'Функция',
+	label: 'Function',
 	helperText: '',
 	onSelect: () => {},
 };

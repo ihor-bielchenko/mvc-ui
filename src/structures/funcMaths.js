@@ -11,73 +11,74 @@ import {
 	DATA_TYPE_BOOLEAN,
 	DATA_TYPE_NUMBER, 
 } from './dataTypes.js';
+import { getLang } from 'components/Language';
 
 export const FUNC_TEMPLATE_MATH_INFINITY = {
 	id: process.env.FUNC_TEMPLATE_MATH_INFINITY,
 	category_id: FUNC_CATEGORY_IF.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
 	color: 'secondary',
-	text: () => 'Бесконечность',
-	subtext: () => 'В результате деления числа на 0 или если результат вычислений, не попадает в допустимый диапазон чисел JavaScript',
+	text: () => getLang('FUNC_TEMPLATE_MATH_INFINITYtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_MATH_INFINITYsubtext'),
 };
 export const FUNC_TEMPLATE_MATH_NAN = {
 	id: process.env.FUNC_TEMPLATE_MATH_NAN,
 	category_id: FUNC_CATEGORY_IF.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
 	color: 'secondary',
-	text: () => 'Не числовое значение (NaN)',
-	subtext: () => 'Используется для обозначения математической ошибки, которая возникает в том случае, если математическая операция не может быть совершена',
+	text: () => getLang('FUNC_TEMPLATE_MATH_NANtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_MATH_NANsubtext'),
 };
 export const FUNC_TEMPLATE_MATH_COUNT = {
 	id: process.env.FUNC_TEMPLATE_MATH_COUNT,
 	category_id: FUNC_CATEGORY_MATH.id,
 	data_type_id: DATA_TYPE_NUMBER.id,
-	text: () => 'Арифметика',
-	subtext: () => 'Сложение, вычитание, умножение, деление, степень, корень',
+	text: () => getLang('FUNC_TEMPLATE_MATH_COUNTtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_MATH_COUNTsubtext'),
 };
 export const FUNC_TEMPLATE_MATH_ROUND = {
 	id: process.env.FUNC_TEMPLATE_MATH_ROUND,
 	category_id: FUNC_CATEGORY_MATH.id,
 	data_type_id: DATA_TYPE_NUMBER.id,
-	text: () => 'Округление',
-	subtext: () => 'Преобразование дробного числа до целого в большую или меньшую сторону',
+	text: () => getLang('FUNC_TEMPLATE_MATH_ROUNDtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_MATH_ROUNDsubtext'),
 };
 export const FUNC_TEMPLATE_MATH_MAX = {
 	id: process.env.FUNC_TEMPLATE_MATH_MAX,
 	category_id: FUNC_CATEGORY_MATH.id,
 	data_type_id: DATA_TYPE_NUMBER.id,
-	text: () => 'Наибольшее значение',
-	subtext: () => 'Из нескольких значений определить наибольшее число',
+	text: () => getLang('FUNC_TEMPLATE_MATH_MAXtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_MATH_MAXsubtext'),
 };
 export const FUNC_TEMPLATE_MATH_MIN = {
 	id: process.env.FUNC_TEMPLATE_MATH_MIN,
 	category_id: FUNC_CATEGORY_MATH.id,
 	data_type_id: DATA_TYPE_NUMBER.id,
-	text: () => 'Наименьшее значение',
-	subtext: () => 'Из нескольких значений определить наименьшее число',
+	text: () => getLang('FUNC_TEMPLATE_MATH_MINtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_MATH_MINsubtext'),
 };
 export const FUNC_TEMPLATE_MATH_TRIG = {
 	id: process.env.FUNC_TEMPLATE_MATH_TRIG,
 	category_id: FUNC_CATEGORY_MATH.id,
 	data_type_id: DATA_TYPE_NUMBER.id,
-	text: () => 'Тригонометрия',
-	subtext: () => 'Синус, косинус, тангенс, арксинус, арккосинус, арктангенс',
+	text: () => getLang('FUNC_TEMPLATE_MATH_TRIGtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_MATH_TRIGsubtext'),
 };
 export const FUNC_TEMPLATE_MATH_LOG = {
 	id: process.env.FUNC_TEMPLATE_MATH_LOG,
 	category_id: FUNC_CATEGORY_MATH.id,
 	data_type_id: DATA_TYPE_NUMBER.id,
 	disabled: true,
-	text: () => 'Логарифмы',
-	subtext: () => 'Действия с логарифмами',
+	text: () => getLang('FUNC_TEMPLATE_MATH_LOGtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_MATH_LOGsubtext'),
 };
 export const FUNC_TEMPLATE_MATH_SYSTEM = {
 	id: process.env.FUNC_TEMPLATE_MATH_SYSTEM,
 	category_id: FUNC_CATEGORY_MATH.id,
 	data_type_id: DATA_TYPE_NUMBER.id,
 	disabled: true,
-	text: () => 'Системы счисления',
-	subtext: () => 'Определение и перевод чисел из одной системы в другую',
+	text: () => getLang('FUNC_TEMPLATE_MATH_SYSTEMtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_MATH_SYSTEMsubtext'),
 };
 export const funcMathsArr = [
 	FUNC_TEMPLATE_IF_TYPE,

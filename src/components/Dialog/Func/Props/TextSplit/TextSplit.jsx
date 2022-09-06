@@ -12,6 +12,7 @@ import onChange from '../onChange.js';
 import onValueScript from '../onValueScript.js';
 import onValidate from '../onValidate.js';
 import onUnmount from '../onUnmount.js';
+import { getLang } from 'components/Language';
 
 let TextSplit = ({ 
 	id, 
@@ -66,9 +67,9 @@ let TextSplit = ({
 					onChange={_onChange1}
 					defaultValue={prop1}
 					name="prop-1"
-					label="Текст, который нужно разделить"
-					placeholder="Текст или число"
-					helperText="Выберите созданный параметр или укажите значение вручную" />
+					label={getLang('DialogFuncContent17Text')}
+					placeholder={getLang('TorN')}
+					helperText={getLang('SelectCreatedPar')} />
 			</Grid>
 			<Grid
 				item
@@ -81,9 +82,9 @@ let TextSplit = ({
 					onChange={_onChange2}
 					defaultValue={prop2}
 					name="prop-2"
-					label="Разделитель"
-					placeholder="Символ или регулярное выражение"
-					helperText="Выберите созданный параметр или укажите значение вручную" />
+					label={getLang('DialogFuncContent22Text')}
+					placeholder={getLang('DialogFuncContent18Text')}
+					helperText={getLang('SelectCreatedPar')} />
 			</Grid>
 		</Grid>
 	</React.Fragment>;

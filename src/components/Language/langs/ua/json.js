@@ -1,0 +1,11 @@
+export const AnsFormat = 'Формат відповіді';
+export const Obj = 'Об`єкт';
+export const Arr = 'Масив';
+export const Text = 'Текст';
+export const Num = 'Число';
+export const SpecifyValue = 'Укажіть значення вручну або оберіть джерело данных';
+export const Answer = 'JSON відповідь';
+export const DeleteElement = 'Ви впевнені, що бажаєте видалити цей елемент? Усі залежні частини логіки будуть видалені';
+export const Key = 'Ключ';
+export const Format = 'Формат';
+export const ErrorKey = 'Ключ повинен бути унікальним. Значення з таким ключом вже існує';

@@ -1,0 +1,14 @@
+export const InputField = 'Input field';
+export const FieldName = 'Field name';
+export const Description = 'Description';
+export const ObligatoryField = 'Make the field required';
+export const AddField = 'Add field';
+export const ErrorField = 'A field with that name already exist';
+export const SelectField = 'Select field';
+export const Field = 'Field';
+export const SortField = 'Which field to sort';
+export const NoFields = 'No fields created';
+export const WhichFields = 'Which fields to select from the database?';
+export const DbNoField = 'No field was created in service`s database';
+export const NameFields = 'Name fields must be filled in';
+export const NewTableText = 'New table';

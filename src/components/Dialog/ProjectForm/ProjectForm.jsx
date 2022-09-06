@@ -17,6 +17,7 @@ import onValidateSubdomain from 'components/Input/Validate/strOrNum.js';
 import onClose from '../onClose.js';
 import { DIALOG_PROJECT_FORM } from 'consts/dialog.js';
 import onSubmit from './onSubmit.js';
+import { getLang } from 'components/Language';
 
 let ProjectForm = ({ history }) => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_PROJECT_FORM]);
@@ -42,16 +43,16 @@ let ProjectForm = ({ history }) => {
 					<DialogTitle>
 						<Title onClose={onClose(DIALOG_PROJECT_FORM)}>
 							{projectId > 0
-								? 'Редактировать'
-								: 'Создать проект'}
+								? getLang('Edit')
+								: getLang('TestCreateProject')}
 						</Title>
 					</DialogTitle>
 					<DialogContent dividers>
 						<Box my={2}>
 							<InputText 
 								required
-								label="Название проекта"
-								placeholder="Например: мой тестовый проект"
+								label={getLang('ProjectTitle')}
+								placeholder={getLang('ProjectExample')}
 								type="text"
 								name="name"
 								defaultValue={name} />
@@ -65,7 +66,7 @@ let ProjectForm = ({ history }) => {
 								xs={5}>
 								<InputText
 									required
-									label="Субдомен проекта"
+									label={getLang('ProjectSub')}
 									placeholder="my-project"
 									type="text"
 									name="subdomain_path"
@@ -94,14 +95,14 @@ let ProjectForm = ({ history }) => {
 								color="secondary"
 								startIcon={<CloseIcon />}
 								onClick={onClose(DIALOG_PROJECT_FORM)}>
-								Отмена
+								{getLang('Cancel')}
 							</Button>
 							<Button 
 								type="submit"
 								variant="outlined"
 								color="primary"
 								startIcon={<SaveIcon />}>
-								Сохранить
+								{getLang('Save')}
 							</Button>
 						</Box>
 					</DialogActions>

@@ -39,7 +39,7 @@ let Method = ({
 Method = React.memo(Method);
 Method.defaultProps = {
 	name: 'method_id',
-	label: 'Метод',
+	label: 'Method',
 	required: false,
 	disabled: false,
 };

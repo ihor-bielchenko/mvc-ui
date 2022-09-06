@@ -35,7 +35,7 @@ let Service = ({
 Service = React.memo(Service);
 Service.defaultProps = {
 	name: 'service_id',
-	label: 'Сервис',
+	label: 'Service',
 	required: false,
 };
 

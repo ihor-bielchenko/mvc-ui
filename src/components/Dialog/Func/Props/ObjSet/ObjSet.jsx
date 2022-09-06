@@ -17,6 +17,7 @@ import onValueScript from '../onValueScript.js';
 import onValidate from '../onValidate.js';
 import onUnmount from '../onUnmount.js';
 import onMount from './onMount.js';
+import { getLang } from 'components/Language';
 
 let ObjSet = ({ 
 	id, 
@@ -76,7 +77,7 @@ let ObjSet = ({
 					color="primary"
 					startIcon={<AddIcon fontSize="small" />}
 					onClick={_onMenu1}>
-					Выбрать объект
+					{getLang('DialogFuncContent16Text')}
 			</Button>}
 		</Box>
 		<Box py={2}>
@@ -88,9 +89,9 @@ let ObjSet = ({
 				onChange={_onChange2}
 				defaultValue={prop2}
 				name="prop-2"
-				label="Ключ"
-				placeholder="Текст или число"
-				helperText="Выберите созданный параметр или укажите значение вручную" />
+				label={getLang('Key')}
+				placeholder={getLang('TorN')}
+				helperText={getLang('SelectCreatedPar')} />
 		</Box>
 		<Box py={2}>
 			<InputText
@@ -101,9 +102,9 @@ let ObjSet = ({
 				onChange={_onChange3}
 				defaultValue={prop3}
 				name="prop-3"
-				label="Значение"
-				placeholder="Текст или число"
-				helperText="Выберите созданный параметр или укажите значение вручную" />
+				label={getLang('Value')}
+				placeholder={getLang('TorN')}
+				helperText={getLang('SelectCreatedPar')} />
 		</Box>
 	</React.Fragment>;
 };

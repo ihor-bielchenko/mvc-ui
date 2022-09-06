@@ -33,6 +33,7 @@ import onValueScript from './onValueScript.js';
 import onClear from './onClear.js';
 import onCancel from './onCancel.js';
 import onUnmount from './onUnmount.js';
+import { getLang } from 'components/Language';
 
 let Input = ({
 	id,
@@ -49,7 +50,7 @@ let Input = ({
 	const Component = React.lazy(loadColumnInputs(columnDataTypeId));
 
 	return <React.Fragment>
-		<React.Suspense fallback={<Typography>Подождите...</Typography>}>
+		<React.Suspense fallback={<Typography>{getLang('Wait')}</Typography>}>
 			<Component
 				{ ...disabledSource
 					? {}
@@ -176,7 +177,7 @@ let Form = ({
 				color="secondary"
 				startIcon={<CloseIcon />}
 				onClick={onCancel}>
-				Отменить
+				{getLang('CancelTextBtn')}
 			</Button>
 			<Button
 				type="submit"
@@ -184,7 +185,7 @@ let Form = ({
 				color="primary"
 				startIcon={<CheckIcon />}
 				onClick={_onSave}>
-				Сохранить
+				{getLang('Save')}
 			</Button>
 		</Box>
 	</React.Fragment>;

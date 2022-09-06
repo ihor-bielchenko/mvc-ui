@@ -1,6 +1,7 @@
 import React from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '../Select.jsx';
+import { getLang } from 'components/Language';
 
 let Trigonometry = ({ 
 	name,
@@ -22,79 +23,79 @@ let Trigonometry = ({
 		<MenuItem 
 			key={1}
 			value={1}>
-			Синус ({'sin'})
+			{getLang('SinusLabel')} ({'sin'})
 		</MenuItem>
 		<MenuItem 
 			key={2}
 			value={2}>
-			Гиперболический синус ({'sinh'})
+			{getLang('HyperbolicSineLabel')} ({'sinh'})
 		</MenuItem>
 		<MenuItem 
 			key={3}
 			value={3}>
-			Косинус ({'cos'})
+			{getLang('CosineLabel')} ({'cos'})
 		</MenuItem>
 		<MenuItem 
 			key={4}
 			value={4}>
-			Тангенс ({'tan'})
+			{getLang('TangentLabel')} ({'tan'})
 		</MenuItem>
 		<MenuItem 
 			key={5}
 			value={5}>
-			Гиперболический тангенс ({'tanh'})
+			{getLang('HyperbolicTangentLabel')} ({'tanh'})
 		</MenuItem>
 		<MenuItem 
 			key={6}
 			value={6}>
-			Гиперболический косинус ({'cosh'})
+			{getLang('HyperbolicCosineLabel')} ({'cosh'})
 		</MenuItem>
 		<MenuItem 
 			key={7}
 			value={7}>
-			Арксинус ({'asin'})
+			{getLang('ArcsineLabel')} ({'asin'})
 		</MenuItem>
 		<MenuItem 
 			key={8}
 			value={8}>
-			Гиперболический арксинус ({'asinh'})
+			{getLang('HyperbolicArcsineLabel')} ({'asinh'})
 		</MenuItem>
 		<MenuItem 
 			key={9}
 			value={9}>
-			Арккосинус ({'acos'})
+			{getLang('ArcCosineLabel')} ({'acos'})
 		</MenuItem>
 		<MenuItem 
 			key={10}
 			value={10}>
-			Гиперболический арккосинус ({'acosh'})
+			{getLang('HyperbolicArcCosineLabel')} ({'acosh'})
 		</MenuItem>
 		<MenuItem 
 			disabled
 			key={11}
 			value={11}>
-			Арктангенс двух переменных ({'atan2'})
+			{getLang('ArcTangentTwoVariablesLabel')} ({'atan2'})
 		</MenuItem>
 		<MenuItem 
 			key={12}
 			value={12}>
-			Гиперболический арктангенс ({'atanh'})
+			{getLang('HyperbolicArcTangentLabel')} ({'atanh'})
 		</MenuItem>
 		<MenuItem 
 			key={13}
 			value={13}>
-			Преобразует значение из градусов в радианы ({'deg2rad'})
+			{getLang('ConvertToRadiansLabel')} ({'deg2rad'})
 		</MenuItem>
 		<MenuItem 
 			key={14}
 			value={14}>
-			Преобразует значение из радианов в градусы ({'rad2deg'})
+			{getLang('ConvertToDegreesLabel')} ({'rad2deg'})
 		</MenuItem>
 		<MenuItem 
 			disabled
 			key={15}
 			value={15}>
-			Рассчитывает длину гипотенузы прямоугольного треугольника ({'hypot'})
+			{getLang('CalculateRightTriangleLabel')} ({'hypot'})
 		</MenuItem>
 	</Select>;
 };

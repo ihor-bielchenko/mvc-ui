@@ -10,6 +10,7 @@ import { DIALOG_DB_QUERY } from 'consts/dialog.js';
 import Filter from '../Filter';
 import Sort from '../Sort';
 import Query from '../Query';
+import { getLang } from 'components/Language';
 
 const StepperWrapper = styled(Stepper)`
 	& .MuiStepLabel-root.MuiStepLabel-vertical.not-current-step {
@@ -51,7 +52,7 @@ let Search = ({
 						onClick={() => (!disabled && step !== 0) && setStep(0)}
 						component="span"
 						variant="h6">
-						Фильтры:
+						{getLang('Filters')}:
 					</Typography>
 				</StepLabel>
 				<StepContent>
@@ -71,7 +72,7 @@ let Search = ({
 							onClick={() => (!disabled && step !== 1) && setStep(1)}
 							component="span"
 							variant="h6">
-							Сортировка:
+							{getLang('Sort')}:
 						</Typography>
 					</StepLabel>
 					<StepContent>
@@ -91,7 +92,7 @@ let Search = ({
 							onClick={() => (!disabled && step !== 2) && setStep(2)}
 							component="span"
 							variant="h6">
-							Поисковой запрос:
+							{getLang('Quest2')}:
 						</Typography>
 					</StepLabel>
 					<StepContent>

@@ -47,7 +47,7 @@ Maths.defaultProps = {
 	required: false,
 	name: 'func_maths',
 	value: '',
-	label: 'Функция',
+	label: 'Function',
 	helperText: '',
 	onSelect: () => {},
 };

@@ -1,0 +1,10 @@
+export const Getting = 'получение';
+export const Creating = 'создание';
+export const Rewrite = 'перезапись';
+export const Updating = 'обновление';
+export const Deleting = 'удаление';
+export const GettingText = 'получить';
+export const CreatingText = 'создать';
+export const RewriteText = 'перезаписать';
+export const UpdatingText = 'обновить';
+export const DeletingText = 'удалить';

@@ -15,6 +15,7 @@ import {
 } from 'structures/dataTypes.js';
 import onClear from './onClear.js';
 import onMenuComplexValue from './onMenuComplexValue.js';
+import { getLang } from 'components/Language';
 
 let ValueComponent = ({
 	scriptId,
@@ -72,7 +73,7 @@ let ValueComponent = ({
 					default:
 						return <React.Fragment>
 							<Box mt="0px">
-								<React.Suspense fallback={<Typography>Подождите...</Typography>}>
+								<React.Suspense fallback={<Typography>{getLang('Wait')}</Typography>}>
 									<Component
 										menu
 										onMenu={_onMenu}

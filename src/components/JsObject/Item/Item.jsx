@@ -15,6 +15,7 @@ import Key from '../Key';
 import Type from '../Type';
 import Divider from '../Divider';
 import Value from '../Value';
+import { getLang } from 'components/Language';
 
 let Item = ({
 	scriptId,
@@ -63,8 +64,8 @@ let Item = ({
 						component="span"
 						variant="caption"
 						color="secondary">
-						Длина массива неизвестна {collection.limit > 0
-							? `(макс. ${collection.limit} элементов)`
+						{getLang('UndefinedArrayLengthText')} {collection.limit > 0
+							? `(max. ${collection.limit} ${getLang('ElementsText999')})`
 							: ''}
 					</Typography>
 					: <React.Fragment />}

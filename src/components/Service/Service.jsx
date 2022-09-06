@@ -47,6 +47,7 @@ import onChange from './onChange.js';
 import onSave from './onSave.js';
 import onDelete from './onDelete.js';
 import onStop from './onStop.js';
+import { getLang } from 'components/Language';
 
 let Service = ({ history }) => {
 	const projectId = getProjectId();
@@ -78,9 +79,9 @@ let Service = ({ history }) => {
 			<Typography variant="h5">
 				{id > 0
 					? <React.Fragment>
-						Сервис <b>{name}</b>
+						{getLang('ServiceLabelText888')} <b>{name}</b>
 					</React.Fragment>
-					: 'Новый сервис'}
+					: getLang('NewService')}
 			</Typography>
 		</Box>
 		<Box py={4}>
@@ -102,20 +103,20 @@ let Service = ({ history }) => {
 					to={`/${projectId}/${URL_PAGE_SERVICE}/${id}/${URL_PAGE_DB}`}
 					disabled={!(id > 0)}
 					startIcon={<StorageIcon />}>
-					База данных
+					{getLang('Databasa')}
 				</Button>
 				<Button
 					disabled
 					startIcon={<LibraryBooksIcon />}>
-					Логи
+					{getLang('logs')}
 				</Button>
 			</ButtonGroup>
 		</Box>
 		<Box py={2}>
 			<InputText 
 				required
-				label="Название сервиса"
-				placeholder="Мой сервис"
+				label={getLang('ServiceName')}
+				placeholder={getLang('MyService')}
 				type="text"
 				name="name"
 				value={name}
@@ -154,7 +155,7 @@ let Service = ({ history }) => {
 					xs={3}>
 					<InputText
 						required
-						label="Субдомен сервиса"
+						label={getLang('ServiceSub')}
 						placeholder="example"
 						type="text"
 						name="subdomain_path"
@@ -214,14 +215,14 @@ let Service = ({ history }) => {
 							? <Button 
 								startIcon={<PauseIcon/>}
 								onClick={onDialog(DIALOG_DELETE_CONFIRM, {
-									title: 'Вы уверены? Пользователи и другие сервисы больше не будут иметь доступ к этому API.',
-									handleText: 'Остановить',
+									title: getLang('StopText'),
+									handleText: getLang('Stop'),
 									onDelete: onStop,
 								})}
 								style={{
 									color: '#e65100'
 								}}>
-								Остановить
+								{getLang('Stop')}
 							</Button>
 							: (serverStatusId === process.env.SERVER_STATUS_RESTART
 								? <Button 
@@ -229,19 +230,19 @@ let Service = ({ history }) => {
 									style={{
 										color: '#e65100'
 									}}>
-									Перезапустить
+									{getLang('Restart')}
 								</Button>
 								: <Button 
 									startIcon={<PlayArrowIcon/>}
 									onClick={onDialog(DIALOG_RUN, {
 										serverStatusId,
 									})}>
-									Запустить
+									{getLang('Launch')}
 								</Button>)}
 						<Button 
 							startIcon={<GetAppIcon/>}
 							onClick={onDialog(DIALOG_BUILD)}>
-							Скачать
+							{getLang('Download')}
 						</Button>
 					</ButtonGroup>
 				</Grid>
@@ -258,7 +259,7 @@ let Service = ({ history }) => {
 						<Button 
 							startIcon={<SaveIcon />}
 							onClick={_onSave}>
-							Сохранить
+							{getLang('Save')}
 						</Button>
 						<Button 
 							disabled={!(name.length > 0)}
@@ -267,7 +268,7 @@ let Service = ({ history }) => {
 							onClick={onDialog(DIALOG_DELETE_CONFIRM, {
 								onDelete: _onDelete,
 							})}>
-							Удалить
+							{getLang('Delete')}
 						</Button>
 					</ButtonGroup>
 				</Grid>

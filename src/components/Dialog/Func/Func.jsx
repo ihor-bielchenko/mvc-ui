@@ -32,6 +32,7 @@ import onChangeName from './onChangeName.js';
 import onSave from './onSave.js';
 import onSelectCategory from './onSelectCategory.js';
 import onSelectTemplate from './onSelectTemplate.js';
+import { getLang } from 'components/Language';
 
 let Func = () => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_FUNC]);
@@ -87,8 +88,8 @@ let Func = () => {
 			<DialogTitle>
 				<Title onClose={_onClose}>
 					{id >= 1
-						? 'Функция: '+ name
-						: 'Добавить функцию'}
+						? `${getLang('LogicFuncName')}: ${name}`
+						: getLang('DialogFuncContent1Text')}
 				</Title>
 			</DialogTitle>
 			{_dialogOpenFlag
@@ -98,8 +99,8 @@ let Func = () => {
 							<InputText 
 								required
 								name="name"
-								label="Название"
-								helperText="Для быстрого поиска придумайте название или краткое описание"
+								label={getLang('Name')}
+								helperText={getLang('DialogConditionDescrText')}
 								value={name}
 								onChange={onChangeName('func')}
 								onInput={onValidateName} />
@@ -136,7 +137,7 @@ let Func = () => {
 							color="secondary"
 							startIcon={<CloseIcon />}
 							onClick={_onClose}>
-							Отмена
+							{getLang('Cancel')}
 						</Button>
 						{id >= 1
 							? <ButtonGroup>
@@ -146,7 +147,7 @@ let Func = () => {
 									color="primary"
 									startIcon={<SaveIcon />}
 									onClick={_onSave}>
-									Сохранить
+									{getLang('Save')}
 								</Button>
 								<Button
 									disabled={filterFormId >= 0 || sortFormId >= 0}
@@ -156,7 +157,7 @@ let Func = () => {
 									onClick={onDialog(DIALOG_DELETE_CONFIRM, {
 										onDelete: _onDelete,
 									})}>
-									Удалить
+									{getLang('Delete')}
 								</Button>
 							</ButtonGroup>
 							: <Button
@@ -165,7 +166,7 @@ let Func = () => {
 								color="primary"
 								startIcon={<SaveIcon />}
 								onClick={_onSave}>
-								Сохранить
+								{getLang('Save')}
 							</Button>}
 					</Box>
 					</DialogActions>

@@ -16,6 +16,7 @@ import {
 	DATA_TYPE_ARRAY,
 	DATA_TYPE_NULL,
 } from 'structures/dataTypes.js';
+import { getLang } from 'components/Language';
 
 let ValueComponent = ({
 	scriptId,
@@ -72,7 +73,7 @@ let ValueComponent = ({
 					default:
 						return <React.Fragment>
 							<Box mt="0px">
-								<React.Suspense fallback={<Typography>Подождите...</Typography>}>
+								<React.Suspense fallback={<Typography>{getLang('Wait')}</Typography>}>
 									<Component
 										menu
 										onMenu={onMenu(id.toString())}

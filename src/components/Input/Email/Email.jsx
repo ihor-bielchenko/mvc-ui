@@ -23,7 +23,7 @@ let Email = ({
 
 Email = React.memo(Email);
 Email.defaultProps = {
-	label: 'Email (адрес электронной почты)',
+	label: 'Email (electronic mail adress)',
 	placeholder: 'example@mail.com',
 	onInput: () => {},
 };

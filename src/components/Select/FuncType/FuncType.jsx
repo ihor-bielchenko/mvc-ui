@@ -51,8 +51,8 @@ let FuncType = ({
 FuncType = React.memo(FuncType);
 FuncType.defaultProps = {
 	name: 'type_id',
-	label: 'Тип функции',
-	helperText: 'Выбрать категорию для быстрого поиска нужной функции',
+	label: 'Function type',
+	helperText: 'Select a category to quickly find the function you need',
 	value: '',
 	required: false,
 	onSelect: () => {},

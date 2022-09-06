@@ -1,0 +1,14 @@
+export const InputField = 'Поле для введення';
+export const FieldName = 'Назва поля';
+export const Description = 'Опис';
+export const ObligatoryField = 'Зробити поле обов`язковим';
+export const AddField = 'Додати поле';
+export const ErrorField = 'Поле з такою назвою вже існує';
+export const SelectField = 'Обрати поле';
+export const Field = 'Поле';
+export const SortField = 'За яким полем сортувати';
+export const NoFields = 'Немає створенихї полів';
+export const WhichFields = 'Які поля треба обрати з бази даних?';
+export const DbNoFields = 'У базі даних такого сервісу не створено жодного поля';
+export const NameFields = 'Поля назв повинні бути заповнені';
+export const NewTableText = 'Нова таблиця';

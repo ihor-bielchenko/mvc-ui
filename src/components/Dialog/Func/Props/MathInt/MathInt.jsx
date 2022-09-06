@@ -11,6 +11,7 @@ import onChange from '../onChange.js';
 import onValueScript from '../onValueScript.js';
 import onValidate from '../onValidate.js';
 import onUnmount from '../onUnmount.js';
+import { getLang } from 'components/Language';
 
 let MathInt = ({ 
 	id, 
@@ -48,9 +49,9 @@ let MathInt = ({
 				onChange={_onChange1}
 				value={prop1}
 				name="prop-1"
-				label="Значение"
-				placeholder="Число"
-				helperText="Выберите созданный параметр или укажите значение вручную" />
+				label={getLang('Value')}
+				placeholder={getLang('Num')}
+				helperText={getLang('SelectCreatedPar')} />
 		</Box>
 	</React.Fragment>;
 };

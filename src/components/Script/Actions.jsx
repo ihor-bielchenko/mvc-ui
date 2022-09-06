@@ -16,6 +16,7 @@ import {
 	DIALOG_FUNC,
 	DIALOG_JSON,
 } from 'consts/dialog.js';
+import { getLang } from 'components/Language';
 
 let Actions = ({ emptyScript }) => {
 	return <React.Fragment>
@@ -38,7 +39,7 @@ let Actions = ({ emptyScript }) => {
 						<Button 
 							disabled
 							startIcon={<DeleteForeverIcon />}>
-							Очистить
+							{getLang('Clear')}
 						</Button>
 						<SelectScale />
 					</ButtonGroup>
@@ -47,19 +48,19 @@ let Actions = ({ emptyScript }) => {
 							onClick={onDialog(DIALOG_PROP)}
 							startIcon={<ClassIcon />}
 							style={{ color: '#00695c' }}>
-							Параметр
+							{getLang('LogicProp')}
 						</Button>
 						<Button 
 							onClick={onDialog(DIALOG_FUNC)}
 							color="secondary"
 							startIcon={<CodeIcon />}>
-							Действие
+							{getLang('LogicFuncTitle')}
 						</Button>
 						<Button 
 							onClick={onDialog(DIALOG_JSON)}
 							startIcon={<VerticalSplitIcon />}
 							style={{ color: '#000' }}>
-							JSON-ответ
+							{getLang('Answer')}
 						</Button>
 					</ButtonGroup>
 				</Box>
@@ -68,12 +69,12 @@ let Actions = ({ emptyScript }) => {
 						<Typography 
 							variant="h5"
 							color="textSecondary">
-							Программа пустая
+							{getLang('LogicTitle')}
 						</Typography>
 					</Box>
 					<Box py={4}>
 						<Typography color="textSecondary">
-							Добавить:
+							{getLang('Add')}:
 						</Typography>
 					</Box>
 					<ButtonGroup>
@@ -81,19 +82,19 @@ let Actions = ({ emptyScript }) => {
 							onClick={onDialog(DIALOG_PROP)}
 							startIcon={<ClassIcon />}
 							style={{ color: '#00695c' }}>
-							Параметр
+							{getLang('LogicProp')}
 						</Button>
 						<Button 
 							onClick={onDialog(DIALOG_FUNC)}
 							color="secondary"
 							startIcon={<CodeIcon />}>
-							Действие
+							{getLang('LogicFuncTitle')}
 						</Button>
 						<Button 
 							onClick={onDialog(DIALOG_JSON)}
 							startIcon={<VerticalSplitIcon />}
 							style={{ color: '#000' }}>
-							JSON-ответ
+							{getLang('Answer')}
 						</Button>
 					</ButtonGroup>
 				</Box>}

@@ -35,6 +35,7 @@ import onDelete from './onDelete.js';
 import onCheckboxAll from './onCheckboxAll.js';
 import onCheckboxRow from './onCheckboxRow.js';
 import onSearch from './onSearch.js';
+import { getLang } from 'components/Language';
 
 let List = ({ id }) => {
 	const rowsPerPage = useSelector((state) => state.list.rowsPerPage);
@@ -91,13 +92,13 @@ let List = ({ id }) => {
 					<Button
 						startIcon={<AddIcon />}
 						onClick={_onEdit()}>
-						Добавить
+						{getLang('Add')}
 					</Button>
 					<Button
 						disabled
 						color="primary"
 						startIcon={<EditIcon />}>
-						Копировать
+						{getLang('Copy')}
 					</Button>
 					<Button
 						disabled={!(select.length > 0)}
@@ -106,7 +107,7 @@ let List = ({ id }) => {
 						onClick={onDialog(DIALOG_DELETE_CONFIRM, {
 							onDelete: _onDelete(),
 						})}>
-						Удалить
+						{getLang('Delete')}
 					</Button>
 				</ButtonGroup>
 				<IconButton onClick={onDialog(DIALOG_DB_PROPS)}>

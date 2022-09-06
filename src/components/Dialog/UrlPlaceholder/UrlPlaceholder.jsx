@@ -16,6 +16,7 @@ import onValidate from 'components/Input/Validate/constStrTranslit.js';
 import onClose from '../onClose.js';
 import { DIALOG_URL_PLACEHOLDER } from 'consts/dialog.js';
 import onSubmit from './onSubmit.js';
+import { getLang } from 'components/Language';
 
 let UrlPlaceholder = ({ history }) => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_URL_PLACEHOLDER]);
@@ -39,16 +40,16 @@ let UrlPlaceholder = ({ history }) => {
 					<DialogTitle>
 						<Title onClose={onClose(DIALOG_URL_PLACEHOLDER)}>
 							{index > -1
-								? 'Редактировать плэйсхолдер'
-								: 'Добавить плэйсхолдер'}
+								? getLang('DialogUrlContent1Text')
+								: getLang('DialogUrlContent2Text')}
 						</Title>
 					</DialogTitle>
 					<DialogContent dividers>
 						<Box my={2}>
 							<InputText 
 								required
-								label="Название плэйсхолдер"
-								placeholder="Например: value_id"
+								label={getLang('DialogUrlContent3Text')}
+								placeholder="For example: value_id"
 								type="text"
 								name="value"
 								defaultValue={value}
@@ -66,14 +67,14 @@ let UrlPlaceholder = ({ history }) => {
 								color="secondary"
 								startIcon={<CloseIcon />}
 								onClick={onClose(DIALOG_URL_PLACEHOLDER)}>
-								Отмена
+								{getLang('Cancel')}
 							</Button>
 							<Button 
 								type="submit"
 								variant="outlined"
 								color="primary"
 								startIcon={<SaveIcon />}>
-								Сохранить
+								{getLang('Save')}
 							</Button>
 						</Box>
 					</DialogActions>

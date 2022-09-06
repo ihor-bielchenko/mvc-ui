@@ -20,6 +20,7 @@ import { DIALOG_DB_ROW } from 'consts/dialog.js';
 import onSave from './onSave.js';
 import onChange from './onChange.js';
 import onClose from './onClose.js';
+import { getLang } from 'components/Language';
 
 export let Column = ({ 
 	columnKey,
@@ -39,7 +40,7 @@ export let Column = ({
 
 	return <React.Fragment>
 		<Box py={1}>
-			<React.Suspense fallback={<Typography>Подождите...</Typography>}>
+			<React.Suspense fallback={<Typography>{getLang('Wait')}</Typography>}>
 				<Component
 					disabled={dataTypeId === DATA_TYPE_ID.id}
 					name={columnKey.toString()}
@@ -49,7 +50,7 @@ export let Column = ({
 						? DATA_TYPE_NUMBER.id
 						: dataTypeId].text() +')'}
 					helperText={error
-						? 'Поле обязательно для заполнения'
+						? getLang('DialogDbRowContent1Text')
 						: description}
 					error={error} />
 			</React.Suspense>
@@ -116,8 +117,8 @@ let DbRow = () => {
 			<DialogTitle>
 				<Title onClose={onClose}>
 					{rowId > 0
-						? 'Редактировать запись'
-						: 'Новая запись'}
+						? getLang('DialogDbRowContent2Text')
+						: getLang('DialogDbRowContent3Text')}
 				</Title>
 			</DialogTitle>
 			{_dialogOpenFlag
@@ -136,7 +137,7 @@ let DbRow = () => {
 								color="secondary"
 								startIcon={<CloseIcon />}
 								onClick={onClose}>
-								Отмена
+								{getLang('Cancel')}
 							</Button>
 							<Button 
 								type="submit"
@@ -145,8 +146,8 @@ let DbRow = () => {
 								startIcon={<SaveIcon />}
 								onClick={_onSave}>
 								{rowId > 0
-									? 'Сохранить'
-									: 'Добавить'}
+									? getLang('Save')
+									: getLang('Add')}
 							</Button>
 						</Box>
 					</DialogActions>

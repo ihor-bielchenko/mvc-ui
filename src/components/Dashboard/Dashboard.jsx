@@ -8,6 +8,7 @@ import { DIALOG_PROJECT_FORM } from 'consts/dialog.js';
 import Project from './Project';
 import onMount from './onMount.js';
 import onUnmount from './onUnmount.js';
+import { getLang } from 'components/Language';
 
 let Dashboard = () => {
 	const data = useSelector((state) => ({ ...state.list.data }));
@@ -27,7 +28,7 @@ let Dashboard = () => {
 				startIcon={<AddIcon />}
 				variant="outlined"
 				color="primary">
-				Новый проект
+				{getLang('NewProjectBtn')}
 			</Button>
 		</Box>
 		{Object.keys(data).map((projectId) => {

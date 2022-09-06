@@ -15,6 +15,7 @@ import {
 	URL_PAGE_SIGN_IN,
 } from 'consts/url.js';
 import onSubmit from './onSubmit.js';
+import { getLang } from 'components/Language';
 
 let Reset = ({ history }) => {
 	const recaptchaRef = React.createRef();
@@ -37,7 +38,7 @@ let Reset = ({ history }) => {
 						component="h1" 
 						variant="h5"
 						align="center">
-						Обновите доступы
+						{getLang('UpdAccesses')}
 					</Typography>
 					<form 
 						noValidate 
@@ -53,7 +54,7 @@ let Reset = ({ history }) => {
 							type="submit"
 							variant="contained"
 							color="primary">
-							Подтвердить
+							{getLang('ConfirmBtnText')}
 						</Button>
 					</form>
 				</Box>
@@ -66,12 +67,12 @@ let Reset = ({ history }) => {
 				component={Link}
 				to={URL_PAGE_SIGN_UP}
 				variant="body2">
-				Создать аккаунт
+				{getLang('CreateAcc')}
 			</Typography>
 		</Box>
 		<Link to={URL_PAGE_SIGN_IN}>
 			<Typography variant="body2">
-				Вход
+				{getLang('AccLogin')}
 			</Typography>
 		</Link>
 	</Container>;

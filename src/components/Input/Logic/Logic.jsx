@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import { StyledChip } from 'components/Input/LogicValue.jsx';
 import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
+import { getLang } from 'components/Language';
 
 let Logic = ({ 
 	onMenu,
@@ -24,7 +25,7 @@ let Logic = ({
 				color="primary"
 				startIcon={<AddIcon fontSize="small" />}
 				onClick={onMenu}>
-				Выбрать параметр из логики
+				{getLang('SelectPropFromLogicText')}
 			</Button>}
 	</Box>;
 };

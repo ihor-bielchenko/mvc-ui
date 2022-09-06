@@ -23,11 +23,12 @@ import {
 	DATA_TYPE_OBJECT,
 	DATA_TYPE_ARRAY,
 } from 'structures/dataTypes.js';
+import { getLang } from 'components/Language';
 
 export const SOURCE_TYPE_MANUALLY = {
 	id: process.env.SOURCE_TYPE_MANUALLY,
 	icon: EditIcon,
-	text: () => 'Вручную',
+	text: () => getLang('Manually'),
 	dataTypeValidating: () => ([
 		DATA_TYPE_TEXT.id,
 		DATA_TYPE_RICHTEXT.id,
@@ -45,7 +46,7 @@ export const SOURCE_TYPE_MANUALLY = {
 export const SOURCE_TYPE_DB = {
 	id: process.env.SOURCE_TYPE_DB,
 	icon: StorageIcon,
-	text: () => 'База данных',
+	text: () => getLang('Databasa'),
 	dataTypeValidating: () => ([
 		DATA_TYPE_TEXT.id,
 		DATA_TYPE_RICHTEXT.id,
@@ -64,7 +65,7 @@ export const SOURCE_TYPE_DB = {
 export const SOURCE_TYPE_PROXY_PASS = {
 	id: process.env.SOURCE_TYPE_PROXY_PASS,
 	icon: LinkIcon,
-	text: () => 'Из другого сервиса',
+	text: () => getLang('FromAnotherServiceText'),
 	dataTypeValidating: () => ([
 		DATA_TYPE_OBJECT.id,
 	]),
@@ -72,7 +73,7 @@ export const SOURCE_TYPE_PROXY_PASS = {
 export const SOURCE_TYPE_HEADER = {
 	id: process.env.SOURCE_TYPE_HEADER,
 	icon: SyncAltIcon,
-	text: () => 'Заголовок запроса',
+	text: () => getLang('HeaderRequest'),
 	dataTypeValidating: () => ([
 		DATA_TYPE_TEXT.id,
 		DATA_TYPE_NUMBER.id,
@@ -88,7 +89,7 @@ export const SOURCE_TYPE_HEADER = {
 export const SOURCE_TYPE_REQUEST = {
 	id: process.env.SOURCE_TYPE_REQUEST,
 	icon: SendIcon,
-	text: () => 'Параметр запроса',
+	text: () => getLang('RequestParam'),
 	dataTypeValidating: () => ([
 		DATA_TYPE_TEXT.id,
 		DATA_TYPE_NUMBER.id,
@@ -104,7 +105,7 @@ export const SOURCE_TYPE_REQUEST = {
 export const SOURCE_TYPE_COOKIE = {
 	id: process.env.SOURCE_TYPE_COOKIE,
 	icon: AssignmentIcon,
-	text: () => 'Куки',
+	text: () => getLang('Cookie'),
 	dataTypeValidating: () => ([
 		DATA_TYPE_TEXT.id,
 		DATA_TYPE_NUMBER.id,
@@ -120,7 +121,7 @@ export const SOURCE_TYPE_COOKIE = {
 export const SOURCE_TYPE_PLACEHOLDER = {
 	id: process.env.SOURCE_TYPE_PLACEHOLDER,
 	icon: LinearScaleIcon,
-	text: () => 'Плэйсхолдер',
+	text: () => getLang('SPlaceholder'),
 	dataTypeValidating: () => ([
 		DATA_TYPE_TEXT.id,
 		DATA_TYPE_NUMBER.id,
@@ -136,7 +137,7 @@ export const SOURCE_TYPE_PLACEHOLDER = {
 export const SOURCE_TYPE_RAND = {
 	id: process.env.SOURCE_TYPE_RAND,
 	icon: BubbleChartIcon,
-	text: () => 'Рандом',
+	text: () => getLang('Random'),
 	disabled: true,
 	dataTypeValidating: () => ([]),
 };
@@ -145,7 +146,7 @@ export const SOURCE_TYPE_SCRIPT = {
 	icon: AccountTreeIcon,
 	disabled: true,
 	text: (text = '') => <React.Fragment>
-		Программа {text
+		{getLang('Programm')} {text
 			? <b>- {text}</b>
 			: ''}
 	</React.Fragment>,

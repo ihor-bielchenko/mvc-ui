@@ -18,7 +18,7 @@ let Numeric = ({ onInput, ...props }) => {
 
 Numeric = React.memo(Numeric);
 Numeric.defaultProps = {
-	placeholder: 'Только числа',
+	placeholder: 'Only numbers',
 };
 
 export default Numeric;

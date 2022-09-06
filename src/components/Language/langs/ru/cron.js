@@ -1,0 +1,9 @@
+export const Running = 'Работает';
+export const Disabled = 'Отключен';
+export const Disabled2 = 'Остановленные';
+export const AddTask = 'Добавить задачу';
+export const All = 'Все';
+export const OnlyRunning = 'Только работающие';
+export const Status = 'Статус';
+export const Configuration = 'Конфигурация';
+export const Logic = 'Логика';

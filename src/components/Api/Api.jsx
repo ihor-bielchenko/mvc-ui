@@ -46,6 +46,7 @@ import onDelete from './onDelete.js';
 import onCheckboxAll from './onCheckboxAll.js';
 import onCheckboxRow from './onCheckboxRow.js';
 import onSearch from './onSearch.js';
+import { getLang } from 'components/Language';
 
 const TableRowWrapper = styled(TableRow)`
 	cursor: pointer;
@@ -99,13 +100,13 @@ let Api = ({ history }) => {
 					component={Link}
 					to={`/${projectId}/${URL_PAGE_SERVICE}/${serviceId}/${URL_PAGE_API}/0`}
 					startIcon={<AddIcon />}>
-					Добавить
+					{getLang('Add')}
 				</Button>
 				<Button
 					disabled
 					color="primary"
 					startIcon={<EditIcon />}>
-					Копировать
+					{getLang('Copy')}
 				</Button>
 				<Button
 					disabled={!(select.length > 0)}
@@ -114,7 +115,7 @@ let Api = ({ history }) => {
 					onClick={onDialog(DIALOG_DELETE_CONFIRM, {
 						onDelete: onDelete(),
 					})}>
-					Удалить
+					{getLang('Delete')}
 				</Button>
 			</ButtonGroup>
 			<IconButton disabled>
@@ -145,14 +146,14 @@ let Api = ({ history }) => {
 							<Typography 
 								variant="caption"
 								color="textSecondary">
-								Метод
+								{getLang('Method')}
 							</Typography>
 						</TableCell>
 						<TableCell>
 							<Typography 
 								variant="caption"
 								color="textSecondary">
-								Путь
+								{getLang('Route2')}
 							</Typography>
 						</TableCell>
 					</TableRow>

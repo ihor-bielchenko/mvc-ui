@@ -29,6 +29,7 @@ import onUnmount from './onUnmount.js';
 import onSave from './onSave.js';
 import onChange from './onChange.js';
 import onCheckRequired from './onCheckRequired.js';
+import { getLang } from 'components/Language';
 
 let Mount = ({
 	tableId,
@@ -110,9 +111,9 @@ let DbColumn = () => {
 				<Title onClose={onClose(DIALOG_DB_COLUMN)}>
 					{name
 						? <React.Fragment>
-							Колонка <b>{name}</b>
+							{getLang('DialogDbColumnTitle1Text')} <b>{name}</b>
 						</React.Fragment>
-						: 'Новая колонка'}
+						: getLang('DialogDbColumnTitle2Text')}
 				</Title>
 			</DialogTitle>
 			{_dialogOpenFlag
@@ -142,13 +143,13 @@ let DbColumn = () => {
 							<InputText
 								required
 								name="name"
-								label="Название поля"
+								label={getLang('DialogDbColumnContent1Text')}
 								onChange={_onChangeName}
 								defaultValue={name}
 								error={error.name}
 								{ ...error.name
 									? {
-										helperText: 'Поле с таким названием уже существует',
+										helperText: getLang('DialogDbColumnContent2Text'),
 									}
 									: {} } />
 						</Box>
@@ -156,7 +157,7 @@ let DbColumn = () => {
 							<InputText
 								multiline
 								rows={3}
-								label="Описание"
+								label={getLang('LogicFuncDescr')}
 								name="description"
 								onChange={_onChangeDescription}
 								defaultValue={description} />
@@ -164,7 +165,7 @@ let DbColumn = () => {
 						<Box py={1}>
 							<FormControlLabel
 								name="required"
-								label="Сделать поле обязательным"
+								label={getLang('ObligatoryField')}
 								disabled={isDisabled}
 								control={<Checkbox 
 									checked={!!required}
@@ -182,7 +183,7 @@ let DbColumn = () => {
 								color="secondary"
 								startIcon={<CloseIcon />}
 								onClick={onClose(DIALOG_DB_COLUMN)}>
-								Отмена
+								{getLang('Cancel')}
 							</Button>
 							<Button 
 								type="submit"
@@ -191,8 +192,8 @@ let DbColumn = () => {
 								startIcon={<SaveIcon />}
 								onClick={_onSave}>
 								{name
-									? 'Сохранить'
-									: 'Добавить'}
+									? getLang('Save')
+									: getLang('Add')}
 							</Button>
 						</Box>
 					</DialogActions>

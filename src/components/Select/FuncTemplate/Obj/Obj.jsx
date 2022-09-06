@@ -52,7 +52,7 @@ Obj.defaultProps = {
 	required: false,
 	name: 'func_obj',
 	value: '',
-	label: 'Функция',
+	label: 'Function',
 	helperText: '',
 	inArr: false,
 	onSelect: () => {},

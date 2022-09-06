@@ -23,6 +23,7 @@ import onClose from './onClose.js';
 import onSubmit from './onSubmit.js';
 import onValueScript from './onValueScript.js';
 import onClear from './onClear.js';
+import { getLang } from 'components/Language';
 
 let DbQuery = () => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_DB_QUERY]);
@@ -62,7 +63,7 @@ let DbQuery = () => {
 			onClose={onClose}>
 			<DialogTitle>
 				<Title onClose={onClose}>
-					Поисковый запрос
+					{getLang('SearchRequest')}
 				</Title>
 			</DialogTitle>
 			{!!dialog
@@ -79,13 +80,13 @@ let DbQuery = () => {
 							onValue={_onMenu}
 							onDelete={_onClear}
 							onChange={_onChange}
-							label="Название"
+							label={getLang('Name')}
 							type="text"
 							name="value"
 							defaultValue={value || ''} />
 						<Box py={2}>
 							<FormControlLabel
-								label="Начало колонки базы данных должно совпадать с указанным значением"
+								label={getLang('DialogDbQueryContent1Text')}
 								control={<Checkbox 
 									name="left"
 									checked={!!left} />}
@@ -93,7 +94,7 @@ let DbQuery = () => {
 						</Box>
 						<Box py={2}>
 							<FormControlLabel
-								label="Конец колонки базы данных должен совпадать с указанным значением"
+								label={getLang('DialogDbQueryContent2Text')}
 								control={<Checkbox 
 									name="right"
 									checked={!!right}
@@ -111,7 +112,7 @@ let DbQuery = () => {
 								color="secondary"
 								startIcon={<CloseIcon />}
 								onClick={onClose}>
-								Отмена
+								{getLang('Cancel')}
 							</Button>
 							<Button 
 								type="submit"
@@ -119,7 +120,7 @@ let DbQuery = () => {
 								color="primary"
 								startIcon={<SaveIcon />}
 								onClick={_onSave}>
-								Сохранить
+								{getLang('Save')}
 							</Button>
 						</Box>
 					</DialogActions>

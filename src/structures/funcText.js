@@ -9,70 +9,71 @@ import {
 	DATA_TYPE_NUMBER,
 	DATA_TYPE_ARRAY,
 } from './dataTypes.js';
+import { getLang } from 'components/Language';
 
 export const FUNC_TEMPLATE_TEXT_LENGTH = {
 	id: process.env.FUNC_TEMPLATE_TEXT_LENGTH,
 	category_id: FUNC_CATEGORY_TEXT.id,
 	data_type_id: DATA_TYPE_NUMBER.id,
-	text: () => 'Длина текста',
-	subtext: () => 'Определить количество символов в строке',
+	text: () => getLang('FUNC_TEMPLATE_TEXT_LENGTHtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_TEXT_LENGTHsubtext'),
 };
 export const FUNC_TEMPLATE_TEXT_SPLIT = {
 	id: process.env.FUNC_TEMPLATE_TEXT_SPLIT,
 	category_id: FUNC_CATEGORY_TEXT.id,
 	data_type_id: DATA_TYPE_ARRAY.id,
-	text: () => 'Разделить текст по символу',
-	subtext: () => 'Разделить текст на две или больше строк по определенному символу или подстроке. Если в тексте нет указанного символа, тогда значение останется неизменным',
+	text: () => getLang('FUNC_TEMPLATE_TEXT_SPLITtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_TEXT_SPLITsubtext'),
 };
 export const FUNC_TEMPLATE_TEXT_JOIN = {
 	id: process.env.FUNC_TEMPLATE_TEXT_JOIN,
 	category_id: FUNC_CATEGORY_TEXT.id,
 	data_type_id: DATA_TYPE_TEXT.id,
-	text: () => 'Объединить несколько строк в один текст',
-	subtext: () => 'Можно объединять по символу или слову',
+	text: () => getLang('FUNC_TEMPLATE_TEXT_JOINtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_TEXT_JOINsubtext'),
 };
 export const FUNC_TEMPLATE_TEXT_UPPERCASE = {
 	id: process.env.FUNC_TEMPLATE_TEXT_UPPERCASE,
 	category_id: FUNC_CATEGORY_TEXT.id,
 	data_type_id: DATA_TYPE_TEXT.id,
-	text: () => 'В верхний регистр (заглавные буквы)',
-	subtext: () => 'Преобразовать все символы текста в большие буквы',
+	text: () => getLang('FUNC_TEMPLATE_TEXT_UPPERCASEtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_TEXT_UPPERCASEsubtext'),
 };
 export const FUNC_TEMPLATE_TEXT_LOWERCASE = {
 	id: process.env.FUNC_TEMPLATE_TEXT_LOWERCASE,
 	category_id: FUNC_CATEGORY_TEXT.id,
 	data_type_id: DATA_TYPE_TEXT.id,
-	text: () => 'В нижний регистр',
-	subtext: () => 'Все символы текста в нижний регистр',
+	text: () => getLang('FUNC_TEMPLATE_TEXT_LOWERCASEtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_TEXT_LOWERCASEsubtext'),
 };
 export const FUNC_TEMPLATE_TEXT_REVERSE = {
 	id: process.env.FUNC_TEMPLATE_TEXT_REVERSE,
 	category_id: FUNC_CATEGORY_TEXT.id,
 	data_type_id: DATA_TYPE_TEXT.id,
-	text: () => 'Задом наперед',
-	subtext: () => 'Перевернуть текст задом наперед',
+	text: () => getLang('FUNC_TEMPLATE_TEXT_REVERSEtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_TEXT_REVERSEsubtext'),
 };
 export const FUNC_TEMPLATE_TEXT_FIND = {
 	id: process.env.FUNC_TEMPLATE_TEXT_FIND,
 	category_id: FUNC_CATEGORY_TEXT.id,
 	data_type_id: DATA_TYPE_TEXT.id,
-	text: () => 'Найти в тексте нужную строку или символ',
-	subtext: () => 'Возвращает первый индекс, по которому символ может быть найден в строке или -1, если такого символа нет',
+	text: () => getLang('FUNC_TEMPLATE_TEXT_FINDtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_TEXT_FINDsubtext'),
 };
 export const FUNC_TEMPLATE_TEXT_REPLACE = {
 	id: process.env.FUNC_TEMPLATE_TEXT_REPLACE,
 	category_id: FUNC_CATEGORY_TEXT.id,
 	data_type_id: DATA_TYPE_TEXT.id,
-	text: () => 'Заменить часть текста на другие символы',
-	subtext: () => 'Найти в тексте слова и заменить их на нужное значение',
+	text: () => getLang('FUNC_TEMPLATE_TEXT_REPLACEtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_TEXT_REPLACEsubtext'),
 };
 export const FUNC_TEMPLATE_TEXT_SUBSTR = {
 	id: process.env.FUNC_TEMPLATE_TEXT_SUBSTR,
 	category_id: FUNC_CATEGORY_TEXT.id,
 	data_type_id: DATA_TYPE_TEXT.id,
 	disabled: true,
-	text: () => 'Вырезать строку',
-	subtext: () => 'Удалить из текста нужную строку или предложение',
+	text: () => getLang('FUNC_TEMPLATE_TEXT_SUBSTRtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_TEXT_SUBSTRsubtext'),
 };
 
 const funcText = {

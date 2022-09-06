@@ -5,6 +5,7 @@ import {
 	DATA_TYPE_OBJECT,
  	DATA_TYPE_ARRAY,
 } from 'structures/dataTypes.js';
+import { getLang } from 'components/Language';
 
 let Header = ({ dataTypeId }) => {
 	return <Box
@@ -25,7 +26,7 @@ let Header = ({ dataTypeId }) => {
 					maxWidth: 138,
 					textAlign: 'center',
 				}}>
-				Ключ
+				{getLang('Key')}
 			</Typography>
 			: <React.Fragment />}
 		<Typography
@@ -36,7 +37,7 @@ let Header = ({ dataTypeId }) => {
 				width: '14%',
 				textAlign: 'center',
 			}}>
-			Тип
+			Type
 		</Typography>
 		<Typography
 			component="div"
@@ -46,7 +47,7 @@ let Header = ({ dataTypeId }) => {
 				width: '100%',
 				textAlign: 'center',
 			}}>
-			Значение
+			{getLang('Value')}
 		</Typography>
 	</Box>;
 };

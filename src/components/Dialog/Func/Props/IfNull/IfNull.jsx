@@ -11,6 +11,7 @@ import onClear from '../onClear.js';
 import onValueScript from '../onValueScript.js';
 import onValidate from '../onValidate.js';
 import onUnmount from '../onUnmount.js';
+import { getLang } from 'components/Language';
 
 let IfNull = ({ 
 	id, 
@@ -48,7 +49,7 @@ let IfNull = ({
 				color="primary"
 				startIcon={<AddIcon fontSize="small" />}
 				onClick={_onMenu1}>
-				Выбрать параметр
+				{getLang('SelectPar')}
 			</Button>}
 	</React.Fragment>;
 };

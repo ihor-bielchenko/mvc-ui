@@ -18,6 +18,7 @@ import {
 	DIALOG_JSON,
 } from 'consts/dialog.js';
 import onClose from '../onClose.js';
+import { getLang } from 'components/Language';
 
 export const onClick = (dialogId, workspaceId, props) => (e) => {
 	const script = Store().getState().script;
@@ -66,7 +67,7 @@ let Entity = ({
 					<DescriptionIcon />
 				</ListItemAvatar>
 				<Typography>
-					Параметр
+					{getLang('LogicProp')}
 				</Typography>
 			</MenuItem>
 			<MenuItem onClick={onClick(DIALOG_IF, workspaceId, {
@@ -80,7 +81,7 @@ let Entity = ({
 					<DoneAllIcon />
 				</ListItemAvatar>
 				<Typography>
-					Условие
+					{getLang('ConditionText999')}
 				</Typography>
 			</MenuItem>
 			<MenuItem onClick={onClick(DIALOG_FUNC, workspaceId, {
@@ -94,7 +95,7 @@ let Entity = ({
 					<AirportShuttleIcon />
 				</ListItemAvatar>
 				<Typography>
-					Функция
+					{getLang('LogicFuncName')}
 				</Typography>
 			</MenuItem>
 			<MenuItem onClick={onClick(DIALOG_JSON, workspaceId, {
@@ -108,7 +109,7 @@ let Entity = ({
 					<TextsmsIcon />
 				</ListItemAvatar>
 				<Typography>
-					JSON-ответ
+					{getLang('Answer')}
 				</Typography>
 			</MenuItem>
 			<MenuItem disabled>
@@ -116,7 +117,7 @@ let Entity = ({
 					<LoopIcon />
 				</ListItemAvatar>
 				<Typography>
-					Цикл
+					{getLang('LoopText999')}
 				</Typography>
 			</MenuItem>
 		</Menu>

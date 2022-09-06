@@ -4,6 +4,7 @@ import fetchSignUp from 'fetch/signUp.js';
 import axiosError from 'utils/axiosError.js';
 import { passwordCheck } from 'utils/validators.js';
 import { URL_PAGE_ACCESS_CONFIRM } from 'consts/url.js';
+import { getLang } from 'components/Language';
 
 const onSubmit = async (e, setState, recaptchaRef, locationPush) => {
 	e.preventDefault();
@@ -18,7 +19,7 @@ const onSubmit = async (e, setState, recaptchaRef, locationPush) => {
 			return setState((currentState) => {
 				return {
 					...currentState,
-					password: 'Пароль и подтверждение пароля не совпадают',
+					password: getLang('SingUpMistmachError'),
 				};
 			});
 		}
@@ -37,7 +38,7 @@ const onSubmit = async (e, setState, recaptchaRef, locationPush) => {
 		return setState((currentState) => {
 			return {
 				...currentState,
-				password: 'Ошибка капчи',
+				password: getLang('SignUpCaptchaError'),
 			};
 		});
 	}

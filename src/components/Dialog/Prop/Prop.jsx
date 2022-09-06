@@ -43,6 +43,7 @@ import onDelete from './onDelete.js';
 import onSelectDataTypeId from './onSelectDataTypeId.js';
 import onCheckVariable from './onCheckVariable.js';
 import onMenuComplexValue from './onMenuComplexValue.js';
+import { getLang } from 'components/Language';
 
 let Prop = () => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_PROP]);
@@ -97,8 +98,8 @@ let Prop = () => {
 			<DialogTitle>
 				<Title onClose={_onClose}>
 					{id >= 1
-						? 'Параметр: '+ name
-						: 'Добавить параметр'}
+						? `${getLang('LogicProp')}: ${name}`
+						: getLang('LogicAddProp')}
 				</Title>
 			</DialogTitle>
 			{_dialogOpenFlag
@@ -110,8 +111,8 @@ let Prop = () => {
 							<InputText 
 								required
 								name="name"
-								label="Название"
-								helperText="Для быстрого поиска придумайте название или краткое описание"
+								label={getLang('Name')}
+								helperText={getLang('DialogConditionDescrText')}
 								value={name}
 								onChange={onChangeName('prop')}
 								onInput={onValidateName} />
@@ -122,10 +123,10 @@ let Prop = () => {
 								onChange={onCheckVariable}
 								label={<React.Fragment>
 									<Typography>
-										Переменная
+										{getLang('DialogPropContent1Text')}
 									</Typography>
 									<Typography variant="caption">
-										Возможность перезаписывать контент пераметра во время выполнения программы
+										{getLang('DialogPropContent2Text')}
 									</Typography>
 								</React.Fragment>}
 								control={<Checkbox 
@@ -140,13 +141,13 @@ let Prop = () => {
 							pt={4}
 							pb={2}>
 							<Typography variant="h6">
-								Данные:
+								{getLang('Info')}:
 							</Typography>
 							<Box
 								position="relative"
 								width="300px">
 								<SelectDataType 
-									label="Формат данных"
+									label={getLang('DialogJsonContent2Text')}
 									name="data_type_id"
 									value={dataTypeId}
 									onSelect={onSelectDataTypeId}
@@ -177,7 +178,7 @@ let Prop = () => {
 							color="secondary"
 							startIcon={<CloseIcon />}
 							onClick={_onClose}>
-							Отмена
+							{getLang('Cancel')}
 						</Button>
 						{id >= 1
 							? <ButtonGroup>
@@ -187,7 +188,7 @@ let Prop = () => {
 									color="primary"
 									startIcon={<SaveIcon />}
 									onClick={_onSave}>
-									Сохранить
+									{getLang('Save')}
 								</Button>
 								<Button
 									variant="outlined"
@@ -196,7 +197,7 @@ let Prop = () => {
 									onClick={onDialog(DIALOG_DELETE_CONFIRM, {
 										onDelete: _onDelete,
 									})}>
-									Удалить
+									{getLang('Delete')}
 								</Button>
 							</ButtonGroup>
 							: <Button
@@ -205,7 +206,7 @@ let Prop = () => {
 								color="primary"
 								startIcon={<SaveIcon />}
 								onClick={_onSave}>
-								Сохранить
+								{getLang('Save')}
 							</Button>}
 					</Box>
 					</DialogActions>

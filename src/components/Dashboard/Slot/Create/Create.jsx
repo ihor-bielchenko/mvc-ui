@@ -6,6 +6,7 @@ import AddIcon from '@material-ui/icons/Add';
 import onDialog from 'components/Dialog/onDialog.js';
 import { DIALOG_SERVICE_TEMPLATE } from 'consts/dialog.js';
 import Slot from '../Slot.jsx';
+import { getLang } from 'components/Language';
 
 let Create = ({ 
 	projectId,
@@ -29,7 +30,7 @@ let Create = ({
 					justifyContent: 'center',
 				}}>
 				<Typography variant="subtitle1">
-					Новый сервис
+					{getLang('NewService')}
 				</Typography>
 			</Button>
 		</Slot>

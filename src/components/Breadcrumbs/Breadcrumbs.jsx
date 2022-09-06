@@ -15,6 +15,7 @@ import {
 	URL_PAGE_DB,
 	URL_PAGE_LOG,
 } from 'consts/url.js';
+import { getLang } from 'components/Language';
 
 let Breadcrumbs = ({ history }) => {
 	const url = history
@@ -26,13 +27,13 @@ let Breadcrumbs = ({ history }) => {
 	const render = [
 		url[1] === URL_PAGE_DASHBOARD
 			? <Typography key="all">
-				Все сервисы
+				{getLang('AllServices')}
 			</Typography>
 			: <Link 
 				key="all"
 				to={'/'+ URL_PAGE_DASHBOARD}>
 				<Typography>
-					Все сервисы
+					{getLang('AllServices')}
 				</Typography>
 			</Link>,
 	];
@@ -68,7 +69,7 @@ let Breadcrumbs = ({ history }) => {
 								{routeName}
 							</Typography>
 							: <Typography key="route">
-								Новый роут
+								{getLang('NewRout')}
 							</Typography>);
 					}
 					else {
@@ -86,13 +87,13 @@ let Breadcrumbs = ({ history }) => {
 
 				case URL_PAGE_DB:
 					render.push(<Typography key="db">
-						База данных
+						{getLang('Databasa')}
 					</Typography>);
 					break;
 
 				case URL_PAGE_LOG:
 					render.push(<Typography key="logs">
-						Логи
+						{getLang('logs')}
 					</Typography>);
 					break;
 
@@ -103,7 +104,7 @@ let Breadcrumbs = ({ history }) => {
 	}
 	else if (url[1] === URL_PAGE_ACCOUNT) {
 		render.push(<Typography key="account">
-			Аккаунт
+			{getLang('Acc')}
 		</Typography>);
 	}
 

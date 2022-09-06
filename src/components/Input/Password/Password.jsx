@@ -9,7 +9,7 @@ let Password = (props) => {
 
 Password = React.memo(Password);
 Password.defaultProps = {
-	placeholder: 'Пароль',
+	placeholder: 'Password',
 };
 
 export default Password;

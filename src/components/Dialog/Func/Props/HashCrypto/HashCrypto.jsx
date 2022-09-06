@@ -11,6 +11,7 @@ import onChange from '../onChange.js';
 import onValueScript from '../onValueScript.js';
 import onValidate from '../onValidate.js';
 import onUnmount from '../onUnmount.js';
+import { getLang } from 'components/Language';
 
 let HashCrypto = ({ 
 	id, 
@@ -59,9 +60,9 @@ let HashCrypto = ({
 				onChange={_onChange1}
 				defaultValue={prop1}
 				name="prop-1"
-				label="Какое значение нужно зашифровать"
-				placeholder="Текст или число"
-				helperText="Выберите созданный параметр или укажите значение вручную" />
+				label={getLang('DialogFuncContent10Text')}
+				placeholder={getLang('TorN')}
+				helperText={getLang('SelectCreatedPar')} />
 		</Box>
 		<Box py={2}>
 			<InputText
@@ -72,9 +73,9 @@ let HashCrypto = ({
 				onChange={_onChange2}
 				defaultValue={prop2}
 				name="prop-2"
-				label="Секретный ключ"
-				placeholder="Текст"
-				helperText="Выберите созданный параметр или укажите значение вручную" />
+				label={getLang('DialogFuncContent11Text')}
+				placeholder={getLang('Text')}
+				helperText={getLang('SelectCreatedPar')} />
 		</Box>
 	</React.Fragment>;
 };

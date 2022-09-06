@@ -1,6 +1,7 @@
 import React from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '../Select.jsx';
+import { getLang } from 'components/Language';
 
 let MathLog = ({ 
 	name,
@@ -22,17 +23,17 @@ let MathLog = ({
 		<MenuItem 
 			key={1}
 			value={1}>
-			Натуральный логарифм ({'log'})
+			{getLang('NaturalLogarithmText')} ({'log'})
 		</MenuItem>
 		<MenuItem 
 			key={2}
 			value={2}>
-			Десятичный логарифм ({'log10'})
+			{getLang('DecimalLogarithmText')} ({'log10'})
 		</MenuItem>
 		<MenuItem 
 			key={3}
 			value={3}>
-			Возвращает log(1 + number)
+			{getLang('LogarithmPlusOneText')} log(1 + number)
 		</MenuItem>
 	</Select>;
 };
@@ -40,7 +41,7 @@ let MathLog = ({
 MathLog = React.memo(MathLog);
 MathLog.defaultProps = {
 	name: 'math_log_id',
-	label: 'Логарифм',
+	label: 'Logarithm',
 	required: false,
 };
 

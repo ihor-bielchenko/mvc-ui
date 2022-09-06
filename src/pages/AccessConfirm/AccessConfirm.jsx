@@ -9,6 +9,7 @@ import {
 	URL_PAGE_SIGN_IN,
 	URL_PAGE_RECOVERY,
 } from 'consts/url.js';
+import { getLang } from 'components/Language';
 
 let AccessConfirm = ({ history }) => {
 	return <Container maxWidth="xs">
@@ -21,11 +22,11 @@ let AccessConfirm = ({ history }) => {
 						component="h1" 
 						variant="h5"
 						align="center">
-						Подтверждение регистрации
+						{getLang('ConfRegistration')}
 					</Typography>
 					<Box my={3}>
 						<Typography>
-							На указанную почту отправлено письмо с инструкциями для подтверждения регистрации.
+							{getLang('Instructions')}
 						</Typography>
 					</Box>
 				</Box>
@@ -36,12 +37,12 @@ let AccessConfirm = ({ history }) => {
 				component={Link}
 				to={URL_PAGE_SIGN_IN}
 				variant="body2">
-				Вход
+				{getLang('AccLogin')}
 			</Typography>
 		</Box>
 		<Link to={URL_PAGE_RECOVERY}>
 			<Typography variant="body2">
-				Восстановить аккаунт
+				{getLang('Restore')}
 			</Typography>
 		</Link>
 	</Container>;

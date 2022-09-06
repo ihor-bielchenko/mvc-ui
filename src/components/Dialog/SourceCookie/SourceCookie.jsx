@@ -21,6 +21,7 @@ import onClear from './onClear.js';
 import onValueScript from './onValueScript.js';
 import onClose from './onClose.js';
 import onSubmit from './onSubmit.js';
+import { getLang } from 'components/Language';
 
 export let Input = ({
 	workspaceId,
@@ -45,7 +46,7 @@ export let Input = ({
 		dataTypeId,
 	]);
 
-	return <React.Suspense fallback={<Typography>Подождите...</Typography>}>
+	return <React.Suspense fallback={<Typography>{getLang('Wait')}</Typography>}>
 		<Component 
 			required
 			menu
@@ -61,8 +62,8 @@ export let Input = ({
 };
 Input = React.memo(Input);
 Input.defaultProps = {
-	label: 'Название значния',
-	placeholder: 'Например, access_token',
+	label: 'Name value',
+	placeholder: 'For example, access_token',
 };
 
 let SourceCookie = () => {
@@ -83,7 +84,7 @@ let SourceCookie = () => {
 				onClose={onClose(SOURCE_TYPE_COOKIE.id)}>
 				<DialogTitle>
 					<Title onClose={onClose(SOURCE_TYPE_COOKIE.id)}>
-						Куки входящего запроса
+						{getLang('CookieRequest')}
 					</Title>
 				</DialogTitle>
 				<form onSubmit={_onSubmit}>
@@ -103,14 +104,14 @@ let SourceCookie = () => {
 								color="secondary"
 								startIcon={<CloseIcon />}
 								onClick={onClose(SOURCE_TYPE_COOKIE.id)}>
-								Отмена
+								{getLang('Cancel')}
 							</Button>
 							<Button 
 								variant="outlined"
 								color="primary"
 								type="submit"
 								startIcon={<CheckIcon />}>
-								Добавить
+								{getLang('Add')}
 							</Button>
 						</Box>
 					</DialogActions>

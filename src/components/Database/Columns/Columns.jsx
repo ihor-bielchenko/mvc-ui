@@ -24,6 +24,7 @@ import onDelete from './onDelete.js';
 import onEdit from './onEdit.js';
 import onMount from './onMount.js';
 import onChange from './onChange.js';
+import { getLang } from 'components/Language';
 
 let Column = ({
 	tableId,
@@ -64,7 +65,7 @@ let Column = ({
 				: <CheckBoxOutlineBlankIcon fontSize="small" />}
 		</Box>
 		<Box width="calc(100% - 120px)">
-			<React.Suspense fallback={<Typography>Подождите...</Typography>}>
+			<React.Suspense fallback={<Typography>{getLang('Wait')}</Typography>}>
 				<Component
 					disabled={dataTypeId === DATA_TYPE_ID.id}
 					name={'column-'+ columnId}

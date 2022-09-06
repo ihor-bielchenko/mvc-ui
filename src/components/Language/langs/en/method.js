@@ -1,0 +1,10 @@
+export const Getting = 'receiving';
+export const Creating = 'creating';
+export const Rewrite = 'rewriting';
+export const Updating = 'updating';
+export const Deleting = 'deleting';
+export const GettingText = 'get';
+export const CreatingText = 'create';
+export const RewriteText = 'overwrite';
+export const UpdatingText = 'update';
+export const DeletingText = 'delete';

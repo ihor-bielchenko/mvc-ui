@@ -1,40 +1,41 @@
 import { FUNC_CATEGORY_HASH } from './funcCategories.js';
 import { DATA_TYPE_TEXT } from './dataTypes.js';
+import { getLang } from 'components/Language';
 
 export const FUNC_TEMPLATE_HASH_PASSWORD = {
 	id: process.env.FUNC_TEMPLATE_HASH_PASSWORD,
 	category_id: FUNC_CATEGORY_HASH.id,
 	data_type_id: DATA_TYPE_TEXT.id,
-	text: () => 'Создать пароль',
-	subtext: () => 'Сгенерировать уникальный пароль с выбором сложности',
+	text: () => getLang('FUNC_TEMPLATE_HASH_PASSWORDtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_HASH_PASSWORDsubtext'),
 };
 export const FUNC_TEMPLATE_HASH_BASE64_ENCODE = {
 	id: process.env.FUNC_TEMPLATE_HASH_BASE64_ENCODE,
 	category_id: FUNC_CATEGORY_HASH.id,
 	data_type_id: DATA_TYPE_TEXT.id,
-	text: () => 'Преобразовать в base64',
-	subtext: () => 'Кодировать данные в base64',
+	text: () => getLang('FUNC_TEMPLATE_HASH_BASE64_ENCODEtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_HASH_BASE64_ENCODEsubtext'),
 };
 export const FUNC_TEMPLATE_HASH_BASE64_DECODE = {
 	id: process.env.FUNC_TEMPLATE_HASH_BASE64_DECODE,
 	category_id: FUNC_CATEGORY_HASH.id,
 	data_type_id: DATA_TYPE_TEXT.id,
-	text: () => 'Декодировать base64',
-	subtext: () => 'Декодировать base64 код в исходный вид',
+	text: () => getLang('FUNC_TEMPLATE_HASH_BASE64_DECODEtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_HASH_BASE64_DECODEsubtext'),
 };
 export const FUNC_TEMPLATE_HASH_HASH = {
 	id: process.env.FUNC_TEMPLATE_HASH_HASH,
 	category_id: FUNC_CATEGORY_HASH.id,
 	data_type_id: DATA_TYPE_TEXT.id,
-	text: () => 'Простое хеширование',
-	subtext: () => 'Создание хеш строки с помощью алгоритма md5',
+	text: () => getLang('FUNC_TEMPLATE_HASH_HASHtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_HASH_HASHsubtext'),
 };
 export const FUNC_TEMPLATE_HASH_CRYPTO = {
 	id: process.env.FUNC_TEMPLATE_HASH_CRYPTO,
 	category_id: FUNC_CATEGORY_HASH.id,
 	data_type_id: DATA_TYPE_TEXT.id,
-	text: () => 'Шифрование по ключу',
-	subtext: () => 'Шифрование данных с помощью алгоритма sha256',
+	text: () => getLang('FUNC_TEMPLATE_HASH_CRYPTOtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_HASH_CRYPTOsubtext'),
 };
 const funcHash =  {
 	[process.env.FUNC_TEMPLATE_HASH_PASSWORD]: FUNC_TEMPLATE_HASH_PASSWORD,

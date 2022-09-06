@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import KeyValue from './KeyValue.jsx';
 import onAdd from './onAdd.js';
+import { getLang } from 'components/Language';
 
 let Headers = () => {
 	const headerKeys = useSelector((state) => Object.keys(state.jsObject.tempValue.header || {}));
@@ -23,7 +24,7 @@ let Headers = () => {
 					size="small"
 					startIcon={<AddIcon />}
 					onClick={onAdd}>
-					Добавить заголовок
+					{getLang('AddHeader')}
 				</Button>
 			</Box>
 		</Box>

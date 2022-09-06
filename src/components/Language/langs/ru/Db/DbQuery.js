@@ -1,0 +1,11 @@
+export const SearchRequest = 'Поисковый запрос';
+export const Cookie = 'Куки';
+export const CookieRequest = 'Куки входящего запроса';
+export const HeaderRequest = 'Заголовок запроса';
+export const HeaderIncomingRequest = 'Заголовок входящего запроса';
+export const RequestIncomingParam = 'Параметр входящего запроса';
+export const RequestMethod = 'Метод запроса';
+export const RequestParam = 'Параметр запроса';
+export const AddRequest = 'Добавить запрос';
+export const RequestParams = 'Параметры запроса';
+export const Request = 'Запрос';

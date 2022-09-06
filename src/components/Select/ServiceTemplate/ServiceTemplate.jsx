@@ -46,7 +46,7 @@ let ServiceTemplate = ({
 ServiceTemplate = React.memo(ServiceTemplate);
 ServiceTemplate.defaultProps = {
 	name: 'template_id',
-	label: 'Шааблон сервиса',
+	label: 'Service Template',
 	required: false,
 	disabled: false,
 };

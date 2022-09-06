@@ -13,6 +13,7 @@ import onUnmount from '../onUnmount.js';
 import onValidate from '../onValidate.js';
 import onValueScript from '../onValueScript.js';
 import onClear from '../onClear.js';
+import { getLang } from 'components/Language';
 
 let IfBase = ({ 
 	id, 
@@ -71,9 +72,9 @@ let IfBase = ({
 					onChange={_onChange1}
 					defaultValue={prop1}
 					name="prop-1"
-					label="Первое значение"
-					placeholder="Текст или число"
-					helperText="Выберите созданный параметр или укажите значение вручную" />
+					label={getLang('Value1')}
+					placeholder={getLang('TorN')}
+					helperText={getLang('SelectCreatedPar')} />
 			</Grid>
 			<Grid 
 				item
@@ -95,9 +96,9 @@ let IfBase = ({
 					onChange={_onChange3}
 					defaultValue={prop3}
 					name="prop-3"
-					label="Второе значение"
-					placeholder="Текст или число"
-					helperText="Выберите созданный параметр или укажите значение вручную" />
+					label={getLang('Value2')}
+					placeholder={getLang('TorN')}
+					helperText={getLang('SelectCreatedPar')} />
 			</Grid>
 		</Grid>
 	</React.Fragment>;

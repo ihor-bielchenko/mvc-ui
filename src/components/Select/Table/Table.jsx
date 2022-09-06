@@ -31,7 +31,7 @@ let Table = ({
 Table = React.memo(Table);
 Table.defaultProps = {
 	name: 'table_id',
-	label: 'Таблица',
+	label: 'Table',
 	required: false,
 	disabled: false,
 };

@@ -16,6 +16,7 @@ import onClose from '../onClose.js';
 import { DIALOG_URL_VALUE } from 'consts/dialog.js';
 import onSubmit from './onSubmit.js';
 import onValidate from 'components/Input/Validate/strOrNum.js';
+import { getLang } from 'components/Language';
 
 let UrlValue = ({ history }) => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_URL_VALUE]);
@@ -39,16 +40,16 @@ let UrlValue = ({ history }) => {
 					<DialogTitle>
 						<Title onClose={onClose(DIALOG_URL_VALUE)}>
 							{index > 0
-								? 'Редактировать url параметр'
-								: 'Добавить url параметр'}
+								? getLang('DialogUrlContent4Text')
+								: getLang('DialogUrlContent5Text')}
 						</Title>
 					</DialogTitle>
 					<DialogContent dividers>
 						<Box my={2}>
 							<InputText 
 								required
-								label="Путь"
-								placeholder="Например: test"
+								label={getLang('Route2')}
+								placeholder="For example: test"
 								type="text"
 								name="value"
 								defaultValue={value}
@@ -66,14 +67,14 @@ let UrlValue = ({ history }) => {
 								color="secondary"
 								startIcon={<CloseIcon />}
 								onClick={onClose(DIALOG_URL_VALUE)}>
-								Отмена
+								{getLang('Cancel')}
 							</Button>
 							<Button 
 								type="submit"
 								variant="outlined"
 								color="primary"
 								startIcon={<SaveIcon />}>
-								Сохранить
+								{getLang('Save')}
 							</Button>
 						</Box>
 					</DialogActions>

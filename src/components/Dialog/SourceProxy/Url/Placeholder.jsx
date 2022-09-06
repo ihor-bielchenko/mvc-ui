@@ -13,6 +13,7 @@ import onValidateSource from 'components/Dialog/Func/Props/onValidate.js';
 import onPlaceholder from './onPlaceholder.js';
 import onValueScript from './onValueScript.js';
 import onClear from './onClear.js';
+import { getLang } from 'components/Language';
 
 let Placeholder = ({ 
 	index,
@@ -53,7 +54,7 @@ let Placeholder = ({
 						onDelete={_onClear}
 						name={id.toString()}
 						label={label}
-						placeholder="значение"
+						placeholder={getLang('value')}
 						onChange={_onPlaceholder}
 						onInput={onValidateInput}
 						defaultValue={value} />

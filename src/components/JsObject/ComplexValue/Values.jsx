@@ -8,6 +8,7 @@ import {
 	DATA_TYPE_NUMBER,
 	DATA_TYPE_BOOLEAN,
 } from 'structures/dataTypes.js';
+import { getLang } from 'components/Language';
 
 let Values = ({
 	dataTypeId, 
@@ -27,7 +28,7 @@ let Values = ({
 					lineHeight: '56px',
 					minWidth: 108,
 				}}>
-				По умолучанию:
+				{getLang('Service3')}:
 			</Typography>
 			: <React.Fragment />}
 		{(() => {
@@ -92,7 +93,7 @@ let Values = ({
 								height: 56,
 								lineHeight: '56px'
 							}}>
-							<i>пустая строка</i>
+							<i>{getLang('EmptyStringText3')}</i>
 						</Typography>;		
 				}
 		})()}

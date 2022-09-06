@@ -22,6 +22,7 @@ import onClear from './onClear.js';
 import onClose from './onClose.js';
 import onSave from './onSave.js';
 import onValueScript from './onValueScript.js';
+import { getLang } from 'components/Language';
 
 let SourcePlaceholder = () => {
 	const dialog = useSelector((state) => state.dialogs[SOURCE_TYPE_PLACEHOLDER.id]);
@@ -52,7 +53,7 @@ let SourcePlaceholder = () => {
 			onClose={onClose}>
 			<DialogTitle>
 				<Title onClose={onClose}>
-					Выбрать плэйсхолдер
+					{getLang('DialogPlaceholderContent1Text')}
 				</Title>
 			</DialogTitle>
 			<DialogContent 
@@ -69,7 +70,7 @@ let SourcePlaceholder = () => {
 						display="flex"
 						alignItems="center">
 						<Typography>
-							Параметр из программы:
+							{getLang('DialogPlaceholderContent2Text')}:
 						</Typography>
 						<div 
 							style={{ 
@@ -93,7 +94,7 @@ let SourcePlaceholder = () => {
 							style={{
 								minWidth: 130,
 							}}>
-							Из логики
+							{getLang('DialogPlaceholderContent3Text')}
 						</Button>
 						<Typography 
 							component="span"
@@ -102,7 +103,7 @@ let SourcePlaceholder = () => {
 								paddingLeft: 18,
 								paddingRight: 18,
 							}}>
-							или
+							{getLang('LogicOr')}
 						</Typography>
 						<Box
 							style={{

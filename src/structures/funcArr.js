@@ -6,111 +6,112 @@ import {
 	DATA_TYPE_ARRAY,
 	DATA_TYPE_OBJECT,
 } from './dataTypes.js';
+import { getLang } from 'components/Language';
 
 export const FUNC_TEMPLATE_ARR_GET = {
 	id: process.env.FUNC_TEMPLATE_ARR_GET,
 	category_id: FUNC_CATEGORY_ARRAY.id,
 	data_type_id: -1,
-	text: () => 'Выбрать значение',
-	subtext: () => 'Извлечь значение из массива',
+	text: () => getLang('FUNC_TEMPLATE_ARR_GETtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_ARR_GETsubtext'),
 };
 export const FUNC_TEMPLATE_ARR_SET = {
 	id: process.env.FUNC_TEMPLATE_ARR_SET,
 	category_id: FUNC_CATEGORY_ARRAY.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
-	text: () => 'Добавить значение',
-	subtext: () => 'Добавить новое значение в конец массива',
+	text: () => getLang('FUNC_TEMPLATE_ARR_SETtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_ARR_SETsubtext'),
 };
 export const FUNC_TEMPLATE_ARR_DEL = {
 	id: process.env.FUNC_TEMPLATE_ARR_DEL,
 	category_id: FUNC_CATEGORY_ARRAY.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
-	text: () => 'Удалить значние',
-	subtext: () => 'Удалить значение из массива по ключу',
+	text: () => getLang('FUNC_TEMPLATE_ARR_DELtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_ARR_DELsubtext'),
 };
 export const FUNC_TEMPLATE_ARR_LENGTH = {
 	id: process.env.FUNC_TEMPLATE_ARR_LENGTH,
 	category_id: FUNC_CATEGORY_ARRAY.id,
 	data_type_id: DATA_TYPE_NUMBER.id,
-	text: () => 'Длина массива',
-	subtext: () => 'Количество элементов в массиве',
+	text: () => getLang('FUNC_TEMPLATE_ARR_LENGTHtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_ARR_LENGTHsubtext'),
 };
 export const FUNC_TEMPLATE_ARR_INDEX_OF = {
 	id: process.env.FUNC_TEMPLATE_ARR_INDEX_OF,
 	category_id: FUNC_CATEGORY_ARRAY.id,
 	data_type_id: DATA_TYPE_NUMBER.id,
-	text: () => 'Индекс элемнта по значению',
-	subtext: () => 'Возвращает первый индекс, по которому элемент может быть найден в массиве или -1, если такого индекса нет',
+	text: () => getLang('FUNC_TEMPLATE_ARR_INDEX_OFtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_ARR_INDEX_OFsubtext'),
 };
 export const FUNC_TEMPLATE_ARR_SPLICE = {
 	id: process.env.FUNC_TEMPLATE_ARR_SPLICE,
 	category_id: FUNC_CATEGORY_ARRAY.id,
 	data_type_id: DATA_TYPE_ARRAY.id,
-	text: () => 'Редактировать массив',
-	subtext: () => 'Функция изменяет содержимое массива, удаляя существующие элементы и/или добавляя новые',
+	text: () => getLang('FUNC_TEMPLATE_ARR_SPLICEtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_ARR_SPLICEsubtext'),
 };
 export const FUNC_TEMPLATE_ARR_REVERSE = {
 	id: process.env.FUNC_TEMPLATE_ARR_REVERSE,
 	category_id: FUNC_CATEGORY_ARRAY.id,
 	data_type_id: DATA_TYPE_ARRAY.id,
-	text: () => 'Изменить порядок следования элементов массива',
-	subtext: () => 'Первый элемент массива становится последним, а последний — первым',
+	text: () => getLang('FUNC_TEMPLATE_ARR_REVERSEtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_ARR_REVERSEsubtext'),
 };
 export const FUNC_TEMPLATE_ARR_MERGE = {
 	id: process.env.FUNC_TEMPLATE_ARR_MERGE,
 	category_id: FUNC_CATEGORY_ARRAY.id,
 	data_type_id: DATA_TYPE_ARRAY.id,
 	disabled: true,
-	text: () => 'Соединить массивы',
-	subtext: () => 'Сливает значения из 2х или более массивов в один',
+	text: () => getLang('FUNC_TEMPLATE_ARR_MERGEtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_ARR_MERGEsubtext'),
 };
 export const FUNC_TEMPLATE_ARR_REDUCE = {
 	id: process.env.FUNC_TEMPLATE_ARR_REDUCE,
 	category_id: FUNC_CATEGORY_ARRAY.id,
 	data_type_id: -1,
 	disabled: true,
-	text: () => 'Результирующее значение массивов',
-	subtext: () => 'Перебора элементов массива для вычисления одного результирующего значения',
+	text: () => getLang('FUNC_TEMPLATE_ARR_REDUCEtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_ARR_REDUCEsubtext'),
 };
 export const FUNC_TEMPLATE_ARR_FOR_EACH = {
 	id: process.env.FUNC_TEMPLATE_ARR_FOR_EACH,
 	category_id: FUNC_CATEGORY_ARRAY.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
 	disabled: true,
-	text: () => 'Перебрать массив',
-	subtext: () => 'Цикл для перебора элементов массива',
+	text: () => getLang('FUNC_TEMPLATE_ARR_FOR_EACHtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_ARR_FOR_EACHsubtext'),
 };
 export const FUNC_TEMPLATE_ARR_FILTER = {
 	id: process.env.FUNC_TEMPLATE_ARR_FILTER,
 	category_id: FUNC_CATEGORY_ARRAY.id,
 	data_type_id: DATA_TYPE_ARRAY.id,
 	disabled: true,
-	text: () => 'Фильтрция массива',
-	subtext: () => 'Функция возвращает новый массив со всеми элементами, прошедшими проверку фильтрции',
+	text: () => getLang('FUNC_TEMPLATE_ARR_FILTERtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_ARR_FILTERsubtext'),
 };
 export const FUNC_TEMPLATE_ARR_SORT = {
 	id: process.env.FUNC_TEMPLATE_ARR_SORT,
 	category_id: FUNC_CATEGORY_ARRAY.id,
 	data_type_id: DATA_TYPE_ARRAY.id,
 	disabled: true,
-	text: () => 'Сортировка массива',
-	subtext: () => 'Функция сортирует элементы массива и возвращает отсортированный массив',
+	text: () => getLang('FUNC_TEMPLATE_ARR_SORTtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_ARR_SORTsubtext'),
 };
 export const FUNC_TEMPLATE_ARR_FIND = {
 	id: process.env.FUNC_TEMPLATE_ARR_FIND,
 	category_id: FUNC_CATEGORY_ARRAY.id,
 	data_type_id: -1,
 	disabled: true,
-	text: () => 'Поиск по массиву',
-	subtext: () => 'Возвращает значение первого найденного в массиве элемента, которое удовлетворяет условию поиска',
+	text: () => getLang('FUNC_TEMPLATE_ARR_FINDtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_ARR_FINDsubtext'),
 };
 export const FUNC_TEMPLATE_ARR_TO_OBJ = {
 	id: process.env.FUNC_TEMPLATE_ARR_TO_OBJ,
 	category_id: FUNC_CATEGORY_ARRAY.id,
 	data_type_id: DATA_TYPE_OBJECT.id,
 	disabled: true,
-	text: () => 'Преобразовать в объект',
-	subtext: () => 'Преобразовать массив в объект',
+	text: () => getLang('FUNC_TEMPLATE_ARR_TO_OBJtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_ARR_TO_OBJsubtext'),
 };
 
 const funcArr = {

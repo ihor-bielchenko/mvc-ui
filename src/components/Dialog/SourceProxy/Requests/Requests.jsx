@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import KeyValue from './KeyValue.jsx';
 import onAdd from './onAdd.js';
+import { getLang } from 'components/Language';
 
 let Requests = () => {
 	const requestKeys = useSelector((state) => Object.keys(state.jsObject.tempValue.request || {}));
@@ -23,7 +24,7 @@ let Requests = () => {
 					size="small"
 					startIcon={<AddIcon />}
 					onClick={onAdd}>
-					Добавить запрос
+					{getLang('AddRequest')}
 				</Button>
 			</Box>
 		</Box>

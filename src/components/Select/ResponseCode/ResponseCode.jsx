@@ -40,7 +40,7 @@ let ResponseCode = ({
 ResponseCode = React.memo(ResponseCode);
 ResponseCode.defaultProps = {
 	name: 'code',
-	label: 'Код ответа',
+	label: 'Response code',
 	required: false,
 	disabled: false,
 	onFilter: (item) => true,

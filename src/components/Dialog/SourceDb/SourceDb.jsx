@@ -22,6 +22,7 @@ import { SOURCE_TYPE_DB } from 'structures/sourceTypes.js';
 import onClose from '../onClose.js';
 import onSave from './onSave.js';
 import onEdit from './onEdit.js';
+import { getLang } from 'components/Language';
 
 let SourceDb = () => {
 	const dialog = useSelector((state) => state.dialogs[SOURCE_TYPE_DB.id]);
@@ -67,7 +68,7 @@ let SourceDb = () => {
 			onClose={_onClose}>
 			<DialogTitle>
 				<Title onClose={_onClose}>
-					Значение из базы данных
+					{getLang('DataValue')}
 				</Title>
 			</DialogTitle>
 			<DialogContent dividers>
@@ -77,7 +78,7 @@ let SourceDb = () => {
 					<Step>
 						<StepLabel>
 							<Typography variant="h6">
-								Настройка данных
+								{getLang('DataSetting')}
 							</Typography>
 						</StepLabel>
 						<StepContent>
@@ -89,7 +90,7 @@ let SourceDb = () => {
 					<Step>
 						<StepLabel>
 							<Typography variant="h6">
-								Фильтры
+								{getLang('Filters')}
 							</Typography>
 						</StepLabel>
 						<StepContent>
@@ -99,7 +100,7 @@ let SourceDb = () => {
 					<Step>
 						<StepLabel>
 							<Typography variant="h6">
-								Сортировка
+								{getLang('Sort')}
 							</Typography>
 						</StepLabel>
 						<StepContent>
@@ -109,7 +110,7 @@ let SourceDb = () => {
 					<Step>
 						<StepLabel>
 							<Typography variant="h6">
-								Поиск
+								{getLang('Search')}
 							</Typography>
 						</StepLabel>
 						<StepContent>
@@ -124,7 +125,7 @@ let SourceDb = () => {
 						color="secondary"
 						startIcon={<NavigateBeforeIcon />}
 						onClick={_onBack}>
-						Назад
+						{getLang('LogicBack')}
 					</Button>
 					{step >= 3
 						? <Button 
@@ -132,7 +133,7 @@ let SourceDb = () => {
 							color="primary"
 							endIcon={<NavigateNextIcon />}
 							onClick={_onSave}>
-							Сохранить
+							{getLang('Save')}
 						</Button>
 						: <Button 
 							disabled={!issetSelectData || filterFormId >= 0 || sortFormId >= 0}
@@ -140,7 +141,7 @@ let SourceDb = () => {
 							color="primary"
 							endIcon={<NavigateNextIcon />}
 							onClick={_onNext}>
-							Далее
+							{getLang('LogicNext')}
 						</Button>}
 				</DialogActions>
 			</DialogContent>

@@ -51,7 +51,7 @@ Text.defaultProps = {
 	required: false,
 	name: 'func_text',
 	value: '',
-	label: 'Функция',
+	label: 'Function',
 	helperText: '',
 	onSelect: () => {},
 };

@@ -13,6 +13,7 @@ import onSubmit from 'components/Dialog/SourceCookie/onSubmit.js';
 import onClose from 'components/Dialog/SourceCookie/onClose.js';
 import { Input } from 'components/Dialog/SourceCookie';
 import { SOURCE_TYPE_REQUEST } from 'structures/sourceTypes.js';
+import { getLang } from 'components/Language';
 
 let SourceRequest = () => {
 	const dialog = useSelector((state) => state.dialogs[SOURCE_TYPE_REQUEST.id]);
@@ -31,7 +32,7 @@ let SourceRequest = () => {
 			onClose={onClose(SOURCE_TYPE_REQUEST.id)}>
 			<DialogTitle>
 				<Title onClose={onClose(SOURCE_TYPE_REQUEST.id)}>
-					Параметр входящего запроса
+					{getLang('RequestIncomingParam')}
 				</Title>
 			</DialogTitle>
 			<form onSubmit={_onSubmit}>
@@ -39,8 +40,8 @@ let SourceRequest = () => {
 					<Input
 						workspaceId={workspaceId}
 						id={id}
-						label="Название значния"
-						placeholder="Например, user_id" />
+						label="Name value"
+						placeholder="For example user_id" />
 				</DialogContent>
 				<DialogActions>
 					<Box 
@@ -53,14 +54,14 @@ let SourceRequest = () => {
 							color="secondary"
 							startIcon={<CloseIcon />}
 							onClick={onClose(SOURCE_TYPE_REQUEST.id)}>
-							Отмена
+							{getLang('Cancel')}
 						</Button>
 						<Button 
 							variant="outlined"
 							color="primary"
 							type="submit"
 							startIcon={<CheckIcon />}>
-							Добавить
+							{getLang('Add')}
 						</Button>
 					</Box>
 				</DialogActions>

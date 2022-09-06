@@ -13,6 +13,7 @@ import { Input } from 'components/Dialog/SourceCookie';
 import onSubmit from 'components/Dialog/SourceCookie/onSubmit.js';
 import onClose from 'components/Dialog/SourceCookie/onClose.js';
 import { SOURCE_TYPE_HEADER } from 'structures/sourceTypes.js';
+import { getLang } from 'components/Language';
 
 let SourceHeader = () => {
 	const dialog = useSelector((state) => state.dialogs[SOURCE_TYPE_HEADER.id]);
@@ -31,7 +32,7 @@ let SourceHeader = () => {
 			onClose={onClose(SOURCE_TYPE_HEADER.id)}>
 			<DialogTitle>
 				<Title onClose={onClose(SOURCE_TYPE_HEADER.id)}>
-					Заголовок входящего запроса
+					{getLang('HeaderIncomingRequest')}
 				</Title>
 			</DialogTitle>
 			<form onSubmit={_onSubmit}>
@@ -39,8 +40,8 @@ let SourceHeader = () => {
 					<Input
 						workspaceId={workspaceId}
 						id={id}
-						label="Название значния"
-						placeholder="Например, Access-Control-Allow-Methods" />
+						label="Name value"
+						placeholder="For example, Access-Control-Allow-Methods" />
 				</DialogContent>
 				<DialogActions>
 					<Box 
@@ -53,14 +54,14 @@ let SourceHeader = () => {
 							color="secondary"
 							startIcon={<CloseIcon />}
 							onClick={onClose(SOURCE_TYPE_HEADER.id)}>
-							Отмена
+							{getLang('Cancel')}
 						</Button>
 						<Button 
 							variant="outlined"
 							color="primary"
 							type="submit"
 							startIcon={<CheckIcon />}>
-							Добавить
+							{getLang('Add')}
 						</Button>
 					</Box>
 				</DialogActions>

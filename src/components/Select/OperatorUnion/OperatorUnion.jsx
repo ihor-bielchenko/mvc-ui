@@ -1,6 +1,7 @@
 import React from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '../Select.jsx';
+import { getLang } from 'components/Language';
 
 let OperatorUnion = ({ 
 	name,
@@ -21,12 +22,12 @@ let OperatorUnion = ({
 		<MenuItem 
 			key={process.env.OPERATOR_UNION_AND}
 			value={process.env.OPERATOR_UNION_AND}>
-			И (&&)
+			{getLang('OperatorJoin1')} (&&)
 		</MenuItem>
 		<MenuItem 
 			key={process.env.OPERATOR_UNION_OR}
 			value={process.env.OPERATOR_UNION_OR}>
-			ИЛИ (||)
+			{getLang('OperatorJoin2')} (||)
 		</MenuItem>
 		{children}
 	</Select>;
@@ -35,7 +36,7 @@ let OperatorUnion = ({
 OperatorUnion = React.memo(OperatorUnion);
 OperatorUnion.defaultProps = {
 	name: 'operator_union',
-	label: 'Оператор соединения',
+	label: 'Join operator',
 	required: false,
 };
 

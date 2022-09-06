@@ -25,6 +25,7 @@ import onValidate from '../onValidate.js';
 import onValueScript from '../onValueScript.js';
 import onCheck from '../onCheck.js';
 import onClear from '../onClear.js';
+import { getLang } from 'components/Language';
 
 let ColumnCreate = ({ 
 	id, 
@@ -100,9 +101,9 @@ let ColumnCreate = ({
 				onChange={_onChange3}
 				defaultValue={prop3}
 				name="prop-3"
-				label="Название поля"
-				placeholder="Текст"
-				helperText="Выберите созданный параметр или укажите значение вручную" />
+				label={getLang('DialogDbColumnContent1Text')}
+				placeholder={getLang('Text')}
+				helperText={getLang('SelectCreatedPar')} />
 		</Box>
 		<Box py={2}>
 			<InputText
@@ -114,14 +115,14 @@ let ColumnCreate = ({
 				onChange={_onChange4}
 				defaultValue={prop4}
 				name="prop-4"
-				label="Описание"
-				placeholder="Текст"
-				helperText="Выберите созданный параметр или укажите значение вручную" />
+				label={getLang('LogicFuncDescr')}
+				placeholder={getLang('Text')}
+				helperText={getLang('SelectCreatedPar')} />
 		</Box>
 		<Box py={2}>
 			<FormControlLabel
 				name="prop-5"
-				label="Сделать поле обязательным"
+				label={getLang('ObligatoryField')}
 				control={<Checkbox 
 					checked={Boolean(Number(prop5))}
 					onChange={onCheck(4)} />} />

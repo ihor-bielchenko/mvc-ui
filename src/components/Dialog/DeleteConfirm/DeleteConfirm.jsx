@@ -10,11 +10,12 @@ import CloseIcon from '@material-ui/icons/Close';
 import CheckIcon from '@material-ui/icons/Check';
 import { DIALOG_DELETE_CONFIRM } from 'consts/dialog.js';
 import onClose from '../onClose.js';
+import { getLang } from 'components/Language';
 
 let DeleteConfirm = () => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_DELETE_CONFIRM]);
-	const _title = ((dialog || {}).title) || 'Вы уверены, что хотите удалить этот элемент?';
-	const _handleText = ((dialog || {}).handleText) || 'Удалить';
+	const _title = ((dialog || {}).title) || getLang('DialogDeleteContent1Text');
+	const _handleText = ((dialog || {}).handleText) || getLang('Delete');
 	const _onDelete = ((dialog || {}).onDelete) || (() => {});
 	const _onClick = React.useCallback(_onDelete, [ 
 		_onDelete, 
@@ -51,7 +52,7 @@ let DeleteConfirm = () => {
 						color="secondary"
 						startIcon={<CloseIcon />}
 						onClick={onClose(DIALOG_DELETE_CONFIRM)}>
-						Отмена
+						{getLang('Cancel')}
 					</Button>
 				</Box>
 			</DialogActions>

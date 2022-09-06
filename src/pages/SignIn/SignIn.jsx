@@ -16,6 +16,7 @@ import {
 	URL_PAGE_RECOVERY,
 } from 'consts/url.js';
 import onSubmit from './onSubmit.js';
+import { getLang } from 'components/Language';
 
 let SignIn = ({ history }) => {
 	const _onSubmit = React.useCallback((e) => onSubmit(e, history.push), [
@@ -32,7 +33,7 @@ let SignIn = ({ history }) => {
 						component="h1" 
 						variant="h5"
 						align="center">
-						Вход
+						{getLang('AccLogin')}
 					</Typography>
 					<form 
 						noValidate 
@@ -43,7 +44,7 @@ let SignIn = ({ history }) => {
 							id="email"
 							name="email"
 							autoComplete="email"
-							label="Email адрес"
+							label={getLang('Email')}
 							variant="outlined"
 							margin="normal" />
 						<TextField
@@ -53,7 +54,7 @@ let SignIn = ({ history }) => {
 							name="password"
 							type="password"
 							autoComplete="current-password"
-							label="Пароль"
+							label={getLang('Password')}
 							variant="outlined"
 							margin="normal" />
 						<FormControlLabel
@@ -61,14 +62,14 @@ let SignIn = ({ history }) => {
 							name="remember"
 							value="remember"
 							color="primary" />}
-							label="Запомнить" />
+							label={getLang('Remember')} />
 						<Box my={4} />
 						<Button
 							fullWidth
 							type="submit"
 							variant="contained"
 							color="primary">
-							Войти
+							{getLang('BtnEnterText')}
 						</Button>
 					</form>
 				</Box>
@@ -79,12 +80,12 @@ let SignIn = ({ history }) => {
 				component={Link}
 				to={URL_PAGE_SIGN_UP}
 				variant="body2">
-				Создать аккаунт
+				{getLang('CreateAcc')}
 			</Typography>
 		</Box>
 		<Link to={URL_PAGE_RECOVERY}>
 			<Typography variant="body2">
-				Восстановить аккаунт
+				{getLang('Restore')}
 			</Typography>
 		</Link>
 	</Container>;

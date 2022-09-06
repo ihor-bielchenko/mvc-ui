@@ -39,7 +39,7 @@ let Protocol = ({
 Protocol = React.memo(Protocol);
 Protocol.defaultProps = {
 	name: 'protocol_id',
-	label: 'Протокол',
+	label: 'Protocol',
 	required: false,
 	disabled: false,
 };

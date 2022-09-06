@@ -1,0 +1,11 @@
+export const AnsFormat = 'Response format';
+export const Obj = 'Object';
+export const Arr = 'Arrow';
+export const Text = 'Text';
+export const Num = 'Number';
+export const SpecifyValue = 'Enter a value manually or select a data source';
+export const Answer = 'JSON response';
+export const DeleteElement = 'Are you sure you want to remove this element? All dependent pieces of logic will be removed';
+export const Key = 'Key';
+export const Format = 'Format';
+export const ErrorKey = 'The key must be unique. A value with this key already exists';

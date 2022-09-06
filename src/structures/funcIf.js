@@ -1,70 +1,70 @@
 import { FUNC_CATEGORY_IF } from './funcCategories.js';
 import { DATA_TYPE_BOOLEAN } from './dataTypes.js';
+import { getLang } from 'components/Language';
 
 export const FUNC_TEMPLATE_IF_COMPARE = {
 	id: process.env.FUNC_TEMPLATE_IF_COMPARE,
 	category_id: FUNC_CATEGORY_IF.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
 	color: 'secondary',
-	text: () => 'Сравнить два значения',
-	subtext: () => 'Больше, меньше или равно',
+	text: () => getLang('FUNC_TEMPLATE_IF_COMPAREtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_IF_COMPAREsubtext'),
 };
 export const FUNC_TEMPLATE_IF_TYPE = {
 	id: process.env.FUNC_TEMPLATE_IF_TYPE,
 	category_id: FUNC_CATEGORY_IF.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
 	color: 'secondary',
-	text: () => 'Тип значения',
-	subtext: () => 'Проверить тип значения (строка, число, файл и т.д.)',
+	text: () => getLang('FUNC_TEMPLATE_IF_TYPEtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_IF_TYPEsubtext'),
 };
 export const FUNC_TEMPLATE_IF_NOT_NULL = {
 	id: process.env.FUNC_TEMPLATE_IF_NOT_NULL,
 	category_id: FUNC_CATEGORY_IF.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
 	color: 'secondary',
-	text: () => 'Значение не пустое',
-	subtext: () => 'Проверить, что значение состоит из каких-то данных',
+	text: () => getLang('FUNC_TEMPLATE_IF_NOT_NULLtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_IF_NOT_NULLsubtext'),
 };
 export const FUNC_TEMPLATE_IF_PARITY = {
 	id: process.env.FUNC_TEMPLATE_IF_PARITY,
 	category_id: FUNC_CATEGORY_IF.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
 	color: 'secondary',
-	text: () => 'Четность числа',
-	subtext: () => 'Является ли значение четным или нет',
+	text: () => getLang('FUNC_TEMPLATE_IF_PARITYtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_IF_PARITYsubtext'),
 };
 export const FUNC_TEMPLATE_IF_INTEGER = {
 	id: process.env.FUNC_TEMPLATE_IF_INTEGER,
 	category_id: FUNC_CATEGORY_IF.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
 	color: 'secondary',
-	text: () => 'Определить, что число целое',
-	subtext: () => 'Является ли значение целым или дробным',
+	text: () => getLang('FUNC_TEMPLATE_IF_INTEGERtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_IF_INTEGERsubtext'),
 };
 export const FUNC_TEMPLATE_MATH_INFINITY = {
 	id: process.env.FUNC_TEMPLATE_MATH_INFINITY,
 	category_id: FUNC_CATEGORY_IF.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
 	color: 'secondary',
-	text: () => 'Бесконечность',
-	subtext: () => 'В результате деления числа на 0 или если результат вычислений, не попадает в допустимый диапазон чисел JavaScript',
+	text: () => getLang('FUNC_TEMPLATE_MATH_INFINITYtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_MATH_INFINITYsubtext'),
 };
 export const FUNC_TEMPLATE_MATH_NAN = {
 	id: process.env.FUNC_TEMPLATE_MATH_NAN,
 	category_id: FUNC_CATEGORY_IF.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
 	color: 'secondary',
-	text: () => 'Не числовое значение (NaN)',
-	subtext: () => 'Используется для обозначения математической ошибки, которая возникает в том случае, если математическая операция не может быть совершена',
+	text: () => getLang('FUNC_TEMPLATE_MATH_NANtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_MATH_NANsubtext'),
 };
-
 export const FUNC_TEMPLATE_IF_REG_EXP = {
 	id: process.env.FUNC_TEMPLATE_IF_REG_EXP,
 	category_id: FUNC_CATEGORY_IF.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
 	color: 'secondary',
-	text: () => 'Регулярное выражение',
-	subtext: () => 'Соответствует ли значение указанному шаблону',
+	text: () => getLang('FUNC_TEMPLATE_IF_REG_EXPtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_IF_REG_EXPsubtext'),
 };
 export const funcIfArr = [
 	FUNC_TEMPLATE_IF_COMPARE,

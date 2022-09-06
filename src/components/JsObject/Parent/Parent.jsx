@@ -15,6 +15,7 @@ import { SOURCE_TYPE_DB } from 'structures/sourceTypes.js';
 import Header from '../Header';
 import Item from '../Item';
 import onAddItem from './onAddItem.js';
+import { getLang } from 'components/Language';
 
 const closures = {
 	[DATA_TYPE_OBJECT.id]: [ '{', '}' ],
@@ -112,7 +113,7 @@ let Parent = ({
 									color="primary"
 									startIcon={<AddIcon />}
 									onClick={_onAddItem}>
-									Добавить элемент
+									{getLang('CreateElement999')}
 								</Button>
 							</Box>
 							: <React.Fragment />}

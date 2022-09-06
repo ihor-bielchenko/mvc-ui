@@ -14,6 +14,7 @@ import CloseIcon from '@material-ui/icons/Close';
 // import MenuFilter from 'components/Menu/Filter';
 import onExactMatch from './onExactMatch.js';
 import onCollection from './onCollection.js';
+import { getLang } from 'components/Language';
 
 let Search = ({
 	aria,
@@ -93,7 +94,7 @@ let Search = ({
 						name="is_exact_match" />}
 					color="primary"
 					label={<Typography variant="body2">
-						Точное совпадение
+						{getLang('AbsMatch')}
 					</Typography>} />
 			</React.Fragment>
 			: <React.Fragment />}
@@ -106,7 +107,7 @@ let Search = ({
 						onChange={onCollection}
 						name="is_collection" />}
 					color="primary"
-					label="Несколько результатов" />
+					label={getLang('SeveralResults')} />
 			</React.Fragment>
 			: <React.Fragment />}
 	</form>;
@@ -115,8 +116,8 @@ let Search = ({
 Search = React.memo(Search);
 Search.defaultProps = {
 	aria: 'menu-filter-list',
-	label: 'Поиск',
-	placeholder: 'Поисковой запрос',
+	label: 'Search',
+	placeholder: 'Search query',
 	withExactMatch: false,
 	withSomeResults: false,
 };

@@ -11,7 +11,7 @@ const Provider = React.memo(({ children }) => {
 
 	// onLoad
 	React.useEffect(() => {
-		!isLoad && (_load('ru', () => setLoad(true)));
+		!isLoad && (_load('en', () => setLoad(true)));
 	}, [ isLoad ]);
 
 	return isLoad

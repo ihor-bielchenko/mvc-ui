@@ -4,6 +4,7 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import InputText from 'components/Input/Text';
+import { getLang } from 'components/Language';
 
 let Account = () => {
 	const uniqueName = useSelector((state) => state.account.unique_name);
@@ -31,14 +32,14 @@ let Account = () => {
 						<InputText
 							disabled
 							name="unique_name"
-							label="Уникальный идентификатор"
+							label={getLang('UserUniqueName')}
 							value={uniqueName} />
 					</Box>
 					<Box py={2}>
 						<InputText
 							disabled
 							name="name"
-							label="Имя пользователя"
+							label={getLang('UserName')}
 							value={name} />
 					</Box>
 					<Box py={2}>

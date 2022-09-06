@@ -1,5 +1,6 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
+import { getLang } from 'components/Language';
 
 let Passwords = ({ password }) => {
 	const error = Boolean(password);
@@ -12,7 +13,7 @@ let Passwords = ({ password }) => {
 			id="password"
 			name="password"
 			type="password"
-			label="Придумайте пароль"
+			label={getLang('CreatePassword')}
 			variant="outlined"
 			margin="normal" />
 		<TextField
@@ -22,7 +23,7 @@ let Passwords = ({ password }) => {
 			id="confirm_password"
 			name="confirm_password"
 			type="password"
-			label="Повторите пароль"
+			label={getLang('RepeatPassword')}
 			variant="outlined"
 			margin="normal"
 			helperText={password} />

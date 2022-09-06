@@ -12,6 +12,7 @@ import onClear from '../onClear.js';
 import onValueScript from '../onValueScript.js';
 import onValidate from '../onValidate.js';
 import onUnmount from '../onUnmount.js';
+import { getLang } from 'components/Language';
 
 let ArrLength = ({ 
 	id, 
@@ -49,7 +50,7 @@ let ArrLength = ({
 					color="primary"
 					startIcon={<AddIcon fontSize="small" />}
 					onClick={_onMenu1}>
-					Выбрать массив
+					{getLang('DialogFuncContent3Text')}
 				</Button>}
 		</Box>
 	</React.Fragment>;

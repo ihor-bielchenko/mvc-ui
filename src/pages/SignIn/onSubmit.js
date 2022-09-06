@@ -3,6 +3,7 @@ import onLoader from 'components/Loader/onLoader.js';
 import fetchSignIn from 'fetch/signIn.js';
 // import axiosError from 'utils/axiosError.js';
 import { URL_PAGE_DASHBOARD } from 'consts/url.js';
+import { getLang } from 'components/Language';
 
 const onSubmit = async (e, locationPush) => {
 	e.preventDefault();
@@ -42,7 +43,7 @@ const onSubmit = async (e, locationPush) => {
 			type: 'alert',
 			payload: () => ({
 				flag: true,
-				message: 'Ошибка авторизации. Убедитесь, что Вы указали правильные данные',
+				message: getLang('SignInErrorText'),
 				vertical: 'bottom',
 				horizontal: 'right',
 			}),

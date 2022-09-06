@@ -1,3 +1,2 @@
-
-export const OperatorJoin1 = 'И (&&)';
-export const OperatorJoin2 = 'ИЛИ (||)';
+export const OperatorJoin1 = 'ТА';
+export const OperatorJoin2 = 'АБО';

@@ -23,6 +23,7 @@ import onChangeLimit from './onLimit.js';
 import onCheckColumn from './onColumn.js';
 import onValueScript from './onValueScript.js';
 import onClear from './onClear.js';
+import { getLang } from 'components/Language';
 
 let Select = ({ 
 	id,
@@ -75,7 +76,7 @@ let Select = ({
 					xs={6}> 
 					<Box py={2}>
 						<FormControlLabel
-							label="Получать из базы коллекцию элементов"
+							label={getLang('ElementCollect')}
 							name="is_collection"
 							control={<Switch 
 								{ ...typeof isCollection === 'boolean'
@@ -101,7 +102,7 @@ let Select = ({
 								onValue={_onMenuOffset}
 								onDelete={_onClearOffset}
 								name="offset"
-								label="Начало выборки (offset)"
+								label={`${getLang('SampleStart')} (offset)`}
 								placeholder="0"
 								defaultValue={offset}
 								onChange={onChangeOffset} />
@@ -115,7 +116,7 @@ let Select = ({
 								onValue={_onMenuLimit}
 								onDelete={_onClearLimit}
 								name="limit"
-								label="Лимит"
+								label={getLang('Limit')}
 								placeholder="10"
 								defaultValue={limit}
 								onChange={onChangeLimit} />
@@ -131,7 +132,7 @@ let Select = ({
 			<Typography 
 				variant="subtitle2"
 				color="textSecondary">
-				Какие поля нужно выбрать из базы данных?
+				{getLang('WhichFields')}
 			</Typography>
 		</Box>
 		<FormGroup>

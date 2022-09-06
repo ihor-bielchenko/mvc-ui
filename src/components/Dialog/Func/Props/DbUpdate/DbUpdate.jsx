@@ -18,6 +18,7 @@ import onClear from '../onClear.js';
 import onValueScript from '../onValueScript.js';
 import onValidate from '../onValidate.js';
 import onUnmount from '../onUnmount.js';
+import { getLang } from 'components/Language';
 
 let Column = ({
 	id,
@@ -48,7 +49,7 @@ let Column = ({
 	]);
 
 	return <Box py={2}>
-		<React.Suspense fallback={<Typography>Подождите...</Typography>}>
+		<React.Suspense fallback={<Typography>{getLang('Wait')}</Typography>}>
 			<Component
 				menu
 				onMenu={_onMenu}
@@ -124,14 +125,14 @@ let DbUpdate = ({
 		</Box>
 		<Box py={2}>
 			<Typography variant="subtitle1">
-				<b>Какую запись нужно обновить:</b>
+				<b>{getLang('DialogFuncContent8Text')}:</b>
 			</Typography>
 			<DatabaseSearch disabledSort />
 		</Box>
 		<Box 
 			my={2}>
 			<Typography variant="subtitle1">
-				<b>Новые данные:</b>
+				<b>{getLang('DialogFuncContent9Text')}:</b>
 			</Typography>
 			{Object
 				.keys(columns)

@@ -30,6 +30,7 @@ import onChangeName from '../Func/onChangeName.js';
 import onSave from '../Func/onSave.js';
 import onSelectTemplate from './onSelectTemplate.js';
 import onClose from './onClose.js';
+import { getLang } from 'components/Language';
 
 let Condition = () => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_IF]);
@@ -82,8 +83,8 @@ let Condition = () => {
 			<DialogTitle>
 				<Title onClose={_onClose}>
 					{id >= 1
-						? 'Условие: '+ name
-						: 'Добавить условие'}
+						? `${getLang('DialogConditionTitle1Text')}: ${name}`
+						: getLang('DialogConditionTitle2Text')}
 				</Title>
 			</DialogTitle>
 			{_dialogOpenFlag
@@ -93,8 +94,8 @@ let Condition = () => {
 							<InputText 
 								required
 								name="name"
-								label="Название"
-								helperText="Для быстрого поиска придумайте название или краткое описание"
+								label={getLang('Name')}
+								helperText={getLang('DialogConditionDescrText')}
 								value={name}
 								onChange={onChangeName('func')}
 								onInput={onValidateName} />
@@ -124,7 +125,7 @@ let Condition = () => {
 							color="secondary"
 							startIcon={<CloseIcon />}
 							onClick={_onClose}>
-							Отмена
+							{getLang('Cancel')}
 						</Button>
 						{id >= 1
 							? <ButtonGroup>
@@ -134,7 +135,7 @@ let Condition = () => {
 									color="primary"
 									startIcon={<SaveIcon />}
 									onClick={_onSave}>
-									Сохранить
+									{getLang('Save')}
 								</Button>
 								<Button
 									variant="outlined"
@@ -143,7 +144,7 @@ let Condition = () => {
 									onClick={onDialog(DIALOG_DELETE_CONFIRM, {
 										onDelete: _onDelete,
 									})}>
-									Удалить
+									{getLang('Delete')}
 								</Button>
 							</ButtonGroup>
 							: <Button
@@ -152,7 +153,7 @@ let Condition = () => {
 								color="primary"
 								startIcon={<SaveIcon />}
 								onClick={_onSave}>
-								Сохранить
+								{getLang('Save')}
 							</Button>}
 					</Box>
 					</DialogActions>

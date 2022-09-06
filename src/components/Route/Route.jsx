@@ -34,6 +34,7 @@ import onSave from './onSave.js';
 import onDelete from './onDelete.js';
 import onProtocol from './onProtocol.js';
 import onMethod from './onMethod.js';
+import { getLang } from 'components/Language';
 
 let Route = ({ history }) => {
 	// const projectId = getProjectId();
@@ -56,16 +57,16 @@ let Route = ({ history }) => {
 			<Typography variant="h5">
 				{id > 0
 					? <React.Fragment>
-						Роут <b>{name}</b>
+						{getLang('RouteLabelText888')} <b>{name}</b>
 					</React.Fragment>
-					: 'Новый роут'}
+					: getLang('NewRout')}
 			</Typography>
 		</Box>
 		<Box py={2}>
 			<InputText 
 				required
-				label="Название роута"
-				placeholder="Роут для ..."
+				label={getLang('RouteLabelNameText888')}
+				placeholder={getLang('RouteLabelForText888')}
 				type="text"
 				name="name"
 				value={name}
@@ -76,8 +77,8 @@ let Route = ({ history }) => {
 			<InputNumeric 
 				required
 				disabled
-				label="Время синхронизации данных с репликами этого сервиса после запуска текущего роута (в секундах)"
-				placeholder="Роут для ..."
+				label={getLang('RouteSyncReplcisText888')}
+				placeholder="0"
 				type="number"
 				name="sync_time"
 				defaultValue="0" />
@@ -151,7 +152,7 @@ let Route = ({ history }) => {
 							onClick={onMenu('menu-url')}
 							startIcon={<AddIcon />}
 							variant="outlined">
-							Маршрут*
+							{getLang('Route')}*
 						</Button>
 						<MenuUrl aria="menu-url" />
 						<IconButton
@@ -182,7 +183,7 @@ let Route = ({ history }) => {
 					disabled={!(name.length > 0 && methodId > 0)}
 					startIcon={<SaveIcon />}
 					onClick={_onSave}>
-					Сохранить
+					{getLang('Save')}
 				</Button>
 				<Button 
 					disabled={!(id > 0)}
@@ -191,7 +192,7 @@ let Route = ({ history }) => {
 					onClick={onDialog(DIALOG_DELETE_CONFIRM, {
 						onDelete: _onDelete,
 					})}>
-					Удалить
+					{getLang('Delete')}
 				</Button>
 			</ButtonGroup>
 		</Box>

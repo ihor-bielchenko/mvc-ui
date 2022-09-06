@@ -21,6 +21,7 @@ import { DATA_TYPE_ID } from 'structures/dataTypes.js';
 import onAdd from './onAdd.js';
 import onEdit from './onEdit.js';
 import onDelete from './onDelete.js';
+import { getLang } from 'components/Language';
 
 let Table = () => {
 	const sortKeys = useSelector((state) => Object.keys(state.jsObject.tempValue.sort || {}));
@@ -32,10 +33,10 @@ let Table = () => {
 					<TableHead>
 						<TableRow>
 							<TableCell width="60%">
-								По какому полю сортировать
+								{getLang('SortField')}
 							</TableCell>
 							<TableCell>
-								Направление сортировки
+								{getLang('SortDirection')}
 							</TableCell>
 						</TableRow>
 					</TableHead>
@@ -57,8 +58,8 @@ let Table = () => {
 								<TableCell>
 									<Typography variant="h6">
 										{sortItem.direction === 0
-											? '↑ По возрастанию'
-											: '↓ По убыванию'}
+											? `↑ ${getLang('Ascending')}`
+											: `↓ ${getLang('Descending')}`}
 									</Typography>
 								</TableCell>
 								<TableCell width="1%">
@@ -85,7 +86,7 @@ let Table = () => {
 				<Typography 
 					variant="body2"
 					color="textSecondary">
-					Нет ни одной настройки
+					{getLang('NoSettings')}
 				</Typography>
 			</Box>}
 			<Box mt={2}>
@@ -95,7 +96,7 @@ let Table = () => {
 					variant="outlined"
 					startIcon={<AddIcon />}
 					onClick={onAdd}>
-					Добавить
+					{getLang('Add')}
 				</Button>
 			</Box>
 		</React.Fragment>;

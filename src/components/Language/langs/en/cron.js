@@ -1,0 +1,9 @@
+export const Running = 'Running';
+export const Disabled = 'Disabled'; 
+export const Disabled2 = 'Disabled';
+export const AddTask = 'Add a task';
+export const All = 'All';
+export const OnlyRunning = 'Only running';
+export const Status = 'Status';
+export const Configuration = 'Configuration';
+export const Logic = 'Logic';

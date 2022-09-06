@@ -9,6 +9,7 @@ import fetchRouteMany from 'fetch/routeMany.js';
 import axiosError from 'utils/axiosError.js';
 import { URL_API_ENGINE_DOWNLOAD } from 'consts/url.js';
 import { DIALOG_BUILD } from 'consts/dialog.js';
+import { getLang } from 'components/Language';
 
 const onMount = async (setProgress, dialog = DIALOG_BUILD, disabledDowndload = false) => {
 	if (!Store().getState().dialogs[dialog]) {
@@ -31,7 +32,7 @@ const onMount = async (setProgress, dialog = DIALOG_BUILD, disabledDowndload = f
 				...currentState,
 				logs: [
 					...currentState.logs,
-					'Запуск процесса конфигурации',
+					getLang('DialogBuildStatus1Text'),
 				],
 			}));
 		}, 0);
@@ -53,7 +54,7 @@ const onMount = async (setProgress, dialog = DIALOG_BUILD, disabledDowndload = f
 					...currentState,
 					logs: [
 						...currentState.logs,
-						'Запуск сборки  "'+ fetchRouteData.data[_index].name +'"',
+						`${getLang('DialogBuildStatus2Text')} "${fetchRouteData.data[_index].name}"`,
 					],
 				}));
 			}
@@ -74,7 +75,7 @@ const onMount = async (setProgress, dialog = DIALOG_BUILD, disabledDowndload = f
 					value: currentState.value + routesStep,
 					logs: [
 						...currentState.logs,
-						'Контроллер "'+ fetchRouteData.data[_index].name +'" успешно собран',
+						`${getLang('DialogBuildStatus30Text')} "${fetchRouteData.data[_index].name}" ${getLang('DialogBuildStatus31Text')}`,
 					],
 				}));
 			}
@@ -87,8 +88,8 @@ const onMount = async (setProgress, dialog = DIALOG_BUILD, disabledDowndload = f
 			value: currentState.value + 10,
 			logs: [
 				...currentState.logs,
-				'Дамп базы данных',
-				'Запуск архивации',
+				getLang('DialogBuildStatus4Text'),
+				getLang('DialogBuildStatus5Text'),
 			],
 		}));
 		const fetchArchiveResponse = await fetchBuildArchiveCreate({
@@ -101,8 +102,8 @@ const onMount = async (setProgress, dialog = DIALOG_BUILD, disabledDowndload = f
 			value: -2,
 			logs: [
 				...currentState.logs,
-				'Завершение конфигурации',
-				'Все файлы успешно собраны!',
+				getLang('DialogBuildStatus6Text'),
+				getLang('DialogBuildStatus7Text'),
 			],
 		}));
 		if (!disabledDowndload) {

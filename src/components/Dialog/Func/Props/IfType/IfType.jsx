@@ -33,6 +33,7 @@ import onClear from '../onClear.js';
 import onValueScript from '../onValueScript.js';
 import onValidate from '../onValidate.js';
 import onUnmount from '../onUnmount.js';
+import { getLang } from 'components/Language';
 
 const _filtterCategoryFunc = (key, categoryId, templateId, defaultValueFlag = false) => {
 	if (templateId === FUNC_TEMPLATE_MATH_MIN.id
@@ -136,7 +137,7 @@ let IfType = ({
 						color="primary"
 						startIcon={<AddIcon fontSize="small" />}
 						onClick={_onMenu2}>
-						Выбрать параметр
+						{getLang('SelectPar')}
 					</Button>}
 			</Grid>
 		</Grid>

@@ -16,6 +16,7 @@ import onClear from '../onClear.js';
 import onValueScript from '../onValueScript.js';
 import onValidate from '../onValidate.js';
 import onUnmount from '../onUnmount.js';
+import { getLang } from 'components/Language';
 
 let Column = ({
 	id,
@@ -45,7 +46,7 @@ let Column = ({
 	]);
 
 	return <Box py={2}>
-		<React.Suspense fallback={<Typography>Подождите...</Typography>}>
+		<React.Suspense fallback={<Typography>{getLang('Wait')}</Typography>}>
 			<Component
 				menu
 				onMenu={_onMenu}

@@ -51,7 +51,7 @@ let FuncCategory = ({
 FuncCategory = React.memo(FuncCategory);
 FuncCategory.defaultProps = {
 	name: 'func_category_id',
-	label: 'Категория функции',
+	label: 'Feature category',
 	helperText: '',
 	value: '',
 	required: false,

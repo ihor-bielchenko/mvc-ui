@@ -18,6 +18,7 @@ import {
 import SlotService from '../Slot/Service';
 import SlotCreate from '../Slot/Create';
 import onDelete from './onDelete.js';
+import { getLang } from 'components/Language';
 
 let Project = ({ projectId }) => {
 	const domain = useSelector((state) => state.account.path);
@@ -58,14 +59,14 @@ let Project = ({ projectId }) => {
 						<Button 
 							disabled
 							startIcon={<GroupIcon />}>
-							Участники
+							{getLang('Members')}
 						</Button>
 						<Button 
 							startIcon={<EditIcon />}
 							onClick={onDialog(DIALOG_PROJECT_FORM, {
 								projectId,
 							})}>
-							Изменить
+							{getLang('Change')}
 						</Button>
 						<Button 
 							color="secondary"

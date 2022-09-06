@@ -23,6 +23,7 @@ import {
 	URL_PAGE_DB,
 } from 'consts/url.js';
 import onClose from '../onClose.js';
+import { getLang } from 'components/Language';
 
 let Service = ({ 
 	aria, 
@@ -55,7 +56,7 @@ let Service = ({
 				<ViewListIcon />
 			</ListItemAvatar>
 			<Typography>
-				Все сервисы
+				{getLang('AllServices')}
 			</Typography>
 		</MenuItem>,
 	];
@@ -123,7 +124,7 @@ let Service = ({
 					<StorageIcon />
 				</ListItemAvatar>
 				<Typography>
-					База данных
+					{getLang('Databasa')}
 				</Typography>
 			</MenuItem>,
 			<MenuItem 
@@ -133,7 +134,7 @@ let Service = ({
 					<LibraryBooksIcon />
 				</ListItemAvatar>
 				<Typography>
-					Логи
+					{getLang('logs')}
 				</Typography>
 			</MenuItem>,
 		];
@@ -148,7 +149,7 @@ let Service = ({
 				<DescriptionIcon />
 			</ListItemAvatar>
 			<Typography>
-				Документация
+				{getLang('DocsText888')}
 			</Typography>
 		</MenuItem>,
 	];

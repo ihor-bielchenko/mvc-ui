@@ -1,5 +1,6 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
+import { getLang } from 'components/Language';
 
 let SignUp = ({ email, name }) => {
 	return <React.Fragment>
@@ -10,7 +11,7 @@ let SignUp = ({ email, name }) => {
 			id="email"
 			name="email"
 			autoComplete="email"
-			label="Email адрес"
+			label={getLang('Email')}
 			variant="outlined"
 			margin="normal"
 			helperText={email} />
@@ -20,7 +21,7 @@ let SignUp = ({ email, name }) => {
 			error={Boolean(name)}
 			id="name"
 			name="name"
-			label="Имя пользователя"
+			label={getLang('UserName')}
 			variant="outlined"
 			margin="normal"
 			helperText={name} />

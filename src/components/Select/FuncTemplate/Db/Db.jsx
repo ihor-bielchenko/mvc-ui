@@ -49,7 +49,7 @@ Db.defaultProps = {
 	required: false,
 	name: 'func_db',
 	value: '',
-	label: 'Функция',
+	label: 'Function',
 	helperText: '',
 	onSelect: () => {},
 };

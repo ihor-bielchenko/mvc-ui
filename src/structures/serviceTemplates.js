@@ -1,19 +1,20 @@
+import { getLang } from 'components/Language';
 
 export const SERVICE_TEMPLATE_BASE = {
 	id: process.env.SERVICE_TEMPLATE_BASE,
-	text: () => 'По умолчанию',
+	text: () => getLang('Service3'),
 };
 export const SERVICE_TEMPLATE_COMMERCE = {
 	id: process.env.SERVICE_TEMPLATE_COMMERCE,
-	text: () => 'Коммуникация',
+	text: () => getLang('Communication'),
 };
 export const SERVICE_TEMPLATE_MESSAGE = {
 	id: process.env.SERVICE_TEMPLATE_MESSAGE,
-	text: () => 'Коммерция',
+	text: () => getLang('Service6'),
 };
 export const SERVICE_TEMPLATE_DISK = {
 	id: process.env.SERVICE_TEMPLATE_DISK,
-	text: () => 'Файлы',
+	text: () => getLang('Files'),
 };
 
 const serviceTemplates = {

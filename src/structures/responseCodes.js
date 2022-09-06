@@ -1,23 +1,24 @@
+import { getLang } from 'components/Language';
 
 export const RESPONSE_CODE_200 = {
 	value: '200',
-	text: () => '200 - Запрос успешно выполнен',
+	text: () => getLang('RESPONSE_CODE_200'),
 };
 export const RESPONSE_CODE_401 = {
 	value: '401',
-	text: () => '401 - Требуется авторизация',
+	text: () => getLang('RESPONSE_CODE_401'),
 };
 export const RESPONSE_CODE_403 = {
 	value: '403',
-	text: () => '403 - Доступ запрещен',
+	text: () => getLang('RESPONSE_CODE_403'),
 };
 export const RESPONSE_CODE_404 = {
 	value: '404',
-	text: () => '404 - Ресурс не найден',
+	text: () => getLang('RESPONSE_CODE_404'),
 };
 export const RESPONSE_CODE_500 = {
 	value: '500',
-	text: () => '500 - Ошибка на сервере',
+	text: () => getLang('RESPONSE_CODE_500'),
 };
 
 const responseCodes = {

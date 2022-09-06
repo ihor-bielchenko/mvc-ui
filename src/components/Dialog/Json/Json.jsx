@@ -41,6 +41,7 @@ import onSave from './onSave.js';
 import onSelectDataTypeId from './onSelectDataTypeId.js';
 import onSelectCode from './onSelectCode.js';
 import onMenuComplexValue from './onMenuComplexValue.js';
+import { getLang } from 'components/Language';
 
 let Json = () => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_JSON]);
@@ -94,8 +95,8 @@ let Json = () => {
 			<DialogTitle>
 				<Title onClose={_onClose}>
 					{id >= 1
-						? 'JSON-ответ: '+ name
-						: 'Добавить JSON-ответ'}
+						? `${getLang('Answer')}: ${name}`
+						: getLang('DialogJsonContent1Text')}
 				</Title>
 			</DialogTitle>
 			{_dialogOpenFlag
@@ -105,8 +106,8 @@ let Json = () => {
 							<InputText 
 								required
 								name="name"
-								label="Название"
-								helperText="Для быстрого поиска придумайте название или краткое описание"
+								label={getLang('Name')}
+								helperText={getLang('DialogConditionDescrText')}
 								value={name}
 								onChange={onChangeName('json')}
 								onInput={onValidateName} />
@@ -122,7 +123,7 @@ let Json = () => {
 							py={2}
 							position="relative">
 							<SelectDataType
-								label="Формат данных"
+								label={getLang('DialogJsonContent2Text')}
 								name="data_type_id"
 								value={dataTypeId}
 								onSelect={onSelectDataTypeId}
@@ -136,7 +137,7 @@ let Json = () => {
 							pt={4}
 							pb={2}>
 							<Typography variant="h6">
-								Данные:
+								{getLang('Info')}:
 							</Typography>
 						</Box>
 						<JsObject 
@@ -159,7 +160,7 @@ let Json = () => {
 							color="secondary"
 							startIcon={<CloseIcon />}
 							onClick={_onClose}>
-							Отмена
+							{getLang('Cancel')}
 						</Button>
 						{id >= 1
 							? <ButtonGroup>
@@ -169,7 +170,7 @@ let Json = () => {
 									color="primary"
 									startIcon={<SaveIcon />}
 									onClick={_onSave}>
-									Сохранить
+									{getLang('Save')}
 								</Button>
 								<Button
 									variant="outlined"
@@ -178,7 +179,7 @@ let Json = () => {
 									onClick={onDialog(DIALOG_DELETE_CONFIRM, {
 										onDelete: _onDelete,
 									})}>
-									Удалить
+									{getLang('Delete')}
 								</Button>
 							</ButtonGroup>
 							: <Button
@@ -187,7 +188,7 @@ let Json = () => {
 								color="primary"
 								startIcon={<SaveIcon />}
 								onClick={_onSave}>
-								Сохранить
+								{getLang('Save')}
 							</Button>}
 					</Box>
 					</DialogActions>

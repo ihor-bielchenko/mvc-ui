@@ -12,6 +12,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import Title from 'components/Title';
 import { DIALOG_KEY_EXISTS } from 'consts/dialog.js';
 import onClose from '../onClose.js';
+import { getLang } from 'components/Language';
 
 let KetExists = () => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_KEY_EXISTS]);
@@ -27,15 +28,15 @@ let KetExists = () => {
 			onClose={onClose(DIALOG_KEY_EXISTS)}>
 			<DialogTitle>
 				<Title onClose={onClose(DIALOG_KEY_EXISTS)}>
-					Найдены совпадения ключей
+					{getLang('DialogKeyExistsContent1Text')}
 				</Title>
 			</DialogTitle>
 			{!!dialog
 				? <React.Fragment>
 					<DialogContent dividers>
 						<Typography>
-							Новые элементы содержат ключи которые уже существуют. <br />
-							Этим элементам будут присвоены новые уникальные значения
+							{getLang('DialogKeyExistsContent2Text')} <br />
+							{getLang('DialogKeyExistsContent3Text')}
 						</Typography>
 					</DialogContent>
 					<DialogActions>
@@ -49,7 +50,7 @@ let KetExists = () => {
 								color="secondary"
 								startIcon={<CloseIcon />}
 								onClick={onClose(DIALOG_KEY_EXISTS)}>
-								Отмена
+								{getLang('Cancel')}
 							</Button>
 							<Button 
 								type="submit"
@@ -57,7 +58,7 @@ let KetExists = () => {
 								color="primary"
 								startIcon={<SaveIcon />}
 								onClick={merge}>
-								Продолжить
+								{getLang('DialogKeyExistsContent4Text')}
 							</Button>
 						</Box>
 					</DialogActions>

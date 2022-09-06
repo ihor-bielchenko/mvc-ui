@@ -16,6 +16,7 @@ import {
 import Background from './Background';
 import Workspace from './Workspace';
 import onMount from './onMount.js';
+import { getLang } from 'components/Language';
 
 let Script = ({ 
 	id,
@@ -67,12 +68,12 @@ let Script = ({
 						<Button 
 							disabled
 							startIcon={<ArrowBackIcon />}>
-							Назад
+							{getLang('LogicBack')}
 						</Button>
 						<Button 
 							disabled
 							endIcon={<ArrowForwardIcon />}>
-							Вперед
+							{getLang('ForwardBtnText888')}
 						</Button>
 						<SelectScale />
 					</Box>
@@ -93,12 +94,12 @@ let Script = ({
 							component={Link}
 							to={`/${projectId}/${URL_PAGE_SERVICE}/${serviceId}/${URL_PAGE_API}/${routeId}`}
 							color="primary">
-							Настройка роута
+							{getLang('RouteConfigText')}
 						</Button>
 						<Button
 							disabled
 							color="primary">
-							Программа
+							{getLang('Programm')}
 						</Button>
 					</Box>
 				</Box>

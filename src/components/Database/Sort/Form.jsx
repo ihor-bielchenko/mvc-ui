@@ -8,6 +8,7 @@ import SelectColumn from 'components/Select/Column';
 import SelectDirection from 'components/Select/Direction';
 import onSubmit from './onSubmit.js';
 import onCancel from './onCancel.js';
+import { getLang } from 'components/Language';
 
 let Form = ({ 
 	id,
@@ -43,14 +44,14 @@ let Form = ({
 				color="secondary"
 				startIcon={<CloseIcon />}
 				onClick={onCancel}>
-				Отменить
+				{getLang('CancelTextBtn')}
 			</Button>
 			<Button
 				type="submit"
 				variant="outlined"
 				color="primary"
 				startIcon={<CheckIcon />}>
-				Сохранить
+				{getLang('Save')}
 			</Button>
 		</Box>
 	</form>;

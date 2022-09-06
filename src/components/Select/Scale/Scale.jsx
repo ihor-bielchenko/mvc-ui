@@ -54,7 +54,7 @@ let Scale = ({
 Scale = React.memo(Scale);
 Scale.defaultProps = {
 	name: 'scale',
-	label: 'Масштаб',
+	label: 'Scale',
 	helperText: '',
 	value: '',
 	onSelect: () => {},

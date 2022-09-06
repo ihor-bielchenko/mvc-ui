@@ -52,7 +52,7 @@ Arr.defaultProps = {
 	required: false,
 	name: 'func_arr',
 	value: '',
-	label: 'Функция',
+	label: 'Function',
 	helperText: '',
 	inArr: false,
 	onSelect: () => {},

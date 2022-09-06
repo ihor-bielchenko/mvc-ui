@@ -1,6 +1,7 @@
 import React from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '../Select.jsx';
+import { getLang } from 'components/Language';
 
 let Arithmetic = ({ 
 	name,
@@ -22,62 +23,62 @@ let Arithmetic = ({
 		<MenuItem 
 			key={1}
 			value={1}>
-			Плюс ({'+'})
+			{getLang('PlusLabel')} ({'+'})
 		</MenuItem>
 		<MenuItem 
 			key={2}
 			value={2}>
-			Минус ({'-'})
+			{getLang('MinusLabel')} ({'-'})
 		</MenuItem>
 		<MenuItem 
 			key={3}
 			value={3}>
-			Умножение ({'*'})
+			{getLang('MultiplicationLabel')} ({'*'})
 		</MenuItem>
 		<MenuItem 
 			key={4}
 			value={4}>
-			Деление ({'/'})
+			{getLang('DivisionLabel')} ({'/'})
 		</MenuItem>
 		<MenuItem 
 			key={5}
 			value={5}>
-			В степень ({'^'})
+			{getLang('ToDegreeLabel')} ({'^'})
 		</MenuItem>
 		<MenuItem 
 			key={6}
 			value={6}>
-			Корень ({'√'})
+			{getLang('RootLabel')} ({'√'})
 		</MenuItem>
 		<MenuItem 
 			disabled
 			key={7}
 			value={7}>
-			Факториал ({'!'})
+			{getLang('FactorialLabel')} ({'!'})
 		</MenuItem>
 		<MenuItem 
 			disabled
 			key={8}
 			value={8}>
-			Проценты ({'%'})
+			{getLang('InterestLabel')} ({'%'})
 		</MenuItem>
 		<MenuItem 
 			disabled
 			key={9}
 			value={9}>
-			Число π ({'π'})
+			{getLang('NumberP888')} ({'π'})
 		</MenuItem>
 		<MenuItem 
 			disabled
 			key={10}
 			value={10}>
-			Число Эйлера ({'e'})
+			{getLang('NumberE888')} ({'e'})
 		</MenuItem>
 		<MenuItem 
 			disabled
 			key={11}
 			value={11}>
-			Модуль числа
+			{getLang('ModuleLabel888')}
 		</MenuItem>
 	</Select>;
 };
@@ -85,7 +86,7 @@ let Arithmetic = ({
 Arithmetic = React.memo(Arithmetic);
 Arithmetic.defaultProps = {
 	name: 'arithmetic_id',
-	label: 'Действие',
+	label: 'Action',
 	required: false,
 };
 

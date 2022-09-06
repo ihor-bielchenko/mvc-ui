@@ -5,58 +5,59 @@ import {
 	DATA_TYPE_NUMBER, 
 	DATA_TYPE_ARRAY,
 } from './dataTypes.js';
+import { getLang } from 'components/Language';
 
 export const FUNC_TEMPLATE_OBJ_GET = {
 	id: process.env.FUNC_TEMPLATE_OBJ_GET,
 	category_id: FUNC_CATEGORY_OBJECT.id,
 	data_type_id: -1,
-	text: () => 'Выбрать значение',
-	subtext: () => 'Извлечь значение из объекта',
+	text: () => getLang('FUNC_TEMPLATE_OBJ_GETtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_OBJ_GETsubtext'),
 };
 export const FUNC_TEMPLATE_OBJ_SET = {
 	id: process.env.FUNC_TEMPLATE_OBJ_SET,
 	category_id: FUNC_CATEGORY_OBJECT.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
-	text: () => 'Установить значение',
-	subtext: () => 'Установить значение в объкте',
+	text: () => getLang('FUNC_TEMPLATE_OBJ_SETtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_OBJ_SETsubtext'),
 };
 export const FUNC_TEMPLATE_OBJ_DEL = {
 	id: process.env.FUNC_TEMPLATE_OBJ_DEL,
 	category_id: FUNC_CATEGORY_OBJECT.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
-	text: () => 'Удалить значние',
-	subtext: () => 'Удалить значение из объекта по ключу',
+	text: () => getLang('FUNC_TEMPLATE_OBJ_DELtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_OBJ_DELsubtext'),
 };
 export const FUNC_TEMPLATE_OBJ_LENGTH = {
 	id: process.env.FUNC_TEMPLATE_OBJ_LENGTH,
 	category_id: FUNC_CATEGORY_OBJECT.id,
 	data_type_id: DATA_TYPE_NUMBER.id,
-	text: () => 'Длина объекта',
-	subtext: () => 'Количество элементов в объекте',
+	text: () => getLang('FUNC_TEMPLATE_OBJ_LENGTHtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_OBJ_LENGTHsubtext'),
 };
 export const FUNC_TEMPLATE_OBJ_FOR_EACH = {
 	id: process.env.FUNC_TEMPLATE_OBJ_FOR_EACH,
 	category_id: FUNC_CATEGORY_OBJECT.id,
 	data_type_id: DATA_TYPE_BOOLEAN.id,
 	disabled: true,
-	text: () => 'Перебрать объект',
-	subtext: () => 'Цикл для перебора элементов объекта',
+	text: () => getLang('FUNC_TEMPLATE_OBJ_FOR_EACHtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_OBJ_FOR_EACHsubtext'),
 };
 export const FUNC_TEMPLATE_OBJ_KEYS = {
 	id: process.env.FUNC_TEMPLATE_OBJ_KEYS,
 	category_id: FUNC_CATEGORY_OBJECT.id,
 	data_type_id: DATA_TYPE_ARRAY.id,
 	disabled: true,
-	text: () => 'Массив ключей',
-	subtext: () => 'Возвращает массив состоящий из ключей данного объекта',
+	text: () => getLang('FUNC_TEMPLATE_OBJ_KEYStext'),
+	subtext: () => getLang('FUNC_TEMPLATE_OBJ_KEYSsubtext'),
 };
 export const FUNC_TEMPLATE_OBJ_TO_ARR = {
 	id: process.env.FUNC_TEMPLATE_OBJ_TO_ARR,
 	category_id: FUNC_CATEGORY_OBJECT.id,
 	data_type_id: DATA_TYPE_ARRAY.id,
 	disabled: true,
-	text: () => 'Преобразовать в массив',
-	subtext: () => 'Преобразовать объект в массив',
+	text: () => getLang('FUNC_TEMPLATE_OBJ_TO_ARRtext'),
+	subtext: () => getLang('FUNC_TEMPLATE_OBJ_TO_ARRsubtext'),
 };
 
 const funcObj = {

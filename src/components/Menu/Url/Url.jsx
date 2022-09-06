@@ -9,6 +9,7 @@ import {
 	DIALOG_URL_PLACEHOLDER,
 } from 'consts/dialog.js';
 import onClose from '../onClose.js';
+import { getLang } from 'components/Language';
 
 let Url = ({ 
 	aria, 
@@ -32,14 +33,14 @@ let Url = ({
 				index,
 			})}>
 				<Typography>
-					Путь
+					{getLang('Route2')}
 				</Typography>
 			</MenuItem>
 			<MenuItem onClick={onDialog(DIALOG_URL_PLACEHOLDER, {
 				index,
 			})}>
 				<Typography>
-					Плэйсхолдер
+					{getLang('SPlaceholder')}
 				</Typography>
 			</MenuItem>
 		</Menu>

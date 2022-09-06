@@ -47,7 +47,7 @@ If.defaultProps = {
 	required: false,
 	name: 'func_if',
 	value: '',
-	label: 'Функция',
+	label: 'Function',
 	helperText: '',
 	onSelect: () => {},
 };

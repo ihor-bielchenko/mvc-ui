@@ -18,6 +18,7 @@ import onClear from '../onClear.js';
 import onValueScript from '../onValueScript.js';
 import onValidate from '../onValidate.js';
 import onUnmount from '../onUnmount.js';
+import { getLang } from 'components/Language';
 
 let ArrSplice = ({ 
 	id, 
@@ -81,7 +82,7 @@ let ArrSplice = ({
 			<Typography
 				variant="caption"
 				color="textSecondary">
-				Какой массив нужно изменить
+				{getLang('DialogFuncContent4Text')}
 			</Typography>
 			<Box mt="6px">
 			{prop1
@@ -94,7 +95,7 @@ let ArrSplice = ({
 					color="primary"
 					startIcon={<AddIcon fontSize="small" />}
 					onClick={_onMenu1}>
-					Выбрать массив
+					{getLang('DialogFuncContent3Text')}
 				</Button>}
 			</Box>
 		</Box>
@@ -107,9 +108,9 @@ let ArrSplice = ({
 				onChange={_onChange2}
 				defaultValue={prop2}
 				name="prop-2"
-				label="Индекс, по которому функция начинает изменять массив"
-				placeholder="Число"
-				helperText="Выберите созданный параметр или укажите значение вручную" />
+				label={getLang('DialogFuncContent5Text')}
+				placeholder={getLang('Num')}
+				helperText={getLang('SelectCreatedPar')} />
 		</Box>
 		<Box my={3}>
 			<InputText
@@ -120,15 +121,15 @@ let ArrSplice = ({
 				onChange={_onChange3}
 				defaultValue={prop3}
 				name="prop-3"
-				label="Количество удаляемых из массива элементов"
-				placeholder="Текст или число"
-				helperText="Выберите созданный параметр или укажите значение вручную" />
+				label={getLang('DialogFuncContent6Text')}
+				placeholder={getLang('TorN')}
+				helperText={getLang('SelectCreatedPar')} />
 		</Box>
 		<Box my={3}>
 			<Typography
 				variant="caption"
 				color="textSecondary">
-				Массив новых элементов (будут добавлены вместо удаленных)
+				{getLang('DialogFuncContent7Text')}
 			</Typography>
 			<Box mt="6px">
 			{prop4
@@ -141,7 +142,7 @@ let ArrSplice = ({
 					color="primary"
 					startIcon={<AddIcon fontSize="small" />}
 					onClick={_onMenu4}>
-					Выбрать массив
+					{getLang('DialogFuncContent3Text')}
 				</Button>}
 			</Box>
 		</Box>

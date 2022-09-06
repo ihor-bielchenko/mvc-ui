@@ -8,6 +8,7 @@ import Script from 'components/Script';
 import getScriptId from 'components/Script/getScriptId.js';
 import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
 import onClose from '../onClose.js';
+import { getLang } from 'components/Language';
 
 let SourceScript = () => {
 	const dialog = useSelector((state) => state.dialogs[SOURCE_TYPE_SCRIPT.id]);
@@ -25,7 +26,7 @@ let SourceScript = () => {
 			onClose={onClose(SOURCE_TYPE_SCRIPT.id)}>
 			<DialogTitle>
 				<Title onClose={onClose(SOURCE_TYPE_SCRIPT.id)}>
-					Значение из программы
+					{getLang('DialogSourceScriptContent1Text')}
 				</Title>
 			</DialogTitle>
 			<DialogContent 

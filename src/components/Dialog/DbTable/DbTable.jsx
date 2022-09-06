@@ -25,6 +25,7 @@ import {
 } from 'consts/dialog.js';
 import onClose from '../onClose.js';
 import onSave from './onSave.js';
+import { getLang } from 'components/Language';
 
 let DbTable = () => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_DB_TABLE]);
@@ -54,9 +55,9 @@ let DbTable = () => {
 				<Title onClose={onClose(DIALOG_DB_TABLE)}>
 					{tableName
 						? <React.Fragment>
-							Таблица <b>{tableName}</b>
+							{getLang('DialogDbTableContent1Text')} <b>{tableName}</b>
 						</React.Fragment>
-						: 'Новая таблица'}
+						: getLang('NewTableText')}
 				</Title>
 			</DialogTitle>
 			{_dialogOpenFlag
@@ -68,7 +69,7 @@ let DbTable = () => {
 							<InputText
 								disabled
 								name="name"
-								label="Название таблицы"
+								label={getLang('DialogDbTableContent2Text')}
 								defaultValue={tableName} />
 						</Box>
 						<Tabs 
@@ -77,10 +78,10 @@ let DbTable = () => {
 							onChange={_onTab}>
 							<Tab 
 								value={0}
-								label="Структура" />
+								label={getLang('Structure')} />
 							<Tab
 								value={1} 
-								label="Список данных" />
+								label={getLang('DbList')} />
 						</Tabs>
 						{tab === 0
 							? <GroupDbColumns id={id} />
@@ -110,7 +111,7 @@ let DbTable = () => {
 										color="primary"
 										startIcon={<SaveIcon />}
 										onClick={_onSave}>
-										Сохранить
+										{getLang('Save')}
 									</Button>
 									<Button
 										disabled={true}
@@ -120,7 +121,7 @@ let DbTable = () => {
 										onClick={onDialog(DIALOG_DELETE_CONFIRM, {
 											onDelete: _onDelete,
 										})}>
-										Удалить
+										{getLang('Delete')}
 									</Button>
 								</ButtonGroup>
 								: <Button
@@ -128,7 +129,7 @@ let DbTable = () => {
 									color="primary"
 									startIcon={<SaveIcon />}
 									onClick={_onSave}>
-									Сохранить
+									{getLang('Save')}
 								</Button>
 							: <React.Fragment />}
 					</Box>

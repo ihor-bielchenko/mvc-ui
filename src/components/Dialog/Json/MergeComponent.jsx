@@ -7,6 +7,7 @@ import onDialog from 'components/Dialog/onDialog.js';
 import dataTypes from 'structures/dataTypes.js';
 import { SOURCE_TYPE_SCRIPT } from 'structures/sourceTypes.js';
 import onValueScript from './onValueScript.js';
+import { getLang } from 'components/Language';
 
 let MergeComponent = ({
 	scriptId,
@@ -28,7 +29,7 @@ let MergeComponent = ({
 			color="primary"
 			startIcon={<AddIcon />}
 			onClick={_onMenu}>
-			Вставить {dataTypes[dataTypeId].text()}
+			{getLang('DialogJsonContent3Text')} {dataTypes[dataTypeId].text()}
 		</Button>
 	</React.Fragment>;
 };

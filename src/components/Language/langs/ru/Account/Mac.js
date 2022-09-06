@@ -1,0 +1,1 @@
+export const MAC = 'MAC адрес';

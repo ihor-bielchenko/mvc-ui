@@ -20,6 +20,7 @@ import PermMediaIcon from '@material-ui/icons/PermMedia';
 import onClose from '../onClose.js';
 import { DIALOG_SERVICE_TEMPLATE } from 'consts/dialog.js';
 import { URL_PAGE_SERVICE } from 'consts/url.js';
+import { getLang } from 'components/Language';
 
 let ServiceTemplate = ({ history }) => {
 	const dialog = useSelector((state) => state.dialogs[DIALOG_SERVICE_TEMPLATE]);
@@ -37,7 +38,7 @@ let ServiceTemplate = ({ history }) => {
 				onClose={onClose(DIALOG_SERVICE_TEMPLATE)}>
 				<DialogTitle>
 					<Title onClose={onClose(DIALOG_SERVICE_TEMPLATE)}>
-						Выберите тип сервиса
+						{getLang('SelectServiceType')}
 					</Title>
 				</DialogTitle>
 				<DialogContent dividers>
@@ -45,7 +46,7 @@ let ServiceTemplate = ({ history }) => {
 						<Typography	
 							variant="body2"
 							color="textSecondary">
-							Сервис для хранения и управления данными:
+							{getLang('ServiceForStoring')}
 						</Typography>
 						<Box 
 							mt={2}
@@ -58,19 +59,19 @@ let ServiceTemplate = ({ history }) => {
 								color="primary"
 								startIcon={<DnsIcon />}>
 								<Typography variant="subtitle1">
-									По умолчанию
+									{getLang('Service3')}
 								</Typography>
 							</Button>
 						</Box>
 						<Typography	
 							variant="h5"
 							color="textSecondary">
-							ИЛИ
+							{getLang('OperatorJoin2')}
 						</Typography>
 						<Typography	
 							variant="body2"
 							color="textSecondary">
-							со специальными действиями:
+							{getLang('Service4')}
 						</Typography>
 						<Box my={2}>
 							<Button 
@@ -80,7 +81,7 @@ let ServiceTemplate = ({ history }) => {
 								startIcon={<ForumIcon />}
 								onClick={() => {}}>
 								<Typography variant="subtitle1">
-									Коммуникация
+									{getLang('Communication')}
 								</Typography>
 							</Button> <Button 
 								disabled
@@ -89,7 +90,7 @@ let ServiceTemplate = ({ history }) => {
 								startIcon={<ShoppingCartIcon />}
 								onClick={() => {}}>
 								<Typography variant="subtitle1">
-									Коммерция
+									{getLang('Service6')}
 								</Typography>
 							</Button>
 						</Box>
@@ -101,7 +102,7 @@ let ServiceTemplate = ({ history }) => {
 								startIcon={<PermMediaIcon />}
 								onClick={() => {}}>
 								<Typography variant="subtitle1">
-									Файлы
+									{getLang('Files')}
 								</Typography>
 							</Button>
 						</Box>
@@ -116,7 +117,7 @@ let ServiceTemplate = ({ history }) => {
 							color="secondary"
 							startIcon={<CloseIcon />}
 							onClick={onClose(DIALOG_SERVICE_TEMPLATE)}>
-							Отмена
+							{getLang('Cancel')}
 						</Button>
 					</Box>
 				</DialogActions>

@@ -1,0 +1,11 @@
+export const SearchRequest = 'Search Request';
+export const Cookie = 'Cookie';
+export const CookieRequest = 'Incoming request cookie';
+export const HeaderRequest = 'Request header';
+export const HeaderIncomingRequest = 'Incoming request header';
+export const RequestIncomingParam = 'Incoming request parameter';
+export const RequestMethod = 'Request Method';
+export const RequestParam = 'Request Param';
+export const AddRequest = 'Add Request';
+export const RequestParams = 'Request Parameters';
+export const Request = 'Request';

@@ -7,6 +7,7 @@ import MenuEntity from 'components/Menu/Entity';
 import onMenu from 'components/Menu/onMenu.js';
 import Slot from '../Slot';
 import { TypographyLabel } from '../../Arrow';
+import { getLang } from 'components/Language';
 
 let Create = ({ 
 	isSource,
@@ -65,7 +66,7 @@ let Create = ({
 					borderRadius: 0,
 				}}
 				onClick={onMenu('menu-entity-create-'+ _id)}>
-				Добавить
+				{getLang('Add')}
 			</Button>
 			<MenuEntity 
 				aria={'menu-entity-create-'+ _id}
